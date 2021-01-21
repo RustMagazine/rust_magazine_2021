@@ -4,6 +4,8 @@
 
 为了丰富 Rust 社区成员的学习文化生活而特别推出此刊！
 
+[点此阅读](https://rustmagazine.github.io/rust_magazine_2021/)
+
 ---
 
 ### 编辑小组
