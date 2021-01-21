@@ -1,0 +1,23 @@
+name: CI/CD
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - "src/**.md"
+    - "book.toml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      uses: ./.github/actions/build
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        EXTERNAL_REPOSITORY: RustMagazine/2021.github.io
+        PUBLISH_BRANCH: main
+        PUBLISH_DIR: ./book
