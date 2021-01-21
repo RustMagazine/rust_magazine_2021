@@ -19,7 +19,7 @@ jobs:
       - run: mdbook build
 
       - name: Deploy
-        uses: RustMagazine/rust_magazine_2021@v1
+        uses: RustMagazine/rust_magazine_2021@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./book
