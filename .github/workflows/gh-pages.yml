@@ -1,0 +1,25 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: mdBook Action
+        uses: peaceiris/actions-mdbook@v1.1.13
+        with:
+          mdbook-version: 'latest'
+
+      - run: mdbook build
+
+      - name: Deploy
+        uses: RustMagazine/rust_magazine_2021_pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
