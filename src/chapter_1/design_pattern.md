@@ -1,1 +1,41 @@
 # 学习园地 |「翻译」Rust设计模式汇总
+
+- introduction
+  - Idioms
+    - Use borrowed types for arguments
+    - Concatenating String with format!
+    - Constructor
+    - The Default Triat
+    - Collections Are Smart Pointers
+    - Finalisation in Destructors
+    - Mem::{take(), replace()}
+    - On-Stack Dynamic Dispatch
+    - Foreign function interface usage
+      - Idiomatic Errors
+      - Accepting Strings
+      - Passing Strings
+    - Iterating over an Option
+    - Pass Variables to Closure
+    - Privacy For Extensibility
+    - Easy doc intialization
+    - Temporary mutability
+  - Design Patterns
+    - [Builder(建造者模式)](./rust-design-patterns/builder.md)
+    - Compose Structs
+    - Entry API
+    - Foreign function interface usage
+      - Object-Based APIs
+      - Type Consolidation into Wrappers
+    - Fold
+    - Newtype
+    - RAII Guards
+    - Prefer Samll Crates
+    - Strategy 
+    - Contain unsafety in small modules
+    - Visitor
+  - Anti-patterns
+    - #[deny(warnings)]
+    - Deref Polymorphism
+  - Functional Programming 
+  - Additional Resources
+    - Design priciples
