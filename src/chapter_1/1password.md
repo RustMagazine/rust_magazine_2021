@@ -31,11 +31,6 @@ Rust 的另一个非常强大却常被忽视的特性是程序化宏系统[1]。
 
 这个工具已经成为我们开发过程中不可或缺的组成部分，让我们的进度比以前快得多。一旦我们的类型在Rust中被定义，我们就能立即在客户端语言中生成等价类型。这使我们的开发人员能够专注于解决问题。而不必去捋模版代码，再使用 FFI 进行通信
 
-**Rust对开发像1Password这样以安全为中心的应用程序的支持（库和其他）有多好？**
-
-对于实现安全软件的大部分基础组件来说，那是绰绰有余的。有两个大型的、突出的密码学平台(ring和Rust Crypto组)，它们提供了丰富的功能。正如我在前面提到的，用 Rust 编写程序会让你对内存的使用充满信心，也让你更难意外引入与内存相关的漏洞。还有一个很好的系统，用来跟踪Rust crates中不时出现的漏洞：RustSec数据库。它是由其他 Rust 开发者提供的社区资源，并且经常更新。此外，Rust 和 Cargo 还包含了 batteries-included 测试框架。这意味着你总是有一种容易的方式来编写单元测试套件，以保证关键代码(比如加密函数)的正确性。
-
-如果存在 Rust 原生安全库，那当然是最理想的 (而且它们会及时出现) 。如果没有也不必担心，我们还有其他选项：使用C语言或原生平台库中的一些东西。在我们的Rust代码中，我们将这一点发挥得淋漓尽致，比如调用生物识别解锁的原生实现（Touch ID、Face ID、Windows Hello）和特定平台的设置实现(比如苹果平台上的NSUserDefaults)。
 
 **Rust对开发像1Password这样以安全为中心的应用程序的支持（库和其他）有多好？**
 
@@ -43,7 +38,7 @@ Rust 的另一个非常强大却常被忽视的特性是程序化宏系统[1]。
 
 如果存在 Rust 原生安全库，那当然是最理想的 (而且它们会及时出现) 。如果没有也不必担心，我们还有其他选项：使用C语言或原生平台库中的一些东西。在我们的Rust代码中，我们将这一点发挥得淋漓尽致，比如调用生物识别解锁的原生实现（Touch ID、Face ID、Windows Hello）和特定平台的设置实现(比如苹果平台上的NSUserDefaults)。
 
-**有什么特别的Rust库是你想要的吗？**
+**其中有什么特别的Rust库是你想介绍一下的吗？**
 
 当然有。1Password 使用了 Tokio、Hyper/Reqwest、Ring 和Neon。得益于这些 Rust 库，我们才能完成这个雄心勃勃的项目。你也应该看看我们在 [crates.io](http://crates.io/) 上的 [密码规则解析器](https://crates.io/crates/password-rules-parser)  。它主要基于苹果支持的规范。他们的工具和文档可以在 [这里](https://developer.apple.com/password-rules/) 找到。
 
@@ -77,9 +72,9 @@ struct Teacher {
 
 ```typescript
 export interface Teacher {
-	name: string;
-	age: number;
-	id: number;
+    name: string;
+    age: number;
+    id: number;
 }
 ```
 
