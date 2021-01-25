@@ -1,5 +1,8 @@
 # 本月简报：官方动态
 
+- 来源：[Rust日报](https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f)
+- 作者：Rust 日报小组
+
 ### Rust 1.49 稳定版发布
 
 2020年最后一天，Rust 1.49 稳定版发布了。稳定版 Rust 发布周期为六周一次。

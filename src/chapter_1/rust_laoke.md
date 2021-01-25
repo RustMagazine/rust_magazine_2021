@@ -1,5 +1,9 @@
 # 本月简报 | Rust 唠嗑室本月汇总
 
+
+- 来源：[Rust 唠嗑室](https://space.bilibili.com/25566598)
+- 主持人：MikeTang
+
 ## 《Rust 唠嗑室》第 16 期 - tensorbase 高性能数据仓库
 
 **时间**: 2021/01/05 20:30-21:30
