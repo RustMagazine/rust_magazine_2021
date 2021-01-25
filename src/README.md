@@ -15,7 +15,7 @@
 - 张汉东（Chaos）
 - 李冬杰
 - 柴杰
-- 苏胤榕（DaviRain）
+- [苏胤榕（DaviRain）](https://github.com/DaviRain-Su)
 - 聂雷海（大海）
 - 严炳（ryan）
 - [橘梦](https://github.com/wangshengfei/)
