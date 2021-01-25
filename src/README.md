@@ -17,7 +17,9 @@
 - 柴杰
 - 苏胤榕（DaviRain）
 - 聂雷海（大海）
+- 严炳（ryan）
 - [橘梦](https://github.com/wangshengfei/)
+
 
 - <其他成员招募位> 招募条件见下方
 
