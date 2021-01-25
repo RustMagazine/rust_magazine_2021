@@ -32,7 +32,7 @@
 - [Rustcc 中文社区](https://rustcc.cn)
 - [Rust 视界 Tg Channel](https://t.me/rust_daily_news)
 - [掘金](https://juejin.cn/user/123560414944158)
-- [CitHub社区](https://talk.citahub.com)
+- [CitaHub社区](https://talk.citahub.com)
 
 ### 支持公司和高校
 
