@@ -4,3 +4,6 @@ language = "zh_CN"
 multilingual = false
 src = "src"
 title = "rust-magazine"
+
+[output.html.playground]
+editable = true
