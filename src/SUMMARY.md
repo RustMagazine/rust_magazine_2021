@@ -15,7 +15,7 @@
     - [Cita: 用Rust写Protobuf扩展](./chapter_1/cita_protobuf-ext.md)
     - [国汽智控: 图解 Rust 所有权与生命周期](./chapter_1/rust_ownership.md)
     - [学习园地 | 「系列」Rust设计模式之创建者模式](./chapter_1/rust-design-patterns/builder.md)
-    - [学习园地 | 「译」 Graphql in Rust](./chapter_1/graphql_in_rust.md)
+    - [学习园地 | 「译」 GraphQL in Rust](./chapter_1/graphql_in_rust/graphql_in_rust.md)
     - [学习园地 | 关于 io_uring 与 Rust 的思考](./chapter_1/io_uring_and_rust.md)
     - [RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎](./chapter_1/jit.md)
     - [RustChinaConf2020 精选 | Rust 异步与并发](./chapter_1/rust_async.md)
