@@ -24,7 +24,7 @@
 ### 学习园地
 
 - [「系列」Rust设计模式](./design_pattern.md)
-- [Graphql in Rust](./graphql_in_rust.md)
+- [GraphQL in Rust](./graphql_in_rust/graphql_in_rust.md)
 
 
 ### RustChinaConf 2020 专题
