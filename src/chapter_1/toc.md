@@ -36,3 +36,7 @@
 
 - [Rust Dev Guide 中文翻译启动](./rustc_dev_guide_zh.md)
 - [Rust语言项目结构概览](./rustc_intro.md)
+
+### Rust Security 专题
+
+- [mdbook 搜索页面 xss 漏洞](./rust_security_mdbook_xss_.md)

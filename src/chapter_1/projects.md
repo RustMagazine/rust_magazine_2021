@@ -1,6 +1,6 @@
 # 本月简报 | 推荐项目
 
-## Rust for Windows
+## 「微软」Rust for Windows
 
 - [仓库链接](https://github.com/microsoft/windows-rs)
 - [文档链接](https://microsoft.github.io/windows-docs-rs/doc/bindings/windows)
@@ -96,3 +96,16 @@ fn main() {
 
 *swc* 被用于 deno 项目中，用于类型擦除。 swc 的作者是一名 97 年的大二学生，如今已经获得了 Deno 官方的顾问合同。
 
+## rlink-rs
+
+*国产项目*
+
+- [仓库链接](https://github.com/rlink-rs/rlink-rs)
+
+rlink-rs是基于rust实现的流式计算引擎，用来作为Apache Flink的替代方案。
+
+相对于在线业务，rlink-rs更关注海量数据的离线流式处理场景，提升吞吐能力、降低资源消耗。其特点是针对exactly once提供计算和输出两种语义；基于特殊的exactly once输出语义，结合rust内存管理模型，实现大部分场景的全内存计算，解决state和checkpoint引起的重量级IO操作。
+
+rlink-rs的目标是成为一个计算驱动引擎，允许基于DAG定制你自己的计算流程、实现自己的计算语义。
+
+目前状态：主要针对flink流计算这块做对比。已经实现基本窗口计算流程。
