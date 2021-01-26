@@ -3,7 +3,7 @@
 ![logo](./image/rust_magazine3.png)
 
 - [介绍](./README.md)
-- [创刊辞](./send_word.md)
+- [创刊寄语](./send_word.md)
 - [一月刊（January）](./chapter_1/toc.md)
     - [本月简报 | Rust官方动态](./chapter_1/lang.md)
     - [本月简报 |社区热点](./chapter_1/hots.md)
