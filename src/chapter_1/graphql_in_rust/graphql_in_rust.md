@@ -347,7 +347,7 @@ _清单8: 可能消耗过多资源的GraphQL请求的示例_
 }
 ```
 
-这将对每个`plant`对象的`details`字段指定单独的SQL查询，因为`details`是与`planet`关键的类型，并存储在其自己的表中。
+这将对每个`plant`对象的`details`字段执行单独的SQL查询，因为`details`是与`planet`关联的类型，并存储在其自己的表中。
 
 但借助`Async-graphql`的[DataLoader](https://github.com/graphql/dataloader)实现，可以将Resolver定义如下：
 
@@ -429,7 +429,7 @@ pub struct UninhabitedPlanetDetails {
 }
 ```
 
-在这里你还可以看到，如果该对象没有一个带有复杂Resolver的字段，则可以使用`SimpleObject`属性来实现。
+在这里你还可以看到，如果该对象没有任何复杂Resolver的字段，则可以使用`SimpleObject`宏来实现。
 
 ### 自定义标量
 
