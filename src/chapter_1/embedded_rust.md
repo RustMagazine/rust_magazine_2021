@@ -21,6 +21,8 @@ todo
 
 todo
 
+![嵌入式生态](embedded_rust/ecosystem.png)
+
 ## RustSBI：新型操作系统引导软件
 
 我们在开发操作系统内核时，有的内核直接运行在裸机上，有的还依托于一个运行环境。
