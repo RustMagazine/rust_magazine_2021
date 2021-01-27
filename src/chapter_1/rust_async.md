@@ -150,7 +150,7 @@ pub struct RawWakerTable {
 
 ![异步任务多线程 Executor](../image/rust-china-config-async-9.png)
 
-如果用 `async-task` 处理处理这个问题，代码应该是这样的：
+如果用 `async-task` 处理这个问题，代码应该是这样的：
 
 ```rust
 use std::thread;
