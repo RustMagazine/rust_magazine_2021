@@ -194,7 +194,6 @@ libhunt的主页地址: [https://www.libhunt.com/lang/rust](https://www.libhunt.
 - 原文链接：[https://os.phil-opp.com/async-await/#multitasking](https://os.phil-opp.com/async-await/#multitasking)
 
 
-
 ## Rust Programming Language: The Ultimate Guide
 
 这篇文章中作者从伪代码出发，一步步教你实现一个爱情计算器。
@@ -202,7 +201,6 @@ libhunt的主页地址: [https://www.libhunt.com/lang/rust](https://www.libhunt.
 作者称这是线上最通俗易懂的Rust入门指南，你怎么认为呢？快来试试吧。
 
 链接：[https://masteringbackend.com/posts/rust-programming-the-ultimate-guide](https://masteringbackend.com/posts/rust-programming-the-ultimate-guide)
-
 
 
 ## Rust: Initial thoughts

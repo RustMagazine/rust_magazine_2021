@@ -228,3 +228,31 @@ Theseus 是从Rust编写的新操作系统，尝试使用新颖的OS结构，更
 
 - [仓库链接](https://github.com/google/evcxr)
 - [Jupyter Kernel 指南](https://github.com/google/evcxr/blob/master/evcxr_jupyter/samples/evcxr_jupyter_tour.ipynb)
+
+## Findomain: 可提供子域监视服务
+
+- [仓库链接](https://github.com/Findomain/Findomain)
+
+该服务可提供：目录模糊处理/端口扫描/漏洞发现（使用Nuclei），等等。 
+
+允许您使用多个顶级工具（OWASP Amass，Sublist3r，Assetfinder和Subfinder）监视目标域，并在出现新的子域时将警报发送到Discord，Slack，Telegram，电子邮件或推送通知（Android / iOS / Smart Watch / Desktop）。 
+
+您唯一要做的就是使用您的电子邮件地址（如果适用）或/和webhooks / Telegram聊天信息配置文件，然后将域放入另一个文件中。
+
+一旦完成，您便拥有了一个完全自动化的子域监视服务，可以让您 包含最新发现的新子域，主机IP，HTTP状态，HTTP网站的屏幕快照，开放端口，子域CNAME等。 您所有的数据都安全地保存在关系数据库中，您可以随时请求转储数据。
+
+## Weylus：让你的平板电脑用作电脑上的图形平板/触摸屏
+
+特点：
+- 用平板电脑控制鼠标
+- 将屏幕镜像到平板电脑上
+
+上述功能在所有操作系统上都可以使用，但`Weylus`在`Linux`上效果最好。`Linux`上的其他功能有：
+- 支持手写笔/笔（支持压力和倾斜）。
+- 多点触控。用支持多点触控的软件试试，- 比如Krita，你就会知道了。
+- 捕捉特定的窗口，并只对其进行绘制。
+- 更快的屏幕镜像
+- 硬件加速视频编码
+- 平板电脑作为第二屏幕
+
+- [仓库链接](https://github.com/H-M-H/Weylus)
