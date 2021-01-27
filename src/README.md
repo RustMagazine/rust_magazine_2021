@@ -1,5 +1,7 @@
 # Rust语言开源杂志（2021）
 
+**The roots aren't deep but the seeds are planted!**
+
 ![logo](./image/rust_magazine3.png)
 
 为了丰富 Rust 社区成员的学习文化生活而特别推出此刊！

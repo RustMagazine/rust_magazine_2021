@@ -3,6 +3,22 @@
 - 来源：[Rust日报](https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f)
 - 作者：Rust 日报小组
 
+## Async-std v1.9.0 发布
+
+这个版本发布了稳定的 `async_std::channel` 子模块，并引入了 tokio v1.0 的功能，同时，移除了不赞成使用的`sync::channel`类型。
+
+```rust
+use async_std::channel;
+
+let (sender, receiver) = channel::unbounded();
+
+assert_eq!(sender.send("Hello").await, Ok(()));
+assert_eq!(receiver.recv().await, Ok("Hello"));
+```
+
+链接，[https://github.com/async-rs/async-std/releases/tag/v1.9.0](https://github.com/async-rs/async-std/releases/tag/v1.9.0)
+
+
 ## Deno in 2020
 
 一直很火热的 Deno 官方最近发布了 Deno 的[大事记表](https://deno.land/posts/deno-in-2020)。
@@ -21,11 +37,6 @@ Rust 在嵌入式开发领域还是有非常大的潜力的。
 
 通过[官方博客](https://sequoia-pgp.org/blog/2020/12/16/202012-1.0/)可以看出团队对当前版本对于安全性的思考和对未来下一步的规划。
 
-## Rustup 宣布发布 1.23.0 版本
-
-官方发布 1.23.0 版本，其中最激动人心的改变就是支持 Apple M1 设备。大家可以安心的买 M1 了！
-
-[原文链接](https://blog.rust-lang.org/2020/11/27/Rustup-1.23.0.html)
 
 ## Firecracker
 
@@ -51,21 +62,6 @@ Rust GUI 方面的介绍以及目前 Rust GUI 库的现阶段状况
 
 [原文链接](https://twitter.com/alexvoica/status/1350049393471324161)
 
-## Rust 要上太空了！RocketLab 招聘 Rust 工程师
-
-Rocket Lab 是小型卫星发射领域的全球领导者。团队有 500 人，而且每周都在增加。
-
-当然，这是在美国的工作。期待国内也会有！
-
-[原文链接](https://www.rocketlabusa.com/careers/positions/flight-software-engineer-ii-auckland-new-zealand-3653845/)
-
-## Rust 书籍宝库
-
-glynnormington 整理了网络上大部分有关 rust 的 mdbook，有官方的，也有非官方的。值得注意的一点是大家关注的 Rust 宏小册很多人以为一直没有更新，但是其实有另一个团队重新在原来的基础上，更新了新的版本，目前已收录到该书库中。
-
-[原文链接](https://www.reddit.com/r/rust/comments/kwiwb8/the_little_book_of_rust_books/)
-
-[项目地址](https://lborb.github.io/book/title-page.html)
 
 ## 时隔一年 tower 终于发布新版本啦
 
@@ -91,3 +87,17 @@ Gartner 今天的一篇博文报道了“Rust”：近年来，Rust 获得了很
 
 [原文链接](https://blogs.gartner.com/manjunath-bhat/2021/01/03/why-2021-will-be-a-rusty-year-for-system-programmers/)
 
+## Open Source Security, Inc.宣布为Rust的GCC前端提供资金
+
+Open Source Security, Inc.宣布为Rust的GCC前端提供资金
+开源安全公司（Open Source Security，Inc）自豪地宣布，它为Rust的GCC前端的全职和公共开发工作提供了资金。在此博客文章中，作者将详细介绍我们参与的动机以及公众将因这项努力而获得的利益。
+
+原文链接 : [https://opensrcsec.com/open_source_security_announces_rust_gcc_funding](https://opensrcsec.com/open_source_security_announces_rust_gcc_funding)
+
+## Rust GUI框架的全调研
+
+这篇文章对几乎目前Rust社区较为流行的GUI框架做了整体的调研，druid和iced表现还不错。
+
+- 原文链接： [https://www.boringcactus.com/2020/08/21/survey-of-rust-gui-libraries.html](https://www.boringcactus.com/2020/08/21/survey-of-rust-gui-libraries.html)
+- AreWeGuiYet 网站也可以看到 GUI 相关信息：[https://www.areweguiyet.com/](https://www.areweguiyet.com/)
+- [另一篇`GUI`调研文章](https://dev.to/davidedelpapa/rust-gui-introduction-a-k-a-the-state-of-rust-gui-libraries-as-of-january-2021-40gl#comments)
