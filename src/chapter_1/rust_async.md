@@ -191,7 +191,7 @@ where
 
 `Future` 如果没有好的话，它负责把 `waker` 注册到 `Reactor` 里去，这里面会有一个 `waker` 过期的问题。第一次调用 `poll` 和第二次调用 `poll` 时，`Executor` 传的 `waker` 可能不是同一个，只有最新的 `waker` 能把 task 唤醒，老的 `waker` 就唤不醒，这样导致的问题是每次 `poll` 的时候都要把 `waker` 更新到 `Reactor` 里，以确保能够唤醒 task。
 
-比如过图中的例子，`Future` 同时对两个事件感兴趣，对应着两个 `Reactor`。`Future` 在 `poll` 的时候需要注册 `Reactor1` 的 `waker`，也要注册 `Reactor` 的 `waker`，当它下次 `poll` 的时候每次都要把两个 `waker` `更新，那么现在问题来了，Future` 的 `poll` 执行在 `Executor` `线程，Reactor` 执行在 `Reactor` 线程，一个线程往里面写，另一个线程试图从里面读，并发问题就出现了。为了处理这个问题，最简单的方式就是加一把锁，每个 `Reactor` 都要加锁解锁，这个操作本身就比较复杂，比较耗时。
+比如过图中的例子，`Future` 同时对两个事件感兴趣，对应着两个 `Reactor`。`Future` 在 `poll` 的时候需要注册 Reactor1 的 `waker`，也要注册 Reactor2 的 `waker`，当它下次 `poll` 的时候每次都要把两个 `waker` 更新，那么现在问题来了，`Future` 的 `poll` 执行在 `Executor` 线程，`Reactor` 执行在 `Reactor` 线程，一个线程往里面写，另一个线程试图从里面读，并发问题就出现了。为了处理这个问题，最简单的方式就是加一把锁，每个 `Reactor` 都要加锁解锁，这个操作本身就比较复杂，比较耗时。
 
 ![AtomicWaker](../image/rust-china-config-async-11.png)
 
