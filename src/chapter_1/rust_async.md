@@ -230,7 +230,7 @@ Join::new(
 
 ![JoinN 组合的效率](../image/rust-china-config-async-13.png)
 
-上面的 `Future` 组合模型涉及到一个 `JoinN` 组合的效率问题，问题是怎么产生的呢？`waker` 只用于唤醒整体 task，但是没有携带任何唤醒信息，比如 task 是怎么被唤醒的，`JoinN` 负责把多个 `Future` 组合在一起同时并发的执行，`join4:poll(waker)` 把4个 `Future` 组合，每次 `poll` 的时候挨个去执行 `Future`，如果没有好的话就会注册到 `Reactor` 里面，假设第二个突然就好了，下一次 `poll` 时 join4 并不知道自己为什么被唤醒了，只能挨个再跑一遍 `Future`，但其实第一、三、四都是浪费掉的。
+上面的 `Future` 组合模型涉及到一个 `JoinN` 组合的效率问题，问题是怎么产生的呢？`waker` 只用于唤醒整体 task，但是没有携带任何唤醒信息，比如 task 是怎么被唤醒的，`JoinN` 负责把多个 `Future` 组合在一起同时并发的执行，`join4:poll(waker)` 把 4 个 `Future` 组合，每次 `poll` 的时候挨个去执行 `Future`，如果没有好的话就会注册到 `Reactor` 里面，假设第二个突然就好了，下一次 `poll` 时 join4 并不知道自己为什么被唤醒了，只能挨个再跑一遍 `Future`，但其实第一、三、四都是浪费掉的。
 
 ![Waker 的拦截和包装](../image/rust-china-config-async-14.png)
 
