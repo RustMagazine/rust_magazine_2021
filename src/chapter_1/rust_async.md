@@ -92,7 +92,7 @@ poll 方法返回的是一个枚举类型 Poll，它和返回布尔值是类似�
 
 ![异步任务的多线程 Executor](../image/rust-china-config-async-5.png)
 
-首先用户通过 `spawn` 函数把异步任务 push 到全局队列里去，然后工作线程会拿到 task 执行，并且创建一个 `Waker`，传给执行的 `Future`，如果执行没结束，`Future` 负责把 `Waker` 注册到 `Reactor` 上面，`Reactor` 负责监听事件，收到事件后会把 `Waker` 唤醒，把 task 放到全局队列中，这样下次其他线程可以拿到这个 task 继续执行，直到执行完毕。
+首先用户通过 `spawn` 函数把异步任务 push 到全局队列里去，然后工作线程会拿到 task 执行，并且创建一个 `Waker`，传给执行的 `Future`，如果执行成功，那就 ok 了；如果执行没成功，`Future` 负责把 `Waker` 注册到 `Reactor` 上面，`Reactor` 负责监听事件，收到事件后会把 `Waker` 唤醒，把 task 放到全局队列中，这样下次其他线程可以拿到这个 task 继续执行，直到执行完毕。
 
 ### Waker 接口的要求
 
@@ -331,4 +331,3 @@ impl Future for WaitGroup {
 如果某一个 `woker` 完成了 task，它并不需要去唤醒 `waker`， `waitGrou`p 只关心所有任务都结束了，只让最后一个 `worker` 去唤醒 `waker`。什么时候是最后一个 `worker` 呢？我们可以用标准库里的 `Arc`，`Arc` 是一个共享引用，让所有的 `Arc` 强引用都销毁的时候，也就是剩下最后一个了，所以只要在 `Arc` 包装的数据的 `drop` 方法里面把 `waker` 唤醒就可以了。
 
 `WaitGroup` 持有一个弱引用，所有的 `Worker` 都持有强引用，`WaitGroup` 在 `poll` 的时候试图把弱引用升级成强引用，如果升级失败了，说明所有的强引用都没了，也就是任务都执行完了，就可以返回 `Ready`。如果升级成功了，说明现在至少还有一个强引用，那就把 `waker` 注册到 `AtomicWaker` 里面。在升级结束的瞬间，所有的 `worker` 全部 `drop` 掉了，但是它还没有调用 `wake`，在升级成功的一瞬间会产生一个临时的强引用 `inner`，最后在这个临时的强引用销毁的时候调用 `drop`，然后调用 `waker.wake()` 整个过程就完整了。
-
