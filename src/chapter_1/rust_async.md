@@ -264,7 +264,7 @@ Join::new(
 
 ![异步任务之间的同步 Oneshot](../image/rust-china-config-async-17.png)
 
-`Onshot` 是做什么事情的呢？它负责在两个线程之间传递一个数据，一个 task 在执行，另一个 task 在等待，前者执行完会通过 `Oneshot` 把数据传递给后者。图上所示就是 `Oneshot` 的数据结构，`state` 中纪录了很多元信息，比如数据是否已经写了，`sender` 是否应析构掉了，`TxWaker` 是否已经存了，`RxWaker` 是否已经存了，`reciver` 是否已经 `drop` 掉了。
+`Oneshot` 是做什么事情的呢？它负责在两个线程之间传递一个数据，一个 task 在执行，另一个 task 在等待，前者执行完会通过 `Oneshot` 把数据传递给后者。图上所示就是 `Oneshot` 的数据结构，`state` 中纪录了很多元信息，比如数据是否已经写了，`sender` 是否应析构掉了，`TxWaker` 是否已经存了，`RxWaker` 是否已经存了，`receiver` 是否已经 `drop` 掉了。
 
 发送端发送数据的时候是怎么做的，首先在修改数据前 data 是完全由 `sender` 去访问的，写完 data 后把 `state` 状态改掉，表示这个 data 已经写完了。然后把接收端的 `waker` 取出来然后唤醒，唤醒之后 task 下次执行就可以把数据拿到了，如果 `sender` 没有发送数据，现在要把它析构掉，析构时要注意接收端还在一直等，因此 `sender` 析构是也要把 `state` 修改掉，把相关的 `waker` 唤醒，让 `reciver` 不要再等了。
 
