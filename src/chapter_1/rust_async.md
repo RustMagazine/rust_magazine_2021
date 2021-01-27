@@ -112,7 +112,7 @@ impl Send for Waker;
 impl Sync for Waker;
 ```
 
-对于使用方的要求，首先 `Waker` 本身是唤醒的功能，所以它要提供一个 `wake` 方法。异步任务可能会关心多个事件源，比如说定时器、IO，也就是说 `Waker` 可能对应不同的 `Reactor`，因为 `Future` 在 `poll` 的时候只是穿了一个 `Waker`，现在要把 `Waker` 注册到多个 `Reactor` 上，就需要 `clone`。然后 `Executor` 和 `Waker` 可能不再一个线程里面，`Waker` 需要跨线程发送到 `Reactor` 上面，所以也就需要一个 `Send` 的约束。最后多个事件源可能同时调用这个 `Waker`，这里就存在并发调用的问题，要满足并发调用的话就比需实现一个 `Sync`。这是对 `Waker` 使用方的要求。
+对于使用方的要求，首先 `Waker` 本身是唤醒的功能，所以它要提供一个 `wake` 方法。异步任务可能会关心多个事件源，比如说定时器、IO，也就是说 `Waker` 可能对应不同的 `Reactor`，因为 `Future` 在 `poll` 的时候只是传了一个 `Waker`，现在要把 `Waker` 注册到多个 `Reactor` 上，就需要 `clone`。然后 `Executor` 和 `Waker` 可能不再一个线程里面，`Waker` 需要跨线程发送到 `Reactor` 上面，所以也就需要一个 `Send` 的约束。最后多个事件源可能同时调用这个 `Waker`，这里就存在并发调用的问题，要满足并发调用的话就比需实现一个 `Sync`。这是对 `Waker` 使用方的要求。
 
 ![Waker 提供方](../image/rust-china-config-async-7.png)
 
