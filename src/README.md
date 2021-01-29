@@ -15,7 +15,7 @@
 ### 编辑小组
 
 - 张汉东（Chaos）
-- 李冬杰
+- [李冬杰](https://www.yuque.com/lidongjies)
 - 柴杰
 - [苏胤榕（DaviRain）](https://github.com/DaviRain-Su)
 - 聂雷海（大海）
