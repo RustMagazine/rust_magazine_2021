@@ -12,7 +12,7 @@
     - [本月简报 | Rust唠嗑室本月汇总](./chapter_1/rust_laoke.md)
     - [生产实践 |「译」1password 的 Rust 实践](./chapter_1/1password.md)
     - [学习园地 | Cita: 用Rust写Protobuf扩展](./chapter_1/cita_protobuf-ext.md)
-    - [学习园地 | 图解 Rust 所有权与生命周期](./chapter_1/rust_ownership.md)
+    - [学习园地 | 图解 Rust 所有权与生命周期](./chapter_1/rust_ownership/rust_ownership.md)
     - [学习园地 | 「系列」Rust设计模式之创建者模式](./chapter_1/rust-design-patterns/builder.md)
     - [学习园地 | 「译」 GraphQL in Rust](./chapter_1/graphql_in_rust/graphql_in_rust.md)
     - [学习园地 | 关于 io_uring 与 Rust 的思考](./chapter_1/io_uring_and_rust.md)

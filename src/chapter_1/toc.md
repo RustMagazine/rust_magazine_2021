@@ -23,7 +23,7 @@
 - [「系列」Rust设计模式](./design_pattern.md)
 - [GraphQL in Rust](./graphql_in_rust/graphql_in_rust.md)
 - [Cita: 用Rust写Protobuf扩展](./cita_protobuf-ext.md)
-- [图解 Rust 所有权与生命周期](./rust_ownership.md)
+- [图解 Rust 所有权与生命周期](./rust_ownership/rust_ownership.md)
 - [关于 io_uring 与 Rust 的思考](./io_uring_and_rust.md)
 
 ### RustChinaConf 2020 专题
