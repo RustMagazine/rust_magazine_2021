@@ -9,7 +9,7 @@
 
 [周鹤洋](https://github.com/losfair)是`wasmer`核心开发者，南航2018级本科生，主要掌握编译/OS/VM/微架构等技术，2017年开始使用Rust.
 
-视频地址：https://www.bilibili.com/video/BV1Yy4y1e7zR?p=14
+视频地址：[https://www.bilibili.com/video/BV1Yy4y1e7zR?p=18](https://www.bilibili.com/video/BV1Yy4y1e7zR?p=18)
 
 ### JIT技术含义及应用场合 ###
 
