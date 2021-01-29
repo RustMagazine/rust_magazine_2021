@@ -2,22 +2,9 @@
 
 作者： 宁志伟
 
+本文为《Rust 唠嗑室》第 17 期 - 《用 Rust 写 Protobuf 扩展》的文字版本。
+
 ---
-
-作者简介：
-
-宁志伟
-
-溪塔科技首席架构师
-首个微服务架构区块链`CITA` 首席架构师，区块链+云原生框架 `CITA-Cloud` 设计者。前阿里巴巴、华为技术专家，超过 `10` 年分布式系统架构设计，编程语言和虚拟机方面工作经验。
-
-- Blog   : [https://rink1969.github.io](https://rink1969.github.io/)
-- GitHub : [https://github.com/rink1969](https://github.com/rink1969)
-
-
-- 为国产自主云原生区块链`CITA-Cloud`点赞[https://github.com/cita-cloud/cita_cloud_proto
-](https://github.com/cita-cloud/cita_cloud_proto)
-
 
 ## Protobuf
 
@@ -88,3 +75,24 @@
 目前实现了一个[`proto_desc_printer`](https://github.com/rink1969/proto_desc_printer)，可以解析中间描述格式，特别是其中的扩展信息。
 
 后续可以在这个基础上去做代码生成部分的工作，这里可以从 `prost` 吸取很多好的经验。
+
+
+---
+
+作者简介：
+
+宁志伟
+
+溪塔科技首席架构师
+首个微服务架构区块链`CITA` 首席架构师，区块链+云原生框架 `CITA-Cloud` 设计者。前阿里巴巴、华为技术专家，超过 `10` 年分布式系统架构设计，编程语言和虚拟机方面工作经验。
+
+- Blog   : [https://rink1969.github.io](https://rink1969.github.io/)
+- GitHub : [https://github.com/rink1969](https://github.com/rink1969)
+
+
+- 为国产自主云原生区块链`CITA-Cloud`点赞[https://github.com/cita-cloud/cita_cloud_proto
+](https://github.com/cita-cloud/cita_cloud_proto)
+
+后期编辑：
+
+[丁 烁(Jarvib Ding)](https://github.com/higker)，Rust 爱好者。

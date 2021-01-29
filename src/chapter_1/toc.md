@@ -23,24 +23,24 @@
 - [「系列」Rust设计模式](./design_pattern.md)
 - [GraphQL in Rust](./graphql_in_rust/graphql_in_rust.md)
 - [Cita: 用Rust写Protobuf扩展](./cita_protobuf-ext.md)
-- [国汽智控: 图解 Rust 所有权与生命周期](./rust_ownership.md)
+- [图解 Rust 所有权与生命周期](./rust_ownership.md)
 - [关于 io_uring 与 Rust 的思考](./io_uring_and_rust.md)
-
 
 ### RustChinaConf 2020 专题
 
 - [RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎](./jit.md)
 - [RustChinaConf2020 精选 | Rust 异步与并发](./rust_async.md)
 
-### Rust 编译器专题
+### 嵌入式 Rust 专题
 
-- [Rust Dev Guide 中文翻译启动](./rustc_dev_guide_zh.md)
-- [Rust语言项目结构概览](./rustc_intro.md)
+- [嵌入式领域的Rust语言](./embedded_rust.md)
 
 ### Rust Security 专题
 
 - [mdbook 搜索页面 xss 漏洞](./rust_security_mdbook_xss_.md)
 
-### 嵌入式 Rust 专题
+### Rust 编译器专题
 
-- [嵌入式领域的Rust语言](./embedded_rust.md)
+- [Rust Dev Guide 中文翻译启动](./rustc_dev_guide_zh.md)
+- [Rust语言项目结构概览](./rustc_intro.md)
+
