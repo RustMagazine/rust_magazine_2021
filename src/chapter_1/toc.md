@@ -36,7 +36,7 @@
 
 ### 操作系统专题
 
-- [用`Rust`写操作系统 Part1](./rust_os_part1.md)
+- [用`Rust`写操作系统 | 清华 rCore OS 教程介绍 ](./rcore_intro.md)
 
 ### Rust Security 专题
 

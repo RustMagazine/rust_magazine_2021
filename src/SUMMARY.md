@@ -19,7 +19,7 @@
     - [学习园地 | 「译」 GraphQL in Rust](./chapter_1/graphql_in_rust/graphql_in_rust.md)
     - [学习园地 | 图解 Rust 所有权与生命周期](./chapter_1/rust_ownership/rust_ownership.md)
     - [嵌入式领域的Rust语言](./chapter_1/embedded_rust.md)
-    - [用`Rust`写操作系统 Part1](./chapter_1/rust_os_part1.md)
+    - [用`Rust`写操作系统 | rCore OS 教程介绍 ](./chapter_1/rust_os_part1.md)
     - [Rust Security 专题 | 2021年`Rust`生态安全漏洞总结系列 | Part 1](./chapter_1/rust_security_part1.md)
     - [Rust编译器专题 | Rust Dev Guide 中文翻译启动招募](./chapter_1/rustc_dev_guide_zh.md)
     - [Rust编译器专题 | Rust语言项目结构概览](./chapter_1/rustc_intro.md)

@@ -2,6 +2,8 @@
 
 作者：肖猛
 
+后期编辑：高宪凤
+
 ---
 
 作者简介：
@@ -27,7 +29,7 @@
 所有图中使用的符号也只有最基础的几个。图 1 对符号体系做简单说明，主要解释一下表达概念之间的关系的符号语言。
 
 <div align=center>
-    <img width="544" height="306" src="./rust_ownership_1.jpg">
+    <img width="544" height="306" src="./rust_ownership/rust_ownership_1.jpg">
 </div>
 <center>图 1UML 符号</center>
 
@@ -48,14 +50,14 @@
 继承与接口实现都是一种泛化关系，`C` 继承自 `A`，表示 `A` 是更泛化的概念。`UML` 中各种关系语义也可以用 `UML` 自身来表达，如图 2：“关联”和“继承”都是“依赖”的具体体现方式。
 
 <div align=center>
-    <img width="544" height="306" src="./rust_ownership_2.jpg">
+    <img width="544" height="306" src="./rust_ownership/rust_ownership_2.jpg">
 </div>
 <center>图 2用 UML表达UML自身</center>
 
 **总图**
 
 图 3 是本文的总图，后续各节分局部介绍。
-<img src="./rust_ownership_3.png">
+<img src="./rust_ownership/rust_ownership_3.png">
 
 <center>图 3Rust 所有权与生命周期总图</center>
 
@@ -79,7 +81,7 @@
 - 缓冲区溢出
 - 非法释放内存(释放未分配的指针或重复释放指针)
 
-<img src="./rust_ownership_4.jpg">
+<img src="./rust_ownership/rust_ownership_4.jpg">
 <center>图 4变量绑定与内存安全的基本概念</center>
 
 这些问题在 `C/C++` 中是需要开发者非常小心的自己处理。 比如我们可以写一段 `C++` 代码，把这五个内存安全错误全部犯一遍。
@@ -196,7 +198,7 @@ fn main() {
 
 相关的语言概念如下图。
 
-<img src="./rust_ownership_5.jpg">
+<img src="./rust_ownership/rust_ownership_5.jpg">
 <center>图 5所有权转移</center>
 
 **为什么要转移所有权？**
@@ -253,7 +255,7 @@ fn main() {
 
 与出借所有权相关的概念关系如图 6
 
-<img src="./rust_ownership_6.jpg">
+<img src="./rust_ownership/rust_ownership_6.jpg">
 <center>图 6出借所有权</center>
 
 拥有所有权的变量借出其所有权有“引用”和“智能指针”两种方式：
@@ -375,7 +377,7 @@ impl<T: ?Sized> Borrow<T> for &T {
 
 变量的生命周期主要跟变量的作用域有关，在大部分程序语言中都是隐式定义的。`Rust` 中能显式声明变量的生命周期参数，这是非常独特的设计，其语法特性在其他语言也是不太可能见到的。以下是生命周期概念相关的图示。
 
-<img src="./rust_ownership_7.jpg">
+<img src="./rust_ownership/rust_ownership_7.jpg">
 <center>图 7生命周期</center>
 
 **生命周期参数的作用**
@@ -968,7 +970,7 @@ println!("call after closure:{}", v.x);
 
 下表列出了 10 多个例子，每个例子跟它前后的例子都略有不同，分析这些差别，我们能得到更清晰的结论。
 
-<img src="./rust_ownership_9.jpg">
+<img src="./rust_ownership/rust_ownership_9.jpg">
 
 首先要明确被捕获的变量是哪个，这很重要。比如例 8 中，`ref_v` 是 `v` 的不可变借用，闭包捕获的是 `ref_v` ，那么所有权转移的事情跟 `v` 没有关系，`v` 不会发生与闭包相关的所有权转移事件。
 
@@ -1163,5 +1165,11 @@ unsafe impl<T:?Sized+Sync+Send>Sync for Arc<T>{}
 
 下图是与跨线程所有权相关的概念和类型的 `UML` 图。
 
-<img src="./rust_ownership_8.jpg">
+<img src="./rust_ownership/rust_ownership_8.jpg">
 <center>图 8与多线程相关的所有权转移</center>
+
+---
+
+编辑简介：
+
+高宪凤(.nil?)，软件开发工程师，Rust 语言爱好者，喜欢有计划、有条理、有效率的工作，热爱开源文化，愿意为 Rust 中文社区的发展尽绵薄之力。
