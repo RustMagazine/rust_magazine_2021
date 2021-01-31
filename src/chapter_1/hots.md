@@ -101,3 +101,23 @@ Open Source Security, Inc.宣布为Rust的GCC前端提供资金
 - 原文链接： [https://www.boringcactus.com/2020/08/21/survey-of-rust-gui-libraries.html](https://www.boringcactus.com/2020/08/21/survey-of-rust-gui-libraries.html)
 - AreWeGuiYet 网站也可以看到 GUI 相关信息：[https://www.areweguiyet.com/](https://www.areweguiyet.com/)
 - [另一篇`GUI`调研文章](https://dev.to/davidedelpapa/rust-gui-introduction-a-k-a-the-state-of-rust-gui-libraries-as-of-january-2021-40gl#comments)
+
+## Redox OS 最近公布了2020年的财务明细。
+
+主要的收入是通过捐赠，包括Patreon网站，paypal,和接收到的一些比特币和以太坊。 《Redox OS Summer of Code》是主要的支出预算，其他网站服务的支出，包括亚马逊的EC2，Jenkins服务器，Gitlab服务。
+
+开源项目的明细能做到公开、明细还是非常值得社区学习的。
+
+原文链接: [https://www.redox-os.org/news/finances-2020/](https://www.redox-os.org/news/finances-2020/)
+
+## Rust 官方团队 Wesley Wiser 宣布入职微软
+
+From Twitter:
+
+> Wesley Wiser: I'm very pleased to announce that I will be joining @Microsoftto work on the @rustlang compiler team they are forming!
+
+Wesley Wiser 在 twitter 宣布：加入微软，并且为「微软组织的`Rust`编译器团队」工作。Wesley Wiser 在 2020 年 12 月刚出任 官方 Rust 编译器团队 co-Leader。
+
+到目前为止，编译器的三大 Leader ：Niko 和 Felix 去了亚马逊，Wesley Wiser 去了微软。之前 Facebook 也在招人组建 Rust 编译器团队，侧面反应出大厂们对 Rust 正在做战略布局。
+
+原文链接：[https://twitter.com/wesleywiser/status/1354896012113022984](https://twitter.com/wesleywiser/status/1354896012113022984)

@@ -6,7 +6,7 @@
 
 ---
 
-### Rust 1.49 稳定版发布
+## Rust 1.49 稳定版发布
 
 2020年最后一天，Rust 1.49 稳定版发布了。稳定版 Rust 发布周期为六周一次。
 
@@ -40,8 +40,7 @@ fn main(){
 
 [https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html](https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html)
 
-### Rust 将不再支持 Windows XP
-
+## Rust 将不再支持 Windows XP
 
 目标i686-pc-windows-msvc和x86_64-pc-windows-msvc是个怪胎。它们对Windows 7+有Tier 1支持，但对Windows XP也有Tier 3支持。这是Firefox需要在XP上运行时的遗留问题。然而在他们放弃XP支持后的几年里，尽管偶尔会有修复，但大多都是任由它过期了。
 
