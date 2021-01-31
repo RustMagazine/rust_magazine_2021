@@ -4,7 +4,7 @@
 
 - [介绍](./README.md)
 - [创刊寄语](./send_word.md)
-- [一月刊（January）| 未发布](./chapter_1/toc.md)
+- [一月刊（January）| 正式发布](./chapter_1/toc.md)
     - [本月简报 | Rust官方动态](./chapter_1/lang.md)
     - [本月简报 |社区热点](./chapter_1/hots.md)
     - [本月简报 | 推荐项目](./chapter_1/projects.md)
@@ -22,7 +22,7 @@
     - [用`Rust`写操作系统 | rCore OS 教程介绍 ](./chapter_1/rcore_intro.md)
     - [Rust Security 专题 | `Rust`生态安全漏洞总结系列 | Part 1](./chapter_1/rust_security_part1.md)
     - [Rust编译器专题 | Rust Dev Guide 中文翻译启动招募](./chapter_1/rustc_dev_guide_zh.md)
-    - [Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开](./chapter_1/rustc_part1.md)
+    - [Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1](./chapter_1/rustc_part1.md)
     
 - [二月刊（February）| 待发布](./chapter_2.md)
 - [三月刊（March）| 待发布](./chapter_3.md)

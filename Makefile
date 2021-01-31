@@ -12,4 +12,4 @@ deploy: init
 	cd /tmp/book && \
 		git add -A && \
 		git commit -m "deployed on $(shell date) by ${USER}" && \
-		git push origin gh-pages
+		git push -f origin gh-pages
