@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>本月简报 |社区热点 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="../chapter_1/hots.html" class="active"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | Cita: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#本月简报--社区热点" id="本月简报--社区热点">本月简报 | 社区热点</a></h1>
+<ul>
+<li>来源：<a href="https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f">Rust日报</a></li>
+<li>作者：Rust 日报小组</li>
+</ul>
+<h2><a class="header" href="#async-std-v190-发布" id="async-std-v190-发布">Async-std v1.9.0 发布</a></h2>
+<p>这个版本发布了稳定的 <code>async_std::channel</code> 子模块，并引入了 tokio v1.0 的功能，同时，移除了不赞成使用的<code>sync::channel</code>类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use async_std::channel;
+
+let (sender, receiver) = channel::unbounded();
+
+assert_eq!(sender.send(&quot;Hello&quot;).await, Ok(()));
+assert_eq!(receiver.recv().await, Ok(&quot;Hello&quot;));
+<span class="boring">}
+</span></code></pre></pre>
+<p>链接，<a href="https://github.com/async-rs/async-std/releases/tag/v1.9.0">https://github.com/async-rs/async-std/releases/tag/v1.9.0</a></p>
+<h2><a class="header" href="#deno-in-2020" id="deno-in-2020">Deno in 2020</a></h2>
+<p>一直很火热的 Deno 官方最近发布了 Deno 的<a href="https://deno.land/posts/deno-in-2020">大事记表</a>。
+其中 1 月份进行了将 libdeno 替换成 rusty_v8 的工作。之前是使用 libdeno（C++ 写的） 来进行绑定 V8 的操作。现在替换成 Rust 原生实现的 rusty_v8。并且 rusty_v8 是一个单独的 Rust crate。</p>
+<h2><a class="header" href="#the-rust-on-raspberry-pi-pico-charity-live-stream" id="the-rust-on-raspberry-pi-pico-charity-live-stream">The Rust on Raspberry Pi Pico Charity Live Stream</a></h2>
+<p>在树莓派上写 Rust 是一种怎样的体验？最近一位国外友人就尝试这么做了，并且进行了直播。具体详情可以<a href="https://www.reddit.com/r/rust/comments/l39jdo/the_rust_on_raspberry_pi_pico_charity_live_stream/">戳此链接</a>。
+Rust 在嵌入式开发领域还是有非常大的潜力的。</p>
+<p>想要看更多关于 Rust 的流媒体视频，可以关注这个项目 <a href="https://github.com/jamesmunns/awesome-rust-streaming">awesome-rust-streaming</a></p>
+<h2><a class="header" href="#sequoia-pgp-发布-10-版本" id="sequoia-pgp-发布-10-版本">Sequoia PGP 发布 1.0 版本</a></h2>
+<p>2018 年，三位 GnuPG 开发者开始着手开发 Sequoia，这是 OpenPGP 在 Rust 中的实现版本。OpenPGP 是一种非专有协议，为加密消息、签名、私钥和用于交换公钥的证书定义了统一标准。</p>
+<p>通过<a href="https://sequoia-pgp.org/blog/2020/12/16/202012-1.0/">官方博客</a>可以看出团队对当前版本对于安全性的思考和对未来下一步的规划。</p>
+<h2><a class="header" href="#firecracker" id="firecracker">Firecracker</a></h2>
+<p>Firecracker 是一种开源虚拟化技术，专门用于创建和管理安全的，多租户容器和基于功能的服务。</p>
+<p><a href="https://github.com/firecracker-microvm/firecracker">项目地址</a></p>
+<h2><a class="header" href="#rust-gui-编程介绍" id="rust-gui-编程介绍">Rust GUI 编程介绍</a></h2>
+<p>Rust GUI 方面的介绍以及目前 Rust GUI 库的现阶段状况</p>
+<p><a href="https://dev.to/davidedelpapa/rust-gui-introduction-a-k-a-the-state-of-rust-gui-libraries-as-of-january-2021-40gl#comments">原文链接</a></p>
+<h2><a class="header" href="#facebook-使用-rust-的简单介绍" id="facebook-使用-rust-的简单介绍">Facebook 使用 Rust 的简单介绍</a></h2>
+<p>该 twitter 快速的介绍了 Rust 在 facebook 中的使用历程:</p>
+<p>2017 年开始应用于一个资源控制项目，后来证明性能和稳定性都比 C++好。
+之后，更多的工程师开始使用 Rust 在各种项目中，例如 Diem，Hack，Mononoke。
+在 dev tools 中证明 Rust 可行之后, 开始在后端和手机应用中使用 Rust
+很多工程师来自 python 和 javascript 语言，Rust 的强类型和高性能让这些工程师不再挣扎于运行时的 bug。
+为了让 Rust 更广泛的使用，设立了一个专门的 Rust 小组来支持其他的工程师在不同的项目中使用 Rust。 该小组同时在 Rust 社区中也非常活跃，贡献代码。</p>
+<p><a href="https://twitter.com/alexvoica/status/1350049393471324161">原文链接</a></p>
+<h2><a class="header" href="#时隔一年-tower-终于发布新版本啦" id="时隔一年-tower-终于发布新版本啦">时隔一年 tower 终于发布新版本啦</a></h2>
+<p>Tower 是一个模块化和可重用组件库，用于构建健壮的网络客户端和服务器。上一个版本 0.3.1 版本是 2020 年 1 月 17 发布的，新版本 0.4.0 是 2021 年 1 月 7 号发布的，这个版本包含了大量改动，包括使用了 tokio 1.0，将所有的中间件转移到了 tower crate，改造，添加了中间件 API。</p>
+<p>不过这次变更并没有核心 Service 或者 Layer trait，所以新版本还是依赖着 tower- service 0.3 和 tower- layer 0.3，因此新版本是兼容使用这两个 crate 的库的。更多发布细节请移步下面的链接。</p>
+<p><a href="https://github.com/tower-rs/tower/releases/tag/tower-0.4.0">原文链接</a></p>
+<p><a href="https://crates.io/crates/tower/0.4.0">项目地址</a></p>
+<h2><a class="header" href="#rust-search-extension-110-发布" id="rust-search-extension-110-发布">Rust Search Extension 1.1.0 发布</a></h2>
+<p><a href="https://rust.extension.sh/">Rust Search Extension</a> 发布了最新版，同时也突破了 500 个 star，感谢大家的支持！这个版本主要功能如下：</p>
+<ul>
+<li>! 搜索改成了 docs.rs，!! 改成了 crates.io。</li>
+<li>给 Rust 仓库的 release 页面增加了目录菜单。</li>
+<li>Rust 标准库文档页面和源码页面所有 &quot;since&quot; 和 &quot;issue&quot; 标签分别会链接到仓库的 release 页面对应的版本和 GitHub 对应的 issue 页。</li>
+</ul>
+<h2><a class="header" href="#为什么-2021-年将成为系统程序员的-rust-年" id="为什么-2021-年将成为系统程序员的-rust-年">为什么 2021 年将成为系统程序员的 Rust 年？</a></h2>
+<p>Gartner 今天的一篇博文报道了“Rust”：近年来，Rust 获得了很多粉丝，并且有充分的理由。Rust 旨在成为满足系统编程需求的 C++ 的可靠替代品。</p>
+<p><a href="https://blogs.gartner.com/manjunath-bhat/2021/01/03/why-2021-will-be-a-rusty-year-for-system-programmers/">原文链接</a></p>
+<h2><a class="header" href="#open-source-security-inc宣布为rust的gcc前端提供资金" id="open-source-security-inc宣布为rust的gcc前端提供资金">Open Source Security, Inc.宣布为Rust的GCC前端提供资金</a></h2>
+<p>Open Source Security, Inc.宣布为Rust的GCC前端提供资金
+开源安全公司（Open Source Security，Inc）自豪地宣布，它为Rust的GCC前端的全职和公共开发工作提供了资金。在此博客文章中，作者将详细介绍我们参与的动机以及公众将因这项努力而获得的利益。</p>
+<p>原文链接 : <a href="https://opensrcsec.com/open_source_security_announces_rust_gcc_funding">https://opensrcsec.com/open_source_security_announces_rust_gcc_funding</a></p>
+<h2><a class="header" href="#rust-gui框架的全调研" id="rust-gui框架的全调研">Rust GUI框架的全调研</a></h2>
+<p>这篇文章对几乎目前Rust社区较为流行的GUI框架做了整体的调研，druid和iced表现还不错。</p>
+<ul>
+<li>原文链接： <a href="https://www.boringcactus.com/2020/08/21/survey-of-rust-gui-libraries.html">https://www.boringcactus.com/2020/08/21/survey-of-rust-gui-libraries.html</a></li>
+<li>AreWeGuiYet 网站也可以看到 GUI 相关信息：<a href="https://www.areweguiyet.com/">https://www.areweguiyet.com/</a></li>
+<li><a href="https://dev.to/davidedelpapa/rust-gui-introduction-a-k-a-the-state-of-rust-gui-libraries-as-of-january-2021-40gl#comments">另一篇<code>GUI</code>调研文章</a></li>
+</ul>
+<h2><a class="header" href="#redox-os-最近公布了2020年的财务明细" id="redox-os-最近公布了2020年的财务明细">Redox OS 最近公布了2020年的财务明细。</a></h2>
+<p>主要的收入是通过捐赠，包括Patreon网站，paypal,和接收到的一些比特币和以太坊。 《Redox OS Summer of Code》是主要的支出预算，其他网站服务的支出，包括亚马逊的EC2，Jenkins服务器，Gitlab服务。</p>
+<p>开源项目的明细能做到公开、明细还是非常值得社区学习的。</p>
+<p>原文链接: <a href="https://www.redox-os.org/news/finances-2020/">https://www.redox-os.org/news/finances-2020/</a></p>
+<h2><a class="header" href="#rust-官方团队-wesley-wiser-宣布入职微软" id="rust-官方团队-wesley-wiser-宣布入职微软">Rust 官方团队 Wesley Wiser 宣布入职微软</a></h2>
+<p>From Twitter:</p>
+<blockquote>
+<p>Wesley Wiser: I'm very pleased to announce that I will be joining @Microsoftto work on the @rustlang compiler team they are forming!</p>
+</blockquote>
+<p>Wesley Wiser 在 twitter 宣布：加入微软，并且为「微软组织的<code>Rust</code>编译器团队」工作。Wesley Wiser 在 2020 年 12 月刚出任 官方 Rust 编译器团队 co-Leader。</p>
+<p>到目前为止，编译器的三大 Leader ：Niko 和 Felix 去了亚马逊，Wesley Wiser 去了微软。之前 Facebook 也在招人组建 Rust 编译器团队，侧面反应出大厂们对 Rust 正在做战略布局。</p>
+<p>原文链接：<a href="https://twitter.com/wesleywiser/status/1354896012113022984">https://twitter.com/wesleywiser/status/1354896012113022984</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_1/lang.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_1/projects.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_1/lang.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_1/projects.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,1358 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>学习园地 | 「译」 GraphQL in Rust - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="../../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="../../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="../../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="../../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="../../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="../../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="../../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | Cita: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="../../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="../../chapter_1/graphql_in_rust/graphql_in_rust.html" class="active"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="../../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开</a></li></ol></li><li class="chapter-item expanded "><a href="../../chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#学习园地--译-graphql-in-rust" id="学习园地--译-graphql-in-rust">学习园地 | 「译」 GraphQL in Rust</a></h1>
+<h2><a class="header" href="#译者序" id="译者序">译者序</a></h2>
+<p>Roman Kudryashov(<a href="https://romankudryashov.com">博客</a>)是一名来自莫斯科的资深后端开发人员，在日常工作中用Rust/Java/Kotlin来完成服务的持久层，微服务之间的集成等工作。在<code>Async-graphql</code>的开发过程中给予了非常多的<a href="https://github.com/async-graphql/async-graphql/issues?q=is%3Aissue+author%3Arkudryashov">帮助</a>，然后根据这些经验总结出来这篇入门教程（<a href="https://romankudryashov.com/blog/2020/12/graphql-rust/">英文原版</a>）。</p>
+<p>译者老油条（<a href="https://github.com/sunli829">孙黎</a>），<code>Async-graphql</code>库作者，连续创业者，处女座码农，之前日常工作由C++和Golang完成，两年前一个偶然的机会邂逅Rust语言，并不由自主的爱上了它，之后再也没有碰过其它编程语言，工作中用Rust语言完成所有的事情，是不折不扣的Rust语言狂热粉丝。Rust是我这么多年编程生涯中真正遇到的完美编程语言，无GC，并发安全以及类似Python等脚本语言才提供的高级语法，让我产生给它做一些力所能及的贡献的想法，<a href="https://github.com/sunli829/nvg">nvg</a>和<a href="https://github.com/sunli829/xactor">Xactor</a>是刚学Rust不久之后的小试牛刀，而<a href="https://github.com/async-graphql/async-graphql">Async-graphql</a>是Rust 1.39异步稳定之后的产物。</p>
+<p><em>学习Rust的过程很艰辛，需要保持一颗修行的心，当你能够越过那一座座阻碍在面前的高山，也许才能够发现它真正的美好。</em></p>
+<h2><a class="header" href="#目录" id="目录">目录</a></h2>
+<ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%A7%88">概览</a></li>
+<li><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88">技术栈</a></li>
+<li><a href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7">开发工具</a></li>
+</ul>
+</li>
+<li>实现
+<ul>
+<li><a href="#%E4%BE%9D%E8%B5%96%E5%BA%93">依赖库</a></li>
+<li><a href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD">核心功能</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E5%92%8C%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89">查询和类型定义</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3N+1%E9%97%AE%E9%A2%98">解决N+1问题</a></li>
+<li><a href="#%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89">接口定义</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E9%87%8F">自定义标量</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E6%9B%B4(Mutation)">定义变更(Mutation)</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E8%AE%A2%E9%98%85(Subscription)">定义订阅(Subscription)</a></li>
+<li><a href="#%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">集成测试</a></li>
+<li><a href="#GraphQL%E5%AE%A2%E6%88%B7%E7%AB%AF">GraphQL客户端</a></li>
+<li><a href="#API%E5%AE%89%E5%85%A8">API安全</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E6%9E%9A%E4%B8%BE">定义枚举</a></li>
+<li><a href="#%E6%97%A5%E6%9C%9F%E5%A4%84%E7%90%86">日期处理</a></li>
+<li><a href="#%E6%94%AF%E6%8C%81ApolloFederation">支持Apollo Federation</a></li>
+<li><a href="#ApolloServer">Apollo Server</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92">数据库交互</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E5%92%8CAPI%E6%B5%8B%E8%AF%95">运行和API测试</a></li>
+<li><a href="#%E8%AE%A2%E9%98%85%E6%B5%8B%E8%AF%95">订阅测试</a></li>
+<li><a href="#CI/CD">CI/CD</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+<li><a href="#%E6%9C%89%E7%94%A8%E7%9A%84%E9%93%BE%E6%8E%A5">有用的链接</a></li>
+</ul>
+<p>在今天的文章中，我将描述如何使用Rust及其生态系统创建GraphQL后端服务。 本文提供了创建GraphQL API时最常见任务的实现示例。最后，将使用Apollo Server和Apollo Federation将三个微服务组合为一个端点。 这使客户端可以同时从任意数量的源中获取数据，而无需知道哪些数据来自哪个源。</p>
+<h2><a class="header" href="#介绍" id="介绍">介绍</a></h2>
+<h3><a class="header" href="#概览" id="概览">概览</a></h3>
+<p>在功能方面，所描述的项目与我上一篇文章中所描述的非常相似，但是现在它是使用Rust编写的。 该项目的架构如下所示：</p>
+<p><img src="architecture.png" alt="architecture" /></p>
+<p>架构的每个组件都回答了在实现GraphQL API时可能出现的几个问题。整个模型包括有关太阳系中的行星及其卫星的数据。该项目具有多模块结构，并包含以下模块：</p>
+<ul>
+<li>
+<p><a href="https://github.com/rkudryashov/graphql-rust-demo/tree/master/planets-service">planets-service</a> (Rust)</p>
+</li>
+<li>
+<p><a href="https://github.com/rkudryashov/graphql-rust-demo/tree/master/satellites-service">satellites-service</a> (Rust)</p>
+</li>
+<li>
+<p><a href="https://github.com/rkudryashov/graphql-rust-demo/tree/master/auth-service">auth-service</a> (Rust)</p>
+</li>
+<li>
+<p><a href="https://github.com/rkudryashov/graphql-rust-demo/tree/master/apollo-server">apollo-server</a> (JS)</p>
+</li>
+</ul>
+<p>在Rust中有两个库来创建GraphQL后端：<a href="https://github.com/graphql-rust/juniper">Juniper</a>和<a href="https://github.com/async-graphql/async-graphql">Async-graphql</a>，但是只有后者支持Apollo Federation，因此我在项目中选择了它（Juniper中的Federation支持存在未解决的<a href="https://github.com/graphql-rust/juniper/issues/376">问题</a>）。 这两个库都遵循<a href="https://blog.logrocket.com/code-first-vs-schema-first-development-graphql/">代码优先</a>方法。</p>
+<p>同样，PostgreSQL用于持久层实现，<a href="https://jwt.io/">JWT</a>用于认证，而Kafka用于消息传递。</p>
+<h3><a class="header" href="#技术栈" id="技术栈">技术栈</a></h3>
+<p>下表总结了该项目中使用的主要技术栈：</p>
+<table><thead><tr><th>类型</th><th>名字</th><th>网站</th><th>代码仓库</th></tr></thead><tbody>
+<tr><td>语言</td><td>Rust</td><td><a href="https://www.rust-lang.org/">link</a></td><td><a href="https://github.com/rust-lang/rust">link</a></td></tr>
+<tr><td>GraphQL服务端库</td><td>Async-graphql</td><td><a href="https://async-graphql.github.io/async-graphql/zh-CN/index.html">link</a></td><td><a href="https://github.com/async-graphql/async-graphql">link</a></td></tr>
+<tr><td>GraphQL网关</td><td>Apollo Server</td><td><a href="https://www.apollographql.com/docs/apollo-server/">link</a></td><td><a href="https://github.com/apollographql/apollo-server">link</a></td></tr>
+<tr><td>Web框架</td><td>Actix-web</td><td><a href="https://actix.rs/">link</a></td><td><a href="https://github.com/actix/actix-web">link</a></td></tr>
+<tr><td>数据库</td><td>PostgreSQL</td><td><a href="https://www.postgresql.org/">link</a></td><td><a href="https://github.com/postgres/postgres">link</a></td></tr>
+<tr><td>消息队列</td><td>Apache Kafka</td><td><a href="https://kafka.apache.org/">link</a></td><td><a href="https://github.com/apache/kafka">link</a></td></tr>
+<tr><td>容器编排</td><td>Docker Compose</td><td><a href="https://docs.docker.com/compose/">link</a></td><td><a href="https://github.com/docker/compose">link</a></td></tr>
+</tbody></table>
+<p>另外还有一些需要依赖的Rust库:</p>
+<table><thead><tr><th>类型</th><th>名字</th><th>网站</th><th>代码仓库</th></tr></thead><tbody>
+<tr><td>ORM</td><td>Diesel</td><td><a href="https://diesel.rs/">link</a></td><td><a href="https://github.com/diesel-rs/diesel">link</a></td></tr>
+<tr><td>Kafka客户端</td><td>rust-rdkafka</td><td><a href="https://crates.io/crates/rdkafka">link</a></td><td><a href="https://github.com/fede1024/rust-rdkafka">link</a></td></tr>
+<tr><td>密码哈希库</td><td>argonautica</td><td><a href="https://crates.io/crates/argonautica">link</a></td><td><a href="https://github.com/bcmyers/argonautica">link</a></td></tr>
+<tr><td>JWT</td><td>jsonwebtoken</td><td><a href="https://crates.io/crates/jsonwebtoken">link</a></td><td><a href="https://github.com/Keats/jsonwebtoken">link</a></td></tr>
+<tr><td>测试</td><td>Testcontainers-rs</td><td><a href="https://crates.io/crates/testcontainers">link</a></td><td><a href="https://github.com/testcontainers/testcontainers-rs">link</a></td></tr>
+</tbody></table>
+<h3><a class="header" href="#开发工具" id="开发工具">开发工具</a></h3>
+<p>要在本地启动项目，你只需要<code>Docker Compose</code>。 如果没有<code>Docker</code>，可能需要安装以下内容：</p>
+<ul>
+<li><a href="https://www.rust-lang.org/tools/install">Rust</a></li>
+<li><a href="https://diesel.rs/guides/getting-started/">Diesel CLI</a> (运行 <code>cargo install diesel_cli --no-default-features --features postgres</code>)</li>
+<li><a href="https://releases.llvm.org/download.html">LLVM</a>(<code>argonautica</code>依赖)</li>
+<li><a href="https://cmake.org/install/">CMake</a> (<code>rust-rdkafka</code>依赖)</li>
+<li><a href="https://www.postgresql.org/download/">PostgreSQL</a></li>
+<li><a href="https://kafka.apache.org/quickstart">Apache Kafka</a></li>
+<li><a href="https://www.npmjs.com/get-npm">npm</a></li>
+</ul>
+<h3><a class="header" href="#实现" id="实现">实现</a></h3>
+<p><em>清单1. 根<code>Cargo.toml</code>指定三个应用和一个库:</em></p>
+<p>根<a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/Cargo.toml">Cargo.toml</a></p>
+<pre><code class="language-toml">[workspace]
+members = [
+    &quot;auth-service&quot;,
+    &quot;planets-service&quot;,
+    &quot;satellites-service&quot;,
+    &quot;common-utils&quot;,
+]
+</code></pre>
+<p>让我们从<a href="https://github.com/rkudryashov/graphql-rust-demo/tree/master/planets-service">planets-service</a>开始。</p>
+<h3><a class="header" href="#依赖库" id="依赖库">依赖库</a></h3>
+<p>这是Cargo.toml：</p>
+<p><em>清单2. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/Cargo.toml">Cargo.toml</a></em></p>
+<pre><code class="language-toml">[package]
+name = &quot;planets-service&quot;
+version = &quot;0.1.0&quot;
+edition = &quot;2018&quot;
+
+[dependencies]
+common-utils = { path = &quot;../common-utils&quot; }
+async-graphql = &quot;2.4.3&quot;
+async-graphql-actix-web = &quot;2.4.3&quot;
+actix-web = &quot;3.3.2&quot;
+actix-rt = &quot;1.1.1&quot;
+actix-web-actors = &quot;3.0.0&quot;
+futures = &quot;0.3.8&quot;
+async-trait = &quot;0.1.42&quot;
+bigdecimal = { version = &quot;0.1.2&quot;, features = [&quot;serde&quot;] }
+serde = { version = &quot;1.0.118&quot;, features = [&quot;derive&quot;] }
+serde_json = &quot;1.0.60&quot;
+diesel = { version = &quot;1.4.5&quot;, features = [&quot;postgres&quot;, &quot;r2d2&quot;, &quot;numeric&quot;] }
+diesel_migrations = &quot;1.4.0&quot;
+dotenv = &quot;0.15.0&quot;
+strum = &quot;0.20.0&quot;
+strum_macros = &quot;0.20.1&quot;
+rdkafka = { version = &quot;0.24.0&quot;, features = [&quot;cmake-build&quot;] }
+async-stream = &quot;0.3.0&quot;
+lazy_static = &quot;1.4.0&quot;
+
+[dev-dependencies]
+jsonpath_lib = &quot;0.2.6&quot;
+testcontainers = &quot;0.9.1&quot;
+</code></pre>
+<p><code>Async-graphql</code>是GraphQL服务端库，<code>Actix-web</code>是Web服务框架，而<code>Async-graphql-actix-web</code>提供它们之间的集成。</p>
+<h3><a class="header" href="#核心功能" id="核心功能">核心功能</a></h3>
+<p>我们转到<code>main.rs</code>：</p>
+<p><em>清单3. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/main.rs">main.rs</a></em></p>
+<pre><pre class="playground"><code class="language-rust">#[actix_rt::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    dotenv().ok();
+    let pool = create_connection_pool();
+    run_migrations(&amp;pool);
+
+    let schema = create_schema_with_context(pool);
+
+    HttpServer::new(move || App::new()
+        .configure(configure_service)
+        .data(schema.clone())
+    )
+        .bind(&quot;0.0.0.0:8001&quot;)?
+        .run()
+        .await
+}
+</code></pre></pre>
+<p>这里，使用<code>lib.rs</code>中定义的功能配置环境和HTTP服务器：</p>
+<p><em>清单4. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/lib.rs">lib.rs</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn configure_service(cfg: &amp;mut web::ServiceConfig) {
+    cfg
+        .service(web::resource(&quot;/&quot;)
+            .route(web::post().to(index))
+            .route(web::get().guard(guard::Header(&quot;upgrade&quot;, &quot;websocket&quot;)).to(index_ws))
+            .route(web::get().to(index_playground))
+        );
+}
+
+async fn index(schema: web::Data&lt;AppSchema&gt;, http_req: HttpRequest, req: Request) -&gt; Response {
+    let mut query = req.into_inner();
+
+    let maybe_role = common_utils::get_role(http_req);
+    if let Some(role) = maybe_role {
+        query = query.data(role);
+    }
+
+    schema.execute(query).await.into()
+}
+
+async fn index_ws(schema: web::Data&lt;AppSchema&gt;, req: HttpRequest, payload: web::Payload) -&gt; Result&lt;HttpResponse&gt; {
+    WSSubscription::start(Schema::clone(&amp;*schema), &amp;req, payload)
+}
+
+async fn index_playground() -&gt; HttpResponse {
+    HttpResponse::Ok()
+        .content_type(&quot;text/html; charset=utf-8&quot;)
+        .body(playground_source(GraphQLPlaygroundConfig::new(&quot;/&quot;).subscription_endpoint(&quot;/&quot;)))
+}
+
+pub fn create_schema_with_context(pool: PgPool) -&gt; Schema&lt;Query, Mutation, Subscription&gt; {
+    let arc_pool = Arc::new(pool);
+    let cloned_pool = Arc::clone(&amp;arc_pool);
+    let details_batch_loader = Loader::new(DetailsBatchLoader {
+        pool: cloned_pool
+    }).with_max_batch_size(10);
+
+    let kafka_consumer_counter = Mutex::new(0);
+
+    Schema::build(Query, Mutation, Subscription)
+        .data(arc_pool)
+        .data(details_batch_loader)
+        .data(kafka::create_producer())
+        .data(kafka_consumer_counter)
+        .finish()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这些函数执行以下操作：</p>
+<ul>
+<li><code>index</code> - 处理GraphQL<a href="https://graphql.org/learn/queries/">查询和变更</a></li>
+<li><code>index_ws</code> - 处理GraphQL<a href="https://www.apollographql.com/docs/react/data/subscriptions/">订阅</a></li>
+<li><code>index_playground</code> - 提供Graph Playground IDE</li>
+<li><code>create_schema_with_context</code> - 使用可在运行时访问的全局上下文数据（例如数据库连接池）创建GraphQL模式</li>
+</ul>
+<h3><a class="header" href="#查询和类型定义" id="查询和类型定义">查询和类型定义</a></h3>
+<p>让我们考虑如何定义查询：</p>
+<p><em>清单5. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">定义查询</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[Object]
+impl Query {
+    async fn get_planets(&amp;self, ctx: &amp;Context&lt;'_&gt;) -&gt; Vec&lt;Planet&gt; {
+        repository::get_all(&amp;get_conn_from_ctx(ctx)).expect(&quot;Can't get planets&quot;)
+            .iter()
+            .map(|p| { Planet::from(p) })
+            .collect()
+    }
+
+    async fn get_planet(&amp;self, ctx: &amp;Context&lt;'_&gt;, id: ID) -&gt; Option&lt;Planet&gt; {
+        find_planet_by_id_internal(ctx, id)
+    }
+
+    #[graphql(entity)]
+    async fn find_planet_by_id(&amp;self, ctx: &amp;Context&lt;'_&gt;, id: ID) -&gt; Option&lt;Planet&gt; {
+        find_planet_by_id_internal(ctx, id)
+    }
+}
+
+fn find_planet_by_id_internal(ctx: &amp;Context&lt;'_&gt;, id: ID) -&gt; Option&lt;Planet&gt; {
+    let id = id.to_string().parse::&lt;i32&gt;().expect(&quot;Can't get id from String&quot;);
+    repository::get(id, &amp;get_conn_from_ctx(ctx)).ok()
+        .map(|p| { Planet::from(&amp;p) })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>每个查询都使用<code>repository</code>从数据库获取数据并将获得的记录转换为GraphQL DTO（这使我们可以保留每个结构的单一职责）。 可以从任何GraphQL IDE访问<code>get_planets</code>和<code>get_planet</code>查询，例如：</p>
+<p><em>清单6. 查询示例</em></p>
+<pre><code class="language-graphql">{
+  getPlanets {
+    name
+    type
+  }
+}
+</code></pre>
+<p><code>Planet</code>对象定义如下：</p>
+<p><em>清单7. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">GraphQL类型定义</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Serialize, Deserialize)]
+struct Planet {
+    id: ID,
+    name: String,
+    planet_type: PlanetType,
+}
+
+#[Object]
+impl Planet {
+    async fn id(&amp;self) -&gt; &amp;ID {
+        &amp;self.id
+    }
+
+    async fn name(&amp;self) -&gt; &amp;String {
+        &amp;self.name
+    }
+
+    /// From an astronomical point of view
+    #[graphql(name = &quot;type&quot;)]
+    async fn planet_type(&amp;self) -&gt; &amp;PlanetType {
+        &amp;self.planet_type
+    }
+
+    #[graphql(deprecation = &quot;Now it is not in doubt. Do not use this field&quot;)]
+    async fn is_rotating_around_sun(&amp;self) -&gt; bool {
+        true
+    }
+
+    async fn details(&amp;self, ctx: &amp;Context&lt;'_&gt;) -&gt; Details {
+        let loader = ctx.data::&lt;Loader&lt;i32, Details, DetailsBatchLoader&gt;&gt;().expect(&quot;Can't get loader&quot;);
+        let planet_id = self.id.to_string().parse::&lt;i32&gt;().expect(&quot;Can't convert id&quot;);
+        loader.load(planet_id).await
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这里，我们为每个字段定义一个Resolver。另外，在某些字段中，指定了描述（Rust文档注释）和弃用原因。 这些将显示在GraphQL IDE中。</p>
+<h3><a class="header" href="#解决n1问题" id="解决n1问题">解决N+1问题</a></h3>
+<p>如果<code>Planet</code>的<code>details</code>函数的实现是直接从数据库中查询对应<code>id</code>的<code>planet</code>对象则将导致N+1问题，如果你发出这样的请求：</p>
+<p><em>清单8: 可能消耗过多资源的GraphQL请求的示例</em></p>
+<pre><code class="language-graphql">{
+  getPlanets {
+    name
+    details {
+      meanRadius
+    }
+  }
+}
+</code></pre>
+<p>这将对每个<code>plant</code>对象的<code>details</code>字段执行单独的SQL查询，因为<code>details</code>是与<code>planet</code>关联的类型，并存储在其自己的表中。</p>
+<p>但借助<code>Async-graphql</code>的<a href="https://github.com/graphql/dataloader">DataLoader</a>实现，可以将Resolver定义如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn details(&amp;self, ctx: &amp;Context&lt;'_&gt;) -&gt; Result&lt;Details&gt; {
+    let data_loader = ctx.data::&lt;DataLoader&lt;DetailsLoader&gt;&gt;().expect(&quot;Can't get data loader&quot;);
+    let planet_id = self.id.to_string().parse::&lt;i32&gt;().expect(&quot;Can't convert id&quot;);
+    let details = data_loader.load_one(planet_id).await?;
+    details.ok_or_else(|| &quot;Not found&quot;.into())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>data_loader</code>是通过以下方式定义的应用程序范围的对象：</p>
+<p><em>清单10. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/lib.rs">DataLoader定义</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let details_data_loader = DataLoader::new(DetailsLoader {
+    pool: cloned_pool
+}).max_batch_size(10)
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>DetailsLoader</code>的实现：</p>
+<p>_清单11. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">DetailsLoader定义</a></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct DetailsLoader {
+    pub pool: Arc&lt;PgPool&gt;
+}
+
+#[async_trait::async_trait]
+impl Loader&lt;i32&gt; for DetailsLoader {
+    type Value = Details;
+    type Error = Error;
+
+    async fn load(&amp;self, keys: &amp;[i32]) -&gt; Result&lt;HashMap&lt;i32, Self::Value&gt;, Self::Error&gt; {
+        let conn = self.pool.get().expect(&quot;Can't get DB connection&quot;);
+        let details = repository::get_details(keys, &amp;conn).expect(&quot;Can't get planets' details&quot;);
+
+        Ok(details.iter()
+            .map(|details_entity| (details_entity.planet_id, Details::from(details_entity)))
+            .collect::&lt;HashMap&lt;_, _&gt;&gt;())
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>此方法有助于我们防止N+1问题，因为每个<code>DetailsLoader.load</code>调用仅执行一个SQL查询，返回多个<code>DetailsEntity</code>。</p>
+<h1><a class="header" href="#接口定义" id="接口定义">接口定义</a></h1>
+<p>GraphQL接口及其实现通过以下方式定义：</p>
+<p><em>清单12. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">GraphQL接口定义</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Interface, Clone)]
+#[graphql(
+    field(name = &quot;mean_radius&quot;, type = &quot;&amp;CustomBigDecimal&quot;),
+    field(name = &quot;mass&quot;, type = &quot;&amp;CustomBigInt&quot;),
+)]
+pub enum Details {
+    InhabitedPlanetDetails(InhabitedPlanetDetails),
+    UninhabitedPlanetDetails(UninhabitedPlanetDetails),
+}
+
+#[derive(SimpleObject, Clone)]
+pub struct InhabitedPlanetDetails {
+    mean_radius: CustomBigDecimal,
+    mass: CustomBigInt,
+    /// In billions
+    population: CustomBigDecimal,
+}
+
+#[derive(SimpleObject, Clone)]
+pub struct UninhabitedPlanetDetails {
+    mean_radius: CustomBigDecimal,
+    mass: CustomBigInt,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这里你还可以看到，如果该对象没有任何复杂Resolver的字段，则可以使用<code>SimpleObject</code>宏来实现。</p>
+<h3><a class="header" href="#自定义标量" id="自定义标量">自定义标量</a></h3>
+<p>这个项目包含两个自定义标量定义的示例，两者都是数字类型的包装器（因为由于<a href="https://doc.rust-lang.org/book/ch10-02-traits.html#implementing-a-trait-on-a-type">孤儿规则</a>，你无法在外部类型上实现外部特征）。包装器的实现如下：</p>
+<p><em>清单 13. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">自定义标量: 包装BigInt</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone)]
+pub struct CustomBigInt(BigDecimal);
+
+#[Scalar(name = &quot;BigInt&quot;)]
+impl ScalarType for CustomBigInt {
+    fn parse(value: Value) -&gt; InputValueResult&lt;Self&gt; {
+        match value {
+            Value::String(s) =&gt; {
+                let parsed_value = BigDecimal::from_str(&amp;s)?;
+                Ok(CustomBigInt(parsed_value))
+            }
+            _ =&gt; Err(InputValueError::expected_type(value)),
+        }
+    }
+
+    fn to_value(&amp;self) -&gt; Value {
+        Value::String(format!(&quot;{:e}&quot;, &amp;self))
+    }
+}
+
+impl LowerExp for CustomBigInt {
+    fn fmt(&amp;self, f: &amp;mut Formatter&lt;'_&gt;) -&gt; fmt::Result {
+        let val = &amp;self.0.to_f64().expect(&quot;Can't convert BigDecimal&quot;);
+        LowerExp::fmt(val, f)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><em>清单 14. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">自定义标量: 包装BigDecimal</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone)]
+pub struct CustomBigDecimal(BigDecimal);
+
+#[Scalar(name = &quot;BigDecimal&quot;)]
+impl ScalarType for CustomBigDecimal {
+    fn parse(value: Value) -&gt; InputValueResult&lt;Self&gt; {
+        match value {
+            Value::String(s) =&gt; {
+                let parsed_value = BigDecimal::from_str(&amp;s)?;
+                Ok(CustomBigDecimal(parsed_value))
+            }
+            _ =&gt; Err(InputValueError::expected_type(value)),
+        }
+    }
+
+    fn to_value(&amp;self) -&gt; Value {
+        Value::String(self.0.to_string())
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>前一个示例还支持使用指数表示大数。</p>
+<h3><a class="header" href="#定义变更mutation" id="定义变更mutation">定义变更(Mutation)</a></h3>
+<p>变更定义如下：</p>
+<p><em>清单 15. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">定义变更</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Mutation;
+
+#[Object]
+impl Mutation {
+    #[graphql(guard(RoleGuard(role = &quot;Role::Admin&quot;)))]
+    async fn create_planet(&amp;self, ctx: &amp;Context&lt;'_&gt;, planet: PlanetInput) -&gt; Result&lt;Planet, Error&gt; {
+        let new_planet = NewPlanetEntity {
+            name: planet.name,
+            planet_type: planet.planet_type.to_string(),
+        };
+
+        let details = planet.details;
+        let new_planet_details = NewDetailsEntity {
+            mean_radius: details.mean_radius.0,
+            mass: BigDecimal::from_str(&amp;details.mass.0.to_string()).expect(&quot;Can't get BigDecimal from string&quot;),
+            population: details.population.map(|wrapper| { wrapper.0 }),
+            planet_id: 0,
+        };
+
+        let created_planet_entity = repository::create(new_planet, new_planet_details, &amp;get_conn_from_ctx(ctx))?;
+
+        let producer = ctx.data::&lt;FutureProducer&gt;().expect(&quot;Can't get Kafka producer&quot;);
+        let message = serde_json::to_string(&amp;Planet::from(&amp;created_planet_entity)).expect(&quot;Can't serialize a planet&quot;);
+        kafka::send_message(producer, message).await;
+
+        Ok(Planet::from(&amp;created_planet_entity))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Mutation.create_planet</code>输入参数需要定义以下结构：</p>
+<p><em>清单 16: <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">定义输入类型</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(InputObject)]
+struct PlanetInput {
+    name: String,
+    #[graphql(name = &quot;type&quot;)]
+    planet_type: PlanetType,
+    details: DetailsInput,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>create_planet</code>受<code>RoleGuard</code>保护，可确保只有具有<code>Admin</code>角色的用户才能访问它。要执行变异，如下所示：</p>
+<pre><code class="language-graphql">mutation {
+  createPlanet(
+    planet: {
+      name: &quot;test_planet&quot;
+      type: TERRESTRIAL_PLANET
+      details: { meanRadius: &quot;10.5&quot;, mass: &quot;8.8e24&quot;, population: &quot;0.5&quot; }
+    }
+  ) {
+    id
+  }
+}
+</code></pre>
+<p>你需要从<code>auth-service</code>获得JWT，并指定<code>Authorization</code>作为HTTP请求的标头（稍后将对此进行描述）。</p>
+<h3><a class="header" href="#定义订阅subscription" id="定义订阅subscription">定义订阅(Subscription)</a></h3>
+<p>在上面的Mutation定义中，你可以看到在<code>planet</code>创建过程中发送了一条消息：</p>
+<p><em>清单 18. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">发送消息到Kafka</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let producer = ctx.data::&lt;FutureProducer&gt;().expect(&quot;Can't get Kafka producer&quot;);
+let message = serde_json::to_string(&amp;Planet::from(&amp;created_planet_entity)).expect(&quot;Can't serialize a planet&quot;);
+kafka::send_message(producer, message).await;
+<span class="boring">}
+</span></code></pre></pre>
+<p>使用者可以通过监听Kafka订阅将事件通知给API客户端：</p>
+<p><em>清单 19. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">订阅定义</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Subscription;
+
+#[Subscription]
+impl Subscription {
+    async fn latest_planet&lt;'ctx&gt;(&amp;self, ctx: &amp;'ctx Context&lt;'_&gt;) -&gt; impl Stream&lt;Item=Planet&gt; + 'ctx {
+        let kafka_consumer_counter = ctx.data::&lt;Mutex&lt;i32&gt;&gt;().expect(&quot;Can't get Kafka consumer counter&quot;);
+        let consumer_group_id = kafka::get_kafka_consumer_group_id(kafka_consumer_counter);
+        let consumer = kafka::create_consumer(consumer_group_id);
+
+        async_stream::stream! {
+            let mut stream = consumer.start();
+
+            while let Some(value) = stream.next().await {
+                yield match value {
+                    Ok(message) =&gt; {
+                        let payload = message.payload().expect(&quot;Kafka message should contain payload&quot;);
+                        let message = String::from_utf8_lossy(payload).to_string();
+                        serde_json::from_str(&amp;message).expect(&quot;Can't deserialize a planet&quot;)
+                    }
+                    Err(e) =&gt; panic!(&quot;Error while Kafka message processing: {}&quot;, e)
+                };
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>订阅可以像查询(Query)和变更(Mutation)一样使用：</p>
+<p><em>清单 20. 订阅使用例子</em></p>
+<pre><code class="language-graphql">subscription {
+  latestPlanet {
+    id
+    name
+    type
+    details {
+      meanRadius
+    }
+  }
+}
+</code></pre>
+<p>订阅的URL是<code>ws://localhost:8001</code>。</p>
+<h3><a class="header" href="#集成测试" id="集成测试">集成测试</a></h3>
+<p>查询和变更的测试可以这样写：</p>
+<p><em>清单 21. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/tests/query_tests.rs">查询测试</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[actix_rt::test]
+async fn test_get_planets() {
+    let docker = Cli::default();
+    let (_pg_container, pool) = common::setup(&amp;docker);
+
+    let mut service = test::init_service(App::new()
+        .configure(configure_service)
+        .data(create_schema_with_context(pool))
+    ).await;
+
+    let query = &quot;
+        {
+            getPlanets {
+                id
+                name
+                type
+                details {
+                    meanRadius
+                    mass
+                    ... on InhabitedPlanetDetails {
+                        population
+                    }
+                }
+            }
+        }
+        &quot;.to_string();
+
+    let request_body = GraphQLCustomRequest {
+        query,
+        variables: Map::new(),
+    };
+
+    let request = test::TestRequest::post().uri(&quot;/&quot;).set_json(&amp;request_body).to_request();
+
+    let response: GraphQLCustomResponse = test::read_response_json(&amp;mut service, request).await;
+
+    fn get_planet_as_json(all_planets: &amp;serde_json::Value, index: i32) -&gt; &amp;serde_json::Value {
+        jsonpath::select(all_planets, &amp;format!(&quot;$.getPlanets[{}]&quot;, index)).expect(&quot;Can't get planet by JSON path&quot;)[0]
+    }
+
+    let mercury_json = get_planet_as_json(&amp;response.data, 0);
+    common::check_planet(mercury_json, 1, &quot;Mercury&quot;, &quot;TERRESTRIAL_PLANET&quot;, &quot;2439.7&quot;);
+
+    let earth_json = get_planet_as_json(&amp;response.data, 2);
+    common::check_planet(earth_json, 3, &quot;Earth&quot;, &quot;TERRESTRIAL_PLANET&quot;, &quot;6371.0&quot;);
+
+    let neptune_json = get_planet_as_json(&amp;response.data, 7);
+    common::check_planet(neptune_json, 8, &quot;Neptune&quot;, &quot;ICE_GIANT&quot;, &quot;24622.0&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果查询的一部分可以在另一个查询中重用，则可以使用<a href="https://graphql.org/learn/queries/#fragments">片段(Fragment)</a>：</p>
+<p><em>清单 22. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/tests/query_tests.rs">查询测试（使用片段）</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const PLANET_FRAGMENT: &amp;str = &quot;
+    fragment planetFragment on Planet {
+        id
+        name
+        type
+        details {
+            meanRadius
+            mass
+            ... on InhabitedPlanetDetails {
+                population
+            }
+        }
+    }
+&quot;;
+
+#[actix_rt::test]
+async fn test_get_planet_by_id() {
+    ...
+
+    let query = &quot;
+        {
+            getPlanet(id: 3) {
+                ... planetFragment
+            }
+        }
+        &quot;.to_string() + PLANET_FRAGMENT;
+
+    let request_body = GraphQLCustomRequest {
+        query,
+        variables: Map::new(),
+    };
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>要使用<a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/tests/query_tests.rs">变量</a>，你可以通过以下方式编写测试：</p>
+<p><em>清单 23. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/tests/query_tests.rs">查询测试（使用片段和变量）</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[actix_rt::test]
+async fn test_get_planet_by_id_with_variable() {
+    ...
+
+    let query = &quot;
+        query testPlanetById($planetId: String!) {
+            getPlanet(id: $planetId) {
+                ... planetFragment
+            }
+        }&quot;.to_string() + PLANET_FRAGMENT;
+
+    let jupiter_id = 5;
+    let mut variables = Map::new();
+    variables.insert(&quot;planetId&quot;.to_string(), jupiter_id.into());
+
+    let request_body = GraphQLCustomRequest {
+        query,
+        variables,
+    };
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这个项目中，<code>Testcontainers-rs</code>库用于准备测试环境，创建一个临时PostgreSQL数据库。</p>
+<h3><a class="header" href="#graphql客户端" id="graphql客户端">GraphQL客户端</a></h3>
+<p>你可以使用上一部分中的代码段来创建外部GraphQL API的客户端。另外，有一些库可用于此目的，例如<code>graphql-client</code>，但我还没有使用它们。</p>
+<h3><a class="header" href="#api安全" id="api安全">API安全</a></h3>
+<p>GraphQL API有一些不同程度的安全威胁（请参阅此<a href="https://leapgraph.com/graphql-api-security">清单</a>以了解更多信息），让我们考虑其中的一些方面。</p>
+<h4><a class="header" href="#限制查询的深度和复杂度" id="限制查询的深度和复杂度">限制查询的深度和复杂度</a></h4>
+<p>如果<code>Satellite</code>对象容纳<code>planet</code>字段，则可能有以下查询：</p>
+<p><em>清单 24. 昂贵查询的例子</em></p>
+<pre><code class="language-graphql">{
+  getPlanet(id: &quot;1&quot;) {
+    satellites {
+      planet {
+        satellites {
+          planet {
+            satellites {
+              ... # 更深的嵌套！
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>为了使这样的查询无效，我们可以指定：</p>
+<p><em>清单 25. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/lib.rs">限制查询深度和复杂度的例子</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn create_schema_with_context(pool: PgPool) -&gt; Schema&lt;Query, Mutation, Subscription&gt; {
+    ...
+
+    Schema::build(Query, Mutation, Subscription)
+        .limit_depth(3)
+        .limit_complexity(15)
+
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>请注意，如果你指定深度或复杂度限制，则API文档可能不能在GraphQL IDE中显示，这是因为IDE尝试执行具有相当深度和复杂度的自省查询。</p>
+<h4><a class="header" href="#认证" id="认证">认证</a></h4>
+<p>使用<code>argonautica</code>和<code>jsonwebtoken</code>库在<code>auth-service</code>中实现此功能。 前一个库负责使用<a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>算法对用户的密码进行哈希处理。<strong>身份验证和授权功能仅用于演示，请针对生产用途进行更多研究。</strong></p>
+<p>让我们看看登录的实现方式：</p>
+<p><em>清单 26. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/auth-service/src/graphql.rs">实现登录</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Mutation;
+
+#[Object]
+impl Mutation {
+
+    async fn sign_in(&amp;self, ctx: &amp;Context&lt;'_&gt;, input: SignInInput) -&gt; Result&lt;String, Error&gt; {
+        let maybe_user = repository::get_user(&amp;input.username, &amp;get_conn_from_ctx(ctx)).ok();
+
+        if let Some(user) = maybe_user {
+            if let Ok(matching) = verify_password(&amp;user.hash, &amp;input.password) {
+                if matching {
+                    let role = AuthRole::from_str(user.role.as_str()).expect(&quot;Can't convert &amp;str to AuthRole&quot;);
+                    return Ok(common_utils::create_token(user.username, role));
+                }
+            }
+        }
+
+        Err(Error::new(&quot;Can't authenticate a user&quot;))
+    }
+}
+
+#[derive(InputObject)]
+struct SignInInput {
+    username: String,
+    password: String,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>你可以在<code>utils</code><a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/auth-service/src/utils.rs">模块</a>中查看<code>verify_password</code>函数的实现，在<code>common_utils</code><a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/common-utils/src/lib.rs">模块</a>中查看<code>create_token</code>函数的实现。如你所料，<code>sign_in</code>函数将颁发JWT，该JWT可进一步用于其他服务中的授权。</p>
+<p>要获得JWT，你需要执行以下变更：</p>
+<p><em>清单 27. 获取JWT</em></p>
+<pre><code class="language-graphql">mutation {
+  signIn(input: { username: &quot;john_doe&quot;, password: &quot;password&quot; })
+}
+</code></pre>
+<p>使用 <em>john_doe/password</em> ，将获得的JWT用于在进一步的请求中，可以访问受保护的资源（请参阅下一节）。</p>
+<h4><a class="header" href="#鉴权" id="鉴权">鉴权</a></h4>
+<p>要请求受保护的数据，你需要以<code>Authorization：Bearer $ JWT</code>格式向HTTP请求中添加标头。 <code>index</code>函数将从请求中提取用户的角色，并将其添加到查询数据中：</p>
+<p><em>清单 28. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/lib.rs">角色提取</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>async fn index(schema: web::Data&lt;AppSchema&gt;, http_req: HttpRequest, req: Request) -&gt; Response {
+    let mut query = req.into_inner();
+
+    let maybe_role = common_utils::get_role(http_req);
+    if let Some(role) = maybe_role {
+        query = query.data(role);
+    }
+
+    schema.execute(query).await.into()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>以下属性应用于先前定义的<code>create_planet</code>变更：</p>
+<p><em>清单 29. 使用字段守卫</em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[graphql(guard(RoleGuard(role = &quot;Role::Admin&quot;)))]
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个守卫自身实现如下：</p>
+<p><em>清单 30. 守卫实现</em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct RoleGuard {
+    role: Role,
+}
+
+#[async_trait::async_trait]
+impl Guard for RoleGuard {
+    async fn check(&amp;self, ctx: &amp;Context&lt;'_&gt;) -&gt; Result&lt;()&gt; {
+        if ctx.data_opt::&lt;Role&gt;() == Some(&amp;self.role) {
+            Ok(())
+        } else {
+            Err(&quot;Forbidden&quot;.into())
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这样如果你未指定角色，则服务器将返回<code>Forbidden</code>的消息。</p>
+<h3><a class="header" href="#定义枚举" id="定义枚举">定义枚举</a></h3>
+<p>GraphQL枚举可以通过以下方式定义：</p>
+<p><em>清单 31. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/satellites-service/src/graphql.rs">定义枚举</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(SimpleObject)]
+struct Satellite {
+    ...
+    life_exists: LifeExists,
+}
+
+#[derive(Copy, Clone, Eq, PartialEq, Debug, Enum, EnumString)]
+#[strum(serialize_all = &quot;SCREAMING_SNAKE_CASE&quot;)]
+pub enum LifeExists {
+    Yes,
+    OpenQuestion,
+    NoData,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#日期处理" id="日期处理">日期处理</a></h4>
+<p><code>Async-graphql</code>支持<code>chrono</code>库中的日期/时间类型，因此你可以照常定义以下字段：</p>
+<p><em>清单 32. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/satellites-service/src/graphql.rs">日期字段定义</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(SimpleObject)]
+struct Satellite {
+    ...
+    first_spacecraft_landing_date: Option&lt;NaiveDate&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#支持apollofederation" id="支持apollofederation">支持ApolloFederation</a></h3>
+<p><code>satellites-service</code>的目的之一是演示如何在两个（或多个）服务中解析分布式GraphQL<a href="https://www.apollographql.com/docs/federation/entities/">实体</a>（<code>Planet</code>），然后通过Apollo Server对其进行访问。</p>
+<p><code>Plant</code>类型之前是通过<code>planets-service</code>定义的：</p>
+<p><em>清单 33. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs">在<code>planets-service</code>里定义<code>Planet</code>类型</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Serialize, Deserialize)]
+struct Planet {
+    id: ID,
+    name: String,
+    planet_type: PlanetType,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>另外，在<code>planets-service</code>中，<code>Planet</code>类型是一个实体：</p>
+<p>_清单 34. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/planets-service/src/graphql.rs"><code>Planet</code>实体定义</a></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[Object]
+impl Query {
+    #[graphql(entity)]
+    async fn find_planet_by_id(&amp;self, ctx: &amp;Context&lt;'_&gt;, id: ID) -&gt; Option&lt;Planet&gt; {
+        find_planet_by_id_internal(ctx, id)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>satellites-service</code>向<code>Planet</code>对象扩展了<code>satellites</code>字段：</p>
+<p><em>清单 35. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/satellites-service/src/graphql.rs"><code>satellites-service</code>中<code>Plant</code>对象的扩展</a></em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Planet {
+    id: ID
+}
+
+#[Object(extends)]
+impl Planet {
+    #[graphql(external)]
+    async fn id(&amp;self) -&gt; &amp;ID {
+        &amp;self.id
+    }
+
+    async fn satellites(&amp;self, ctx: &amp;Context&lt;'_&gt;) -&gt; Vec&lt;Satellite&gt; {
+        let id = self.id.to_string().parse::&lt;i32&gt;().expect(&quot;Can't get id from String&quot;);
+        repository::get_by_planet_id(id, &amp;get_conn_from_ctx(ctx)).expect(&quot;Can't get satellites of planet&quot;)
+            .iter()
+            .map(|e| { Satellite::from(e) })
+            .collect()
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>你还应该为扩展类型提供查找函数（此处只是创建了<code>Planet</code>的新实例）：</p>
+<p><em>清单 36. <code>Planet</code>对象的查找函数</em></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[Object]
+impl Query {
+
+    #[graphql(entity)]
+    async fn get_planet_by_id(&amp;self, id: ID) -&gt; Planet {
+        Planet { id }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Async-graphql</code>生成两个附加查询（<code>_service</code>和<code>_entities</code>），这些查询将由Apollo Server使用。这些查询是内部查询，也就是说Apollo Server不会公开这些查询。当然，具有Apollo Federation支持的服务仍可以独立运行。</p>
+<h3><a class="header" href="#apolloserver" id="apolloserver">ApolloServer</a></h3>
+<p>Apollo Server和Apollo Federation可以实现两个主要目标：</p>
+<ul>
+<li>
+<p>创建单个端点以访问由多个服务提供的GraphQL API</p>
+</li>
+<li>
+<p>从分布式服务创建单个GraphQL模式</p>
+</li>
+</ul>
+<p>也就是说即使你不使用联合实体，前端开发人员也可以使用单个端点而不是多个端点，使用起来更加的方便。</p>
+<p>还有一种创建单个GraphQL模式的方法，即<a href="https://www.graphql-tools.com/docs/schema-stitching/">模式缝合</a>，但是我没有使用这种方法。</p>
+<p>该模块包括以下代码：</p>
+<p><em>清单 37. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/apollo-server/package.json">元信息和依赖</a></em></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;api-gateway&quot;,
+  &quot;main&quot;: &quot;gateway.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;start-gateway&quot;: &quot;nodemon gateway.js&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;concurrently&quot;: &quot;5.3.0&quot;,
+    &quot;nodemon&quot;: &quot;2.0.6&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;@apollo/gateway&quot;: &quot;0.21.3&quot;,
+    &quot;apollo-server&quot;: &quot;2.19.0&quot;,
+    &quot;graphql&quot;: &quot;15.4.0&quot;
+  }
+}
+</code></pre>
+<p>_清单 38. <a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/apollo-server/gateway.js">Apollo Server定义</a></p>
+<pre><code class="language-javascript">const {ApolloServer} = require(&quot;apollo-server&quot;);
+const {ApolloGateway, RemoteGraphQLDataSource} = require(&quot;@apollo/gateway&quot;);
+
+class AuthenticatedDataSource extends RemoteGraphQLDataSource {
+    willSendRequest({request, context}) {
+        if (context.authHeaderValue) {
+            request.http.headers.set('Authorization', context.authHeaderValue);
+        }
+    }
+}
+
+let node_env = process.env.NODE_ENV;
+
+function get_service_url(service_name, port) {
+    let host;
+    switch (node_env) {
+        case 'docker':
+            host = service_name;
+            break;
+        case 'local': {
+            host = 'localhost';
+            break
+        }
+    }
+
+    return &quot;http://&quot; + host + &quot;:&quot; + port;
+}
+
+const gateway = new ApolloGateway({
+    serviceList: [
+        {name: &quot;planets-service&quot;, url: get_service_url(&quot;planets-service&quot;, 8001)},
+        {name: &quot;satellites-service&quot;, url: get_service_url(&quot;satellites-service&quot;, 8002)},
+        {name: &quot;auth-service&quot;, url: get_service_url(&quot;auth-service&quot;, 8003)},
+    ],
+    buildService({name, url}) {
+        return new AuthenticatedDataSource({url});
+    },
+});
+
+const server = new ApolloServer({
+    gateway, subscriptions: false, context: ({req}) =&gt; ({
+        authHeaderValue: req.headers.authorization
+    })
+});
+
+server.listen({host: &quot;0.0.0.0&quot;, port: 4000}).then(({url}) =&gt; {
+    console.log(`🚀 Server ready at ${url}`);
+});
+</code></pre>
+<p>如果以上代码可以简化，请随时与我联系以进行更改。</p>
+<p><code>apollo-service</code>中的授权工作如先前Rust服务所述（你只需指定<code>Authorization</code>标头及其值）即可。</p>
+<p>如果采用<a href="https://www.apollographql.com/docs/federation/federation-spec/">Federation规范</a>，则可以将用任何语言或框架编写的应用程序作为下游服务添加到Apollo Server。这个<a href="https://www.apollographql.com/docs/federation/other-servers/">文档</a>中提供了提供此类支持的库列表。</p>
+<p>在实现此模块时，我遇到了一些限制：</p>
+<ul>
+<li>
+<p>Apollo Gateway<a href="https://github.com/apollographql/apollo-server/issues/3357">不支持订阅</a>（但它们仍可在独立的Rust GraphQL应用程序中使用）</p>
+</li>
+<li>
+<p>试图扩展GraphQL接口的服务需要<a href="https://github.com/apollographql/apollo-server/issues/2849">了解具体的实现</a></p>
+</li>
+</ul>
+<h3><a class="header" href="#数据库交互" id="数据库交互">数据库交互</a></h3>
+<p>持久层是使用PostgreSQL和Diesel实现的。如果你不在本地使用Docker，你应该在每个服务的文件夹中运行<code>diesel setup</code>。这将创建一个空数据库，然后将应用Migrations创建表和插入数据。</p>
+<h3><a class="header" href="#运行和api测试" id="运行和api测试">运行和API测试</a></h3>
+<p>如前面所述，对于在本地启动项目，你有两个选择。</p>
+<ul>
+<li>
+<p>使用Docker Compose (<a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/docker-compose.yml">docker-compose.yml</a>)</p>
+<p>这里也有两个选择</p>
+<ul>
+<li>
+<p>开发模式 （使用本地生成的镜像）</p>
+<p><code>docker-compose up</code></p>
+</li>
+<li>
+<p>生产模式 （使用已发布的镜像）</p>
+<p><code>docker-compose -f docker-compose.yml up</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>不使用Docker</p>
+<p>用<code>cargo run</code>启动每个服务，然后启动Apollo Server:</p>
+<ul>
+<li>进入 <code>apollo-server</code> 目录</li>
+<li>定义 <code>NODE_ENV</code> 环境变量， 例如<code>set NODE_ENV=local</code>(Windows)</li>
+<li><code>npm install</code></li>
+<li><code>npm run start-gateway</code></li>
+</ul>
+</li>
+</ul>
+<p>当<code>apollo-server</code>成功运行应该输出以下信息:</p>
+<p><em>清单 39. Apollo Server启动日志</em></p>
+<pre><code>[nodemon] 2.0.6
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node gateway.js`
+Server ready at http://0.0.0.0:4000/
+</code></pre>
+<p>你可以在浏览器中打开<code>http://localhost:4000</code>，并使用内置的Playground IDE。</p>
+<p><img src="playground.png" alt="playground" /></p>
+<p>在这里你可以执行下游服务中定义的查询、变更和订阅。另外，这些服务也都有自己的Playground IDE。</p>
+<h3><a class="header" href="#订阅测试" id="订阅测试">订阅测试</a></h3>
+<p>要测试订阅是否正常工作，可以在GraphQL IDE中打开两个Tab，第一个请求如下。</p>
+<p><em>清单 40. 订阅请求</em></p>
+<pre><code class="language-graphql">subscription {
+  latestPlanet {
+    name
+    type
+  }
+}
+</code></pre>
+<p>第二个请求指定如上所述的<code>Authorization</code>标头，并执行这样的变更。</p>
+<p><em>清单 41. 变更请求</em></p>
+<pre><code class="language-graphql">mutation {
+  createPlanet(
+    planet: {
+      name: &quot;Pluto&quot;
+      type: DWARF_PLANET
+      details: { meanRadius: &quot;1188&quot;, mass: &quot;1.303e22&quot; }
+    }
+  ) {
+    id
+  }
+}
+</code></pre>
+<p>订阅的客户端会收到<code>Plant</code>创建的通知。</p>
+<p><img src="subscription-demo.gif" alt="subscription-demo" /></p>
+<h3><a class="header" href="#cicd" id="cicd">CI/CD</a></h3>
+<p>CI/CD是使用GitHub Actions（<a href="https://github.com/rkudryashov/graphql-rust-demo/blob/master/.github/workflows/workflow.yml">workflow</a>）配置的，它可以运行应用程序的测试，构建它们的Docker镜像，并在Google Cloud Platform上部署它们。</p>
+<p>你可以在<a href="http://graphql-rust.romankudryashov.com/">这里</a>试试已部署的服务。</p>
+<p><strong>注意：</strong> 在<code>生产</code>环境下，为了防止更改初始数据，密码与前面指定的不同。</p>
+<h3><a class="header" href="#结论" id="结论">结论</a></h3>
+<p>在这篇文章中，我考虑了如何解决在Rust中开发GraphQL API时可能出现的最常见问题。此外，我还展示了如何将使用Rust开发的GraphQL微服务API结合起来，以提供统一的GraphQL接口。在这样的架构中，一个实体可以分布在几个微服务之间，它是通过Apollo Server、Apollo Federation和Async-graphql库来实现的。项目的源代码在<a href="https://github.com/rkudryashov/graphql-rust-demo">GitHub</a>上。如果你发现文章或源代码中有任何错误，欢迎<a href="rskudryashov@gmail.com">联系</a>我。谢谢阅读!</p>
+<h3><a class="header" href="#有用的链接" id="有用的链接">有用的链接</a></h3>
+<ul>
+<li><a href="https://graphql.org/">graphql.org</a></li>
+<li><a href="https://spec.graphql.org/">spec.graphql.org</a></li>
+<li><a href="https://graphql.org/learn/best-practices/">graphql.org/learn/best-practices</a></li>
+<li><a href="https://www.howtographql.com/">howtographql.com</a></li>
+<li><a href="https://github.com/async-graphql/async-graphql">Async-graphql</a></li>
+<li><a href="https://async-graphql.github.io/async-graphql/zh-CN/index.html">Async-graphql使用手册</a></li>
+<li><a href="https://github.com/chentsulin/awesome-graphql">Awesome GraphQL</a></li>
+<li><a href="https://github.com/APIs-guru/graphql-apis">Public GraphQL APIs</a></li>
+<li><a href="https://github.com/apollographql/federation-demo">Apollo Federation demo</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../chapter_1/io_uring_and_rust.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../chapter_1/rust_ownership.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../chapter_1/io_uring_and_rust.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../chapter_1/rust_ownership.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

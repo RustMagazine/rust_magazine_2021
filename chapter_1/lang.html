@@ -1,0 +1,407 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>本月简报 | Rust官方动态 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/lang.html" class="active"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | Cita: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#本月简报官方动态" id="本月简报官方动态">本月简报：官方动态</a></h1>
+<ul>
+<li>来源：<a href="https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f">Rust日报</a></li>
+<li>作者：<code>Rust</code>日报小组</li>
+<li>专题编辑：张汉东</li>
+</ul>
+<hr />
+<h2><a class="header" href="#rust-149-稳定版发布" id="rust-149-稳定版发布">Rust 1.49 稳定版发布</a></h2>
+<p>2020年最后一天，Rust 1.49 稳定版发布了。稳定版 Rust 发布周期为六周一次。</p>
+<p>值得关注的更新：</p>
+<ul>
+<li><code>aarch64-unknown-linux-gnu</code> 升级为<code>Tier 1</code>。</li>
+<li><code>aarch64-apple-darwin</code> 和<code>aarch64-pc-windows-msvc</code> 得到<code>Tier 2</code> 级别的支持。</li>
+<li>单元测试中线程中的print输出将会被捕获，默认不会在控制台打印出来了。如果不- 需要捕获，需要添加--nocapture参数。</li>
+<li><code>union</code>支持 <code>impl Drop trait</code> 了
+支持使用<code>ref</code>关键字让解构的字段不再被move 而是被借用。</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust editable">#[derive(Debug)]
+struct Person {
+    name: String,
+    age: u8,
+}
+
+fn main(){
+    let person = Person {
+    name: String::from(&quot;Alice&quot;),
+    age: 20,
+    };
+
+    // `name` is moved out of person, but `age` is referenced.
+    let Person { name, ref age } = person;
+    println!(&quot;{} {}&quot;, name, age);
+}
+
+</code></pre></pre>
+<p><a href="https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html">https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html</a></p>
+<h2><a class="header" href="#rust-将不再支持-windows-xp" id="rust-将不再支持-windows-xp">Rust 将不再支持 Windows XP</a></h2>
+<p>目标i686-pc-windows-msvc和x86_64-pc-windows-msvc是个怪胎。它们对Windows 7+有Tier 1支持，但对Windows XP也有Tier 3支持。这是Firefox需要在XP上运行时的遗留问题。然而在他们放弃XP支持后的几年里，尽管偶尔会有修复，但大多都是任由它过期了。</p>
+<p>因此有人建议，正式放弃这个Tier 3支持状态，可以更好地反映出目前对XP的实际支持程度，不再让一个Tier 1目标背负着实际上不支持Tier 3目标的担忧。</p>
+<p>只要LLVM和他们的链接器仍然支持XP目标，移除官方的XP支持不会阻止任何人编译到XP（减去std）。</p>
+<p>对Windows 7以上的目标的影响将是移除工作区和一个支持XP的运行时兼容性层。此外，还有可能使用更现代的API，而这些API可能曾经因为兼容性问题而被避免。</p>
+<p>如果在未来，有人积极支持XP，那么最好的办法是为此创建一个新的目标。这可以从其自身的优点出发，而且它的开发不会影响到一级平台的开发。</p>
+<p>官方团队接受了该建议。</p>
+<p><a href="https://github.com/rust-lang/compiler-team/issues/378">https://github.com/rust-lang/compiler-team/issues/378</a></p>
+<h2><a class="header" href="#rustup-宣布发布-1230-版本" id="rustup-宣布发布-1230-版本">Rustup 宣布发布 1.23.0 版本</a></h2>
+<p>官方发布 1.23.0 版本，其中最激动人心的改变就是支持 Apple M1 设备。大家可以安心的买 M1 了！</p>
+<p><a href="https://blog.rust-lang.org/2020/11/27/Rustup-1.23.0.html">原文链接</a></p>
+<h2><a class="header" href="#rust-官方知名开发者陆续入职巨头科技公司" id="rust-官方知名开发者陆续入职巨头科技公司">Rust 官方知名开发者陆续入职巨头科技公司</a></h2>
+<p><strong>Niko Matsakis，Esteband K 入职 Amazon</strong></p>
+<p>Niko Matsakis 入职 Amazon 担任 Rust 团队的技术主管。</p>
+<pre><code>Niko的博客链接: https://smallcultfollowing.com/babysteps/blog/2020/12/30/the-more-things-change/
+</code></pre>
+<p>Esteband K 入职 Amazon 研究 Rust 编译器和相关工具。</p>
+<pre><code>Twitter 链接：https://mobile.twitter.com/ekuber/status/1345218814087053312
+</code></pre>
+<p><strong>Patrick Walton 入职 Facebook</strong></p>
+<p>Patrick Walton 将领导 Facebook 的新 Rust 团队，致力于为 Rust 社区改善其编译器和生态。</p>
+<pre><code>Twitter 链接：https://twitter.com/pcwalton/status/1345094455712333824
+</code></pre>
+<h2><a class="header" href="#futures-rs-039-发布" id="futures-rs-039-发布">futures-rs 0.3.9 发布</a></h2>
+<ul>
+<li>把<code>pin-project</code>这个<code>crate</code>替换成了<code>pin-project-lite</code>, 在<code>--no-default-features</code>的情况下大幅提高了编译速度.</li>
+<li>增加了几个新的API方法
+<ul>
+<li>stream::repeat_with</li>
+<li>StreamExt::unzip</li>
+<li>sink::unfold</li>
+<li>SinkExt::feed</li>
+</ul>
+</li>
+</ul>
+<p>链接：<a href="https://github.com/rust-lang/futures-rs/releases/tag/0.3.9">https://github.com/rust-lang/futures-rs/releases/tag/0.3.9</a></p>
+<h2><a class="header" href="#rust官方项目工作组的工作范围是什么" id="rust官方项目工作组的工作范围是什么">Rust官方项目工作组的工作范围是什么？</a></h2>
+<p>该小组的主要重点是继续进行小组成立前的错误处理相关工作。为此而努力系统地解决与错误处理相关的问题，以及消除阻碍RFC停滞不前的障碍。</p>
+<p>在小组成立的最初几次会议上，制定了一些短期和长期目标，这些目标主要围绕下面三个主题：</p>
+<ul>
+<li>使 <code>Error</code> trait 在生态中应用更加普及。</li>
+<li>提升错误处理的开发体验。</li>
+<li>编写更多的关于错误处理的学习资源。</li>
+</ul>
+<p>下面具体来说。</p>
+<p><strong>建立统一的标准<code>Error</code> trait。</strong></p>
+<p><code>Error</code> trait 从 <code>1.0</code>开始就存在了，并暴露了两个方法。<code>Error::description</code>和<code>Error::cause</code>。由于它最初的构造，由于一些原因，它太过拘谨。<code>Failure</code> crate通过导出Fail trait解决了Error trait的许多缺点。</p>
+<p>在这一点上，加强<code>std::error::Error</code> trait，使其可以作为<code>Error</code> trait被整个Rust社区采用，自2018年8月RFC 2504被合并以来，一直是一个持续的过程。</p>
+<p>这个过程还涉及稳定许多<code>Error</code> trait API和<code>crates</code>，截至本文撰写时，这些API和crates只在Nightly使用。这些包括backtrace和chain方法，这两种方法对于处理错误类型非常有用。如果你有兴趣关注或贡献这项工作，请看一下这个问题。</p>
+<p>另一个相关的举措是将<code>Error</code> trait迁移到核心，这样它就可以更广泛地用于不同的场景（比如在FFI或嵌入式上下文中）。</p>
+<p><strong>增加通过回溯（backtrace）类型进行迭代的能力</strong></p>
+<p>到目前为止，<code>backtrace</code> 类型只实现了<code>Display</code>和<code>Debug</code>特征。这意味着使用回溯类型的唯一方法是打印出来，这不是很理想。一个能够提供迭代堆栈框架的迭代器API将使用户能够控制他们的反向跟踪如何被格式化，这是一个必要的步骤，将<code>std::backtrace::Backtrace</code>支持添加到像<code>color-backtrace</code>这样的箱子中。</p>
+<p>在研究了如何解决这个问题的策略后，我们发现回溯箱已经有了一个框架方法，可以很好地实现<code>Iterator</code> API。在std中公开一个相同的方法应该是一个相对简单的考验。</p>
+<p>我们已经为此开了一个<code>[PR](https://github.com/rust-lang/rust/pull/78299)</code>，如果有人想看的话，可以去看看。</p>
+<p><strong>通用成员访问</strong></p>
+<p>目前，当我们想要获取一些与错误相关的额外上下文时，需要调用一些特定的方法来获取该上下文。例如，如果要查看一个错误的回溯，我们会调用回溯方法： <code>let backtrace = some_error.backtrace();</code>。这种方法的问题是，它不可能支持在<code>std</code>之外定义的类型。即使是存在于<code>std</code>内的类型，也需要定义一个方法来访问每个各自的类型，这使得事情变得很麻烦，而且更难维护。</p>
+<p>顾名思义，通用成员访问，当它得到实现时，是一种类型无关的方法，可以从<code>Error</code> trait对象中访问不同的上下文。这有个类比示例，当你要把一个字符串解析成一个数字的时候，用这样的方法。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let ten = &quot;10&quot;.parse::&lt;i32&gt;();
+<span class="boring">}
+</span></code></pre></pre>
+<p>或者通过迭代器来collect生成的内容时：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::collections::HashSet;
+
+let a_to_z_set = ('a'..='z').collect::&lt;HashSet&lt;_&gt;&gt;();
+<span class="boring">}
+</span></code></pre></pre>
+<p>跟上面用法类似，您可以通过指定错误的类型ID来访问某个上下文片段。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let span_trace = some_error.context::&lt;&amp;SpanTrace&gt;();
+<span class="boring">}
+</span></code></pre></pre>
+<p>这可以用来获取与错误相关的其他上下文，如错误的回溯、错误的来源、状态码、替代的格式化表示（如&amp;dyn Serialize）。</p>
+<p>这个功能将使我们计划在以后添加的其他功能成为可能，比如提供一种方法来报告程序中错误来源的所有位置，以及提供一种除了显示和调试之外的更一致的错误报告格式。</p>
+<p>Jane在推动这些想法上做了很多工作。你可以查看相关的<a href="https://github.com/rust-lang/rfcs/pull/2895">RFC</a>。</p>
+<p><strong>编写一本<code>Rust</code>错误处理最佳实践的书</strong></p>
+<p>最后但并非最不重要的一点是，围绕创作<a href="https://github.com/rust-lang/project-error-handling">The Rust Error Book</a>的团队引起了很多兴趣。 本书的目的是根据各自的用例来整理和交流不同的错误处理最佳实践。 这可能包括FFI用例，或有关从程序返回错误代码的最佳实践。</p>
+<p>这是一项持续不断的工作，在接下来的几周和几个月中将会看到许多进步！</p>
+<p><strong>脚注</strong></p>
+<ul>
+<li><code>Error::description</code>方法只支持字符串片段，这意味着创建包含附加上下文的动态错误信息是不直接的。这个方法被弃用，改用<code>Display</code>。</li>
+<li><code>Error::cause</code>方法，现在被称为<code>Error::source</code>，并没有强制要求错误具有 &quot;静态生命周期&quot;，这意味着 downcasting 错误源是不可能的，这使得使用动态错误处理程序来处理错误变得更加困难。</li>
+</ul>
+<h2><a class="header" href="#rustdoc-性能提升" id="rustdoc-性能提升">Rustdoc 性能提升</a></h2>
+<p>有两个PR明确地旨在提高rustdoc的性能：</p>
+<ul>
+<li>Rustdoc：缓存已解析的链接<a href="https://github.com/rust-lang/rust/pull/77700">＃77700</a>。该<code>PR</code>将文档生成的链接的时间缩短了 <code>90%</code>。</li>
+<li>不要在文档内链接中寻找覆盖实现（blanket-impls）<a href="https://github.com/rust-lang/rust/pull/79682">＃79682</a>。因为它从来没有起过作用，并且已经引起了严重的性能问题。</li>
+</ul>
+<p>Rustdoc 团队还清理了一些技术债务。比如 <code>jyn514</code> 不久前注意到，Rustdoc中的大部分工作都是重复的: 实际上有三种不同的抽象语法树(ast)！一个用于doctree，一个用于clean，还有一个是编译器使用的原始HIR。Rustdoc花费了大量的时间在它们之间进行转换。大部分的速度改进来自于完全去掉部分AST。</p>
+<p>文章里也介绍了Rustdoc的工作原理：</p>
+<ul>
+<li>运行编译器的某些部分以获得需要的信息。</li>
+<li>删除编译器提供的不需要的信息（例如，如果一个项目是doc(hidden)，就不需要它）。这一部分有很多话要说，也许会再写一篇博文来详细介绍。</li>
+<li><code>doctree pass</code>，它在编译器的某些项目上添加了一些<code>rustdoc</code>需要的额外信息。</li>
+<li><code>clean pass</code>将编译器类型转换为<code>rustdoc</code>类型：基本上，它将所有内容都转换为 &quot;可打印 &quot;内容。</li>
+<li>渲染（render）通证，然后生成所需的输出（HTML 或，在Nightly，JSON）</li>
+</ul>
+<p>更多内容： <a href="https://blog.rust-lang.org/inside-rust/2021/01/15/rustdoc-performance-improvements.html">https://blog.rust-lang.org/inside-rust/2021/01/15/rustdoc-performance-improvements.html</a></p>
+<h2><a class="header" href="#nightly的reference已上线const-generics的文档" id="nightly的reference已上线const-generics的文档">Nightly的Reference已上线Const Generics的文档</a></h2>
+<p>Const Generics 计划在1.50版进入stable，官方今天在nightly的Reference上已更新好相关文档。</p>
+<p>链接：<a href="https://doc.rust-lang.org/nightly/reference/items/generics.html#const-generics">https://doc.rust-lang.org/nightly/reference/items/generics.html#const-generics</a></p>
+<h2><a class="header" href="#nightly-edition-guide-文档增加了-rust-2021-edition-小节" id="nightly-edition-guide-文档增加了-rust-2021-edition-小节">Nightly Edition Guide 文档增加了 Rust 2021 Edition 小节</a></h2>
+<p>内容还在逐步更新，可以先关注。</p>
+<p>链接： <a href="https://doc.rust-lang.org/nightly/edition-guide/rust-next/index.html">https://doc.rust-lang.org/nightly/edition-guide/rust-next/index.html</a></p>
+<h2><a class="header" href="#rfc-2945--c-unwind-abi-支持相关情况" id="rfc-2945--c-unwind-abi-支持相关情况">RFC 2945 : &quot;C unwind&quot; ABI 支持相关情况</a></h2>
+<p>官方 FFI-Unwind 项目工作组已经将 RFC 2945 合并了。该 RFC 描述了对 &quot;C unwind&quot; ABI 的支持。</p>
+<p>RFC 概要：</p>
+<blockquote>
+<p>引入了一个新的<code>ABI</code>字符串“<code>C-unwind</code>”，以支持从其他语言(如c++)到Rust框架的<code>unwind</code>，以及从<code>Rust</code>到其他语言的<code>unwind</code>。此外，当<code>unwind</code>操作以“non <code>Rust</code>”、“non <code>C-unwind</code>”ABI到达<code>Rust</code>函数边界时，我们为之前未定义的有限几种情况定义了行为。作为该规范的一部分，我们引入了术语“Plain Old Frame”(POF)。POF帧不会挂起析构函数，可以轻松地释放析构函数。这个RFC没有定义被外部异常展开的Rust框架中的catch unwind行为。</p>
+</blockquote>
+<p>引入动机：</p>
+<blockquote>
+<p>有些Rust项目需要跨语言展开以提供所需的功能。 一个主要的例子是<code>Wasm</code>解释器，包括<code>Lucet</code>和<code>Wasmer</code>项目。</p>
+<p>还有一些现有的<code>Rust</code> crate（尤其是围绕libpng和libjpeg C库的包装器）会在<code>C</code>帧之间出现混乱。 这种展开的安全性取决于Rust的展开机制与<code>GCC</code>，<code>LLVM</code>和<code>MSVC</code>中的本机异常机制之间的兼容性。 尽管使用了兼容的展开机制，但是当前的<code>rustc</code>实现假定“extern <code>C</code>”函数无法展开，这允许LLVM在这种展开构成未定义行为的前提下进行优化。</p>
+<p>之前已经在其他RFC（包括＃2699和＃2753）上讨论了对此功能的需求。</p>
+</blockquote>
+<p>RFC 2945: <a href="https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md">https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md</a></p>
+<p>现在 FFI-unwind 工作组正在为<code>C-unwind</code> ABI 指定新的行为（覆盖之前的未定义的行为），<a href="https://github.com/rust-lang/rust/pull/76570">RFC 2945 实现PR</a>。</p>
+<p>然而，在起草 &quot;<code>C unwind</code> &quot; RFC 时，工作组发现围绕<code>longjmp</code>和类似函数的现有保证可以改进。虽然这与<code>unwind</code>并没有严格的关系，但它们有着密切的联系：它们都是 <code>non-local</code> 的控制流机制，防止函数正常返回。由于<code>Rust</code>项目的目标之一是让<code>Rust</code>与现有的<code>C</code>系语言互操作，而这些控制流机制在实践中被广泛使用，工作组认为<code>Rust</code>必须对它们有一定程度的支持。</p>
+<p>这篇博文将解释该问题。如果你有兴趣帮助指定这种行为，欢迎参与!</p>
+<p>官方博文地址：<a href="https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html">https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html</a></p>
+<h2><a class="header" href="#rust-playground-支持-vim-模式" id="rust-playground-支持-vim-模式">Rust Playground 支持 vim 模式</a></h2>
+<p>Rust Playground <code>vim</code> 模式，可以通过输入 <code>:w</code> 回车运行编译，非常棒的使用体验。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_1/toc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_1/hots.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_1/toc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_1/hots.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

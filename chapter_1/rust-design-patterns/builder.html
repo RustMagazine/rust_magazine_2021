@@ -1,0 +1,1345 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>学习园地 | 「系列」Rust设计模式之创建者模式 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="../../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="../../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="../../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="../../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="../../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="../../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="../../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | Cita: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust-design-patterns/builder.html" class="active"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="../../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="../../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="../../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="../../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="../../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开</a></li></ol></li><li class="chapter-item expanded "><a href="../../chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="../../chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#建造者模式builder" id="建造者模式builder">建造者模式（Builder)</a></h1>
+<h2><a class="header" href="#概述" id="概述">概述</a></h2>
+<p>构建者模式是一种设计模式，提供一种灵活的解决方案，已解决面向对象程序设计中的各种对象创建问题。Builder设计模式的目的是将复杂对象的构造与其表示分离开来。是&quot;是四人帮&quot;设计模式之一[wiki]。建造者模式是一种创建型设计模式，使你能够分步骤创建复杂对象。该模式允许你使用相同的创建代码生成不同类型和形式的对象。</p>
+<p>定义：Builder设计模式的目的是将复杂对象的构造与其表示分离开来。通过这样做，同样的构造过程可以创建不同的表示。</p>
+<h2><a class="header" href="#历史" id="历史">历史</a></h2>
+<p>假如有一个复杂的对象，需要对其进行构造时需要对诸多成员变量和嵌套对象进行繁杂的初始化工作。有时这些初始化代码通常深藏于一个包含众多参数且让人看不懂的构造函数中；或者这些代码散落在客户端代码的多个位置。</p>
+<ol>
+<li>例如，创建一个房子，不同种类的房子有不同的风格，为每一种类型的房子创建一个子类，这可能会导致程序变得过于复杂。</li>
+<li>或者无需生成子类，但是需要创建一个包括所有可能参数的超级构造函数，并用它来控制房屋对象的创建。这样虽然可以避免生成子类，但是会造成当拥有大量输入参数的构造函数不是每次都要全部用上。通常情况下，绝大部分的参数都没有使用，这使得对于构造函数的调用十分不简洁。</li>
+</ol>
+<h2><a class="header" href="#建造者模式-的使用" id="建造者模式-的使用">建造者模式 的使用</a></h2>
+<p>建造者模式建议将对象构造的代码从产品类中抽取出来，并将其放在一个名为生成器的独立对象中。每次创建对象时，都需要通过生成器对象执行一系列步骤。重点在于无需调用所有步骤，而只需调用创建特定对象配置所需的那些步骤。</p>
+<h2><a class="header" href="#适用场景" id="适用场景">适用场景</a></h2>
+<ul>
+<li>使用建造者设计模式可以避免“重叠构造函数”的出现。
+<ul>
+<li>假设复杂函数中有十几个可选参数，那么调用这些函数会非常不方便，因此需要重载这个构造函数，新建几个只有较少参数的简化版本。</li>
+<li>建造者设计模式让你可以分步骤生成对象，而且允许你仅适用必须的步骤。</li>
+</ul>
+</li>
+<li>当使用代码创建不同形式的产品时，可使用生成器模式
+<ul>
+<li>如果你需要创建各种形式的产品，他们的制造过程相似且仅有细节上的差异，此时可使用生成器模式。</li>
+<li>基本生成器接口中定义了所有可能的制造步骤，具体生成器将实现这些步骤来制造特定形式的产品。</li>
+</ul>
+</li>
+<li>使用构造者模式构造其他复杂对象
+<ul>
+<li>构造者模式让你能分步骤构造产品，你可以延迟执行某些步骤而不会影响最终产品。</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#优点" id="优点">优点</a></h2>
+<ul>
+<li>可以分步骤创建对象，暂缓创建步骤或者递归运行创建步骤。</li>
+<li>生成不同形式的产品，你可以复用相同的制造代码</li>
+<li>单一职责原则，可以将复杂构造代码从产品的业务逻辑中分离出来。</li>
+</ul>
+<h2><a class="header" href="#缺点" id="缺点">缺点</a></h2>
+<p>由于该模式需要新增多个类，因此代码整体复杂程度会有所增加。</p>
+<h2><a class="header" href="#描述" id="描述">描述</a></h2>
+<p>通过使用构建者助手创建一个对象。</p>
+<h2><a class="header" href="#例子" id="例子">例子</a></h2>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let foo = Foo {
+        bar: String::from(&quot;Y&quot;),
+    };
+    let foo_from_builder = FooBuilder::new().name(String::from(&quot;Y&quot;)).build();
+    println!(&quot;foo = {:?}&quot;, foo);
+    println!(&quot;foo from builfer = {:?}&quot;, foo_from_builder);
+}
+
+#[derive(Debug, PartialEq)]
+pub struct Foo {
+    // lots of complicated fields
+    bar : String,
+}
+
+pub struct FooBuilder {
+    // Probably lots of optional fields.
+    bar: String,
+}
+
+impl FooBuilder {
+    pub fn new() -&gt; Self {
+        // set the minimally required fields of Foo.
+        Self {
+            bar: String::from(&quot;x&quot;),
+        }
+    }
+
+    pub fn name(mut self, bar: String) -&gt; FooBuilder {
+        // set the name on the builder iteself,
+        // and return the builder by value.
+        self.bar = bar;
+        self 
+    }
+    // if we can get away with not consuming the builder here, that is an 
+    // advantage. It means we can use the FooBuilder as a template for constructing many Foo.
+    pub fn build(self) -&gt; Foo {
+        // Create a Foo from Foo the FooBuilder, applying all settings in FooBuilder to Foo. 
+        Foo { bar: self.bar }
+    }
+}
+</code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">// Rust 编程之道. P234
+struct Circle {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+
+struct CircleBuilder {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+
+impl Circle {
+    fn area(&amp;self) -&gt; f64 {
+        std::f64::consts::PI * (self.radius * self.radius)
+    }
+    fn new() -&gt; CircleBuilder {
+        CircleBuilder {
+            x: 0.0, y: 0.0, radius: 1.0,
+        }
+    }
+}
+
+impl CircleBuilder {
+    fn x(&amp;mut self, coordinate: f64) -&gt; &amp;mut CircleBuilder {
+        self.x = coordinate;
+        self
+    }
+    fn y(&amp;mut self, coordinate: f64) -&gt; &amp;mut CircleBuilder {
+        self.y = coordinate;
+        self
+    }
+    fn radius(&amp;mut self, radius: f64) -&gt; &amp;mut CircleBuilder {
+        self.radius = radius;
+        self
+    }
+
+    fn build(&amp;self) -&gt; Circle {
+        Circle {
+            x: self.x, y: self.y, radius: self.radius,
+        }
+    }
+}
+
+fn main() {
+  let c = Circle::new().x(1.0).y(2.0).radius(2.0).build();
+  println!(&quot;area = {:?}&quot;, c.area());
+  println!(&quot;c.x = {:?}&quot;, c.x);
+  println!(&quot;c.y = {:?}&quot;, c.y);
+}
+</code></pre></pre>
+<h2><a class="header" href="#动机" id="动机">动机</a></h2>
+<p>当你需要许多不同的构造函数或者当构造有副作用时，这种方法有用。</p>
+<h2><a class="header" href="#优点-1" id="优点-1">优点</a></h2>
+<p>将构造方法与其他方法分离。</p>
+<p>防止构造函数的扩散</p>
+<p>可用于单次初始化以及更加复杂的构造。</p>
+<h2><a class="header" href="#缺点-1" id="缺点-1">缺点</a></h2>
+<p>比直接创建结构对象或简单的的构造函数更复杂。</p>
+<h2><a class="header" href="#讨论" id="讨论">讨论</a></h2>
+<p>这种模式在Rust（以及简单对象）中比在其他许多语言中更常见，这是因为Rust缺乏重载。由于你只能使用给定名称的单个方法，因此在Rust中使用多个构造函数要比C++、Java或其他语言好。</p>
+<p>这种模式通常用于构建器对象本身就很有用的地方，而不仅仅是一个构建器。例如：std::process::Command 是Child的构建器。在这种情况下，不使用T和TBuilder的命名模式。</p>
+<p>该示例通过值获取并返回生成器。接受并返回构建器作为可变引用通常更符合人体工程学（并且更有效）。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut fb = FooBuilder::new();
+fb.a();
+fb.b();
+let f = fb.builder();
+<span class="boring">}
+</span></code></pre></pre>
+<p>以及FooBuilder::new().a().b().builder()样式。</p>
+<h2><a class="header" href="#参见" id="参见">参见</a></h2>
+<ul>
+<li><a href="https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html">Description in the style guide</a></li>
+<li><a href="https://crates.io/crates/derive_builder">derive_builder</a>, a crate for automatically implementing this pattern while avoiding the boilerplate.</li>
+<li><a href="https://rust-unofficial.github.io/patterns/idioms/ctor.html">Constructor pattern</a> for when construction is simpler.</li>
+<li><a href="https://en.wikipedia.org/wiki/Builder_pattern">Builder pattern (wikipedia)</a></li>
+<li><a href="https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder">Construction of complex values</a></li>
+<li>Rust编程之道 ch7,p234</li>
+</ul>
+<h2><a class="header" href="#项目中的使用" id="项目中的使用">项目中的使用</a></h2>
+<h3><a class="header" href="#tokio-中的建造者模式-struct-a-hrefhttpsdocsrstokio110tokioindexhtmltokioaa-hrefhttpsdocsrstokio110tokioruntimeindexhtmlruntimeaa-hrefhttpsdocsrstokio110tokioruntimestructbuilderhtmlbuildera" id="tokio-中的建造者模式-struct-a-hrefhttpsdocsrstokio110tokioindexhtmltokioaa-hrefhttpsdocsrstokio110tokioruntimeindexhtmlruntimeaa-hrefhttpsdocsrstokio110tokioruntimestructbuilderhtmlbuildera">Tokio 中的建造者模式 Struct <a href="https://docs.rs/tokio/1.1.0/tokio/index.html">tokio</a>::<a href="https://docs.rs/tokio/1.1.0/tokio/runtime/index.html">runtime</a>::<a href="https://docs.rs/tokio/1.1.0/tokio/runtime/struct.Builder.html">Builder</a></a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Builder {
+    /// Runtime type
+    kind: Kind,
+
+    /// Whether or not to enable the I/O driver
+    enable_io: bool,
+
+    /// Whether or not to enable the time driver
+    enable_time: bool,
+
+    /// The number of worker threads, used by Runtime.
+    ///
+    /// Only used when not using the current-thread executor.
+    worker_threads: Option&lt;usize&gt;,
+
+    /// Cap on thread usage.
+    max_blocking_threads: usize,
+
+    /// Name fn used for threads spawned by the runtime.
+    pub(super) thread_name: ThreadNameFn,
+
+    /// Stack size used for threads spawned by the runtime.
+    pub(super) thread_stack_size: Option&lt;usize&gt;,
+
+    /// Callback to run after each thread starts.
+    pub(super) after_start: Option&lt;Callback&gt;,
+
+    /// To run before each worker thread stops
+    pub(super) before_stop: Option&lt;Callback&gt;,
+
+    /// Customizable keep alive timeout for BlockingPool
+    pub(super) keep_alive: Option&lt;Duration&gt;,
+}
+
+pub fn new_current_thread() -&gt; Builder // 设置current thread 类型
+//Returns a new builder with the current thread scheduler selected.
+//Configuration methods can be chained on the return value.
+
+pub fn new_multi_thread() -&gt; Builder // 设置 multi thread 类型
+//This is supported on crate feature rt-multi-thread only.
+//Returns a new builder with the multi thread scheduler selected.
+//Configuration methods can be chained on the return value.
+
+pub fn enable_all(&amp;mut self) -&gt; &amp;mut Self
+// Enables both I/O and time drivers.
+// Doing this is a shorthand for calling enable_io and enable_time individually. If additional components are added to Tokio in the future, enable_all will include these future components.
+
+pub fn worker_threads(&amp;mut self, val: usize) -&gt; &amp;mut Self // 设置的runtime 用于工作的线程数
+// Sets the number of worker threads the Runtime will use.
+// This should be a number between 0 and 32,768 though it is advised to keep this value on the smaller side.
+
+pub fn max_blocking_threads(&amp;mut self, val: usize) -&gt; &amp;mut Self // 设置生成的用于阻塞操作的线程最大数
+//Specifies limit for threads spawned by the Runtime used for blocking operations.
+//Similarly to the worker_threads, this number should be between 1 and 32,768.
+//The default value is 512.
+//Otherwise as worker_threads are always active, it limits additional threads (e.g. for blocking annotations).
+
+pub fn thread_name(&amp;mut self, val: impl Into&lt;String&gt;) -&gt; &amp;mut Self // 设置线程的名字
+//Sets name of threads spawned by the Runtime's thread pool.
+//The default name is &quot;tokio-runtime-worker&quot;.
+
+// .....
+
+pub fn build(&amp;mut self) -&gt; Result&lt;Runtime&gt; // 构造出tokio中的runtime结构
+//Creates the configured Runtime.
+//The returned Runtime instance is ready to spawn tasks.
+
+//etc..
+
+//example
+// build runtime
+let runtime = Builder::new_multi_thread()
+                .worker_threads(4)
+                .thread_name(&quot;my-custom-name&quot;)
+                .thread_stack_size(3 * 1024 * 1024)
+                .build()
+                .unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+<p>从Builder的build函数可以知道Builder结构是Runtime的辅助结构体用来帮助构造Runtime的。</p>
+<h2><a class="header" href="#futures-中的建造者设计模式-struct-a-hrefhttpsdocsrsfutures0312futuresindexhtmlfuturesaa-hrefhttpsdocsrsfutures0312futuresexecutorindexhtmlexecutoraa-hrefhttpsdocsrsfutures0312futuresexecutorstructthreadpoolbuilderhtmlthreadpoolbuildera" id="futures-中的建造者设计模式-struct-a-hrefhttpsdocsrsfutures0312futuresindexhtmlfuturesaa-hrefhttpsdocsrsfutures0312futuresexecutorindexhtmlexecutoraa-hrefhttpsdocsrsfutures0312futuresexecutorstructthreadpoolbuilderhtmlthreadpoolbuildera">Futures 中的建造者设计模式 Struct <a href="https://docs.rs/futures/0.3.12/futures/index.html">futures</a>::<a href="https://docs.rs/futures/0.3.12/futures/executor/index.html">executor</a>::<a href="https://docs.rs/futures/0.3.12/futures/executor/struct.ThreadPoolBuilder.html">ThreadPoolBuilder</a></a></h2>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// A general-purpose thread pool for scheduling tasks that poll futures to
+/// completion.
+///
+/// The thread pool multiplexes any number of tasks onto a fixed number of
+/// worker threads.
+///
+/// This type is a clonable handle to the threadpool itself.
+/// Cloning it will only create a new reference, not a new threadpool.
+///
+/// This type is only available when the `thread-pool` feature of this
+/// library is activated.
+#[cfg_attr(docsrs, doc(cfg(feature = &quot;thread-pool&quot;)))]
+pub struct ThreadPool {
+    state: Arc&lt;PoolState&gt;,
+}
+
+/// Thread pool configuration object.
+///
+/// This type is only available when the `thread-pool` feature of this
+/// library is activated.
+#[cfg_attr(docsrs, doc(cfg(feature = &quot;thread-pool&quot;)))]
+pub struct ThreadPoolBuilder {
+    pool_size: usize,
+    stack_size: usize,
+    name_prefix: Option&lt;String&gt;,
+    after_start: Option&lt;Arc&lt;dyn Fn(usize) + Send + Sync&gt;&gt;,
+    before_stop: Option&lt;Arc&lt;dyn Fn(usize) + Send + Sync&gt;&gt;,
+}
+
+
+struct PoolState {
+    tx: Mutex&lt;mpsc::Sender&lt;Message&gt;&gt;,
+    rx: Mutex&lt;mpsc::Receiver&lt;Message&gt;&gt;,
+    cnt: AtomicUsize,
+    size: usize,
+}
+
+enum Message {
+    Run(Task),
+    Close,
+}
+
+impl ThreadPoolBuilder {
+    /// Create a default thread pool configuration.
+    ///
+    /// See the other methods on this type for details on the defaults.
+    pub fn new() -&gt; Self {
+        Self {
+            pool_size: cmp::max(1, num_cpus::get()),
+            stack_size: 0,
+            name_prefix: None,
+            after_start: None,
+            before_stop: None,
+        }
+    }
+
+    /// Set size of a future ThreadPool
+    ///
+    /// The size of a thread pool is the number of worker threads spawned. By
+    /// default, this is equal to the number of CPU cores.
+    ///
+    /// # Panics
+    ///
+    /// Panics if `pool_size == 0`.
+    pub fn pool_size(&amp;mut self, size: usize) -&gt; &amp;mut Self {
+        assert!(size &gt; 0);
+        self.pool_size = size;
+        self
+    }
+
+    /// Set stack size of threads in the pool, in bytes.
+    ///
+    /// By default, worker threads use Rust's standard stack size.
+    pub fn stack_size(&amp;mut self, stack_size: usize) -&gt; &amp;mut Self {
+        self.stack_size = stack_size;
+        self
+    }
+
+    /// Set thread name prefix of a future ThreadPool.
+    ///
+    /// Thread name prefix is used for generating thread names. For example, if prefix is
+    /// `my-pool-`, then threads in the pool will get names like `my-pool-1` etc.
+    ///
+    /// By default, worker threads are assigned Rust's standard thread name.
+    pub fn name_prefix&lt;S: Into&lt;String&gt;&gt;(&amp;mut self, name_prefix: S) -&gt; &amp;mut Self {
+        self.name_prefix = Some(name_prefix.into());
+        self
+    }
+
+    /// Execute the closure `f` immediately after each worker thread is started,
+    /// but before running any tasks on it.
+    ///
+    /// This hook is intended for bookkeeping and monitoring.
+    /// The closure `f` will be dropped after the `builder` is dropped
+    /// and all worker threads in the pool have executed it.
+    ///
+    /// The closure provided will receive an index corresponding to the worker
+    /// thread it's running on.
+    pub fn after_start&lt;F&gt;(&amp;mut self, f: F) -&gt; &amp;mut Self
+        where F: Fn(usize) + Send + Sync + 'static
+    {
+        self.after_start = Some(Arc::new(f));
+        self
+    }
+
+    /// Execute closure `f` just prior to shutting down each worker thread.
+    ///
+    /// This hook is intended for bookkeeping and monitoring.
+    /// The closure `f` will be dropped after the `builder` is droppped
+    /// and all threads in the pool have executed it.
+    ///
+    /// The closure provided will receive an index corresponding to the worker
+    /// thread it's running on.
+    pub fn before_stop&lt;F&gt;(&amp;mut self, f: F) -&gt; &amp;mut Self
+        where F: Fn(usize) + Send + Sync + 'static
+    {
+        self.before_stop = Some(Arc::new(f));
+        self
+    }
+	
+  	// 从ThreadBuilder的create函数可以看到ThreadPoolBuilder根据配置采纳数创建ThreadPool， 是ThreadPool的辅助结构体 
+    /// Create a [`ThreadPool`](ThreadPool) with the given configuration.
+    pub fn create(&amp;mut self) -&gt; Result&lt;ThreadPool, io::Error&gt; {
+        let (tx, rx) = mpsc::channel();
+        let pool = ThreadPool {
+            state: Arc::new(PoolState {
+                tx: Mutex::new(tx),
+                rx: Mutex::new(rx),
+                cnt: AtomicUsize::new(1),
+                size: self.pool_size,
+            }),
+        };
+
+        for counter in 0..self.pool_size {
+            let state = pool.state.clone();
+            let after_start = self.after_start.clone();
+            let before_stop = self.before_stop.clone();
+            let mut thread_builder = thread::Builder::new();
+            if let Some(ref name_prefix) = self.name_prefix {
+                thread_builder = thread_builder.name(format!(&quot;{}{}&quot;, name_prefix, counter));
+            }
+            if self.stack_size &gt; 0 {
+                thread_builder = thread_builder.stack_size(self.stack_size);
+            }
+            thread_builder.spawn(move || state.work(counter, after_start, before_stop))?;
+        }
+        Ok(pool)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>从ThreadBuilder的create函数可以看到ThreadPoolBuilder根据配置采纳数创建ThreadPool， 是ThreadPool的辅助结构体 </p>
+<h2><a class="header" href="#surf中的建造者设计模式" id="surf中的建造者设计模式">Surf中的建造者设计模式</a></h2>
+<pre><pre class="playground"><code class="language-rust">/// Request Builder
+///
+/// Provides an ergonomic way to chain the creation of a request.
+/// This is generally accessed as the return value from `surf::{method}()`,
+/// however [`Request::builder`](crate::Request::builder) is also provided.
+///
+/// # Examples
+///
+/// ```rust
+/// use surf::http::{Method, mime::HTML, Url};
+/// # #[async_std::main]
+/// # async fn main() -&gt; surf::Result&lt;()&gt; {
+/// let mut request = surf::post(&quot;https://httpbin.org/post&quot;)
+///     .body(&quot;&lt;html&gt;hi&lt;/html&gt;&quot;)
+///     .header(&quot;custom-header&quot;, &quot;value&quot;)
+///     .content_type(HTML)
+///     .build();
+///
+/// assert_eq!(request.take_body().into_string().await.unwrap(), &quot;&lt;html&gt;hi&lt;/html&gt;&quot;);
+/// assert_eq!(request.method(), Method::Post);
+/// assert_eq!(request.url(), &amp;Url::parse(&quot;https://httpbin.org/post&quot;)?);
+/// assert_eq!(request[&quot;custom-header&quot;], &quot;value&quot;);
+/// assert_eq!(request[&quot;content-type&quot;], &quot;text/html;charset=utf-8&quot;);
+/// # Ok(())
+/// # }
+/// ```
+///
+/// ```rust
+/// use surf::http::{Method, Url};
+/// # #[async_std::main]
+/// # async fn main() -&gt; surf::Result&lt;()&gt; {
+/// let url = Url::parse(&quot;https://httpbin.org/post&quot;)?;
+/// let request = surf::Request::builder(Method::Post, url).build();
+/// # Ok(())
+/// # }
+/// ```
+
+pub struct RequestBuilder {
+    /// Holds the state of the request.
+    req: Option&lt;Request&gt;,
+    /// Hold an optional Client.
+    client: Option&lt;Client&gt;,
+    /// Holds the state of the `impl Future`.
+    fut: Option&lt;BoxFuture&lt;'static, Result&lt;Response&gt;&gt;&gt;,
+}
+
+impl RequestBuilder {
+    /// Create a new instance.
+    ///
+    /// This method is particularly useful when input URLs might be passed by third parties, and
+    /// you don't want to panic if they're malformed. If URLs are statically encoded, it might be
+    /// easier to use one of the shorthand methods instead.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// # #[async_std::main]
+    /// # async fn main() -&gt; surf::Result&lt;()&gt; {
+    /// use surf::http::{Method, Url};
+    ///
+    /// let url = Url::parse(&quot;https://httpbin.org/get&quot;)?;
+    /// let req = surf::RequestBuilder::new(Method::Get, url).build();
+    /// # Ok(()) }
+    /// ```
+    pub fn new(method: Method, url: Url) -&gt; Self {
+        Self {
+            req: Some(Request::new(method, url)),
+            client: None,
+            fut: None,
+        }
+    }
+
+    pub(crate) fn with_client(mut self, client: Client) -&gt; Self {
+        self.client = Some(client);
+        self
+    }
+
+    /// Sets a header on the request.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let req = surf::get(&quot;https://httpbin.org/get&quot;).header(&quot;header-name&quot;, &quot;header-value&quot;).build();
+    /// assert_eq!(req[&quot;header-name&quot;], &quot;header-value&quot;);
+    /// ```
+    pub fn header(mut self, key: impl Into&lt;HeaderName&gt;, value: impl ToHeaderValues) -&gt; Self {
+        self.req.as_mut().unwrap().insert_header(key, value);
+        self
+    }
+
+    /// Sets the Content-Type header on the request.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use surf::http::mime;
+    /// let req = surf::post(&quot;https://httpbin.org/post&quot;).content_type(mime::HTML).build();
+    /// assert_eq!(req[&quot;content-type&quot;], &quot;text/html;charset=utf-8&quot;);
+    /// ```
+    pub fn content_type(mut self, content_type: impl Into&lt;Mime&gt;) -&gt; Self {
+        self.req
+            .as_mut()
+            .unwrap()
+            .set_content_type(content_type.into());
+        self
+    }
+
+    /// Sets the body of the request.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # #[async_std::main]
+    /// # async fn main() -&gt; surf::Result&lt;()&gt; {
+    /// use serde_json::json;
+    /// let mut req = surf::post(&quot;https://httpbin.org/post&quot;).body(json!({ &quot;any&quot;: &quot;Into&lt;Body&gt;&quot;})).build();
+    /// assert_eq!(req.take_body().into_string().await.unwrap(), &quot;{\&quot;any\&quot;:\&quot;Into&lt;Body&gt;\&quot;}&quot;);
+    /// # Ok(())
+    /// # }
+    /// ```
+    pub fn body(mut self, body: impl Into&lt;Body&gt;) -&gt; Self {
+        self.req.as_mut().unwrap().set_body(body);
+        self
+    }
+
+    /// Set the URL querystring.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// # use serde::{Deserialize, Serialize};
+    /// # #[async_std::main]
+    /// # async fn main() -&gt; surf::Result&lt;()&gt; {
+    /// #[derive(Serialize, Deserialize)]
+    /// struct Index {
+    ///     page: u32
+    /// }
+    ///
+    /// let query = Index { page: 2 };
+    /// let mut req = surf::get(&quot;https://httpbin.org/get&quot;).query(&amp;query)?.build();
+    /// assert_eq!(req.url().query(), Some(&quot;page=2&quot;));
+    /// assert_eq!(req.url().as_str(), &quot;https://httpbin.org/get?page=2&quot;);
+    /// # Ok(()) }
+    /// ```
+    pub fn query(mut self, query: &amp;impl Serialize) -&gt; std::result::Result&lt;Self, Error&gt; {
+        self.req.as_mut().unwrap().set_query(query)?;
+
+        Ok(self)
+    }
+
+    /// Submit the request and get the response body as bytes.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// # #[async_std::main]
+    /// # async fn main() -&gt; surf::Result&lt;()&gt; {
+    /// let bytes = surf::get(&quot;https://httpbin.org/get&quot;).recv_bytes().await?;
+    /// assert!(bytes.len() &gt; 0);
+    /// # Ok(()) }
+    /// ```
+    pub async fn recv_bytes(self) -&gt; Result&lt;Vec&lt;u8&gt;&gt; {
+        let mut res = self.send().await?;
+        Ok(res.body_bytes().await?)
+    }
+
+    /// Submit the request and get the response body as a string.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// # #[async_std::main]
+    /// # async fn main() -&gt; surf::Result&lt;()&gt; {
+    /// let string = surf::get(&quot;https://httpbin.org/get&quot;).recv_string().await?;
+    /// assert!(string.len() &gt; 0);
+    /// # Ok(()) }
+    /// ```
+    pub async fn recv_string(self) -&gt; Result&lt;String&gt; {
+        let mut res = self.send().await?;
+        Ok(res.body_string().await?)
+    }
+
+    /// Submit the request and decode the response body from json into a struct.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// # use serde::{Deserialize, Serialize};
+    /// # #[async_std::main]
+    /// # async fn main() -&gt; surf::Result&lt;()&gt; {
+    /// #[derive(Deserialize, Serialize)]
+    /// struct Ip {
+    ///     ip: String
+    /// }
+    ///
+    /// let uri = &quot;https://api.ipify.org?format=json&quot;;
+    /// let Ip { ip } = surf::get(uri).recv_json().await?;
+    /// assert!(ip.len() &gt; 10);
+    /// # Ok(()) }
+    /// ```
+    pub async fn recv_json&lt;T: serde::de::DeserializeOwned&gt;(self) -&gt; Result&lt;T&gt; {
+        let mut res = self.send().await?;
+        Ok(res.body_json::&lt;T&gt;().await?)
+    }
+
+    /// Submit the request and decode the response body from form encoding into a struct.
+    ///
+    /// # Errors
+    ///
+    /// Any I/O error encountered while reading the body is immediately returned
+    /// as an `Err`.
+    ///
+    /// If the body cannot be interpreted as valid json for the target type `T`,
+    /// an `Err` is returned.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// # use serde::{Deserialize, Serialize};
+    /// # #[async_std::main]
+    /// # async fn main() -&gt; surf::Result&lt;()&gt; {
+    /// #[derive(Deserialize, Serialize)]
+    /// struct Body {
+    ///     apples: u32
+    /// }
+    ///
+    /// let url = &quot;https://api.example.com/v1/response&quot;;
+    /// let Body { apples } = surf::get(url).recv_form().await?;
+    /// # Ok(()) }
+    /// ```
+    pub async fn recv_form&lt;T: serde::de::DeserializeOwned&gt;(self) -&gt; Result&lt;T&gt; {
+        let mut res = self.send().await?;
+        Ok(res.body_form::&lt;T&gt;().await?)
+    }
+		
+  	// 从build函数可以知道最后RequestBuilder是Request的辅助结构体，用来构造返回Request
+  	// 这个函数返回的是Request
+    /// Return the constructed `Request`.
+    pub fn build(self) -&gt; Request {
+        self.req.unwrap()
+    }
+
+    /// Create a `Client` and send the constructed `Request` from it.
+    pub async fn send(mut self) -&gt; Result&lt;Response&gt; {
+        self.client
+            .take()
+            .unwrap_or_else(Client::new_shared_or_panic)
+            .send(self.build())
+            .await
+    }
+}
+</code></pre></pre>
+<p>从build函数可以知道最后RequestBuilder是Request的辅助结构体，用来构造返回Request</p>
+<h2><a class="header" href="#reqwest中的建造者设计模式" id="reqwest中的建造者设计模式">Reqwest中的建造者设计模式</a></h2>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// A request which can be executed with `Client::execute()`.
+pub struct Request {
+    method: Method,
+    url: Url,
+    headers: HeaderMap,
+    body: Option&lt;Body&gt;,
+    timeout: Option&lt;Duration&gt;,
+}
+
+/// A builder to construct the properties of a `Request`.
+///
+/// To construct a `RequestBuilder`, refer to the `Client` documentation.
+#[must_use = &quot;RequestBuilder does nothing until you 'send' it&quot;]
+pub struct RequestBuilder {
+    client: Client,
+    request: crate::Result&lt;Request&gt;,
+}
+
+impl Request {
+    /// Constructs a new request.
+    #[inline]
+    pub fn new(method: Method, url: Url) -&gt; Self {
+        Request {
+            method,
+            url,
+            headers: HeaderMap::new(),
+            body: None,
+            timeout: None
+        }
+    }
+
+    /// Get the method.
+    #[inline]
+    pub fn method(&amp;self) -&gt; &amp;Method {
+        &amp;self.method
+    }
+
+    /// Get a mutable reference to the method.
+    #[inline]
+    pub fn method_mut(&amp;mut self) -&gt; &amp;mut Method {
+        &amp;mut self.method
+    }
+
+    /// Get the url.
+    #[inline]
+    pub fn url(&amp;self) -&gt; &amp;Url {
+        &amp;self.url
+    }
+
+    /// Get a mutable reference to the url.
+    #[inline]
+    pub fn url_mut(&amp;mut self) -&gt; &amp;mut Url {
+        &amp;mut self.url
+    }
+
+    /// Get the headers.
+    #[inline]
+    pub fn headers(&amp;self) -&gt; &amp;HeaderMap {
+        &amp;self.headers
+    }
+
+    /// Get a mutable reference to the headers.
+    #[inline]
+    pub fn headers_mut(&amp;mut self) -&gt; &amp;mut HeaderMap {
+        &amp;mut self.headers
+    }
+
+    /// Get the body.
+    #[inline]
+    pub fn body(&amp;self) -&gt; Option&lt;&amp;Body&gt; {
+        self.body.as_ref()
+    }
+
+    /// Get a mutable reference to the body.
+    #[inline]
+    pub fn body_mut(&amp;mut self) -&gt; &amp;mut Option&lt;Body&gt; {
+        &amp;mut self.body
+    }
+
+    /// Get the timeout.
+    #[inline]
+    pub fn timeout(&amp;self) -&gt; Option&lt;&amp;Duration&gt; {
+        self.timeout.as_ref()
+    }
+
+    /// Get a mutable reference to the timeout.
+    #[inline]
+    pub fn timeout_mut(&amp;mut self) -&gt; &amp;mut Option&lt;Duration&gt; {
+        &amp;mut self.timeout
+    }
+
+    /// Attempt to clone the request.
+    ///
+    /// `None` is returned if the request can not be cloned, i.e. if the body is a stream.
+    pub fn try_clone(&amp;self) -&gt; Option&lt;Request&gt; {
+        let body = match self.body.as_ref() {
+            Some(ref body) =&gt; Some(body.try_clone()?),
+            None =&gt; None,
+        };
+        let mut req = Request::new(self.method().clone(), self.url().clone());
+        *req.timeout_mut() = self.timeout().cloned();
+        *req.headers_mut() = self.headers().clone();
+        req.body = body;
+        Some(req)
+    }
+
+    pub(super) fn pieces(self) -&gt; (Method, Url, HeaderMap, Option&lt;Body&gt;, Option&lt;Duration&gt;) {
+        (self.method, self.url, self.headers, self.body, self.timeout)
+    }
+}
+
+impl RequestBuilder {
+    pub(super) fn new(client: Client, request: crate::Result&lt;Request&gt;) -&gt; RequestBuilder {
+        let mut builder = RequestBuilder { client, request };
+
+        let auth = builder
+            .request
+            .as_mut()
+            .ok()
+            .and_then(|req| extract_authority(&amp;mut req.url));
+
+        if let Some((username, password)) = auth {
+            builder.basic_auth(username, password)
+        } else {
+            builder
+        }
+    }
+
+    /// Add a `Header` to this Request.
+    pub fn header&lt;K, V&gt;(self, key: K, value: V) -&gt; RequestBuilder
+    where
+        HeaderName: TryFrom&lt;K&gt;,
+        &lt;HeaderName as TryFrom&lt;K&gt;&gt;::Error: Into&lt;http::Error&gt;,
+        HeaderValue: TryFrom&lt;V&gt;,
+        &lt;HeaderValue as TryFrom&lt;V&gt;&gt;::Error: Into&lt;http::Error&gt;, 
+    {
+        self.header_sensitive(key, value, false)
+    }
+
+    /// Add a `Header` to this Request with ability to define if header_value is sensitive.
+    fn header_sensitive&lt;K, V&gt;(mut self, key: K, value: V, sensitive: bool) -&gt; RequestBuilder
+    where
+        HeaderName: TryFrom&lt;K&gt;,
+        &lt;HeaderName as TryFrom&lt;K&gt;&gt;::Error: Into&lt;http::Error&gt;,
+        HeaderValue: TryFrom&lt;V&gt;,
+        &lt;HeaderValue as TryFrom&lt;V&gt;&gt;::Error: Into&lt;http::Error&gt;,
+    {
+        let mut error = None;
+        if let Ok(ref mut req) = self.request {
+            match &lt;HeaderName as TryFrom&lt;K&gt;&gt;::try_from(key) {
+                Ok(key) =&gt; match &lt;HeaderValue as TryFrom&lt;V&gt;&gt;::try_from(value) {
+                    Ok(mut value) =&gt; {
+                        value.set_sensitive(sensitive);
+                        req.headers_mut().append(key, value);
+                    }
+                    Err(e) =&gt; error = Some(crate::error::builder(e.into())),
+                },
+                Err(e) =&gt; error = Some(crate::error::builder(e.into())),
+            };
+        }
+        if let Some(err) = error {
+            self.request = Err(err);
+        }
+        self
+    }
+
+    /// Add a set of Headers to the existing ones on this Request.
+    ///
+    /// The headers will be merged in to any already set.
+    pub fn headers(mut self, headers: crate::header::HeaderMap) -&gt; RequestBuilder {
+        if let Ok(ref mut req) = self.request {
+            crate::util::replace_headers(req.headers_mut(), headers);
+        }
+        self
+    }
+
+    /// Enable HTTP basic authentication.
+    pub fn basic_auth&lt;U, P&gt;(self, username: U, password: Option&lt;P&gt;) -&gt; RequestBuilder
+    where
+        U: fmt::Display,
+        P: fmt::Display,
+    {
+        let mut header_value = b&quot;Basic &quot;.to_vec();
+        {
+            let mut encoder = Base64Encoder::new(&amp;mut header_value, base64::STANDARD);
+            // The unwraps here are fine because Vec::write* is infallible.
+            write!(encoder, &quot;{}:&quot;, username).unwrap();
+            if let Some(password) = password {
+                write!(encoder, &quot;{}&quot;, password).unwrap();
+            }
+        }
+
+        self.header_sensitive(crate::header::AUTHORIZATION, header_value, true)
+    }
+
+    /// Enable HTTP bearer authentication.
+    pub fn bearer_auth&lt;T&gt;(self, token: T) -&gt; RequestBuilder
+    where
+        T: fmt::Display,
+    {
+        let header_value = format!(&quot;Bearer {}&quot;, token);
+        self.header_sensitive(crate::header::AUTHORIZATION, header_value, true)
+    }
+
+    /// Set the request body.
+    pub fn body&lt;T: Into&lt;Body&gt;&gt;(mut self, body: T) -&gt; RequestBuilder {
+        if let Ok(ref mut req) = self.request {
+            *req.body_mut() = Some(body.into());
+        }
+        self
+    }
+
+    /// Enables a request timeout.
+    ///
+    /// The timeout is applied from when the request starts connecting until the
+    /// response body has finished. It affects only this request and overrides
+    /// the timeout configured using `ClientBuilder::timeout()`.
+    pub fn timeout(mut self, timeout: Duration) -&gt; RequestBuilder {
+        if let Ok(ref mut req) = self.request {
+            *req.timeout_mut() = Some(timeout);
+        }
+        self
+    }
+
+    /// Sends a multipart/form-data body.
+    ///
+    /// ```
+    /// # use reqwest::Error;
+    ///
+    /// # async fn run() -&gt; Result&lt;(), Error&gt; {
+    /// let client = reqwest::Client::new();
+    /// let form = reqwest::multipart::Form::new()
+    ///     .text(&quot;key3&quot;, &quot;value3&quot;)
+    ///     .text(&quot;key4&quot;, &quot;value4&quot;);
+    ///
+    ///
+    /// let response = client.post(&quot;your url&quot;)
+    ///     .multipart(form)
+    ///     .send()
+    ///     .await?;
+    /// # Ok(())
+    /// # }
+    /// ```
+    #[cfg(feature = &quot;multipart&quot;)]
+    pub fn multipart(self, mut multipart: multipart::Form) -&gt; RequestBuilder {
+        let mut builder = self.header(
+            CONTENT_TYPE,
+            format!(&quot;multipart/form-data; boundary={}&quot;, multipart.boundary()).as_str(),
+        );
+
+        builder = match multipart.compute_length() {
+            Some(length) =&gt; builder.header(CONTENT_LENGTH, length),
+            None =&gt; builder,
+        };
+
+        if let Ok(ref mut req) = builder.request {
+            *req.body_mut() = Some(multipart.stream())
+        }
+        builder
+    }
+
+    /// Modify the query string of the URL.
+    ///
+    /// Modifies the URL of this request, adding the parameters provided.
+    /// This method appends and does not overwrite. This means that it can
+    /// be called multiple times and that existing query parameters are not
+    /// overwritten if the same key is used. The key will simply show up
+    /// twice in the query string.
+    /// Calling `.query([(&quot;foo&quot;, &quot;a&quot;), (&quot;foo&quot;, &quot;b&quot;)])` gives `&quot;foo=a&amp;foo=b&quot;`.
+    ///
+    /// # Note
+    /// This method does not support serializing a single key-value
+    /// pair. Instead of using `.query((&quot;key&quot;, &quot;val&quot;))`, use a sequence, such
+    /// as `.query(&amp;[(&quot;key&quot;, &quot;val&quot;)])`. It's also possible to serialize structs
+    /// and maps into a key-value pair.
+    ///
+    /// # Errors
+    /// This method will fail if the object you provide cannot be serialized
+    /// into a query string.
+    pub fn query&lt;T: Serialize + ?Sized&gt;(mut self, query: &amp;T) -&gt; RequestBuilder {
+        let mut error = None;
+        if let Ok(ref mut req) = self.request {
+            let url = req.url_mut();
+            let mut pairs = url.query_pairs_mut();
+            let serializer = serde_urlencoded::Serializer::new(&amp;mut pairs);
+
+            if let Err(err) = query.serialize(serializer) {
+                error = Some(crate::error::builder(err));
+            }
+        }
+        if let Ok(ref mut req) = self.request {
+            if let Some(&quot;&quot;) = req.url().query() {
+                req.url_mut().set_query(None);
+            }
+        }
+        if let Some(err) = error {
+            self.request = Err(err);
+        }
+        self
+    }
+
+    /// Send a form body.
+    pub fn form&lt;T: Serialize + ?Sized&gt;(mut self, form: &amp;T) -&gt; RequestBuilder {
+        let mut error = None;
+        if let Ok(ref mut req) = self.request {
+            match serde_urlencoded::to_string(form) {
+                Ok(body) =&gt; {
+                    req.headers_mut().insert(
+                        CONTENT_TYPE,
+                        HeaderValue::from_static(&quot;application/x-www-form-urlencoded&quot;),
+                    );
+                    *req.body_mut() = Some(body.into());
+                }
+                Err(err) =&gt; error = Some(crate::error::builder(err)),
+            }
+        }
+        if let Some(err) = error {
+            self.request = Err(err);
+        }
+        self
+    }
+
+    /// Send a JSON body.
+    ///
+    /// # Optional
+    ///
+    /// This requires the optional `json` feature enabled.
+    ///
+    /// # Errors
+    ///
+    /// Serialization can fail if `T`'s implementation of `Serialize` decides to
+    /// fail, or if `T` contains a map with non-string keys.
+    #[cfg(feature = &quot;json&quot;)]
+    pub fn json&lt;T: Serialize + ?Sized&gt;(mut self, json: &amp;T) -&gt; RequestBuilder {
+        let mut error = None;
+        if let Ok(ref mut req) = self.request {
+            match serde_json::to_vec(json) {
+                Ok(body) =&gt; {
+                    req.headers_mut()
+                        .insert(CONTENT_TYPE, HeaderValue::from_static(&quot;application/json&quot;));
+                    *req.body_mut() = Some(body.into());
+                }
+                Err(err) =&gt; error = Some(crate::error::builder(err)),
+            }
+        }
+        if let Some(err) = error {
+            self.request = Err(err);
+        }
+        self
+    }
+
+    /// Disable CORS on fetching the request.
+    ///
+    /// # WASM
+    ///
+    /// This option is only effective with WebAssembly target.
+    ///
+    /// The [request mode][mdn] will be set to 'no-cors'.
+    ///
+    /// [mdn]: https://developer.mozilla.org/en-US/docs/Web/API/Request/mode
+    pub fn fetch_mode_no_cors(self) -&gt; RequestBuilder {
+        self
+    }
+  
+ 
+		// 从RequestBuilder的build函数可以知道，RequestBuilder是用来帮助构造Request的辅助结构体
+    /// Build a `Request`, which can be inspected, modified and executed with
+    /// `Client::execute()`.
+    pub fn build(self) -&gt; crate::Result&lt;Request&gt; {
+        self.request
+    }
+
+    /// Constructs the Request and sends it to the target URL, returning a
+    /// future Response.
+    ///
+    /// # Errors
+    ///
+    /// This method fails if there was an error while sending request,
+    /// redirect loop was detected or redirect limit was exhausted.
+    ///
+    /// # Example
+    ///
+    /// ```no_run
+    /// # use reqwest::Error;
+    /// #
+    /// # async fn run() -&gt; Result&lt;(), Error&gt; {
+    /// let response = reqwest::Client::new()
+    ///     .get(&quot;https://hyper.rs&quot;)
+    ///     .send()
+    ///     .await?;
+    /// # Ok(())
+    /// # }
+    /// ```
+    pub fn send(self) -&gt; impl Future&lt;Output = Result&lt;Response, crate::Error&gt;&gt; {
+        match self.request {
+            Ok(req) =&gt; self.client.execute_request(req),
+            Err(err) =&gt; Pending::new_err(err),
+        }
+    }
+
+    /// Attempt to clone the RequestBuilder.
+    ///
+    /// `None` is returned if the RequestBuilder can not be cloned,
+    /// i.e. if the request body is a stream.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use reqwest::Error;
+    /// #
+    /// # fn run() -&gt; Result&lt;(), Error&gt; {
+    /// let client = reqwest::Client::new();
+    /// let builder = client.post(&quot;http://httpbin.org/post&quot;)
+    ///     .body(&quot;from a &amp;str!&quot;);
+    /// let clone = builder.try_clone();
+    /// assert!(clone.is_some());
+    /// # Ok(())
+    /// # }
+    /// ```
+    pub fn try_clone(&amp;self) -&gt; Option&lt;RequestBuilder&gt; {
+        self.request
+            .as_ref()
+            .ok()
+            .and_then(|req| req.try_clone())
+            .map(|req| RequestBuilder {
+                client: self.client.clone(),
+                request: Ok(req),
+            })
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>从RequestBuilder的build函数可以知道，RequestBuilder是用来帮助构造Request的辅助结构体。</p>
+<p>参考链接：</p>
+<p>https://docs.rs/tokio/1.1.0/tokio/runtime/struct.Builder.html</p>
+<p>https://docs.rs/reqwest/0.11.0/src/reqwest/async_impl/request.rs.html#36-39</p>
+<p>https://github.com/http-rs/surf/blob/31315743b91ff003231183c1ec5a3cd2b698c58a/src/request_builder.rs</p>
+<p>https://docs.rs/futures/0.3.12/futures/executor/struct.ThreadPoolBuilder.html</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../chapter_1/cita_protobuf-ext.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../chapter_1/io_uring_and_rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../chapter_1/cita_protobuf-ext.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../chapter_1/io_uring_and_rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

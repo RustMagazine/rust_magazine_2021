@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>本月简报 | 学习资源 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="../chapter_1/learns.html" class="active"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | Cita: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#本月简报学习资源" id="本月简报学习资源">本月简报：学习资源</a></h1>
+<ul>
+<li>来源：<a href="https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f">Rust日报</a></li>
+<li>作者：Rust 日报小组</li>
+</ul>
+<h2><a class="header" href="#rust-design-patterns-book" id="rust-design-patterns-book">🎈Rust Design Patterns Book</a></h2>
+<p>非官方好书系列, 再次安利! Rust Design Patterns Book. 作者最近更新了很多东西。</p>
+<p>看下翻译的中文引言吧。</p>
+<h4><a class="header" href="#引言" id="引言">引言</a></h4>
+<h4><a class="header" href="#设计模式" id="设计模式">设计模式</a></h4>
+<p>在开发程序中，我们必须解决许多问题。一个程序可以看作是一个问题的解决方案。它也可以被看作是许多不同问题的解决方案的集合。所有这些解决方案共同解决一个更大的问题。</p>
+<h4><a class="header" href="#在rust中的设计模式" id="在rust中的设计模式">在Rust中的设计模式</a></h4>
+<p>有许多问题的形式是相同的，由于事实上，rust不是面向对象设计，模式不同于其他面向对象程序设计语言，虽然细节是不同的，因为他们有相同的形式，他们可以解决使用相同的基本方法。</p>
+<p><a href="https://rust-unofficial.github.io/patterns/patterns/index.html">设计模式</a>是解决编写软件时常见问题的方法。</p>
+<p><a href="https://rust-unofficial.github.io/patterns/anti_patterns/index.html">反模式</a>是解决这些相同问题的方法。</p>
+<p>然而，尽管设计模式给我们带来了好处，反模式却带来了更多的问题。</p>
+<p><a href="https://rust-unofficial.github.io/patterns/idioms/index.html">惯用法</a>，是编码是要遵守的指南，他们是社区的社区规范，你可以破他们，但如果你这样做，你应该有一个很好的理由。</p>
+<p>TODO: 说明为什么Rust是一个有点特殊功能要素，类型系统，借用检查。</p>
+<p><a href="https://rust-unofficial.github.io/patterns/">book 链接</a></p>
+<h2><a class="header" href="#异步书翻译更新啦" id="异步书翻译更新啦">🎈异步书翻译更新啦</a></h2>
+<p>这次翻译新增了 第八章-关于生态的叙述 （<a href="https://github.com/EthanYuan">@EthanYuan</a>) 以及 第九章 http服务器项目（<a href="https://github.com/huangjj27">@huangjj27</a>), 欢迎来指正错误或贡献~</p>
+<p><a href="https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html">english book link</a></p>
+<p><a href="https://huangjj27.github.io/async-book/index.html">中文翻译链接</a></p>
+<p>​</p>
+<h2><a class="header" href="#manning的rust新书refactoring-to-rust" id="manning的rust新书refactoring-to-rust">🎈Manning的Rust新书《Refactoring to Rust》</a></h2>
+<p>这本书正在MEAP阶段，目前才更新了3章，感兴趣的同学可以看看。</p>
+<p><a href="https://www.manning.com/books/refactoring-to-rust">Refactoring to Rust</a></p>
+<h2><a class="header" href="#rust-书籍宝库" id="rust-书籍宝库">🎈Rust 书籍宝库</a></h2>
+<p><a href="https://www.reddit.com/user/glynnormington/">glynnormington</a>整理了网络上大部分有关rust的mdbook，有官方的，也有非官方的。值得注意的一点是大家关注的rust宏小册很多人以为一直没有更新，但是其实有另一个团队重新在原来的基础上，更新了新的版本，目前已收录到该书库中。</p>
+<p><a href="https://lborb.github.io/book/title-page.html">Rust 书籍宝库</a></p>
+<p><a href="https://www.reddit.com/r/rust/comments/kwiwb8/the_little_book_of_rust_books/">Read More on reddit</a></p>
+<h2><a class="header" href="#使用rust-编写一门语言" id="使用rust-编写一门语言">🎈使用Rust 编写一门语言</a></h2>
+<p>有关使用<a href="https://rust-lang.org/">Rust</a>编程语言制作称为<a href="https://github.com/arzg/eldiro">Eldiro</a>的编程语言的系列文章。</p>
+<p><a href="https://arzg.github.io/lang/">原文链接</a></p>
+<h2><a class="header" href="#rust-错误处理-python-同学专用" id="rust-错误处理-python-同学专用">Rust 错误处理: python 同学专用</a></h2>
+<p>本文是 python 同学专用, 介绍了 python 日常中的错误处理以及如何在 rust 中达到类似效果和最佳实践.</p>
+<p><a href="https://theomn.com/rust-error-handling-for-pythonistas/">原文链接</a></p>
+<h2><a class="header" href="#其他语言调用rust---c" id="其他语言调用rust---c">🎈其他语言调用Rust - C++</a></h2>
+<p>作者选择Rust作为运行时库的实现语言，并且希望使同一库可用于不同的编程语言。</p>
+<p>最初，选择从对三种语言的支持开始：</p>
+<ul>
+<li><strong>Rust</strong>：因为这是我们的实现语言。</li>
+<li><strong>C ++</strong>：这是我们熟悉的低级语言，仍然是嵌入式设备领域中最成熟的语言之一。</li>
+<li><strong>JavaScript / TypeScript</strong>：因为它是一种非常流行的动态语言。</li>
+</ul>
+<p><img src="https://sixtyfps.io/blog/expose-rust-library-to-other-languages/diagrams.png" alt="img" /></p>
+<p>Rust库（也称为板条箱）分为两部分，共享实现板条箱和精简惯用的API条板箱。</p>
+<p>对于JavaScript，我们使用<a href="https://github.com/neon-bindings/neon">Neon</a>公开API。Neon使我们能够方便地编写JavaScript API和创建NPM包。</p>
+<p>C ++部分更具挑战性。</p>
+<p><a href="https://sixtyfps.io/blog/expose-rust-library-to-other-languages.html">原文链接</a></p>
+<h2><a class="header" href="#使用-rust-创建一个模拟器-part-1" id="使用-rust-创建一个模拟器-part-1">🎈使用 Rust 创建一个模拟器: part 1</a></h2>
+<p>这个系列中, 作者会通过 神经网络 和 遗传算法 制作一个 进化模拟器.</p>
+<p>作者首先会介绍 神经网络和遗传算法 是如何工作的, 然后会使用 Rust 来实现他们, 并且编译成 WebAssembly. 下图是一个预览图.</p>
+<p>教程地址： <a href="https://pwy.io/en/posts/learning-to-fly-pt1/">https://pwy.io/en/posts/learning-to-fly-pt1/</a></p>
+<h2><a class="header" href="#rust陷阱-reprtransparent" id="rust陷阱-reprtransparent">🎈Rust陷阱: repr(transparent)</a></h2>
+<p>repr(transparent) 可以让类似 struct Foo(i32) 和 i32 有同样的内存分布方式. 他作用范围非常具体,只能有一个非 0 size 的字段.</p>
+<p>本文章介绍了如何使用 repr(transparent) 以及一些陷阱.</p>
+<p>原文链接：<a href="https://jack.wrenn.fyi/blog/semver-snares-transparent/">https://jack.wrenn.fyi/blog/semver-snares-transparent/</a></p>
+<h2><a class="header" href="#unsafe-rust该如何或何时使用它" id="unsafe-rust该如何或何时使用它">🎈Unsafe Rust：该如何或何时使用它</a></h2>
+<p>本文包含了以下内容：</p>
+<ul>
+<li>关于 Unsafe Rust 的五点迷思</li>
+<li>什么时候不该用 Unsafe 的代码</li>
+<li>处理未初始化的内存</li>
+<li>内部可变性</li>
+<li>内在动机</li>
+<li>内联汇编</li>
+<li>FFi</li>
+<li>编写Unsafe Rust时候应该使用的工具</li>
+</ul>
+<p>原文链接：<a href="https://blog.logrocket.com/unsafe-rust-how-and-when-not-to-use-it/">https://blog.logrocket.com/unsafe-rust-how-and-when-not-to-use-it/</a></p>
+<h2><a class="header" href="#mozilla-如何导出-rust-组件给-kotlin" id="mozilla-如何导出-rust-组件给-kotlin">🎈Mozilla: 如何导出 Rust 组件给 Kotlin</a></h2>
+<p>Mozilla 应用服务平台这个仓库中提供了一个 login 组件可以很好地展示这个示例。</p>
+<p>概要：</p>
+<p>假设你已经的组件在./src/目录下编写了一个不错的Rust核心代码。</p>
+<p>首先，你需要将 Rust API 扁平化为一组 FFI 绑定，通常是在 <code>./ffi/ </code>目录下。使用 <code>ffi_support</code> crate 来帮助实现这个功能，这将涉及到在核心 Rust 代码中实现一些特性。</p>
+<p>接下来，你需要编写消耗<code>FFI</code>的<code>Kotlin</code>代码，通常是在<code>./android/</code>目录下。这段代码应该使用<code>JNA</code>通过共享库加载编译后的<code>Rust</code>代码，并将其作为一个漂亮的安全且易于使用的<code>Kotlin API</code>暴露出来。</p>
+<p>似乎我们很可能在这里提供一个有用的模板来让你入门。但我们还没有这样做。</p>
+<p>最后，将你的包添加到<code>android-components repo</code>中。</p>
+<p>文章还回答了一些导出过程中的问题。</p>
+<p>原文链接：<a href="https://github.com/mozilla/application-services/blob/020a3eb831da8cd9d21978e3d1fb7af3a6ffcfea/docs/howtos/exposing-rust-components-to-kotlin.md">https://github.com/mozilla/application-services/blob/020a3eb831da8cd9d21978e3d1fb7af3a6ffcfea/docs/howtos/exposing-rust-components-to-kotlin.md</a></p>
+<h2><a class="header" href="#入门教程用rust写一个todo应用" id="入门教程用rust写一个todo应用">入门教程：用Rust写一个todo应用</a></h2>
+<p>在这篇教程里，作者依照javscript的传统，教你用Rust写一个todo应用。 你会学到：</p>
+<ul>
+<li>Rust中的错误处理</li>
+<li>Option的使用</li>
+<li>Struct和impl</li>
+<li>终端输入输出</li>
+<li>文件操作</li>
+<li>所有权和借用</li>
+<li>模式匹配</li>
+<li>迭代器和闭包</li>
+<li>使用外部crate</li>
+</ul>
+<p>链接：<a href="https://www.freecodecamp.org/news/how-to-build-a-to-do-app-with-rust/">https://www.freecodecamp.org/news/how-to-build-a-to-do-app-with-rust/</a></p>
+<h2><a class="header" href="#libhunt-根据reddit-被提及状态展示-rust-库的热度" id="libhunt-根据reddit-被提及状态展示-rust-库的热度">🎈LibHunt: 根据reddit 被提及状态展示 rust 库的热度</a></h2>
+<p>LibHunt 根据 reddit 上大家提及到库的热度来排序出一些热门的 rust 库.</p>
+<p>对于调研阶段的同学来说,是一个很好的工具.</p>
+<p>libhunt的主页地址: <a href="https://www.libhunt.com/lang/rust">https://www.libhunt.com/lang/rust</a></p>
+<h2><a class="header" href="#用-rust-实现一个-rest-client" id="用-rust-实现一个-rest-client">🎈用 Rust 实现一个 Rest Client</a></h2>
+<p>这是 &lt;&lt; Zero To Production In Rust&gt;&gt; 的 这本书中的一个示例。在本文, 作者演示了:</p>
+<ul>
+<li>如何使用 reqwests 来写一个 REST API client.</li>
+<li>如何来使用 wiremock 来进行测试.</li>
+</ul>
+<p>原文链接: <a href="https://www.lpalmieri.com/posts/how-to-write-a-rest-client-in-rust-with-reqwest-and-wiremock/">https://www.lpalmieri.com/posts/how-to-write-a-rest-client-in-rust-with-reqwest-and-wiremock/</a></p>
+<h2><a class="header" href="#太素os基于-riscv-架构的-rust-系统内核实现中文教程和源码" id="太素os基于-riscv-架构的-rust-系统内核实现中文教程和源码">🎈太素OS：基于 RISCV 架构的 Rust 系统内核实现（中文）教程和源码</a></h2>
+<p>构建于QEMU 之上，适合学习</p>
+<ul>
+<li>源码： <a href="https://github.com/belowthetree/TisuOS">https://github.com/belowthetree/TisuOS</a></li>
+<li>教程： <a href="https://www.zhihu.com/column/c_1118934193425629184">https://www.zhihu.com/column/c_1118934193425629184</a></li>
+</ul>
+<h2><a class="header" href="#译asyncawait二-futures" id="译asyncawait二-futures">【译】Async/Await（二）—— Futures</a></h2>
+<p>新的文章翻译来啦。</p>
+<p>来自：公众号：「Rust 碎碎念」，翻译 by：Praying</p>
+<ul>
+<li>翻译链接： <a href="https://mp.weixin.qq.com/s/OL7_usSmY_gAZzYYydyr8A">https://mp.weixin.qq.com/s/OL7_usSmY_gAZzYYydyr8A</a></li>
+<li>原文链接：<a href="https://os.phil-opp.com/async-await/#multitasking">https://os.phil-opp.com/async-await/#multitasking</a></li>
+</ul>
+<h2><a class="header" href="#rust-programming-language-the-ultimate-guide" id="rust-programming-language-the-ultimate-guide">Rust Programming Language: The Ultimate Guide</a></h2>
+<p>这篇文章中作者从伪代码出发，一步步教你实现一个爱情计算器。</p>
+<p>作者称这是线上最通俗易懂的Rust入门指南，你怎么认为呢？快来试试吧。</p>
+<p>链接：<a href="https://masteringbackend.com/posts/rust-programming-the-ultimate-guide">https://masteringbackend.com/posts/rust-programming-the-ultimate-guide</a></p>
+<h2><a class="header" href="#rust-initial-thoughts" id="rust-initial-thoughts">Rust: Initial thoughts</a></h2>
+<p>作者分享了自己刚开始学Rust的一些想法和与其它语言的对比。</p>
+<p><a href="https://dev.to/hb/rust-initial-thoughts-4jka">原文链接</a></p>
+<h2><a class="header" href="#关于futurejoin设计的思考" id="关于futurejoin设计的思考">关于Future::join设计的思考</a></h2>
+<p>这篇文章中作者分享了关于如何将<code>Future::{try_}join</code>和<code>{try_}join!</code>以一种更一致的形式加入标准库中的思考，以及对于const-eval可能起到的作用的讨论。</p>
+<p><a href="https://blog.yoshuawuyts.com/future-join-and-const-eval/">原文链接</a></p>
+<h3><a class="header" href="#rust-教程-从头开始学-rust" id="rust-教程-从头开始学-rust">Rust 教程: 从头开始学 Rust</a></h3>
+<p>Rust 越来越被更多的人喜爱, 很多小伙伴也想入坑. 这篇教程可以帮助零基础的小伙伴了解 Rust.</p>
+<p><img src="https://www.educative.io/api/page/5328531525992448/image/download/6018549143830528" alt="img" /></p>
+<p><a href="https://www.educative.io/blog/rust-tutorial-from-scratch">原文链接</a></p>
+<h3><a class="header" href="#ref-vs--in-variables" id="ref-vs--in-variables">ref vs &amp; in variables</a></h3>
+<p>帖子讨论了ref 和&amp; 的使用，哪个使用更好。</p>
+<p><a href="https://www.reddit.com/r/rust/comments/l451ux/ref_vs_in_variables/">原文链接</a></p>
+<h3><a class="header" href="#在rust中包装错误" id="在rust中包装错误">在Rust中包装错误</a></h3>
+<p>在开发时错误处理是必须，有时错误处理非常糟糕，文章中提高了warp Error 提高体验。</p>
+<p><a href="https://edgarluque.com/blog/wrapping-errors-in-rust">原文链接</a></p>
+<p><a href="https://www.reddit.com/r/rust/comments/l3x6p0/wrapping_errors_in_rust/">on reddit</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_1/projects.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_1/rust_laoke.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_1/projects.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_1/rust_laoke.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

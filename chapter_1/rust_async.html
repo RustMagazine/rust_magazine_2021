@@ -1,0 +1,566 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RustChinaConf2020 精选 | Rust 异步与并发 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_async.html" class="active"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | Cita: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rustchinaconf2020-精选--rust-异步与并发" id="rustchinaconf2020-精选--rust-异步与并发">RustChinaConf2020 精选 | Rust 异步与并发</a></h1>
+<p>说明：本文为视频演讲文字版，编者听录的时候可能会出现一些误差，欢迎指正。</p>
+<p>讲师：赖智超 - Onchain 区块链架构师</p>
+<p>视频地址：<a href="https://www.bilibili.com/video/BV1Yy4y1e7zR?p=14">https://www.bilibili.com/video/BV1Yy4y1e7zR?p=14</a></p>
+<p>后期编辑：李冬杰，阿里巴巴淘系技术部，花名齐纪，。</p>
+<p>————————</p>
+<h2><a class="header" href="#自我介绍" id="自我介绍">自我介绍</a></h2>
+<p><img src="../image/rust-china-config-async-1.png" alt="自我介绍" /></p>
+<p>大家好，今天我跟大家分享一下 Rust 的异步模型，以及实现这个模型时面临的一些并发方面的挑战。首先介绍一下 Rust 在我们公司的应用情况，我们公司在区块链是布局比较早的，现在大概成立有四年多了，目前我们公司主要还是 golang 为核心的技术栈，但是在 Rust 方面我们也在积极探索，有一些应用的实践。首先我们的区块链支持 wasm 虚拟机，使用 Rust 基于 cranelift/wasmtime 实现了 JIT 的版本，目前已经运行了一年多了。有了 wasm 虚拟机的支持后，我们也在智能合约和配套的工具链上下了功夫，目前团队智能合约开发首选 Rust，它具有开发效率高和迭代速度快的优点，前些天统计我们使用 Rust 开发的智能合约代码已经上 10 万了。还有密码学库，我们也是用的 Rust。</p>
+<ol>
+<li>区块链 wasm JIT 虚拟机：基于 cranelift/wasmtime;</li>
+<li>智能合约开发库和配套的工具链：目前合约开发都首选 Rust，开发效率高，迭代速度快；</li>
+<li>密码学库；</li>
+</ol>
+<h2><a class="header" href="#同步任务多线程池" id="同步任务多线程池">同步任务多线程池</a></h2>
+<p><img src="../image/rust-china-config-async-2.png" alt="同步任务多线程池" /></p>
+<p>为了讲解异步编程模型，我们先来看一看大家都比较熟悉的同步任务多线程池的实现，一个比较典型的实现如 PPT 左图所示，有一个全局的队列（Global Task Queue），由用户调用 <code>spawn</code> 把任务压到全局队列，全局队列关联着一个或者多个 <code>worker</code> 线程，每个工作线程都会轮询的从全局队列中把任务拿出来执行，用代码实现也比较简单。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::thread;
+use crossbeam::channel::{unbounded, Sender};
+use once_cell::sync::Lazy;
+
+type Task = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+
+static QUEUE: Lazy&lt;Sender&lt;Task&gt;&gt; = Lazy::new(|| {
+    let (sender, reciver) = unbounded::&lt;Task&gt;();
+    for _ in 0..4 {
+        let recv = reciver.clone();
+        thread::spawn(|| {
+            for task in recv {
+                task();
+            }
+        })
+    }
+    sender
+});
+
+fn spawn&lt;F&gt;(task: F) where F: FnOnce() + Send + 'static {
+    QUEUE.send(Box::new(task)).unwrap();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先我们在第5行代码定义了什么叫做同步任务，因为同步任务的话只需要执行一次就行了，所以是 <code>FnOnce()</code>，因为这个任务是从用户线程 push 
+到全局队列，跨线程到工作线程，所以需要有<code>Send</code>约束和 <code>static</code> 生命周期，然后封装到 Box 中。第 8 行构建了一个并发的队列，起了 4 
+个线程，每个线程拿到队列的接收端，然后在一个循环中执行 task，当然执行 task 的过程可能会 panic，这里为了演示我就没有处理。第17行 <code>sender</code> 就保存着在全局静态变量 QUEUE 上，当用户调用 <code>spawn</code>时，拿到 <code>QUEUE</code> 调用 <code>send</code> 方法，将任务 push 到队列中。</p>
+<h2><a class="header" href="#异步任务的多线程" id="异步任务的多线程">异步任务的多线程</a></h2>
+<p><img src="../image/rust-china-config-async-3.png" alt="异步任务的多线程" /></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type Task = Box&lt;dyn FnMut() -&gt; bool + Send + 'static&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>接下来我们看一下异步任务的多线程池，首先定义不能立即完成，需要多次执行的任务为异步任务，因此 <code>FnOnce()</code> 就不满足了，需要使用 
+<code>FnMut </code>，它返回的结果是个布尔值，表示是否执行完任务。但是这样定义就有个问题，如果这个函数没有被工作线程执行完，工作线程就不知道接下来该怎么办了，如果一直等着直到这个任务能够执行，全局队列中的其他任务就不能被执行；直接扔掉这个任务也不行。因此Rust的设计用了一个很巧妙的办法，<code>Exector</code> 就不关心这个任务什么时候好，在执行的时候创建一个 <code>Waker</code>，然后告诉 task，“如果你什么时候好了，可以通过 <code>Waker</code> 把它重新放到全局队列里去” 以便再次执行，这样的话 Task 的定义就多出了 <code>Waker</code> 参数，如下所示：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type Task = Box&lt;dyn FnMut(&amp;Waker) -&gt; bool + Send + 'static&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>这样异步任务执行没有 ready 的时候，可以将拿到 <code>Waker</code> 注册到能监控任务状态的 <code>Reactor</code> 中，如 ioepoll、timer 等，<code>Reactor</code> 发现任务 ready 后调用 <code>Waker</code> 把任务放到全局队列中。</p>
+<h3><a class="header" href="#异步任务的多线程-executor" id="异步任务的多线程-executor">异步任务的多线程 Executor</a></h3>
+<p><img src="../image/rust-china-config-async-4.png" alt="异步任务的多线程 Executor" /></p>
+<p>在Rust中，对于异步计算的标准定义是Future trait</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub enum Poll&lt;T&gt; {
+    Ready(T),
+    Pending,
+}
+
+pub trait Future {
+    type Output;
+    fn poll(&amp;mut self, cx: &amp;Waker) -&gt; Poll&lt;Self::Output&gt;;
+    // fn poll(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>poll 方法返回的是一个枚举类型 <code>Poll</code>，它和返回布尔值是类似的，只不过语义会更清晰一些，如果没好的话就返回一个 <code>Pending</code>，好了的话就返回一个 
+<code>Ready</code>。标准库里用的不是<code>&amp;mut self</code>，而是<code>Pin&lt;&amp;mut Self&gt;</code>，因为 30 分钟讲不完，所以在这里先跳过。下面就是整个异步任务多线程的模型图：</p>
+<p><img src="../image/rust-china-config-async-5.png" alt="异步任务的多线程 Executor" /></p>
+<p>首先用户通过 <code>spawn</code> 函数把异步任务 push 到全局队列里去，然后工作线程会拿到 task 执行，并且创建一个 <code>Waker</code>，传给执行的 <code>Future</code>，如果任务执行完成了，那就 
+ok 了；如果没执行完成，<code>Future</code> 负责把 <code>Waker</code> 注册到 <code>Reactor</code> 上面，<code>Reactor</code> 负责监听事件，收到事件后会把 <code>Waker</code> 唤醒，把 task 
+放到全局队列中，这样下次其他线程可以拿到这个 task 继续执行，这样循环重复直到任务执行完毕。</p>
+<h3><a class="header" href="#waker-接口的要求" id="waker-接口的要求">Waker 接口的要求</a></h3>
+<p><img src="../image/rust-china-config-async-6.png" alt="Waker 使用方" /></p>
+<p><code>Waker</code> 在这个过程中充当着十分重要的角色，我们来看一下 Waker 的接口需要满足哪些要求：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Waker {
+    pub fn wake(self);
+}
+
+impl Clone for Waker;
+
+impl Send for Waker;
+
+impl Sync for Waker;
+<span class="boring">}
+</span></code></pre></pre>
+<p>对于使用方的要求，首先 <code>Waker</code> 本身是唤醒的功能，所以它要提供一个 <code>wake</code> 方法。异步任务可能会关心多个事件源，比如说定时器、IO，也就是说 <code>Waker</code> 可能对应不同的 
+<code>Reactor</code>，因为 <code>Future</code> 在 <code>poll</code> 的时候只是传了一个 <code>Waker</code>，现在要把 <code>Waker</code> 注册到多个 <code>Reactor</code> 上，就需要 <code>clone</code>。然后 
+<code>Executor</code> 和 <code>Waker</code> 可能不在一个线程里面，<code>Waker</code> 需要跨线程发送到 <code>Reactor</code> 上面，所以也就需要一个 <code>Send</code> 
+的约束。最后多个事件源可能同时调用这个 <code>Waker</code>，这里就存在并发调用的问题，要满足并发调用的话就需要实现<code>Sync</code>约束。这是对 <code>Waker</code> 使用方的要求。</p>
+<p><img src="../image/rust-china-config-async-7.png" alt="Waker 提供方" /></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Waker {
+    pub unsafe fn from_raw(waker: RawWaker) -&gt; Waker
+}
+
+pub struct RawWaker {
+    data: *const (),
+    vtable: &amp;'static RawWakerTable,
+}
+
+pub struct RawWakerTable {
+    clone: unsafe fn(*const ()) -&gt; RawWaker,
+    wake: unsafe fn(*const ()),
+    wake_by_ref: unsafe fn(*const ()),
+    drop: unsafe fn(*const ())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>不同的 <code>Executor</code> 有不同的内部实现，而 <code>Waker</code> 又是一个公共统一的 API。有的<code>Executor</code>有一个全局队列，有的是一个线程局部队列，有的 
+<code>Executor</code> 可能只支持单个 task 的执行，因此他们的唤醒机制是完全不一样的。要构造统一的 <code>Waker</code> 必然涉及多态，Rust 中是采用自定义虚表的方式实现的，通过 
+<code>RawWaker</code> 来构造 <code>Waker</code>，<code>RawWaker</code> 有个数据字段，和一个静态的虚表，不同的 <code>Executor</code> 就是要把这些虚表中的方法全部实现，</p>
+<h3><a class="header" href="#waker-实现需要考虑的并发问题" id="waker-实现需要考虑的并发问题">Waker 实现需要考虑的并发问题</a></h3>
+<p><img src="../image/rust-china-config-async-8.png" alt="Waker 实现需要考虑的并发问题" /></p>
+<p><code>Waker</code> 在实现上可能会有一些并发上的问题，我们先说第一个问题，<code>wake</code> 调用之间的并发，需要保证只将任务push执行队列一次。如果有两(多)个 <code>Reactor</code> 同时执行 
+<code>Waker::wake</code> 的话，两个 <code>Reactor</code> 都成功把任务 push 到全局队列里去，如果第一次push的让线程 A 拿到了，第二次pushed让线程 B 拿到了，线程 A 和 B 
+现在同时调用<code>poll</code>，因为 <code>poll</code> 本身 <code>Self</code> 参数是 <code>&amp;mut self</code> 的，也就是说是互斥的，这样就会造成线程安全问题。</p>
+<p>第二个问题，<code>wake</code> 调用和 <code>poll</code> 之间的并发，一个任务正在执行<code>poll</code>，但是之前调用<code>poll</code>的时候把已经<code>Waker</code>注册到一个 <code>Reactor</code> 中，这个 <code>Reactor</code> 
+突然好了，现在它调用<code>Waker::wake</code>试图把任务push到并发队列里去，如果push能成功的话，那么另一个线程从队列里取到任务，并尝试调用<code>poll</code>，而当前这个任务又在<code>poll </code>的过程中，因此会导致和上面一样的并发问题。</p>
+<p><code>async-task</code> 完美的解决了这些并发问题，并且它提供了十分优雅的 API，我把<a href="https://zhuanlan.zhihu.com/p/92679351">源码解析</a>放在了知乎上面，大家有兴趣可以看一下。</p>
+<h3><a class="header" href="#异步任务多线程-executor" id="异步任务多线程-executor">异步任务多线程 Executor</a></h3>
+<p><img src="../image/rust-china-config-async-9.png" alt="异步任务多线程 Executor" /></p>
+<p>如果用 <code>async-task</code> 处理这个问题，代码应该是这样的：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::thread;
+use crossbeam::channel::{unbounded, Sender};
+use once_cell::sync::Lazy;
+use async_task;
+
+static QUEUE: Lazy&lt;Sender&lt;async_task::Task&lt;()&gt;&gt;&gt; = Lazy::new(|| {
+    let (sender, reciver) = unbounded::&lt;Task&gt;();
+    for _ in 0..4 {
+        let recv = reciver.clone();
+        thread::spawn(|| {
+            for task in recv {
+                task();
+            }
+        })
+    }
+    sender
+});
+
+fn spawn&lt;F, R&gt;(future: F) -&gt; async_task::JoinHandle&lt;R, ()&gt; 
+where 
+    F: Future&lt;Output = R&gt; + Send + 'static,
+    R: Send + 'static,
+{
+    let schedule = |task| QUEUE.send(task).unwrap();
+    let (task, handle) = async_task::spawn(future, schedule, ());
+    task.schedule();
+    handle
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>可以看到和之前的同步任务多线程池相比，工作线程的代码基本一致，<code>spawn</code> 函数有一些区别。使用 <code>async_task</code> 很简单实现了异步任务多线程池的处理。</p>
+<h3><a class="header" href="#future-和-reactor-之间的并发" id="future-和-reactor-之间的并发">Future 和 Reactor 之间的并发</a></h3>
+<p><img src="../image/rust-china-config-async-10.png" alt="Future 和 Executor 之间的并发" /></p>
+<p><code>Future</code> 如果<code>poll</code>的时候没有好的话，它负责把 <code>Waker</code> 注册到 <code>Reactor</code> 里去，这里面会有一个 <code>Waker</code> 过期的问题。第一次调用 <code>poll</code> 和第二次调用 
+<code>poll</code> 时，<code>Executor</code> 传的 <code>Waker</code> 可能不是同一个，只有最新的 <code>Waker</code> 能把 task 唤醒，老的 <code>Waker</code> 就唤不醒，这样导致的问题是每次 <code>poll</code> 
+的时候都要把 <code>waker</code> 更新到 <code>Reactor</code> 里，以确保能够唤醒 task。</p>
+<p>比如上图中的例子，<code>Future</code> 同时对两个事件感兴趣，对应着两个 <code>Reactor</code>。<code>Future</code> 在 <code>poll</code> 的时候需要向 Reactor1 注册 <code>waker</code>，也要向 
+Reactor2 注册 <code>waker</code>，当它下次 <code>poll</code> 的时候每次都要把两个 <code>waker</code> 更新，那么现在问题来了，<code>Future</code> 的 <code>poll</code> 执行在 <code>Executor</code> 线程，<code>Reactor</code> 执行在 <code>Reactor</code> 线程，一个线程往里面写，另一个线程试图从里面读，并发问题就出现了。为了处理这个问题，最简单的方式就是加一把锁，每个 <code>Reactor</code> 都要加锁解锁，这个操作本身就比较复杂，比较耗时。</p>
+<p><img src="../image/rust-china-config-async-11.png" alt="AtomicWaker" /></p>
+<p><code>AtomicWaker</code> 完美处理了这个问题，它通过单生产者多消费者的模式，将 <code>waker</code> 放到 <code>AtomicWaker</code> 里面，<code>AtomicWaker</code> 被多个 <code>Reactor</code> 
+共享，<code>Waker</code>只需要更新一次，所有 <code>Reactor</code> 就能拿到最新的 <code>waker</code>。</p>
+<h2><a class="header" href="#future-的可组合性" id="future-的可组合性">Future 的可组合性</a></h2>
+<p><img src="../image/rust-china-config-async-12.png" alt="Future 的可组合性" /></p>
+<p>异步任务本身是可以组合的，比如发起一个 HTTPS 请求涉及查询 DNS 拿到 IP，建立 TLS 
+链接，发送请求数据，拿到响应数据，过程中的每一步都是异步任务，把这些异步任务组合到一起就是一个大的异步任务。 <code>Future</code>本身设计也是可组合的，比如下面的代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>future1
+    .map(func)
+    .then(func_return_future)
+    .join(future2);
+<span class="boring">}
+</span></code></pre></pre>
+<p>因为 <code>Future</code> 要执行的话必须发到 <code>Executor</code> 里面，因此上面的代码还没有发到 <code>Executor</code> 里面去，所以它本身是没有执行的。上面的代码等于：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Join::new(
+    Then::new(
+        Map::new(future1, func), 
+        func_return_future
+    ), 
+    future2
+);
+<span class="boring">}
+</span></code></pre></pre>
+<p>它是一个声明式的，最终会产生一个结构体，是一个如上图所示的树形结构，当整个任务丢到 <code>Executor</code> 里去执行的时候，<code>poll</code> 方法 <code>Future</code> 的树根结点开始，执行到叶子节点，最底层的叶子节点 futrue 是专门跟 <code>Reactor</code> 打交道的，所以大部分开发者是不需要关心 <code>Reactor</code> 的，因此可能对 <code>Reactor</code> 概念可能了解不多。</p>
+<p>当一个叶子节点没好的时候，它会把传下来的 <code>waker</code> 注册到 <code>Reactor</code> 里面去。当<code>Reactor</code> 发现任务可以继续推进了，会调用 <code>waker</code> 把 任务
+放入到全局队列中，某个线程拿到任务后，会重新从根节点 poll。以上就是整个的执行过程。</p>
+<h3><a class="header" href="#joinn-组合的效率" id="joinn-组合的效率">JoinN 组合的效率</a></h3>
+<p><img src="../image/rust-china-config-async-13.png" alt="JoinN 组合的效率" /></p>
+<p>上面的 <code>Future</code> 组合模型涉及到一个 <code>JoinN</code> 组合的效率问题，问题是怎么产生的呢？<code>waker</code> 只用于唤醒整个task，但是没有携带任何唤醒信息，比如 task 
+是怎么被唤醒的。<code>JoinN</code> 负责把多个 <code>Future</code> 组合在一起同时并发的执行，<code>oin4</code> 把 4 个 <code>Future</code> 组合，每次 <code>poll</code> 
+的时候挨个去执行子 <code>Future</code>，如果没有好的话就会注册到 <code>Reactor</code> 里面，假设第二个突然就好了，下一次 <code>poll</code> 时，Join4 
+并不知道自己为什么被唤醒了，只能挨个再遍历一遍 <code>Future</code>，但其实第一、三、四都是浪费掉的。</p>
+<p><img src="../image/rust-china-config-async-14.png" alt="Waker 的拦截和包装" /></p>
+<p>怎么解决这个问题呢？<code>futures-rs</code> 里面有一个 <code>FuturesUnordered</code> 专门处理这个事情，可以管理成千上万个子 <code>Future</code>，它内置了一个并发队列，维护已经 
+ready 的子 <code>Future</code>。当 <code>Executor</code> 在 <code>poll</code> 整个任务的时候，它只遍历并发队列，挨个拿出来执行，执行的时候并不是把 <code>waker</code> 
+原封不动的传下去，而是进行了一次包装拦截：<code>wake</code>调用的时候，它会先把 <code>Future</code> 添加到自己的ready队列里面去，再去通知<code>Executor</code>的全局队列，<code>Executor</code> 
+下次再 
+<code>poll</code> 
+的时候直接从内置的并发队列去执行 <code>Future</code>，这样能达到效率最大化。</p>
+<h2><a class="header" href="#异步任务之间的同步" id="异步任务之间的同步">异步任务之间的同步</a></h2>
+<p><img src="../image/rust-china-config-async-15.png" alt="异步任务之间的同步" /></p>
+<p>传统多个线程之间也有同步的需求，比如说锁。异步任务之间也不可能是完全隔离的，它们之间可能做一些消息的交互，我们比较一下线程和 Task 之间的区别：</p>
+<p>｜｜ 线程 ｜ Task ｜
+｜----｜----｜----｜
+｜睡眠｜ thread::park｜return Pending｜
+｜唤醒｜thread::unpark｜Waker::wake｜
+｜获取方式｜thread::current()｜poll的参数｜</p>
+<p>线程如果想暂停工作可以调用 <code>thread::park</code>，task想暂停工作可以直接 <code>return Pending</code>；线程可以通过 <code>thread::unpark</code> 唤醒，task 
+需要调用 <code>Waker::wake</code>；获取方式上，线程直接调用 <code>thread::current</code>，task 是通过 <code>poll</code> 的参数拿到 <code>waker</code>。</p>
+<h3><a class="header" href="#异步任务之间的同步-mutex" id="异步任务之间的同步-mutex">异步任务之间的同步 Mutex</a></h3>
+<p><img src="../image/rust-china-config-async-16.png" alt="异步任务之间的同步 Mutex" /></p>
+<p><code>Mutex</code> 数据结构里面有一个数据字段，表示要锁的数据，一个 <code>locked</code> 
+原子变量表示有没有被锁住，还有一个等待队列，异步任务想拿锁却没有拿到，它就只能进入等待队列里面，等着别人去通知它。先看一下拿锁的过程，如果 <code>waker</code> 拿到锁之前 <code>locked</code> 是 
+false，表示拿锁成功了，如果没拿到失败了的话，就只能等，把 <code>waker</code> 丢到等待队列里。拿到锁的任务想释放这把锁的时候，把 <code>locked</code> 改成 false，并从等待队列中拿一个 
+<code>waker</code> 出来，去唤醒相应的task。</p>
+<p>这里跟大家讲一个很多人误区的地方，很多人认为异步任务里面是必须要用异步锁的，同步锁有阻塞就不行，这是不对的。大部分的等待队列的实现都是用了同步锁，也就是说 <code>Mutex</code> 
+也不是完全异步的，它本身有个同步锁在里面。如果你在应用里面只是想保护一段数据，对共享的数据做点加减操作，那么应该用 std 
+里面的同步锁，因为用异步锁的话，更新内部的等待队列需要加同步锁，这个开销可能比你直接用同步锁更新共享数据还要复杂很多。</p>
+<p>那么什么时候用异步锁呢？在保护 IO 资源的时候，当你的锁需要跨越多个 <code>.await</code>，时间差的比较大的时候，那应该优先使用异步锁。</p>
+<h3><a class="header" href="#异步任务之间的同步-oneshot" id="异步任务之间的同步-oneshot">异步任务之间的同步 Oneshot</a></h3>
+<p><img src="../image/rust-china-config-async-17.png" alt="异步任务之间的同步 Oneshot" /></p>
+<p><code>Oneshot</code> 是做什么事情的呢？它负责在两个线程之间传递一个数据，一个 task 在执行，另一个 task 在等待，前者执行完会通过 <code>Oneshot</code> 把数据传递给后者。图上所示就是 <code>Oneshot</code> 的数据结构，<code>state</code> 中纪录了很多元信息，比如数据是否已经写了，<code>sender</code> 是否应析构掉了，<code>TxWaker</code> 是否已经存了，<code>RxWaker</code> 是否已经存了，<code>receiver</code> 是否已经 <code>drop</code> 掉了。</p>
+<p>发送端发送数据的时候，首先在修改state前， data是完全由 <code>sender</code> 自由访问的，写完 data 后把 <code>state</code> 状态改掉，表示这个 data 已经写完了。然后把接收端的 
+<code>RxWaker</code> 取出来然后唤醒，唤醒之后 task 下次执行就可以把数据拿到了。如果 <code>sender</code> 没有发送数据，现在要把它析构掉，析构时要注意接收端还在一直等，因此 <code>sender</code> 
+析构是也要把 <code>state</code> 修改掉，把相关的 <code>RxWaker</code> 唤醒，通知 <code>reciver</code> 不要再等了。</p>
+<p>接收端的实现是一个 <code>Future</code>，它本身在 <code>poll</code> 的时候会读取 <code>state</code>，如果有数据那就说明发送端数据已经写完了，直接读取数据。如果没有数据的话就要等待，把它的 
+<code>waker</code> 存在 <code>Oneshot</code> 的 <code>RxWaker</code> 里面，同时也更新相应的 <code>state</code>，表示接收端的 <code>RxWaker</code> 已经存在。接收端在 <code>drop</code> 的时候，也要通知 
+<code>sender</code>，表示“我现在对你的数据没有兴趣了，你可以不用继续计算下去&quot;，所以接受端在 drop 的时候也要修改 <code>state</code>，从 <code>Oneshot</code> 里面拿到发送端的 
+<code>TxWaker</code>，把发送端唤醒。</p>
+<h3><a class="header" href="#异步任务之间的同步-waitgroup" id="异步任务之间的同步-waitgroup">异步任务之间的同步 WaitGroup</a></h3>
+<p><img src="../image/rust-china-config-async-18.png" alt="异步任务之间的同步 WaitGroup" /></p>
+<p>接下来讲一下我自己实现的 <code>WaitGroup</code>，它在 golang 里面是非常常见的。它可以构造出多个子任务，等待所有的子任务完成后，再继续执行下去，下面是一个演示代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use waitgroup::WaitGroup;
+use async_std::task;
+
+async {
+    let wg = WaitGroup::new();
+    for _ in 0..100 {
+        let w = wg.worker();
+        task::spawn(async move {
+            drop(w);
+        });
+    }
+    wg.wait().await;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先先构造一个 <code>WaitGroup</code>，然后创建 100 个 <code>worker</code>，在每个任务执行完后，只要把 <code>worker</code> drop 掉，就说明任务已经完成了。然后 <code>WaitGroup</code> 
+等到所有的子任务完成后继续执行。下面介绍一下它的实现，其实比较简单：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Inner {
+    waker: AtomicWaker,
+}
+
+impl Drop for Inner {
+    fn drop(&amp;mut self) {
+        self.waker.wake();
+    }
+}
+
+pub struct Worker {
+    inner: Arc&lt;Inner&gt;,
+}
+
+pub struct WaitGroup {
+    inner: Weak&lt;Inner&gt;
+}
+
+impl Future for WaitGroup {
+    type Output = ();
+
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt; {
+        match self.inner.upgrade() {
+            Some(inner) =&gt; {
+                inner.waker.register(cx.waker());
+                Poll::Pending
+            }
+            None =&gt; Poll::Ready(())
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意到如果某一个 <code>worker</code> 完成了 task，它并不需要去唤醒 <code>Waker</code>，<code>WaitGroup</code> 只关心所有任务都结束了，只需要让最后一个 <code>worker</code> 去唤醒 
+<code>waker</code>。什么时候是最后一个 <code>worker</code> 呢？我们可以借用标准库里的 <code>Arc</code>，<code>Arc</code> 是一个共享引用，当所有的 <code>Arc</code> 
+强引用都销毁的时候，就会析构内部的数据，只要在 <code>Arc</code> 包装的数据的 <code>drop</code> 方法里面把 <code>waker</code> 唤醒就可以了。</p>
+<p><code>WaitGroup</code> 持有一个弱引用，所有的 <code>Worker</code> 都持有强引用，<code>WaitGroup</code> 在 <code>poll</code> 
+的时候试图把弱引用升级成强引用，如果升级失败了，说明所有的强引用都没了，也就是任务都执行完了，就可以返回 <code>Ready</code>。如果升级成功了，说明现在至少还有一个强引用，那就把 <code>waker</code> 注册到 <code>AtomicWaker</code> 里面。这里有一个边界条件，在升级结束的瞬间，所有的 <code>worker</code> 全部 <code>drop</code> 掉了，这时还不会调用 
+<code>wake</code>，因为在升级成功时，会产生一个临时的强引用 
+<code>inner</code>，这时更新waker后，在这个临时的强引用销毁的时候调用 <code>drop</code>，然后调用 <code>waker.wake()</code> 把任务唤醒，因此不会丢失通知。整个过程就完整了。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_1/jit.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_1/1password.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_1/jit.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_1/1password.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

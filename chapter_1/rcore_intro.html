@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>用Rust写操作系统 | rCore OS 教程介绍  - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | Cita: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="../chapter_1/rcore_intro.html" class="active"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1 ：Rust 编译过程与宏展开</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="../chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#用rust写操作系统--清华-rcore-os-教程介绍" id="用rust写操作系统--清华-rcore-os-教程介绍">用<code>Rust</code>写操作系统 | 清华 rCore OS 教程介绍</a></h1>
+<p>编辑：张汉东</p>
+<h2><a class="header" href="#rcore-os-教程简介" id="rcore-os-教程简介">rCore OS 教程简介</a></h2>
+<p>众所周知，清华大学的操作系统课程是国家级精品课程。清华大学也是是国内首个使用 Rust 进行操作系统教学的高校。目前，陈渝教授和他的学生吴一凡正在编写新的操作系统教材。该教材相关的文档都是网络公开的，教程地址：<a href="https://rcore-os.github.io/rCore-Tutorial-Book-v3/">https://rcore-os.github.io/rCore-Tutorial-Book-v3/</a>。</p>
+<p>这本教程旨在一步一步展示如何 <strong>从零开始</strong> <strong>用 Rust 语言写一个基于 RISC-V 架构的类 Unix 内核</strong>。值得注意的是， 本项目不仅支持模拟器环境（如 Qemu/terminus 等），还支持在真实硬件平台 Kendryte K210 上运行。</p>
+<p>该教程目前已经发布了近 20 万字，每一章都是一个能完整运行的内核。目前已经完成了前四章分别可以让内核能在裸机打印字符、支持系统调用和特权级切换、任务切换和虚拟存储。后面还会依次支持进程、进程间通信和数据持久化，代码已经写完，有待更新教程文档。陈渝教授和吴一凡也希望能够通过该教程吸引更多对 Rust 和 OS 感兴趣的读者，可以在教程的基础上自己从头实现一遍或者能做一些拓展，也能提供一些反馈，让教程的质量越来越高。</p>
+<p>以教程目前的内容进度，正是大家从零开始学习编写操作系统的最佳时期。</p>
+<h2><a class="header" href="#为什么要学习操作系统" id="为什么要学习操作系统">为什么要学习操作系统？</a></h2>
+<p>一名程序员的绝大部分工作都是在操作系统上面进行的。学习操作系统，深入了解操作系统原理，是每个合格的程序员必须要经历的。</p>
+<p>很多人学习 Rust 语言感到很吃力，基本上就是因为操作系统基础知识薄弱造成的。</p>
+<p>通过自己实现一个操作系统，可以让你对操作系统的理解不仅仅是停留在概念上。而且用 Rust 实现操作系统，对于 Rust 爱好者来说，更有意思。</p>
+<p>希望社区的朋友可以根据该教程实现自己的操作系统，如果需要交流，可以联系我（张汉东），我们可以一起建立学习小组，并且可以直接向陈渝教授和吴一凡反馈学习中的问题。</p>
+<p><strong>以下内容节选自rCore OS 教程第零章</strong>。</p>
+<h2><a class="header" href="#目前常见的操作系统内核都是基于c语言的为何要推荐rust语言" id="目前常见的操作系统内核都是基于c语言的为何要推荐rust语言">目前常见的操作系统内核都是基于C语言的，为何要推荐Rust语言？</a></h2>
+<p>没错，C语言就是为写UNIX而诞生的。Dennis Ritchie和KenThompson没有期望设计一种新语言能帮助高效简洁地开发复杂的应用业务逻辑，只是希望用一种简洁的方式抽象出计算机的行为，便于编写控制计算机硬件的操作系统，最终的结果就是C语言。</p>
+<p>C语言的指针的天使与魔鬼，且C语言缺少有效的并发支持，导致内存和并发漏洞成为当前操作系统的噩梦。</p>
+<p>Rust语言具有与C一样的硬件控制能力，且大大强化了安全编程。从某种角度上看，新出现的Rust语言的核心目标是解决C的短板，取代C。所以用Rust写OS具有很好的开发和运行的体验。</p>
+<p>用 Rust 写 OS 的代价仅仅是学会用 Rust 编程。</p>
+<h2><a class="header" href="#目前常见的cpu是x86和arm为何要推荐risc-v" id="目前常见的cpu是x86和arm为何要推荐risc-v">目前常见的CPU是x86和ARM，为何要推荐RISC-V？</a></h2>
+<p>没错，最常见的的CPU是x86和ARM，他们已广泛应用在服务器，台式机，移动终端和很多嵌入式系统中。它们需要支持非常多的软件系统和应用需求，导致它们越来越复杂。</p>
+<p>x86的向过去兼容的策略确保了它的江湖地位，但导致其丢不掉很多已经比较过时的硬件设计，让操作系统疲于适配这些硬件特征。</p>
+<p>x86和ARM都很成功，这主要是在商业上，其广泛使用是的其CPU硬件逻辑越来越复杂，且不够开放，不能改变，不是开源的，提高了操作系统开发者的学习难度。</p>
+<p>从某种角度上看，新出现的RISC-V的核心目标是灵活适应未来的AIoT场景，保证基本功能，提供可配置的扩展功能。其开源特征使得学生都可以方便地设计一个RISC-V CPU。</p>
+<p>写面向RISC-V的OS的代价仅仅是你了解RISC-V的Supevisor特权模式，知道OS在Supevisor特权模式下的控制能力。</p>
+<h2><a class="header" href="#清华大学为何要写这本操作系统书" id="清华大学为何要写这本操作系统书">清华大学为何要写这本操作系统书?</a></h2>
+<p>现在国内外已有一系列优秀的操作系统教材,例如 William Stallings 的《Operating Systems Internals and Design Principles》，Avi Silberschatz、Peter Baer Galvin 和 Greg Gagne 的《Operating System Concepts》，Remzi H. Arpaci-Dusseau 和 Andrea C. Arpaci-Dusseau 的《Operating Systems: Three Easy Pieces》等。然而,从我们从2000年以来的教学实践来看,某些经典教材对操作系统的概念和原理很重视，但还有如下一些问题有待改进：</p>
+<p>原理与实践脱节：缺乏在操作系统的概念/原理与操作系统的设计/实现之间建立联系的桥梁，导致学生发现操作系统实现相关的实验与操作系统的概念相比，有较大的鸿沟。</p>
+<p>缺少历史发展的脉络：操作系统的概念和原理是从实际操作系统设计与实现过程中，从无到有逐步演进而产生的，有其发展的历史渊源和规律。但目前的大部分教材只提及当前主流操作系统的概念和原理，有“凭空出现”的感觉，学生并不知道这些内容出现的前因后果。</p>
+<p>忽视硬件细节或用复杂硬件：很多教材忽视或抽象硬件细节，是的操作系统概念难以落地。部分教材把 x86 作为的操作系统实验的硬件参考平台，缺乏对当前快速发展的RISC-V等体系结构的实验支持，使得学生在操作系统实验中可能需要花较大代价了解相对繁杂的x86硬件细节，影响操作系统实验的效果。</p>
+<p>这些问题增加了学生学习和掌握操作系统的难度。我们想通过尝试解决上面三个问题，来缓解学生学习操作系统的压力，提升他们的兴趣，让他们能够在一个学期内比较好地掌握操作系统。为应对“原理与实践脱节”的问题，我们强调了实践先行，实践引领原理的理念。MIT教授 Frans Kaashoek等师生设计实现了基于UNIX v6的xv6教学操作系统用于每年的本科操作系统课的实验中，并在课程讲解中把原理和实验结合起来，在国际上得到了广泛的认可。这些都给了我们很好的启发，经过十多年的实践，对一个计算机专业的本科生而言，设计实现一个操作系统（包括CPU）有挑战但可行，前提是实际操作系统要小巧并能体现操作系统的核心思想。这样就能够让学生加深对操作系统原理和概念的理解，能让操作系统原理和概念落地。</p>
+<p>为应对“缺少历史发展的脉络”的问题，我们重新设计操作系统实验和教学内容，按照操作系统的历史发展过程来建立多个相对独立的小实验，每个实验体现了操作系统的一个微缩的历史，并从中归纳总结出操作系统相关的概念与原理，并在教学中引导学生理解这些概念和原理是如何一步一步演进的。</p>
+<p>为应对“忽视硬件细节或用复杂硬件”的问题，我们在硬件（x86, ARM, MIPS, RISC-V等）和编程语言（C, C++, Go, Rust等）选择方面进行了多年尝试。在2017年引入了RISC-V CPU作为操作系统实验的硬件环境，在2018年引入Rust编程语言作为开发操作系统的编程语言，使得学生以相对较小的开发和调试代价能够用Rust语言编写运行在RISC-V上的操作系统。而且方便和简化了让操作系统的概念和原理形象化，可视化的过程。学生可以吧操作系统的概念和原理直接对应到程序代码、硬件规范和操作系统的实际执行中，加强了学生对操作系统内涵的实际体验和感受。</p>
+<p>所以本书的目标是以简洁的RISC-V CPU为底层硬件基础，根据上层应用从小到大的需求，按OS发展的历史脉络，逐步讲解如何设计并实现满足这些需求的“从小到大”的多个“小”操作系统。并在设计实现操作系统的过程中，逐步解析操作系统各种概念与原理的知识点，对应的做到有“理”可循和有“码”可查，最终让读者通过主动的操作系统设计与实现来深入地掌握操作系统的概念与原理。</p>
+<p>在具体撰写过程中，第零章是对操作系统的一个概述，让读者对操作系统的历史、定义、特征等概念上有一个大致的了解。后面的每个章节体现了操作系统的一个微缩的历史发展过程，即从对应用由简到繁的支持的角度出发，每章会讲解如何设计一个可运行应用的操作系统，满足应用的阶段性需求。从而读者可以通过对应配套的操作系统设计实验，了解如何从一个微不足道的“小”操作系统，根据应用需求，添加或增强操作系统功能，逐步形成一个类似UNIX的相对完善的“小”操作系统。每一步都小到足以让人感觉到易于掌控，而在每一步结束时，你都有一个可以工作的“小”操作系统。另外，通过足够详尽的测试程序 ，可以随时验证读者实现的操作系统在每次更新后是否正常工作。由于实验的代码规模和实现复杂度在一个逐步递增的可控范围内，读者可以结合对应于操作系统设计实验的进一步的原理讲解，来建立操作系统概念原理和实际实现的对应关系，从而能够通过操作系统实验的实践过程来加强对理论概念的理解，通过理论概念来进一步指导操作系统实验的实现与改进。</p>
+<p>在你开始阅读与实践本书讲解的内容之前，你需要决定用什么编程语言来完成操作系统实验。你可以用任何你喜欢的编程语言和你喜欢的CPU上来实现操作系统。我们推荐的编程语言是Rust，我们推荐的CPU是RISC-V。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_1/embedded_rust.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_1/rust_security_part1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_1/embedded_rust.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_1/rust_security_part1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
