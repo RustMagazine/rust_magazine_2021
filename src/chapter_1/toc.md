@@ -21,7 +21,7 @@
 ### Rust in Production 
 
 - [「翻译」1password 的 Rust 实践](./1password.md)
-- [Cita: 用Rust写Protobuf扩展](./cita_protobuf-ext.md)
+- [溪塔科技: 用Rust写Protobuf扩展](./cita_protobuf-ext.md)
 
 ### 学习园地
 
