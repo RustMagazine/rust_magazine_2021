@@ -4063,7 +4063,7 @@ int main()
 </code></pre>
 <p>我们可以看到，在 <code>C++</code> 代码中，变量 <code>a</code> 先赋值为 1，后赋值为 2，但其地址没有发生变化。<code>Rust</code> 代码中，<code>a</code> 是一个不可变绑定，执行<code>a=2</code>动作被编译器拒绝。但是可以使用 <code>let</code> 重新绑定，但这时 <code>a</code> 的地址跟之前发生了变化，说明 a 被绑定到了另一个内存地址。<code>b</code> 是一个可变绑定，可以使用<code>b = 2</code>重新给它指向的内存赋值，<code>b</code> 的地址不变。但使用 <code>let</code> 重新绑定后，<code>b</code> 指向了新的内存区域。</p>
 <p>可以看出，&quot;赋值&quot; 是将值写入变量关联的内存区域，&quot;绑定&quot; 是建立变量与内存区域的关联关系，<code>Rust</code> 里，还会把这个内存区域的所有权赋予这个变量。</p>
-<p>不可变绑定的含义是：将变量绑定到一个内存地址，并赋予所有权，通过改变量只能读取该地址的数据，不能修改该地址的数据。对应的，可变绑定就可以通过变量修改关联内存区域的数据。从语法上看，有 <code>let</code> 关键字是绑定, 没有就是赋值.。</p>
+<p>不可变绑定的含义是：将变量绑定到一个内存地址，并赋予所有权，通过该变量只能读取该地址的数据，不能修改该地址的数据。对应的，可变绑定就可以通过变量修改关联内存区域的数据。从语法上看，有 <code>let</code> 关键字是绑定, 没有就是赋值。</p>
 <p>这里我们能看出 <code>Rust</code> 与 <code>C++</code> 的一个不同之处。<code>C++</code> 里是没有“绑定”概念的。<code>Rust</code> 的变量绑定概念是一个很关键的概念，它是所有权的起点。有了明确的绑定才有了所有权的归属，同时解绑定的时机也确定了资源释放的时机。</p>
 <p>所有权规则：</p>
 <ul>
@@ -4768,7 +4768,7 @@ unsafe impl&lt;T:Send + ?Sized&gt; Send for &amp; mut T{}
 <li>如果类型 T 实现了“<strong>Sync</strong>”，则自动为类型 <code>&amp;T</code> 实现“<strong>Send</strong>”.</li>
 <li>如果类型 T 实现了“<strong>Send</strong>”，则自动为类型 <code>&amp;mut T</code> 实现“<strong>Send</strong>”.</li>
 </ul>
-<p>这两条规则都可以直观的理解。比如：对第一条规则 <code>T</code> 实现了 “<strong>Sync</strong>”, 意味则可以在很多个线程中出现同一个 <code>T</code> 实例的 <code>&amp;T</code> 类型实例。如果线程 <code>A</code> 中先有有 <code>&amp;T</code> 实例，线程 <code>B</code> 中怎么得到 <code>&amp;T</code> 的实例呢？必须要有在线程 <code>A</code> 中通过某种方式 <code>send</code> 过来，比如闭包的捕获上下文变量。而且 <code>&amp;T</code> 实现了 &quot;<code>Copy</code>&quot; <code>Trait</code>, 不会有所有权风险，数据是只读的不会有数据竞争风险，非常安全。逻辑上也是正确的。<font color=#fa8919>那为什么还会别标记为 unsafe ?</font> 我们先把这个问题暂时搁置，来看看为智能指针设计的另外几条规则。</p>
+<p>这两条规则都可以直观的理解。比如：对第一条规则 <code>T</code> 实现了 “<strong>Sync</strong>”, 意味则可以在很多个线程中出现同一个 <code>T</code> 实例的 <code>&amp;T</code> 类型实例。如果线程 <code>A</code> 中先有 <code>&amp;T</code> 实例，线程 <code>B</code> 中怎么得到 <code>&amp;T</code> 的实例呢？必须要有在线程 <code>A</code> 中通过某种方式 <code>send</code> 过来，比如闭包的捕获上下文变量。而且 <code>&amp;T</code> 实现了 &quot;<code>Copy</code>&quot; <code>Trait</code>, 不会有所有权风险，数据是只读的不会有数据竞争风险，非常安全。逻辑上也是正确的。<font color=#fa8919>那为什么还会别标记为 unsafe ?</font> 我们先把这个问题暂时搁置，来看看为智能指针设计的另外几条规则。</p>
 <pre><code class="language-Rust">impl &lt;T:?Sized&gt;!marker::Send for Rc&lt;T&gt;{}
 impl &lt;T:?Sized&gt;!marker::Sync for Rc&lt;T&gt;{}
 impl&lt;T:?Sized&gt;!marker::Send for Weak&lt;T&gt;{}
