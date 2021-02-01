@@ -6,7 +6,7 @@
 
 视频地址：[https://www.bilibili.com/video/BV1Yy4y1e7zR?p=14](https://www.bilibili.com/video/BV1Yy4y1e7zR?p=14)
 
-后期编辑：李冬杰，阿里巴巴淘系技术部，花名齐纪，。
+后期编辑：李冬杰，阿里巴巴淘系技术部，花名齐纪。
 
 ————————
 
