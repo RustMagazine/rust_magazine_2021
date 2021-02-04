@@ -5,5 +5,9 @@ multilingual = false
 src = "src"
 title = "rust-magazine"
 
+[output.html]
+google-analytics = "UA-188947685-1"
+git-repository-url = "https://github.com/RustMagazine/rust_magazine_2021"
+
 [output.html.playground]
 editable = true
