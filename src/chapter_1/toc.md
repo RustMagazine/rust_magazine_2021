@@ -25,7 +25,7 @@
 
 ### 学习园地
 
-- [「系列」Rust设计模式](./design_pattern.md)
+- [「系列」Rust设计模式](./rust-design-patterns/builder.md)
 - [关于 io_uring 与 Rust 的思考](./io_uring_and_rust.md)
 - [GraphQL in Rust](./graphql_in_rust/graphql_in_rust.md)
 - [图解 Rust 所有权与生命周期](./rust_ownership.md)
