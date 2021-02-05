@@ -138,6 +138,10 @@
                         </a>
                         
                         
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -295,7 +299,7 @@
 </ul>
 <h3><a class="header" href="#学习园地" id="学习园地">学习园地</a></h3>
 <ul>
-<li><a href="chapter_1/./design_pattern.html">「系列」Rust设计模式</a></li>
+<li><a href="chapter_1/./rust-design-patterns/builder.html">「系列」Rust设计模式</a></li>
 <li><a href="chapter_1/./io_uring_and_rust.html">关于 io_uring 与 Rust 的思考</a></li>
 <li><a href="chapter_1/./graphql_in_rust/graphql_in_rust.html">GraphQL in Rust</a></li>
 <li><a href="chapter_1/./rust_ownership.html">图解 Rust 所有权与生命周期</a></li>
@@ -330,7 +334,7 @@
 <ul>
 <li><code>aarch64-unknown-linux-gnu</code> 升级为<code>Tier 1</code>。</li>
 <li><code>aarch64-apple-darwin</code> 和<code>aarch64-pc-windows-msvc</code> 得到<code>Tier 2</code> 级别的支持。</li>
-<li>单元测试中线程中的print输出将会被捕获，默认不会在控制台打印出来了。如果不- 需要捕获，需要添加--nocapture参数。</li>
+<li>单元测试中线程中的print输出将会被捕获，默认不会在控制台打印出来了。如果不需要捕获，需要添加--nocapture参数。</li>
 <li><code>union</code>支持 <code>impl Drop trait</code> 了
 支持使用<code>ref</code>关键字让解构的字段不再被move 而是被借用。</li>
 </ul>
@@ -389,7 +393,7 @@ fn main(){
 </li>
 </ul>
 <p>链接：<a href="https://github.com/rust-lang/futures-rs/releases/tag/0.3.9">https://github.com/rust-lang/futures-rs/releases/tag/0.3.9</a></p>
-<h2><a class="header" href="#rust官方项目工作组的工作范围是什么" id="rust官方项目工作组的工作范围是什么">Rust官方项目工作组的工作范围是什么？</a></h2>
+<h2><a class="header" href="#rust-异常处理小组的工作范围是什么" id="rust-异常处理小组的工作范围是什么">Rust 异常处理小组的工作范围是什么？</a></h2>
 <p>该小组的主要重点是继续进行小组成立前的错误处理相关工作。为此而努力系统地解决与错误处理相关的问题，以及消除阻碍RFC停滞不前的障碍。</p>
 <p>在小组成立的最初几次会议上，制定了一些短期和长期目标，这些目标主要围绕下面三个主题：</p>
 <ul>
@@ -1058,7 +1062,7 @@ null_pointer_exception:
 <p>说明：本文为视频演讲文字版，编者听录的时候可能会出现一些误差，欢迎指正。</p>
 <p>讲师：赖智超 - Onchain 区块链架构师</p>
 <p>视频地址：<a href="https://www.bilibili.com/video/BV1Yy4y1e7zR?p=14">https://www.bilibili.com/video/BV1Yy4y1e7zR?p=14</a></p>
-<p>后期编辑：李冬杰，阿里巴巴淘系技术部，花名齐纪，。</p>
+<p>后期编辑：李冬杰，阿里巴巴淘系技术部，花名齐纪。</p>
 <p>————————</p>
 <h2><a class="header" href="#自我介绍" id="自我介绍">自我介绍</a></h2>
 <p><img src="chapter_1/../image/rust-china-config-async-1.png" alt="自我介绍" /></p>
@@ -5488,6 +5492,23 @@ fn main() {
 
         
 
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
         
 
         
