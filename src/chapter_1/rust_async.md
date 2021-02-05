@@ -272,11 +272,11 @@ ready 的子 `Future`。当 `Executor` 在 `poll` 整个任务的时候，它只
 
 传统多个线程之间也有同步的需求，比如说锁。异步任务之间也不可能是完全隔离的，它们之间可能做一些消息的交互，我们比较一下线程和 Task 之间的区别：
 
-｜｜ 线程 ｜ Task ｜
-｜----｜----｜----｜
-｜睡眠｜ thread::park｜return Pending｜
-｜唤醒｜thread::unpark｜Waker::wake｜
-｜获取方式｜thread::current()｜poll的参数｜
+|          | 线程              | Task           |
+|----------|-------------------|----------------|
+| 睡眠     | thread::park      | return Pending |
+| 唤醒     | thread::unpark    | Waker::wake    |
+| 获取方式 | thread::current() | poll的参数     |
 
 线程如果想暂停工作可以调用 `thread::park`，task想暂停工作可以直接 `return Pending`；线程可以通过 `thread::unpark` 唤醒，task 
 需要调用 `Waker::wake`；获取方式上，线程直接调用 `thread::current`，task 是通过 `poll` 的参数拿到 `waker`。
