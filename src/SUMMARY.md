@@ -25,6 +25,11 @@
     - [Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1](./chapter_1/rustc_part1.md)
     
 - [二月刊（February）| 待发布](./chapter_2.md)
+    - [本月简报 | Rust官方动态](./chapter_2/lang.md)
+    - [本月简报 |社区热点](./chapter_2/hots.md)
+    - [本月简报 | 推荐项目](./chapter_2/projects.md)
+    - [本月简报 | 学习资源](./chapter_2/learns.md)
+    - [本月简报 | Rust唠嗑室本月汇总](./chapter_2/rust_laoke.md)
 - [三月刊（March）| 待发布](./chapter_3.md)
 - [四月刊（April）| 待发布](./chapter_4.md)
 - [五月刊（May）| 待发布](./chapter_5.md)
