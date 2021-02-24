@@ -867,10 +867,10 @@ trait Foo{
     fn value(&self)->i32;
 }
 
-struct Bar<'a>{v:&'amuti32}
+struct Bar<'a>{v:&'a mut i32}
 
 impl<'a> Foo for Bar<'a> {
-    fn inc(&mutself){
+    fn inc(&mut self){
         *(self.v)=*(self.v)+1
     }
     fn value(&self)->i32{

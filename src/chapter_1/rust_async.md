@@ -253,7 +253,7 @@ Join::new(
 ![JoinN 组合的效率](../image/rust-china-config-async-13.png)
 
 上面的 `Future` 组合模型涉及到一个 `JoinN` 组合的效率问题，问题是怎么产生的呢？`waker` 只用于唤醒整个task，但是没有携带任何唤醒信息，比如 task 
-是怎么被唤醒的。`JoinN` 负责把多个 `Future` 组合在一起同时并发的执行，`oin4` 把 4 个 `Future` 组合，每次 `poll` 
+是怎么被唤醒的。`JoinN` 负责把多个 `Future` 组合在一起同时并发的执行，`Join4` 把 4 个 `Future` 组合，每次 `poll` 
 的时候挨个去执行子 `Future`，如果没有好的话就会注册到 `Reactor` 里面，假设第二个突然就好了，下一次 `poll` 时，Join4 
 并不知道自己为什么被唤醒了，只能挨个再遍历一遍 `Future`，但其实第一、三、四都是浪费掉的。
 
@@ -272,11 +272,11 @@ ready 的子 `Future`。当 `Executor` 在 `poll` 整个任务的时候，它只
 
 传统多个线程之间也有同步的需求，比如说锁。异步任务之间也不可能是完全隔离的，它们之间可能做一些消息的交互，我们比较一下线程和 Task 之间的区别：
 
-｜｜ 线程 ｜ Task ｜
-｜----｜----｜----｜
-｜睡眠｜ thread::park｜return Pending｜
-｜唤醒｜thread::unpark｜Waker::wake｜
-｜获取方式｜thread::current()｜poll的参数｜
+|          | 线程              | Task           |
+|----------|-------------------|----------------|
+| 睡眠     | thread::park      | return Pending |
+| 唤醒     | thread::unpark    | Waker::wake    |
+| 获取方式 | thread::current() | poll的参数     |
 
 线程如果想暂停工作可以调用 `thread::park`，task想暂停工作可以直接 `return Pending`；线程可以通过 `thread::unpark` 唤醒，task 
 需要调用 `Waker::wake`；获取方式上，线程直接调用 `thread::current`，task 是通过 `poll` 的参数拿到 `waker`。
