@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh_CN" class="sidebar-visible no-js light">
+<html lang="zh_CN" class="sidebar-visible no-js rust">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -52,7 +52,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -78,7 +78,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('rust')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item expanded "><a href="chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）| 正式发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item expanded "><a href="chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item expanded "><a href="chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item expanded "><a href="chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item expanded "><a href="chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item expanded "><a href="chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item expanded "><a href="chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item expanded "><a href="chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item expanded "><a href="chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item expanded "><a href="chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item expanded "><a href="chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item expanded "><a href="chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item expanded "><a href="chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item expanded "><a href="chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">4.</strong> 二月刊（February）| 待发布</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/lang.html"><strong aria-hidden="true">4.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item expanded "><a href="chapter_2/hots.html"><strong aria-hidden="true">4.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item expanded "><a href="chapter_2/projects.html"><strong aria-hidden="true">4.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item expanded "><a href="chapter_2/learns.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item expanded "><a href="chapter_2/rust_laoke.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -116,8 +116,8 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
@@ -989,12 +989,12 @@ Rust 在嵌入式开发领域还是有非常大的潜力的。</p>
 <p>RISC-V二进制翻译</p>
 <p><img src="chapter_1/../image/Jan_Jit8.PNG" alt="" /></p>
 <center>图4  RISC-V 二进制翻译代码示例 </center>
+</li>
+</ol>
 <p>​	在RISC-V当中，主要有访存指令和跳转指令会涉及到较大的内存结构查找开销。</p>
 <p>​	① 对于全系统模拟的访存指令(load/store)，需要在内存管理单元钟进行tlb lookup，用软件实现非常慢，遍历4层页表。或者在一些高层次结构的模拟时，在b-tree结构去查找内存空间，效率也很低。</p>
 <p>​	对于这种指令，我们可以对指令关联一个缓存槽，当该指令第一次需求查表的时候，将查表预期的虚拟地址范围和真实物理地址  写入到缓存槽中，以后每次执行到该指令时，我们就直接用缓存信息直接提取内存信息即可。</p>
 <p>​	② 如图4，jalr指令，间接跳转指令的例子。对于这种指令，除了需要mmu lookup , 还需要查找Jit 翻译，即被翻译后的字节码(translation lookup)，共两层查找。 而内联缓存技术就可以消除这两层查找的开销。</p>
-</li>
-</ol>
 <p>让我来介绍一下关于内联缓存我所做的简单应用吧。 rvjt-aa64项目 是我所完成的riscv到aarch64的jit引擎(<a href="https://github.com/losfair/rvjit-aa64">rvjit-aa64</a>)</p>
 <p><img src="chapter_1/../image/Jan_Jit3.PNG" alt="" /></p>
 <center>图5 rvjit-aa64 快速路径(从内存加载数据)</center>
@@ -1278,7 +1278,7 @@ Reactor2 注册 <code>waker</code>，当它下次 <code>poll</code> 的时候每
 <h3><a class="header" href="#joinn-组合的效率" id="joinn-组合的效率">JoinN 组合的效率</a></h3>
 <p><img src="chapter_1/../image/rust-china-config-async-13.png" alt="JoinN 组合的效率" /></p>
 <p>上面的 <code>Future</code> 组合模型涉及到一个 <code>JoinN</code> 组合的效率问题，问题是怎么产生的呢？<code>waker</code> 只用于唤醒整个task，但是没有携带任何唤醒信息，比如 task 
-是怎么被唤醒的。<code>JoinN</code> 负责把多个 <code>Future</code> 组合在一起同时并发的执行，<code>oin4</code> 把 4 个 <code>Future</code> 组合，每次 <code>poll</code> 
+是怎么被唤醒的。<code>JoinN</code> 负责把多个 <code>Future</code> 组合在一起同时并发的执行，<code>Join4</code> 把 4 个 <code>Future</code> 组合，每次 <code>poll</code> 
 的时候挨个去执行子 <code>Future</code>，如果没有好的话就会注册到 <code>Reactor</code> 里面，假设第二个突然就好了，下一次 <code>poll</code> 时，Join4 
 并不知道自己为什么被唤醒了，只能挨个再遍历一遍 <code>Future</code>，但其实第一、三、四都是浪费掉的。</p>
 <p><img src="chapter_1/../image/rust-china-config-async-14.png" alt="Waker 的拦截和包装" /></p>
@@ -1291,11 +1291,11 @@ ready 的子 <code>Future</code>。当 <code>Executor</code> 在 <code>poll</cod
 <h2><a class="header" href="#异步任务之间的同步" id="异步任务之间的同步">异步任务之间的同步</a></h2>
 <p><img src="chapter_1/../image/rust-china-config-async-15.png" alt="异步任务之间的同步" /></p>
 <p>传统多个线程之间也有同步的需求，比如说锁。异步任务之间也不可能是完全隔离的，它们之间可能做一些消息的交互，我们比较一下线程和 Task 之间的区别：</p>
-<p>｜｜ 线程 ｜ Task ｜
-｜----｜----｜----｜
-｜睡眠｜ thread::park｜return Pending｜
-｜唤醒｜thread::unpark｜Waker::wake｜
-｜获取方式｜thread::current()｜poll的参数｜</p>
+<table><thead><tr><th></th><th>线程</th><th>Task</th></tr></thead><tbody>
+<tr><td>睡眠</td><td>thread::park</td><td>return Pending</td></tr>
+<tr><td>唤醒</td><td>thread::unpark</td><td>Waker::wake</td></tr>
+<tr><td>获取方式</td><td>thread::current()</td><td>poll的参数</td></tr>
+</tbody></table>
 <p>线程如果想暂停工作可以调用 <code>thread::park</code>，task想暂停工作可以直接 <code>return Pending</code>；线程可以通过 <code>thread::unpark</code> 唤醒，task 
 需要调用 <code>Waker::wake</code>；获取方式上，线程直接调用 <code>thread::current</code>，task 是通过 <code>poll</code> 的参数拿到 <code>waker</code>。</p>
 <h3><a class="header" href="#异步任务之间的同步-mutex" id="异步任务之间的同步-mutex">异步任务之间的同步 Mutex</a></h3>
@@ -4026,13 +4026,20 @@ int main() {
 <p>这段代码是可以编译通过的，当然，编译器还是会给出警告信息。这段代码也是可以运行的，也会输出信息，直到执行到最后一个错误处“对空指针解引用时”才会发生段错误退出。</p>
 <p><code>Rust</code> 的语言特性为上述问题提供了解决方案，如下表所示：</p>
 <table><thead><tr><th>问题</th><th>解决方案</th></tr></thead><tbody>
-<tr><td><div style="width: 200px">使用未初始化的内存</div></td><td>编译器禁止变量读取未赋值变量</td></tr>
-<tr><td><div style="width: 200px">对空指针解引用</div></td><td>使用 Option<T> 枚举替代空指针</td></tr>
-<tr><td><div style="width: 200px">悬垂指针</div></td><td>生命周期标识与编译器检查</td></tr>
-<tr><td><div style="width: 200px">缓冲区溢出</div></td><td>编译器检查，拒绝超越缓冲区边界的数据访问</td></tr>
-<tr><td><div style="width: 200px">非法释放内存</div></td><td>语言级的 RAII 机制，只有唯一的所有者才有权释放内存</td></tr>
-<tr><td><div style="width: 200px">多个变量修改同一块内存区域</div></td><td>允许多个变量借用所有权，但是同一时间只允许一个可变借用</td></tr>
-<tr><td><div style="width: 200px">变量在多个线程中传递时的安全问题</div></td><td>对基本数据类型用 Sync 和 Send 两个 Trait 标识其线程安全特性，即能否转移所有权或传递可变借用，把这作为基本事实。再利用泛型限定语法和 Trait impl 语法描述出类型线程安全的规则。编译期间使用类似规则引擎的机制，基于基本事实和预定义规则为用户代码中的跨线程数据传递做推理检查。</td></tr>
+<tr><td><div style="width: 200px">使用未初始化的内存</div></td><td></td></tr>
+<tr><td>编译器禁止变量读取未赋值变量</td><td></td></tr>
+<tr><td><div style="width: 200px">对空指针解引用</div></td><td></td></tr>
+<tr><td>使用 Option<T> 枚举替代空指针</td><td></td></tr>
+<tr><td><div style="width: 200px">悬垂指针</div></td><td></td></tr>
+<tr><td>生命周期标识与编译器检查</td><td></td></tr>
+<tr><td><div style="width: 200px">缓冲区溢出</div></td><td></td></tr>
+<tr><td>编译器检查，拒绝超越缓冲区边界的数据访问</td><td></td></tr>
+<tr><td><div style="width: 200px">非法释放内存</div></td><td></td></tr>
+<tr><td>语言级的 RAII 机制，只有唯一的所有者才有权释放内存</td><td></td></tr>
+<tr><td><div style="width: 200px">多个变量修改同一块内存区域</div></td><td></td></tr>
+<tr><td>允许多个变量借用所有权，但是同一时间只允许一个可变借用</td><td></td></tr>
+<tr><td><div style="width: 200px">变量在多个线程中传递时的安全问题</div></td><td></td></tr>
+<tr><td>对基本数据类型用 Sync 和 Send 两个 Trait 标识其线程安全特性，即能否转移所有权或传递可变借用，把这作为基本事实。再利用泛型限定语法和 Trait impl 语法描述出类型线程安全的规则。编译期间使用类似规则引擎的机制，基于基本事实和预定义规则为用户代码中的跨线程数据传递做推理检查。</td><td></td></tr>
 </tbody></table>
 <h2><a class="header" href="#3变量绑定与所有权的赋予" id="3变量绑定与所有权的赋予">3.变量绑定与所有权的赋予</a></h2>
 <p><code>Rust</code> 中为什么叫“变量绑定”而不叫“变量赋值&quot;。我们先来看一段 <code>C++</code> 代码，以及对应的 <code>Rust</code> 代码。</p>
@@ -4572,10 +4579,10 @@ fn main(){
     fn value(&amp;self)-&gt;i32;
 }
 
-struct Bar&lt;'a&gt;{v:&amp;'amuti32}
+struct Bar&lt;'a&gt;{v:&amp;'a mut i32}
 
 impl&lt;'a&gt; Foo for Bar&lt;'a&gt; {
-    fn inc(&amp;mutself){
+    fn inc(&amp;mut self){
         *(self.v)=*(self.v)+1
     }
     fn value(&amp;self)-&gt;i32{
@@ -4788,11 +4795,21 @@ unsafe impl&lt;T:?Sized+Sync+Send&gt;Sync for Arc&lt;T&gt;{}
 <p>当编译器确定 “<strong>Sync</strong>”和 “<strong>Send</strong>”适合某个类型时，会自动为其实现此。</p>
 <p>比如编译器默认为以下类型实现了 <code>Sync</code> ：</p>
 <ul>
-<li>[u8] 和 [f64] 这样的基本类型都是 [Sync]，</li>
-<li>包含它们的简单聚合类型（如元组、结构和名号）也是[Sync] 。</li>
-<li>&quot;不可变&quot; 类型（如 &amp;T）</li>
-<li>具有简单继承可变性的类型，如 Box <T>、Vec<T></li>
-<li>大多数其他集合类型（如果泛型参数是 [Sync]，其容器就是 [Sync]。</li>
+<li>
+<p>[u8] 和 [f64] 这样的基本类型都是 [Sync]，</p>
+</li>
+<li>
+<p>包含它们的简单聚合类型（如元组、结构和名号）也是[Sync] 。</p>
+</li>
+<li>
+<p>&quot;不可变&quot; 类型（如 &amp;T）</p>
+</li>
+<li>
+<p>具有简单继承可变性的类型，如 Box <T>、Vec<T></p>
+</li>
+<li>
+<p>大多数其他集合类型（如果泛型参数是 [Sync]，其容器就是 [Sync]。</p>
+</li>
 </ul>
 <p>用户也可以手动使用 <code>unsafe</code> 的方式直接指定。</p>
 <p>下图是与跨线程所有权相关的概念和类型的 <code>UML</code> 图。</p>
@@ -5457,7 +5474,12 @@ fn main() {
 <h2><a class="header" href="#小结" id="小结">小结</a></h2>
 <p>本篇文章主要介绍了 Rust 代码的编译过程，以及 Rust 宏代码的展开机制，学习这些内容，将有助于你深入理解 Rust 的概念。不知道这篇内容是否激发起你对 Rust 编译器对兴趣呢？编译器是一个深坑，让我们慢慢挖掘它。</p>
 <p>感谢阅读。</p>
-<h1><a class="header" href="#二月刊february" id="二月刊february">二月刊（February）</a></h1>
+<h1><a class="header" href="#二月刊february-待发布" id="二月刊february-待发布">二月刊（February）| 待发布</a></h1>
+<h1><a class="header" href="#本月简报--rust官方动态" id="本月简报--rust官方动态">本月简报 | Rust官方动态</a></h1>
+<h1><a class="header" href="#本月简报-社区热点" id="本月简报-社区热点">本月简报 |社区热点</a></h1>
+<h1><a class="header" href="#本月简报--推荐项目-1" id="本月简报--推荐项目-1">本月简报 | 推荐项目</a></h1>
+<h1><a class="header" href="#本月简报--学习资源" id="本月简报--学习资源">本月简报 | 学习资源</a></h1>
+<h1><a class="header" href="#本月简报--rust唠嗑室本月汇总" id="本月简报--rust唠嗑室本月汇总">本月简报 | Rust唠嗑室本月汇总</a></h1>
 <h1><a class="header" href="#三月刊march" id="三月刊march">三月刊（March）</a></h1>
 <h1><a class="header" href="#四月刊april" id="四月刊april">四月刊（April）</a></h1>
 <h1><a class="header" href="#五月刊may" id="五月刊may">五月刊（May）</a></h1>
@@ -5539,6 +5561,10 @@ fn main() {
 
         <!-- Custom JS scripts -->
         
+        <script type="text/javascript" src="mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="mermaid-init.js"></script>
+        
 
         
         
@@ -5549,6 +5575,13 @@ fn main() {
         </script>
         
         
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
 
     </body>
 </html>
