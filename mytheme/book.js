@@ -427,7 +427,7 @@ function playground_text(playground) {
             link.setAttribute('tabIndex', 0);
         });
         sidebarToggleButton.setAttribute('aria-expanded', true);
-        sidebar.setAttribute('aria-hidden', false);
+        // sidebar.setAttribute('aria-hidden', false);
         try { localStorage.setItem('mdbook-sidebar', 'visible'); } catch (e) { }
     }
 
@@ -449,7 +449,7 @@ function playground_text(playground) {
             link.setAttribute('tabIndex', -1);
         });
         sidebarToggleButton.setAttribute('aria-expanded', false);
-        sidebar.setAttribute('aria-hidden', true);
+        // sidebar.setAttribute('aria-hidden', true);
         try { localStorage.setItem('mdbook-sidebar', 'hidden'); } catch (e) { }
     }
 

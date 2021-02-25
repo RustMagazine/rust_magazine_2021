@@ -37,6 +37,10 @@
 - [「译」使用 Rust 实现命令行生命游戏](./cli_gameoflife.md)
 - [「译」使用 Tokio 实现 Actor 系统](./actor_with_tokio.md)
 
+### WASM 专题
+
+- [前端入门 ｜ Rust 和 WebAssembly ](./rust_wasm_frontend.md)
+
 ### 游戏专题
 
 - [实践案例 | 使用 `Bevy` 游戏引擎制作炸弹人](./rust_game_bevy_)
