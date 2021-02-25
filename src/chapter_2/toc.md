@@ -3,12 +3,9 @@
 ![logo](../image/rust_magazine3.png)
 
 
-### RustMagazine 通告
+### 发刊通告
 
-- 新增了评论功能
-- 可以使用
-
-
+- [发刊通告](./announce.md)
 
 ### 本月社区动态简报
 
@@ -20,11 +17,17 @@
 - [学习资源](./learns.md)
 - [Rust 唠嗑室本月汇总](./rust_laoke.md)
 
+### Rust 问答精选
+
+只精选已授权的答案
+
+- [知乎 Rust 圆桌年话专题问答精选](./rust_zhihu.md)
 
 ### Rust in Production 
 
 - [PingCAP | traceing](./rust_trace.md)
 - [蚂蚁集团 CeresDB 团队 | 错误处理](./rust_error_handle.md)
+- [华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景](./huawei_rust.md)
 
 ### 学习园地
 

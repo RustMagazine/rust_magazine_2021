@@ -25,13 +25,16 @@
     - [Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1](./chapter_1/rustc_part1.md)
     
 - [二月刊（February）| 待发布](./chapter_2.md)
+    - [发刊通告](./chapter_2/announce.md)
     - [本月简报 | Rust官方动态](./chapter_2/lang.md)
     - [本月简报 |社区热点](./chapter_2/hots.md)
     - [本月简报 | 推荐项目](./chapter_2/projects.md)
     - [本月简报 | 学习资源](./chapter_2/learns.md)
     - [本月简报 | Rust唠嗑室本月汇总](./chapter_2/rust_laoke.md)
+    - [知乎 Rust 圆桌年话专题问答精选](./chapter_2/rust_zhihu.md)
     - [PingCAP | traceing](./chapter_2/rust_trace.md)
     - [蚂蚁集团 CeresDB 团队 | 错误处理](./chapter_2/rust_error_handle.md)
+    - [华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景](./chapter_2/huawei_rust.md)
     - [解读 Rust 1.51 稳定版](./chapter_2/rust_1.51.md)
     - [解读 Rust 2021 Edition RFC ](./chapter_2/rust_2021_edition.md)
     - [rust错误处理以及rust日志的标准处理](./chapter_2/rust_error_handle_and_log.md)
@@ -43,7 +46,7 @@
     - [`Rust`生态安全漏洞总结系列 | Part2](./chapter_2/rust_security_part2.md)
     - [如何为 Rust 语言做贡献 | Part 1](./chapter_2/contribute_to_the_rust_part1.md)
     - [图解 Rust 编译器与语言设计 | Part 2](./chapter_2/rustc_part2.md)
-    
+
 - [三月刊（March）| 待发布](./chapter_3.md)
 - [四月刊（April）| 待发布](./chapter_4.md)
 - [五月刊（May）| 待发布](./chapter_5.md)

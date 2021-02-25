@@ -20,6 +20,8 @@ additional-js = ["mermaid.min.js", "mermaid-init.js"]
 editable = true
 copy-js = true
 
-
+[output.html.fold]
+enable = true
+level = 2
 
 
