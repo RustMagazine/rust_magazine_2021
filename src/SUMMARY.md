@@ -41,7 +41,7 @@
     - [「译」使用 Rust 实现命令行生命游戏](./chapter_2/cli_gameoflife.md)
     - [「译」使用 Tokio 实现 Actor 系统](./chapter_2/actor_with_tokio.md)
     - [前端入门 ｜ Rust 和 WebAssembly ](./chapter_2/rust_wasm_frontend.md)
-    - [实践案例 | 使用 `Bevy` 游戏引擎制作炸弹人](./chapter_2/rust_game_bevy_)
+    - [实践案例 | 使用 `Bevy` 游戏引擎制作炸弹人](./chapter_2/rust_game_bevy_bomber.md)
     - [io_uring | Linux的新异步IO接口 io_uring 介绍 ](./chapter_2/io_uring_intro.md)
     - [io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件](./chapter_2/io_uring_async_rw.md)
     - [`Rust`生态安全漏洞总结系列 | Part2](./chapter_2/rust_security_part2.md)
