@@ -40,6 +40,7 @@
     - [rust错误处理以及rust日志的标准处理](./chapter_2/rust_error_handle_and_log.md)
     - [「译」使用 Rust 实现命令行生命游戏](./chapter_2/cli_gameoflife.md)
     - [「译」使用 Tokio 实现 Actor 系统](./chapter_2/actor_with_tokio.md)
+    - [新年新人新气象 | Rust 学习笔记](./chapter_2/rust_study.md)
     - [前端入门 ｜ Rust 和 WebAssembly ](./chapter_2/rust_wasm_frontend.md)
     - [实践案例 | 使用 `Bevy` 游戏引擎制作炸弹人](./chapter_2/rust_game_bevy_bomber.md)
     - [io_uring | Linux的新异步IO接口 io_uring 介绍 ](./chapter_2/io_uring_intro.md)

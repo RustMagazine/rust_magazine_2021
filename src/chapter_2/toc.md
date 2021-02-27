@@ -36,6 +36,7 @@
 - [rust错误处理以及rust日志的标准处理](./rust_error_handle_and_log.md)
 - [「译」使用 Rust 实现命令行生命游戏](./cli_gameoflife.md)
 - [「译」使用 Tokio 实现 Actor 系统](./actor_with_tokio.md)
+- [新年新人新气象 | Rust 学习笔记](./rust_study.md)
 
 ### WASM 专题
 
