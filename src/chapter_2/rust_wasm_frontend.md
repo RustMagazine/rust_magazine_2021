@@ -1,6 +1,6 @@
 # 前端入门 ｜ Rust 和 WebAssembly
 
-作者: lencx / 后期编辑：张汉东
+作者: 陈鑫(lencx) / 后期编辑：张汉东
 
 ---
 
@@ -373,9 +373,12 @@ init()
 
 ---
 
-作者信息：
+作者简介：
 
-- GitHub: lencx
-- 公众号：浮之静
-- 网站: https://mtc.nofwl.com
-- 简介：{折腾 ⇌ 迷茫 ⇌ 思考]ing，在路上...
+陈鑫(lencx)
+
+{折腾 ⇌ 迷茫 ⇌ 思考]ing，在路上...
+
+* 公众号：浮之静
+* Blog: https://mtc.nofwl.com
+* GitHub: https://github.com/lencx
