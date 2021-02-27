@@ -48,7 +48,7 @@
 
 ### 操作系统与网络编程专题
 
-- [io_uring | Linux的新异步IO接口 io_uring 介绍 ](./io_uring_intro.md)
+- [io_uring | Linux 新异步接口 io_uring 的 Rust 生态盘点 ](./io_uring_intro.md)
 - [io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件](./io_uring_async_rw.md)
 
 ### Rust Security 专题

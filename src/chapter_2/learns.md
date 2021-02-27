@@ -1,5 +1,10 @@
 # 本月简报 | 学习资源
 
+- 来源：[Rust日报](https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f)
+- 作者：`Rust`日报小组
+- 后期编辑：苏胤榕（DaviRain）
+
+
 ## 使用 Rust 创建一个模拟器
 
 这是 Learning to Fly: Let's create a simulation in Rust!.

@@ -48,7 +48,7 @@
     - [新年新人新气象 | Rust 学习笔记](./chapter_2/rust_study.md)
     - [前端入门 ｜ Rust 和 WebAssembly ](./chapter_2/rust_wasm_frontend.md)
     - [实践案例 | 使用 `Bevy` 游戏引擎制作炸弹人](./chapter_2/rust_game_bevy_bomber.md)
-    - [io_uring | Linux的新异步IO接口 io_uring 介绍 ](./chapter_2/io_uring_intro.md)
+    - [io_uring | Linux 新异步接口 io_uring 的 Rust 生态盘点 ](./chapter_2/io_uring_intro.md)
     - [io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件](./chapter_2/io_uring_async_rw.md)
     - [`Rust`生态安全漏洞总结系列 | Part2](./chapter_2/rust_security_part2.md)
     - [如何为 Rust 语言做贡献 | Part 1](./chapter_2/contribute_to_the_rust_part1.md)

@@ -1,5 +1,10 @@
 # 「译」使用 Tokio 实现 Actor 系统
 
+译者：Matrixtang
+
+原文：[https://ryhl.io/blog/actors-with-tokio/](https://ryhl.io/blog/actors-with-tokio/)
+
+---
 
   本文将不使用任何 Actors 库(例如 Actix ) 而直接使用Tokio实现 Actors 系统。事实上这甚至是更容易的，但是还是有一些细节需要注意：
 
@@ -270,6 +275,9 @@ loop {
 ​	我已经在`Actors 间发送信息` 标题下讨论了一些关于循环的问题，在此我讨论了如何关闭循环的Actors。但是，如何关闭并不是循环可能导致的唯一问题，因为这种循环还会产生死锁，循环中的每个 Actor 都在等待下一个 Actor 接收消息，但是下一个 Actor 直到它的下一个Actor接收到消息才会接收到该消息，依此类推。 为避免这种死锁，必须确保循环的信道容量都不受限。这样做的原因是有界信道上的 `send` 方法不会立即返回，而具有立即返回`send` 方法的信道是不记入这种循环，因为这种`send`方法是不会产生死锁的。 当心，这意味着`oneshot` 信道也不会产生死锁，因为它们也有 立即返回的 `send`  方法。还要当心，如果使用的是 `try_send` 而不是`send`来发送消息，那么这也不是死锁循环的一部分。 
 
 感谢 [matklad](https://matklad.github.io/)指出循环和死锁的问题。 
-    
 
-原文：[https://ryhl.io/blog/actors-with-tokio/](https://ryhl.io/blog/actors-with-tokio/)
+---
+
+译者简介：
+
+Matrixtang，Rust/cpp 程序员，对编译相关领域感兴趣，不会 pwn 的安全爱好者。

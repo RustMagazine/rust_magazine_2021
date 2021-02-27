@@ -12,6 +12,19 @@
 
 ---
 
+### 发刊渠道
+
+```mermaid
+graph TD
+    A[RustMagazine] -->|每月最后一天| B(发刊)
+    B --> C{阅读渠道}
+    C --> |GitHub Page| D[GitHub]
+    C -->|Rustcc| E[Rust中文论坛/公众号]
+    C -->|Rust视界| F[Telegram]
+    C -->|掘金| G[技术社区]
+    C -->|语雀| H[在线文档]
+```
+
 ### 编辑小组
 
 - 张汉东（Chaos）
@@ -21,6 +34,9 @@
 - 聂雷海（大海）
 - 严炳（ryan）
 - [橘梦](https://github.com/wangshengfei/)
+- 高宪凤
+- 杨楚天（yct21）
+- Matrixtang
 
 
 - <其他成员招募位> 招募条件见下方
