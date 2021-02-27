@@ -22,6 +22,6 @@ copy-js = true
 
 [output.html.fold]
 enable = true
-level = 2
+level = 0
 
 

@@ -1,6 +1,6 @@
 # 前端入门 ｜ Rust 和 WebAssembly
 
-作者: lencx
+作者: lencx / 后期编辑：张汉东
 
 ---
 
@@ -140,7 +140,7 @@ yarn add -D vite-plugin-rsw
 npm init xc-app
 ```
 
-![xc-app](./img/rust_wasm_frontend-xc-app.png)
+![xc-app](./wasm_fronted/rust_wasm_frontend-xc-app.png)
 
 ## 快速开始
 
@@ -199,8 +199,8 @@ wasm-pack new <name>
 cargo new --lib <name>
 ```
 
-![wasm-pack new](./img/rust_wasm_frontend-wasm-pack-new.png)
-![cargo new](./img/rust_wasm_frontend-caro-new.png)
+![wasm-pack new](./wasm_fronted/rust_wasm_frontend-wasm-pack-new.png)
+![cargo new](./wasm_fronted/rust_wasm_frontend-caro-new.png)
 
 ### 项目配置
 
@@ -370,3 +370,12 @@ init()
 * [wasm-pack - Rust => WebAssembly](https://rustwasm.github.io/wasm-pack)
 * [rust-to-wasm](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
 * [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)
+
+---
+
+作者信息：
+
+- GitHub: lencx
+- 公众号：浮之静
+- 网站: https://mtc.nofwl.com
+- 简介：{折腾 ⇌ 迷茫 ⇌ 思考]ing，在路上...

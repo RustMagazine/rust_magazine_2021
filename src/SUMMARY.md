@@ -2,9 +2,14 @@
 
 ![logo](./image/rust_magazine3.png)
 
+# RustMagazine 中文月刊
+
 - [介绍](./README.md)
 - [创刊寄语](./send_word.md)
-- [一月刊（January）| 正式发布](./chapter_1/toc.md)
+
+# 2021 年期刊
+
+- [一月刊（January）](./chapter_1/toc.md)
     - [本月简报 | Rust官方动态](./chapter_1/lang.md)
     - [本月简报 |社区热点](./chapter_1/hots.md)
     - [本月简报 | 推荐项目](./chapter_1/projects.md)
@@ -23,8 +28,8 @@
     - [Rust Security 专题 | `Rust`生态安全漏洞总结系列 | Part 1](./chapter_1/rust_security_part1.md)
     - [Rust编译器专题 | Rust Dev Guide 中文翻译启动招募](./chapter_1/rustc_dev_guide_zh.md)
     - [Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1](./chapter_1/rustc_part1.md)
-    
-- [二月刊（February）| 待发布](./chapter_2.md)
+
+- [二月刊（February）](./chapter_2/toc.md)
     - [发刊通告](./chapter_2/announce.md)
     - [本月简报 | Rust官方动态](./chapter_2/lang.md)
     - [本月简报 |社区热点](./chapter_2/hots.md)
@@ -49,16 +54,16 @@
     - [如何为 Rust 语言做贡献 | Part 1](./chapter_2/contribute_to_the_rust_part1.md)
     - [图解 Rust 编译器与语言设计 | Part 2](./chapter_2/rustc_part2.md)
 
-- [三月刊（March）| 待发布](./chapter_3.md)
-- [四月刊（April）| 待发布](./chapter_4.md)
-- [五月刊（May）| 待发布](./chapter_5.md)
-- [六月刊（June）| 待发布](./chapter_6.md)
-- [七月刊（July）| 待发布](./chapter_7.md)
-- [八月刊（August）| 待发布](./chapter_8.md)
-- [九月刊（September）| 待发布](./chapter_9.md)
-- [十月刊（October）| 待发布](./chapter_10.md)
-- [十一月刊（November）| 待发布](./chapter_11.md)
-- [十二月刊（December）| 待发布](./chapter_12.md)
+- [三月刊（March）| 待发布]()
+- [四月刊（April）| 待发布]()
+- [五月刊（May）| 待发布]()
+- [六月刊（June）| 待发布]()
+- [七月刊（July）| 待发布]()
+- [八月刊（August）| 待发布]()
+- [九月刊（September）| 待发布]()
+- [十月刊（October）| 待发布]()
+- [十一月刊（November）| 待发布]()
+- [十二月刊（December）| 待发布]()
 
 
 
