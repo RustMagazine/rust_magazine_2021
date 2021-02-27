@@ -31,9 +31,9 @@
 
 ### 学习园地
 
-- [解读 Rust 1.51 稳定版](./rust_1.51.md)
+- [解读 Rust 1.51 稳定版](./rust_1.50.md)
 - [解读 Rust 2021 Edition RFC ](./rust_2021_edition.md)
-- [rust错误处理以及rust日志的标准处理](./rust_error_handle_and_log.md)
+- [Rust中的错误传递和日志记录](./rust_error_handle_and_log.md)
 - [「译」使用 Rust 实现命令行生命游戏](./cli_gameoflife.md)
 - [「译」使用 Tokio 实现 Actor 系统](./actor_with_tokio.md)
 - [新年新人新气象 | Rust 学习笔记](./rust_study.md)
@@ -51,11 +51,6 @@
 - [io_uring | Linux 新异步接口 io_uring 的 Rust 生态盘点 ](./io_uring_intro.md)
 - [io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件](./io_uring_async_rw.md)
 
-### Rust Security 专题
-
-- [`Rust`生态安全漏洞总结系列 | Part2](./rust_security_part2.md)
-
 ### Rust 编译器专题
 
 - [如何为 Rust 语言做贡献 | Part 1](./contribute_to_the_rust_part1.md)
-- [图解 Rust 编译器与语言设计 | Part 2](./rustc_part2.md)

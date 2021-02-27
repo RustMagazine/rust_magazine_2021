@@ -2,6 +2,9 @@
 
 - 来源：[Rust 唠嗑室](https://space.bilibili.com/25566598)
 - 主持人：MikeTang
+- 后期编辑：高宪凤
+
+---
 
 ## 《Rust 唠嗑室》第 18 期 - 剖析 Rust 的引用
 

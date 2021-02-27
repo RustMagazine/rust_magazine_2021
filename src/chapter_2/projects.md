@@ -113,14 +113,99 @@ voyager 是一个用 Rust 实现的爬虫库。
 
 Starlight 是一个 JavaScript 的运行时，其设计重点放在运行速度上，已经通过了 2k+test262 测试。Starlight 比 Boa（另一个Rust写的JS引擎）更快，其目标是和V8一样快。
 
-## Moonzone
 
-- [仓库链接](https://github.com/MoonZoon/MoonZoon)
-
-MoonZoon 一个 Rust 全栈框架。维护这个框架的作者是seed的主要维护者，所以，理所当然地在前端部分选择了seed。
 
 ## Lettre
 
 - [仓库链接](https://github.com/lettre/lettre)
 
 Lettre 是一个可以用于发送 email 的库。
+
+## Optic：使用实际流量来记录和测试您的API
+
+- [仓库链接](https://github.com/opticdev/optic)
+
+说明：
+
+- Optic观察开发流量并了解您的API行为
+- Optic通过将流量与当前规范相区别来检测API更改
+- Optic为每个拉取请求添加准确的API更改日志
+
+
+## Rust Web 模板项目
+
+- [仓库链接](https://github.com/svenstaro/rust-web-boilerplate)
+
+前些日子 Rust 不适合 Web 一文引起了热议，今天就有热心群友推荐了一个 Rust Web 模板项目：
+
+- 使用 .env 文件管理环境变量
+- 使用 diesel 来处理数据库迁移
+- 配合 cargo-watch 监控开发时程序修改，方便调试
+- 支持 cargo-tarpaulin 做测试覆盖率
+
+## termchat：一个终端聊天软件
+
+- [仓库链接](https://github.com/lemunozm/termchat)
+
+最近Clubhouse因为Elon Musk突然大火，使用termchat可以在终端进行聊天。
+
+## Yatta: 用于 Windows10 的 BSP 平铺窗口管理器
+
+- [仓库链接](https://github.com/LGUG2Z/yatta)
+
+作者最近因为从之前的mac环境由于一些原因需要切换到windows环境下工作，但是没有找到之前使用mac时的桌面分割工具（窗口排放管理工具），于是自己花了几天，研究了不少其它类似的工具，捣鼓出了这个。
+
+## nlprule，Rust 实现的 NLP 库
+
+- [仓库链接](https://github.com/bminixhofer/nlprule)
+
+nlprule 使用 LanguageTool 中的资源为NLP实现了基于规则和查找的方法。
+
+## firestorm： 代码分析器
+
+- [仓库链接](https://github.com/That3Percent/firestorm)
+
+作者扎克·伯恩斯发布了这款侵入式代码分析器。“火旋风”分析器能帮助代码作者测试Rust代码的性能；它能分析项目中的时间敏感部分，输出到时间轴图、合并的火焰图或其它的表现形式。这是一款侵入式分析器，也就意味着在代码编写的过程中，用户就需要使用分析器提供的宏，帮助分析器的记录过程。项目文档指出，这款分析器能通过编译特性来启用或禁用；未被启用时，所有的记录操作都被编译为空操作，这将不会影响生产程序的运行性能。
+
+我们常用的性能分析器，常常基于系统提供的“perf”指令，它就像是一个调试器，在合适的时候暂停进程，读取此时所有的线程和有关信息，从间隔的采样过程记录，从而得到运行性能输出。这种采样不需要重新添加和编译代码，但较可能漏掉时间短的函数。合理使用侵入式代码分析器，可以精细记录运行性能的细节，也能更少地影响待测程序的运行性能。
+
+friestorm 分析器已经在GitHub上开源，并配有丰富的使用文档。
+
+
+
+## rkyv 0.4：共享指针和自定义序列化程序
+
+- [仓库链接](https://github.com/djkoloski/rkyv)
+
+大家好，大约又工作了一个月，RKYV0.4终于推出了新特性和重大变化。
+
+如果你还没听说过的话，rkyv是一个针对Rust的零拷贝反序列化框架，类似于Cap'n Proto和FlatBuffers。它主要是为游戏开发而构建的，但也适用于广泛的其他应用程序。
+
+文章链接，[https://www.reddit.com/r/rust/comments/lniraj/rkyv_04_shared_pointers_and_custom_serializers/](https://www.reddit.com/r/rust/comments/lniraj/rkyv_04_shared_pointers_and_custom_serializers/)
+
+
+## rg3d 游戏引擎
+
+- [仓库链接](https://github.com/mrDIMAS/StationIapetus。)
+
+在过去的三个月中，rg3d 和 rusty-editor取得了很多重要的功能和改进。并开始使用引擎制作了新游戏，Station lapetus，一款 Sci-Fi 3D射击游戏。
+
+近3个月的进展报告: [https://rg3d.rs/general/2021/02/26/progress.html](https://rg3d.rs/general/2021/02/26/progress.html)
+
+## LAM: Actor模式的VM
+
+- [仓库链接](https://github.com/AbstractMachinesLab/lam)
+
+LAM，针对 WebAssembly和 Native 的 Actor VM。
+
+访谈链接： [https://notamonadtutorial.com/lam-an-actor-model-vm-for-webassembly-and-native-d7939362e1b8](https://notamonadtutorial.com/lam-an-actor-model-vm-for-webassembly-and-native-d7939362e1b8)
+
+项目链接： [https://abstractmachines.dev/](https://abstractmachines.dev/)
+
+
+
+
+
+
+
+

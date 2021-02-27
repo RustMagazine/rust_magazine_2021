@@ -21,12 +21,6 @@ Rust通常cargo使用命令构建，但是WebAssembly有一个叫做wasm-pack的
 
 [链接](https://zenn.dev/beijaflor/articles/da789ea779c005)
 
-## 在 Rust 中实现基于 io_uring 的异步随机读文件
-
-前段时间知乎上很火的迟先生的博客，写的不错，推荐一看。
-
-[链接](https://www.skyzh.dev/posts/articles/2021-01-30-async-random-read-with-rust/)
-
 ## Improving texture atlas allocation in WebRender
 
 作者花费大量篇幅解读了如何改进WebRender中Texture atlas分配的问题。
@@ -175,6 +169,36 @@ EasyRust 是一个非常好的 Rust 入门教程,现在,他不仅有文档,还�
 [链接](https://chrismorgan.info/blog/rust-ownership-the-hard-way/)
 
 
-> 整理: davirain
+## 好文推荐：《Rust和LoRa》
 
+Drogue IoT 是一个试图将可重用和高效的组件引入嵌入式Rust的团队，本文讲述了“如何在Rust中开始使用LoRa“。
 
+ps: LoRa是一种低功率远程无线协议
+
+阅读原文: [https://blog.drogue.io/rust-and-lora/](https://blog.drogue.io/rust-and-lora/)
+
+Repo: [https://github.com/drogue-iot/drogue-device](https://github.com/drogue-iot/drogue-device)
+
+## Rust 循环优化
+
+![1](https://rustcc-1252416178.cos.ap-nanjing.myqcloud.com/rust_loop_opt.jpeg)
+![2](https://rustcc-1252416178.cos.ap-nanjing.myqcloud.com/rust_loop_opt_2.jpeg)
+![3](https://rustcc-1252416178.cos.ap-nanjing.myqcloud.com/rust_loop_opt_2.jpeg)
+
+## Cranelift 代码生成入门
+
+Cranelift 是用 Rust 编程语言编写的代码生成器，旨在成为快速的代码生成器，其输出以合理速度运行的机器代码。如今，它被用于包括 Wasmtime 和 Wasmer 在内的几种不同的 WebAssembly 运行时中，并且还可以作为 Rust 调试编译的替代后端。
+
+更多见博客原文：[https://blog.benj.me/2021/02/17/cranelift-codegen-primer/](https://blog.benj.me/2021/02/17/cranelift-codegen-primer/)
+
+Cranelift 仓库地址：[https://github.com/bytecodealliance/wasmtime/tree/main/cranelift#cranelift-code-generator](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift#cranelift-code-generator)
+
+## Rtic book
+
+[RTIC 框架](https://github.com/rtic-rs/cortex-m-rtic) 是中断驱动的异步实时系统，完全针对应用使用Rust的宏语法生成，拥有极高的效率。
+
+RTIC Book ：[https://rtic.rs/0.5/book/en/by-example.html](https://rtic.rs/0.5/book/en/by-example.html)
+
+## 国外 Rust 咨询公司 Ferrous System 的嵌入式课程资料
+
+链接：[https://embedded-trainings.ferrous-systems.com/preparations.html](https://embedded-trainings.ferrous-systems.com/preparations.html)
