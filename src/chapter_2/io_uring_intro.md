@@ -6,7 +6,7 @@
 
 io_uring 无可置疑是近两年内核圈最火的话题之一，作为风头正劲的 Linux 异步 I/O 接口，其野心更大，不仅仅想将 Linux 的 I/O 操作全面异步化，还希望将所有[Linux系统调用异步化](https://lwn.net/Articles/810414/)。
 
-Rust 作为一门系统级变成语言，兼具安全和高性能的特点，大家也一定是想使用Rust语言 “尝鲜” io_uring。然而遗憾的是 io_uring 作者 Jens Axboe 仅仅维护一个[C语言的库](https://github.com/axboe/liburing)。用户想要用Rust调用，一方面还需要自己进行一些封装，另一方面 C 语言的接口还是太底层，想在 Rust 的异步框架中使用仍有许多工作要做。
+Rust 作为一门系统级编程语言，兼具安全和高性能的特点，大家也一定是想使用Rust语言 “尝鲜” io_uring。然而遗憾的是 io_uring 作者 Jens Axboe 仅仅维护一个[C语言的库](https://github.com/axboe/liburing)。用户想要用Rust调用，一方面还需要自己进行一些封装，另一方面 C 语言的接口还是太底层，想在 Rust 的异步框架中使用仍有许多工作要做。
 
 好消息是已经有一些 Rust 语言封装的 io_uring 库出现在 github 上，今天让我们来挑选一些使用人数较多（通过star数目来判断）的库进行分析，看看是否可以给大家使用 io_uring 带来便利。
 
