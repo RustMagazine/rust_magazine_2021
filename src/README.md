@@ -6,7 +6,8 @@
 
 为了丰富 Rust 社区成员的学习文化生活而特别推出此刊！
 
-- [点此阅读](https://rustmagazine.github.io/rust_magazine_2021/)
+- [GitHub Page 阅读](https://rustmagazine.github.io/rust_magazine_2021/)
+- [语雀阅读](https://www.yuque.com/chaosbot/rust_magazine_2021)
 - [仓库地址](https://github.com/RustMagazine/rust_magazine_2021)
 
 
