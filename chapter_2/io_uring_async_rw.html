@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item expanded "><a href="../chapter_2/io_uring_async_rw.html" class="active"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#io_uring--用-rust-实现基于-io_uring-的异步随机读文件" id="io_uring--用-rust-实现基于-io_uring-的异步随机读文件">io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></h1>
+<p>作者：迟先生（skyzh）/ 后期编辑：张汉东</p>
+<hr />
+<p>本文介绍了 <code>io_uring</code> 的基本使用方法，然后介绍了本人写的异步读文件库的实现方法，最后做了一个 benchmark，和 mmap 对比性能。</p>
+<h2><a class="header" href="#tldr" id="tldr">TL;DR</a></h2>
+<p>一句话总结：在 <a href="https://github.com/skyzh/uring-positioned-io">skyzh/uring-positioned-io</a> 中，我包装了 Tokio 提供的底层 <code>io_uring</code> 接口，在 Rust 中实现了基于<code>io_uring</code> 的异步随机读文件。你可以这么用它：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>ctx.read(fid, offset, &amp;mut buf).await?;
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#io_uring-简介" id="io_uring-简介">io_uring 简介</a></h2>
+<p><code>io_uring</code> 是一个由 Linux 内核的提供的异步 I/O 接口。它于 2019 年 5 月在 Linux 5.1 中面世，现在已经在各种项目中被使用。
+比如：</p>
+<ul>
+<li><a href="https://github.com/facebook/rocksdb/pull/5881">RocksDB 的 MultiRead</a> 目前就是通过 <code>io_uring</code> 做并发读文件。</li>
+<li>Tokio 为 <code>io_uring</code> <a href="https://github.com/tokio-rs/io-uring">包装了一层 API</a>。在 Tokio 1.0 发布之际，开发者表示今后会通过 io_uring 提供真正的异步文件操作
+(见 <a href="https://tokio.rs/blog/2020-12-tokio-1-0">Announcing Tokio 1.0</a>)。
+目前 Tokio 的异步文件操作通过开另外的 I/O 线程调用同步 API 实现。</li>
+<li>QEMU 5.0 已经使用 <code>io_uring</code> (见 <a href="https://wiki.qemu.org/ChangeLog/5.0">ChangeLog</a>)。</li>
+</ul>
+<p>目前关于 <code>io_uring</code> 的测试，大多是和 Linux AIO 对比 Direct I/O 的性能 <a href="https://thenewstack.io/how-io_uring-and-ebpf-will-revolutionize-programming-in-linux/">(1)</a> <a href="https://developers.mattermost.com/blog/hands-on-iouring-go/">(2)</a> <a href="https://zhuanlan.zhihu.com/p/62682475">(3)</a>。
+<code>io_uring</code> 通常能达到两倍于 AIO 的性能。</p>
+<h2><a class="header" href="#随机读文件的场景" id="随机读文件的场景">随机读文件的场景</a></h2>
+<p>在数据库系统中，我们常常需要多线程读取文件任意位置的内容 <code>(&lt;fid&gt;, &lt;offset&gt;, &lt;size&gt;)</code>。
+经常使用的 <code>read / write</code> API 无法完成这种功能（因为要先 seek，需要独占文件句柄）。
+下面的方法可以实现文件随机读。</p>
+<ul>
+<li>通过 <code>mmap</code> 直接把文件映射到内存中。读文件变成了直接读内存，可以在多个线程中并发读。</li>
+<li><code>pread</code> 可以从某一位置 <code>offset</code> 开始读取 <code>count</code> 个字节，同样支持多线程并发读。</li>
+</ul>
+<p>不过，这两种方案都会把当前线程阻塞住。比如 <code>mmap</code> 后读某块内存产生 page fault，当前线程就会阻塞；<code>pread</code> 本身就是一个阻塞的 API。
+异步 API (比如 Linux AIO / <code>io_uring</code>) 可以减少上下文切换，从而在某些场景下提升吞吐量。</p>
+<h2><a class="header" href="#io_uring-的基本用法" id="io_uring-的基本用法">io_uring 的基本用法</a></h2>
+<p><code>io_uring</code> 相关的 syscall 可以在 <a href="https://kernel.dk/io_uring.pdf">这里</a> 找到。<a href="https://github.com/axboe/liburing">liburing</a> 提供了更易用的 API。
+Tokio 的 <a href="https://github.com/tokio-rs/io-uring">io_uring crate</a> 在此基础之上，提供了 Rust 语言的 <code>io_uring</code> API。下面以它为例，
+介绍 <code>io_uring</code> 的使用方法。</p>
+<p>要使用 <code>io_uring</code>，需要先创建一个 ring。在这里我们使用了 <code>tokio-rs/io-uring</code> 提供的 <code>concurrent</code> API，
+支持多线程使用同一个 ring。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use io_uring::IoUring;
+let ring = IoUring::new(256)?;
+let ring = ring.concurrent();
+<span class="boring">}
+</span></code></pre></pre>
+<p>每一个 ring 都对应一个提交队列和一个完成队列，这里设置队列最多容纳 256 个元素。</p>
+<p>通过 <code>io_uring</code> 进行 I/O 操作的过程分为三步：往提交队列添加任务，向内核提交任务 [注1]，
+从完成队列中取回任务。这里以读文件为例介绍整个过程。</p>
+<p>通过 <code>opcode::Read</code> 可以构造一个读文件任务，通过 <code>ring.submission().push(entry)</code> 可以将任务添加到队列中。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use io_uring::{opcode, types::Fixed};
+let read_op = opcode::Read::new(Fixed(fid), ptr, len).offset(offset);
+let entry = read_op
+            .build()
+            .user_data(user_data);
+unsafe { ring.submission().push(entry)?; }
+<span class="boring">}
+</span></code></pre></pre>
+<p>任务添加完成后，将它提交到内核。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>assert_eq!(ring.submit()?, 1);
+<span class="boring">}
+</span></code></pre></pre>
+<p>最后轮询已经完成的任务。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>loop {
+    if let Some(entry) = ring.completion().pop() {
+        // do something
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这样一来，我们就实现了基于 <code>io_uring</code> 的随机读文件。</p>
+<p>注 1: <code>io_uring</code> 目前有三种执行模式：默认模式、poll 模式和内核 poll 模式。如果使用内核 poll 模式，则不一定需要调用提交任务的函数。</p>
+<h2><a class="header" href="#利用-io_uring-实现异步读文件接口" id="利用-io_uring-实现异步读文件接口">利用 io_uring 实现异步读文件接口</a></h2>
+<p>我们的目标是实现类似这样的接口，把 <code>io_uring</code> 包装起来，仅暴露给开发者一个简单的 <code>read</code> 函数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>ctx.read(fid, offset, &amp;mut buf).await?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>参考了 <a href="https://github.com/hmwill/tokio-linux-aio">tokio-linux-aio</a> 对 Linux AIO 的异步包装后，我采用下面方法来实现基于 <code>io_uring</code> 的异步读。</p>
+<ul>
+<li>开发者在使用 <code>io_uring</code> 之前，需要创建一个 <code>UringContext</code>。</li>
+<li><code>UringContext</code> 被创建的同时，会在后台运行一个（或多个）用来提交任务和轮询完成任务的 <code>UringPollFuture</code>。
+(对应上一章节中读文件的第二步、第三步操作)。</li>
+<li>开发者可以从 <code>ctx</code> 调用读文件的接口，用 <code>ctx.read</code> 创建一个 <code>UringReadFuture</code>。在调用 <code>ctx.read.await</code> 后：
+<ol>
+<li><code>UringReadFuture</code> 会创建一个固定在内存中的对象 <code>UringTask</code>，然后把读文件任务放进队列里，将 <code>UringTask</code> 的地址作为
+读操作的用户数据。<code>UringTask</code> 里面有个 channel。</li>
+<li><code>UringPollFuture</code> 在后台提交任务。</li>
+<li><code>UringPollFuture</code> 在后台轮询已经完成的任务。</li>
+<li><code>UringPollFuture</code> 取出其中的用户数据，还原成 <code>UringTask</code> 对象，通过 channel 通知 <code>UringReadFuture</code>
+I/O 操作已经完成。</li>
+</ol>
+</li>
+</ul>
+<p>整个流程如下图所示。</p>
+<p><img src="https://user-images.githubusercontent.com/4198311/106355863-b53ca880-6335-11eb-9dfe-0682aefa1093.png" alt="uring" /></p>
+<p>这样，我们就可以方便地调用 <code>io_uring</code> 实现文件的异步读取。这么做还顺便带来了一个好处：任务提交可以自动 batching。
+通常来说，一次 I/O 操作会产生一次 syscall。但由于我们使用一个单独的 Future 来提交、轮询任务，在提交的时候，
+队列里可能存在多个未提交的任务，可以一次全部提交。这样可以减小 syscall 切上下文的开销 (当然也增大了 latency)。
+从 benchmark 的结果观察来看，每次提交都可以打包 20 个左右的读取任务。</p>
+<h2><a class="header" href="#benchmark" id="benchmark">Benchmark</a></h2>
+<p>将包装后的 <code>io_uring</code> 和 <code>mmap</code> 的性能作对比。测试的负载是 128 个 1G 文件，随机读对齐的 4K block。
+我的电脑内存是 32G，有一块 1T 的 NVMe SSD。测试了下面 6 个 case：</p>
+<ul>
+<li>8 线程 mmap。 (mmap_8)</li>
+<li>32 线程 mmap。 (mmap_32)</li>
+<li>512 线程 mmap。 (mmap_512)</li>
+<li>8 线程 8 并发的 <code>io_uring</code>。(uring_8)</li>
+<li>8 线程 32 并发的 <code>io_uring</code>。即 8 个 worker thread, 32 个 future 同时 read。(uring_32)</li>
+<li>8 线程 512 并发的 <code>io_uring</code>。(uring_512)</li>
+</ul>
+<p>测试了 Throughput (op/s) 和 Latency (ns)。</p>
+<table><thead><tr><th>case</th><th>throughput</th><th>p50</th><th>p90</th><th>p999</th><th>p9999</th><th>max</th></tr></thead><tbody>
+<tr><td>uring_8</td><td>104085.77710777053</td><td>83166</td><td>109183</td><td>246416</td><td>3105883</td><td>14973666</td></tr>
+<tr><td>uring_32</td><td>227097.61356918357</td><td>142869</td><td>212730</td><td>1111491</td><td>3321889</td><td>14336132</td></tr>
+<tr><td>uring_512</td><td>212076.5160505447</td><td>1973421</td><td>3521119</td><td>19478348</td><td>25551700</td><td>35433481</td></tr>
+<tr><td>mmap_8</td><td>109697.87025744558</td><td>78971</td><td>107021</td><td>204211</td><td>1787823</td><td>18522047</td></tr>
+<tr><td>mmap_32</td><td>312829.53428971884</td><td>100336</td><td>178914</td><td>419955</td><td>4408214</td><td>55129932</td></tr>
+<tr><td>mmap_512</td><td>235368.9890904751</td><td>2556429</td><td>3265266</td><td>15946744</td><td>50029659</td><td>156095218</td></tr>
+</tbody></table>
+<p>发现 mmap 吊打 <code>io_uring</code>。嗯，果然这个包装做的不太行，但是勉强能用。下面是一分钟 latency 的 heatmap。每一组数据的展示顺序是先 mmap 后 <code>io_uring</code>。</p>
+<p><strong>mmap_8 / uring_8</strong>
+<img src="https://user-images.githubusercontent.com/4198311/106357357-a14a7400-6340-11eb-89df-72e876855557.png" alt="waterfall_mmap_8" />
+<img src="https://user-images.githubusercontent.com/4198311/106357364-a60f2800-6340-11eb-9376-2d66ffa7098f.png" alt="waterfall_uring_8" /></p>
+<p><strong>mmap_32 / uring_32</strong>
+<img src="https://user-images.githubusercontent.com/4198311/106357361-a5769180-6340-11eb-8a85-80180df69ea8.png" alt="waterfall_mmap_32" />
+<img src="https://user-images.githubusercontent.com/4198311/106357365-a6a7be80-6340-11eb-81e7-945758dd2092.png" alt="waterfall_uring_32" /></p>
+<p><strong>mmap_512 / uring_512</strong>
+<img src="https://user-images.githubusercontent.com/4198311/106357363-a5769180-6340-11eb-9704-7c97d9a577a6.png" alt="waterfall_mmap_512" />
+<img src="https://user-images.githubusercontent.com/4198311/106357366-a6a7be80-6340-11eb-9b7e-ec4ff168962d.png" alt="waterfall_uring_512" /></p>
+<p><img src="https://user-images.githubusercontent.com/4198311/106357531-904e3280-6341-11eb-9577-fcd1a487e6db.png" alt="Throughput-2" /></p>
+<p><img src="https://user-images.githubusercontent.com/4198311/106357534-93e1b980-6341-11eb-8974-05575e63b2b7.png" alt="p50 Latency (ns)" /></p>
+<h2><a class="header" href="#一些可能的改进" id="一些可能的改进">一些可能的改进</a></h2>
+<ul>
+<li>看起来现在 <code>io_uring</code> 在我和 Tokio 的包装后性能不太行。之后可以通过对比 Rust / C 在 <code>io_uring</code> nop
+指令上的表现来测试 Tokio 这层包装引入的开销。</li>
+<li>测试 Direct I/O 的性能。目前只测试了 Buffered I/O。</li>
+<li>和 Linux AIO 对比。（性能不会比 Linux AIO 还差吧（痛哭</li>
+<li>用 perf 看看现在的瓶颈在哪里。目前 <code>cargo flamegraph</code> 挂上去以后 <code>io_uring</code> 没法申请内存。（占个坑，说不定能出续集</li>
+<li>目前，用户必须保证 <code>&amp;mut buf</code> 在整个 read 周期都有效。如果 Future 被 abort，会有内存泄漏的问题。
+futures-rs 的类似问题见 https://github.com/rust-lang/futures-rs/issues/1278 。Tokio 目前的
+I/O 通过两次拷贝（先到缓存，再给用户）解决了这个问题。</li>
+<li>或许可以把写文件和其他操作也顺便包装一下。</li>
+</ul>
+<hr />
+<p>作者简介：</p>
+<p>迟先生（skyzh），上海交通大学大三学生，SJTUG 镜像站维护者，沉迷写 Rust。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/io_uring_intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/contribute_to_the_rust_part1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/io_uring_intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/contribute_to_the_rust_part1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

@@ -1,0 +1,751 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>「译」使用 Rust 实现命令行生命游戏 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item expanded "><a href="../chapter_2/cli_gameoflife.html" class="active"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#译使用-rust-实现命令行生命游戏" id="译使用-rust-实现命令行生命游戏">「译」使用 Rust 实现命令行生命游戏</a></h1>
+<p>译者：m1zzx2 </p>
+<hr />
+<p>原文：</p>
+<ul>
+<li><a href="https://dev.to/jbarszczewski/rust-cli-game-of-life-tutorial-part-1-57pp">https://dev.to/jbarszczewski/rust-cli-game-of-life-tutorial-part-1-57pp</a></li>
+<li><a href="https://dev.to/jbarszczewski/rust-cli-game-of-life-tutorial-part-2-16j3">https://dev.to/jbarszczewski/rust-cli-game-of-life-tutorial-part-2-16j3</a></li>
+</ul>
+<h2><a class="header" href="#介绍" id="介绍">介绍</a></h2>
+<p>你好！如果你看到了这篇文章，说明你对Rust感兴趣，并且想学习或者了解它。我早在2020年6月就编写了我的第一个Rust教程<a href="https://dev.to/jbarszczewski/rust-actix-cosmosdb-mongodb-tutorial-api-17i5">Rust + Actix + CosmosDB (MongoDB) tutorial api</a>。这次，我将尝试介绍Rust的CLI。为了让这次的介绍更有趣，使用了<a href="https://rustwasm.github.io/docs/book/game-of-life/rules.html">Official Rust WebAssembly</a>教程来实现“生命游戏”，来增强用户的交互逻辑。</p>
+<p>虽然这是个新手教程，但是我仍然强烈建议你通过了官方的新手教程后再来做这个。
+<a href="https://github.com/rust-lang/rustlings">rustlings tutorial</a></p>
+<p>可以在我的<a href="https://github.com/jbarszczewski/cli-game-of-life">github仓库</a>中找到“最终”代码</p>
+<h2><a class="header" href="#创造universe" id="创造universe">创造Universe</a></h2>
+<p>开始吧！
+在创建一些新的项目像 new cli-game-of-life (或者 cargo init 如果你已经在一个正确的目录里面)之后。 使用你喜欢的编辑器打开它，目前要忽略main.rs。我们先要创建一个逻辑模块，所以继续创建一个src/game.rs文件。和前面说的一样，我将使用和wasm官方教程一样的逻辑来讲解，如果你之前做过它，你就会对它非常熟悉。让我们在游戏Universe里面来定义一个游戏单元格的枚举。</p>
+<pre><code>#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+pub enum Cell {
+    Dead = 0,
+    Alive = 1,
+}
+</code></pre>
+<p>derive 声明会告诉编译器提供(Copy, Clone, Debug, Eq, PartialEq)的基本实现，所以我们可以给单元分配枚举值并且比较他们。</p>
+<p><strong>注意</strong>: 我们也可以用bool值来实现一样的功能，不过使用enum可以具有更好的可读性，两者占用的内存是相等的。</p>
+<p>我们的游戏Universe定义如下:</p>
+<pre><code>pub struct Universe {
+    width: u32,
+    height: u32,
+    cells: Vec&lt;Cell&gt;,
+}
+</code></pre>
+<p>好了现在我们开始实现游戏的函数了。让我们从一个方便的构造函数开始，这个构造函数将会设置Universe的大小，并初始化Cells的初始值。set_cells函数将会接受一个cells坐标，并把对应坐标的Cell设置成Alive状态。</p>
+<pre><code>impl Universe {
+    pub fn new(width: u32, height: u32) -&gt; Universe {
+        Universe {
+            width: width,
+            height: height,
+            cells: vec![Cell::Dead; (width * height) as usize],
+        }
+    }
+
+    pub fn set_cells(&amp;mut self, cells: &amp;[(u32, u32)]) {
+        for (row, col) in cells.iter().cloned() {
+            let idx = self.get_index(row, col);
+            self.cells[idx] = Cell::Alive;
+        }
+    }
+
+    fn get_index(&amp;self, row: u32, column: u32) -&gt; usize {
+        (row * self.width + column) as usize
+    }
+}
+</code></pre>
+<p>get_index 函数是一个辅助函数，它会把Universed的坐标翻译成cells数组对应的下标。</p>
+<p>接下来，我们会实现Display特性，方便打印当前游戏的状态。</p>
+<pre><code>use std::fmt;
+
+impl fmt::Display for Universe {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        for line in self.cells.as_slice().chunks(self.width as usize) {
+            for &amp;cell in line {
+                let symbol = if cell == Cell::Dead { '◻' } else { '◼' };
+                write!(f, &quot;{}&quot;, symbol)?;
+            }
+            write!(f, &quot;\n&quot;)?;
+        }
+
+        Ok(())
+    }
+}
+</code></pre>
+<p>Perfect! Now we have something to run. Head over to your main.rs and replace all with the following content:
+非常完美!现在我们需需要定义一个启动函数: 挑转到main.rs 用下面的内容替换main.rs的内容：</p>
+<pre><code>mod game;
+
+fn main() {
+    let mut game = game::Universe::new(5, 5);
+    game.set_cells(&amp;[(2, 1), (2, 2), (2, 3)]);
+    print!(&quot;{}&quot;, game);
+}
+</code></pre>
+<p>运行 cargo run之后 ,代码顺利的跑起来了，但是它实际上没有做什么，因此我们需要新增一个tick函数:</p>
+<pre><code>pub fn tick(&amp;mut self) {
+    let mut next = self.cells.clone();
+    for row in 0..self.height {
+        for col in 0..self.width {
+            let idx = self.get_index(row, col);
+            let cell = self.cells[idx];
+            let live_neighbours = self.live_neighbour_count(row, col);
+            next[idx] = match (cell, live_neighbours) {
+                (Cell::Alive, x) if x &lt; 2 =&gt; Cell::Dead,
+                (Cell::Alive, 2) | (Cell::Alive, 3) =&gt; Cell::Alive,
+                (Cell::Alive, x) if x &gt; 3 =&gt; Cell::Dead,
+                (Cell::Dead, 3) =&gt; Cell::Alive,
+                (otherwise, _) =&gt; otherwise,
+            };
+        }
+    }
+    self.cells = next;
+}
+
+fn live_neighbour_count(&amp;self, row: u32, column: u32) -&gt; u8 {
+    let mut count = 0;
+    for delta_row in [self.height - 1, 0, 1].iter().cloned() {
+        for delta_col in [self.width - 1, 0, 1].iter().cloned() {
+            if delta_row == 0 &amp;&amp; delta_col == 0 {
+                continue;
+            }
+
+            let neighbour_row = (row + delta_row) % self.height;
+            let neighbour_col = (column + delta_col) % self.width;
+            let idx = self.get_index(neighbour_row, neighbour_col);
+            count += self.cells[idx] as u8;
+        }
+    }
+
+    count
+}
+</code></pre>
+<p>该代码直接来自WASM锈皮书，它将Conway的《生命游戏》规则应用到我们的宇宙中，同时还要注意边缘包裹，以使我们的宇宙看起来像是循环的（请参见风味3）。
+在使用刻度之前，我们需要准备终端以显示动画游戏Universe。 让我们现在就跳进去！</p>
+<p>P.S. -您可以在我的GitHub上找到本章的源代码</p>
+<p>这段代码来自wasm rust book ，它把ConWay的 Conway's Game Of Life 的规则应用到我们的universe中，它也会注意边界条件，让我们的universe看起来是循环运动的。<a href="https://rustwasm.github.io/docs/book/game-of-life/implementing.html">看第三章</a></p>
+<p>在我们使用tick函数之前，我们需要准备用终端去展示Universe 的界面，让我们来进入这个操作吧!</p>
+<p>P.S -你们可以在<a href="https://github.com/jbarszczewski/cli-game-of-life/tree/42c60e1c10073dd65819af7d1a6d7b049d1a449d">这里</a>找到本章的源代码</p>
+<h2><a class="header" href="#绘制游戏universe" id="绘制游戏universe">绘制游戏Universe</a></h2>
+<p>为了让终端输入输出，我们将会使用<a href="https://crates.io/crates/crossterm">Crossterm crate</a>包，因此我们需要把它添加进我们的Cargo.toml文件里面:</p>
+<pre><code>[dependencies]
+crossterm = &quot;0.19.0&quot;
+</code></pre>
+<p>这个工具箱里面有很多方便的函数来操作终端，并且它是跨平台的，我们不需要担心任何平台的区别。大多数crossterm指令是容易理解的，因为他们被分进了不同的模块，就像cursor:Hide 就是和它的字面意思的一样，隐藏光标。</p>
+<pre><code>use crossterm::{
+    cursor::{Hide, MoveTo, Show},
+    event::{poll, read, Event},
+    execute,
+    style::{Color, Print, ResetColor, SetForegroundColor},
+    terminal::{Clear, ClearType, EnterAlternateScreen, LeaveAlternateScreen},
+    Result,
+};
+use std::io::stdout;
+use std::time::Duration;
+</code></pre>
+<p>接下老，我们的main函数需要被填充成这个样子:</p>
+<pre><code>fn main() -&gt; Result&lt;()&gt; {
+    let mut game = game::Universe::new(5, 5);
+    game.set_cells(&amp;[(2, 1), (2, 2), (2, 3)]);
+    execute!(
+        stdout(),
+        EnterAlternateScreen,
+        SetForegroundColor(Color::Magenta),
+        Hide
+    )?;
+
+    loop {
+        if poll(Duration::from_millis(500))? {
+            match read()? {
+                Event::Key(_) =&gt; break,
+                _ =&gt; {}
+            }
+        } else {
+            execute!(
+                stdout(),
+                Clear(ClearType::All),
+                MoveTo(0, 0),
+                Print(&amp;game),
+                Print(&quot;Press enter to exit...&quot;)
+            )?;
+            game.tick();
+        }
+    }
+    execute!(stdout(), ResetColor, Show, LeaveAlternateScreen)?;
+    Ok(())
+}
+</code></pre>
+<p>好的让我们拆解一下在做的事情:</p>
+<ol>
+<li>main函数现在返回了Result类型。这能让用户随时退出。</li>
+<li>我们在execute!宏里面设置临时终端，它的第一个参数是std::io::Writer(这个case里面的输入)类，后面的参数是一些命令。</li>
+<li>在这个循环里面，我们用poll去读取用户的输入，这样不会阻塞execution去绘画终端。当用户输入回车按钮时，这个循环就会退出，如果用户在500ms内没有输入，我们将会根据tick计算的状态重新绘画Universe。</li>
+<li>循环结束以后，我们就会离开这个临时终端。
+现在我们可以跑脚本cargo run 了。
+你将会看到水平线和垂直线相互交替出现，但是输入enter，游戏没有停止。我们需要修改代码来实现这个功能。</li>
+</ol>
+<h2><a class="header" href="#和universe交互" id="和universe交互">和Universe交互</a></h2>
+<p>我们只能处理回车的原因是，默认的输入是在按下回车后处理的。通常，你的输入都准备好之后，在按下会车触发，这才有意义。但是在我们的需求里面，我们希望和一个键交互。这意味着我们需要启用<a href="https://docs.rs/crossterm/0.19.0/crossterm/terminal/#raw-mode">raw mode</a>. 新的代码会被改成这样:</p>
+<pre><code>
+// add required imports:
+use terminal::{disable_raw_mode, enable_raw_mode};
+
+// add this line at the very begining of the main() function:
+enable_raw_mode()?;
+
+// replace code block when poll returns true, the match statement, with following:
+
+if let Event::Key(KeyEvent { code, .. }) = read()? {
+    match code {
+        KeyCode::Esc =&gt; {
+            break;
+        }
+        _ =&gt; {}
+    }
+}
+
+// finaly disable raw mode at the end of the function before returning Ok(()):
+disable_raw_mode()?;
+</code></pre>
+<p>添加循环退出功能是很重要的，因为raw mode模式下，会禁用ctrl+c退出的方式。
+现在你可以运行这个代码了，但是你会发现输出的格式都是乱的，这是因为raw mode不会处理换行符。现在我们需要将光标显示在正确的位置。这意味着我们不能用Display 特征来显示了。取而代之的，我们会遍历Universe，把每一行分别打印出来，向Universe中添加新方法：</p>
+<pre><code>pub fn row_as_string(&amp;self, row: u32) -&gt; Option&lt;String&gt; {
+    if row &lt; self.height {
+        let mut row_string = String::new();
+        let start = self.get_index(row, 0);
+        let end = self.get_index(row, self.width);
+        let line = &amp;self.cells[start..end];
+        for &amp;cell in line {
+            let symbol = if cell == Cell::Dead { '◻' } else { '◼' };
+            row_string.push(symbol);
+        }
+        Some(row_string)
+    } else {
+        None
+    }
+}
+</code></pre>
+<p>如果该行和Universe大小一致，我们返回整行作为一个字符串，否则，返回None.
+在我们的main.rs中，从crossterm队列中添加新的导入，请排队！宏类似于执行，但需要手动刷新。如果要有条件地构建输出，这将非常方便。让我们看看它如何进行。首先在main（）函数的开头初始化一个新变量：</p>
+<pre><code>let mut stdout = stdout();
+</code></pre>
+<p>现在，可以把stdout()替换为我们的新名称，我们需要用以下代码替换整个循环:</p>
+<pre><code>loop {
+    if poll(Duration::from_millis(500))? {
+        if let Event::Key(KeyEvent { code, .. }) = read()? {
+            match code {
+                KeyCode::Esc =&gt; {
+                    break;
+                }
+                _ =&gt; {}
+            }
+        }
+    } else {
+        queue!(stdout, Clear(ClearType::All))?;
+        let mut i = 0;
+        while let Some(line) = game.row_as_string(i) {
+            queue!(stdout, MoveTo(0, i as u16), Print(line))?;
+            i += 1;
+        }
+
+        queue!(
+            stdout,
+            MoveTo(0, (i + 1) as u16),
+            Print(&quot;Press Esc to exit...&quot;)
+        )?;
+        stdout.flush()?;
+        game.tick();
+    }
+}
+</code></pre>
+<p>按键处理逻辑不会改变,所有的更改都在else里面：</p>
+<ol>
+<li>
+<p>我们把execute!替换成 queue! 宏。</p>
+</li>
+<li>
+<p>遍历Universe的每一行，queue! 会直接打印结果，你会看到返回Option <T>有多方便！我们不需要任何额外的处理，这个代码看起来会很干净。</p>
+</li>
+<li>
+<p>在所有文本都准备好之后，我们调用 flush() 刷新到输出。</p>
+</li>
+</ol>
+<h2><a class="header" href="#接受参数" id="接受参数">接受参数</a></h2>
+<p>使用std :: env :: args函数可以非常简单的接受参数.但是我想展示一些依赖外部包 <a href="https://crates.io/crates/clap">clap</a>的方法。有三种配置clap的方式:</p>
+<ul>
+<li>'Builder Pattern'</li>
+<li>yaml配置</li>
+<li>宏
+'Builder Pattern'是我最喜欢的一种方式，它可以动态扩展输入的参数，并提供一些检查。对于像这样的简单项目，将配置放在main.rs中是完全可以的，随着项目复杂度的增长，可能湖考虑把配置放在单独的文件里面，可以有更好的可读性。首先Cargo.toml添加依赖：</li>
+</ul>
+<pre><code>clap = &quot;2.33.3&quot;
+</code></pre>
+<p>接下来更新我们的main.rs文件:</p>
+<pre><code>use clap::{crate_version, App, Arg};
+
+//below code goes at the beginning of main() function:
+  let matches = App::new(&quot;CLI Game Of Life&quot;)
+        .version(crate_version!())
+        .author(&quot;jbarszczewski&quot;)
+        .about(&quot;Simple implementation of Conway's Game Of Life in Rust.&quot;)
+        .after_help(&quot;Have fun!&quot;)
+        .arg(
+            Arg::with_name(&quot;INPUT&quot;)
+                .help(&quot;Sets the input file to configure initial state of game&quot;)
+                .short(&quot;i&quot;)
+                .long(&quot;input&quot;)
+                .takes_value(true),
+        )
+        .arg(
+            Arg::with_name(&quot;DELAY&quot;)
+                .help(&quot;Sets the delay between game ticks. Value is in miliseconds&quot;)
+                .short(&quot;d&quot;)
+                .long(&quot;delay&quot;)
+                .takes_value(true)
+                .default_value(&quot;500&quot;),
+        )
+        .get_matches();
+</code></pre>
+<p>clap包会创建两个子命令(除非你覆盖了它们):</p>
+<ul>
+<li>help (-h or --help)</li>
+<li>version (-V --version) That's why we provide basic info about the app. You may notice crate_version! macro, this will grab the version number from your Cargo.toml file so you don't need to manually update it. Then we add two arguments, INPUT and DELAY, with some description how to use it. Build your app with cargo build (you will find binary in /target/debug directory) and run like this ./cli-game-of-life -h which will print out help page:</li>
+</ul>
+<pre><code>
+CLI Game of Life 0.2.0
+jbarszczewski
+Simple implementation of Conway's Game of Life in Rust.
+
+USAGE:
+    cli-game-of-life [OPTIONS]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -d, --delay &lt;DELAY&gt;    Sets the delay between game ticks. Value is in miliseconds [default: 500]
+    -i, --input &lt;INPUT&gt;    Sets the input file to configure initial state of game
+
+Have fun!
+</code></pre>
+<p>现在，可以写代码获取你输入的值:</p>
+<pre><code>if let Some(input) = matches.value_of(&quot;INPUT&quot;) {
+    println!(&quot;A config file was passed: {}&quot;, input);
+}
+</code></pre>
+<p>value_of() 将会返回  Option<T> 因此你可以输入的数据是否存在而采取相应的行动，我们把DELAY设置成了默认值，也就是说无论有没有解析到输入，我们都会可以采取行动.现在我们不会使用value_of(), 在这个项目里面，我们会使用flag接受参数。默认情况下，所有的clap参数都是flag，这也就是为什么我们在描述INPUT和DELAY的时候，需要添加take_values()方法。因为flag并不会有值，当我们使用它们，像在这种场景:</p>
+<pre><code>if matches.is_present(&quot;TEST&quot;) {
+    println!(&quot;TEST!&quot;);
+}
+</code></pre>
+<p>这里有太多的可能的配置，所以我只建议你用到配置的时候才去看<a href="https://docs.rs/clap/2.33.3/clap/struct.Arg.html">文档</a>。</p>
+<p>好的，我们通过配置，已经能让我们的应用接受参数了，但是他们不会做任何处理，接下来将会做一些处理。</p>
+<h2><a class="header" href="#控制速度" id="控制速度">控制速度</a></h2>
+<p>让我们使用DELAY参数，现在我们的游戏hard-code了500ms作为刷新下一个状态的频率，动态地改变它是很简单的，首先，我们需要去读并且解析(Duration::from_millis() accept u64)我们输入的参数:</p>
+<pre><code>let delay:u64 = matches.value_of(&quot;DELAY&quot;).unwrap().parse().unwrap();
+</code></pre>
+<p>我们的第一个unwrap(返回空，将会抛出panic)，来检查输入是否为空，第二个unwrap(如果返回Err，将会抛出panic)来检查输入是不是一个合法的int, panic时候，我们希望程序退出。如果你想定制第二个错误，你需要写下面的逻辑:</p>
+<pre><code>let delay: u64 = match matches.value_of(&quot;DELAY&quot;).unwrap().parse() {
+    Ok(val) =&gt; val,
+    Err(e) =&gt; {
+        println!(&quot;Error parsing DELAY argument: {}&quot;, e);
+        500
+    }
+};
+</code></pre>
+<p>然后我们可以吧poll 函数里面的500换成delay变量。如果你想测试脚本是否正确运行，你需要执行这样的脚本: ./cli-game-of-life -d 200(记住这个值是毫秒)
+这里有个小问题。由于处理的方式，我们需要在delay ms后，才展示屏幕上面的内容，如果delay5秒，那么程序开始的5秒不会有任何输出。我们可以用&quot;drawing&quot;修复它，
+代码:</p>
+<pre><code>loop {
+    queue!(stdout, Clear(ClearType::All))?;
+    let mut i = 0;
+    while let Some(line) = game.row_as_string(i) {
+        queue!(stdout, MoveTo(0, i as u16), Print(line))?;
+        i += 1;
+    }
+
+    queue!(
+        stdout,
+        MoveTo(0, (i + 1) as u16),
+        Print(&quot;Press Esc to exit...&quot;)
+    )?;
+    stdout.flush()?;
+    if poll(Duration::from_millis(delay))? {
+        if let Event::Key(KeyEvent { code, .. }) = read()? {
+            match code {
+                KeyCode::Esc =&gt; {
+                    break;
+                }
+                _ =&gt; {}
+            }
+        }
+    }
+
+    game.tick();
+}
+</code></pre>
+<h2><a class="header" href="#定义universe" id="定义universe">定义Universe</a></h2>
+<p>现在是使用INPUT参数的时候了，这个参数制定了universe的配置路径，文件将会是下面这种格式:</p>
+<pre><code>5
+5
+00000
+00100
+00010
+01110
+00000
+</code></pre>
+<p>第一行代表Universe的行数，第二行代表Universe的列数，接下来就是描述Universe每个格子的详情,0代表死,1代表或者。现在这里有两个地方你可以放置配置文件:</p>
+<ol>
+<li>项目的根目录，一些文件像是Cargo.toml就在这个里面，并且你能通过脚本cargo run -- -i INPUT跑你的应用。使用cargo运行之后的内容，都可以作为参数传递给你的项目。</li>
+<li>./target/debug. 这意味着您需要在每次更改后重新构建，然后执行/debug/cli-game-of-life -i starship。
+在本次教程里面，建议使用第一种方式，因为它更方便。上面的配置在“Game of Life”中称为starship pattern，因此我们将文件命名为一样的，然后继续下一步
+我们将会读取这个文件，首先需要导入一个新的依赖:</li>
+</ol>
+<pre><code>use std::fs::File;
+use std::io::{BufRead, BufReader};
+</code></pre>
+<p>下面是解析文件的函数，返回game::Universe:: </p>
+<pre><code>fn create_game_from_file(path: &amp;str) -&gt; game::Universe {
+    let file = File::open(path).unwrap();
+    let mut reader = BufReader::new(file);
+    let mut line = String::new();
+    let mut rows_number = 0;
+    if let Ok(success) = reader.read_line(&amp;mut line) {
+        if success &gt; 0 {
+            rows_number = line.trim().parse().unwrap();
+            line.clear();
+        } else {
+            panic!(&quot;Rows number not detected!&quot;);
+        }
+    };
+    let mut cols_number = 0;
+    if let Ok(success) = reader.read_line(&amp;mut line) {
+        if success &gt; 0 {
+            cols_number = line.trim().parse().unwrap();
+            line.clear();
+        } else {
+            panic!(&quot;Columns number not detected!&quot;);
+        }
+    };
+    let mut game_universe = game::Universe::new(cols_number, rows_number);
+    let mut row = 0;
+    let mut live_cells = Vec::&lt;(u32, u32)&gt;::new();
+    loop {
+        match reader.read_line(&amp;mut line) {
+            Ok(0) =&gt; break,
+            Ok(_) =&gt; {
+                let mut col = 0;
+                for char in line.chars() {
+                    match char {
+                        '1' =&gt; live_cells.push((row, col)),
+                        _ =&gt; {}
+                    }
+                    col += 1;
+                }
+            }
+            _ =&gt; break,
+        }
+
+        line.clear();
+        row += 1;
+    }
+    game_universe.set_cells(&amp;live_cells);
+    game_universe
+}
+</code></pre>
+<p>这看起来很长而且有一定重构的空间，但是比较容易理解:</p>
+<ol>
+<li>打开文件，写入BufReader。</li>
+<li>创建变量line读取每一行。</li>
+<li>尝试去解析行数和列数。</li>
+<li>创建新的 Universe。</li>
+<li>遍历剩余行，解析cell，写入vector。</li>
+<li>调用game_universe.set_cell方法，把vector的值写入对象，然后返回。</li>
+</ol>
+<p>我们需要做的最后一件事情就是让我们的新的函数得到使用，在main函数里面删除初始化游戏的逻辑，并且把我们新的代码放在解析DELAY变量后面:</p>
+<pre><code>let mut game = match matches.value_of(&quot;INPUT&quot;) {
+    Some(path) =&gt; create_game_from_file(path),
+    None =&gt; {
+        let mut default_game = game::Universe::new(5, 5);
+        default_game.set_cells(&amp;[(2, 1), (2, 2), (2, 3)]);
+        default_game
+    }
+};
+</code></pre>
+<p>这个逻辑很简单：我们尝试读取INPUT参数，如果一个通过了，我们接下来调用create_game_from_file方法，如果没通过，我们然后默认的universe。</p>
+<p>现在我们可以调用cargo run -- -i starship并且享受美景!你可以使用更大的场地，类似15*15， 并且由于我们不校验参数，所以不需要在每行最后输入0。</p>
+<h2><a class="header" href="#总结" id="总结">总结</a></h2>
+<p>希望您喜欢本教程，多谢您的阅读！</p>
+<hr />
+<p>译者介绍：</p>
+<p>m1zzx2 ，Rust 初学者，知乎工程师。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/rust_study.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/actor_with_tokio.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/rust_study.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/actor_with_tokio.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

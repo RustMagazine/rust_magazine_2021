@@ -1,0 +1,476 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>解读 Rust 1.50 稳定版 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item expanded "><a href="../chapter_2/rust_1.50.html" class="active"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#解读-rust-150-稳定版" id="解读-rust-150-稳定版">解读 Rust 1.50 稳定版</a></h1>
+<p>作者：张汉东 / 后期编辑： 张汉东</p>
+<hr />
+<p>2021 年 2 月 11 号，<a href="https://blog.rust-lang.org/2021/02/11/Rust-1.50.0.html">Rust 1.50 稳定版发布</a>。1.50 版更新包括：</p>
+<ul>
+<li>语言级特性</li>
+<li>编译器</li>
+<li>标准库</li>
+<li>稳定的 API </li>
+<li>Cargo 相关</li>
+<li>其他</li>
+<li>兼容性提示</li>
+</ul>
+<p>以下挑一些重点讲解。</p>
+<h1><a class="header" href="#语言级特性" id="语言级特性">语言级特性</a></h1>
+<h3><a class="header" href="#a-hrefhttpsrust-langgithubiorfcs2000-const-genericshtml常量泛型-const-na-进一步得到完善" id="a-hrefhttpsrust-langgithubiorfcs2000-const-genericshtml常量泛型-const-na-进一步得到完善"><a href="https://rust-lang.github.io/rfcs/2000-const-generics.html">常量泛型 <code>[CONST; N]</code></a> 进一步得到完善：</a></h3>
+<ul>
+<li>常量泛型数组实现了 <code>ops::Index</code> 和 <code>ops::IndexMut</code>。</li>
+<li>值重复的常量数组<code>[x; N]</code>现在支持 常量值作为 x ，无论 x 是否实现 <code>Copy</code>。</li>
+</ul>
+<p>Rust 有一种内置数组类型<code>[T; LEN]</code>，但是这个 <code>LEN</code>一直无法支持泛型，所以这类数组就沦为了二等公民。比如 <code>[0,0,0]</code>和<code>[0,0,0,0]</code>不是同一个类型。所谓一等公民应该是不管数组长度如何，至少可以用同一个类型表示。为了提升这个数组类型，就引入了常量泛型的支持。<code>[CONST; N]</code> 是从 1.38 版本开始筹划，在 Rust 1.38~1.46 版本内，引入了一个<code>std::array::LengthAtMost32</code>来限制默认<code>[T; LEN]</code>的长度不能超过 32 。到 Rust 1.47 版本，首次在内部引入了 <code>[CONST; N]</code> 的支持。</p>
+<p>直到 <code>Rust 1.50 </code>版本，进一步对<code>[CONST; N]</code> 功能进行了完善。</p>
+<p>对常量泛型数组实现了 <code>ops::Index</code> 和 <code>ops::IndexMut</code>：</p>
+<pre><pre class="playground"><code class="language-rust">fn second&lt;C&gt;(container: &amp;C) -&gt; &amp;C::Output
+where
+    C: std::ops::Index&lt;usize&gt; + ?Sized,
+{
+    &amp;container[1]
+}
+
+fn main() {
+    let array: [i32; 3] = [1, 2, 3];
+    assert_eq!(second(&amp;array[..]), &amp;2); // 之前必须转成切片才可以
+    assert_eq!(second(&amp;array), &amp;2); // 现在直接传引用就可以了
+}
+</code></pre></pre>
+<p>值重复的常量数组<code>[x; N]</code>现在支持 常量值作为 x ：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 这行代码是不允许的，因为`Option&lt;Vec&lt;i32&gt;&gt;` 没有实现 `Copy`。
+    let array: [Option&lt;Vec&lt;i32&gt;&gt;; 10] = [None; 10];
+
+  	// 但是，现在改成 `const` 定义就可以了
+    const NONE: Option&lt;Vec&lt;i32&gt;&gt; = None;
+    const EMPTY: Option&lt;Vec&lt;i32&gt;&gt; = Some(Vec::new());
+
+    // 虽然没有实现`Copy`，但是现在可以重复`const`的值了。
+    let nones = [NONE; 10];
+    let empties = [EMPTY; 10];
+}
+</code></pre></pre>
+<p>这样写起来可能比较麻烦，但是在随后 <a href="https://github.com/rust-lang/rfcs/blob/master/text/2920-inline-const.md">RFC 2920: inline const </a>功能稳定后，就可以写成下面这种形式了：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 这行代码是不允许的，因为`Option&lt;Vec&lt;i32&gt;&gt;` 没有实现 `Copy`。
+    let array: [Option&lt;Vec&lt;i32&gt;&gt;; 10] = [None; 10];
+
+    // 虽然没有实现`Copy`，但是现在可以重复`const`的值了。
+    let nones : [Option&lt;Vec&lt;i32&gt;&gt;; 10] = [const {None}; 10];
+    let empties : [Option&lt;Vec&lt;i32&gt;&gt;; 10]  = [const {Some(Vec::new())}; 10];
+}
+</code></pre></pre>
+<p>其实可以 Rust 本可以做到下面这种形式：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 这行代码是不允许的，因为`Option&lt;Vec&lt;i32&gt;&gt;` 没有实现 `Copy`。
+    let array: [Option&lt;Vec&lt;i32&gt;&gt;; 10] = [None; 10];
+
+    // 虽然没有实现`Copy`，但是现在可以重复`const`的值了。
+    let nones : [Option&lt;Vec&lt;i32&gt;&gt;; 10] = [None; 10];
+    let empties : [Option&lt;Vec&lt;i32&gt;&gt;; 10]  = [Some(Vec::new()); 10];
+}
+</code></pre></pre>
+<p>上面<code>None</code>和<code>Some(Vec::new())</code>可以自动被编译器提升为常量，但这样可能为用户带来困扰，对于一些不能被自动提升为常量的类型，还需要用户去学习一大堆<a href="https://github.com/rust-lang/const-eval/blob/master/promotion.md#promotability">常量提升规则</a>，并且使用 <code>const fn</code>等功能来定义常量。倒不如显示地加一个 const 块表达式来直接标注更好。</p>
+<p>另外，关于<code>#![feature(min_const_generics)]</code><a href="https://github.com/rust-lang/rust/pull/79135">将在 Rust 1.51 中稳定</a>，预计 <code>2021-03-25</code>。</p>
+<h3><a class="header" href="#将共用体union中a-hrefhttpsdocrust-langorgstablestdmemstructmanuallydrophtmlsearchmanualdropa类型字段的分配视为安全" id="将共用体union中a-hrefhttpsdocrust-langorgstablestdmemstructmanuallydrophtmlsearchmanualdropa类型字段的分配视为安全">将共用体(<code>union</code>)中<a href="https://doc.rust-lang.org/stable/std/mem/struct.ManuallyDrop.html?search="><code>ManualDrop</code></a>类型字段的分配视为安全</a></h3>
+<pre><pre class="playground"><code class="language-rust">// Rust 1.49 新增特性，允许 union 中使用 ManuallyDrop
+use core::mem::ManuallyDrop;
+
+union MyUnion {
+    f1: u32,
+    f2: ManuallyDrop&lt;String&gt;,
+}
+
+fn main() {
+    let mut u = MyUnion { f1: 1 };
+
+    // These do not require `unsafe`.
+    u.f1 = 2;
+    u.f2 = ManuallyDrop::new(String::from(&quot;example&quot;));
+}
+
+</code></pre></pre>
+<p>在<code>Union</code> 类型 中 <code>Copy</code>或<code>ManuallyDrop</code>的字段不会调用析构函数，所以不必加 <code>unsafe</code>块。</p>
+<p>进一步，当 Drop 一个 Union 类型的时候，需要手工去实现 Drop。因为 共用体 本身的特性，它不会知道该 drop 哪个字段才是安全的，所以才需要字段都是 <code>Copy</code> 或 <code>ManuallyDrop</code>的。</p>
+<pre><pre class="playground"><code class="language-rust">#![feature(untagged_unions)]
+use std::mem::ManuallyDrop;
+use std::cell::RefCell;
+
+union U1 {
+    a: u8
+}
+
+union U2 {
+    a: ManuallyDrop&lt;String&gt;
+}
+
+union U3&lt;T&gt; {
+    a: ManuallyDrop&lt;T&gt;
+}
+
+union U4&lt;T: Copy&gt; {
+    a: T
+}
+
+// 对于 ManuallyDrop 之外的 非 Copy 类型，目前还是 unstable，需要 `#![feature(untagged_unions)]` 特性门支持。
+union URef {
+    p: &amp;'static mut i32,
+}
+
+// RefCell 没有实现 Drop ，但是它是非 Copy 的
+union URefCell { // field that does not drop but is not `Copy`, either
+    a: (RefCell&lt;i32&gt;, i32),
+}
+
+fn generic_noncopy&lt;T: Default&gt;() {
+    let mut u3 = U3 { a: ManuallyDrop::new(T::default()) };
+    u3.a = ManuallyDrop::new(T::default()); // OK (assignment does not drop)
+    
+}
+
+fn generic_copy&lt;T: Copy + Default&gt;() {
+    let mut u3 = U3 { a: ManuallyDrop::new(T::default()) };
+    u3.a = ManuallyDrop::new(T::default()); // OK
+    
+    let mut u4 = U4 { a: T::default() };
+    u4.a = T::default(); // OK
+}
+
+fn main() {
+    let mut u1 = U1 { a: 10 }; // OK
+    
+    u1.a = 11; // OK
+
+    let mut u2 = U2 { a: ManuallyDrop::new(String::from(&quot;old&quot;)) }; // OK
+    u2.a = ManuallyDrop::new(String::from(&quot;new&quot;)); // OK (assignment does not drop)
+
+    let mut u3 = U3 { a: ManuallyDrop::new(0) }; // OK
+    u3.a = ManuallyDrop::new(1); // OK
+
+    let mut u3 = U3 { a: ManuallyDrop::new(String::from(&quot;old&quot;)) }; // OK
+    u3.a = ManuallyDrop::new(String::from(&quot;new&quot;)); // OK (assignment does not drop)
+    
+}
+</code></pre></pre>
+<h1><a class="header" href="#编译器" id="编译器">编译器</a></h1>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/78142">添加对<code>armv5te-unknown-linux-uclibcgnueabi</code>目标的内置支持</a>。 基于ARMv5TE指令集的，你可以认为是ARM处理器，但实际上已经有原来intel的很多技术在里面进行了修改。</li>
+<li><a href="https://github.com/rust-lang/rust/pull/77484">在ARM Mac上添加对Arm64 Catalyst的支持</a>。苹果很快将发布基于ARM64的Mac，macOS应用将使用在ARM上运行的Darwin ABI。 该PR增加了对ARM Macs上Catalyst应用程序的支持：为darwin ABI编译的iOS应用程序。</li>
+<li><a href="https://github.com/rust-lang/rust/pull/79484">修复 FreeBSD 上的链接问题</a>。在FreeBSD上，有时会出现一个问题，即使基本系统中包含<code>lld</code>，由于 Rust 未找到链接程序，链接 Rust 程序也会失败。 这似乎主要影响裸机/交叉编译，例如<code>wasm</code>构建和<code>arm / riscv</code>裸机工作（例如，尝试编译时）。 在<code>Linux</code>和其他操作系统上，启用了用于构建 Rust 的完整工具，因此没有链接问题。 如果使用这些选项正确构建了 Rust，则此PR应该可以在FreeBSD上启用完整的功能。</li>
+</ul>
+<p>除了这三个，还有其他 target 支持，查看<a href="https://forge.rust-lang.org/release/platform-support.html">Platform Support 页面</a>。</p>
+<h1><a class="header" href="#标准库" id="标准库">标准库</a></h1>
+<h3><a class="header" href="#a-hrefhttpsgithubcomrust-langrustpull78636为proc_macropunct增加-partialeqchar-a" id="a-hrefhttpsgithubcomrust-langrustpull78636为proc_macropunct增加-partialeqchar-a"><a href="https://github.com/rust-lang/rust/pull/78636">为<code>proc_macro::Punct</code>增加 <code>PartialEq&lt;char&gt; </code></a></a></h3>
+<p>用于在宏中判断特殊标点符号更加方便。比如：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ...
+else if let TokenTree::Punct(ref tt) = tree {
+  if tt.as_char() == '$' {
+    after_dollar = true;
+    return None;
+  }
+  // ...
+ if p.as_char() == '&gt;' { 
+  // ...
+if tt.as_char() == '=' { 
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#unix-平台优化optionfile-大小等价于-file" id="unix-平台优化optionfile-大小等价于-file">Unix 平台优化：<code>Option&lt;File&gt;</code> 大小等价于 <code>File</code></a></h3>
+<p>在Unix平台上，Rust 的文件仅由系统的整数文件描述符组成，并且它永远不会为<code>-1</code>！ 返回文件描述符的系统调用使用<code>-1</code>表示发生了错误（检查errno），因此<code>-1</code>不可能是真实的文件描述符。 从<code>Rust 1.50</code>开始，此niche（特定生态场景）被添加到类型的定义中，因此它也可以用于布局优化。 因此，<code>Option &lt;File&gt;</code>现在将具有与<code>File</code>本身相同的大小！</p>
+<h1><a class="header" href="#兼容性变更" id="兼容性变更">兼容性变更</a></h1>
+<h3><a class="header" href="#a-hrefhttpsgithubcomrust-langrustpull79261过期-compare_and_swap-方法a" id="a-hrefhttpsgithubcomrust-langrustpull79261过期-compare_and_swap-方法a"><a href="https://github.com/rust-lang/rust/pull/79261">过期 compare_and_swap 方法</a></a></h3>
+<p>推荐使用 <code>compare_exchange</code> 和 <code>compare_exchange_weak</code>。过期这个cas方法一方面是为了和<code> cpp</code> 的  <code>compare_exchange_strong</code> 和  <code>compare_exchange_weak</code> 对应，另一方面也是为了避免使用这个cas在 arm 架构下产生不必要的指令，因为有 cas 的时候，很多人可能会直接使用 cas，从而在 ARM 下产生不必要的指令。</p>
+<blockquote>
+<p>ARM 架构实现LL/SC对(load-linked/store-conditional) ，可以基于它们实现 cas。Load-linked（LL） 运算仅仅返回指针地址的当前变量值，如果指针地址中的内存数据在读取之后没有变化，那么 Store-conditional（SC）操作将会成功，它将LL读取 指针地址的存储新的值，否则，SC将执行失败。</p>
+</blockquote>
+<blockquote>
+<p>通过LL/SC对实现的CAS并不是一个原子性操作，但是它确实执行了原子性的CAS，目标内存单元内容要么不变，要么发生原子性变化。由于通过LL/SC对实现的CAS并不是一个原子性操作，于是，该CAS在执行过程中，可能会被中断。因此<code>C++11</code>标准中添入两个<code>compare_exchange</code>原语: <code>compare_exchange_weak</code>和<code>compare_exchange_strong</code>。即使当前的变量值等于预期值，这个弱的版本也可能失败，比如返回false。可见任何weak CAS都能破坏CAS语义，并返回false，而它本应返回true。而Strong CAS会严格遵循CAS语义。</p>
+</blockquote>
+<blockquote>
+<p>何种情形下使用Weak CAS，何种情形下使用Strong CAS呢？通常执行以下原则：</p>
+</blockquote>
+<blockquote>
+<p>倘若CAS在循环中（这是一种基本的CAS应用模式），循环中<strong>不存在</strong>成千上万的运算（循环体是轻量级和简单的），使用<code>compare_exchange_weak</code>。否则，采用强类型的<code>compare_exchange_strong</code>。</p>
+</blockquote>
+<p>因此，Rust 标准库过期 cas 方法，就是为了让开发者可以根据场景来判断使用 强还是弱的 cas 语义。而 标准库里的cas方法则只是对 <code>compare_exchange</code> 的包装，而 Rust 中 <code>compare_exchange</code> 对应 强CAS 语义，所以容易被滥用。</p>
+<h3><a class="header" href="#a-hrefhttpsgithubcomrust-langrustpull78439放弃对所有-cloudabi-target-的支持a" id="a-hrefhttpsgithubcomrust-langrustpull78439放弃对所有-cloudabi-target-的支持a"><a href="https://github.com/rust-lang/rust/pull/78439">放弃对所有 cloudabi target 的支持</a></a></h3>
+<p>包括：</p>
+<ul>
+<li>aarch64-unknown-cloudabi</li>
+<li>armv7-unknown-cloudabi</li>
+<li>i686-unknown-cloudabi</li>
+<li>x86_64-unknown-cloudabi</li>
+</ul>
+<p>因为 <a href="https://github.com/NuxiNL/cloudabi#note-this-project-is-unmaintained">CloudABI 不再被维护了</a>，可以考虑 WASI 了，WASI 的一些概念就是受到 CloudABI 的启发，现在算是 CloudABI 的接班人了。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/actor_with_tokio.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/rust_2021_edition.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/actor_with_tokio.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/rust_2021_edition.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

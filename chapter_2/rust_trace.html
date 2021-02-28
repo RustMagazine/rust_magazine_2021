@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PingCAP | TiKV 高性能追踪的实现解析 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item expanded "><a href="../chapter_2/rust_trace.html" class="active"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#pingcap--tikv-高性能追踪的实现解析" id="pingcap--tikv-高性能追踪的实现解析">PingCAP | TiKV 高性能追踪的实现解析</a></h1>
+<p>作者：钟镇炽 / 后期编辑：张汉东</p>
+<hr />
+<h2><a class="header" href="#前言" id="前言">前言</a></h2>
+<p>本文为  PingCAP Observability 团队研发工程师钟镇炽在 Rust China Conf 2020 大会上所做演讲 《高性能 Rust tracing 库设计》的更详细文本，介绍了对性能要求非常苛刻的分布式 KV 数据库 TiKV 如何以不到 5% 的性能影响实现所有请求的耗时追踪 。另可点击 https://www.bilibili.com/video/BV1Yy4y1e7zR?p=22 查看演讲视频。</p>
+<h2><a class="header" href="#背景" id="背景">背景</a></h2>
+<p>系统的可观测性 (Observability) 通常由三个维度组成：日志 (Logging)、指标 (Metrics) 和追踪 (Tracing)，它们之间的关系如下：</p>
+<p><img src="./rust_trace/1.png" alt="1" /></p>
+<ul>
+<li>日志：离散的错误信息和状态信息。</li>
+<li>指标：记录和呈现可聚合的数据。</li>
+<li>追踪：单个请求的一系列事件。</li>
+</ul>
+<p>TiKV 实现了完备的日志和指标系统，但缺失了追踪，导致在诊断 TiKV 和 TiDB 问题时会遇到以下困难：</p>
+<ul>
+<li><strong>观测数据之间的没有关联</strong>：只有熟悉请求链路上每个操作对应什么监控指标的同学才能完整追溯和诊断问题。</li>
+<li><strong>请求抖动难以追溯</strong>：TiKV 节点往往同时处理不同模式的业务，零星请求的性能抖动无法体现在 AVG / P99 / MAX 等监控指标中，从而无法诊断抖动原因。</li>
+</ul>
+<p><strong>追踪可以有效解决上述场景中遇到的问题</strong>。以下详细介绍 TiKV 中高性能追踪的实现。追踪功能在 TiKV 中尚为实验性特性，需要特定代码分支开启，感兴趣的同学可以关注 GitHub issue <a href="https://github.com/tikv/tikv/pull/8981">Introduce tracing framework (#8981)</a>。</p>
+<h3><a class="header" href="#基本概念" id="基本概念">基本概念</a></h3>
+<p>追踪（Trace）呈现系统中的一个请求的执行路径。例如追踪一个 SQL 语句从 TiDB 到 TiKV 的执行全过程后可以得到下图：</p>
+<p><img src="./rust_trace/2.png" alt="2" /></p>
+<p>从图中可以直观看到 SQL 语句<code>“INSERT INTO</code>t<code>VALUES (1), (2), (3);” </code>有趣的信息：</p>
+<ul>
+<li>TiDB 处理这个请求时依次进行了 compile、plan、execute 三个步骤</li>
+<li>TiDB 在 execute 阶段调用了 TiKV 的 Prewrite RPC 和 Commit RPC</li>
+<li>请求共耗时 5ms</li>
+</ul>
+<p>图中每个方框代表一个事件，称之为 Span。每个 Span 包含：</p>
+<ul>
+<li>事件名称</li>
+<li>事件起始时间戳和结束时间戳</li>
+</ul>
+<p>Span 之间有层级，可以构成父子关系或先后关系，如下图所示：</p>
+<p><img src="./rust_trace/3.png" alt="3" /></p>
+<h2><a class="header" href="#实现" id="实现">实现</a></h2>
+<blockquote>
+<p>本文所有性能测试结果，若特别说明测试环境，均在以下平台完成：</p>
+<p>CPU: Intel Core i7-8700
+Linux distros: Ubuntu 20.04
+Linux kernel: 5.4
+Memory: 32G
+Disk: NVMe SSD</p>
+</blockquote>
+<p>TiKV 使用 Rust 编写。Rust 生态中有几个现成的追踪库，分别是 <a href="https://github.com/tokio-rs/tracing">tokio-tracing</a>, <a href="https://github.com/sile/rustracing">rustracing</a> 和 <a href="https://github.com/open-telemetry/opentelemetry-rust">open-telemetry</a>，它们都兼容 <a href="https://opentracing.io/specification/">OpenTracing 规范</a>，但<strong>性能不够理想</strong>，引入后会降低 TiKV 50% 以上性能。<strong>TiKV 目前的实现能将性能的影响控制在 5% 以内</strong>。这主要来自于<strong>单个 Span 追踪收集仅耗时 <code>20ns</code></strong>：</p>
+<p><img src="./rust_trace/4.png" alt="4" /></p>
+<p>以下具体介绍 TiKV 如何在 <code>20ns</code> 内完成单个 Span 追踪和收集。</p>
+<h3><a class="header" href="#计时" id="计时">计时</a></h3>
+<p>计时在追踪中是高频操作，每个 Span 都需要取两次时间戳，分别代表事件的起始和结束时刻，因此计时的性能会很大程度上影响追踪的性能。</p>
+<p>追踪库采用的计时方式通常需要能满足以下要求：</p>
+<ul>
+<li>获取的时间戳单调递增</li>
+<li>高性能</li>
+<li>高精度</li>
+</ul>
+<h4><a class="header" href="#stdinstant" id="stdinstant">std::Instant</a></h4>
+<p>Rust 原生提供以下两种计时方式：</p>
+<ul>
+<li><code>std::SystemTime::now()</code></li>
+<li><code>std::Instant::now()</code></li>
+</ul>
+<p>其中第一种方式获取的是当前系统时间，它可能受用户手动调整、NTP 服务修正等原因的影响，获取到的时间戳并不提供单调递增的保证，因此不能采用。</p>
+<p>大多数 Rust 社区的追踪库采取了第二种方式，可以取得单调递增的、纳秒精度的时间戳。但它的性能不够理想，取两次时间需要 <code>50ns</code>，这是社区追踪库性能较低的原因之一。</p>
+<h4><a class="header" href="#coarse-time" id="coarse-time">Coarse Time</a></h4>
+<p>若仅从高性能的角度出发来寻找计时方案，可使用 Coarse Time，<strong>它牺牲了一定的精度换取高性能</strong>。在 Linux 环境下，以 <code>CLOCK_MONOTONIC_COARSE</code> 作为时间源参数，通过 <code>clock_gettime</code> 系统调用可获取 Coarse Time。Rust 社区也提供了库 <a href="https://docs.rs/coarsetime/0.1.18/coarsetime/">coarsetime</a> 获取 Coarse Time：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>coarsetime::Instant::now()
+<span class="boring">}
+</span></code></pre></pre>
+<p>Coarse Time 性能很高，在测试环境下完成两次调用仅需要 <code>10ns</code>。它的精度取决于 Linux 的 jiffies 配置，默认精度为 <code>4ms</code>。</p>
+<p>低精度的计时对于短耗时请求的追踪会产生让人困惑的结果。如下图所示，从观测的角度来看已经损失了相当一部分的细节信息：</p>
+<p><img src="./rust_trace/5.png" alt="5" /></p>
+<p>当然<strong>在多数情况下，Coarse Time 仍是快速计时的首选</strong>。一方面是它在 Linux 系统下开箱即用，获取方便。另一方面，<code>4ms</code> 精度对大部分应用来说是可以接受的。</p>
+<p>尽管如此，作为追踪功能的开发者，我们不希望限制用户的场景，例如对于 KvGet 请求，<code>4ms</code> 在要求高的场景中已足够作为异常的抖动需要追溯了，因此<strong>有必要支持微秒乃至纳秒级别精度的追踪</strong>。同时，性能作为核心出发点，也不能被牺牲掉。幸运的是，这个问题是有解的，它便是接下来要介绍的 TSC。</p>
+<h4><a class="header" href="#tsc" id="tsc">TSC</a></h4>
+<p>TiKV 采用 Time Stamp Counter (TSC) 寄存器进行高精度高性能计时。TSC 寄存器在现代 x86 架构的 CPU 中已经存在很久了，最早可以追溯到 2003 年推出的奔腾处理器。它记录了 CPU 供电重设后到当前时刻所经过的 CPU 时钟周期数。在 CPU 时钟周期速率相同的条件下，经过测量和换算即可用于高精度计时。</p>
+<p><strong>TSC 可以同时满足单调递增、高精度和高性能的需求</strong>。在我们的测试环境中取两次 TSC 仅需 <code>15ns</code>。在实际情况中，随着处理器的不断发展，TSC 寄存器积累了相当多历史遗留问题会对其正确性造成影响，需要修正。</p>
+<p><strong>TSC 速率</strong></p>
+<p>TSC 递增速率由 CPU 频率决定。<strong>现代化 CPU 可能会动态调节频率节省能耗，导致 TSC 递增速率不稳定</strong>：</p>
+<p><img src="./rust_trace/6.png" alt="6" /></p>
+<p>另外，<strong>一些 CPU 在休眠状态时不会递增 TSC</strong>：</p>
+<p><img src="./rust_trace/7.png" alt="7" /></p>
+<p><strong>比较现代的 x86 架构 CPU 提供了特性确保 TSC 递增速率的稳定性</strong>。在 Linux 下可以通过 <code>/proc/cpuinfo</code> 中的 CPU flag 来检查 TSC 速率是否稳定：</p>
+<ul>
+<li>constant_tsc: TSC 将以固定的额定标称频率而非瞬时频率递增</li>
+<li>nonstop_tsc: TSC 在 CPU 休眠状态下仍持续递增</li>
+</ul>
+<p>以上 TSC 速率的稳定性保证<strong>仅对单个 CPU 核心有效</strong>，在多核情况下还需处理 TSC 同步问题。</p>
+<p><strong>TSC 多核同步</strong></p>
+<p>x86 架构 CPU <strong>没有提供 TSC 寄存器在所有核心上的一致性保证</strong>，这会导致计时存在问题。下图展示了某台 2020 年生产的搭载了当时最新 x64 CPU 的笔记本上 TSC 测量情况。可以看到，16 个核心中有一个核心 CPU 0 的 TSC 值存在偏差。</p>
+<p><img src="./rust_trace/8.png" alt="8" /></p>
+<p>在追踪中，完整的计时操作会读取两次时间戳，分别代表事件的始末。由于操作系统的线程调度，这两个时间戳的读取可能发生在不同的核心上。若我们简单地以 TSC 值差值进行计时，会<strong>在多核 TSC 不同步的情况下造成耗时计算的偏差</strong>。</p>
+<p>举个例子：</p>
+<ol>
+<li>t1 时刻，线程在 Core 1 上运行，读取了较大的 tsc1</li>
+<li>操作系统将线程从 Core 1 调度至 Core 2</li>
+<li>t2 时刻，线程在 Core 2 上运行，读取了较小的 tsc2</li>
+</ol>
+<p><img src="./rust_trace/9.png" alt="9" /></p>
+<p>此时计算的 TSC 差值甚至成为了负数，无法换算为耗时。</p>
+<p>为了解决这个问题，<strong>TiKV 会同步各个核心的原始 TSC 值，计算出 TSC 值在各个核心的偏移量</strong>，使用同步过后的 TSC 值用于计算耗时。具体算法为在各个核心上任取两次 TSC 和物理时间，以物理时间作为 x 轴、核心上的 TSC 作为 y 轴计算截距，差值即为各个核心的 TSC 偏移，如下图所示：</p>
+<p><img src="./rust_trace/10.png" alt="10" /></p>
+<p>在计算初始 TSC 偏移时，<strong>需要确保取两次 TSC 的过程全都同一核心上执行</strong>。在 Linux 中可以通过系统调用 <code>sched_setaffinity</code> 设置线程的亲核性，将线程固定到某个核心上运行：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>fn set_affinity(cpuid: usize) -&gt; Result&lt;(), Error&gt; {
+   use libc::{cpu_set_t, sched_setaffinity, CPU_SET};
+   use std::mem::{size_of, zeroed};
+ 
+   let mut set = unsafe { zeroed::&lt;cpu_set_t&gt;() };
+   unsafe { CPU_SET(cpuid, &amp;mut set) };
+ 
+   // Set the current thread's core affinity.
+   if unsafe {
+       sched_setaffinity(
+           0, // Defaults to current thread
+           size_of::&lt;cpu_set_t&gt;(),
+           &amp;set as *const _,
+       )
+   } != 0
+   {
+       Err(std::io::Error::last_os_error().into())
+   } else {
+       Ok(())
+   }
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>有了各个核心的 TSC 偏移值后，在计时阶段只需获取当前执行线程所在的 CPU 及 TSC 值，即可计算出同步后的 TSC 值。需要注意的是，当前执行所在的 CPU 及当前的 TSC 值需要在一条指令中同时获取，避免其中插入操作系统的线程调度导致计算错误。这<strong>可以通过 RDTSCP 指令实现</strong>。它可以帮助我们原子性地获取原始 TSC 值和 CPU ID。</p>
+<p>Rust 代码如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>#[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
+fn tsc_with_cpuid() -&gt; (u64, usize) {
+   #[cfg(target_arch = &quot;x86&quot;)]
+   use core::arch::x86::__rdtscp;
+   #[cfg(target_arch = &quot;x86_64&quot;)]
+   use core::arch::x86_64::__rdtscp;
+ 
+   let mut aux = std::mem::MaybeUninit::&lt;u32&gt;::uninit();
+   let tsc = unsafe { __rdtscp(aux.as_mut_ptr()) };
+   let aux = unsafe { aux.assume_init() };
+ 
+   // IA32_TSC_AUX are encoded by Linux kernel as follow format:
+   //
+   // 31       12 11      0
+   // [ node id ][ cpu id ]
+   (tsc, (aux &amp; 0xfff) as usize)
+}
+
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>上文描述的高精度计时的逻辑已经提取成一个独立的 Rust 社区库 <a href="https://github.com/zhongzc/minstant.git">minstant</a>，可供相似需求的其他项目直接使用。</p>
+<h3><a class="header" href="#span-收集" id="span-收集">Span 收集</a></h3>
+<p>Span 可能在各个线程上产生，最终要收集起来汇聚成一个追踪，因此需要跨线程的 Span 收集机制。<strong>Span 的收集也是追踪库的一个常见性能瓶颈点</strong>。</p>
+<p>一般有以下方式进行线程安全的 Span 收集：</p>
+<ul>
+<li><code>Arc&lt;Mutex&lt;Vec&lt;Span&gt;&gt;&gt;</code></li>
+<li><code>std::sync::mpsc::Receiver&lt;Span&gt;</code></li>
+<li><code>crossbeam::channel::Receiver&lt;Span&gt;</code></li>
+</ul>
+<p>这几种常见的收集方式中 crossbeam channel 是最优的，发送和收集一次 Span 的耗时约为 40ns。为了在提升性能，TiKV 采用了与上述不同的方式收集 Span：同一线程上 Span 仅<strong>在线程本地无竞争地收集</strong>、最终汇集各个线程上已经<strong>收集好的一批 Span 到全局收集器</strong>。</p>
+<h4><a class="header" href="#local-span" id="local-span">Local Span</a></h4>
+<p>TiKV 为每个线程维护一个线程本地结构 LocalSpanLine，负责 LocalSpan 的产生和存储。再由另外一个线程本地结构 LocalCollector，负责驱动 LocalSpanLine 和收集 LocalSpan。这三者之间的关系和各自的职责如下图。</p>
+<p><img src="./rust_trace/11.png" alt="11" /></p>
+<p>由于 LocalSpan、LocalSpanLine 和 LocalCollector 均是线程本地的，它们之间的交互均<strong>不需要线程间的同步和互斥，也不会破坏内存缓存，因此性能极高</strong>。LocalSpan 的收集是简单的 <code>Vec::push</code> 操作，平均耗费仅为 <code>4ns</code>。</p>
+<p>另外，在构造 Span 依赖关系时，利用线程本地的特性可以很方便地实现<strong>隐式上下文</strong>的机制，<strong>用户无需修改函数签名来手动传递追踪上下文</strong>，大大降低了对现有代码的侵入性。</p>
+<p>下面我们来深入了解关于 LocalSpan 产生和收集的实现细节。</p>
+<p>首先，LocalSpanLine 维护了一个容器 SpanQueue，用于装载正在进行的或者已经完成的 LocalSpan。“正在进行”意味着 LocalSpan 所指示的事件开始时间已知，而结束时间未知。这些 LocalSpan 均存储在 SpanQueue 内部的 Vec 结构。</p>
+<p>除此之外，上文提到我们利用隐式上下文来构造 LocalSpan 之间的父子依赖关系，这个过程实际上依赖于 SpanQueue 维护的一个变量 <code>next_parent_id</code>。</p>
+<p>接下来我们将通过一些例子对整个过程进行更为详细的展开。</p>
+<p>假设这样一个 foo 事件，于 <code>09:00</code> 产生，持续至 <code>09:03</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>09:00  foo +
+09:01      |
+09:02      |
+09:03      +
+<span class="boring">}
+</span></code></pre></pre>
+<p>初始状态下，SpanQueue 为空，<code>next_parent_id</code> 记为 root。那么在 foo 发生的时刻，即 09:00，SpanQueue 会去完成以下几个步骤：</p>
+<ul>
+<li>新增一条记录，填写事件名称 foo，起始时间 09:00，留空结束时间</li>
+<li>将 <code>next_parent_id</code> 的值赋给 foo 的 parent</li>
+<li>将 <code>next_parent_id</code> 更新为 foo</li>
+<li>向外部返回 <code>index</code> 的值 0，用以接收事件结束的通知，进而完成后续结束时间的回填</li>
+</ul>
+<p><img src="./rust_trace/12.png" alt="12" /></p>
+<p>在 foo 结束的时刻，即 <code>09:03</code>，用户提交 <code>index</code>，向 SpanQueue 通知 foo 事件结束，于是 SpanQueue 开始回填工作：</p>
+<ul>
+<li>通过 <code>index</code> 索引到 foo 事件所在记录</li>
+<li>将结束时间回填为 <code>09:03</code></li>
+<li>将 <code>next_parent_id</code> 更新为该记录的 <code>parent</code></li>
+</ul>
+<p><img src="./rust_trace/13.png" alt="13" /></p>
+<p>以上的例子描述了单个事件的记录过程，很简单也很有效。而实际上多个事件的记录也仅仅只是上述过程的重复。比如下面的过程，foo 事件包含了两个子事件：bar 和 baz。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>09:00  foo +
+09:01      | bar +
+09:02      |     |
+09:03      |     +
+09:04      |
+09:05      | baz +
+09:06      |     |
+09:07      |     +
+09:08      +
+
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>正如上文所述，SpanQueue 除了记录各个事件的起始和结束时间，还需要记录各个事件之间的父子依赖关系。这个例子中，foo 发生时 SpanQueue 的存储内容和上文没有区别。而在 bar 发生时，SpanQueue 设置 bar 的 parent 为当前的 <code>next_parent_id</code> 值，即 foo，同时将 <code>next_parent_id</code> 更新为 bar：</p>
+<p><img src="./rust_trace/14.png" alt="14" /></p>
+<p>在 bar 结束时，会按照上面提到的回填步骤，更新 bar 记录的结束时间以及 <code>next_parent_id</code> 变量：</p>
+<p><img src="./rust_trace/15.png" alt="15" /></p>
+<p>重复以上步骤，最终 SpanQueue 以一种高效的方式，完整记录了这三个事件的信息：</p>
+<p><img src="./rust_trace/16.png" alt="16" />
+<img src="./rust_trace/17.png" alt="17" /></p>
+<p>将这些记录串连起来，最终形成如下的 Trace 树状结构：</p>
+<p><img src="./rust_trace/18.png" alt="18" /></p>
+<h4><a class="header" href="#normal-span" id="normal-span">Normal Span</a></h4>
+<p>虽然 LocalSpan 的记录比较高效，但是由于其本身基于线程本地的实现方式，使得灵活性不足。比如在异步场景下，一些 Span 的产生和结束发生在不同的线程，线程本地的实现就不再能发挥作用。</p>
+<p>针对上述问题，TiKV 保留了前文最开始所描述的线程安全的 Span 记录方式，即采用 crossbeam channel 每次进行单个 Span 的收集，这样的 Span 下文称之为 NormalSpan。</p>
+<p>从实现的角度看，NormalSpan 的信息不会记录在线程本地的容器当中，而是由相应的变量自行维护，以便于跨线程的移动。同时，NormalSpan 之间的父子关系不再由线程本地隐式构建，而需由用户手动指定。</p>
+<p>但是，NormalSpan 和 LocalSpan 并非完全隔离，TiKV 通过以下的交互方式将这两者联系起来：从 LocalCollector 收集而来的一组 LocalSpan，可以挂载在 NormalSpan 上作为子树，如下图所示。同时，挂载的数量不受限制，通过允许进行多对多的挂载方式，TiKV 在一定程度上支持了对 batch 场景的追踪，这是社区中大部分追踪库没有覆盖到的。</p>
+<p><img src="./rust_trace/19.png" alt="19" /></p>
+<p>上述实现方式形成了 Span 收集的快慢两条路径。它们共同合作，完成对某个请求的执行路径信息的记录：</p>
+<ul>
+<li>LocalSpan 不可跨越线程但记录高效，通过批量收集 LocalSpan 然后挂载至普通 Span 的方式，让追踪的开销变得非常低。</li>
+<li>普通 Span 的记录相对较慢，不过它可以跨线程传递，使用起来比较灵活。</li>
+</ul>
+<h2><a class="header" href="#使用方法" id="使用方法">使用方法</a></h2>
+<p><strong>TiKV 中的高性能追踪的逻辑已提取成一个独立的库</strong> <a href="https://github.com/tikv/minitrace-rust">minitrace-rust</a>，可直接在各种项目中使用，步骤如下：</p>
+<ul>
+<li>请求到达时，创建对应根 Span；</li>
+<li>请求执行路径上，使用 minitrace-rust 提供的接口记录事件的发生；</li>
+<li>请求完成时，收集执行路径上产生的所有 Span。</li>
+</ul>
+<h3><a class="header" href="#根-span-的创建和收集" id="根-span-的创建和收集">根 Span 的创建和收集</a></h3>
+<p>一般在一个请求开始的时候可以创建根 Span。在 minitrace-rust 中用法如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for req in listener.incoming() {
+   let (root_span, collector) = Span::root(&quot;http request&quot;);
+   let guard = root_span.enter();
+   my_request_handler(req);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Span 基于 Guard 实现了自动在作用域结束后结束 Span，而无需手工标记 Span 的终止。除了返回根 Span 外，<code>Span::root(event)</code>  还返回了一个 <code>Collector</code>。 <code>Collector</code> 与根 Span 一一对应。在请求完成时，可调用 <code>Collector</code> 的 <code>collect</code> 方法，从而完成对执行路径上产生的所有 Span 的收集。如下所示。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let (root_span, collector) = Span::root(&quot;http request&quot;);
+let guard = root_span.enter();
+ 
+handle_http_request(req);
+ 
+drop((guard, root_span));
+let spans = collector.collect();
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#事件记录" id="事件记录">事件记录</a></h3>
+<p>比较推荐使用 minitrace-rust 提供的 <code>trace</code> 和 <code>trace_async</code> 宏进行函数级别的事件记录。通过上述方式为单个函数记录的执行信息如下：</p>
+<ol>
+<li>调用的发生时刻</li>
+<li>调用的返回时刻</li>
+<li>直接（或间接）调用者的引用</li>
+<li>直接（或间接）调用的子函数的引用</li>
+</ol>
+<p>例如，追踪两个同步函数 <code>foo</code> 和 <code>bar</code>，通过添加 <code>trace(event)</code> 作为这两个函数的 attribute，即可记录函数的执行信息。如下所示。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[trace(&quot;foo&quot;)]
+fn foo() -&gt; u32 {
+   bar();
+   42
+}
+ 
+#[trace(&quot;bar&quot;)]
+fn bar() { }
+<span class="boring">}
+</span></code></pre></pre>
+<p>最终记录下来的信息，包括这两个函数各自的起始和完成时刻，以及函数调用关系：<code>foo</code> 调用了 <code>bar</code>。</p>
+<p><img src="./rust_trace/20.png" alt="20" /></p>
+<p>对于异步函数的记录，步骤略有不同。首先须将 <code>trace</code> 替换成 <code>trace_async</code>，如下所示。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>#[trace_async(&quot;foo async&quot;)]
+async fn foo_aysnc() -&gt; u32 {
+   bar_async().await;
+   42
+}
+ 
+#[trace_async(&quot;bar async&quot;)]
+async fn bar_async() {
+   yield_now().await;
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>另外还需要关键的一步：将 Task 用 minitrace-rust 提供的 Future 适配器 <code>in_span</code> 进行包装，从而将该 Future 与某个 Span 绑定起来。</p>
+<p>Task，在 Rust 异步语境中，特指被 spawn 至某个 executor 的 Future，也称根 Future。例如以下的 <code>foo_async</code> 就是一个 Task：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>executor::spawn(
+   foo_async()
+);
+<span class="boring">}
+</span></code></pre></pre>
+<p>假设要追踪 <code>foo_async</code> 这样一个 Task，并且与一个由 <code>Span::from_local_parent(event)</code> 创建的 Span 进行绑定，那么，相关的应用代码将如下所示。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>executor::spawn(
+   foo_async().in_span(Span::from_local_parent(&quot;Task: foo_async&quot;))
+);
+<span class="boring">}
+</span></code></pre></pre>
+<p>下图为该 Task 追踪的结果：</p>
+<p><img src="./rust_trace/21.png" alt="21" /></p>
+<h2><a class="header" href="#结语" id="结语">结语</a></h2>
+<p>TiKV 作为底层 KV 数据库，对其增加观测性功能天然有着与普通业务程序完全不一样的性能要求，非常具有挑战性。除了追踪以外，TiKV 及其上层 SQL 数据库 TiDB 也还有其他富有挑战性的观测性需求。PingCAP 的 Observability 团队专注于这类观测难题的解决与功能实现，感兴趣的同学可投递简历到 <a href="mailto:hire@pingcap.com">hire@pingcap.com</a> 加入我们，或加入 Slack channel <a href="https://slack.tidb.io/invite?team=tidb-community&amp;channel=sig-diagnosis&amp;ref=tracing">#sig-diagnosis</a> 参与技术讨论。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/huawei_rust.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/rust_error_handle.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/huawei_rust.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/rust_error_handle.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

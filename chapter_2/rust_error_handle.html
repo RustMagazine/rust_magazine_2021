@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item expanded "><a href="../chapter_2/rust_error_handle.html" class="active"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#蚂蚁集团-ceresdb-团队--关于-rust-错误处理的思考" id="蚂蚁集团-ceresdb-团队--关于-rust-错误处理的思考">蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></h1>
+<p>作者：evenyag / 后期编辑：张汉东</p>
+<hr />
+<p>错误处理并非一件容易的事情，尽管在使用 Rust 时，有编译器不厌其烦地督促我们，基本不存在漏掉错误不处理的情况了，但这并不意味着错误处理这件事情变简单了。这里也记录一下我使用 Rust 一段时间后，对于错误处理的一些思考，包含大量主观看法，欢迎读者拍砖。</p>
+<h2><a class="header" href="#不可恢复错误和可恢复错误" id="不可恢复错误和可恢复错误">不可恢复错误和可恢复错误</a></h2>
+<p>使用 Rust 的人都知道， Rust 错误处理的手段主要分为两种，对于不可恢复的错误（unrecoverable error），可以通过 panic 来直接中断程序的执行，而对于可恢复的错误（recoverable error），一般会返回 Result 。至于什么时候使用 panic ，什么时候使用 Result ，官方提供了一些指导意见，很多文章对这块都有讨论，相信不少人在这上面是能达成共识的，因此本文在这块也不做过多展开。</p>
+<p>错误处理中最麻烦的，还是处理可恢复的错误。</p>
+<h2><a class="header" href="#error-类型" id="error-类型">Error 类型</a></h2>
+<p>在进行错误处理，首先，你得把自己 Error 类型给定义了。我认为，对于一个新项目来说，定义好自己的 Error 类型甚至是属于最先要做的几件事情之一。即便一开始不做，等到你写到了第一个 Result 时，你也不得不考虑了。定义 Error 类型是一个可简单，可复杂的事情，毕竟在 <code>Result&lt;T, E&gt;</code> 里，<code>E</code> 其实可以塞任何东西。如果你胆子够大，甚至可以直接把 String 作为 Error 来使用，还能带上一定的错误信息。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn make_string_err() -&gt; Result&lt;(), String&gt; {
+    Err(format!(&quot;Oh, string is not {}&quot;, 1))
+}
+
+fn string_err_example() -&gt; Result&lt;(), String&gt; {
+    make_string_err()?;
+    Ok(())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>String 甚至可以转为来使用 <code>Box&lt;dyn Error&gt;</code></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn string_box_err() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    Err(format!(&quot;Oops, {}&quot;, 1))?;
+    Ok(())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>不过这种错误处理方式过于简单粗暴，而错误一旦转为了 String ，就丧失了大部分可编程性，上层想要针对某些类型的错误做针对性的处理就会变得非常困难 —— 唯一的手段估计就只剩下字符串匹配了。</p>
+<p>更多的时候，我们可能会想要把错误定义为一个 Enum 或者 Struct ，并实现 Error 等相关的 trait 。这是个体力活，如果你还需要处理 std 或者第三方库抛出来的 Error ，还需要手工实现一大堆 <code>From</code> 来为自己的 Error 实现相应的转换规则。这样下去，还没等 Error 类型定义完，写代码的热情就已经冷却了。</p>
+<p>这些工作太枯燥了，就应该交给工具库去做！而当你去找 Rust 相关的错误处理库（严格来说，可能称为错误管理或者错误定义库更合适）时，就会发现， Rust 的错误处理库也太多了，而且以后可能会更多，这对于有选择困难症的来说简直是灾难。后面我也会从早期到近期挑选出一些比较有代表性的错误处理库，谈下我对他们的理解和在错误处理上的一些看法。当然，由于不是每个库我都使用过，所以也难免理解存在偏颇，欢迎大家指正</p>
+<h2><a class="header" href="#quick-error" id="quick-error">quick-error</a></h2>
+<p>在我刚接触 Rust 时，市面上的错误处理库还没有现在多，或者说我对 Rust 错误处理还不如现在了解，挑选库的过程反而比较简单。由于当时 tikv 已经挺有名气了，于是我直接打开 tikv 的项目，发现它在使用 quick-error ，就决定跟着它用了。当时我的需求也很简单，就是希望有个工具库帮我把定义错误的这些 boilerplate code 给包掉，而 quick-error 也正如其名，能够比较麻利地帮我把 Error 类型定义出来。而 Rust 最早的错误处理库基本上也就只帮你干这样的事情，因此其实更像是错误定义库（如今 quick-error 也不仅仅只能帮你定义错误了，不过也是后话了）。</p>
+<p>例如下面就是个使用 quick-error 的例子，定义了一个 Error 类型，并且自动实现了 <code>From&lt;io::Error&gt;</code></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>quick_error! {
+    #[derive(Debug)]
+    pub enum MyError {
+        Io(err: io::Error) {
+            from()
+            display(&quot;I/O error: {}&quot;, err)
+            source(err)
+        }
+        Other(descr: &amp;'static str) {
+            display(&quot;Error {}&quot;, descr)
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#丢失上下文" id="丢失上下文">丢失上下文</a></h2>
+<p>然而，仅仅只是把 Error 定义出来只不过是刚刚踏入了错误处理的门，甚至可以说定义 Error 也只是错误处理那一系列 boilerplate code 的一小部分而已。单纯见到错误就往上抛并不难，而且 Rust 还提供了 <code>?</code> 运算符来让你可以更爽地抛出错误，但与之相对的，直接上抛错误，就意味着丢弃了大部分错误的上下文，也会给时候定位问题带来不便。</p>
+<p>例如有类似下面的代码，使用了刚刚在上面定义的 Error 类型，而 eat()/drink()/work()/sleep() 中任意一个都有可能抛出 <code>io::Error</code> 的函数。那么当 daily() 出错时，你拿到的最终信息可能只是个 &quot;I/O error: failed to fill whole buffer&quot; ，而到底是哪里出的错，为什么出错了呢？不知道，因为错误来源丢失了。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn daily() -&gt; Result&lt;(), MyError&gt; {
+    eat()?;
+    drink()?;
+    work()?;
+    sleep()?;
+    Ok(())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>丢失错误源头这种问题在 Rust 里还是很容易发生的，也是 Rust 错误处理里较恼人的一件事。当然，很大的原因还是在于错误提供没有 backtrace （现在也尚未 stable）。为了避免出现类似的问题，遇到错误时就需要注意保存一些调用信息以及错误的现场，概况下来，就是两样东西</p>
+<ul>
+<li>调用栈，或者说 backtrace</li>
+<li>错误的上下文，如关键入参</li>
+</ul>
+<p>严格来说， backtrace 也属于上下文的一部分，这里分开提更多是考虑到两者在实现层面是有所区分的。有 backtrace 自然方便，但 backtrace 也并不能解决所有问题：</p>
+<ul>
+<li>光靠 backtrace 其实只能回答哪里出了错的问题，而回答不了为什么出错的</li>
+<li>一些预期内时常会抛错误的代码路径也不宜获取 backtrace</li>
+</ul>
+<p>反过来，通过在日志里打印或者在 Error 类型中追加上下文信息，其实是能反过来推断出调用链路的，使得排查问题不强依赖 backtrace。我在 Rust 里进行的错误处理时做得最多的事情就是，考虑这个地方适不适合打印错误日志：</p>
+<ul>
+<li>如果适合，打下错误日志和相关信息，继续抛错误</li>
+<li>不适合，考虑错误直接抛上去了后续是否方便定位问题
+<ul>
+<li>如果不方便，还会把 error 和上下文信息 format 下得到新的 error message ，然后产生个新的错误抛出去</li>
+</ul>
+</li>
+</ul>
+<p>这种方式虽说能解决问题，不过并不认为是一种最佳实践，更称不上优雅，光是打印日志和补充错误信息，就得写不少代码，更不提日志和错误信息里有不少内容可能还是相互重复的。</p>
+<h2><a class="header" href="#error-chain-和-failure" id="error-chain-和-failure">error-chain 和 failure</a></h2>
+<p>有没有办法更方便地将错误的上下文信息放到 Error 里面呢？早期的 error-chain 库在这方面做了不少尝试，其中 <code>chaining errors</code> 模式有点类似 golang 中的 <code>errors.Wrap()</code> ，允许用户通过 <code>chain_err()</code> 将错误或者可转换为错误的类型（如 String）不断地串联起来。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let res: Result&lt;()&gt; = do_something().chain_err(|| &quot;something went wrong&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>除此之外，这个库还提供了 <code>ensure!</code> ， <code>bail!</code> 等工具宏以及 backtrace 功能，这些我认为对后来错误处理库的发展都是由一定启发作用的。不过 error-chain 文档里那一大坨宏定义，各种概念以及说明，对于刚接触 Rust 的人还是比较劝退的。</p>
+<p>到了 failure 库， <code>chain_err()</code> 的模式改为了通过 <code>context()</code> 来携带错误的上下文信息。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use failure::{Error, ResultExt};
+
+fn root() -&gt; Result&lt;(), Error&gt; {
+    a().context(&quot;a failed&quot;)?;
+    b().context(&quot;b failed&quot;)?;
+    Ok(())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如今错误处理库也基本沿用了 <code>context()</code> 这一 api 命名，甚至 <code>context()</code> 已经成为了 Rust 风格错误处理的一部分。</p>
+<p>尽管我也考虑过使用这两个库替换掉自己项目里在用的 quick-error ，不过，一旦项目变庞大后，这种替换错误处理库以及错误处理风格的工作就多少有点工作量抵不上收益了。另一方面， error-chain 和 failure 作为出现得比较早的错误处理库，更多起到探索和过渡的作用，他们当初需要解决的问题在 std 的 Error trait 的演进下，很多也都不复存在了（起码在 nightly 上是这样），因此他们的演进也基本走到尽头了。包括 failure 的开发后来也逐渐停滞，现在已经是处于 deprecated 的状态了，项目维护者也都推荐用一些更新的错误处理库。</p>
+<h2><a class="header" href="#thiserror--anyhow" id="thiserror--anyhow">thiserror + anyhow</a></h2>
+<p>对于一些新的错误处理库，目前社区里较为主流的建议可能是组合使用 thiserror 和 anyhow 这两个库。其中 thiserror 可以看作是定义 Error 的一个工具，它只帮你生成一些定义 Error 的代码，别的什么都不做，相当纯粹。</p>
+<p>而 anyhow 则为你定义好了一个 Error 类型，基本可以看作是一个 <code>Box&lt;dyn Error&gt;</code> ，同时还提供了一些如 <code>context</code> 等扩展功能，用起来更加无脑。</p>
+<pre><pre class="playground"><code class="language-rust">use anyhow::{Context, Result};
+
+fn main() -&gt; Result&lt;()&gt; {
+    ...
+    it.detach().context(&quot;Failed to detach the important thing&quot;)?;
+
+    let content = std::fs::read(path)
+        .with_context(|| format!(&quot;Failed to read instrs from {}&quot;, path))?;
+    ...
+}
+</code></pre></pre>
+<p>除此之外， anyhow 的 Error 只占用一个指针大小的栈空间，相应的 Result 的栈空间占用也会变小，在一些<a href="https://zhuanlan.zhihu.com/p/191655266">场景</a>下也比较有用。</p>
+<p>这两个库的作者 dtolnay 建议，如果你是在开发库，则用 thiserror ，而如果是开发应用则使用 anyhow 。这在实践时遇到的一个问题就是所谓库和应用的边界有时候并没有那么清晰：对一个多模块的应用来说，本质上也可以看作是由若干个库构成的，而这些模块或者&quot;库&quot;之间，也可能是有层级关系的。对于这些模块，使用 anyhow 就存在以下问题</p>
+<ul>
+<li>需要使用 anyhow 专门提供的 Error 类型，可能直接将 <code>anyhow::Error</code> 暴露到库的 api 上</li>
+<li>调用方拿到的不是明确的错误类型</li>
+<li>无法对 <code>anyhow::Error</code> 做 pattern match</li>
+<li>更近一步，应用也不保证不会有处理具体错误的需求</li>
+</ul>
+<p>本质上， <code>anyhow::Error</code> 库提供的 Error 类型，更类似一种 Report 类型，适合汇报错误，而不适合处理具体的错误。如果使用 thiserror ，就失去了便利的 <code>context</code> 功能，用起来相对没那么方便，而作者看上去也不打算支持这一点。总的看下来， thiserror + anyhow 的组合方案还是存在一定局限性，似乎用起来并没有那么顺手。</p>
+<h2><a class="header" href="#snafu" id="snafu">snafu</a></h2>
+<p>而 snafu 的方案，则让我看到 context 也是可以和具体的 Error 类型比较优雅地结合起来。不妨看下 snafu 官方的例子</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use snafu::{ResultExt, Snafu};
+use std::{fs, io, path::PathBuf};
+
+#[derive(Debug, Snafu)]
+enum Error {
+    #[snafu(display(&quot;Unable to read configuration from {}: {}&quot;, path.display(), source))]
+    ReadConfiguration { source: io::Error, path: PathBuf },
+
+    #[snafu(display(&quot;Unable to write result to {}: {}&quot;, path.display(), source))]
+    WriteResult { source: io::Error, path: PathBuf },
+}
+
+type Result&lt;T, E = Error&gt; = std::result::Result&lt;T, E&gt;;
+
+fn process_data() -&gt; Result&lt;()&gt; {
+    let path = &quot;config.toml&quot;;
+    let configuration = fs::read_to_string(path).context(ReadConfiguration { path })?;
+    let path = unpack_config(&amp;configuration);
+    fs::write(&amp;path, b&quot;My complex calculation&quot;).context(WriteResult { path })?;
+    Ok(())
+}
+
+fn unpack_config(data: &amp;str) -&gt; &amp;str {
+    &quot;/some/path/that/does/not/exist&quot;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>上面的例子就体现出 snafu 的一些特点：</p>
+<ul>
+<li>基于 context selector 的 context 方案
+<ul>
+<li>同样是 <code>io::Error</code> ， snafu 可以通过不同的 context 返回不同的 enum variant ，同时还能带上一些错误相关信息</li>
+<li>比起为 Error 直接实现 <code>From&lt;io::Error&gt;</code> 要更有意义，毕竟我们更希望拿到的错误告诉我是 read configuration 出错了，还是 write result 出错了，以及出错的文件 path 是哪个</li>
+<li>本质上是把 context 的类型也提前定义了</li>
+</ul>
+</li>
+<li>产生的 Error 就是我们自己定义的 Error，无需依赖 snafu 提供的 Error 类型</li>
+<li>这里其实还有一个隐含的好处，就是这个 Error 是可以做 pattern match 的</li>
+</ul>
+<p>关于 snafu 和错误处理， influxdb_iox 其实总结了一份他们错误处理的 style guide ，我觉得很有参考价值，里面也提到了 snafu 的一些<a href="https://docs.rs/snafu/0.6.10/snafu/guide/philosophy/index.html">设计哲学</a></p>
+<ul>
+<li>同样的底层错误可以根据上下文不同而转换为不同的领域特定错误，例如同样是 io 错误，根据上层业务语义的不同能够转换为不同的业务错误</li>
+<li>在库和应用的场景下都同样好用</li>
+<li>模块级别的 Error 类型，每个模块都应该定义一个，甚至多个自己专用的错误类型</li>
+</ul>
+<p>而这些设计哲学，我认为也是错误处理里比较好的实践。其中，关于 Error 类型应该做到模块级别还是做到 crate 级别（全局），可能会有较多争议，也值得发散开来聊聊。</p>
+<h2><a class="header" href="#模块级-error-类型与全局-error-类型" id="模块级-error-类型与全局-error-类型">模块级 Error 类型与全局 Error 类型</a></h2>
+<p>先摆观点，我认为 Error 类型尽量做到模块级别是更好的，甚至部分函数有专门的 Error 类型也不过分，但是也要摆一个事实，那就是我自己的代码里这一点做得也还不够好。</p>
+<p>所以，这里还是要提一下全局 Error 类型的一些好处，起码包括</p>
+<ul>
+<li>方便做一套全局的错误码，而且类型参数不合法就是比较常见的错误</li>
+<li>不需要花太多精力定义 Error 类型，很多 enum variant 可以共用，<code>Result&lt;T, Error&gt;</code> 也只需要定义一份，，这也是全局 Error 类型最大的优势</li>
+</ul>
+<p>但是，全局 Error 类型也存在相应的缺陷</p>
+<ul>
+<li>所有用到了 Error 类型的模块，其实通过 Error 类型间接和其他模块耦合了，除非你的 Error 类型只想用 <code>anyhow::Error</code> 这样的类型</li>
+<li>即使来源 Error 相同，上下文也不同，定义到一个 enum variant 里面不见得合适</li>
+<li>更容易出现 Error 抛着抛着不知道哪来的情况</li>
+</ul>
+<p>而模块级的 Error 类型则看上去也更符合一个模块化的 crate 应有的设计</p>
+<ul>
+<li>不存在共用 Error 类型导致的间接耦合</li>
+<li>更加内聚，每个模块可以专心处理自己的错误， match 错误的范围也大大减少</li>
+<li>即使不依赖 backtrace ，错误本身也能明确反映出了层次关系和链路</li>
+</ul>
+<p>当然，模块级的 Error 类型也并非没有缺点，例如</p>
+<ul>
+<li>定义 Error 的工作会变多，做全局的错误码会麻烦些，可能需要在上层做一次转换</li>
+<li>模块层次过深的话，或者一些模块的 Error 字段较多，由于 Rust enum 的特点，越上层的 Error 类型就会越大（std::mem::size_of::<Error>()），像 snafu 同样也会有这样的问题</li>
+</ul>
+<h2><a class="header" href="#总结" id="总结">总结</a></h2>
+<p>错误处理可能不存在最佳方案一说，更多还是要结合实际场景。即便是谈到错误处理库，我要是大喊一声 snafu 是 Rust 最好的错误处理库，相信社区里肯定也会有一堆人跳出来反对我。而实际上 snafu 也存在自身的缺点，例如 Error 定义的工作量相对大（需要定义各种 context）， Error 类型体积可能会比较大等。</p>
+<p>总的来说，错误处理一直是一件麻烦的事。我觉得能做到错误的现场可追溯，就已经算错误处理做得不错了的。经过几年的发展， Rust 的错误处理库初步发展出了 context 和 backtrace 两种记录错误上下文的手段，同时也更加强大和易用了，但我认为目前他们尚未发展到终态，也尚未出现一个库独大的局面。如果说现在我新起个项目或者模块，需要选择一个错误处理库的话，我可能会先尝试下 snafu 。</p>
+<h2><a class="header" href="#关于我们" id="关于我们">关于我们</a></h2>
+<p>我们是蚂蚁智能监控技术中台的时序存储团队，我们正在使用 Rust 构建高性能、低成本并具备实时分析能力的新一代时序数据库，欢迎加入或者推荐，联系人 jiachun.fjc@antgroup.com</p>
+<h2><a class="header" href="#参考" id="参考">参考</a></h2>
+<ul>
+<li>https://blog.yoshuawuyts.com/error-handling-survey/</li>
+<li>https://www.ncameron.org/blog/migrating-a-crate-from-futures-0-1-to-0-3/</li>
+<li>https://zhuanlan.zhihu.com/p/225808164</li>
+<li>https://nick.groenen.me/posts/rust-error-handling/</li>
+<li>https://doc.rust-lang.org/book/ch09-00-error-handling.html</li>
+<li>https://github.com/tikv/rfcs/pull/38#discussion_r370581410</li>
+<li>https://github.com/shepmaster/snafu/issues/209</li>
+<li>https://github.com/rust-lang/project-error-handling/issues/24</li>
+<li>https://github.com/rust-lang/rust/issues/53487</li>
+<li>https://github.com/rust-lang/rfcs/blob/master/text/2504-fix-error.md</li>
+<li>https://zhuanlan.zhihu.com/p/191655266</li>
+<li>https://docs.rs/snafu/0.6.10/snafu/guide/philosophy/index.html</li>
+<li>https://doc.rust-lang.org/src/std/error.rs.html#48-153</li>
+<li>https://github.com/facebook/rocksdb/blob/00519187a6e495f0be0bbc666cacd9da467a6c1e/include/rocksdb/status.h#L34</li>
+<li>https://github.com/tailhook/quick-error/issues/22</li>
+<li>https://github.com/dtolnay/anyhow</li>
+<li>https://github.com/dtolnay/thiserror</li>
+<li>https://github.com/tailhook/quick-error</li>
+<li>https://github.com/rust-lang-nursery/failure</li>
+<li>https://github.com/rust-lang-nursery/error-chain</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/rust_trace.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/rust_error_handle_and_log.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/rust_trace.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/rust_error_handle_and_log.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

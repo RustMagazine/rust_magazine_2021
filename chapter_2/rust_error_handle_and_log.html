@@ -1,0 +1,733 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>华为 | Rust中的错误传递和日志记录 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item expanded "><a href="../chapter_2/rust_error_handle_and_log.html" class="active"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rust中的错误传递和日志记录" id="rust中的错误传递和日志记录">Rust中的错误传递和日志记录</a></h1>
+<p>作者：楼智豪 / 后期编辑：张汉东</p>
+<hr />
+<h2><a class="header" href="#简介以及背景" id="简介以及背景">简介以及背景</a></h2>
+<p>在Rust代码的编写过程中，开发者也需要关注错误处理和日志记录的过程，程序能够及时反馈信息，保证程序的正常运行。
+本文分两部分，第一部分讲述如何进行错误传递和处理，第二部分讲述应该如何记录日志。</p>
+<h2><a class="header" href="#错误处理" id="错误处理">错误处理</a></h2>
+<p>以前在使用C进行错误处理时，通常采用的是函数传递错误码的方式，而对于Rust而言这种方式显得有些古老。</p>
+<p>首先，Rust当中的错误处理基于两个特性，Result和Error。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub enum Result&lt;T, E&gt; {
+    /// Contains the success value
+    Ok(T),
+    /// Contains the error value
+    Err(E),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Result是Rust提供的一个枚举类，它里面应当包含，程序成功运行时返回的值T，或者是程序运行失败时返回的错误类型E。如果一个函数，它的返回值是一个Result，那么就表明，它有可能失败并返回一个错误类型，需要我们来处理这个Result。</p>
+<p>Rust在标准库中提供了一个trait，<code>sdt::error::Error</code>，目前错误处理都是基于这个trait来进行，一个结构体/枚举如果实现了这个trait，那么我们认为，它就是一个错误类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//为自定义的结构体实现Error的trait，该trait要求同时实现Display和Debug
+//Error tarit包含多个方法，但通常情况下impl的时候除了source方法其他无需重写
+pub trait Error: Debug + Display {
+    //如果该错误类型中包含了底层的错误Err，那么source方法应该返回Some(err),如果没有返回None。不重写则默认为None
+    fn source(&amp;self) -&gt; Option&lt;&amp;(dyn Error + 'static)&gt;;
+    //type_id()：该方法被隐藏
+    fn type_id(&amp;self, _: private::Internal) -&gt; TypeId;
+    //backtrace()：返回发生此错误的堆栈追溯，目前为unstable，默认禁用，且占用大量内存，性能很差
+    fn backtrace(&amp;self) -&gt; Option&lt;&amp;Backtrace&gt;;
+    //description()：已废弃，改使用Display
+    fn description(&amp;self) -&gt; &amp;str;
+    //cause()：已废弃，改使用source()
+    fn cause(&amp;self) -&gt; Option&lt;&amp;dyn Error&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>错误传递的背景在于，在开发过程中，可能各个模块自身都定义了一个错误类型，那么当这些模块需要一起使用时，不同错误类型的结构体应该如何转换和处理，如何传递。</p>
+<h3><a class="header" href="#方式一自定义错误类型" id="方式一自定义错误类型">方式一：自定义错误类型</a></h3>
+<ul>
+<li>自定义错误类型，并且通过From trait进行转换</li>
+<li>用 <code>?</code>来传递错误，自动执行类型转换</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Error for MyError {
+
+}
+
+/// MyError属于当前自定义的枚举，其中包含了多种错误类型
+/// MyError也包含了从下层传递而来的错误类型，统一归纳
+#[derive(Debug)]
+pub enum MyError {
+    BadSchema(String, String, String),
+    IO(io::Error),
+    Read,
+    Receive,
+    Send,
+}
+
+//实现Display
+impl fmt::Display for MyError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        match self {
+            MyError::BadSchema(s1, s2, s3) =&gt; {
+                write!(f, &quot;BadSchema Error:{}, {}, {}&quot;, s1, s2, s3)
+            }
+            MyError::IO(e) =&gt; {
+                write!(f, &quot;IO Error: {}&quot;, e)
+            }
+            MyError::Read =&gt; {
+                write!(f, &quot;Read Error&quot;)
+            }
+            MyError::Receive =&gt; {
+                write!(f, &quot;Receive Error&quot;)
+            }
+            MyError::Send =&gt; {
+                write!(f, &quot;Send Error&quot;)
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在定义MyError时，其中包括了多种错误类型，有当前模块产生的错误（比如Read, Receive, Send），也有从下层模块传递上来的错误，比如IO(io::Error)，针对从下层传递而来的这种错误，我们需要将它归纳到自己的MyError中，统一传递给上层。为了实现这个目的，我们就需要实现From 方法，当我们为一个错误类型的转换实现了From方法，就可以使用<code>?</code>来进行自动转换。如下所示</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl From&lt;io::Error&gt; for MyError {
+    fn from(err: io::Error) -&gt; MyError {
+        MyError::IO(err)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//这两个示例是相同的
+fn test_error() -&gt; Result&lt;i32, MyError&gt; {
+    let s = std::fs::read_to_string(&quot;test123.txt&quot;)?;
+    Ok(s)
+}
+
+fn test_error2() -&gt; Result&lt;String, MyError&gt; {
+    let s = match std::fs::read_to_string(&quot;test123.txt&quot;) {
+        Ok(s)=&gt;{
+            s
+        }
+        Err(e)=&gt;{
+            return Err(MyError::from(e));
+        }
+    };
+    Ok(s)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意在示例一当中<code>?</code>的作用，它等效于示例二中的match，意思是</p>
+<ul>
+<li>
+<p>该函数的返回值是一个<code>Result&lt;T,Error&gt;</code>，需要进行处理。</p>
+</li>
+<li>
+<p>如果该函数运行正确，那么返回T，上述的示例中返回String</p>
+</li>
+<li>
+<p>如果该函数运行失败，返回了一个错误类型Error，这里返回了io::Error， 并且因为我们实现了From方法，io::Error被自动转换成了MyError::IO(io::Error)，然后程序在此处直接return，不再继续往下走。</p>
+<p>注意From的类型转换是通过<code>?</code>来隐式调用的，如果不使用<code>?</code>而是直接return一个错误，它是不会自动进行类型转换的。</p>
+</li>
+</ul>
+<h3><a class="header" href="#方式二--使用trait-object传递错误" id="方式二--使用trait-object传递错误">方式二 ： 使用trait Object传递错误</a></h3>
+<ul>
+<li>
+<p>不定义自己的类型，而直接使用 <code>Box&lt;dyn Error&gt;</code> 来统一错误类型。</p>
+</li>
+<li>
+<p>用 <code>?</code>来传递错误，自动把Error转换成 <code>Box&lt;dyn Error&gt;</code> </p>
+</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn test_error() -&gt; Result&lt;i32, Box&lt;dyn Error&gt;&gt; {
+    let s = std::fs::read_to_string(&quot;test123.txt&quot;)?;
+    let n = s.trim().parse::&lt;i32&gt;()?;
+    Ok(n)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在上面这个示例中，可以看到，我们返回了一个Box<dyn Error>，他是一个trait Object，意思是泛指一个具有Error trait的结构体/枚举类型。我们之所以可以这么写，其实是因为Rust本身为Box<dyn Error>实现了From方法，所以可以实现自动转换。</p>
+<p>上述代码中，第一行和第二行分别返回了io:Error和ParseIntError，都可以被转换成Box<dyn Error>。这种方式的好处在于开发者不用再一个个地去定义错误类型，编写From方法，坏处在于丢失了具体的错误类型的信息，如果要对于不同的错误类型进行不同处理，就会遇到麻烦。</p>
+<p>虽然Rust提供的downcast方法可以将Box<dyn Error>重新还原成具体的结构体，但是<code>e.downcast::&lt;MyError&gt;();</code>这种形式的调用也还是需要预先知道结构体类型，所以使用起来还是有困难。</p>
+<h3><a class="header" href="#对比" id="对比">对比</a></h3>
+<table><thead><tr><th>方式</th><th>优点</th><th>缺点</th></tr></thead><tbody>
+<tr><td>自定义错误类型</td><td>可以统一错误类型，方便上层用户对不同的错误类型采取不同的措施</td><td>需要进行各式的类型转换，较为繁琐</td></tr>
+<tr><td>Box&lt;dyn Error&gt;</td><td>Error可以直接透传，不需要在乎具体的类型</td><td>丢失了结构体类型信息，但是也可以通过downcast把trait object转换回具体的结构体</td></tr>
+</tbody></table>
+<p>结论：综合以上两种方式的优缺点以及各方给出的意见，得出结论如下</p>
+<ul>
+<li>如果是编写一个库，那么最好采取方式一，因为我们需要给上层用户传递具体的错误类型，来方便他们进行处理。</li>
+<li>如果是编写一个完整的应用程序，所有错误都在自身内部进行处理了，不需要传递给其他人，那么可以考虑采取方式二</li>
+</ul>
+<h3><a class="header" href="#其他第三方库" id="其他第三方库">其他：第三方库</a></h3>
+<h3><a class="header" href="#anyhow-专门为错误处理设计的第三方库" id="anyhow-专门为错误处理设计的第三方库">anyhow ：专门为错误处理设计的第三方库</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use anyhow::Result;
+
+fn get_cluster_info() -&gt; Result&lt;ClusterMap&gt; {
+    //从std::io::Error转换成了anyhow::Error
+    let config = std::fs::read_to_string(&quot;cluster.json&quot;)?;
+    let map: ClusterMap = serde_json::from_str(&amp;config)?;
+    Ok(map)
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match root_cause.downcast_ref::&lt;DataStoreError&gt;() {
+    //从anyhow::Error转换成自定义的DataStoreError
+    Some(DataStoreError::Censored) =&gt; Ok(),
+    None =&gt; Err(error),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>anyhow这个库可以把用户自定义的，所有实现了<code>std::Error trait</code>的结构体，统一转换成它定义的<code>anyhow::Error</code>。这样用户在传递错误的过程中就使用的是统一的一个结构体，不用自定义各种各样的错误。</p>
+<p>论用法，其实anyhow和第二种trait Object方法是类似的，但是有几点不同</p>
+<ul>
+<li><code>anyhow::Error</code> 的错误是<code>Send</code>, <code>Sync</code> 和 <code>'static</code>的</li>
+<li><code>anyhow::Error</code> 保证<code>backtrace</code>方法可用，即便你的底层Error没有提供<code>backtrace</code></li>
+<li><code>anyhow::Error</code>是一个机器字长，而<code>Box&lt;dyn Error&gt;</code>是两个机器字长</li>
+</ul>
+<h3><a class="header" href="#thiserror-提供便捷的派生宏的第三方库" id="thiserror-提供便捷的派生宏的第三方库">thiserror ：提供便捷的派生宏的第三方库</a></h3>
+<p>前面有提到，一个自定义的MyError结构体，需要实现很多内容，Error trait，Display，Debug以及各种From函数，手动编写可能较为麻烦，而thiserror这个库则提供了过程宏来简化这个过程</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum DataStoreError {
+    #[error(&quot;data store disconnected&quot;)]
+    Disconnect(#[from] io::Error),
+    #[error(&quot;the data for key `{0}` is not available&quot;)]
+    Redaction(String),
+    #[error(&quot;invalid header (expected {expected:?}, found {found:?})&quot;)]
+    InvalidHeader {
+        expected: String,
+        found: String,
+    },
+    #[error(&quot;unknown data store error&quot;)]
+    Unknown,
+    #[error(&quot;Utf data store error&quot;)]
+    Utf{
+        #[from]
+        source: Utf8Error,
+        backtrace: Backtrace
+    },
+    #[error(transparent)]
+    Other(#[from] anyhow::Error)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>
+<p>在我们自定义的结构体前加上<code>#[derive(Error)]</code>，就可以自动impl Error</p>
+</li>
+<li>
+<p><code>#[error(&quot;invalid header (expected {expected:?}, found {found:?})&quot;)]</code>这条语句代表如何实现Display，后面的字符串就代表Display会输出的字符，同时支持格式化参数，比如这条语句里的expected就是代表结构体里面的元素。如果是元组则可以通过<code>.0</code>或者<code>.1</code>的方式来表示元素</p>
+</li>
+<li>
+<p><code>#[from]</code>表示会自动实现From方法，将对应的子错误进行转换</p>
+<ul>
+<li><code>#[from]</code>有两种写法，第一种就是<code>Disconnect(#[from] io::Error)</code>这样，自动将<code>io::Error</code>转换成<code>DataStoreError::Disconnect</code>，简单的结构体嵌套</li>
+<li>第二种写法是<code>Utf { #[from] source: Utf8Error, backtrace: Backtrace }</code>这种，这种格式有且只能有两个字段，<code>source</code>和<code>backtrace</code>，不能有其他字段。它会自动将<code>Utf8Error</code>转换成<code>DtaStoreError::Utf</code>，并且自动捕获原错误中的<code>backtrace</code>方法</li>
+</ul>
+</li>
+<li>
+<p><code>#[source]</code>表示将这个结构体字段的值作为<code>source</code>方法的返回值，如果字段本身的名称就是<code>source</code>的话就不用加<code>#[source]</code>而会自动应用。而<code>backtrace</code>方法则会自动寻找结构体里类型为<code>std::backtrace::Backtrace</code>的字段来作为返回值。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Error, Debug)]
+pub struct MyError {
+    msg: String,
+    #[source]  // optional if field name is `source`
+    source: anyhow::Error,
+    backtrace: Backtrace,  // automatically detected
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><code>#[error(transparent)]</code>表示将源错误的<code>source</code>方法和<code>Display</code>方法不加修改直接应用到<code>DataStoreError::Other</code></p>
+</li>
+</ul>
+<h2><a class="header" href="#日志记录" id="日志记录">日志记录</a></h2>
+<h3><a class="header" href="#a-hrefhttpscratesiocratesloglog库a" id="a-hrefhttpscratesiocratesloglog库a"><a href="https://crates.io/crates/log">log库</a></a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error!(target: &quot;yak_events&quot;, &quot;Commencing yak shaving for {:?}&quot;, yak);
+// target默认为当前crate的名称
+warn!( &quot;hello world&quot;);
+info!( &quot;hello world&quot;);
+debug!( &quot;hello world&quot;);
+trace!( &quot;hello world&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>记录当前crate的名字、文件名路径、行号、文本信息</li>
+</ul>
+<p><strong>日志门面库</strong></p>
+<p>通过定义统一的接口，使用统一的日志记录方式，可以在多个日志框架中灵活切换，可以让开发者不必关心底层的日志系统。如果你是Rust库的开发者，自然不期望自己的框架绑定某个具体日志库，而是只使用log门面日志库，由使用者自行决定日志库。</p>
+<pre class="mermaid">graph TD
+	应用程序--&gt;log
+	log--&gt;具体的日志系统
+	具体的日志系统--&gt;env_logger
+	具体的日志系统--&gt;pretty_env_logger
+	具体的日志系统--&gt;log4rs
+	具体的日志系统--&gt;slog-stdlog
+	具体的日志系统--&gt;...
+</pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct SimpleLogger {};
+
+impl log::Log for SimpleLogger {};
+
+log::set_logger(SimpleLogger);
+<span class="boring">}
+</span></code></pre></pre>
+<p>使用方式：调用set_logger方法绑定底层的日志系统，然后用户只需调用error!、log!这几个宏，其余的如何写入日志的问题则交给系统自己去做。</p>
+<h3><a class="header" href="#开源库如何记录日志" id="开源库如何记录日志">开源库如何记录日志</a></h3>
+<p>下面列出了一些开源库使用了什么日志工具，以及它们是如何记录日志的。</p>
+<p>可以得到结论，绝大部分开源库都在使用log这个日志门面库，而且日志记录的方式，通常是直接写入字符串信息，以及调用Error的Display方法进行写入。</p>
+<ul>
+<li>
+<p><a href="https://github.com/ivanceras/diwata">ivanceras / diwata</a> —用于PostgreSQL的数据库管理工具 ： 使用log库</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>debug!(&quot;ERROR: {} ({})&quot;, msg, status);
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><a href="https://community.chef.io/products/chef-habitat/">habitat</a>—由<a href="https://www.chef.io/">Chef</a>创建的用于构建，部署和管理应用程序的工具：使用log库</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>  match server::run(args) {
+      Err(err) =&gt; {
+          error!(&quot;Launcher exiting with 1 due to err: {}&quot;, err);
+          process::exit(1);
+      }
+      Ok(code) =&gt; {
+          let level = if code == 0 { Level::Info } else { Level::Error };
+          log!(level, &quot;Launcher exiting with code {}&quot;, code);
+          process::exit(code);
+      }
+  } 
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><a href="https://github.com/changlan/kytan">kytan</a> —高性能对等VPN ：使用log库</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>warn!(&quot;Invalid message {:?} from {}&quot;, msg, addr);
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><a href="https://github.com/servo/servo">Servo</a> —原型Web浏览器引擎 :  使用log库和gstreamer库</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>gst_element_error!(src, CoreError::Failed, [&quot;Failed to get memory&quot;]);
+// 引用C动态库，采取错误码方式传递u32
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><a href="https://github.com/wez/wezterm">wezterm</a> — GPU加速的跨平台终端仿真器和多路复用器 ：使用log库</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>log::error!(&quot;not an ioerror in stream_decode: {:?}&quot;, err);
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><a href="https://github.com/nicohman/eidolon">nicohman / eidolon</a> —适用于linux和macosx的无Steam和drm的游戏注册表和启动器：使用log库</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error!(&quot;Could not remove game. Error: {}&quot;, res.err().unwrap());
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><a href="https://github.com/tokio-rs/mio">Mio</a> - Mio是一个用于Rust的，快速的底层I/O库：使用log库</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let Err(err) = syscall!(close(self.kq)) {
+            error!(&quot;error closing kqueue: {}&quot;, err);
+        }
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p><a href="https://github.com/alacritty/alacritty">Alacritty</a> —跨平台，GPU增强的终端仿真器：使用log库 </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if let Err(err) = run(window_event_loop, config, options) {
+        error!(&quot;Alacritty encountered an unrecoverable error:\n\n\t{}\n&quot;, err);
+        std::process::exit(1);
+    }
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>最后，关于Error的Display方法具体应当输出什么内容，这里可以参考<code>std::io::Error</code>的内容（这里的<code>io::Error</code>并不是一个trait，而是一个实现了<code>std::error::Error</code>的trait的具体类型，是一个结构体）</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl ErrorKind {
+  pub(crate) fn as_str(&amp;self) -&gt; &amp;'static str {
+      match *self {
+          ErrorKind::NotFound =&gt; &quot;entity not found&quot;,
+          ErrorKind::PermissionDenied =&gt; &quot;permission denied&quot;,
+          ErrorKind::ConnectionRefused =&gt; &quot;connection refused&quot;,
+          ErrorKind::ConnectionReset =&gt; &quot;connection reset&quot;,
+          ErrorKind::ConnectionAborted =&gt; &quot;connection aborted&quot;,
+          ErrorKind::NotConnected =&gt; &quot;not connected&quot;,
+          ErrorKind::AddrInUse =&gt; &quot;address in use&quot;,
+          ErrorKind::AddrNotAvailable =&gt; &quot;address not available&quot;,
+          ErrorKind::BrokenPipe =&gt; &quot;broken pipe&quot;,
+          ErrorKind::AlreadyExists =&gt; &quot;entity already exists&quot;,
+          ErrorKind::WouldBlock =&gt; &quot;operation would block&quot;,
+          ErrorKind::InvalidInput =&gt; &quot;invalid input parameter&quot;,
+          ErrorKind::InvalidData =&gt; &quot;invalid data&quot;,
+          ErrorKind::TimedOut =&gt; &quot;timed out&quot;,
+          ErrorKind::WriteZero =&gt; &quot;write zero&quot;,
+          ErrorKind::Interrupted =&gt; &quot;operation interrupted&quot;,
+          ErrorKind::Other =&gt; &quot;other os error&quot;,
+          ErrorKind::UnexpectedEof =&gt; &quot;unexpected end of file&quot;,
+      }
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+</ul>
+<h3><a class="header" href="#slog库结构化日志" id="slog库结构化日志">slog库：结构化日志</a></h3>
+<p>这里还要提到一个库，slog，意为structured log，结构化日志。前面提到的日志都是非结构化日志，直接记录一段话，没有具体的格式。如果程序的日志数量比较小，那么非结构化日志是可以满足要求的，如果日志的数量很大，那么非结构化的日志就会带来诸多问题，就比如，格式多种多样，难以进行查询和解析。</p>
+<p>何为结构化日志，就是具有明确具体结构的日志记录形式，最主要的是具有key-value的键值对的形式，典型的是使用json来记录日志，一个json条目就是一条日记，每个字段就是一个键值对。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>debug!(log, &quot;Here is message&quot;; key1 =&gt; value1, key2 =&gt; value2);
+<span class="boring">}
+</span></code></pre></pre>
+<pre><code class="language-json">//传统的非结构化日志
+DEBUG 2018-02-05 02:00:45.541 [file:src/main.rs][line:43] CPU OVerload in location 100,ThreadId is 123456,MemoryUsage is 0,ThreadId is 234567,MemoryUsage is 0
+
+//结构化日志
+{
+    &quot;Timestamp&quot;: &quot;2018-02-05 02:00:45.541&quot;,
+    &quot;Severity&quot;: &quot;Debug&quot;,
+    &quot;File&quot;: &quot;src/main.rs&quot;,
+    &quot;Line&quot;: &quot;43&quot;,
+    &quot;Message&quot;: &quot;Memory overflow&quot;,
+    &quot;Info&quot;: {
+        &quot;ThreadId&quot;: &quot;123456&quot;,
+        &quot;MemoryUsage&quot;: &quot;0&quot;,
+        &quot;ThreadId&quot;: &quot;234567&quot;,
+        &quot;MemoryUsage&quot;: &quot;0&quot;,
+    }
+}
+</code></pre>
+<p>日志是维测能力的一个重要方面，也是调试的重要工具。 传统上非结构化的字符串，很难进行后续的二次分析，日志的相关处理也很麻烦。目前结构化日志日趋流行，使用结构化日志，使日志文件具有机器可读性和更高级的功能，以易于解析的结构化格式编写日志文件。这意味着日志分析工具可以轻松地获取结构化日志数据，这也使处理和查询日志更容易，并且分析日志更快，针对特定的条目进行过滤和跟踪分析。</p>
+<p>非结构化的日志查询，往往就是搜索关键字，速度慢，准确性差，容易查询出其他不相关的内容，效率低下。而目前的许多json分析工具，支持使用sql语言对条目进行查询；<a href="https://cloud.google.com/logging/docs/view/logs-viewer-interface">Google Cloud</a>的提供的结构化日志的服务还内置了日志解析工具，提供图形化界面解析日志，定义了日志查询语言来进行查询。</p>
+<p>最后，结构化日志可以帮助降低日志的存储成本，因为大多数存储系统上，结构化的键值数据比非结构化的字符串有更高的压缩率。</p>
+<hr />
+<p>作者介绍：</p>
+<p>楼智豪 </p>
+<p>任职于华为技术有限公司嵌入式软件能力中心，本文章仅代表作者个人观点，不代表公司意见。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/rust_error_handle.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/rust_study.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/rust_error_handle.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/rust_study.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

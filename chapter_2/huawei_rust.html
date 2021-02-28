@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item expanded "><a href="../chapter_2/huawei_rust.html" class="active"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#华为--可信编程----华为引领rust语言开发的实践和愿景" id="华为--可信编程----华为引领rust语言开发的实践和愿景">华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></h1>
+<p>作者：（俞一峻、Amanieu d'Antras、Nghi D. Q. Bui） / 后期编辑：张汉东</p>
+<hr />
+<h2><a class="header" href="#本文结构" id="本文结构">本文结构</a></h2>
+<ul>
+<li>可信编程 -- 华为引领 Rust 语言开发的实践和愿景
+<ul>
+<li>Rust带来的创新</li>
+<li>Rust在华为的初步推进</li>
+<li>华为对 Rust 社区的贡献</li>
+<li>配置华为的端到端 Rust 工具链
+<ul>
+<li>tokei</li>
+<li>cargo-geiger</li>
+</ul>
+</li>
+<li>通过深度代码学习研究 Rust</li>
+<li>结论</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#rust带来的创新" id="rust带来的创新">Rust带来的创新</a></h2>
+<p>StackOverflow 的调查表明, 自 2015 年以来，Rust 一直是开发者最爱的编程语言。</p>
+<p><img src="./huawei_rust/1-RustConChina2020-yu-v42.png" alt="img" /></p>
+<p>学术界对于Rust也越来越重视，在编程语言和软件工程顶会上发表的关于Rust的论文正逐年增加。</p>
+<p><img src="./huawei_rust/2-RustConChina2020-yu-v43.png" alt="img" /></p>
+<p>不仅如此，《自然》杂志2020年尾的文章《Why Scientists are Turning to Rust》中也强调：科学家极为推崇Rust。</p>
+<p><img src="./huawei_rust/3-RustConChina2020-yu-v41.png" alt="img" /></p>
+<h2><a class="header" href="#rust在华为的初步推进" id="rust在华为的初步推进">Rust在华为的初步推进</a></h2>
+<p>华为的目标是引领通信系统软件向安全可信演进，其中 Rust 语言正在发挥很大的作用。</p>
+<p>例如，我们希望通过部分 C/C++ 代码的迁移，在保证高性能的同时，拥有更高的安全性。在此过程中， 我们为开发者提供一套自动化工具支持：基于开源的 C2Rust 转译工具， 首先从 C 代码生成 Rust 代码, 然后通过源到源变换工具自动重构。</p>
+<p>在华为内部我们还基于 Actor 的并发编程模式开发了 Rust 库，方便程序员充分利用 Rust的语言特性, 例如<code>async/await</code>等。</p>
+<p>以华为代表的通信系统软件的开发以 C/C++ 代码为主, 这些 Rust 库将使 C/C++ 到 Rust 的迁移更加顺畅。 作为业界领先公司和 Rust基金会 的创始成员，华为致力于 Rust 在通信软件行业，并将持续为 Rust 社区做出贡献。</p>
+<h2><a class="header" href="#华为对rust社区的贡献" id="华为对rust社区的贡献">华为对Rust社区的贡献</a></h2>
+<p>我们为 Rust 社区贡献了许多重要的功能特性。例如，我们最近为 Rust 编译器提交了一系列代码，使得 Rust 编译目标可以支持<code>ARM AArch64 32</code>位大端变体<a href="https://developer.arm.com/documentation/dai0490/latest/">ILP32</a>芯片组, 用于我们的通信产品中。 这些改进使得我们和友商可以在这些常用网络硬件架构上执行Rust 原生程序。这些代码已经通过我们的 Rust 专家<code>Amanieu d'Antras</code> 提交给了 <a href="https://reviews.llvm.org/rG21bfd068b32ece1c6fbc912208e7cd1782a8c3fc">LLVM 编译器</a>, <a href="https://github.com/rust-lang/libc/pull/2039">libc 库</a>, 以及 <a href="https://github.com/rust-lang/rust/pull/81455">Rust 编译器</a>等开源社区。</p>
+<p>这些对 Rust 编译器的更改引入了新的端到端交叉编译目标，针对定制硬件构建 Rust 产品变得更容易,只需要简单的命令，比如：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo build --target aarch64_be-unknown-linux-gnu
+cargo build --target aarch64-unknown-linux-gnu_ilp32
+cargo build --target aarch64_be-unknown-linux-gnu_ilp32
+<span class="boring">}
+</span></code></pre></pre>
+<p>华为在中国 Rust 社区方面也走在前列，战略支持 12月26日至27日 在 深圳 举办了<a href="https://2020conf.rustcc.cn/">第一届 Rust China Conf 大会</a>，并推行多项 社区活动，包括为中国的开发者提供 Rust教程 和 Rust编码规范。</p>
+<h2><a class="header" href="#配置华为的端到端rust工具链" id="配置华为的端到端rust工具链">配置华为的端到端Rust工具链</a></h2>
+<p>Rust社区中有几种端到端的工具，我们已经开始从开发人员和工具的交互中获取信息。</p>
+<p>这里有一些例子:</p>
+<p><strong>tokei</strong></p>
+<p>由于可信编程项目通常涉及多个编程语言，我们采用了tokei作为多语言代码复杂性度量工具，识别多达200种编程语言。例如，开源的 Fuchhia 项目涉及了多种编程语言，下面的统计信息显示有多少行不同语种的代码：</p>
+<p><img src="./huawei_rust/4-RustConChina2020-yu-v49.png" alt="img" /></p>
+<p>C、C++、Rust 代码在 Fuchhia 项目的占比，可以绘制成如下演进图：</p>
+<p><img src="./huawei_rust/5-RustConChina2020-yu-v410.png" alt="img" /></p>
+<p>为了在大型项目中满足处理多种编程语言的场景需求，我们提交代码到tokei支持识别编程语言的批处理。</p>
+<p><strong>cargo-geiger</strong></p>
+<p>为了提高安全性，我们经常想知道有多少代码已经被 Rust 编译器检查过。幸运的是，通过统计&quot;Unsafe&quot;项目，如<code>fn</code>、<code>expr</code>，<code>struct</code>、<code>impl</code>、<code>trait</code>及其在各相关库实现中的出现次数， <a href="https://github.com/rust-secure-code/cargo-geiger">cargo-geiger</a>几乎做到了这点。</p>
+<p><img src="./huawei_rust/6-RustConChina2020-yu-v411.png" alt="img" /></p>
+<p>不过，统计数字中并没有反映安全性，所以没办法展现Rust项目总体上取得了多少进展的比例。因此，我们 提交了<a href="https://github.com/rust-secure-code/cargo-geiger/pull/167">代码</a>，在改进的 cargo-geiger 计数器报告中提供 Rust 项目的安全检查比率。这个代码采纳后，我们的产品团队现在每天定期都在使用这个工具，一份典型的报告能够更容易理解哪些代码库还没被 Rust 编译器完全检查到。</p>
+<p><img src="./huawei_rust/7-RustConChina2020-yu-v412.png" alt="img" /></p>
+<h2><a class="header" href="#通过深度代码学习研究-rust" id="通过深度代码学习研究-rust">通过深度代码学习研究 Rust</a></h2>
+<p>随着 Rust 开源社区代码的发展和革新，初学者需要学习掌握Rust最佳的实践，其包括但不限于 Rust 语言本身。把统计机器学习的方法应用到源代码数据上，也称为<a href="https://arxiv.org/abs/1709.06182">大代码</a>，正被全世界的软件工程研究团队关注：类似于 图像处理和自然语言处理中的机器学习问题，这些问题都需要通过深度神经网络(deep neural networks DNN)提取大量的特征，Big Code 可能同样需要去训练DNN来反映程序的统计特性，所以也称为&quot;深度代码学习&quot;。</p>
+<p>在这方面，华为与<a href="https://mcs.open.ac.uk/yy66">英国开放大学</a>和<a href="http://www.mysmu.edu/faculty/lxjiang/">新加坡管理大学</a>进行技术合作，在现在最先进的“跨语言”深度代码学习基础上进行优化研究。</p>
+<p>例如，最初的深度代码学习方法应用于北京大学编程课程收集到的104个算法类的5.2万个C/C++程序。对此数据集，树基卷积神经网络(TBCNN)算法分类准确率达到94%(<a href="https://github.com/bdqnghi/tbcnn.tensorflow">AAAI'16</a>)。最近的 SOTA 在语句级使用抽象语法树 (<a href="https://github.com/zhangj111/astnn">ICSE '19</a>)准确率达到98%。近期我们同英国开放大学和新加坡管理大学在树基胶囊网络的合作研究进展推动了SOTA进一步提高，达到98.4%的准确率(<a href="https://arxiv.org/abs/2009.09777">AAAI'21</a>)。</p>
+<p>早些时候我们已经使用跨语言的数据集表明，对一种编程语言的深度代码学习模型也适用于另一种编程语言。例如，从GitHub 爬取的数据集 Rosetta Code，从 Java 到 C 语言，可以获得86%的算法分类准确度 (<a href="https://github.com/bdqnghi/bi-tbcnn">SANER'19</a>)，在Java到C#的跨语言API映射 问题也能发挥重要作用(ESEC/FSE'19)。这些统计语言模型在软件工程中可以应用于很多方面，比如代码分类、代码搜索、代码推荐、代码摘要、方法名称预测、代码克隆检测等等(<a href="https://github.com/bdqnghi/infercode">ICSE'21</a>)。</p>
+<p>为了进一步研究分析 Rust 项目，我们向 Rust 解析器项目<code>tree-sitter</code>和 XML序列化 <code>quick-xml</code>等项目提交了代码，通过 Rust 程序的抽象语法树来训练深度代码学习模型。研究的初步结果很有希望，算法检测任务在 Rust代码上的精度高达85.5%。随着工具链的改进，这个比例还有望进一步提升。</p>
+<p>在 IDE 上的原型是在<code>Visual Studio Code IDE</code>上，我们开发扩展插件，使得程序员可以得到合适的算法推荐和可解释性的帮助。</p>
+<p><img src="./huawei_rust/8-RustConChina2020-yu-v414.png" alt="img" /></p>
+<h2><a class="header" href="#结论" id="结论">结论</a></h2>
+<p>综上所述，华为可信开源软件工程实验室正在开展的 Rust 工作为程序员提供智能化端到端 IDE 工具链，以期最大限度地提高代码的安全性和性能。走向可信编程远景的旅程刚刚开始，我们希望与 Rust社区 和 Rust基金会深度合作，引领电信软件产业的可信革新。</p>
+<hr />
+<p>作者简介：</p>
+<p>俞一峻：
+可信编程首席专家/华为可信软件工程开源实验室/华为爱尔兰研究所</p>
+<p>Amanieu d'Antras:
+可信编程首席专家/华为可信软件工程开源实验室/华为爱尔兰研究所</p>
+<p>Nghi D. Q. Bui:
+可信编程首席专家/华为可信软件工程开源实验室/华为爱尔兰研究所</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/rust_zhihu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/rust_trace.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/rust_zhihu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/rust_trace.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

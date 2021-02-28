@@ -1,0 +1,909 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>新年新人新气象 | Rust 学习笔记 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item expanded "><a href="../chapter_2/rust_study.html" class="active"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#新年新人新气象--rust-学习笔记" id="新年新人新气象--rust-学习笔记">新年新人新气象 | Rust 学习笔记</a></h1>
+<p>作者：李大狗（李骜华）/ 后期编辑： 张汉东</p>
+<hr />
+<blockquote>
+<p><strong>本系列所有源码：</strong></p>
+<p>https://github.com/leeduckgo/Rust-Study</p>
+</blockquote>
+<h2><a class="header" href="#新年新目标" id="新年新目标">新年新目标</a></h2>
+<p>打算在 2021 年学习一门新的编程语言，Rust 是一个很好的标的，一方面它及其具备实用性；另一个方面它也能让我们在更高的层面上理解计算机。</p>
+<p>本系列将是我从Rust小学生开始的Rust学习过程全记录。</p>
+<p>话不多说，我们开整。</p>
+<p>由于是一门新的语言（相对 Java），所以传统的到网上去找一本好的入门教材的方法失效了。</p>
+<p>那我们就来康康 Rust 能做什么有趣的事情，有什么有趣的Repo。</p>
+<p>Substrate（Polkadot公链）、Libra（Facebook链）、WeDPR（FISCO BCOS 隐私保护组件）都是用 Rust 写的，不过评估一下，这些 Repo 的难度太高了，不适合用来作为语言入门。</p>
+<p>后来发现 Rust 在 WebAssembly 方面目前进展很不错：</p>
+<blockquote>
+<p>WebAssembly是一种新的编码方式，可以在现代的网络浏览器中运行 － 它是一种低级的类汇编语言，具有紧凑的二进制格式，可以接近原生的性能运行，并为诸如C / C ++等语言提供一个编译目标，以便它们可以在Web上运行。它也被设计为可以与JavaScript共存，允许两者一起工作。</p>
+<h2><a class="header" href="#简而言之" id="简而言之">简而言之</a></h2>
+<p>对于网络平台而言，WebAssembly具有巨大的意义——它提供了一条途径，以使得以各种语言编写的代码都可以以接近原生的速度在Web中运行。在这种情况下，以前无法以此方式运行的客户端软件都将可以运行在Web中。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzml3h1uij30w00mi41a.jpg" alt="image-20210212094819556" /></p>
+<p>所以，Rust 的学习路线就这么定下来了，从wasm开始！</p>
+<h2><a class="header" href="#检索实例" id="检索实例">检索实例</a></h2>
+<p>既然确定了目标，那么可以开始检索相应的实例。这个实例有两个条件：</p>
+<ul>
+<li>光有文章是不行的，必须配套相应的的源码</li>
+<li>这个源码必须足够简洁，适合用来入门</li>
+</ul>
+<p>经过一番检索，最后找到了这个：</p>
+<blockquote>
+<p>项目代码：</p>
+<p>https://github.com/RodionChachura/rust-js-snake-game/</p>
+<p>运行地址：</p>
+<p>https://rodionchachura.github.io/rust-js-snake-game/</p>
+<p>教程地址：</p>
+<p>https://geekrodion.com/blog/rustsnake</p>
+</blockquote>
+<p>git clone 下来，运行了试试，的确可以。</p>
+<p>但感觉不是我想要的，因为前端代码的内容太多了。</p>
+<p>然后打开官方教程：</p>
+<blockquote>
+<p>https://developer.mozilla.org/zh-CN/docs/WebAssembly/Rust_to_wasm</p>
+</blockquote>
+<p>看到：</p>
+<blockquote>
+<p>Rust 和 WebAssembly 有两大主要用例：</p>
+<ul>
+<li>构建完整应用 —— 整个 Web 应用都基于 Rust 开发！</li>
+<li>构建应用的组成部分 —— 在现存的 JavaScript 前端中使用 Rust。</li>
+</ul>
+<p>目前，Rust 团队正专注于第二种用例，因此我们也将着重介绍它。对于第一种用例，可以参阅 <code>yew</code> 这类项目。</p>
+</blockquote>
+<p>Yep，感觉我需要的是<code>yew</code>！</p>
+<h2><a class="header" href="#yew-的探索之旅" id="yew-的探索之旅">Yew 的探索之旅</a></h2>
+<p>首先找到 <code>yew</code>的官网：</p>
+<blockquote>
+<p><strong>Yew</strong> is a modern Rust framework for creating multi-threaded front-end web apps with WebAssembly.</p>
+<p>https://github.com/yewstack/yew</p>
+</blockquote>
+<p>找到它官方的例子：</p>
+<blockquote>
+<p>https://yew.rs/docs/zh-CN/getting-started/build-a-sample-app</p>
+</blockquote>
+<p>结果，运行报错……</p>
+<pre><code>cargo-web is not compatible with web-sys.
+</code></pre>
+<p>遇到问题，第一时间，当然是到官方Repo里去检索啦，然后就搜到这么一条 Issue：</p>
+<blockquote>
+<p>https://github.com/yewstack/yew/issues/1081</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzml07drdj30x60u0tf8.jpg" alt="image-20210212102606760" /></p>
+<p>建议使用 trunk，妥~</p>
+<h2><a class="header" href="#trunk-的探索之旅" id="trunk-的探索之旅">Trunk 的探索之旅</a></h2>
+<p>跳转到 Trunk Repo：</p>
+<blockquote>
+<p>https://github.com/thedodd/trunk</p>
+</blockquote>
+<p>发现里面有examples，于是直接 clone 下来运行：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzmkyp56nj315m020mxd.jpg" alt="image-20210212103935572" /></p>
+<p>执行没问题，很好！</p>
+<p>但是只有一个简单的实例，没法基于这个进行学习，怎么办？</p>
+<p>我们回到 yew 的 Repo 里面，看下有没啥实例。</p>
+<blockquote>
+<p>https://github.com/yewstack/yew/tree/master/examples</p>
+</blockquote>
+<p>Examples 很多，也都能跑通，赞：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzmky3r5lj31160u0k06.jpg" alt="image-20210212104228167" /></p>
+<h2><a class="header" href="#魔改出-base64-encoder" id="魔改出-base64-encoder">魔改出 Base64 Encoder！</a></h2>
+<p>在入门一个新的计算机技术的时候，千万不要一开始就从0到1！因为从0到1的难度对新手来说太高。最开始应该先去魔改一个已有的项目。</p>
+<p>我选择的是todomvc，原始是长这样：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzml3vu1zj310q0hydhg.jpg" alt="image-20210212104717518" /></p>
+<p>目的是把它修改成一个 Base64-Encoder：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzmkz5c6mj30yi0bc75c.jpg" alt="image-20210212104823485" /></p>
+<p>Ok，那我们来看看原始代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>......
+    fn view(&amp;self) -&gt; Html {
+        let hidden_class = if self.state.entries.is_empty() {
+            &quot;hidden&quot;
+        } else {
+            &quot;&quot;
+        };
+        html! {
+            &lt;div class=&quot;todomvc-wrapper&quot;&gt;
+                &lt;section class=&quot;todoapp&quot;&gt;
+                    &lt;header class=&quot;header&quot;&gt;
+                        &lt;h1&gt;{ &quot;todos&quot; }&lt;/h1&gt;
+                        { self.view_input() }
+                    &lt;/header&gt;
+                    &lt;section class=classes!(&quot;main&quot;, hidden_class)&gt;
+                        &lt;input
+                            type=&quot;checkbox&quot;
+                            class=&quot;toggle-all&quot;
+                            id=&quot;toggle-all&quot;
+                            checked=self.state.is_all_completed()
+                            onclick=self.link.callback(|_| Msg::ToggleAll)
+                        /&gt;
+                        &lt;label for=&quot;toggle-all&quot; /&gt;
+                        &lt;ul class=&quot;todo-list&quot;&gt;
+                            { for self.state.entries.iter().filter(|e| self.state.filter.fits(e)).enumerate().map(|e| self.view_entry(e)) }
+                        &lt;/ul&gt;
+                    &lt;/section&gt;
+                    &lt;footer class=classes!(&quot;footer&quot;, hidden_class)&gt;
+                        &lt;span class=&quot;todo-count&quot;&gt;
+                            &lt;strong&gt;{ self.state.total() }&lt;/strong&gt;
+                            { &quot; item(s) left&quot; }
+                        &lt;/span&gt;
+                        &lt;ul class=&quot;filters&quot;&gt;
+                            { for Filter::iter().map(|flt| self.view_filter(flt)) }
+                        &lt;/ul&gt;
+                        &lt;button class=&quot;clear-completed&quot; onclick=self.link.callback(|_| Msg::ClearCompleted)&gt;
+                            { format!(&quot;Clear completed ({})&quot;, self.state.total_completed()) }
+                        &lt;/button&gt;
+                    &lt;/footer&gt;
+                &lt;/section&gt;
+                &lt;footer class=&quot;info&quot;&gt;
+                    &lt;p&gt;{ &quot;Double-click to edit a todo&quot; }&lt;/p&gt;
+                    &lt;p&gt;{ &quot;Written by &quot; }&lt;a href=&quot;https://github.com/DenisKolodin/&quot; target=&quot;_blank&quot;&gt;{ &quot;Denis Kolodin&quot; }&lt;/a&gt;&lt;/p&gt;
+                    &lt;p&gt;{ &quot;Part of &quot; }&lt;a href=&quot;http://todomvc.com/&quot; target=&quot;_blank&quot;&gt;{ &quot;TodoMVC&quot; }&lt;/a&gt;&lt;/p&gt;
+                &lt;/footer&gt;
+            &lt;/div&gt;
+        }
+    }
+}
+......
+<span class="boring">}
+</span></code></pre></pre>
+<p>挺好，这个就是前端部分了，我们把它删减一下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    fn view(&amp;self) -&gt; Html {
+        let hidden_class = if self.state.entries.is_empty() {
+            &quot;hidden&quot;
+        } else {
+            &quot;&quot;
+        };
+        html! {
+            &lt;div class=&quot;todomvc-wrapper&quot;&gt;
+                &lt;h1&gt;{ &quot;encode/decode&quot; }&lt;/h1&gt;
+                { self.view_input() }
+                &lt;section class=classes!(&quot;main&quot;, hidden_class)&gt;
+                    &lt;ul class=&quot;todo-list&quot;&gt;
+                        { for self.state.entries.iter().filter(|e| self.state.filter.fits(e)).enumerate().map(|e| self.view_entry(e)) }
+                    &lt;/ul&gt;
+                &lt;/section&gt;
+            &lt;/div&gt;
+        }
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们可以看到，输入的逻辑在<code>view_input()</code>这个地方，于是我们找到那个函数：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn view_input(&amp;self) -&gt; Html {
+        html! {
+            // You can use standard Rust comments. One line:
+            // &lt;li&gt;&lt;/li&gt;
+            &lt;input
+                class=&quot;new-todo&quot;
+          			// 改掉replaceholder
+                placeholder=&quot;What needs to be encode/decode?&quot;
+                value=&amp;self.state.value
+                oninput=self.link.callback(|e: InputData| Msg::Update(e.value))
+                onkeypress=self.link.batch_callback(|e: KeyboardEvent| {
+                    if e.key() == &quot;Enter&quot; { Some(Msg::Add) } else { None }
+                })
+            /&gt;
+            /* Or multiline:
+            &lt;ul&gt;
+                &lt;li&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+            */
+        }
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>再找到<code>Msg::Add</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn update(&amp;mut self, msg: Self::Message) -&gt; ShouldRender {
+        match msg {
+            Msg::Add =&gt; {
+                //info!(&quot;add things&quot;);
+                let description = self.state.value.trim();
+                let description_handled = format!(&quot;{}: {}&quot;, description, encode(description.to_string()));
+
+                if !description.is_empty() {
+                    let entry = Entry {
+                        description: description_handled,
+                        completed: false,
+                        editing: false,
+                    };
+                    //info!(&quot;{}&quot;, entry.description);
+                    self.state.entries.push(entry);
+                }
+                self.state.value = &quot;&quot;.to_string();
+            }
+......
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个时候，我想先调试一下，因此需要把一些数据打印出来。</p>
+<p>这个时候，首先想到的是<code>print</code>大法：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>println!(&quot;Input: {}&quot;, val);
+<span class="boring">}
+</span></code></pre></pre>
+<p>但是，在<code>trunk serve</code>命令中，<code>println!</code>这个函数失效了！</p>
+<p>在<code>trunk</code>和<code>yew</code>的 Repo 中进行检索，均未找到解决方案。</p>
+<p>但是随即发现<code>yew</code>有 Discord Chatroom，于是乎进去搜索聊天记录。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzml4by57j311q0qmgpg.jpg" alt="image-20210212105847278" /></p>
+<p>Yummy，这里提到只要使用wasm-logger即可。</p>
+<blockquote>
+<p>https://crates.io/crates/wasm-logger</p>
+</blockquote>
+<p>在项目里添加<code>wasm-logger</code>：</p>
+<pre><pre class="playground"><code class="language-rust">......
+// in the first of main.rs
+#[macro_use] extern crate log;
+......
+fn main() {
+		// init wasm logger!
+    wasm_logger::init(wasm_logger::Config::default());
+    yew::start_app::&lt;Model&gt;();
+}
+</code></pre></pre>
+<p>调用试试看：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn update(&amp;mut self, msg: Self::Message) -&gt; ShouldRender {
+        match msg {
+            Msg::Add =&gt; {
+                info!(&quot;add things&quot;);
+......
+<span class="boring">}
+</span></code></pre></pre>
+<p>妥了！</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzml2kyvrj31ga0oo0vx.jpg" alt="image-20210212110203302" /></p>
+<p>接下来找到Rust Base64 的库，调用之（修改的地方用new标出了）：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>......
+use base64::{encode, decode};
+......
+fn update(&amp;mut self, msg: Self::Message) -&gt; ShouldRender {
+        match msg {
+            Msg::Add =&gt; {
+                // new
+                info!(&quot;add things&quot;);
+                let description = self.state.value.trim();
+                // new
+                let description_handled = format!(&quot;{}: {}&quot;, description, encode(description.to_string()));
+
+                if !description.is_empty() {
+                    let entry = Entry {
+                      	// new
+                        description: description_handled,
+                        completed: false,
+                        editing: false,
+                    };
+                  	// new
+                    info!(&quot;{}&quot;, entry.description);
+                    self.state.entries.push(entry);
+                }
+                self.state.value = &quot;&quot;.to_string();
+            }
+<span class="boring">}
+</span></code></pre></pre>
+<p>运行之。</p>
+<p>Okay，Base64-Encoder就做好了！</p>
+<p>效果：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnzml2w1ejj30k009z758.jpg" alt="encoder" /></p>
+<p><code>Cargo.toml</code>最后长这样：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>[package]
+name = &quot;encoder&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;Denis Kolodin &lt;deniskolodin@gmail.com&gt;&quot;]
+edition = &quot;2018&quot;
+
+[dependencies]
+strum = &quot;0.20&quot;
+strum_macros = &quot;0.20&quot;
+serde = &quot;1&quot;
+serde_derive = &quot;1&quot;
+yew = { path = &quot;./packages/yew&quot; }
+yew-services = { path = &quot;./packages/yew-services&quot; }
+
+log = &quot;0.4.6&quot;
+wasm-logger = &quot;0.2.0&quot;
+base64 = &quot;0.13.0&quot;
+<span class="boring">}
+</span></code></pre></pre>
+<h1><a class="header" href="#生成-eth-公私钥与地址" id="生成-eth-公私钥与地址">生成 ETH 公私钥与地址</a></h1>
+<blockquote>
+<p><strong>本系列所有源码：</strong></p>
+<p>https://github.com/leeduckgo/Rust-Study</p>
+</blockquote>
+<p>本篇是 Rust 学习笔记的第二篇。在第一篇里，我们魔改出了一个 Encoder，现在我们继续延续我们的魔改之路，挑战一个难度+1的Repo：</p>
+<blockquote>
+<p>Rust library for generating cryptocurrency wallets</p>
+<p>https://github.com/AleoHQ/wagyu</p>
+</blockquote>
+<p>魔改目标 0x1：</p>
+<blockquote>
+<p><strong>抽取 Repo 中以太坊私钥、公钥、地址生成的部分，打印到控制台中。</strong></p>
+</blockquote>
+<p>但在魔改之前，笔者首先要对上一篇文章稍作补充，总结一下上篇文章中所涉及的知识点。</p>
+<h2><a class="header" href="#上篇文章中所涉及的知识点" id="上篇文章中所涉及的知识点">上篇文章中所涉及的知识点</a></h2>
+<ul>
+<li>变量的赋值</li>
+<li>format!函数（连接字符串）</li>
+<li>库的添加与使用，以wasm-logger为例</li>
+<li>trunk 与 yew 结合，让Rust程序 wasm 化，使其在浏览器中可访问</li>
+</ul>
+<h2><a class="header" href="#跑一遍-wagyu" id="跑一遍-wagyu">跑一遍 wagyu</a></h2>
+<p>首先要验证这个库符合我们的需求，所以按照 Repo 中的 Readme，采用源码的方式跑一遍。</p>
+<pre><code class="language-bash"># Download the source code
+git clone https://github.com/AleoHQ/wagyu
+cd wagyu
+
+# Build in release mode
+$ cargo build --release
+./target/release/wagyu
+</code></pre>
+<p>成功：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnpi5cklf3j313y0fi79f.jpg" alt="image-20210213091719643" /></p>
+<p>在这个过程里，我们学习到了 cargo 的更多用法：</p>
+<pre><code class="language-bash">$ cargo run # 直接执行
+$ cargo build # build 出 debug 版本，可执行文件在 ./target/debug 目录下
+$ cargo build --release # build 出 正式版本（release version)，可执行文件在 ./target/release 下
+</code></pre>
+<h2><a class="header" href="#研究-wagyu-代码" id="研究-wagyu-代码">研究 wagyu 代码</a></h2>
+<p>首先喵一眼目录结构：</p>
+<pre><code>.
+├── AUTHORS
+├── Cargo.lock
+├── Cargo.toml
+├── LICENSE-APACHE
+├── LICENSE-MIT
+├── README.md
+├── bitcoin
+├── ethereum
+├── model
+├── monero
+├── target
+├── zcash
+└── wagyu
+      ├── cli
+      │   ├── bitcoin.rs
+      │   ├── ethereum.rs
+      │   ├── mod.rs
+      │   ├── monero.rs
+      │   ├── parameters
+      │   └── zcash.rs
+      ├── lib.rs
+      └── main.rs
+
+</code></pre>
+<p>我们可以看到，主入口是<code>wagyu</code>。</p>
+<p>在<code>wagyu</code>的<code>main.rs</code>中，会对<code>cli</code>目录下的子模块进行调用，进而对和<code>cli</code>平级的子模块进行调用。</p>
+<p>其代码如下：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() -&gt; Result&lt;(), CLIError&gt; {
+    let arguments = App::new(&quot;wagyu&quot;)
+        .version(&quot;v0.6.3&quot;)
+        .about(&quot;Generate a wallet for Bitcoin, Ethereum, Monero, and Zcash&quot;)
+        .author(&quot;Aleo &lt;hello@aleo.org&gt;&quot;)
+        .settings(&amp;[
+            AppSettings::ColoredHelp,
+            AppSettings::DisableHelpSubcommand,
+            AppSettings::DisableVersion,
+            AppSettings::SubcommandRequiredElseHelp,
+        ])
+        .subcommands(vec![
+            BitcoinCLI::new(),
+            EthereumCLI::new(),
+            MoneroCLI::new(),
+            ZcashCLI::new(),
+        ])
+        .set_term_width(0)
+        .get_matches();
+
+    match arguments.subcommand() {
+        (&quot;bitcoin&quot;, Some(arguments)) =&gt; BitcoinCLI::print(BitcoinCLI::parse(arguments)?),
+        (&quot;ethereum&quot;, Some(arguments)) =&gt; EthereumCLI::print(EthereumCLI::parse(arguments)?),
+        (&quot;monero&quot;, Some(arguments)) =&gt; MoneroCLI::print(MoneroCLI::parse(arguments)?),
+        (&quot;zcash&quot;, Some(arguments)) =&gt; ZcashCLI::print(ZcashCLI::parse(arguments)?),
+        _ =&gt; unreachable!(),
+    }
+}
+</code></pre></pre>
+<p>我们再进入<code>wagyu &gt; cli &gt; ethereum.rs</code>目录下，发现里面有个简单的函数：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    pub fn new&lt;R: Rng&gt;(rng: &amp;mut R) -&gt; Result&lt;Self, CLIError&gt; {
+        let private_key = EthereumPrivateKey::new(rng)?;
+        let public_key = private_key.to_public_key();
+        let address = public_key.to_address(&amp;EthereumFormat::Standard)?;
+        Ok(Self {
+            private_key: Some(private_key.to_string()),
+            public_key: Some(public_key.to_string()),
+            address: Some(address.to_string()),
+            ..Default::default()
+        })
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>很好，就拿这个改造了！</p>
+<h2><a class="header" href="#复制必要文件到新项目" id="复制必要文件到新项目">复制必要文件到新项目</a></h2>
+<ol>
+<li>新建项目</li>
+</ol>
+<pre><code class="language-bash">$ cargo new hello-crypto-rust
+</code></pre>
+<p>或者直接把上一个项目复制一份。</p>
+<ol start="2">
+<li>把<code>wagyu</code>的<code>Cargo.toml</code>中的必要内容复制过来</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>[dependencies]
+log = &quot;0.4&quot;
+pretty_env_logger = &quot;0.3&quot;
+
+wagyu-ethereum = { path = &quot;./ethereum&quot;, version = &quot;0.6.3&quot; }
+wagyu-model = { path = &quot;./model&quot;, version = &quot;0.6.3&quot; }
+
+arrayvec = { version = &quot;0.5.1&quot; }
+base58 = { version = &quot;0.1&quot; }
+clap = { version = &quot;~2.33.1&quot; }
+colored = { version = &quot;1.9&quot; }
+digest = { version = &quot;0.9.0&quot; }
+either = { version = &quot;1.5.3&quot; }
+failure = { version = &quot;0.1.8&quot; }
+hex = { version = &quot;0.4.2&quot; }
+lazy_static = { version = &quot;1.4.0&quot; }
+rand = { version = &quot;0.7&quot; }
+rand_core = { version = &quot;0.5.1&quot; }
+safemem = { version = &quot;0.3.3&quot; }
+serde = { version = &quot;1.0&quot;, features = [&quot;derive&quot;] }
+serde_json = { version = &quot;1.0&quot; }
+tiny-keccak = { version = &quot;1.4&quot; }
+
+[profile.release]
+opt-level = 3
+lto = &quot;thin&quot;
+incremental = true
+
+[profile.bench]
+opt-level = 3
+debug = false
+rpath = false
+lto = &quot;thin&quot;
+incremental = true
+debug-assertions = false
+
+[profile.dev]
+opt-level = 0
+
+[profile.test]
+opt-level = 3
+incremental = true
+debug-assertions = true
+debug = true
+<span class="boring">}
+</span></code></pre></pre>
+<ol start="3">
+<li>把<code>ethereum</code>与<code>model</code>两个文件夹复制到<code>hello-crypto-rust</code>目录下</li>
+</ol>
+<p>此时的文件目录是这个样子的：</p>
+<pre><code class="language-bash">.
+├── Cargo.lock
+├── Cargo.toml
+├── ethereum
+├── model
+├── src
+└── target
+</code></pre>
+<h2><a class="header" href="#补充代码" id="补充代码">补充代码</a></h2>
+<ol>
+<li>补充<code>lib.rs</code>文件</li>
+</ol>
+<p>在<code>src</code>目录下新建<code>lib.rs</code>文件，内容：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub extern crate wagyu_ethereum as ethereum;
+pub extern crate wagyu_model as model;
+extern crate pretty_env_logger;
+<span class="boring">}
+</span></code></pre></pre>
+<p>作用是加载外部 crate，更详细的说明可见：</p>
+<blockquote>
+<p>https://wiki.jikexueyuan.com/project/rust-primer/module/module.html</p>
+</blockquote>
+<ol start="2">
+<li>编写<code>main.rs</code>文件。</li>
+</ol>
+<p>首先引用必要的外部模块：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rand::{rngs::StdRng};
+use rand_core::SeedableRng;
+use hello_crypto_rust::ethereum::{EthereumPrivateKey, EthereumFormat};
+use hello_crypto_rust::model::{PrivateKey, PrivateKeyError, AddressError, PublicKeyError, PublicKey};
+
+#[macro_use] extern crate log;
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后我们编写主函数：</p>
+<pre><pre class="playground"><code class="language-rust">fn main(){
+    pretty_env_logger::init();  // 初始化 pretty_env_logger 模块
+    new(); //调用new函数
+}
+</code></pre></pre>
+<p>写<code>new()</code>函数：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn new() -&gt; Result&lt;EthereumPrivateKey, CreateError&gt; {
+    let rng = &amp;mut StdRng::from_entropy();
+    let private_key = EthereumPrivateKey::new(rng)?;
+    info!(&quot;priv: {}&quot;, private_key.to_string());
+    let public_key = private_key.to_public_key();
+    info!(&quot;pub: {}&quot;, public_key.to_string());
+    let address = public_key.to_address(&amp;EthereumFormat::Standard)?;
+    info!(&quot;addr: {}&quot;, address.to_string());
+    Ok(private_key)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们这里使用了相对于<code>println!</code>更高级的输出方式，通过log输出。</p>
+<p>这里有个关键的语法糖——<code>?</code>，用于错误处理。</p>
+<blockquote>
+<p>把 result 用 match 连接起来会显得很难看；幸运的是，<code>?</code> 运算符可以把这种逻辑变得 干净漂亮。<code>?</code> 运算符用在返回值为 <code>Result</code> 的表达式后面，它等同于这样一个匹配 表达式：其中 <code>Err(err)</code> 分支展开成提前返回的 <code>return Err(err)</code>，而 <code>Ok(ok)</code> 分支展开成 <code>ok</code> 表达式。</p>
+<p>—— https://rustwiki.org/zh-CN/rust-by-example/std/result/question_mark.html</p>
+</blockquote>
+<p>两个等价的函数，一个使用了<code>?</code>，一个没有：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn not_use_question_mark() {
+    let a = 10;                                                   // 把这里改成 9 就会报错.
+    let half = halves_if_even(a);
+    let half = match half {
+        Ok(item) =&gt; item,
+        Err(e) =&gt; panic!(e),
+    };
+    assert_eq!(half, 5);
+}
+
+
+fn use_question_mark&lt;'a &gt;() -&gt; Result&lt;i32, &amp;'a str&gt; {              // 这里必须要返回Result
+    let a = 10;
+    let half = halves_if_even(a)?;                     // 因为?要求其所在的函数必须要返回Result
+    assert_eq!(half, 5);
+    Ok(half)                                                                   
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后，我们定义一下枚举类型<code>CreateError</code>，里面会囊括<code>AddressError</code>、<code>PrivateKeyError</code>与<code>PublicKeyError</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub enum CreateError {
+    AddressError(AddressError),
+    PrivateKeyError(PrivateKeyError),
+    PublicKeyError(PublicKeyError)
+}
+
+impl From&lt;AddressError&gt; for CreateError {
+    fn from(error: AddressError) -&gt; Self {
+        CreateError::AddressError(error)
+    }
+}
+
+impl From&lt;PrivateKeyError&gt; for CreateError {
+    fn from(error: PrivateKeyError) -&gt; Self {
+        CreateError::PrivateKeyError(error)
+    }
+}
+
+impl From&lt;PublicKeyError&gt; for CreateError {
+    fn from(error: PublicKeyError) -&gt; Self {
+        CreateError::PublicKeyError(error)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#try-it" id="try-it">Try It！</a></h2>
+<p>实现成功：</p>
+<p><img src="https://img.learnblockchain.cn/2021/02/22_/320988596.jpg" alt="image-20210213095659766" /></p>
+<h2><a class="header" href="#本篇所涉及的知识点" id="本篇所涉及的知识点">本篇所涉及的知识点</a></h2>
+<ul>
+<li>cargo 的更多用法</li>
+<li><code>lib.rs</code>的用法</li>
+<li>函数与函数返回值</li>
+<li><code>pretty_env_logger</code>的用法</li>
+<li>枚举类型，以<code>CreateError</code>为例</li>
+</ul>
+<hr />
+<p>作者简介：</p>
+<p>李大狗（李骜华），上海对外经贸大学区块链技术与应用研究中心副主任、柏链教育 CTO、FISCO BCOS（微众银行区块链框架）区块链认证讲师、5 年区块链工程师、北京大学硕士。
+研究领域包括：区块链系统、共识机制、智能合约、区块链应用、数字身份等。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/rust_error_handle_and_log.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_2/cli_gameoflife.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/rust_error_handle_and_log.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_2/cli_gameoflife.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>如何为 Rust 语言做贡献 | Part 1 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item expanded "><a href="../chapter_2/contribute_to_the_rust_part1.html" class="active"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#如何为-rust-语言做贡献--part-1" id="如何为-rust-语言做贡献--part-1">如何为 Rust 语言做贡献 | Part 1</a></h1>
+<p>作者：CrLF0710（野喵）/ 后期编辑：张汉东</p>
+<hr />
+<h2><a class="header" href="#引文" id="引文">引文</a></h2>
+<blockquote>
+<p>如果你想成为 Rust 贡献者，那看这系列文章会很有帮助。</p>
+</blockquote>
+<p>本系列文章主要是给大家介绍一下如何为 <code>Rust Project</code> （即 Rust 语言本身）做贡献。</p>
+<p>随着时间的推移，<code>Rust Project</code> 也在不断的演化，本文有效范围仅限于当前发表的时间点（2021.02）。</p>
+<p>接下来就随我一起熟悉 Rust Project 吧。</p>
+<h2><a class="header" href="#熟悉-rust-project" id="熟悉-rust-project">熟悉 Rust Project</a></h2>
+<p>简单来说 <code>Rust Project</code> 的主要目标就是设计、开发、维护Rust这门编程语言。</p>
+<p><code>Rust Project</code> 主要由下列三部分构成：</p>
+<ol>
+<li>第一部分是现有的技术积累，包括设计文档、代码仓库、文档教程和技术讨论的积淀。</li>
+<li>第二部分是 Rust 的项目组织及其延伸，包括整个 Rust 开发者社区。</li>
+<li>第三部分是 Rust 的配套资产（如 CI、服务器、域名，乃至于商标）和会议活动等等。</li>
+</ol>
+<h2><a class="header" href="#熟悉-rust-代码仓库" id="熟悉-rust-代码仓库">熟悉 Rust 代码仓库</a></h2>
+<p>Rust 语言的设计文档、代码仓库、文档教程都是存储在Github上的rust-lang这个组织下的。其中<a href="https://github.com/rust-lang/rust">rust-lang/rust</a>这个仓库是主入口。</p>
+<p>感兴趣的话，我们可以用git来直接下载一份下来。注意它是使用了<code>git submodule</code>的，相关联的仓库也都是需要的。</p>
+<p>代码仓库大概分成六部分:</p>
+<ul>
+<li>编译器源码：位于<code>compiler/</code>目录下，由五十多个crate构成。另外还有它会用到的llvm，位于src/llvm-project目录下。</li>
+<li>内置库源码：位于<code>library/</code>目录下，有十几个crate。我们平时会使用的core, alloc, std, test这些都在其中。</li>
+<li>其他开发工具：位于<code>src/librustdoc/</code>, <code>src/tools/</code>目录下，包括我们平时使用的rustdoc, cargo, miri, clippy 等等工具</li>
+<li>文档书架：位于<code>src/doc/</code>目录下，包括官方的the book, reference, nomicon等等的教程和参考文档。</li>
+<li>测试用例集：位于<code>src/test/</code>目录下，大部分是编译器的测试用例，也有少量一些rustdoc和其他工具的测试用例。</li>
+<li>部署工具和CI脚本：位于<code>src/bootstrap</code>, <code>src/build_helper</code>, <code>src/ci</code>, <code>.github/</code> 这几个地方，这些是用来自动化编译一套完整的rust工具链的。</li>
+</ul>
+<h2><a class="header" href="#编译一套-rust-工具链" id="编译一套-rust-工具链">编译一套 Rust 工具链</a></h2>
+<p>下载好了<code>rust源码</code>之后，我们来试着自己编译一份<code>rust工具链</code>吧！</p>
+<p>首先要在你的机器上准备这些东西：<code>python3</code>, <code>ninja</code>, <code>cmake</code>，还有一套<code>c++</code>编译器(<code>g++</code>或者<code>windows</code>下用<code>visual studio</code>)。第一个是用来执行编译脚本的，后两个则是用来编译<code>llvm</code>的。</p>
+<p>准备好了之后，把<code>rust</code>目录里的<code>config.toml.example</code>拷贝一份，名叫<code>config.toml</code>。其中大部分内容都不用修改，但是我建议可以把增量编译启用，就是找到其中的<code>#incremental = false</code>这一行，去掉前面的<code>#</code>并且把后面的false改成true。</p>
+<p>其他配置选项参考如下，具体作用在配置文件中有注释说明：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>compiler-docs = false
+submodules = false
+configure-args = []
+debug = true
+codegen-units = 0
+default-linker = &quot;cc&quot;
+channel = &quot;nightly&quot;
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>构建Rust的三个阶段：</strong></p>
+<p>Rust 是⼀个⾃举的编译器，需要通过旧的编译器来构建最新的版本。所以⼀般是分阶段来完成：</p>
+<ol>
+<li><code>Stage0</code> 阶段。下载最新<code>beta</code>版的编译器，这些<code>x.py</code>会⾃动完成。你也可以通过修改配置⽂件来使⽤其他版本的Rust。</li>
+<li><code>Stage1</code> 阶段，使⽤<code>Stage0</code>阶段下载的<code>beta</code>版编译器来编译从<code>Git</code>仓库⾥下载的代码。最终⽣成<code>Stage1</code>版编译器。但是为了对其优化，还需要进⾏下⼀阶段。</li>
+<li><code>Stage2</code>，⽤<code>Stage1</code>版编译器继续对源码进⾏编译，以便⽣成Stage2版编译器。</li>
+</ol>
+<p>理论上，<code>Stage1</code>和<code>Stage2</code>编译器在功能上是相同的，但实际上还有些细微的差别。</p>
+<p>官⽅推荐的具体构建流程如下：</p>
+<ol>
+<li><code>./x.py check</code> ，先执⾏此命令，检查编译器是否可以构建。</li>
+<li><code>./x.py build -i --stage 1</code> ，进⾏<code>Stage 0</code>和<code>Stage 1</code>阶段的构建，最终构建完成Stage1的编译器。</li>
+<li><code>./x.py build --stage 2 compiler/rustc</code>，在<code>Stage1</code>基础上进⾏增量式构建，最终编译出<code>Stage2</code>的编译器。</li>
+</ol>
+<p>整个过程是有点慢的，不考虑一开始的下载部分，编译时间随你的硬件配置不等，一般在20到60分钟左右。其中大约有一半的时间是在编译<code>llvm</code>。好在<code>llvm</code>只要编译一次，后续如果没有版本变化是不需要重新编译的。(<code>config.toml</code>里有个选项在版本变化的时候也不重新编译<code>llvm</code>)另外记得硬盘剩余空间要保证<code>30G</code>以上哦。</p>
+<p>然后将其加到Rustup⼯具链中:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// your-target-tripe 类似：aarch64-apple-darwin/x86_64-apple-darwin 等。
+&gt; rustup toolchain link stage2 build/{your-target-tripe}/stage2
+<span class="boring">}
+</span></code></pre></pre>
+<p>到此为⽌，准备⼯作就已经做好了。</p>
+<p>对这个话题感兴趣的可以继续读读官方准备的书籍<a href="https://rustc-dev-guide.rust-lang.org/">Guide to Rustc Development</a>，里面有更多的讲解。这本书中文社区也在组织翻译<a href="https://github.com/RustcRustc/rustc-dev-guide-zh">Guide to Rustc Development 中文版</a>，欢迎大家参与。</p>
+<h2><a class="header" href="#一起成为-rust-contributor-吧" id="一起成为-rust-contributor-吧">一起成为 Rust Contributor 吧</a></h2>
+<p>接下来，让我们试着为 Rust 项目来做点事情。<code>Rust Project</code>是非常欢迎大家参与的，参与的门槛是非常的低。</p>
+<p>对于想参与贡献的新手来说，可以从比较轻松的任务做起。由此，我来试着难度从低到高列出一些比较适合新手来做的事情。</p>
+<h3><a class="header" href="#no1-改进标准库文档" id="no1-改进标准库文档">No.1 改进标准库文档</a></h3>
+<p>Rust 的每个标准库函数都在旁边有<code>markdown</code>语法的文档描述。对这一部分的调整改进是门槛最低的。可以多读读标准库的文档，顺便检查每个条目(item)和关联条目的文档描述是否足够的清晰。（特别是标注着<code>Experimental</code>的那些，往往会存在改进空间。）对于没有示例(<code>Example</code>)的部分，可以补充示例。对于标注了<code>unsafe</code>关键字的部分，可以检查下安全性(<code>Safety</code>)一节是否清晰的描述了使用时的约束条件。</p>
+<h3><a class="header" href="#no2-改进语言参考手册" id="no2-改进语言参考手册">No.2 改进语言参考手册</a></h3>
+<p>Rust 有一个相对冷门的资源叫<a href="https://github.com/rust-lang/reference">The Rust Language Reference</a>，是语言的规格说明的雏形，实际上能做的事情相当多。但是因为人手有限，进度不是很快。对于新手，有很多参加编辑性修改的机会。实质性修改门槛会稍微高一点，需要对语言有比较全面深刻的了解。但是因为是有老手帮助review，对新人来说也是不错的提升自己的机会。缺点是<code>review</code>周期可能会相对较长。</p>
+<h3><a class="header" href="#no3-重构清理增加测试用例类任务" id="no3-重构清理增加测试用例类任务">No.3 重构、清理、增加测试用例类任务</a></h3>
+<p>Rust里很多地方都有小型的重构、清理任务（而且很多都是故意留给新人练习的），包括<code>rustc</code>,<code>rustdoc</code>,<code>cargo</code>,<code>chalk</code>,<code>polonius</code>之类的地方都会有。可以多关注一下<code>E-easy</code>,<code>E-mentor</code>,<code>E-needs-test</code>这些标签下的问题条目，也不要忘了多去逛逛<code>cargo</code>,<code>chalk</code>等等的单独仓库。</p>
+<h3><a class="header" href="#no4-完善编译器的诊断和代码质量检测" id="no4-完善编译器的诊断和代码质量检测">No.4 完善编译器的诊断和代码质量检测</a></h3>
+<p>在编译器这一侧，最适合初学者学习的工作有两项，一个是诊断(<code>diagnostics</code>)，负责编译报错信息的完善，尽可能推断出用户的原本意图，并给出更好的错误提示。另一个就是代码质量检测(<code>lint</code>)。代码质量检测检查的是代码中那些不违反基本规则的那些写法，它们是可配置的，编译器可以配置为允许，警告，拒绝和严禁的形式进行响应。<a href="https://rustc-dev-guide.rust-lang.org/diagnostics.html">Guide to Rustc Development中有专门的一节进行讲解</a>，可做的事情也是非常多的。对于一些非常具体情况的检测和反馈，也可以放到<code>clippy</code>这个专门的检测工具中。可以多关注一下<code>A-Diagnostics</code>, <code>A-suggestion-diagnostics</code>, <code>A-lint</code>这些标签下的问题条目，以及<code>clippy</code>仓库中的问题条目。</p>
+<h2><a class="header" href="#rust-pr-流程从提交到合并" id="rust-pr-流程从提交到合并">Rust PR 流程：从提交到合并</a></h2>
+<p>要提交修改只要在<code>GitHub</code>上 fork 官方的<code>rust</code>仓库，把修改提交到自己的fork仓库里，然后建一个PR(Pull Request)就可以了。</p>
+<p>接下来我来试着讲讲提交之后会发生的事情。感兴趣可以了解下，不感兴趣也可以跳过。</p>
+<p><strong>PR CI 阶段</strong></p>
+<p>官方<code>rust</code>仓库有好几个自动交互机器人。我们首先会接触到的是一个叫<code>rust-highfive</code>的机器人。它负责欢迎新人，并且如果你的 PR 里没写由谁来<code>review</code>的话(格式是<code>r? @XXX</code>)，它会自动把我们的<code>PR</code>随机分配给它觉得合适的人来<code>review</code>。分配的方法是它会看你修改了仓库里哪些文件，然后在相应的负责人员列表里随机分配。并且给你的 PR 加上一个<code>S-waiting-for-review</code>的标签，表示正在等待<code>review</code>的状态。同时 PR CI 会开始运行，如果你的修改有格式问题(没有执行<code>rustfmt</code>之类的)、编译或者单元测试不通过，就会被 PR CI 拦下来，告诉你编译失败。你可以继续调整。</p>
+<p><strong>官方 Reviewer 审阅</strong></p>
+<p>接下来几天之内往往就会有官方 Reviewer 来审阅我们的修改了。Reviewer 都是官方某个团队的正式成员。因为 PR 都是公开的，在这期间，其他成员、社区爱好者也有可能会帮忙审阅你的代码，帮我们提出修改意见之类的。Reviewer 看了之后也可能要求我们修改。他们会把 PR 状态改成<code>S-waiting-for-author</code>。还有一种情况是这段时间里代码更新导致了合并冲突。机器人会来留言告诉你有合并冲突。这个时候你需要执行一个<code>git</code>的<code>rebase</code>操作，完成对合并冲突的解决，然后更新你的 PR 分支。</p>
+<p>很多 PR 会在这一阶段停留一段时间，官方有一个小的分类处理工作组(<code>T-release</code>/<code>WG-triage</code>)，会定期来检查各个 PR 的状态。对于等待作者处理的 PR，15 天左右会留言确认状态；如果 30 天左右没有响应，会留言并关闭 PR。对于等待<code>review</code>的 PR，会在 15 天左右整理成报告，部分会通知 reviewer 确认审阅进度。</p>
+<p><strong>PR 合并</strong></p>
+<p>Reviewer 觉得你的提交<code>ok</code>了之后就会进入下一阶段了。Reviewer 会给另一个名叫<code>bors</code>的机器人发指令标识审阅通过(<code>@bors r+</code>)。这个命令有俩参数，一个是优先级(<code>p</code>)，优先级高的会在排在队列靠前的位置。一个是是否参与批量合并(<code>rollup</code>)。如果你的贡献足够微小，Reviewer 会把<code>rollup</code>设置为<code>always</code>，永不参与单独测试合并。相反如果你的贡献可能会带来编译性能影响之类的，Reviewer 会把<code>rollup</code>设置为<code>never</code>，永不参与批量测试合并，这样万一以后需要<code>revert</code>的话会比较方便。</p>
+<p>接下来就是测试合并阶段了。<code>Bors</code>机器人管理着一个<a href="https://bors.rust-lang.org/queue/rust">PR队列</a>。<code>Bors</code>机器人会按照队列的顺序一次一个 PR 来<strong>先合并</strong>，再测试，通过后推送远端分支并更新关闭相应的 PR。对于那些<code>rollup=always</code>的 PR，<code>bors</code>是不会合并的。官方的一些成员会轮流负责<code>Rollup</code>工作，每次控制<code>Bors</code>机器人来产生一个<code>8~12</code>个 PR 构成的一个高优先级的批量合并的 PR 加到队列里，由<code>bors</code>来测试合并。</p>
+<h2><a class="header" href="#小结" id="小结">小结</a></h2>
+<p>这次我们从一个开发者的视角，了解了参与rust项目所需要的一些基本知识和切入点，下一次我们会介绍一下项目组的总体结构以及如何参与一些更大型的工作。到时见！</p>
+<hr />
+<p>作者介绍：</p>
+<p>CrLF0710，C++程序员/ Rust业余爱好者/ Rust Team版本发布团队分类处理工作组（负责参与 Rust Project 的issues 和 PR 分类管理）成员。</p>
+<p>业余时间写些<code>Rust</code>代码，也对<code>rustc</code>, <code>cargo</code>, <code>chalk</code>, <code>rustup</code>, <code>rustbook</code>等都做过一些代码贡献。偶尔在知乎Rust主题专栏<a href="https://www.zhihu.com/column/rust-quickstart">《学一点Rust又不会怀孕》</a>上写一些文章。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_2/io_uring_async_rw.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_2/io_uring_async_rw.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
