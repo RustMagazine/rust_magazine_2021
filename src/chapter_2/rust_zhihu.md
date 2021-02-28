@@ -9,7 +9,7 @@
 
 **[关于 Rust 语言基金会成立，你有什么想说的呢？](https://www.zhihu.com/question/443595816)**
 
-韩朴宇：
+**@韩朴宇：**
     
     链接：https://www.zhihu.com/question/443595816/answer/1734191236
     来源：知乎
@@ -20,7 +20,7 @@
 ChromeOS是一个类似于Android的系统，其系统分区是只读的，使用A/B分区的方式无缝升级，并且使用单独的用户数据分区。但是不同于Android高度定制化的用户空间，ChromeOS的用户空间就是用Gentoo Linux的包管理器Portage编译出来的，因此ChromeOS是一个标准的GNU/Linux系统。但是Google认为直接在该系统上运行任意的Linux程序会损害ChromeOS的安全性，因此在ChromeOS上运行一个轻量级虚拟机来运行一个命令行版的ChromeOS, 该系统可以运行LXC容器，默认的容器是Debian。Google认为这样套娃下来，既可以运行普通的Linux程序，又不会产生安全性问题。crosvm的特色是实现了一个基于virtio的Wayland总线，可以将虚拟机的Wayland/Xwayland程序的窗口直接穿过虚拟机的界限绘制到主系统的Wayland合成器上。使用最广的应该是AWS的 firecracker-microvm/firecracker ，AWS已经将其用于生成环境。此外还有Intel的 cloud-hypervisor/cloud-hypervisor，不仅支持x64, 而且像前3者一样也支持ARM64,而且还支持Windows 10。Rust在KVM上的生态离不开rust-vmm项目，该项目提供了对KVM api的绑定，该项目带起了整个Rust虚拟机的生态。
 
     
-iyacontrol：
+**@iyacontrol：**
 
     链接：https://www.zhihu.com/question/443595816/answer/1723079060
     来源：知乎
@@ -30,7 +30,7 @@ iyacontrol：
 首先恭喜Rust有了好爸爸，而且不止一个。而且可以预见不久的未来，IBM、阿里云、腾讯云等大厂也会加入进来。有了这么多的好爸爸的加持，小伙伴们可以放心大胆地用Rust了，不用再担心Rust被砍掉了。通过基金会的成员来看，除了亲爸爸Mozilla，其他member大多都和云有关系。可以得出两点：Rust 的安全性和不差的性能，适合用来写一些偏底层的软件，比如各种运行时。而且也得到了大家一致的认可。Rust 将在云原生领域大放异彩了。目前来看，很有可能和Golang相互配合，Rust负责底层部分，Go负责中间部分，共同服务上层各种语言的应用。另外，感谢Mozilla的不为五斗米折腰，没有让Rust走了Java的路。如果Rust卖给类似于甲骨文的公司，那么Rust的前景就不好说了。
 
 
-最帅的物理课代表：
+**@最帅的物理课代表：**
 
     链接：https://www.zhihu.com/question/443595816/answer/1734618924
     来源：知乎
@@ -46,7 +46,7 @@ iyacontrol：
 **[您对 2021 年的 Rust 语言有哪些期待？](https://www.zhihu.com/question/438833112)**
 
 
-韩朴宇:
+**@韩朴宇:**
 
     链接：https://www.zhihu.com/question/438833112/answer/1673155747
     来源：知乎
@@ -63,7 +63,7 @@ iyacontrol：
 4. `chalk` 。trait 系统的改进全靠这个，包括`GAT`由`traits working group`负责为什么我的期待都有working group，因为这就是rust项目的治理方式，没有working group的东西就肯定是没戏的，至少一年内是如此。比如取一个稳定的abi，作为rust abi和c++ abi的子集和C abi的超集，已经吵了好几年了，估计今年也是没戏。
 
 
-Nugine：
+**@Nugine：**
 
     链接：https://www.zhihu.com/question/438833112/answer/1672070201
     来源：知乎
@@ -82,7 +82,7 @@ GAT 仍然是我最期待的有生之年的特性，它与 async trait, monad �
 希望 2021 Rust 多出一些杀手级产品，最好是国产的。
 
 
-dontpanic:
+**@dontpanic:**
 
     链接：https://www.zhihu.com/question/438833112/answer/1673710125
     来源：知乎

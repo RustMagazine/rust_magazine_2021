@@ -25,18 +25,18 @@
 
 ### Rust in Production 
 
-- [PingCAP | traceing](./rust_trace.md)
-- [蚂蚁集团 CeresDB 团队 | 错误处理](./rust_error_handle.md)
 - [华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景](./huawei_rust.md)
+- [蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考](./rust_error_handle.md)
+- [华为工程师 | Rust中的错误传递和日志记录](./rust_error_handle_and_log.md)
+- [PingCAP | traceing](./rust_trace.md)
 
 ### 学习园地
 
-- [解读 Rust 1.51 稳定版](./rust_1.50.md)
-- [解读 Rust 2021 Edition RFC ](./rust_2021_edition.md)
-- [Rust中的错误传递和日志记录](./rust_error_handle_and_log.md)
+- [新年新人新气象 | Rust 学习笔记](./rust_study.md)
 - [「译」使用 Rust 实现命令行生命游戏](./cli_gameoflife.md)
 - [「译」使用 Tokio 实现 Actor 系统](./actor_with_tokio.md)
-- [新年新人新气象 | Rust 学习笔记](./rust_study.md)
+- [解读 Rust 1.51 稳定版](./rust_1.50.md)
+- [解读 Rust 2021 Edition RFC ](./rust_2021_edition.md)
 
 ### WASM 专题
 
