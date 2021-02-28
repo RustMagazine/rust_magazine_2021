@@ -528,4 +528,4 @@ let mut game = match matches.value_of("INPUT") {
 
 译者介绍：
 
-m1zzx2 ，Rust 初学者。
+m1zzx2 ，Rust 初学者，知乎工程师。

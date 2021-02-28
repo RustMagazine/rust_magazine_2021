@@ -19,16 +19,14 @@
 
 ### Rust 问答精选
 
-只精选已授权的答案
-
 - [知乎 Rust 圆桌年话专题问答精选](./rust_zhihu.md)
 
 ### Rust in Production 
 
 - [华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景](./huawei_rust.md)
+- [PingCAP | TiKV 高性能追踪的实现解析](./rust_trace.md)
 - [蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考](./rust_error_handle.md)
-- [华为工程师 | Rust中的错误传递和日志记录](./rust_error_handle_and_log.md)
-- [PingCAP | traceing](./rust_trace.md)
+- [华为 | Rust中的错误传递和日志记录](./rust_error_handle_and_log.md)
 
 ### 学习园地
 
@@ -48,7 +46,7 @@
 
 ### 操作系统与网络编程专题
 
-- [io_uring | Linux 新异步接口 io_uring 的 Rust 生态盘点 ](./io_uring_intro.md)
+- [io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 ](./io_uring_intro.md)
 - [io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件](./io_uring_async_rw.md)
 
 ### Rust 编译器专题
