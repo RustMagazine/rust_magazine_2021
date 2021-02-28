@@ -171,7 +171,7 @@
 <p>作者：施继成@DatenLord / 后期编辑：张汉东</p>
 <hr />
 <p>io_uring 无可置疑是近两年内核圈最火的话题之一，作为风头正劲的 Linux 异步 I/O 接口，其野心更大，不仅仅想将 Linux 的 I/O 操作全面异步化，还希望将所有<a href="https://lwn.net/Articles/810414/">Linux系统调用异步化</a>。</p>
-<p>Rust 作为一门系统级变成语言，兼具安全和高性能的特点，大家也一定是想使用Rust语言 “尝鲜” io_uring。然而遗憾的是 io_uring 作者 Jens Axboe 仅仅维护一个<a href="https://github.com/axboe/liburing">C语言的库</a>。用户想要用Rust调用，一方面还需要自己进行一些封装，另一方面 C 语言的接口还是太底层，想在 Rust 的异步框架中使用仍有许多工作要做。</p>
+<p>Rust 作为一门系统级编程语言，兼具安全和高性能的特点，大家也一定是想使用Rust语言 “尝鲜” io_uring。然而遗憾的是 io_uring 作者 Jens Axboe 仅仅维护一个<a href="https://github.com/axboe/liburing">C语言的库</a>。用户想要用Rust调用，一方面还需要自己进行一些封装，另一方面 C 语言的接口还是太底层，想在 Rust 的异步框架中使用仍有许多工作要做。</p>
 <p>好消息是已经有一些 Rust 语言封装的 io_uring 库出现在 github 上，今天让我们来挑选一些使用人数较多（通过star数目来判断）的库进行分析，看看是否可以给大家使用 io_uring 带来便利。</p>
 <h1><a class="header" href="#a-hrefhttpsgithubcomtokio-rsio-uringtokio-io-uringa" id="a-hrefhttpsgithubcomtokio-rsio-uringtokio-io-uringa"><a href="https://github.com/tokio-rs/io-uring">Tokio io-uring</a></a></h1>
 <p>Tokio 是 github 上 Star 数目最多的异步框架，那么他们团队封装的io_uring lib如何呢？通过阅读代码不难发现，该 io_uring 库完全撇弃了 C 语言的 liburing 库，自己在 io_uring 系统调用上从零开始封装了一层，实现了submission queue，completion queue 和 submitter。</p>
