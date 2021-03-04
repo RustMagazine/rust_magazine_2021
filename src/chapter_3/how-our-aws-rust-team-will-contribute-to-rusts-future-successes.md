@@ -16,8 +16,8 @@
 例如，用 Rust 编写的 Firecracker 于 2018 年推出，提供支持 AWS Lambda 和其他无服务器产品的开源虚拟化技术。
 最近，AWS 发布了用 Rust 编写的基于 Linux 的容器操作系统 Bottlerocket ，Amazon Elastic Compute Cloud(Amazon EC2) 团队使用 Rust 作为新的 AWS Nitro 系统组件(包括 Nitro Enclaves 等敏感应用程序)的首选语言。
 随着在 AWS 中采用 Rust 的增长，我们对项目和社区的投资也在增加。
-2019年，AWS 宣布赞助Rust项目。
-2020年，AWS 开始打造铁锈维护者和贡献者团队，2021年，AWS 联合其他铁锈用户和铁锈项目发起了铁锈基金会。
+2019年，AWS 宣布赞助 Rust 项目。
+2020年，AWS 开始打造 Rust 维护者和贡献者团队，2021年，AWS 联合其他铁锈用户和铁锈项目发起了铁锈基金会。
 AWS Rust 团队首先找出了如何最好地与 AWS 和更广泛的开源社区建立联系。
 我们知道，我们希望在公开的环境下运作，并成为整个社会的一份子。
 与此同时，我们知道我们想要充分利用在 AWS 工作的机会。
