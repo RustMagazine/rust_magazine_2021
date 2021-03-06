@@ -24,7 +24,7 @@
 - [橘梦](https://github.com/wangshengfei/)
 - 高宪凤
 - 杨楚天（yct21）
-- Matrixtang
+- [Matrixtang](https://github.com/MATRIXKOO)
 - m1zzx2 
 
 - <其他成员招募位> 招募条件见下方
