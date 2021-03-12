@@ -114,5 +114,8 @@ Rust 一直受益于它是一种“实践者”的语言。
 这些是我们目前的宗旨，我们希望随着我们更多地了解 AWS 和 Rust 社区合作的最佳方式，它们会不断发展。
 
 
-#### 原文链接[https://aws.amazon.com/cn/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/]
+原文链接：[How our AWS Rust team will contribute to Rust’s future successes](https://aws.amazon.com/cn/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/)
+
+译者：
+- [NiZerin](https://github.com/NiZerin)
 
