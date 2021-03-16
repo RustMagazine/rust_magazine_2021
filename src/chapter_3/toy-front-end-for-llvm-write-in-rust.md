@@ -1,6 +1,6 @@
 # 「译」用Rust编写LLVM的玩具编译器
 
-译者：iamazy
+译者：[iamazy](https://github.com/iamazy)
 
 ---
 
