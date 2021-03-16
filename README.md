@@ -4,21 +4,28 @@
 
 ![logo](./src/image/rust_magazine3.png)
 
+![logo](./src/image/rm.png)
+
 为了丰富 Rust 社区成员的学习文化生活而特别推出此刊！
 
-[点此阅读](https://rustmagazine.github.io/rust_magazine_2021/)
+- [GitHub Page 阅读](https://rustmagazine.github.io/rust_magazine_2021/)
+- [语雀阅读](https://www.yuque.com/chaosbot/rust_magazine_2021)
 
 ---
 
 ### 编辑小组
 
 - 张汉东（Chaos）
-- 李冬杰
+- [李冬杰](https://www.yuque.com/lidongjies)
 - 柴杰
 - [苏胤榕（DaviRain）](https://github.com/DaviRain-Su)
 - 聂雷海（大海）
 - 严炳（ryan）
 - [橘梦](https://github.com/wangshengfei/)
+- 高宪凤
+- 杨楚天（yct21）
+- [Matrixtang](https://github.com/MATRIXKOO)
+- m1zzx2 
 
 - <其他成员招募位> 招募条件见下方
 
@@ -41,13 +48,13 @@
 
 感谢以下公司和高校大力支持 RustMagazine并贡献内容，排名不分先后。
 
+- 华为
 - PingCAP
 - 蚂蚁集团
 - 溪塔科技
 - 国汽智控
 - 清华大学
 - 期待更多
-
 
 ### 特别感谢
 

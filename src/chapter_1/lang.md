@@ -6,7 +6,7 @@
 
 ---
 
-### Rust 1.49 稳定版发布
+## Rust 1.49 稳定版发布
 
 2020年最后一天，Rust 1.49 稳定版发布了。稳定版 Rust 发布周期为六周一次。
 
@@ -14,7 +14,7 @@
 
 - `aarch64-unknown-linux-gnu` 升级为`Tier 1`。
 - `aarch64-apple-darwin` 和`aarch64-pc-windows-msvc` 得到`Tier 2` 级别的支持。
-- 单元测试中线程中的print输出将会被捕获，默认不会在控制台打印出来了。如果不- 需要捕获，需要添加--nocapture参数。
+- 单元测试中线程中的print输出将会被捕获，默认不会在控制台打印出来了。如果不需要捕获，需要添加--nocapture参数。
 - `union`支持 `impl Drop trait` 了
 支持使用`ref`关键字让解构的字段不再被move 而是被借用。
 
@@ -40,8 +40,7 @@ fn main(){
 
 [https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html](https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html)
 
-### Rust 将不再支持 Windows XP
-
+## Rust 将不再支持 Windows XP
 
 目标i686-pc-windows-msvc和x86_64-pc-windows-msvc是个怪胎。它们对Windows 7+有Tier 1支持，但对Windows XP也有Tier 3支持。这是Firefox需要在XP上运行时的遗留问题。然而在他们放弃XP支持后的几年里，尽管偶尔会有修复，但大多都是任由它过期了。
 
@@ -92,7 +91,7 @@ Patrick Walton 将领导 Facebook 的新 Rust 团队，致力于为 Rust 社区�
 
 链接：[https://github.com/rust-lang/futures-rs/releases/tag/0.3.9](https://github.com/rust-lang/futures-rs/releases/tag/0.3.9)
 
-## Rust官方项目工作组的工作范围是什么？
+## Rust 异常处理小组的工作范围是什么？
 
 该小组的主要重点是继续进行小组成立前的错误处理相关工作。为此而努力系统地解决与错误处理相关的问题，以及消除阻碍RFC停滞不前的障碍。
 
