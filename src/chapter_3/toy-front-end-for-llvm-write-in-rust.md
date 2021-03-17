@@ -8,15 +8,15 @@
 
 
 
-> 我目前的副业是用Rust编写一个可以将代码转换成LLVM IR的编译器。LLVM的API对于新手来说有点令人生畏，而且没有很多有关的教程（有限的教程大多数还是基于C++的，如何使用Rust做同样的事并不总是那么明确）。我希望当我准备做一件事情时，有人可以手把手的教我，这也是我要写这篇文章的原因。
+> 我目前的副业是用 Rust 编写一个可以将代码转换成 LLVM IR 的编译器。LLVM 的 API 对于新手来说有点令人生畏，而且没有很多有关的教程（有限的教程大多数还是基于 C++ 的，如何使用 Rust 做同样的事并不总是那么明确）。我希望当我准备做一件事情时，有人可以手把手的教我，这也是我要写这篇文章的原因。
 
-对于Rust，与LLVM的接口交互的最佳选择是使用`llvm-sys`。互联网上的一些热心朋友在[这里](http://rustdoc.taricorp.net/llvm-sys/llvm_sys/)托管了一些关于`llvm-sys`的文档。当然，你还应该去查看LLVM的[官方指南](http://llvm.org/docs/tutorial/LangImpl01.html)，因为它可以帮助你理解LLVM是如何“思考”的。这篇文章基本上是LLVM官方指南的Rust翻译。
+对于 Rust ，与 LLVM 的接口交互的最佳选择是使用 `llvm-sys`。互联网上的一些热心朋友在[这里](http://rustdoc.taricorp.net/llvm-sys/llvm_sys/)托管了一些关于 `llvm-sys` 的文档。当然，你还应该去查看 LLVM 的[官方指南](http://llvm.org/docs/tutorial/LangImpl01.html)，因为它可以帮助你理解 LLVM 是如何“思考”的。这篇文章基本上是 LLVM 官方指南的 Rust 翻译。
 
 你可以从这里获取最终的[代码](https://github.com/ucarion/llvm-rust-getting-started)。
 
 ## 搭建开发环境
 
-对于新手，使用LLVM开发有一个可以复用的方式：
+对于新手，使用 LLVM 开发有一个可以复用的方式：
 
 ```shell
 # `curl` is just so we can next install Rust
@@ -27,7 +27,7 @@ curl https://sh.rustup.rs -sSf | sh
 sudo ln -s /usr/bin/llvm-config-3.8 /usr/bin/llvm-config
 ```
 
-如果你是在Ubuntu上执行上面的语句（你可能需要执行`apt-get update`），你就可以继续了。如果不是，你需要使用下面的`Vagrantfile`文件在Vagrant Box中运行上述语句。
+如果你是在 Ubuntu 上执行上面的语句（你可能需要执行 `apt-get update` ），则没有任何问题。如果不是，你需要使用下面的 `Vagrantfile` 文件在 Vagrant Box 中运行上述语句。
 
 ```shell
 Vagrant.configure("2") do |config|
@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-你可以从执行`cargo init llvm-example --bin`开始，并将下面（从llvm-sys中拷贝）的代码写入`src/main.rs`中：
+你可以从执行 `cargo init llvm-example --bin` 开始，并将下面（从 llvm-sys 中拷贝）的代码写入 `src/main.rs` 中：
 
 ```rust
 //! Construct a function that does nothing in LLVM IR.
@@ -76,7 +76,7 @@ fn main() {
 }
 ```
 
-并在你的`Cargo.toml`文件中：
+并在你的 `Cargo.toml` 文件中：
 
 ```toml
 [package]
@@ -107,11 +107,11 @@ entry:
 
 完美！现在我们可以开始编写自己的东西了。
 
-## 一个不太平凡的程序
+## 一段不太平凡的程序
 
-首先，让我们编译一个程序，该程序通过从main函数中返回一个整数来简单的设置一个返回码。
+首先，让我们编译一个程序，该程序通过从 main 函数中返回一个整数来简单的设置一个返回码。
 
-下面是我使用的方式（我们有时候需要使用一个解析器，所以我先添加了`peg`库）：
+下面是我使用的方式（我们有时候需要使用一个解析器，所以我先添加了 `peg` 库）：
 
 ```rust
 #![feature(plugin)]
@@ -186,7 +186,7 @@ vagrant@vagrant:/vagrant$ lli-3.8 out.ll ; echo $?
 42
 ```
 
-有点酷哦！顺便提一下，下面是`out.ll`文件的内容：
+有点酷哦！顺便提一下，下面是 `out.ll` 文件的内容：
 
 ```s
 ; ModuleID = 'example_module'
@@ -199,7 +199,7 @@ entry:
 
 ## 算术
 
-让我们添加对数字的加减乘除操作的支持。为了实现这个，我们需要扩展我们的语法。我们引入一个枚举来代表AST（抽象语法树）。
+让我们添加对数字的加减乘除操作的支持。为了实现这个，我们需要扩展我们的语法。我们引入一个枚举来代表 AST（抽象语法树）。
 
 ```rust
 pub enum Expr {
@@ -242,7 +242,7 @@ peg! parser(r#"
 "#);
 ```
 
-接下来，可以提交代码。你可以指定诸如“addtmp”的字符串，这些字符串将被用作IR中对应“寄存器”名称的一部分。
+接下来，可以提交代码。你可以指定诸如 “addtmp” 的字符串，这些字符串将被用作 IR 中对应“寄存器”名称的一部分。
 
 ```rust
 // When you write out instructions in LLVM, you get back `LLVMValueRef`s. You
@@ -289,11 +289,11 @@ unsafe fn codegen_expr(context: LLVMContextRef, builder: LLVMBuilderRef, expr: E
 }
 ```
 
-现在，你可以执行`10 * 4 + 20/2 - 8`之类的程序！如果你问我，那可真是太酷了。
+现在，你可以执行 `10 * 4 + 20/2 - 8` 之类的程序！如果你问我，那可真是太酷了。
 
 ## 变量
 
-我们将采用简单的方式并假设程序不会执行任何烦人的操作，如引用未定义的变量等。我们只将变量存储在寄存器中，并将它们存在`HashMap<String, LLVMValueRef>`中，之所以有用是因为运行该程序只有这一种方式。
+我们将采用简单的方式并假设程序不会执行任何烦人的操作，如引用未定义的变量等。我们只将变量存储在寄存器中，并将它们存在 `HashMap<String, LLVMValueRef>` 中，之所以有用是因为运行该程序只有这一种方式。
 
 我们扩展语言和解析器：
 
@@ -363,7 +363,7 @@ unsafe fn codegen_expr(context: LLVMContextRef, builder: LLVMBuilderRef, names: 
 }
 ```
 
-并迅速的在`codegen`函数中更新：
+并迅速的在 `codegen` 函数中更新：
 
 ```rust
 let zero = llvm::core::LLVMConstInt(int_type, 0, 0);
@@ -396,7 +396,7 @@ entry:
 
 ## If
 
-在使用`if`关键字的时候遇到一些麻烦。让`if`起作用的最简单的方式就是将所有的变量存储在堆栈上。并让LLVM做一些优化。在LLVM中，你可以通过`alloca`指令创建一个栈变量，并使用`load/store`进行读写。
+在使用 `if` 关键字的时候遇到一些麻烦。让 `if` 起作用的最简单的方式就是将所有的变量存储在堆栈上。并让 LLVM 做一些优化。在 LLVM 中，你可以通过 `alloca` 指令创建一个栈变量，并使用 `load/store` 进行读写。
 
 为了实现这个，我们通过添加新的解析规则再一次扩展了语言和语法。
 
@@ -412,7 +412,7 @@ if_expression -> Expr
     }
 ```
 
-并在AST节点上添加了一个新的类型：
+并在 AST 节点上添加了一个新的类型：
 
 ```rust
 pub enum Expr {
@@ -427,7 +427,7 @@ pub enum Expr {
 }
 ```
 
-最后，完成关于`if`表达式的代码：
+最后，完成关于 `if` 表达式的代码：
 
 ```rust
 unsafe fn codegen_expr(context: LLVMContextRef, builder: LLVMBuilderRef, func: LLVMValueRef, names: &mut HashMap<String, LLVMValueRef>, expr: Expr) -> LLVMValueRef {
@@ -486,7 +486,7 @@ if a {
 a
 ```
 
-上述代码对应的IR如下所示：
+上述代码对应的 IR 如下所示：
 
 ```s
 ; ModuleID = 'example_module'
@@ -513,11 +513,11 @@ entry4:                                           ; preds = %entry3, %entry2
 }
 ```
 
-然而，我们还没有结束。目前，我们的“if”表达式的返回结果始终为zero(见上述`codegen_expr`函数中If分支的返回值)。而我们想要的正好与其相反，如果我们执行了“then”路径，则if的求值结果应该为then_return，否则返回else_return。
+然而，我们还没有结束。目前，我们的 “if” 表达式的返回结果始终为 zero（见上述 `codegen_expr` 函数中 If 分支的返回值）。而我们想要的正好与其相反，如果我们执行了 “then” 路径，则 if 的求值结果应该为 then_return，否则返回 else_return。
 
-你如何使用LLVM跟踪它执行了哪个分支？通过使用“Phi”节点。你给phi指令一个(block, value)对，该phi节点将会返回与先前执行的块相对应的值。
+你如何使用 LLVM 跟踪它执行了哪个分支？通过使用 “phi” 节点。你给 phi 指令一个 (block, value) 对，该 phi 节点将会返回与先前执行的块相对应的值。
 
-我们可以这样结束if。注意，我们必须更新then_block和else_block，因为这是我们在“then/else”分支中需要的最后一个块，并且前面的then_block是“then/else”的第一个块。
+我们可以这样结束 if。注意，我们必须更新 then_block 和 else_block，因为这是我们在 “then/else” 分支中需要的最后一个块，并且前面的 then_block 是 “then/else” 的第一个块。
 
 ```rust
 // This is mostly the same code as before, just note the new calls to
@@ -577,7 +577,7 @@ vagrant@vagrant:/vagrant$ lli-3.8 out.ll ; echo $?
 42
 ```
 
-太酷了！下面是我们提供的示例输入程序的IR：
+太酷了！下面是我们提供的示例输入程序的 IR：
 
 ```s
 ; ModuleID = 'example_module'
@@ -633,6 +633,6 @@ entry14:                                          ; preds = %entry13, %entry12
 
 ```
 
-请注意：这些块具有以下的模式：不包含第一个条目，它们三个为一组，第一个是“then”分支，然后是“else”分支，最后是“merge”块（带有可识别的phi指令）。每一次我们遇到“if”表达式时都会在main后面附加三个新块。因为要在AST中递归查询三元组，所以块的三元组是有序的。
+请注意：这些块具有以下的模式：不包含第一个条目，它们三个为一组，第一个是 “then” 分支，然后是 “else” 分支，最后是 “merge” 块（带有可识别的 phi 指令）。每一次我们遇到 “if” 表达式时都会在 main 后面附加三个新块。因为要在 AST 中递归查询三元组，所以块的三元组是有序的。
 
 这就是我想要分享的全部内容！希望在这一点上你可以有足够的实力来决定你的命运。
