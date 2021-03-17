@@ -314,3 +314,56 @@ mod simd {
 
 
 ## 编写 `unsafe rust` 的工具 
+
+
+正如我们所见，编写 `unsafe` Rust比 `safe` 的 Rust 需要多做许多工作，因为这样将不再依靠编译器检查。 因此，要踏上这条道路，最好先"带上"下面的这些工具：
+
+
+
+###　Miri
+
+[Miri ](https://github.com/rust-lang/miri)是 `Rustc` 的 MIR (中级中间语言)，这是 Rust 在移交给 `LLVM` 或者`Cranelift`之前用来优化程序的中间表示，是一种解释器。 你可以用 `rustup` 运行 `rustup component add miri` 安装它。 它跑在  `cargo miri` 上-例如，` cargo miri test` 将在解释器中运行测试。 Miri 采用了很多可以检测未定义行为的技术，例如访问未初始化的数据，并会指出问题所在。 但是，它只会在被执行的代码上检测未定义行为，因此不能完整的覆盖代码。 
+
+ 
+
+### Clippy and Rust lints
+
+
+
+Rust的官方 lints (静态分析工具) 中有很多对编写 `unsafe`  有帮助的 lint。 至少，missing_safety_docs棉绒将帮助您将所有不安全方法的要求记录在案。 另外，Rust编译器默认情况下不会激活所有棉绒； 致电rustc -W help将显示最新列表。
+
+### Prusti
+
+[Prusti](https://github.com/viperproject/prusti-dev)  仍在开发中（目前在更新到最新的稳定Rust时存在一些问题，因此最新的稳定版本针对某些2018 Rust编译器），但是这个工具非常有前景，可让你在数学上验证给定特定条件的代码的安全性。
+
+基本上，你可以用数学证明代码中某些不变量是 "真的" 保持不变的，这对于必须支持不安全代码的不变量的安全抽象是理想的。 有关更多信息，请参见[用户指南](https://viperproject.github.io/prusti-dev/user-guide/)。
+
+
+
+### Fuzzers
+
+[Rust Fuzz Book](https://rust-fuzz.github.io/book/) 列出了许多可与Rust一起使用的 `Fuzzer` (模糊测试器)。目前，可使用的`Fuzzer` 有 [cargo-fuzz/libfuzzer](https://github.com/rust-fuzz/cargo-fuzz) 和 [American Fuzzy Lop / afl.rs](http://lcamtuf.coredump.cx/afl/)的。两者都将为的代码创建大量的测试输入，并运行它以查找触发崩溃的某种组合。
+
+> 译者注: 这个地方的 Fuzzer 是安全测试里面常用的模糊测试工具, 常见的就是上文提到的AFL 。而这种随机生成的测试样例被用于保证代码覆盖率, 每当遇到 crash (崩溃的样例) 并会记录下, 提示此处可能有漏洞。
+
+为了检测未初始化内存的使用，[libdiffuzz](https://github.com/Shnatsel/libdiffuzz)是一个侵入式内存分配器，它将使用不同的值来初始化每个内存分配。通过运行两次代码并比较结果，可以确定未初始化内存的哪一部分是造成了问题。更不错的是，`memory sanitizer`  是每天更新的（[tracking lssue](https://github.com/rust-lang/rust/issues/39699)列出了各种`memory sanitizer`及其在各个平台上的支持），会监测每一次对未初始化内存的读取，哪怕没有造成任何问题。 
+
+尽管从统计学上讲， `Fuzzer` 比普通的属性测试更有可能找到代码路径，但不能保证他们会在任何时间后找到特定的代码路径。比如说我曾经遇到的标记化函数的 `bug`，就是由我在互联网上的一个随机文档中发现的一个 `unicode` 宽的空格触发的，当在运行了数十亿个测试案例的模糊测试一周后也并未发现。Rust fuzz 在 [trophy case](https://github.com/rust-fuzz/trophy-case) 上展示了不少没被 Fuzzing 到的 `bug`。如果你找到一个同样的 `bug` ，请添加它。
+
+> 译者注: Fuzzer 不保证100%的代码覆盖率, 因为种子是随机的
+
+ [rutenspitz](https://github.com/jakubadamw/rutenspitz) 是一个过程宏，非常适合对状态代码（例如数据结构）进行模型测试。模型测试意味着您拥有一个 “模型” ，即一个简单但缓慢的版本，可以对要确保的行为进行建模，然后使用它来测试不安全的实现。然后它将生成一系列操作，以测试相等关系是否成立。如果你遵循了我的上述建议，则应该已经有一个安全的实施方案可以进行测试。 
+
+##  [LogRocket](https://logrocket.com/signup): Full visibility into production Rust apps
+(广告时间到) 调试 Rust 应用程序是艰辛的，当我们遇到难以重现的问题时更是如此。 如果希望监视和跟踪 Rust 应用程序的性能，自动显示错误以及跟踪缓慢的网络请求和加载时间，请尝试 [LogRocket](https://logrocket.com/signup)。 
+
+
+
+![](../image/unsafe_rust.png)
+
+
+
+`LogRocket` 就像Web应用程序中的 `DVR` ，实际上记录了 Rust 应用程序中发生的所有事情。 它可以汇总并报告问题发生时应用程序所处的状态，而不用猜测为什么会发生问题。 `LogRocket` 还会监视应用程序的性能，报告诸如客户端CPU负载，客户端内存使用情况等指标。 
+
+走一条 rust debug 现代化之路吧!  [点击即用](https://logrocket.com/signup).
+
