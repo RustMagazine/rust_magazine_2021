@@ -70,6 +70,7 @@
     - [「译」用Rust编写LLVM的玩具编译器](./chapter_3/toy-front-end-for-llvm-write-in-rust.md)
     - [「译」Unsafe Rust 的取舍](./chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.md)
     - [「译」基于 Rust 用 Bevy 实现节奏大师游戏](./chapter_3/Rhythm-game-in-Rust-using-bevy.md)
+    - [「译」Arenas in Rust](./chapter_3/arenas-in-rust.md)
     - [透过 rust 探索系统的本原：并发篇](./chapter_3/rust-to-system-essence-concurrent.md)
     - [透过 rust 探索系统的本原：安全篇](./chapter_3/rust-to-system-essence-safety.md)
     - [`Rust`生态安全漏洞总结系列 | Part2](./chapter_3/rust_security_part2.md)

@@ -23,7 +23,8 @@
 - [华为 | Rust 语言在系统开发（虚拟化平台 StratoVirt ）的实践与应用](./hw_rust_meetup_sz_stratovirt.md)
 - [华为 | Rust 科学计算多维数组运算库的分析与实践](./hw_ndarray.md)
 - [华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型](./hw_rust_rvm_wasm_ai.md)
-- [蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探](./rust_cpu_affinity.md)
+- [蚂蚁集团 CeresDB 团队 | Rust CPU 亲和性(Affinity) 初探](./rust_cpu_affinity.md)
+- [DatenLord | Rust实现RDMA](./rust_rdma.md)
 - [PingCAP | Rust FFI  跨语言代码复用的方法和实践](./rust_ffi.md)
 - [Netwarps | 从libp2p-rs 到 IPFS](./netwarps_libp2p.md)
 
@@ -34,6 +35,7 @@
 - [「译」用Rust编写LLVM的玩具编译器](./toy-front-end-for-llvm-write-in-rust.md)
 - [「译」Unsafe Rust 的取舍](./Unsafe_Rust_How_and_when_not_to_use_it.md)
 - [「译」基于 Rust 用 Bevy 实现节奏大师游戏](./Rhythm-game-in-Rust-using-bevy.md)
+- [「译」Arenas in Rust](./arenas-in-rust.md)
 
 ### 【系列】透过 Rust 探索系统的本原 
 
