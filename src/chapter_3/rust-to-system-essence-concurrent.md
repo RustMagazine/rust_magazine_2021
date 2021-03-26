@@ -1,5 +1,9 @@
 ## 透过 rust 探索系统的本原：并发篇
 
+作者：陈天
+
+---
+
 rust 是一门非常优秀的语言，我虽然没有特别正式介绍过 rust 本身，但其实已经写了好多篇跟 rust 相关的文章：
 
 - [沅有芷兮：类型系统的数学之美](http://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&mid=2649828208&idx=1&sn=1599b7cbc3bcc2c050c2689b9e46acbd&chksm=8704a96cb073207a890c0056332ede6ac01eda5f5bcc02ec016b466b0fb6b6c91c3637fee1c1&scene=21#wechat_redirect)
@@ -183,6 +187,6 @@ Rust 下和 S3 打交道的库是 Rusoto，Rusoto 是全异步的处理，因而
 
 ------
 
-作者：陈天
+
 
 原文链接：[https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA](https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA)
