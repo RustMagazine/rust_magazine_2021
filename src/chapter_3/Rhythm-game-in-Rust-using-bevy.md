@@ -1,3 +1,5 @@
+# 「译」基于 Rust 用 Bevy 实现节奏大师游戏
+
 >* Rhythm game in Rust using Bevy 译文（基于 Rust 用 Bevy 实现节奏大师游戏）
 >* 原文链接：https://caballerocoll.com/blog/bevy-rhythm-game/
 >* 原文作者：[Guillem Caballero Coll](https://github.com/guimcaballero)
@@ -11,8 +13,7 @@
 ## 介绍
 在这个教程中，我们基于 Rust 使用 Bevy 引擎实现一个节奏大师游戏。目的是展现如何用 Bevy 实现一些东西，特别是一些更高级的功能，如着色器，状态，和音频。
 
-If you want to see the final code before diving in, you can find the repository [here](https://github.com/guimcaballero/bevy_rhythm), and here's a video of how the game works:
->如果你想在进入学习之前看看最终的代码，你可以在[这里](https://github.com/guimcaballero/bevy_rhythm)找到仓库，并且下面是一个游戏视频：
+如果你想在进入学习之前看看最终的代码，你可以在[这里](https://github.com/guimcaballero/bevy_rhythm)找到仓库，并且下面是一个游戏视频：
 
 [视频资源](https://caballerocoll.com/images/rhythm/rhythm_working_menu_and_game.mp4)
 
@@ -3235,3 +3236,4 @@ impl Plugin for MapMakerPlugin {
 * 3.给游戏增加一个游戏结束画面。
 * 4.增加一种歌曲播放完后，回到菜单的方式
 * 5.创建一个可以改变点击阈值的“系统”，可以让玩家在困难模式时选择简单模式，玩家很轻松则切换到困难模式。
+
