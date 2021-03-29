@@ -843,8 +843,7 @@ fn setup_ui(
 struct TimeText;
 ```
 
-In this system we've used parenting, which makes a child entity have it's transform be relative to it's parent entity. We add children to a parent entity using the aptly named `with_children`, which takes a closure that will receive a `ChildBuilder`, a struct that is very similar to `Commands`, and allows us to spawn entities which will automatically be set as children. In this case, we're creating a `NodeBundle` as a parent entity, and we're adding a `TextBundle` as a child to it. We're using the CSS-like `Style` component to make the parent node sit at the top left of the screen. To the text entity we're adding a `TimeText` marker component, so that we can query it and change it each frame.
->在这个系统中，我们使用了育儿模式（parenting），它产生一个子实体，子实体可以相对于父实体进行转换。当我们把子实体加到父实体中后，给它一个合适的命名 `with_children`，它的参数是一个闭包，闭包接受一个类似于 `Commands` 的结构体类型 `ChildBuilder` 参数。在这个例子中，我创建了一个 `NodeBundle` 作为父实体，并添加了 `TextBundle` 作为子实体。我们使用类似于 css 风格的 `Style` 组件让父节点坐落在屏幕的左上角。我们给文本实体增加了 `TimeText` 标记组件，这样我们就可以查询它，并且可以在任意帧中修改它。
+在这个系统中，我们使用了父子关系模式（parenting），使得子实体可以相对于父实体进行转换。当我们把子实体加到父实体中后，给它一个合适的命名 `with_children`，它的参数是一个闭包，闭包接受一个类似于 `Commands` 的结构体类型 `ChildBuilder` 参数。在这个例子中，我创建了一个 `NodeBundle` 作为父实体，并将 `TextBundle` 作为子实体添加到其中。我们使用类似于 css 风格的 `Style` 组件让父节点坐落在屏幕的左上角。我们给文本实体增加了 `TimeText` 标记组件，这样我们就可以查询它，并且可以在任意帧中修改它。
 
 现在，我们可以添加一个“系统”，它可以在每一帧中更新文本：
 
