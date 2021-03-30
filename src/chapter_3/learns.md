@@ -1,12 +1,16 @@
-# 学习资源
+# 本月简报 | 学习资源
+
+- 来源：[Rust日报](https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f)
+- 作者：`Rust`日报小组
+- 后期编辑：苏胤榕（DaviRain）
 
 ## C++ to Rust - or how to render your mindset
 
-作者打算使用 Rust 重新实现 C++教程 `<<Ray tracing in One Weekend>>`, 本文目标人群是对于 Rust 感兴趣的, 或者对图像渲染感兴趣的人.
+作者打算使用 Rust 重新实现 C++教程 `<<Ray tracing in One Weekend>>`，本文目标人群是对于 Rust 感兴趣的，或者对图像渲染感兴趣的人。
 
-通过本教程,最终会得到下面的预览图.
+通过本教程，最终会得到下面的预览图。
 
-整个过程, 作者既给出了`C++`代码, 也给出了`Rust`代码, 对于熟悉 C++的同学,可以更加清晰的了解两种语言的不同
+整个过程， 作者既给出了`C++`代码， 也给出了`Rust`代码，对于熟悉 C++的同学，可以更加清晰的了解两种语言的不同。
 
 ![](../image/boll.png)
 
@@ -63,7 +67,7 @@ rust-guidelines 收集了用于编写Rust代码的新出现的原理，约定，
 
 ## Rust Web开发人员路线图
 
-超详细 Rust Web 开发人员的路线图, 不说了, 看图.
+超详细 Rust Web 开发人员的路线图。
 
 ![](../image/web-rust-road.png)
 
@@ -71,13 +75,13 @@ rust-guidelines 收集了用于编写Rust代码的新出现的原理，约定，
 
 ## Rust 中返回引用的各种策略
 
-本文总结了常见的返回引用的几种方式,强烈推荐.
+本文总结了常见的返回引用的几种方式，强烈推荐。
 
 [原文链接](https://bryce.fisher-fleig.org/strategies-for-returning-references-in-rust/)
 
 ## Learning Rust: Structs and Traits
 
-这是一系列学习 Rust 视频的第三部分, `Structs and Traits`, 内容相对比较简单, 有喜欢看视频学习 Rust 的小伙伴可以翻墙看一下.
+这是一系列学习 Rust 视频的第三部分，`Structs and Traits`， 内容相对比较简单， 有喜欢看视频学习 Rust 的小伙伴可以翻墙看一下。
 
 [油管视频](https://youtu.be/tYfA5rjrhqk)
 
@@ -89,7 +93,7 @@ rust-guidelines 收集了用于编写Rust代码的新出现的原理，约定，
 
 ## 【博客】Rust 命名空间
 
-关于Rust中命名空间的内容讲解
+关于Rust中命名空间的内容讲解。
 
 [链接](https://aloso.github.io/2021/03/10/rusts-universes.html)
 
@@ -124,8 +128,6 @@ Rg3d是一个使用Rust编写的游戏引擎，渲染后端用的是OpenGl的Rus
 
 本篇blog名字是`Rust's async isn't f#@king colored!`
 
-仅看blog名字也能想到作者是个爆操的老哥，开个玩笑*_*。
-
 本篇blog衍生自15年的一篇著名blog：[What Color is Your Function?](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)，在这篇blog种将编程语言的函数调用区分为不同的颜色，特别指出多种语言种的异步调用和同步函数是两种不同的颜色，在编写程序的时候会给程序员造成一些痛苦。而文中所说go、java之类的则不属于这类语言，详细的可以去看看原文。
 
 而本篇blog也就沿着上面提到的这篇blog讨论了Rust异步编程种是否存在同样的问题。结论已经被标题出卖了，Rust异步不是有色函数！
@@ -138,11 +140,11 @@ Rg3d是一个使用Rust编写的游戏引擎，渲染后端用的是OpenGl的Rus
 
 ## 看到Toml文件，真是相见恨晚
 
-有位作者在`Reddit`发表了一篇帖子：`I really love TOML files`.
+有位作者在`Reddit`发表了一篇帖子：`I really love TOML files`。
 
 > “我没在使用Rust之前，并不了解Toml文件。现在我想用它来做任何事。” 这不就是传说中的：相见恨晚嘛。
 
-为什么`Toml`文件会被人喜爱？下面有人评论： “对于许多简单的配置，它们真的很酷！ 它们没有YAML陌生性，也没有JSON的字符串性，并且它们大多是扁平的，几乎没有级别缩进。...”
+为什么`Toml`文件会被人喜爱？下面有人评论： “对于许多简单的配置，它们真的很酷！ 它们没有YAML陌生性，也没有JSON的字符串性，并且它们大多是扁平的，几乎没有级别缩进。”
 
 [详细链接](https://www.reddit.com/r/rust/comments/m37zya/i_really_love_toml_files/)
 
@@ -178,26 +180,26 @@ Rust 和 C 的编程风格差异很大，但两者开发的程序在运行速度
 
 ## Rust的异步是有颜色, 但没什么大不了
 
-语言设计领域的一个争议点是 `有色函数`, 即将函数分为异步函数和非异步函数。这个术语来源于2015年一篇名为`《What Color is Your Function?》`的文章, 它用颜色来比喻JavaScript和其他带有显式异步函数的语言中的同步和异步函数之间常常令人痛苦的不匹配.
+语言设计领域的一个争议点是 `有色函数`， 即将函数分为异步函数和非异步函数。这个术语来源于2015年一篇名为`《What Color is Your Function?》`的文章, 它用颜色来比喻JavaScript和其他带有显式异步函数的语言中的同步和异步函数之间常常令人痛苦的不匹配。
 
-Rust 中,也有很多人讨论这个问题, 比如前几天有一片文章 `Rust’s async isn’t f#@king colored!`.
+Rust 中，也有很多人讨论这个问题， 比如前几天有一片文章 `Rust’s async isn’t f#@king colored!`。
 
-这里作者将通过原始的定义和实践,来表达自己的观点: Rust 是有颜色的.
+这里作者将通过原始的定义和实践，来表达自己的观点: Rust 是有颜色的。
 
 [原文链接](https://morestina.net/blog/1686/rust-async-is-colored)
 
 
 ## 使用 Rust 写一个 Postgres SQL 打印器: Part I
 
-这是作者 `pg-pretty`项目项目的一系列文章第一篇.
+这是作者`pg-pretty`项目项目的一系列文章第一篇。
 
-作者不能忍受非格式化的代码, 对于大型项目来说, 统一风格可以消除很多理解障碍. 但是作者没有找到一个很好的 Postgres SQL 风格打印器, 所以打算自己动手写一个.
+作者不能忍受非格式化的代码，对于大型项目来说，统一风格可以消除很多理解障碍。但是作者没有找到一个很好的 Postgres SQL 风格打印器，所以打算自己动手写一个。
 
 [原文链接](https://blog.urth.org/2021/03/14/writing-a-postgres-sql-pretty-printer-in-rust-part-1/)
 
 ## Crust of Rust: The Drop Check
 
-这是 `Crust of Rust` 系列视频的最新一期: `The Drop Check`, 相信很多小伙伴对 Drop check 都很感兴趣, 可以翻墙看一下.
+这是 `Crust of Rust` 系列视频的最新一期: `The Drop Check`, 相信很多小伙伴对 Drop check 都很感兴趣，可以翻墙看一下。
 
 [油管视频](https://youtu.be/Das3XSWo1GU)
 
@@ -225,22 +227,21 @@ Rust Async基金会工作组认为,Rust可以成为构建分布式系统（从�
 
 ## Rust 的 零大小类型(ZST) 的神奇应用
 
-Rust 中有 零大小类型的概念, 简称 `ZST` (Zero-Sized Types). 这些类型不会在他们的布局上包含任何的信息. 但是这并不意味着他们不重要,本文将深入解释 ZST 的设计理念和应用. 感兴趣的小伙伴可以看一下.
+Rust 中有 零大小类型的概念，简称 `ZST` (Zero-Sized Types). 这些类型不会在他们的布局上包含任何的信息。 但是这并不意味着他们不重要,本文将深入解释 ZST 的设计理念和应用。 感兴趣的小伙伴可以看一下。
 
 [原文链接](https://www.hardmo.de/article/2021-03-14-zst-proof-types.md)
 
 
 ## lens-rs 指路
 
-来自 `脚趾头` 的知乎投稿. 作者之前使用 `Rust` 实现了 `lens`, 本文主要说明如何来把玩这个库 `len-rs`.
-
+来自 `脚趾头` 的知乎投稿。作者之前使用 `Rust` 实现了 `lens`， 本文主要说明如何来把玩这个库 `len-rs`。
 
 [原文链接](https://zhuanlan.zhihu.com/p/358678675)
 
 
 ## 使用 Rust 构建 OpenStreetMap 应用: Part VI
 
-`使用 Rust 构建 OpenStreetMap 应用` 的最新章节, 结合之前的内容, 本章结束会完成一个基本的应用.
+`使用 Rust 构建 OpenStreetMap 应用` 的最新章节， 结合之前的内容， 本章结束会完成一个基本的应用。
 
 [原文链接](https://blogg.bekk.no/building-an-openstreetmap-app-in-rust-part-vi-8cfc8c3f7798)
 
@@ -255,21 +256,21 @@ Rust 中有 零大小类型的概念, 简称 `ZST` (Zero-Sized Types). 这些�
 ## Pin and suffering
 
 
-`Cool bear`系列的最新文章. 可以让你深入的了解 `Rust` 中的 `async`.
+`Cool bear`系列的最新文章，可以让你深入的了解 `Rust` 中的 `async`。
 
 [原文链接](https://fasterthanli.me/articles/pin-and-suffering)
 
 ## 2021年去哪里学习 Rust
 
-2021 年了, 去哪里学习 Rust 呢?
+2021 年了，去哪里学习 Rust 呢？
 
-本文总结列出了一系列的 Rust 学习资料. 想学习的 Rust 的小伙伴可以看看.
+本文总结列出了一系列的 Rust 学习资料，想学习的 Rust 的小伙伴可以看看。
 
 [原文链接](https://loige.co/where-to-go-to-learn-rust-in-2021/)
 
 
 ## Rusts Module System Explained
 
-本文详细的介绍了 Rust 模块系统. 从为什么需要模块系统? 到如何使用的非常详细. 希望对模块系统深入掌握的同学可以看看.
+本文详细的介绍了 Rust 模块系统，从为什么需要模块系统？ 到如何使用的非常详细，希望对模块系统深入掌握的同学可以看看。
 
 [原文链接](https://aloso.github.io/2021/03/28/module-system.html)

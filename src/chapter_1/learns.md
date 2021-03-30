@@ -36,7 +36,7 @@ TODO: 说明为什么Rust是一个有点特殊功能要素，类型系统，借�
 
 ## 🎈异步书翻译更新啦
 
-这次翻译新增了 第八章-关于生态的叙述 （[@EthanYuan](https://github.com/EthanYuan)) 以及 第九章 http服务器项目（[@huangjj27](https://github.com/huangjj27)), 欢迎来指正错误或贡献~
+这次翻译新增了第八章-关于生态的叙述（[@EthanYuan](https://github.com/EthanYuan)) 以及第九章http服务器项目（[@huangjj27](https://github.com/huangjj27)), 欢迎来指正错误或贡献~
 
 [english book link](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 
@@ -68,7 +68,7 @@ TODO: 说明为什么Rust是一个有点特殊功能要素，类型系统，借�
 
 ## Rust 错误处理: python 同学专用
 
-本文是 python 同学专用, 介绍了 python 日常中的错误处理以及如何在 rust 中达到类似效果和最佳实践.
+本文是python同学专用，介绍了python日常中的错误处理以及如何在rust中达到类似效果和最佳实践。
 
 [原文链接](https://theomn.com/rust-error-handling-for-pythonistas/)
 
@@ -84,7 +84,7 @@ TODO: 说明为什么Rust是一个有点特殊功能要素，类型系统，借�
 
 ![img](https://sixtyfps.io/blog/expose-rust-library-to-other-languages/diagrams.png)
 
-Rust库（也称为板条箱）分为两部分，共享实现板条箱和精简惯用的API条板箱。
+Rust库（也称为板条箱) 分为两部分，共享实现板条箱和精简惯用的API条板箱。
 
 对于JavaScript，我们使用[Neon](https://github.com/neon-bindings/neon)公开API。Neon使我们能够方便地编写JavaScript API和创建NPM包。
 
@@ -94,17 +94,17 @@ C ++部分更具挑战性。
 
 ## 🎈使用 Rust 创建一个模拟器: part 1
 
-这个系列中, 作者会通过 神经网络 和 遗传算法 制作一个 进化模拟器.
+这个系列中，作者会通过神经网络和遗传算法制作一个进化模拟器。
 
-作者首先会介绍 神经网络和遗传算法 是如何工作的, 然后会使用 Rust 来实现他们, 并且编译成 WebAssembly. 下图是一个预览图.
+作者首先会介绍神经网络和遗传算法是如何工作的，然后会使用Rust来实现他们，并且编译成WebAssembly，下图是一个预览图。
 
 教程地址： [https://pwy.io/en/posts/learning-to-fly-pt1/](https://pwy.io/en/posts/learning-to-fly-pt1/)
 
 ## 🎈Rust陷阱: repr(transparent)
 
-repr(transparent) 可以让类似 struct Foo(i32) 和 i32 有同样的内存分布方式. 他作用范围非常具体,只能有一个非 0 size 的字段.
+repr(transparent)可以让类似struct Foo(i32)和i32有同样的内存分布方式。他作用范围非常具体，只能有一个非 0 size 的字段。
 
-本文章介绍了如何使用 repr(transparent) 以及一些陷阱.
+本文章介绍了如何使用repr(transparent)以及一些陷阱。
 
 原文链接：[https://jack.wrenn.fyi/blog/semver-snares-transparent/](https://jack.wrenn.fyi/blog/semver-snares-transparent/)
 
@@ -125,13 +125,13 @@ repr(transparent) 可以让类似 struct Foo(i32) 和 i32 有同样的内存分�
 
 ## 🎈Mozilla: 如何导出 Rust 组件给 Kotlin 
 
-Mozilla 应用服务平台这个仓库中提供了一个 login 组件可以很好地展示这个示例。
+Mozilla应用服务平台这个仓库中提供了一个login组件可以很好地展示这个示例。
 
 概要：
 
 假设你已经的组件在./src/目录下编写了一个不错的Rust核心代码。
 
-首先，你需要将 Rust API 扁平化为一组 FFI 绑定，通常是在 `./ffi/ `目录下。使用 `ffi_support` crate 来帮助实现这个功能，这将涉及到在核心 Rust 代码中实现一些特性。
+首先，你需要将Rust API扁平化为一组FFI绑定，通常是在 `./ffi/ `目录下。使用 `ffi_support` crate来帮助实现这个功能，这将涉及到在核心Rust代码中实现一些特性。
 
 接下来，你需要编写消耗`FFI`的`Kotlin`代码，通常是在`./android/`目录下。这段代码应该使用`JNA`通过共享库加载编译后的`Rust`代码，并将其作为一个漂亮的安全且易于使用的`Kotlin API`暴露出来。
 
@@ -162,7 +162,7 @@ Mozilla 应用服务平台这个仓库中提供了一个 login 组件可以很�
 
 ## 🎈LibHunt: 根据reddit 被提及状态展示 rust 库的热度
 
-LibHunt 根据 reddit 上大家提及到库的热度来排序出一些热门的 rust 库.
+LibHunt根据reddit上大家提及到库的热度来排序出一些热门的rust库.
 
 对于调研阶段的同学来说,是一个很好的工具.
 
@@ -170,10 +170,10 @@ libhunt的主页地址: [https://www.libhunt.com/lang/rust](https://www.libhunt.
 
 ## 🎈用 Rust 实现一个 Rest Client
 
-这是 << Zero To Production In Rust>> 的 这本书中的一个示例。在本文, 作者演示了:
+这是 `Zero To Production In Rust` 的这本书中的一个示例。在本文，作者演示了：
 
-- 如何使用 reqwests 来写一个 REST API client.
-- 如何来使用 wiremock 来进行测试.
+- 如何使用reqwests来写一个REST API client。
+- 如何来使用wiremock来进行测试。
 
 原文链接: [https://www.lpalmieri.com/posts/how-to-write-a-rest-client-in-rust-with-reqwest-and-wiremock/](https://www.lpalmieri.com/posts/how-to-write-a-rest-client-in-rust-with-reqwest-and-wiremock/)
 
@@ -219,7 +219,7 @@ libhunt的主页地址: [https://www.libhunt.com/lang/rust](https://www.libhunt.
 
 ### Rust 教程: 从头开始学 Rust
 
-Rust 越来越被更多的人喜爱, 很多小伙伴也想入坑. 这篇教程可以帮助零基础的小伙伴了解 Rust.
+Rust越来越被更多的人喜爱，很多小伙伴也想入坑。这篇教程可以帮助零基础的小伙伴了解 Rust。
 
 ![img](https://www.educative.io/api/page/5328531525992448/image/download/6018549143830528)
 
@@ -229,13 +229,13 @@ Rust 越来越被更多的人喜爱, 很多小伙伴也想入坑. 这篇教程�
 
 ### ref vs & in variables
 
-帖子讨论了ref 和& 的使用，哪个使用更好。
+帖子讨论了ref和&的使用，哪个使用更好。
 
 [原文链接](https://www.reddit.com/r/rust/comments/l451ux/ref_vs_in_variables/)
 
 ### 在Rust中包装错误
 
-在开发时错误处理是必须，有时错误处理非常糟糕，文章中提高了warp Error 提高体验。
+在开发时错误处理是必须，有时错误处理非常糟糕，文章中提高了warp Error提高体验。
 
 [原文链接](https://edgarluque.com/blog/wrapping-errors-in-rust)
 
