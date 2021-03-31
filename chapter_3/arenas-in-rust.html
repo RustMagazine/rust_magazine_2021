@@ -1,0 +1,564 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>「译」Arenas in Rust - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item expanded "><a href="../chapter_3/arenas-in-rust.html" class="active"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#译arenas-in-rust" id="译arenas-in-rust">「译」Arenas in Rust</a></h1>
+<p>译者：<a href="https://github.com/MATRIXKOO">MATRIXKOO</a> / 后期编辑：张汉东</p>
+<blockquote>
+<p>原文: <a href="https://manishearth.github.io/blog/2021/03/15/arenas-in-rust/">Arenas in Rust</a></p>
+</blockquote>
+<hr />
+<h1><a class="header" href="#rust-中的-arenas-内存池" id="rust-中的-arenas-内存池">Rust 中的 Arenas 内存池</a></h1>
+<p>最近有一些关于 Rust 中 <code>Arenas</code> 的讨论，我想我应该写一篇关于这个文章。</p>
+<p>在 Rust 中，<code>Arenas</code> 并不是那种 &quot;典型的&quot; 问题，所以很少有人了解它们。只会在各种用例的应用程序中有看到它们。一般来说，你只需要调包就行了，没必要为它使用 <code>unsafe</code> 。因此无需专门去学会写它，但这些知识也不是无用的，尤其是对有使用 <code>Arenas</code> 的人来说更是如此 。</p>
+<p>此外，我在实现自引用的 <code>Arenas</code> 时会涉及到一系列非常<em>酷</em>的 <code>lifetime</code>操作 ，我以前完全没写过。</p>
+<p>我主要是为了写一些<em>很酷</em>的生命周期效应而写的，但是我认为有必要写一篇针对所有 <code>Rustaceans</code> 的介绍。如果你已经知道什么是 <code>Arenas</code>，并且想看到一些很炫酷的 <code>lifetime</code> 技巧，则可以直接跳到<a href="https://manishearth.github.io/blog/2021/03/15/arenas-in-rust/#implementing-a-self-referential-arena">这里</a>阅读。</p>
+<h2><a class="header" href="#什么是-arena-" id="什么是-arena-">什么是 arena ?</a></h2>
+<p><code>Arenas</code> 本质上是一种将预期生命周期相同的内存进行分组的模式。比如说有时需要在某个生命周期内分配一堆对象，之后这些对象将被全部销毁。每次都调用系统分配器效率低下，更可取的是为对象预分配一堆内存，并在完成处理后立即将其全部清理干净。
+&gt;译者注: 没错就是 cache</p>
+<p>从广义上讲，使用 <code>Arenas</code>  有以下两个原因：</p>
+<p>首先，如上所述，使用它主要目标可能是减轻内存消耗。例如，在游戏或应用程序中，可能存在大量需要逐帧分配，使用完立即销毁的情况。特别是在游戏开发中，这非常普遍，而内存压力是游戏开发人员比较关心的事情。使用  <code>Arenas</code>，可以轻松地分配一个 <code>Arena</code>，在每个帧中将其填满，并在帧结束后将其清空。缓存局部性还能其他好处：可以确保大多数每帧对象在帧期间（可能比其他对象使用得更多）位于缓存中，因为它们是相邻分配的。</p>
+<p>另一个原因可能是用于编写自引用的数据，例如带有环的复杂图，使用此方法数据可以一次全部清除。例如，在编写编译器时，<code>type</code>信息可能将需要引用其他类型或者其他数据，从而导致复杂的，可能是 <code>type</code> 的有环图。一旦推导出类型，就不需要专门销毁它了，因此可以使用一个 <code>Arenas</code> 来存储所有计算出的类型信息，当类型信息无关紧要时，就可以直接将他们一次性清楚。使用这种模式可以让代码不必担心自引用位是否会 “提前” 释放，它可以保证，如果存在一个 <code>Ty</code> ，则它的寿命与其他所有 <code>Ty</code> 一样长，并且可以直接引用它们。</p>
+<blockquote>
+<p>译者注: 不会导致空引用</p>
+</blockquote>
+<p>这两个目标不一定是相互联系的：可以使用一个 <code>Arenas</code>来同时实现两个目标。但是，也可以拥有一个禁止使用自我引用类型的 <code>Arenas</code>（有得有失，你能得到一些好处）。在本文的稍后部分，我将实现一个允许自我引用类型但对减轻内存分配压力影响不大的  <code>Arenas</code>，主要是为了易于实现。<em>通常</em>，如果要为编写用于自引用类型 的 <code>Arenas</code>，则可以使其同时减少分配器压力，但可能会有所取舍。 </p>
+<h2><a class="header" href="#在-rust-中如何使用-arena-" id="在-rust-中如何使用-arena-">在 Rust 中如何使用 arena ?</a></h2>
+<p>一般来说，要使用 arena ，只需要调包。 我简单的搜索一下现有的 <code>Arenas</code> 实现，在<a href="https://crates.io/search?q=arena">这里</a>。下面我会介绍两个我已经了解的库，但我只是挂 &quot;二&quot; 漏万。</p>
+<p>要指出的是，如果只需要环结构，而不必使用 <code>arenas</code> ，那么出色的 <a href="https://docs.rs/petgraph/">petgraph</a> 通常就足够了。 <a href="https://docs.rs/slotmap/">slotmap</a> 也很不错； 它是类似地图的数据结构，可用于基于分代索引的自引用数据。 </p>
+<h3><a class="header" href="#bumpalo" id="bumpalo">Bumpalo</a></h3>
+<p><code>Bumpalo</code> 是一种快速的 <code>bump allocator[1]</code>，它允许异构的内容，并且仅在不关心析构函数运行的情况下才允许循环。</p>
+<blockquote>
+<p>参见: [1]https://blog.codingnow.com/2013/11/bump_pointer_allocator.html</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bumpalo::Bump;
+
+// (example slightly modified from `bumpalo` docs)
+
+// Create a new arena to bump allocate into.
+let bump = Bump::new();
+
+// Allocate values into the arena.
+let scooter = bump.alloc(Doggo {
+    cuteness: u64::max_value(),
+    age: 8,
+    scritches_required: true,
+});
+
+// Happy birthday, Scooter!
+scooter.age += 1;
+<span class="boring">}
+</span></code></pre></pre>
+<p>每次对 <code>Bump::alloc()</code> 的调用都会返回对已分配对象的可变引用。 这可以分配不同的对象，它们甚至可以相互引用 (不用环的话,借用检查就会强制这样做) 。 默认情况下，它不会在其内容上调用析构函数。 但是，可以使用 <code>bumpalo::boxed</code>（或Nightly上的自定义分配器）来实现这个效果。 可以类似地使用 <code>bumpalo::collections</code>来获取 <code>bumpalo</code> 支持的向量和字符串。<code> bumpalo::boxed</code> 将不允许自引用。 
+x</p>
+<h3><a class="header" href="#typed-arena" id="typed-arena">typed-arena</a></h3>
+<p>［typed-arena](https://docs.rs/typed-arena/)是一个 <code>areana</code> 分配器，它只能存储单一类型的对象，但是就可以循环引用： </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Example from typed-arena docs
+
+use std::cell::Cell;
+use typed_arena::Arena;
+
+struct CycleParticipant&lt;'a&gt; {
+    other: Cell&lt;Option&lt;&amp;'a CycleParticipant&lt;'a&gt;&gt;&gt;,
+}
+
+let arena = Arena::new();
+
+let a = arena.alloc(CycleParticipant { other: Cell::new(None) });
+let b = arena.alloc(CycleParticipant { other: Cell::new(None) });
+
+// mutate them after the fact to set up a cycle
+a.other.set(Some(b));
+b.other.set(Some(a));
+<span class="boring">}
+</span></code></pre></pre>
+<p>和 <code>bumpalo</code> 不同的是，<code>typed-arena</code> 当 <code>arena</code> 本身超出范围时，就会使用析构函数
+&gt;你或许想知道，析构函数在引用数据上的安全性–毕竟，无论哪一个变量被第二次销毁，析构函数都会读到悬挂的引用。 我们将在文章的后面对此进行介绍，但这与 <code>drop</code> 检查有关，特别是如果尝试自引用时，则 arena 元素 本身允许的唯一显式析构函数将是带有适当标记类型的析构函数。 </p>
+<h2><a class="header" href="#实现一个支持自引用的-arena" id="实现一个支持自引用的-arena">实现一个支持自引用的 arena</a></h2>
+<p>写自引用代码是很有趣的，因为 Rust 非常警惕自我参照数据。 但是 <code>areana</code> 可以让你清楚地将“我不在乎此对象”和“可以删除此对象”阶段分开，以允许自引用和循环类型出现。</p>
+<blockquote>
+<p>人们很少需要实现自己的 arena，Bumpalo和Typedarena涵盖了大多数使用场景，实在没办法的话不妨先在 crates.io上 找一下。 但是，如果你的确需要直接实现的话，或者对具体的生命周期细节感兴趣，那么本节适合你。 </p>
+</blockquote>
+<p>在以下规则中实现输入条目为Entry的竞技场Arena的关键：</p>
+<ul>
+<li><code>Arena</code> 和 <code>Entry</code> 都应具有生命周期参数：<code>Arena &lt;'arena&gt;</code> 和 <code>Entry &lt;'arena&gt;</code></li>
+<li><code>Arena</code> 方法都应将 <code>Arena &lt;'arena&gt;</code> 接收为 <code>＆'arena</code> 自身，即其自身类型为<code>＆'arena Arena &lt;'arena&gt;</code></li>
+<li><code>Entry</code>几乎应该始终以 <code>＆'arena Entry &lt;'arena&gt;</code> 的形式传递（为此创建别名非常有用）</li>
+<li>使用内部可变性； <code>Arena</code>上的 <code>＆mut self</code> 将使所有代码停止编译。 如果使用 <code>unsafe</code>的可变性，请确保 <code>RefCell &lt;Entry &lt;'arena &gt;&gt;</code>  具有 <a href="https://doc.rust-lang.org/std/marker/struct.PhantomData.html">PhantomData</a> 。</li>
+</ul>
+<p>从生命周期的角度来看基本上就是这样，剩下的全部就是确定所需的 API 。 掌握了以上规则，只要确保定义区域与所需的保证一起使用，就不必了解底层生命周期的状况。</p>
+<p>让我们看一个 实现，然后剖析其工作原理。 </p>
+<p>###　实现
+我的库 <a href="https://docs.rs/elsa">elsa</a> 在其中一个示例中使用 100％ <code>safe</code> 的代码实现了一个 <code>arena</code> 。由于 <code>elsa :: FrozenVec</code> 要求其内容位于间接引用之后，因此该 <code>arena</code> 无法节省分配，并且它不是通用的，但这是一种合理的方式来说明生命周期的工作方式，而无需陷入 使用 <code>unsafe</code> 带来的麻烦之中。</p>
+<p>该示例实现了 <code>Person &lt;'arena&gt;</code> 类型的 <code>Arena</code> ，<code>Arena &lt;'arena&gt;</code> 。目标是实现某种可能有环的有向社交图。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use elsa::FrozenVec;
+
+struct Arena&lt;'arena&gt; {
+    people: FrozenVec&lt;Box&lt;Person&lt;'arena&gt;&gt;&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><a href="https://docs.rs/elsa/1.4.0/elsa/vec/struct.FrozenVec.html">elsa::FrozenVec</a>是类似于 <code>Vec</code> 的仅支持追加内容的抽象，可让你调用<code>push</code> 而不需要传入可变的引用，这是只使用 <code>safe</code> 的一个实现。</p>
+<p>每个 <code>Person &lt;'arena&gt;</code> 都有一个他们关注的人的列表，但也跟踪他们关注的人： </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Person&lt;'arena&gt; {
+    pub follows: FrozenVec&lt;PersonRef&lt;'arena&gt;&gt;,
+    pub reverse_follows: FrozenVec&lt;PersonRef&lt;'arena&gt;&gt;,
+    pub name: &amp;'static str,
+}
+
+// following the rule above about references to entry types
+type PersonRef&lt;'arena&gt; = &amp;'arena Person&lt;'arena&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个生命周期 <code>arena</code>  其实是 “arena本身的生命周期”。 从这开始事情就变得奇怪起来了：通常，如果一个有生命周期参数，则调用者可以选择其中的内容。 不必只是说“这是对象本身的生命周期”，调用者通常可以根据需要实例化 <code>arena &lt;'static&gt;</code> 或为某个 <code>'a</code> 实例化 <code>Arena &lt;'a&gt;</code> 。 但是在这里，我们声明 “<code> 'arena</code> 是 <code>arena</code> 自身的生命周期&quot; ； 很明显，一定有东西不太对。</p>
+<p>这是我们实际实现的地方： </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>impl&lt;'arena&gt; Arena&lt;'arena&gt; {
+    fn new() -&gt; Arena&lt;'arena&gt; {
+        Arena {
+            people: FrozenVec::new(),
+        }
+    }
+    
+    fn add_person(&amp;'arena self, name: &amp;'static str,
+                  follows: Vec&lt;PersonRef&lt;'arena&gt;&gt;) -&gt; PersonRef&lt;'arena&gt; {
+        let idx = self.people.len();
+        self.people.push(Box::new(Person {
+            name,
+            follows: follows.into(),
+            reverse_follows: Default::default(),
+        }));
+        let me = &amp;self.people[idx];
+        for friend in &amp;me.follows {
+            // We're mutating existing arena entries to add references,
+            // potentially creating cycles!
+            // 把每一个元素都加上了 引用 , 很有可能导致循环引用
+            friend.reverse_follows.push(me)
+        }
+        me
+    }
+
+    fn dump(&amp;'arena self) {
+        // code to print out every Person, their followers, and the people who follow them
+        // 打印出 `Person` ,他们的关注者 ,和关注的人
+    }
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意 <code>add_person中的&amp;'arena self</code>。</p>
+<p>此处的很好的实现了,“如果A 关注了 B，然后B又关注A” 这种通常需要分开处理的情况，但这仅是示例。</p>
+<p>最后，我们可以像这样使用 <code>arena</code> ： </p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let arena = Arena::new();
+    let lonely = arena.add_person(&quot;lonely&quot;, vec![]);
+    let best_friend = arena.add_person(&quot;best friend&quot;, vec![lonely]);
+    let threes_a_crowd = arena.add_person(&quot;threes a crowd&quot;, vec![lonely, best_friend]);
+    let rando = arena.add_person(&quot;rando&quot;, vec![]);
+    let _everyone = arena.add_person(&quot;follows everyone&quot;, vec![rando, threes_a_crowd, lonely, best_friend]);
+    arena.dump();
+}
+</code></pre></pre>
+<p>在这种情况下，所有 “可变性” 都发生在 <code>arena</code> 本身的实现中，但是此代码可能会将元素直接添加到 <code>follows/reverse_follows</code> 列表中，或者 <code>Person</code> 可能具有用于其他类型链接的 <code>RefCells</code> 。</p>
+<h3><a class="header" href="#生命周期是如何工作的" id="生命周期是如何工作的">生命周期是如何工作的</a></h3>
+<p>那么这是如何工作的呢？ 如前所述，在 Rust 中使用这样的抽象，调用者通常可以自由地根据其处理方式来设置生存期。 例如，如果 <code>HashMap&lt;K，&amp;'a str&gt;</code>，则 <code>'a</code> 将根据你尝试插入的内容的生存期进行调整。</p>
+<p>当构造 <code>Arena</code> 时，其生命周期确实仍然不受限制，我们可以通过检查以下强制约束生命周期的代码来进行测试。 (依然是能过编译的)</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let arena: Arena&lt;'static&gt; = Arena::new();
+<span class="boring">}
+</span></code></pre></pre>
+<p>当你想做点什么的时候,就会停止工作:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let arena: Arena&lt;'static&gt; = Arena::new();
+let lonely = arena.add_person(&quot;lonely&quot;, vec![]);
+<span class="boring">}
+</span></code></pre></pre>
+<pre><code class="language-shell">error[E0597]: `arena` does not live long enough
+  --&gt; examples/mutable_arena.rs:5:18
+   |
+4  |     let arena: Arena&lt;'static&gt; = Arena::new();
+   |                -------------- type annotation requires that `arena` is borrowed for `'static`
+5  |     let lonely = arena.add_person(&quot;lonely&quot;, vec![]);
+   |                  ^^^^^ borrowed value does not live long enough
+...
+11 | }
+   | - `arena` dropped here while still borrowed
+</code></pre>
+<p><code>add_person</code> 方法以某种方式强制将 <code>Arena</code> 的 <code>arena</code> 参数设置为自己的生命周期，从而对其进行约束（并且无法用类型注释将其强制约束为其他任何值）。 这是与 <code>add_person</code> 的<code>＆'arena</code> 自签名（即 self 是 <code>＆'arena Arena &lt;'self&gt;</code> ）的巧妙互动，以及<code>'Arena in Arena &lt;'arena&gt;</code> 是<a href="https://doc.rust-lang.org/nomicon/subtyping.html#variance">不变的生命周期</a>。 </p>
+<p>通常，在 Rust 程序中，生命周期具有&quot;伸缩性&quot;。 以下代码可以通过编译：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ask for two strings *with the same lifetime*
+// 要求具有相同 生命周期的 string 
+fn take_strings&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) {}
+
+// string literal with lifetime 'static
+// 要求具有 `'static' 生命周期的 ` string literal`  
+let lives_forever = &quot;foo&quot;;
+// owned string with shorter, local lifetime
+// 要求具有 `local` 生命周期
+let short_lived = String::from(&quot;bar&quot;);
+
+// still works!
+// 能跑通
+take_strings(lives_forever, &amp;*short_lived);
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这段代码中，Rust 很高兴地注意到，虽然 <code>live_forever</code> 和 <code>&amp;* short_lived</code> 具有不同的生命周期，但假装 <code>life_forever</code> 在 <code>take_strings</code> 函数的有效期内具有较短的生命周期是完全可以接受的。这只是引用，使用生命周期长的引用也适用于生命周期短的情况。</p>
+<p>事实是，这种伸缩性并非对所用的生命周期都一样！<a href="https://doc.rust-lang.org/nomicon/subtyping.html">nomicon chapter on subtyping and variance</a> 一章详细说明了为什么会这样，但一般的经验法则是，大多数生命周期都是“紧缩的” (更专业的说法是 <code>协变的</code> )，就像上面的<code>&amp;a str</code> 中的一样，但是如果涉及某种形式的可变性，它们是不可变的，也称为“不变式”。如果使用的是函数类型，则具有 <code>弹性的</code> 生命周期 (即抗变的)，但是这种情况很少见。 </p>
+<p>我们的 <code>Arena &lt;'arena&gt;</code> 使用内部可变性（通过 <code>FrozenVec</code>）使' <code>arena</code>不变。 让我们再次看一下两行代码。当编译器看到下面代码的第一行时，便会构建 <code>arena</code>，我们将其生命周期称为“ a”。此时 Arena 类型是 <code>Arena &lt;'？&gt;</code> ，其中的'？由表示形式表示，但生命周期不受限制。 </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let arena = Arena::new(); 
+let lonely = arena.add_person(&quot;lonely&quot;, vec![]);
+<span class="boring">}
+</span></code></pre></pre>
+<p>让我们把生命周期写清楚一点</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let arena = Arena::new(); // type Arena&lt;'?&gt;, lives for 'a
+
+// explicitly write the `self` that gets constructed when you call add_person
+// 显式写出 在调用 add_person 时的构建函数
+let ref_to_arena = &amp;arena; // type &amp;'a Arena&lt;'?&gt;
+let lonely = Arena::add_person(ref_to_arena, &quot;lonely&quot;, vec![]);
+<span class="boring">}
+</span></code></pre></pre>
+<p>还记得我之前列出的第二条规则吗？</p>
+<ul>
+<li>Arena方法都应将Arena &lt;'arena&gt;接收为＆'arena自身，即其自身类型为＆'arena Arena &lt;'arena&gt; 我们遵循这条规则； </li>
+</ul>
+<p><code>add_person</code> 的签名是 <code>fn add_person(&amp;'arena self)</code>。这意味着 <code>ref_to_arena</code> 的生存期必须与 <code>&amp;'arena Arena &lt;'arena&gt;</code> 模式匹配。目前，它的生命周期是<code>&amp;'a Arena &lt;'?&gt;</code>，表示<code> '？</code>强制与'a相同，即 <code>arena</code> 变量本身的生存期。如果生命周期是可变的，则编译器可以压缩其他生存期来适配它，但它是不变的，并且不受限制的生存期被强制转变成一个确切的生命周期。</p>
+<p>通过这个巧妙的技巧，我们可以强制编译器将 <code>Arena &lt;'arena&gt;</code> 的生存期参数设置为其实例的生存期。 </p>
+<p>在此之后，其余的工作就非常简单了。 <code>Arena &lt;'arena&gt;</code> 拥有类型为 <code>Person &lt;'arena&gt;</code>的元素，也就是说：“<code>Person</code> 被允许引用具有 <code>'arena</code> 生命周期的元素, 例如 <code>Arena</code> &quot;。</p>
+<p><code>type PersonRef &lt;'arena&gt; =&amp;'arena Person &lt;'arena&gt;</code>是“引用在 <code>Arena</code> 中并允许从其中引用对象 <code>Person</code> 的引用的便捷缩写。</p>
+<h3><a class="header" href="#析构器如何工作" id="析构器如何工作">析构器如何工作</a></h3>
+<p>到目前为止，我还没有讨论存在析构函数的情况下如何保证安全。 如果 <code>Arena</code> 具 有循环引用，并且编写了一个析构函数读取去这些循环引用，那么在销毁的过程中就会导致悬垂引用。 </p>
+<p>这是 rust 十分模糊的地方。 除了“明确析构器巧妙地改变借用检查行为”，你没有什么需要必须去了解的。 但是了解这里的机制对建立一个更好的心智模型更有帮助。 </p>
+<p>如果将以下代码添加到 <code>arena</code> 示例中： </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'arena&gt; Drop for Person&lt;'arena&gt; {
+    fn drop(&amp;mut self) {
+        println!(&quot;goodbye {:?}&quot;, self.name);
+        for friend in &amp;self.reverse_follows {
+            // potentially dangling!
+            println!(&quot;\t\t{}&quot;, friend.name);
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>报错:</p>
+<pre><code class="language-shell">error[E0597]: `arena` does not live long enough
+  --&gt; examples/mutable_arena.rs:5:18
+   |
+5  |     let lonely = arena.add_person(&quot;lonely&quot;, vec![]);
+   |                  ^^^^^ borrowed value does not live long enough
+...
+11 | }
+   | -
+   | |
+   | `arena` dropped here while still borrowed
+   | borrow might be used here, when `arena` is dropped and runs the destructor for type `Arena&lt;'_&gt;`
+</code></pre>
+<p>析构函数的存在在自引用数据的生命周期内巧妙地更改了借用检查器的行为。准确的规则是十分 <code>tricky</code>的，并在 <a href="https://doc.rust-lang.org/nomicon/dropck.html">nomicon</a>中进行了解释，但实际上发生的是，在Person &lt;'arena&gt;上存在自定义析构函数后，<code>'person arena</code>（因为是Arena）的 '<code>'arena</code>变成了一个“在销毁时观测到的的生命周期&quot;。然后在借用检查期间将其考虑在内---知道作用域末尾隐式调用<code>drop()</code>能够读取<code>'arena</code>的数据，Rust 做出了适当的结论，由于销毁本身是可变的操作，在销毁之后，调用<code>drop()</code> 读取内容是可行的 。 </p>
+<p>当然，需要问的一个合理问题是，如果析构函数不允许用 <code>'arena</code> '“包装”数据，应该如何在 <code>arena</code> 中存储例如 <code>Box</code> 或者 <code>FrozenVec</code>之类的东西呢? </p>
+<p>原因是 Rust 知道 <code>Box::Drop </code>由于不清楚 <code>Person</code> 是什么,也不会去试图知道,而无法检查 <code>Person.follows</code>的内容。</p>
+<p>当然凡事都有例外,由于析构器可以调用指定的 <code>trait</code> 方法(或者特化的方法)来告诉如何读取<code>Person</code>的内容,如果有一个随机的泛型类型提供了这种方法,就可以再次巧妙地更改借用检查器的行为。<code> stdlib</code> 类型和其他自定义数据结构通过转义填充<code>＃[may_dangle]</code>（也称为“ eyepatch” 毕竟析构器 &quot;看不到&quot; 生命周期）来实现这种目的，声明不会从生命周期或通用参数中读取自定义析构函数。 </p>
+<p>这也适用于诸如  <a href="https://docs.rs/typed-arena/">typed-arena </a>之类的库；如果需要创建循环引用，则将无法在为放置在 <code>arena</code>  上的类型上编写自定义析构函数。但是只要避免创建循环引用就可以使用 <code>typed-arena</code> 编写自定义析构函数了；因此将无法使用内部可变性来使一个 <code>arena</code> 指向另一个 <code>arena</code>。 </p>
+<p>感谢 <a href="https://mpc.sh/">Mark Cohen</a> 和 <a href="https://twitter.com/kneecaw/">Nika Layzell</a> 审阅了这篇文章的草稿。 </p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

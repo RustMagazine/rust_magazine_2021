@@ -1,0 +1,419 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item expanded "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html" class="active"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#华为--基于-tvm-rust-runtime-和-wasm-沙箱运行-ai-模型" id="华为--基于-tvm-rust-runtime-和-wasm-沙箱运行-ai-模型">华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></h1>
+<p>作者： 王辉 / 后期编辑： 张汉东</p>
+<blockquote>
+<p>此文来自于 3.27号 深圳 Meetup 大会
+3月27日活动PPT和现场视频链接：  <a href="https://disk.solarfs.io/sd/6e7b909b-133c-49f7-be0f-a51f65559665">https://disk.solarfs.io/sd/6e7b909b-133c-49f7-be0f-a51f65559665</a></p>
+</blockquote>
+<hr />
+<h1><a class="header" href="#基于tvm-rust-runtime和wasm沙箱运行ai模型" id="基于tvm-rust-runtime和wasm沙箱运行ai模型">基于TVM Rust Runtime和WASM沙箱运行AI模型</a></h1>
+<h2><a class="header" href="#说明" id="说明">说明</a></h2>
+<p>本文介绍了一种WASM与TVM在AI领域的结合方案：依托TVM端到端深度学习编译全栈的能力，将AI框架训练好的模型编译成WASM字节码，然后在运行时环境中通过Wasmtime进行图加载进而实现模型的无缝迁移部署。</p>
+<h2><a class="header" href="#图解tvm和wasm技术" id="图解tvm和wasm技术">图解TVM和WASM技术</a></h2>
+<h3><a class="header" href="#tvm与rust运行时" id="tvm与rust运行时">TVM与Rust运行时</a></h3>
+<img src="https://tvm.apache.org/assets/images/about-image.svg" alt="TVM Framework" width="800"/>
+<p>作为Apache基金会的顶级开源项目，TVM是用于深度学习领域的一个全栈编译器，旨在高效地在任何硬件平台进行模型的编译优化和部署工作。通过统一的中间表示层（包括Relay和Tensor IR两层），TVM可将AI框架训练的模型编译成与后端硬件架构无关的计算图表达，然后基于统一运行时实现不同环境下的计算图加载和执行操作。</p>
+<p>为实现上述的图加载执行操作，TVM制定了一套抽象的运行时接口，并根据不同的运行时环境提供多种编程语言的接口实现（包括C++、Python、Rust、Go及Javascript等），本文主要介绍TVM Rust运行时的接口定义。TVM Rust运行时接口主要包含<code>tvm_rt</code>和<code>tvm_graph_rt</code>两个crate，前者完全实现了TVM runtime API的Rust接口，而后者则具体实现了TVM graph运行时的Rust版本；本文着重针对<code>tvm_graph_rt</code>的接口实现展开介绍。</p>
+<ul>
+<li>
+<p>结构体定义</p>
+<p>| 结构体名称 | 功能介绍 |
+| :--------- | :------- |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/struct.DLTensor.html">DLTensor</a> | Plain C Tensor object, does not manage memory. |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/struct.DsoModule.html">DsoModule</a> | A module backed by a Dynamic Shared Object (dylib). |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/struct.Graph.html">Graph</a> | A TVM computation graph. |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/struct.GraphExecutor.html">GraphExecutor</a> | An executor for a TVM computation graph. |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/struct.SystemLibModule.html">SystemLibModule</a> | A module backed by a static system library. |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/struct.Tensor.html">Tensor</a> | A n-dimensional array type which can be converted to/from <code>tvm::DLTensor</code> and <code>ndarray::Array</code>. <code>Tensor</code> is primarily a holder of data which can be operated on via TVM (via <code>DLTensor</code>) or converted to <code>ndarray::Array</code> for non-TVM processing. |</p>
+</li>
+<li>
+<p>枚举定义</p>
+<p>| 枚举名称 | 功能介绍 |
+| :------- | :------- |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/enum.ArgValue.html">ArgValue</a> | A borrowed TVMPODValue. Can be constructed using <code>into()</code> but the preferred way to obtain a <code>ArgValue</code> is automatically via <code>call_packed!</code>. |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/enum.RetValue.html">RetValue</a> | An owned TVMPODValue. Can be converted from a variety of primitive and object types. Can be downcasted using <code>try_from</code> if it contains the desired type. |
+| <a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/enum.Storage.html">Storage</a> | A <code>Storage</code> is a container which holds <code>Tensor</code> data. |</p>
+</li>
+<li>
+<p>常量定义</p>
+<ul>
+<li><a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/constant.DTYPE_FLOAT32.html">DTYPE_FLOAT32</a></li>
+<li><a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/constant.DTYPE_FLOAT64.html">DTYPE_FLOAT64</a></li>
+<li><a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/constant.DTYPE_INT32.html">DTYPE_INT32</a></li>
+<li><a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/constant.DTYPE_UINT32.html">DTYPE_UINT32</a></li>
+</ul>
+</li>
+<li>
+<p>trait定义</p>
+<ul>
+<li><a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/trait.Module.html">Module</a></li>
+<li><a href="https://tvm.apache.org/docs/api/rust/tvm_graph_rt/trait.PackedFunc.html">PackedFunc</a></li>
+</ul>
+</li>
+</ul>
+<h3><a class="header" href="#wasm与wasi" id="wasm与wasi">WASM与WASI</a></h3>
+<img src="https://www.virusbulletin.com/files/cache/f1eb0edbac94a7c83b2d8dda10dbf716_f3050.jpg" alt="WASM Introduction" width="600"/>
+<p><a href="https://webassembly.org/">WebAssembly技术</a>（WASM）是一个基于二进制操作指令的栈式结构的虚拟机，其可以被编译为机器码，进而更快、高效地执行本地方法和硬件资源；当然凭借WASM强大的安全和可移植特性，其不仅可以嵌入浏览器增强Web应用，也可以应用于服务器、IoT等场景。</p>
+<p>由于浏览器领域天然具备屏蔽后端硬件平台的特点，WASM技术本身不需要考虑浏览器后端的运行时环境；但是面向非Web领域必须要针对不同的操作系统进行适配和兼容（文件读写、时钟同步、中断触发等），针对这种情况WASM社区提出了一套全新的WASI标准（WASM System Interface）。正如WASM是面向逻辑机层面的汇编语言一样，WASI是一套面向逻辑操作系统的标准接口，目的是为了实现WASM平台在不同操作系统间的无缝迁移运行。针对WASI标准的详细解读，请查阅<a href="https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/">此博文</a>。</p>
+<h2><a class="header" href="#方案介绍" id="方案介绍">方案介绍</a></h2>
+<h3><a class="header" href="#前期调研" id="前期调研">前期调研</a></h3>
+<p>当前业界针对WASM技术在AI领域已经有了比较多的探索：<a href="https://blog.tensorflow.org/2020/03/introducing-webassembly-backend-for-tensorflow-js.html">TF.js社区</a>基于WASM编译传统手写算子提升执行速度；<a href="https://tvm.apache.org/2020/05/14/compiling-machine-learning-to-webassembly-and-webgpu">TVM社区</a>基于WASM编译模型用于浏览器领域的模型推理；还有利用WASM可移植性解决算子库与硬件设备不兼容的问题（详见<a href="https://github.com/google/XNNPACK">XNNPACK</a>）等等。</p>
+<h3><a class="header" href="#方案设计" id="方案设计">方案设计</a></h3>
+<p>之前我们团队分享了WASM与AI领域结合的初步思路（详见<a href="https://leonwanghui.github.io/machine-learning/2020/04/15/some-thoughts-on-using-wasm-in-ml.html">此处</a>），正如TF.js和TVM社区开展的探索工作，我们发现WASM具有的可移植性天然地解决了AI模型在全场景落地的问题：针对传统深度学习框架定义的模型，用户在不同硬件环境上进行模型训练/推理时必须要进行额外的定制化开发工作，甚至需要单独开发一套推理引擎系统。</p>
+<p>那么如何利用WASM的可移植性实现硬件环境的统一呢？以MindSpore深度学习框架为例，如果我们把MindSpore模型分别从宏观和微观的角度来分析，宏观来看它就是一张基于MindSpore IR定义的<strong>计算图</strong>，微观来看它是一系列MindSpore<strong>算子</strong>的集合。那么我们就可以尝试分别从计算图和算子的维度将WASM与深度学习框架进行结合，也就是提出<code>WASM计算图</code>和<code>WASM算子库</code>这两种概念。</p>
+<ul>
+<li>
+<p>WASM计算图</p>
+<p>WASM计算图，顾名思义就是将训练好的模型（包括模型参数）编译成WASM字节码，然后在Runtime环境中通过WASM Runtime加载便可直接进行模型推理，借助WASM的可移植性可以实现任何环境下的模型推理工作：</p>
+<ul>
+<li>Web领域通过<code>Emscripten</code>工具将WASM字节码加载到JS Runtime中进而在浏览器中执行；</li>
+<li>非Web领域通过<code>Wasmtime</code>工具加载WASM字节码到系统环境中执行。
+对于WASM计算图这种情况，由于训练好的模型（和参数）都是提前保存在系统环境中，因此需要引入<code>WASI</code>接口与系统资源进行交互，进而完成离线加载模型的操作。所以在选择WASM Runtime的时候需要选择支持WASI（WASM System Interface）标准的工具（例如<code>Wasmtime</code>），或者也可以像TVM社区那样简单粗暴地直接对Emscripten进行WASI扩展。</li>
+</ul>
+</li>
+<li>
+<p>WASM算子库</p>
+<p>WASM算子库相对来说比较好理解，就是把单个算子编译成WASM字节码，然后对上层框架提供一种封装好的算子调用接口。但是和传统手写算子的调用方式不同，框架需要通过一种类似于动态链接的方式来加载WASM算子，但考虑到当前WASM本身不支持动态链接的方式，因此需要提前将所有编译好的WASM算子进行整合，然后对框架层提供算子库的调用接口。</p>
+</li>
+</ul>
+<p>通过对上述两种思路进行分析比较，同时在<strong>借鉴了TVM社区已有工作</strong>的情况下，我们决定首先从<code>WASM计算图</code>这条路开始进行深入探索，最大程度地利用TVM全栈编译的能力快速实现方案的原型。</p>
+<h3><a class="header" href="#方案实现" id="方案实现">方案实现</a></h3>
+<img src="./hw-tvm/TVM-graph-solution.png" alt="TVM Graph Solution" width="800"/>
+<ul>
+<li>
+<p>WASM图编译</p>
+<p>如上图所示，我们可以利用TVM Relay的Python接口直接把模型编译成<code>graph.o</code>的可执行文件，但是需要注意的是生成的graph.o文件无法直接被WASM runtime模块识别，必须首先要通过TVM的Rust runtime加载然后通过Rust编译器把图中所示的<code>WASM Graph Builder</code>模块直接编译成WASM字节码（即图中的<code>wasm_graph.wasm</code>文件）。为什么非得要经过这一步繁琐的转换呢？主要是因为<code>graph.o</code>文件中包含了Relay和TVM IR的原语，我们无法直接将这些原语转换成WASM的原语，具体转换的步骤这里就不做赘述了。</p>
+</li>
+<li>
+<p>WASM图加载</p>
+<p>图加载阶段（由上图看来）似乎是非常简单的，但是实际情况要复杂地多。首先，WASM的运行时针对WASM IR定义了一整套汇编层面的用户接口，这对于上层应用开发者来说是极度不友好的；其次，WASM当前只支持整数类型（例如i32、u64等）作为函数参数，这就导致深度学习领域的张量类型无法通过原生方式传入；更别说还要增加thread、SIMD128这些高级特性的支持等等。</p>
+<p>当然每个新领域的探索都离不开各种各样的问题，而且解决问题本身就是技术/科研人员的本职工作，所以我们没有寄希望于WASM社区而是主动尝试解决这些问题：既然WASM没有面向上层用户的高级API，我们就根据自己的需求开发一套；虽然WASM不支持传入Struct或Pointer，我们可以通过Memory机制将数据提前写入到WASM内存中然后将内存地址转成i32类型作为函数参数。虽然有些改动有点“反人类”，但是它可以清晰地展示出我们的思路和想法，这就已经足够了。</p>
+</li>
+</ul>
+<p>由于篇幅有限，此处附上项目实现的<a href="https://github.com/apache/incubator-tvm/tree/master/apps/wasm-standalone">完整代码</a>，欢迎感兴趣的大佬进行交流讨论。</p>
+<p>如下展示的是项目整体的codebase：</p>
+<pre><code>wasm-standalone/
+├── README.md
+├── wasm-graph      // WASM图生成模块
+│   ├── build.rs    // build脚本
+│   ├── Cargo.toml  // 项目依赖包
+│   ├── lib         // 通过TVM Relay API编译生成的计算图的存放目录
+│   │   ├── graph.json
+│   │   ├── graph.o
+│   │   ├── graph.params
+│   │   └── libgraph_wasm32.a
+│   ├── src         // WASM图生成模块源代码
+│   │   ├── lib.rs
+│   │   ├── types.rs
+│   │   └── utils.rs
+│   └── tools       // Relay Python API编译脚本的存放目录
+│       ├── build_graph_lib.py
+└── wasm-runtime    // WASM图生成模块
+    ├── Cargo.toml
+    ├── src         // WASM图生成模块源代码
+    │   ├── graph.rs
+    │   ├── lib.rs
+    │   └── types.rs
+    └── tests      // WASM图生成模块测试用例
+        └── test_graph_resnet50
+</code></pre>
+<p>为了让大家对该方案有一个更形象具体的理解，我们准备了一个简单的原型：通过TVM Relay API将基于ONNX生成的ResNet50模型编译成<code>wasm_graph_resnet50.wasm</code>文件，然后在运行时环境中通过Wasmtime加载WASM完成模型推理功能（具体操作流程详见<a href="https://github.com/apache/incubator-tvm/blob/master/apps/wasm-standalone/README.md#poc-guidelines">此处</a>）。</p>
+<h2><a class="header" href="#未来规划" id="未来规划">未来规划</a></h2>
+<h3><a class="header" href="#tvm社区联动" id="tvm社区联动">TVM社区联动</a></h3>
+<p>正如前面所说的，该方案仍处于<strong>试验</strong>阶段，因此我们会和TVM社区一起共同探索更多可能性，目前初步规划的特性有：</p>
+<ul>
+<li>支持基于SIMD128的数据并行处理；</li>
+<li>进一步完善TVM社区的Rust runtime API模块，使其能原生支持WASM Memory特性的对接；</li>
+<li>基于WASM后端的AutoTVM优化；</li>
+<li>更多网络支持。</li>
+</ul>
+<h3><a class="header" href="#wasm算子库" id="wasm算子库">WASM算子库</a></h3>
+<p>当前我们只是针对WASM计算图这个方向进行了深入探索，但如果要是将WASM技术与深度学习框架（比如MindSpore）相结合的话，WASM算子库的方向可能会释放更大的潜能。这里首先列举几个更适合WASM算子库的场景：</p>
+<ul>
+<li>很多深度学习框架本身已经定义了自己的IR以及编译流水线，只有WASM算子库可以无缝地与这些框架的图编译层相融合；</li>
+<li>WASM计算图只能用于模型推理，而WASM算子库可以适用于模型训练/验证/推理等场景；</li>
+<li>在可移植性这个层面，WASM计算图无法提供其内部算子的一致性保证，而WASM算子库真正实现了端边云全场景中算子的可移植性。</li>
+</ul>
+<img src="./hw-tvm/TVM-kernel-solution.png" alt="TVM Kernel Solution" width="800"/>
+<p>如上图所示，我们计划从WASM算子库这个层面梳理出一套端到到的集成方案（优先覆盖上述几个场景），真正实现WASM技术在AI领域全场景的结合。</p>
+<h2><a class="header" href="#加入我们" id="加入我们">加入我们</a></h2>
+<p>为了更好地推动Rust编程语言生态在AI领域的落地，我们发起了一个叫Rusted AI的非商业性组织，任何对Rust和AI技术感兴趣的开发者均可申请加入，社区当前提供如下几种交流渠道：</p>
+<ul>
+<li><strong>Rusted AI微信群</strong>：欢迎添加小助手的微信（微信号：<code>mindspore0328</code>，备注：<code>Rusted AI</code>），认证通过后小助手会将您拉进Rusted AI讨论群</li>
+<li><strong>GitHub Teams</strong>：社区当前依托GitHub Teams提供公开讨论的渠道，由于GitHub Teams仅对组织成员开放，请以邮件形式发送<code>个人GitHub ID</code>至<a href="wanghui71leon@gmail.com">wanghui71leon@gmail.com</a>，认证通过后即可参与<a href="https://github.com/orgs/tinyms-ai/teams/rustedai">社区话题讨论</a></li>
+<li><strong>生态众筹项目</strong>：近期社区发布了<a href="https://github.com/tinyms-ai/awesome-rusted-ai">awesome-rusted-ai</a>众筹项目，用于记录所有与Rust语言和AI领域联动相关的开源项目</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_3/hw_ndarray.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_3/rust_cpu_affinity.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_3/hw_ndarray.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_3/rust_cpu_affinity.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

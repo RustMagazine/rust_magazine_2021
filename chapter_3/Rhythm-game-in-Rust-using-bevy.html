@@ -1,0 +1,3399 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>「译」基于 Rust 用 Bevy 实现节奏大师游戏 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item expanded "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html" class="active"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#译基于-rust-用-bevy-实现节奏大师游戏" id="译基于-rust-用-bevy-实现节奏大师游戏">「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></h1>
+<p>译者：<a href="https://github.com/suhanyujie">suhanyujie</a>/ 后期编辑：张汉东</p>
+<blockquote>
+<p>原文链接：https://caballerocoll.com/blog/bevy-rhythm-game/</p>
+</blockquote>
+<p>本文相关：</p>
+<blockquote>
+<p>Rust中文社群线上学习室 | 使用 Bevy 实现节奏大师游戏 
+⁣&gt; </p>
+<ul>
+<li>01 <a href="https://rust-lang.feishu.cn/minutes/obcnw4jtr2832779jmg373wz">录屏</a></li>
+<li>02 <a href="https://rust-lang.feishu.cn/minutes/obcnxrrm878zw3q7c9z7bx6p">录屏⁣</a></li>
+</ul>
+<p>Rust 中文社群 飞书群 邀请你加入：</p>
+<ul>
+<li>对话群： https://applink.feishu.cn/TeLAcbDR </li>
+<li>话题群：https://applink.feishu.cn/TeLD868w</li>
+</ul>
+</blockquote>
+<hr />
+<h2><a class="header" href="#正文" id="正文">正文</a></h2>
+<p>在这个教程中，我们基于 Rust 使用 Bevy 引擎实现一个节奏大师游戏。目的是展现如何用 Bevy 实现一些东西，特别是一些更高级的功能，如着色器，状态，和音频。</p>
+<p>如果你想在进入学习之前看看最终的代码，你可以在<a href="https://github.com/guimcaballero/bevy_rhythm">这里</a>找到仓库，并且下面是一个游戏视频：</p>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_working_menu_and_game.mp4">视频资源</a></p>
+<p>这款游戏很简单：箭头飞过屏幕，玩家必须在正确的时间内按下正确的方向键才能让箭头消失。如果玩家成功地做到了这一点，他们将获得积分。否则，箭头会旋转着掉下来。箭头会有不同的速度，每个箭头颜色不同。游戏还有一个选择歌曲的菜单，以及一个简单的地图制作器来帮助创建歌曲地图。</p>
+<h2><a class="header" href="#bevy" id="bevy">Bevy</a></h2>
+<p><a href="https://bevyengine.org/">Bevy</a> 是一个数据驱动的游戏引擎。它使用起来非常简单，令人愉悦。它使用 <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a> 来管理游戏实体及其行为。</p>
+<p>Bevy 有一个很受欢迎的社区，所以如果你对本教程有任何疑问，可以查阅 <a href="https://bevyengine.org/learn/book/introduction/">Bevy book</a>，浏览[示例]](https://github.com/bevyengine/bevy/tree/master/examples)，或者加入<a href="https://discord.gg/gMUk5Ph">官方的 Discord</a> 进行提问。</p>
+<p>如果你发现教程中存在错误，请在这里开一个 <a href="https://github.com/guimcaballero/bevy_rhythm/issues">Issue</a>，我会修正它。</p>
+<h2><a class="header" href="#前期准备" id="前期准备">前期准备</a></h2>
+<p>在本教程中，你需要熟悉 Rust。你不必成为专家，我们不会使用任何的黑魔法。虽然不是必须的，但强烈建议你去了解一下 ECS 的工作原理。</p>
+<p>如果你想阅读一些更简单的教程，我建议你阅读<a href="https://mbuffett.com/posts/bevy-snake-tutorial/">基于 Rust，使用 Bevy 实现贪吃蛇</a>，或者<a href="https://caballerocoll.com/blog/bevy-chess-tutorial/"> Bevy 实现国际象棋</a>教程，可以详细了解基础知识。</p>
+<p>此外，我们将在本教程中使用着色器和 <a href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">GLSL</a>。这两种知识不是必须的，因为我会提供要使用的代码，但了解 GLSL 会使你可以修改更多的东西，并让游戏真正属于你自己的。</p>
+<p>如果你之前从未使用过着色器，可以参考下面这些推荐链接开始学习：</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=u5HAYVHsasc">Shadertoy 入门</a>：介绍并使用 <a href="https://www.shadertoy.com/">Shadertoy</a>。</li>
+<li>Unity 着色器编码入门 —— <a href="https://www.youtube.com/watch?v=9WW5-0N1DsI">一款即兴的在线课程</a>：介绍在 Unity 中使用着色器。非 Unity 官方指定的大部分资料都在这儿。</li>
+<li><a href="https://www.youtube.com/watch?v=C0uJ4sZelio">Unity 教程：着色器的实用介绍 —— 第一部分</a>：与上面类似。</li>
+</ul>
+<h2><a class="header" href="#创建一个项目" id="创建一个项目">创建一个项目</a></h2>
+<p>和往常一样，我们使用 <code>cargo new bevy_rhythm &amp;&amp; cd bevy_rhythm</code> 创建一个空 Rust 项目。你现在可以打开该 crate 项目。并用你喜欢的编辑器打开 <code>Cargo.toml</code>，把 <code>bevy</code> 加入到依赖项中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>[package]
+name = &quot;bevy_rhythm&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;You &lt;your@emailhere.com&gt;&quot;]
+edition = &quot;2018&quot;
+
+<span class="boring">See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+</span>
+[dependencies]
+bevy = &quot;0.4&quot;
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#快速编译" id="快速编译">快速编译</a></h2>
+<p>我建议你启用快速编译，以确保开发过程不会太烦躁。以下是我们需要准备的：</p>
+<ul>
+<li>1.LLD 链接器：普通链接器会有点慢，所以我们把其换成 LLD 链接器进行加速：
+<ul>
+<li>Ubuntu: <code>sudo apt-get install lld</code></li>
+<li>Arch: <code>sudo pacman -S lld</code></li>
+<li>Windows: <code>cargo install -f cargo-binutils and rustup component add llvm-tools-preview</code></li>
+<li>MacOS: <code>brew install michaeleisel/zld/zld</code></li>
+</ul>
+</li>
+<li>2.为该项目启用 Rust 的 nightly 版本：rustup 工具链安装 nightly 版，并且在项目目录中设置 rustup 为 nightly 进行启用。</li>
+<li>3.把<a href="https://github.com/bevyengine/bevy/blob/master/.cargo/config_fast_builds">这个文件</a>的内容拷贝到 <code>bevy_rhythm/.cargo/config</code> 中。</li>
+</ul>
+<p>以上就是所有要准备的事情了，现在运行游戏来编译所有的库。编译完成后，你应该在命令行中看到 <code>Hello, world!</code>。</p>
+<p>注意：如果你看到游戏性能很差，或者看到<a href="https://github.com/guimcaballero/bevy_rhythm/issues/1">加载资源很慢</a>，你可以用 <code>cargo run --release</code> 的编译模式下运行。编译时间可能会稍长一些，但游戏运行会更加流畅！ </p>
+<h2><a class="header" href="#开始" id="开始">开始</a></h2>
+<p>任何 Bevy 游戏的第一步都是增加小段示例代码来启动应用的。打开 <code>main.rs</code>，并将已有的 <code>main</code> 函数替换为下面的内容：</p>
+<pre><pre class="playground"><code class="language-rust">use bevy::{input::system::exit_on_esc_system, prelude::*};
+
+fn main() {
+    App::build()
+        // 抗锯齿设置 samples 为 4
+        .add_resource(Msaa { samples: 4 })
+        // 设置 WindowDescriptor 资源修改标题和窗口大小
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_plugins(DefaultPlugins)
+        .add_system(exit_on_esc_system.system())
+        .run();
+}
+</code></pre></pre>
+<p>如果你使用 <code>cargo run</code> 运行程序，你会看到一个空白窗口：</p>
+<p><img src="https://caballerocoll.com/images/bevy_empty_window.png" alt="" /></p>
+<p>这一步设置 Bevy <code>App</code>，添加默认插件。这将包括转换、输入、窗口等游戏运行所需的元素。如果你不需要这些功能， Bevy 是模块化的，你可以选择只开启你需要的功能。我们要新增这些插件，所以需要使用 <code>add_plugins</code> 和 <code>DefaultPlugins</code>。</p>
+<p>我们还添加了两个资源：<code>Msaa</code> 和 <code>WindowDescriptor</code>，分别用于配置 anti-aliasing，以及窗口大小和标题。最后，我们添加了 Bevy 的 <code>exit_on_esc_system</code>，它的作用是按下 esc 键时关闭游戏。</p>
+<h2><a class="header" href="#bevy-中的-ecs" id="bevy-中的-ecs">Bevy 中的 ECS</a></h2>
+<p>下面是 ECS 如何在 Bevy 中工作的介绍。如果你已经知道它是如何工作的，可以<a href="https://caballerocoll.com/blog/bevy-rhythm-game/#adding-a-setup-system">跳过本节</a>。这和我们的游戏无关，我将使用 <a href="https://bevyengine.org/learn/book/getting-started/ecs/">Bevy book</a> 中的例子来说明它是如何运作的。你不需要复制这里的代码，只需读懂它即可。</p>
+<p>Bevy 的 ECS 是 <a href="https://github.com/Ralith/hecs">hecs</a> 的一个分支版本。它使用 Rust 结构体作为组件，不需要添加宏或其他复杂的东西。例如：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 有两个字段的结构体组件
+struct Position { 
+    x: f32,
+    y: f32
+}
+
+// 元组组件
+struct Name(String);
+
+// 我们甚至可以使用标记组件
+struct Person;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Systems are just normal Rust functions, that have access to <code>Querys</code>:
+&gt;这个“系统”中可以使用正常的 Rust 函数，访问 <code>Querys</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn set_names(mut query: Query&lt;(&amp;Position, &amp;mut Name), With&lt;Person&gt;&gt;) {
+    for (pos, mut name) in query.iter_mut() {
+        name.0 = format!(&quot;position: ({}, {})&quot;, pos.x, pos.y);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>一次查询可以访问组件中所有实体。在前面的示例中，<code>query</code> 参数允许我们迭代包括 <code>Person</code> 组件在内以及 <code>Position</code> 和 <code>Name</code> 等组件实体。因为我们用 <code>&amp;mut Name</code> 替代 <code>&amp;Name</code>，所以可以对实体进行修改。如果对 <code>&amp;Name</code> 类型的该值进行修改，Rust 会报错。</p>
+<p>有时候我们想要只在游戏开始时运行一次的机制。我们可以通过“启动系统”来做到这一点。“启动系统”和“普通系统”完全一样，唯一的区别是我们将如何把它加到游戏中，这会在后面进行详细讲解。下面是一个使用 <code>Commands</code> 生成一些实体的“启动系统”：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn setup(commands: &amp;mut Commands) {
+    commands
+        .spawn((Position { x: 1., y: 2. }, Name(&quot;Entity 1&quot;.to_string())))
+        .spawn((Position { x: 3., y: 9. }, Name(&quot;Entity 2&quot;.to_string())));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Bevy 也有资源的概念，它可以保存全局数据。例如，内置的 <code>Time</code> 资源给我们提供游戏中的当前时间。为了在“系统”中使用这类资源，我们需要用到 <code>Res</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn change_position(mut query: Query&lt;&amp;mut Position&gt;, time: Res&lt;Time&gt;) {
+    for mut pos in query.iter_mut() {
+        pos.x = time.seconds_since_startup() as f32;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们自定义资源也很简单：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 一个简单的资源
+struct Scoreboard {
+    score: usize,
+}
+
+// 另一个资源，它实现了 Default trait
+#[derive(Default)]
+struct OtherScore(f32);
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们有两种方法初始化资源：第一种是使用 <code>.add_resource</code> 并提供我们需要的结构体，另一种是实现了 <code>Default</code> 和 <code>FromResources</code> 的 <code>.init_resource</code>。</p>
+<p>下面我们如何把它们加到游戏中：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    App::build()
+        // 新增资源的第一种方法
+        .add_resource(Scoreboard { score: 7 })
+        // 第二种方法，通过 Default 的初始化加载资源
+        .init_resource::&lt;OtherScore&gt;()
+
+        // 增加“启动系统”，游戏启动时只会运行一次
+        .add_startup_system(setup.system())
+        // 增加一个“普通系统”，每一帧都会运行一次
+        .add_system(set_names.system())
+        .add_system(change_position.system())
+        .run();
+}
+</code></pre></pre>
+<p>Another cool thing Bevy has are Plugins, which we've already seen when we used <code>DefaultPlugins</code> in the previous section. Plugins allow us to wrap features that belong together, which then let's us enable and disable them together easily. Plugins also provide organization, which is the main purpose we'll be creating our own in this tutorial.
+&gt;Bevy 还有一个很酷的东西是插件，我们在上一节使用 <code>DefaultPlugins</code> 时看到了。插件可以让我们将一些特性包装在一起，这可以让我们很容易地启用和禁用它，插件也提供了组织功能，这也是我们在这篇教程中自定义插件地主要功能点。</p>
+<p>如果有些东西不清楚，不用担心，我们会在后面更详细地解释所有内容。</p>
+<h2><a class="header" href="#增加系统设置" id="增加系统设置">增加系统设置</a></h2>
+<p>每个游戏都需要一个相机来渲染对象，所以我们将从如何添加一个生成相机的“启动系统”开始。因为这是一款 2D 游戏，所以我们要使用 <code>Camera2dBundle</code>。</p>
+<pre><pre class="playground"><code class="language-rust">use bevy::{input::system::exit_on_esc_system, prelude::*};
+
+fn main() {
+    App::build()
+        // 设定[抗锯齿](https://cn.bing.com/search?q=%E7%BB%98%E5%88%B6+%E6%8A%97%E9%94%AF%E9%BD%BF&amp;qs=n&amp;form=QBRE&amp;sp=-1&amp;pq=%E7%BB%98%E5%88%B6+%E6%8A%97%E9%94%AF%E9%BD%BF)，samples 参数值为 4
+        .add_resource(Msaa { samples: 4 })
+        // 设定 WindowDescriptor 资源，定义我们需要的标题和窗口大小
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_startup_system(setup.system()) // &lt;--- New
+        .add_plugins(DefaultPlugins)
+        .add_system(exit_on_esc_system.system())
+        .run();
+}
+
+fn setup(commands: &amp;mut Commands) {
+    commands.spawn(Camera2dBundle::default());
+}
+</code></pre></pre>
+<p>bundle 是组件的集合。在本例中，<code>Camera2dBundle</code> 将创建一个包含 <code>Camera</code>，<code>OrthographicProjection</code>，<code>VisibleEntities</code>，<code>Transform</code> 和 <code>GlobalTransform</code> 的 实体。其中大部分是我们玩游戏时不需要用到的，所以我们使用抽象的 <code>Camera2dBundle</code> 添加组件。</p>
+<p>注意：我们还可以使用一个元组代替 bundle 来添加所有组件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn setup(commands: &amp;mut Commands) {
+    commands.spawn((Camera::default(), OrthographicProjection::default(), VisibleEntities::default(), Transform::default(), GlobalTransform::default()));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这段代码实际上还不能运行，因为我们还需要在 camera 和投影组件中设置一些字段，但我觉得它明确地体现了使用 bundle 和元组来添加结构是很相似的。</p>
+<h2><a class="header" href="#加载精灵" id="加载精灵">加载精灵</a></h2>
+<p>在这部分中，我们会添加一些“精灵”，让它们四处移动。为此，我们需要创建一个 <code>assets</code> 目录，我们将存储一些<a href="https://github.com/guimcaballero/bevy_rhythm/tree/main/assets/images">图像</a>和<a href="https://github.com/guimcaballero/bevy_rhythm/tree/main/assets/fonts">字体文件</a>。目录中有两个子文件夹，图像和字体。你可以点击前面提到的链接，从 GitHub 仓库下载。</p>
+<p>你的资源目录应该如下所示：</p>
+<pre><code>assets
+├── fonts
+│   └── FiraSans-Bold.ttf
+└── images
+    ├── arrow_blue.png
+    ├── arrow_border.png
+    ├── arrow_green.png
+    └── arrow_red.png
+</code></pre>
+<p>我们将使用带颜色的箭头来表示不同速度的箭头，并使用带边框的箭头来标记目标区域。</p>
+<p>有了这些静态资源，我们就可以开始编写一些游戏动画了。我们将创建一个 <code>arrows.rs</code> 文件，它将包含生成，移动，清除箭头等相关操作。首先要做的是为“箭头精灵”保留资源，这样我们就不必在每次创建箭头时重新加载它们：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy::prelude::*;
+
+/// 为箭头保留材料和资源
+struct ArrowMaterialResource {
+    red_texture: Handle&lt;ColorMaterial&gt;,
+    blue_texture: Handle&lt;ColorMaterial&gt;,
+    green_texture: Handle&lt;ColorMaterial&gt;,
+    border_texture: Handle&lt;ColorMaterial&gt;,
+}
+impl FromResources for ArrowMaterialResource {
+    fn from_resources(resources: &amp;Resources) -&gt; Self {
+        let mut materials = resources.get_mut::&lt;Assets&lt;ColorMaterial&gt;&gt;().unwrap();
+        let asset_server = resources.get::&lt;AssetServer&gt;().unwrap();
+
+        let red_handle = asset_server.load(&quot;images/arrow_red.png&quot;);
+        let blue_handle = asset_server.load(&quot;images/arrow_blue.png&quot;);
+        let green_handle = asset_server.load(&quot;images/arrow_green.png&quot;);
+        let border_handle = asset_server.load(&quot;images/arrow_border.png&quot;);
+        ArrowMaterialResource {
+            red_texture: materials.add(red_handle.into()),
+            blue_texture: materials.add(blue_handle.into()),
+            green_texture: materials.add(green_handle.into()),
+            border_texture: materials.add(border_handle.into()),
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>通过实现 <code>FromResources</code> trait，在我们调用 <code>.init_resource::&lt;ArrowMaterialResource&gt;()</code> 时，Bevy 会管理并初始化资源，在进程中加载图片。</p>
+<p>如你所看到的，实际的资源加载是 <code>Handle&lt;ColorMaterial&gt;</code> 而不是 <code>ColorMaterials</code>。这样，当我们创建箭头实例时，我们可以使用对应的 handle，并且它们将复用已存在的资源，而不是每个都各自独有一份。</p>
+<h2><a class="header" href="#生成并移动箭头" id="生成并移动箭头">生成并移动箭头</a></h2>
+<p>我们接下来要做的是生成箭头并在屏幕上移动它们。我们从实现每秒生成一个箭头的“系统”开始。箭头会包含一个名为 <code>Arrow</code> 的空（结构体）组件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 箭头组件
+struct Arrow;
+
+/// 跟踪何时生成新箭头
+struct SpawnTimer(Timer);
+
+/// 生成箭头
+fn spawn_arrows(
+    commands: &amp;mut Commands,
+    materials: Res&lt;ArrowMaterialResource&gt;,
+    time: Res&lt;Time&gt;,
+    mut timer: ResMut&lt;SpawnTimer&gt;,
+) {
+    if !timer.0.tick(time.delta_seconds()).just_finished() {
+        return;
+    }
+
+    let transform = Transform::from_translation(Vec3::new(-400., 0., 1.));
+    commands
+        .spawn(SpriteBundle {
+            material: materials.red_texture.clone(),
+            sprite: Sprite::new(Vec2::new(140., 140.)),
+            transform,
+            ..Default::default()
+        })
+        .with(Arrow);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这个系统中，我们使用了 <code>Timer</code>，这是 Bevy 中执行每隔 <code>x</code> 秒重复操作的最佳方式。我们使用 <a href="https://rust-unofficial.github.io/patterns/patterns/newtype.html">newtype 模式</a>进行封装，这样我们能够把 <code>SpawnTimer</code> 与其他的定时器区分开。我们需要使用形如 <code>.add_resource(SpawnTimer(Timer::from_seconds(1.0, true)))</code> 的调用方式进行初始化，调用稍后会进行。将 <code>true</code> 作为参数值传递表示计时器结束时会再次重复执行。</p>
+<p>要使用计时器，我们必须手动调用它的 <code>tick</code> 方法，入参 time 是距离上次调用所间隔的时间差，然后我们可以使用 <code>just_finished</code> 来查看定时器是否完成。实际上我们所做的是提前检查定时器是否完成来确保 <code>spawn_arrows</code> 系统每秒只运行一次。</p>
+<p>系统的其余部分将创建一个 <code>Transform</code> 组件，我们将其添加到箭头组件中，它会返回 <code>SpriteBundle</code> 从而生成箭头，并给箭头实体一个来自 <code>ArrowMaterialResource</code> 的红色纹理。我们使用 <code>Commands</code> 中的 <code>with</code> 方法添加了 <code>Arrow</code> 组件。这样，我们创建的实体将拥有所有的 <code>SpriteBundle</code> 和 <code>Arrow</code> 组件。</p>
+<p>注意：这个系统只是临时的，并且它会被在某个特定时间内生成箭头的东西所覆盖。</p>
+<p>现在，我们生成的那些箭头就在那了，我们需要用另一个系统让它们向右移动：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 箭头前移
+fn move_arrows(time: Res&lt;Time&gt;, mut query: Query&lt;(&amp;mut Transform, &amp;Arrow)&gt;) {
+    for (mut transform, _arrow) in query.iter_mut() {
+        transform.translation.x += time.delta_seconds() * 200.;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>move_arrows</code> 使用 <code>Query</code> 来获取所有带有 <code>Transform</code> 和 <code>Arrow</code> 组件的实体，并通过增加 x 坐标值来将它们向右移动一点点。我们还使用了 <code>Time::delta_seconds()</code> 来根据当前帧到上一帧的时间来增加距离。 </p>
+<p>我们把这些 <code>ArrowMaterialResource</code> 和 <code>SpawnTimer</code> 等系统连接到一个插件中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct ArrowsPlugin;
+impl Plugin for ArrowsPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app
+            // 初始化资源
+            .init_resource::&lt;ArrowMaterialResource&gt;()
+            .add_resource(SpawnTimer(Timer::from_seconds(1.0, true)))
+            // 增加 system
+            .add_system(spawn_arrows.system())
+            .add_system(move_arrows.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们现在可以将 <code>main.rs</code> 改为如下内容：</p>
+<pre><pre class="playground"><code class="language-rust">use bevy::{input::system::exit_on_esc_system, prelude::*};
+
+mod arrows;
+use arrows::ArrowsPlugin;
+
+fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin) // &lt;--- New
+        .run();
+}
+
+fn setup(commands: &amp;mut Commands) {
+    commands.spawn(Camera2dBundle::default());
+}
+</code></pre></pre>
+<p>我们需要做的只是增加 <code>.add_plugin(ArrowsPlugin)</code>，这样所有的系统和资源就被正确地集成在 <code>arrows.rs</code> 中。</p>
+<p>如果你运行程序，你会看到箭头在屏幕上飞舞：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_red_arrows_moving.mp4">视频资源</a></p>
+</blockquote>
+<h2><a class="header" href="#类型和常量" id="类型和常量">类型和常量</a></h2>
+<p>我们在上一节中对一些值硬编码了。因此我们需要重新使用它们，我们要新建一个小模块来保存我们的常量。创建一个名为 <code>consts.rs</code> 的文件，并添加以下内容：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 箭头移动的速度
+pub const BASE_SPEED: f32 = 200.;
+
+/// 箭头生成时的 X 坐标值，应该在屏幕之外
+pub const SPAWN_POSITION: f32 = -400.;
+
+/// 箭头应该被正确点击时的 X 坐标值
+pub const TARGET_POSITION: f32 = 200.;
+
+/// 点击箭头时的容错间隔
+pub const THRESHOLD: f32 = 20.;
+
+/// 箭头从刷出到目标区域的总距离
+pub const DISTANCE: f32 = TARGET_POSITION - SPAWN_POSITION;
+<span class="boring">}
+</span></code></pre></pre>
+<p>其中一些常数稍后才会用到。在 <code>main.rs</code> 中增加 <code>mod consts</code>，以导入模块使其可用。我们可以在 <code>arrows.rs</code> 中的 <code>spawn_arrows</code> 和 <code>move_arrows</code> 替换掉对应硬编码的值。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::consts::*;
+
+fn spawn_arrows(
+    commands: &amp;mut Commands,
+    materials: Res&lt;ArrowMaterialResource&gt;,
+    time: Res&lt;Time&gt;,
+    mut timer: ResMut&lt;SpawnTimer&gt;,
+) {
+    if !timer.0.tick(time.delta_seconds()).just_finished() {
+        return;
+    }
+
+    let transform = Transform::from_translation(Vec3::new(SPAWN_POSITION, 0., 1.));
+    commands
+        .spawn(SpriteBundle {
+            material: materials.red_texture.clone(),
+            sprite: Sprite::new(Vec2::new(140., 140.)),
+            transform,
+            ..Default::default()
+        })
+        .with(Arrow);
+}
+
+/// 箭头前移
+fn move_arrows(time: Res&lt;Time&gt;, mut query: Query&lt;(&amp;mut Transform, &amp;Arrow)&gt;) {
+    for (mut transform, _arrow) in query.iter_mut() {
+        transform.translation.x += time.delta_seconds() * BASE_SPEED;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在我们的箭头在屏幕上移动，但他们都面向相同的方向、相同的速度移动，且颜色相同。为了能够区分它们，我们将创建两个不同的枚举，一个用于表示方向（上、下、左、右），一个表示速度（慢、中、快）。</p>
+<p>注意：我们把它叫做 <code>Directions</code> 而非 <code>Direction</code>，因为后者是一个<a href="https://docs.rs/bevy/0.4.0/bevy/prelude/enum.Direction.html"> Bevy 枚举</a>。通过给它取一个稍微不一样的名字，防止混淆带来的麻烦。</p>
+<p>让我们创建一个 <code>types.rs</code> 文件，并把上面提到的枚举值放于其中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::consts::*;
+use bevy::input::{keyboard::KeyCode, Input};
+use core::f32::consts::PI;
+
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub enum Directions {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+impl Directions {
+    /// 检查相应的方向键是否被按下
+    pub fn key_just_pressed(&amp;self, input: &amp;Input&lt;KeyCode&gt;) -&gt; bool {
+        let keys = match self {
+            Directions::Up =&gt; [KeyCode::Up, KeyCode::D],
+            Directions::Down =&gt; [KeyCode::Down, KeyCode::F],
+            Directions::Left =&gt; [KeyCode::Left, KeyCode::J],
+            Directions::Right =&gt; [KeyCode::Right, KeyCode::K],
+        };
+
+        keys.iter().any(|code| input.just_pressed(*code))
+    }
+
+    /// 返回此方向的箭头的旋转角度
+    pub fn rotation(&amp;self) -&gt; f32 {
+        match self {
+            Directions::Up =&gt; PI * 0.5,
+            Directions::Down =&gt; -PI * 0.5,
+            Directions::Left =&gt; PI,
+            Directions::Right =&gt; 0.,
+        }
+    }
+
+    /// 返回此方向的箭头的 y 坐标值
+    pub fn y(&amp;self) -&gt; f32 {
+        match self {
+            Directions::Up =&gt; 150.,
+            Directions::Down =&gt; 50.,
+            Directions::Left =&gt; -50.,
+            Directions::Right =&gt; -150.,
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先，我们添加 <code>Directions</code> 枚举。并且已经实现了三种不同的方法。</p>
+<p><code>key_just_pressed</code>，用于检查被按下的方向键。我已经决定增加 <code>D, F, J, K</code> 作为可能的键，因为我键盘上的方向键比较小。如果你是 FPS 玩家，你可以使用 <code>W, S, A, D</code>，或者 VIM 世界的 <code>K, J, H, L</code> 来替代它们。</p>
+<p>注意：如果你不太习惯使用迭代器，下面是用传统的方法实现 <code>key_just_pressed</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 检查与方向对应的按键是否被按下
+pub fn key_just_pressed(&amp;self, input: &amp;Input&lt;KeyCode&gt;) -&gt; bool {
+    match self {
+        Up =&gt; input.just_pressed(KeyCode::Up) || input.just_pressed(KeyCode::D),
+        Down =&gt; input.just_pressed(KeyCode::Down) || input.just_pressed(KeyCode::F),
+        Left =&gt; input.just_pressed(KeyCode::Left) || input.just_pressed(KeyCode::J),
+        Right =&gt; input.just_pressed(KeyCode::Right) || input.just_pressed(KeyCode::K),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>rotation</code> 表示我们需要将“箭头精灵”旋转多少度以将其指向正确的方向。<code>y</code> 表示箭头的 <code>y</code> 坐标值。我决定把箭头的顺序调整为 <code>Up, Down, Left, Right</code>，但如果你喜欢其他顺序，你可以自己修改。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Copy, Clone, Debug)]
+pub enum Speed {
+    Slow,
+    Medium,
+    Fast,
+}
+impl Speed {
+    /// 返回箭头移动的实际速度
+    pub fn value(&amp;self) -&gt; f32 {
+        BASE_SPEED * self.multiplier()
+    }
+    /// Speed 乘数
+    pub fn multiplier(&amp;self) -&gt; f32 {
+        match self {
+            Speed::Slow =&gt; 1.,
+            Speed::Medium =&gt; 1.2,
+            Speed::Fast =&gt; 1.5,
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>接下来，我们添加了 <code>Speed</code> 枚举。我们实现了两个方法：一个是乘法，它表示箭头应该相对于 <code>BASE_SPEED</code> 所移动的距离；另一个是 <code>value</code>，它是执行乘法运算得到的值。</p>
+<p>这是一部分代码，我不希望特别复杂！接下来要添加的类型是 <code>ArrowTime</code> 和 <code>SongConfig</code>。前者记录何时生成一个箭头，以及它的方向和速度。第二个将保存所有箭头实体的列表：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone, Copy, Debug)]
+/// 跟踪记录箭头应该在什么时候生成，以及箭头的速度和方向。
+pub struct ArrowTime {
+    pub spawn_time: f64,
+    pub speed: Speed,
+    pub direction: Directions,
+}
+
+#[derive(Debug)]
+pub struct SongConfig {
+    pub arrows: Vec&lt;ArrowTime&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们的 <code>ArrowTime</code> 有个问题。在内部，我们需要知道箭头什么时候生成，但在生成它时，我们希望指定应该在什么时候点击它。因为每个箭头都有不同的速度，所以仅仅减去几秒是不够的。为了解决这个问题，我们要创建一个 <code>new</code> 函数，包含 <code>click_time</code>，<code>speed</code> 和 <code>direction</code>，并设置相应的 <code>spawn_time</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl ArrowTime {
+    fn new(click_time: f64, speed: Speed, direction: Directions) -&gt; Self {
+        let speed_value = speed.value();
+        Self {
+            spawn_time: click_time - (DISTANCE / speed_value) as f64,
+            speed,
+            direction,
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>为了进行测试，我们将创建一个函数，它返回硬编码的 <code>SongConfig</code>，其中包含了不同的速度和方向的箭头：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn load_config() -&gt; SongConfig {
+    SongConfig {
+        arrows: vec![
+            ArrowTime::new(1., Speed::Slow, Directions::Up),
+            ArrowTime::new(2., Speed::Slow, Directions::Down),
+            ArrowTime::new(3., Speed::Slow, Directions::Left),
+            ArrowTime::new(4., Speed::Medium, Directions::Up),
+            ArrowTime::new(5., Speed::Fast, Directions::Right),
+        ],
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>最后，我们可以进入 <code>main.rs</code> 并将 <code>setup</code> 系统修改成下方所示：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod types;
+
+fn setup(commands: &amp;mut Commands) {
+    let config = types::load_config();
+
+    commands
+        .spawn(Camera2dBundle::default())
+        .insert_resource(config);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意：我们使用 <code>insert_resource</code> 替代 <code>add_resource</code> 或 <code>init_resource</code>，因为后者是 <code>AppBuilder</code>，前者是用在 <code>Commands</code> 中。</p>
+<p>如果我们现在运行游戏，没有任何变化，但仍然是能运行的，这很棒！我们进入 <code>arrows.rs</code> 文件，修改它使它能根据 <code>SongConfig</code> 中的列表生成箭头。</p>
+<h2><a class="header" href="#定时生成箭头" id="定时生成箭头">定时生成箭头</a></h2>
+<p>现在我们有了一个要生成的箭头列表，我们可以删除所有定时器的内容，并修改 <code>spawn_arrows</code> 系统来检查每一帧刷出的箭头。</p>
+<p>我们可以想到的第一个实现是循环遍历 <code>SongConfig</code> 中的所有箭头，并检查哪些箭头应该在当前帧中生成。这是可行的，但我们会在每一帧都循环遍历一个可能会很大的数组。我们硬编码的只有 5 个箭头，这不成问题，但一整首歌的情况下，箭头可能会超过 1000 个，就算电脑很快，玩家也不希望游戏让它们的 CPU “热”起来。</p>
+<p>相反，我们将假设 <code>SongConfig</code> 中的箭头是有序的。我们需要在歌曲开始前将它们进行排序，这很简单。了解了这一点，我们只能先检查列表中的第一个箭头，如果它应该被生成出来，我们也会检查下一个箭头，一次类推，直到我们到达那个不需要再生成的箭头为止。由于箭头是有序的，如果一个箭头不需要生成，那么其后的箭头也无需生成。在这之后，我们需要移除列表中已经被生成的箭头。 </p>
+<p>我们还需要给 <code>Arrow</code> 新增 <code>Speed</code> 和 <code>Directions</code> 字段：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 在顶部
+use crate::types::*;
+
+/// “精灵实体”上的组件
+struct Arrow {
+    speed: Speed,
+    direction: Directions,
+}
+
+/// 生成箭头
+fn spawn_arrows(
+    commands: &amp;mut Commands,
+    mut song_config: ResMut&lt;SongConfig&gt;,
+    materials: Res&lt;ArrowMaterialResource&gt;,
+    time: Res&lt;Time&gt;,
+) {
+    // 我们得到了从启动到当前的时间（secs）以及到最后一次迭代的时间（secs_last），这样我们就可以检查是否有箭头应该在这个窗口中生成。
+
+    // 歌曲在启动后 3 秒开始，所以减去 3 秒。
+    let secs = time.seconds_since_startup() - 3.;
+    let secs_last = secs - time.delta_seconds_f64();
+
+    // 计数器用于计算列表中产生和删除箭头数量
+    let mut remove_counter = 0;
+    for arrow in &amp;song_config.arrows {
+        // 列表是有序的，所以我们遍历检查直到第一个不满足条件为止
+        // 检查箭头是否应该在当前帧和下一帧之间的时间点生成
+        if secs_last &lt; arrow.spawn_time &amp;&amp; arrow.spawn_time &lt; secs {
+            remove_counter += 1;
+
+            // 根据速度得到与之匹配的箭头素材（纹理）
+            let material = match arrow.speed {
+                Speed::Slow =&gt; materials.red_texture.clone(),
+                Speed::Medium =&gt; materials.blue_texture.clone(),
+                Speed::Fast =&gt; materials.green_texture.clone(),
+            };
+
+            let mut transform =
+                Transform::from_translation(Vec3::new(SPAWN_POSITION, arrow.direction.y(), 1.));
+            // 按一定的方向旋转箭头
+            transform.rotate(Quat::from_rotation_z(arrow.direction.rotation()));
+            commands
+                .spawn(SpriteBundle {
+                    material,
+                    sprite: Sprite::new(Vec2::new(140., 140.)),
+                    transform,
+                    ..Default::default()
+                })
+                .with(Arrow {
+                    speed: arrow.speed,
+                    direction: arrow.direction,
+                });
+        } else {
+            break;
+        }
+    }
+
+    // 移除列表中生成的箭头
+    for _ in 0..remove_counter {
+        song_config.arrows.remove(0);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>上面这段代码，我们来分析一下它。</p>
+<p>在“系统”开始时，我们先获取游戏已经开始多久了，以及“系统”最后一次运行的时间点。我们使用 <a href="https://docs.rs/bevy/0.4.0/bevy/core/struct.Time.html#method.delta_seconds_f64">delta_seconds_f64</a> 来获取，它返回自最后一次游戏更新以来的时间。有了这两个值，我们就能知道该生成哪个箭头。因为 Bevy 不会每纳秒都更新（不代表所有的游戏引擎），所以如果只是简单地检查 <code>spawn_time</code> 是否等于当前时间会导致我们跳过需要处理的箭头。例如，我们可能有一个箭头，它刷出的时间被设为 <code>3.0</code>。Bevy 可以在 <code>2.99</code> 时运行这个“系统”，然后 <code>3.01</code> 时运行一次。由于箭头被指定为在 <code>3.0</code> 时生成，它就与运行“系统”的时间不匹配，导致它永远不会生成。</p>
+<p>我们换个方法，在“系统”开始时检查当前时间和最后结束时的时间，对于上面的举例，在第二次运行该“系统”时，就会有 <code>secs = 3.01</code> 以及 <code>secs_last = 2.99</code>，因为我们的箭头产生的时间超过 <code>secs_last</code>，但小于下一帧的 <code>secs</code>，所以能够生成。大功告成！</p>
+<p>有了这个，我们可以对 <code>move_arrows</code> 做一下小修改，让它兼顾速度的影响，可以使用我们之前创建的 <code>Speed::value()</code> 方法：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 把箭头向前移动
+fn move_arrows(time: Res&lt;Time&gt;, mut query: Query&lt;(&amp;mut Transform, &amp;Arrow)&gt;) {
+    for (mut transform, arrow) in query.iter_mut() {
+        transform.translation.x += time.delta_seconds() * arrow.speed.value();
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>很酷，现在每个箭头都显示了正确的颜色，并以相应的速度移动：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_colored_arrows_moving_at_speed.mp4">视频资源</a></p>
+</blockquote>
+<h2><a class="header" href="#增加目标区域箭头" id="增加目标区域箭头">增加目标区域箭头</a></h2>
+<p>现在我们将使用 <code>border_texture</code> 去创造目标箭头，以便玩家能够知道何时应该按下按键。为此，我们将创建另一个“启动系统”，<code>setup_target_arrows</code> 以及一个标记组件，<code>TargetArrow</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct TargetArrow;
+
+fn setup_target_arrows(commands: &amp;mut Commands, materials: Res&lt;ArrowMaterialResource&gt;) {
+    use Directions::*;
+    let directions = [Up, Down, Left, Right];
+
+    for direction in directions.iter() {
+        let mut transform =
+            Transform::from_translation(Vec3::new(TARGET_POSITION, direction.y(), 1.));
+        transform.rotate(Quat::from_rotation_z(direction.rotation()));
+        commands
+            .spawn(SpriteBundle {
+                material: materials.border_texture.clone(),
+                sprite: Sprite::new(Vec2::new(140., 140.)),
+                transform,
+                ..Default::default()
+            })
+            .with(TargetArrow);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>为了创建四个箭头，我们创建了一个有四个方向值的数组，然后循环调用 <code>border_texture</code> 和空的 <code>TargetArrow</code> 组件。</p>
+<p>不要忘记在 <code>ArrowsPlugin</code> 中添加 <code>setup_target_arrows</code> 作为“启动系统”：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct ArrowsPlugin;
+impl Plugin for ArrowsPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.init_resource::&lt;ArrowMaterialResource&gt;()
+            .add_startup_system(setup_target_arrows.system())
+            .add_system(spawn_arrows.system())
+            .add_system(move_arrows.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>好了，我们现在把“目标区域箭头”准备好了。</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_target_arrows.mp4">视频资源</a></p>
+</blockquote>
+<h2><a class="header" href="#按键按下时清除箭头" id="按键按下时清除箭头">按键按下时清除箭头</a></h2>
+<p>现在我们有了目标箭头，我们接下来要实现一个“系统”，它的作用是，当箭头刷出时，并且如果在特定的阈值内，用户点击了正确的操作键，箭头就会消失。我们将创建一个名为 <code>despawn_arrows</code> 的新“系统”：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 用户在箭头到达尽头前按下正确的按键，箭头消失。
+fn despawn_arrows(
+    commands: &amp;mut Commands,
+    query: Query&lt;(Entity, &amp;Transform, &amp;Arrow)&gt;,
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+) {
+    for (entity, transform, arrow) in query.iter() {
+        let pos = transform.translation.x;
+
+        // 检查按下按键时，是否是在特定的阈值内
+        if (TARGET_POSITION - THRESHOLD..=TARGET_POSITION + THRESHOLD).contains(&amp;pos)
+            &amp;&amp; arrow.direction.key_just_pressed(&amp;keyboard_input)
+        {
+            commands.despawn(entity);
+        }
+
+        // 当箭头离开屏幕时，箭头消失
+        if pos &gt;= 2. * TARGET_POSITION {
+            commands.despawn(entity);
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们使用 <code>Query</code> 来查询所有实现了 <code>Transform</code> 和 <code>Arrow</code> 的实体。我们在查询中添加了 <code>Entity</code>，这样可以访问实体的“id”，然后我们可以在 <code>Commands::despawn()</code> 中根据它来消除实体。然后我们循环所有箭头，并检查 x 坐标值是否在点击的阈值内，如果是，则消除箭头。还有第二个检查，当箭头被错过离开屏幕时，它在最后也会被消除。它是在 x 坐标值大于等于 <code>2. * TARGET_POSITION</code> 时消除。 </p>
+<p>记得用 <code>.add_system(despawn_arrows.system())</code> 将“系统”添加到 <code>ArrowsPlugin</code> 中，这样，运行游戏时，当我们斜着看的时候，也可以将其视为一种游戏！</p>
+<h2><a class="header" href="#增加基础-ui" id="增加基础-ui">增加基础 UI</a></h2>
+<p>在这一节中，我们将实现一些基本的 UI，目前只是显示了歌曲中的当前时间。我们会把它保存在 <code>ui.rs</code> 中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy::prelude::*;
+
+fn setup_ui(
+    commands: &amp;mut Commands,
+    asset_server: ResMut&lt;AssetServer&gt;,
+    mut color_materials: ResMut&lt;Assets&lt;ColorMaterial&gt;&gt;,
+) {
+    let font = asset_server.load(&quot;fonts/FiraSans-Bold.ttf&quot;);
+    let material = color_materials.add(Color::NONE.into());
+
+    commands
+        // 时间文本节点
+        .spawn(NodeBundle {
+            style: Style {
+                position_type: PositionType::Absolute,
+                position: Rect {
+                    left: Val::Px(10.),
+                    top: Val::Px(10.),
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            material: material.clone(),
+            ..Default::default()
+        })
+        .with_children(|parent| {
+            parent
+                .spawn(TextBundle {
+                    text: Text {
+                        value: &quot;Time: 0.0&quot;.to_string(),
+                        font: font.clone(),
+                        style: TextStyle {
+                            font_size: 40.0,
+                            color: Color::rgb(0.9, 0.9, 0.9),
+                            ..Default::default()
+                        },
+                    },
+                    ..Default::default()
+                })
+                .with(TimeText);
+        });
+}
+
+struct TimeText;
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这个系统中，我们使用了父子关系模式（parenting），使得子实体可以相对于父实体进行转换。当我们把子实体加到父实体中后，给它一个合适的命名 <code>with_children</code>，它的参数是一个闭包，闭包接受一个类似于 <code>Commands</code> 的结构体类型 <code>ChildBuilder</code> 参数。在这个例子中，我创建了一个 <code>NodeBundle</code> 作为父实体，并将 <code>TextBundle</code> 作为子实体添加到其中。我们使用类似于 css 风格的 <code>Style</code> 组件让父节点坐落在屏幕的左上角。我们给文本实体增加了 <code>TimeText</code> 标记组件，这样我们就可以查询它，并且可以在任意帧中修改它。</p>
+<p>现在，我们可以添加一个“系统”，它可以在每一帧中更新文本：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn update_time_text(time: Res&lt;Time&gt;, mut query: Query&lt;(&amp;mut Text, &amp;TimeText)&gt;) {
+    // 歌曲在实时启动 3 秒后开始
+    let secs = time.seconds_since_startup() - 3.;
+
+    // 在歌曲开始播放前不做任何处理
+    if secs &lt; 0. {
+        return;
+    }
+
+    for (mut text, _marker) in query.iter_mut() {
+        text.value = format!(&quot;Time: {:.2}&quot;, secs);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>该系统使用内置的 <code>Time</code> 资源，以及具有 <code>Text</code> 和 <code>TimeText</code> 的组件的实体查询。之后，我们只需要循环遍历它们并更新文本值。在实际情况中，应该只有一个实体能匹配上查询，所以我们可以只需获取第一个实体并完成此次操作，但无论如何我还是倾向于使用循环。这样，如果将来我们决定创建多个“系统”，我们就不必修改其中的代码了。</p>
+<p>我们通过创建一个插件来完成该代码文件的编写：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct UIPlugin;
+impl Plugin for UIPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.add_startup_system(setup_ui.system())
+            .add_system(update_time_text.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在，进入 <code>main.rs</code>，把 <code>CameraUiBundle</code> 加到 <code>setup</code> “系统”中，并导入插件：</p>
+<pre><pre class="playground"><code class="language-rust">use bevy::{input::system::exit_on_esc_system, prelude::*};
+
+mod arrows;
+use arrows::ArrowsPlugin;
+mod consts;
+mod types;
+mod ui;
+use ui::UIPlugin;
+
+fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin)
+        .add_plugin(UIPlugin) // &lt;--- 新代码
+        .run();
+}
+
+fn setup(commands: &amp;mut Commands) {
+    let config = types::load_config();
+
+    commands
+        .spawn(Camera2dBundle::default())
+        .spawn(CameraUiBundle::default()) // &lt;--- 新代码
+        .insert_resource(config);
+}
+</code></pre></pre>
+<p><code>CameraUiBundle</code> 和 <code>Camera2dBundle</code> 很类似，但对于 UI 元素。如果不显式地添加它，文本就不会显示。因为我们之前已经添加了它，现在可以运行游戏，在屏幕上可以看到华丽地文字：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_time_text.mp4">视频资源</a></p>
+</blockquote>
+<h2><a class="header" href="#增加得分" id="增加得分">增加得分</a></h2>
+<p>在本节中，我们将创建得分系统，以便于玩家能过够在每次玩耍后看到自己的表现。为此，我们打开另一个文件 <code>score.rs</code>。在其中，我们将创建一个新的资源来记录分数以及正确的箭头和失败的箭头数量：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::consts::*;
+
+#[derive(Default)]
+pub struct ScoreResource {
+    corrects: usize,
+    fails: usize,
+
+    score: usize,
+}
+
+impl ScoreResource {
+    /// 增加合适的次数值以及得分
+    pub fn increase_correct(&amp;mut self, distance: f32) -&gt; usize {
+        self.corrects += 1;
+
+        // 根据按下的按键的及时性获取一个 0 到 1 的值
+        let score_multiplier = (THRESHOLD - distance.abs()) / THRESHOLD;
+        // 最少增加 10 分，最多不超过 100 分。
+        let points = (score_multiplier * 100.).min(100.).max(10.) as usize;
+        self.score += points;
+
+        points
+    }
+
+    /// 统计失败的次数
+    pub fn increase_fails(&amp;mut self) {
+        self.fails += 1;
+    }
+
+    // Getters
+
+    pub fn score(&amp;self) -&gt; usize {
+        self.score
+    }
+    pub fn corrects(&amp;self) -&gt; usize {
+        self.corrects
+    }
+    pub fn fails(&amp;self) -&gt; usize {
+        self.fails
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>ScoreResource</code> 是一个简单的结构体，它有三个 <code>usize</code> 类型的私有字段。我们没有将字段设计成公有，而是设计成成员属性的 getter 和 setter。通过这种方式，增加合适的箭头数量的唯一方法是通过 <code>increase_correct</code>，它也能增加积分，我们需要保证有了这个方法后不会又编写另一个类似功能的方法。在这款游戏中，我们不需要这样，因为我们只需在一个地方增加分数，但对于其他更大的项目而言，这种做法更让我们有信心维护，它不会造成意料之外的漏洞。</p>
+<p>我们把这个资源添加到 <code>main.rs</code>，并加上下面的引入代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod score;
+use score::ScoreResource;
+<span class="boring">}
+</span></code></pre></pre>
+<p>使用下面的代码替换 <code>main</code> 函数：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .init_resource::&lt;ScoreResource&gt;() // &lt;--- New
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin)
+        .add_plugin(UIPlugin)
+        .run();
+}
+</code></pre></pre>
+<p>完成之后，我们就能使用“系统”上的资源了。也就是说，我们对 <code>arrows.rs</code> 文件中的 <code>despawn_arrows</code> 系统做一些调整，这样，当箭头消失时，就会触发调用增加积分方法：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::ScoreResource;
+
+/// 当它们到达终点时，正确点击了按钮，就会消除箭头
+fn despawn_arrows(
+    commands: &amp;mut Commands,
+    query: Query&lt;(Entity, &amp;Transform, &amp;Arrow)&gt;,
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+    
+    // 新代码
+    mut score: ResMut&lt;ScoreResource&gt;,
+) {
+    for (entity, transform, arrow) in query.iter() {
+        let pos = transform.translation.x;
+
+        // 检查箭头是否是在阈值内点击的
+        if (TARGET_POSITION - THRESHOLD..=TARGET_POSITION + THRESHOLD).contains(&amp;pos)
+            &amp;&amp; arrow.direction.key_just_pressed(&amp;keyboard_input)
+        {
+            commands.despawn(entity);
+
+            // 新代码
+            let _points = score.increase_correct(TARGET_POSITION - pos);
+        }
+
+        // 离开屏幕时，箭头消失
+        if pos &gt;= 2. * TARGET_POSITION {
+            commands.despawn(entity);
+
+            // 新代码
+            score.increase_fails();
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>改动很简单，我们增加 <code>mut score: ResMut&lt;ScoreResource&gt;</code> 作为系统的参数，以便我们可以编辑得分，我们添加了一个 <code>increase_correct</code> 方法，它会帮助我们增加积分，并且还有一个 <code>increase_fails</code> 方法，用于表示箭头离开屏幕消失时，积分增加失败。</p>
+<p>现在，拥有一个得分系统很不错，但如果玩家无法看到自己的表现，那就没啥价值了！我们需要在 UI 模板中加一些东西，以显示分数：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::ScoreResource;
+
+// 新代码
+struct ScoreText;
+fn update_score_text(score: ChangedRes&lt;ScoreResource&gt;, mut query: Query&lt;(&amp;mut Text, &amp;ScoreText)&gt;) {
+    for (mut text, _marker) in query.iter_mut() {
+        text.value = format!(
+            &quot;Score: {}. Corrects: {}. Fails: {}&quot;,
+            score.score(),
+            score.corrects(),
+            score.fails()
+        );
+    }
+}
+
+pub struct UIPlugin;
+impl Plugin for UIPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.add_startup_system(setup_ui.system())
+            .add_system(update_time_text.system())
+            .add_system(update_score_text.system()); // &lt;--- 新代码
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在 <code>update_score_text</code> 中，我们使用 <code>ChangedRes</code>，而非普通的 <code>Res</code>。它们的区别在于后者会在每一帧都会运行一次，而 <code>ChangedRes</code> 只会在资源发生改变时才会运行。这很酷，因为分数不会再每一帧里都发生变化，所以这样可以节省一些开销，只需在需要时才更新文本。然后，它在具有 <code>ScoreText</code> 组件的实体上设置文本值（和 <code>TimeText</code> 一样，应该只有一个，但为什么要限制）。</p>
+<p>我们还要修改 <code>setup_ui</code> 中的一些东西，在第二次产生 <code>NodeBundle</code> 和 <code>TextBundle</code> 时，使用 <code>ScoreText</code> 组件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn setup_ui(
+    commands: &amp;mut Commands,
+    asset_server: ResMut&lt;AssetServer&gt;,
+    mut color_materials: ResMut&lt;Assets&lt;ColorMaterial&gt;&gt;,
+) {
+    let font = asset_server.load(&quot;fonts/FiraSans-Bold.ttf&quot;);
+    let material = color_materials.add(Color::NONE.into());
+
+    commands
+        // Time 文本节点
+        .spawn(NodeBundle {
+            style: Style {
+                position_type: PositionType::Absolute,
+                position: Rect {
+                    left: Val::Px(10.),
+                    top: Val::Px(10.),
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            material: material.clone(),
+            ..Default::default()
+        })
+        .with_children(|parent| {
+            parent
+                .spawn(TextBundle {
+                    text: Text {
+                        value: &quot;Time: 0.0&quot;.to_string(),
+                        font: font.clone(),
+                        style: TextStyle {
+                            font_size: 40.0,
+                            color: Color::rgb(0.8, 0.8, 0.8),
+                            ..Default::default()
+                        },
+                    },
+                    ..Default::default()
+                })
+                .with(TimeText);
+        })
+        
+        // 新代码
+        .spawn(NodeBundle {
+            style: Style {
+                position_type: PositionType::Absolute,
+                position: Rect {
+                    left: Val::Px(10.),
+                    bottom: Val::Px(10.),
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            material,
+            ..Default::default()
+        })
+        .with_children(|parent| {
+            parent
+                .spawn(TextBundle {
+                    text: Text {
+                        value: &quot;Score: 0. Corrects: 0. Fails: 0&quot;.to_string(),
+                        font,
+                        style: TextStyle {
+                            font_size: 40.0,
+                            color: Color::rgb(0.8, 0.8, 0.8),
+                            ..Default::default()
+                        },
+                    },
+                    ..Default::default()
+                })
+                .with(ScoreText);
+        });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我已经打算把这个文本设置在屏幕的左下角，但如果你想练习，你可以尝试把它设置在左上角时间文本的下面。</p>
+<p>试试吧！运行游戏，看看我们的成果如何：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_score_text.mp4">视频资源</a></p>
+</blockquote>
+<p>你可以随心所欲地为 UI 增减东西！我们在这里所做的是比较基础地展示文本。</p>
+<h2><a class="header" href="#从配置文件中加载数据" id="从配置文件中加载数据">从配置文件中加载数据</a></h2>
+<p>目前我们游戏中的箭头是硬编码的。目前这一切都还好，但我们希望玩家能创作自己的歌曲。我们不会通过制作自定义文件格式或任何花哨的东西使配置复杂化，所以我们将通过 <a href="https://en.wikipedia.org/wiki/TOML">TOML</a> 和 <a href="https://github.com/serde-rs/serde">serde</a> 库，来使用经过试用和测试的 <a href="https://en.wikipedia.org/wiki/TOML">TOML</a> 格式。这两个 crate 将帮助我们非常容易地实现 <code>SongConfig</code> 结构的 TOML 序列化和反序列化。</p>
+<p>向 <code>Cargo.toml</code> 文件加入以下内容：</p>
+<pre><code class="language-toml">toml = &quot;0.5.8&quot;
+serde = &quot;1.0.118&quot;
+serde_derive = &quot;1.0.118&quot;
+</code></pre>
+<p>我们现在可以编辑 <code>types.rs</code> 文件，并且导入准备好的类型和反序列化格式，向 <code>Directions</code> 和 <code>Speed</code> 类型中增加 <code>Deserialize</code> 和 <code>Serialize</code> trait 实现声明：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy::prelude::*;
+
+use serde_derive::{Deserialize, Serialize};
+use std::fs::File;
+use std::io::prelude::*;
+
+#[derive(Copy, Clone, Debug, PartialEq, Deserialize, Serialize)]
+pub enum Directions {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+#[derive(Copy, Clone, Debug, Deserialize, Serialize)]
+pub enum Speed {
+    Slow,
+    Medium,
+    Fast,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在，我们有个小问题。我们的 <code>ArrowTime</code> 结构体有 <code>spawn_time</code> 字段，但是我们想在 TOML 文件中写入点击时间，所以我们不能直接在 Serde 中使用 <code>ArrowTime</code> 和 <code>SongConfig</code>。我们会通过创建两个新结构体来解决这个问题，<code>ArrowTimeToml</code> 和 <code>SongConfigToml</code>，它们对应的数据将会被包含在 TOML 文件中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Deserialize, Debug)]
+struct SongConfigToml {
+    pub name: String,
+    pub filename: String,
+    pub arrows: Vec&lt;ArrowTimeToml&gt;,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct ArrowTimeToml {
+    pub click_time: f64,
+    pub speed: Speed,
+    pub direction: Directions,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>name</code> 字段用于存储歌曲的名称，<code>filename</code> 是音频文件的路径，<code>arrows</code> 是 <code>ArrowTimeTomls</code> 列表。<code>ArrowTimeToml</code> 和 <code>ArrowTime</code> 的字段大部分一样，不同的是前者有 <code>click_time</code>，后者没有，取而代之的是 <code>spawn_time</code>。</p>
+<p>我们也会把 <code>ArrowTime::new</code> 的入参改为 <code>ArrowTimeToml</code> 类型：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl ArrowTime {
+    fn new(arrow: &amp;ArrowTimeToml) -&gt; Self {
+        let speed_value = arrow.speed.value();
+        Self {
+            spawn_time: arrow.click_time - (DISTANCE / speed_value) as f64,
+            speed: arrow.speed,
+            direction: arrow.direction,
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>让我们在 <code>SongConfig</code> 加几个字段，用来保存名称和音频：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct SongConfig {
+    pub name: String,
+    pub song_audio: Handle&lt;AudioSource&gt;,
+    pub arrows: Vec&lt;ArrowTime&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们用 <code>Handle&lt;AudioSource&gt;</code> 保存音频，当我们把 <code>SongConfigToml</code> 转换为 <code>SongConfig</code> 时，我们会使用 <code>AssetServer</code> 加载它。</p>
+<p>最后，我们将修改 <code>load_config</code> 来从文件中加载 <code>SongConfig</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn load_config(path: &amp;str, asset_server: &amp;AssetServer) -&gt; SongConfig {
+    // 打开文件并读取内容
+    let mut file = File::open(format!(&quot;assets/songs/{}&quot;, path)).expect(&quot;Couldn't open file&quot;);
+    let mut contents = String::new();
+    file.read_to_string(&amp;mut contents)
+        .expect(&quot;Couldn't read file into String&quot;);
+
+    // 使用 toml 和 Serde 进行解析
+    let parsed: SongConfigToml =
+        toml::from_str(&amp;contents).expect(&quot;Couldn't parse into SongConfigToml&quot;);
+
+    // 处理箭头
+    let mut arrows = parsed
+        .arrows
+        .iter()
+        .map(|arr| ArrowTime::new(arr))
+        .collect::&lt;Vec&lt;ArrowTime&gt;&gt;();
+    // 根据 spawn_time 对箭头排序
+    arrows.sort_by(|a, b| a.spawn_time.partial_cmp(&amp;b.spawn_time).unwrap());
+
+    // 加载音频歌曲，并进行处理
+    let song_audio = asset_server.load(&amp;*format!(&quot;songs/{}&quot;, parsed.filename));
+
+    SongConfig {
+        name: parsed.name,
+        song_audio,
+        arrows,
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>只有几行代码，但是很直接：先打开文件并读取文件的内容，使用 toml 库中的 <code>from_str</code> 方法解析文件内容，然后修改 <code>ArrowTimeTomls</code> 数组为 <code>ArrowTimes</code> 数组，我们使用 <code>AssetServer::load</code> 加载歌曲音频，然后返回新构建的 <code>SongConfig</code>。</p>
+<p>注意：<code>AssetServer::load</code> 将在 <code>assets</code> 文件夹中搜索文件。<code>File::open</code> 不会从根目录开始查找，所以我们需要手动地将 <code>assets</code> 加到路径前缀中。</p>
+<p>我们还需要修改 <code>main.rs</code> 中的 <code>setup</code> “系统”，修改 <code>load_config</code> 的调用方式，把 <code>AssetServer</code> 作为参数：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn setup(commands: &amp;mut Commands, asset_server: Res&lt;AssetServer&gt;) {
+    let config = types::load_config(&quot;test.toml&quot;, &amp;asset_server);
+
+    commands
+        .spawn(Camera2dBundle::default())
+        .spawn(CameraUiBundle::default())
+        .insert_resource(config);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们将在 <code>assets</code> 中创建一个 <code>songs</code> 文件夹，可以在其中保存所有的歌曲文件和对应的音频。现在，我们将创建一个名为 <code>test.toml</code> 的占位文件。你可以随意修改 arrows 以获得更详细的内容，现在只做一些简单测试：</p>
+<pre><code>name = &quot;Test song&quot;
+filename = &quot;audio.mp3&quot;
+
+arrows = [
+    { click_time = 1.00, speed = &quot;Slow&quot;, direction = &quot;Up&quot; },
+    { click_time = 3.00, speed = &quot;Slow&quot;, direction = &quot;Down&quot; },
+    { click_time = 5.00, speed = &quot;Fast&quot;, direction = &quot;Left&quot; },
+    { click_time = 5.00, speed = &quot;Slow&quot;, direction = &quot;Right&quot; },
+    { click_time = 7.00, speed = &quot;Slow&quot;, direction = &quot;Up&quot; },
+    { click_time = 8.00, speed = &quot;Medium&quot;, direction = &quot;Up&quot; },
+    { click_time = 9.00, speed = &quot;Slow&quot;, direction = &quot;Left&quot; },
+    { click_time = 10.00, speed = &quot;Slow&quot;, direction = &quot;Right&quot; },
+    { click_time = 10.50, speed = &quot;Medium&quot;, direction = &quot;Right&quot; },
+    { click_time = 11.00, speed = &quot;Slow&quot;, direction = &quot;Up&quot; },
+    { click_time = 11.00, speed = &quot;Slow&quot;, direction = &quot;Down&quot; },
+]
+</code></pre>
+<p>现在，（合法地）下载你最喜欢的歌曲，将其放在 <code>assets/songs</code> 中，并将其命名为 <code>audio.mp3</code>。</p>
+<p>你的 assets 目录应该如下方所示：</p>
+<pre><code>assets
+├── fonts
+│   └── FiraSans-Bold.ttf
+├── images
+│   ├── arrow_blue.png
+│   ├── arrow_border.png
+│   ├── arrow_green.png
+│   └── arrow_red.png
+└── songs
+    ├── audio.mp3
+    └── test.toml
+</code></pre>
+<p>现在运行游戏，应该和上一节没有太大不同，只是你得到的箭头是根据外部文件配置加载的！如果你问我的话，我觉得相当酷 :)。</p>
+<h2><a class="header" href="#播放音频" id="播放音频">播放音频</a></h2>
+<p>你可能注意到，在上一节中，我们做了一些加载歌曲的逻辑，但当我们玩游戏时，歌曲还是不能播放。现在，我们来实现播放！为此，我新建了一个文件，<code>audio.rs</code>，其中只含有一个“系统”：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>audio.rs
+use crate::types::SongConfig;
+use bevy::prelude::*;
+
+fn start_song(audio: Res&lt;Audio&gt;, time: Res&lt;Time&gt;, config: Res&lt;SongConfig&gt;) {
+    // 歌曲将在实时的 3 秒后开始播放
+    let secs = time.seconds_since_startup();
+    let secs_last = secs - time.delta_seconds_f64();
+
+    if secs_last &lt;= 3. &amp;&amp; 3. &lt;= secs {
+        audio.play(config.song_audio.clone());
+    }
+}
+
+pub struct AudioPlugin;
+impl Plugin for AudioPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.add_system(start_song.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>start_song</code> 使用 <code>Audio</code> 资源，在进入游戏 3 秒后开始播放歌曲。如你所看到的，我们使用了与“生成箭头”相同的方法。</p>
+<p>注意：我们本可以复用 <code>Timer</code>，但当我们制作一个菜单来选择歌曲时，会带来一定的复杂度。何况尝试使用定时器重写，是个很不错的练习方式！</p>
+<p>在 <code>main.rs</code> 中，我们添加以下内容：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// main.rs
+mod audio;
+use audio::AudioPlugin;
+<span class="boring">}
+</span></code></pre></pre>
+<p>在 <code>main</code> 函数中，在所有插件加载的最后，添加 <code>.add_plugin(AudioPlugin)</code>。现在运行游戏应该会让歌曲播放了，因为计时器在运行！</p>
+<p>至此，我们完成了游戏核心实现。你可以自由地在此基础上构建你自己地东西，但我建议你再往后看看，因为我们将致力于让游戏更加✨漂亮✨。</p>
+<h2><a class="header" href="#美化失败的箭头" id="美化失败的箭头">美化失败的箭头</a></h2>
+<p>首先，我们可以改进失败箭头的外观。目前，它们只是飞向远处。我们希望给玩家一些暗示，提醒他们那个箭头失败了。</p>
+<p>我们要做的是让箭头在穿过目标区域后，“脱离”那条线。为了实现这一点，我们在 <code>arrows.rs</code> 中的 <code>move_arrows</code> 函数中加点东西：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 箭头前移
+fn move_arrows(time: Res&lt;Time&gt;, mut query: Query&lt;(&amp;mut Transform, &amp;Arrow)&gt;) {
+    for (mut transform, arrow) in query.iter_mut() {
+        transform.translation.x += time.delta_seconds() * arrow.speed.value();
+
+        // 新加代码
+        let distance_after_target = transform.translation.x - (TARGET_POSITION + THRESHOLD);
+        if distance_after_target &gt;= 0.02 {
+            transform.translation.y -= time.delta_seconds() * distance_after_target * 2.;
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们所做的是获取目标到目标区域箭头符号的 <code>x</code> 坐标距离差，如果是正的，意味着它已经移动到目标区域外，我们就在它的 <code>y</code> 坐标减去一点，这样它就会下降。通过 <code>time.delta_seconds() * distance_after_target</code>，我们让每一帧的下降因子变大，这会让箭头以弧线的形式下降。<code>2.</code> 只是一个特定的常量，使弧线更好看（我觉得是），你可以根据你自己的意愿调整它！</p>
+<p>效果见下方链接的视频：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_arrows_falling.mp4">视频资源</a></p>
+</blockquote>
+<p>很好，我们再给它加点效果。我们让箭头在下降时收缩并旋转：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 箭头前移
+fn move_arrows(time: Res&lt;Time&gt;, mut query: Query&lt;(&amp;mut Transform, &amp;Arrow)&gt;) {
+    for (mut transform, arrow) in query.iter_mut() {
+        transform.translation.x += time.delta_seconds() * arrow.speed.value();
+
+        let distance_after_target = transform.translation.x - (TARGET_POSITION + THRESHOLD);
+        if distance_after_target &gt;= 0.02 {
+            // 一旦箭头穿过目标区域，则开始下落
+            transform.translation.y -= time.delta_seconds() * distance_after_target * 2.;
+
+            // 根据箭头地距离改变下降因子（比例）
+            let scale = ((100. - distance_after_target / 3.) / 100.).max(0.2);
+            transform.scale = Vec3::splat(scale);
+
+            // 根据距离和速度旋转箭头
+            transform.rotate(Quat::from_rotation_z(
+                -distance_after_target * arrow.speed.multiplier() / 460.,
+            ));
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这是一串充满魔力的数字和公式，我在经过多次不同的尝试得出的结论。我建议你试试其它内容！</p>
+<p>我们将其分析一下：首先，我们使用一个随着箭头移动而减小的公式来获得一个比例。然后，使用 <code>max</code> 来确保比例至少为 <code>0.2</code>。之后，我们使用 <a href="https://docs.rs/bevy/0.4.0/bevy/prelude/struct.Transform.html#method.rotate">Transform::rotate</a> 来旋转箭头。对于旋转，我们使用 <code>Speed::multiplier</code>，如果箭头的速度更快，就会旋转地更快。下面是所有这些效果组合在一起的样子：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_arrows_spinning.mp4">视频资源</a></p>
+</blockquote>
+<p>太酷了！再次强调，你可以随时即兴发挥，添加其他逻辑，让它更加酷炫。游戏有一半的乐趣来自于制作你喜欢的花哨特效！</p>
+<h2><a class="header" href="#着色器背景" id="着色器背景">着色器背景</a></h2>
+<p>接下来我们要做的是替换灰色背景。选择之一是使用 <code>ClearColor</code> 资源，以静态颜色作为背景。<a href="https://github.com/bevyengine/bevy/blob/v0.4.0/examples/window/clear_color.rs">这里</a>是一个使用示例。这种方式很简单，我们只需要在 <code>main</code> 函数中加上 <code>.add_resource(ClearColor(Color::rgb(0.5, 0.5, 0.9)))</code>，缺点是只能将背景改为一个平面颜色，我们希望看到更加生动的内容。着色器可以帮助我们！</p>
+<p>我们将在所有元素下面制作一个窗口大小的精灵，我们将添加着色器材料。这样我们会有一个背景，也就是设置一个着色器作为背景。</p>
+<p>当我们用着色器添加一些其他东西时，我们创建一个名为 <code>shaders</code> 的文件夹，用于存放相关文件。我们先打开 <code>shaders/mod.rs</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy::{
+    prelude::*,
+    reflect::TypeUuid,
+    render::{
+        pipeline::{PipelineDescriptor, RenderPipeline},
+        render_graph::{base, RenderGraph},
+        renderer::RenderResources,
+        shader::{ShaderStage, ShaderStages},
+    },
+    window::WindowResized,
+};
+
+mod background;
+use background::*;
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在，我们只添加了一些导入，声明了 <code>background</code> 模块，接下来就创建这个模块：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use super::*;
+
+pub struct Background;
+pub fn setup_background(
+    commands: &amp;mut Commands,
+    mut pipelines: ResMut&lt;Assets&lt;PipelineDescriptor&gt;&gt;,
+    mut shaders: ResMut&lt;Assets&lt;Shader&gt;&gt;,
+    window: Res&lt;WindowDescriptor&gt;,
+) {
+    // 创建一个新的着色器管道
+    let pipeline_handle = pipelines.add(PipelineDescriptor::default_config(ShaderStages {
+        vertex: shaders.add(Shader::from_glsl(
+            ShaderStage::Vertex,
+            include_str!(&quot;background.vert&quot;),
+        )),
+        fragment: Some(shaders.add(Shader::from_glsl(
+            ShaderStage::Fragment,
+            include_str!(&quot;background.frag&quot;),
+        ))),
+    }));
+
+    commands
+        .spawn(SpriteBundle {
+            render_pipelines: RenderPipelines::from_pipelines(vec![RenderPipeline::new(
+                pipeline_handle,
+            )]),
+            transform: Transform::from_scale(Vec3::new(
+                window.width + 10.,
+                window.height + 10.,
+                1.,
+            )),
+            ..Default::default()
+        })
+        .with(Background);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这个文件中，我们添加了一个“启动系统”，它首先创建了 <code>PipelineDescriptor</code>，其中包含顶点和 fragment 着色器。这些都是用 <code>include_str</code> 宏从文件中添加进来的。然后我们会创建一个带有 <code>RenderPipelines</code> 组件的 <code>SpriteBundle</code>，并将我们创建的管道描述符传入。最后，我们添加了一个 <code>Background</code> 标记组件。</p>
+<p>我们正在使用 <code>WindowDescriptor</code> 资源来得到屏幕宽度和高度，这样就可以进行正确的转换。如果玩家将窗口变大，会出现一个小问题，因为我们的背景大小不变，导致后面的灰色背景被显示出来！为了解决这个问题，我们添加另一个“系统”：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 当窗口大小变化时，背景大小跟着改变
+pub fn update_background_size(
+    mut event_reader: Local&lt;EventReader&lt;WindowResized&gt;&gt;,
+    events: Res&lt;Events&lt;WindowResized&gt;&gt;,
+    mut background: Query&lt;(&amp;mut Transform, &amp;Background)&gt;,
+) {
+    for event in event_reader.iter(&amp;events) {
+        for (mut transform, _) in background.iter_mut() {
+            transform.scale = Vec3::new(event.width, event.height, 1.);
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>它监听 <a href="https://docs.rs/bevy/0.4.0/bevy/window/struct.WindowResized.html">WindowResized</a> 事件，该事件在每次调整窗口大小时会提供新的窗口宽高。</p>
+<p>正如你注意到的，在 Bevy 中有一种易于使用且优雅的模式。事件也不例外。要使用一个事件，我们需要添加一个 <code>Event&lt;T&gt;</code> 资源和一个 <code>Local&lt;EventReader&lt;T&gt;&gt;</code> 作为参数。然后我们就可以通过事件资源来使用 <code>EventReader::iter</code>，该事件资源将给我们提供需要处理的事件。</p>
+<p>实际使用着色器时是使用 Rust 的 <code>include_str</code> 宏添加的，它将以字符串的形式添加文件内容。首先，我们创建 <code>background.vert</code>：</p>
+<pre><code>#version 450
+
+layout(location = 0) in vec3 Vertex_Position;
+layout(location = 1) in vec3 Vertex_Normal;
+layout(location = 2) in vec2 Vertex_Uv;
+
+layout(location = 1) out vec2 v_Uv;
+
+layout(set = 0, binding = 0) uniform Camera {
+    mat4 ViewProj;
+};
+layout(set = 1, binding = 0) uniform Transform {
+    mat4 Model;
+};
+
+void main() {
+    v_Uv = Vertex_Uv;
+    gl_Position = ViewProj * Model * vec4(Vertex_Position, 1.0);
+}
+</code></pre>
+<p>我们在这里只需做一件特殊的事是添加 <code>v_Uv</code>（纹理的 uv 坐标）作为输出，这样，我们就可以在 fragment 着色器中使用它，现在我们在 <code>background.frag</code> 中创建它：</p>
+<pre><code>// shaders/background.frag
+#version 450
+
+layout(location = 0) in vec4 v_Position;
+layout(location = 1) in vec2 v_Uv;
+
+layout(location = 0) out vec4 o_Target;
+
+void main() {
+    o_Target = vec4(v_Uv, 0.1, 1.0);
+}
+</code></pre>
+<p>在这个着色器中，我们只返回基于背景的 uv 坐标的简单颜色。</p>
+<p>我们现在需要注册这些创建的“系统”。我们在 <code>shaders/mod.rs</code> 中添加 <code>ShaderPlugin</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// shaders/mod.rs
+pub struct ShadersPlugin;
+impl Plugin for ShadersPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.add_startup_system(setup_background.system())
+            .add_system(update_background_size.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在我们可以在 <code>main.rs</code> 中导入它：</p>
+<pre><pre class="playground"><code class="language-rust">mod shaders;
+use shaders::ShadersPlugin;
+
+fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .init_resource::&lt;ScoreResource&gt;()
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin)
+        .add_plugin(UIPlugin)
+        .add_plugin(AudioPlugin)
+        .add_plugin(ShadersPlugin) // &lt;--- New
+        .run();
+}
+</code></pre></pre>
+<p>运行游戏你可以看到下方链接视频中展示的效果：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_simple_background.mp4">视频资源</a></p>
+</blockquote>
+<h2><a class="header" href="#使用时间着色器" id="使用时间着色器">使用时间着色器</a></h2>
+<p>继续，我们会有一些奇特的场景，酷！理想情况下，我们希望游戏背景随着时间有一些变化。</p>
+<p>Bevy 没有（至少现在没有）添加时间和分辨率到着色器中作为输入，所以我们将不得不手动添加它们。希望这点能在 Bevy 中尽快得到改善。</p>
+<p>我们再次打开 <code>shaders/mod.rs</code>文件，并增加以下代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(RenderResources, Default, TypeUuid)]
+#[uuid = &quot;0320b9b8-b3a3-4baa-8bfa-c94008177b17&quot;]
+/// 将资源传递给着色器
+pub struct ShaderInputs {
+    time: f32,
+    resolution: Vec2,
+}
+
+/// 在每一帧中，更新 ShaderInputs 中的时间
+fn update_time(time: Res&lt;Time&gt;, mut nodes: Query&lt;&amp;mut ShaderInputs&gt;) {
+    let time = time.seconds_since_startup();
+    for mut node in nodes.iter_mut() {
+        node.time = time as f32;
+    }
+}
+
+/// 如果窗口大小发生改变，更新 ShaderInputs 的分辨率
+fn update_resolution(
+    mut event_reader: Local&lt;EventReader&lt;WindowResized&gt;&gt;,
+    events: Res&lt;Events&lt;WindowResized&gt;&gt;,
+    mut background: Query&lt;&amp;mut ShaderInputs&gt;,
+) {
+    for event in event_reader.iter(&amp;events) {
+        for mut node in background.iter_mut() {
+            node.resolution = Vec2::new(event.width / event.height, 1.);
+        }
+    }
+}
+
+/// 在渲染图形时，添加 ShaderInputs 作为一个 edge
+fn setup_render_graph(mut render_graph: ResMut&lt;RenderGraph&gt;) {
+    render_graph.add_system_node(&quot;inputs&quot;, RenderResourcesNode::&lt;ShaderInputs&gt;::new(true));
+    render_graph
+        .add_node_edge(&quot;inputs&quot;, base::node::MAIN_PASS)
+        .unwrap();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们正在创建一个新的 <code>ShaderInputs</code> 结构体，将其作为渲染图形边添加到 <code>setup_render_graph</code> 中，并将其加到“启动系统”中。<code>update_time</code> 和 <code>update_resolution</code> 是两个负责更新 <code>ShaderInputs</code> 组件值的系统。注意在 <code>update_resolution</code> 中我们是通过监听 <code>WindowResized</code> 事件来实现，而非更新每一帧。</p>
+<p>现在，用以下代码替换 <code>ShaderPlugin</code> 中的实现，添加所有系统和资源：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct ShadersPlugin;
+impl Plugin for ShadersPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.add_asset::&lt;ShaderInputs&gt;() // &lt;--- 新代码
+            .add_startup_system(setup_render_graph.system()) // &lt;--- 新代码
+            .add_system(update_time.system()) // &lt;--- 新代码
+            .add_system(update_resolution.system()) // &lt;--- 新代码
+            .add_startup_system(setup_background.system())
+            .add_system(update_background_size.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们现在要向之前创建的背景实体添加 <code>ShaderInputs</code> 组件，提供初始值：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// shaders/background.rs
+pub fn setup_background(
+    commands: &amp;mut Commands,
+    mut pipelines: ResMut&lt;Assets&lt;PipelineDescriptor&gt;&gt;,
+    mut shaders: ResMut&lt;Assets&lt;Shader&gt;&gt;,
+    window: Res&lt;WindowDescriptor&gt;,
+) {
+    // 创建新的着色器管道
+    let pipeline_handle = pipelines.add(PipelineDescriptor::default_config(ShaderStages {
+        vertex: shaders.add(Shader::from_glsl(
+            ShaderStage::Vertex,
+            include_str!(&quot;background.vert&quot;),
+        )),
+        fragment: Some(shaders.add(Shader::from_glsl(
+            ShaderStage::Fragment,
+            include_str!(&quot;background.frag&quot;),
+        ))),
+    }));
+
+    commands
+        .spawn(SpriteBundle {
+            render_pipelines: RenderPipelines::from_pipelines(vec![RenderPipeline::new(
+                pipeline_handle,
+            )]),
+            transform: Transform::from_scale(Vec3::new(
+                window.width + 10.,
+                window.height + 10.,
+                1.,
+            )),
+            ..Default::default()
+        })
+        .with(Background)
+        // New
+        .with(ShaderInputs {
+            time: 0.,
+            resolution: Vec2::new(window.width / window.height, 1.),
+        });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这些值在添加一些东西后，现在可以在着色器上使用了：</p>
+<pre><code>// shaders/background.frag
+#version 450
+
+layout(location = 0) in vec4 v_Position;
+layout(location = 1) in vec2 v_Uv;
+
+layout(location = 0) out vec4 o_Target;
+
+// New
+layout(set = 2, binding = 0) uniform ShaderInputs_time {
+    float time;
+};
+// New
+layout(set = 2, binding = 1) uniform ShaderInputs_resolution {
+    vec2 resolution;
+};
+
+void main() {
+    o_Target = vec4(v_Uv, abs(sin(time)), 1.0);
+}
+</code></pre>
+<p>基本上，我们必须对 <code>ShaderInputs</code> 的每个字段增加 uniform，它包含 <code>binding</code> 对应增加的值，以及形如 <code>ShaderInputs_$name</code> 的名字，其中的 <code>$name</code> 是字段名。现在我们可以使用着色器内部的变量了！</p>
+<p>现在看起来应该如下方链接视频所示：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_background_with_time.mp4">视频资源</a></p>
+</blockquote>
+<p>就个人而言，我选择了以下配置的着色器作为背景：</p>
+<pre><code>#version 450
+
+#define TWO_PI 6.28318530718
+
+layout(location = 0) in vec4 v_Position;
+layout(location = 1) in vec2 v_Uv;
+layout(location = 0) out vec4 o_Target;
+
+layout(set = 2, binding = 0) uniform ShaderInputs_time {
+    float time;
+};
+layout(set = 2, binding = 1) uniform ShaderInputs_resolution {
+    vec2 resolution;
+};
+
+vec3 hsb2rgb(in vec3 c){
+    vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
+                             6.0)-3.0)-1.0,
+                     0.0,
+                     1.0 );
+    rgb = rgb*rgb*(3.0-2.0*rgb);
+    return c.z * mix( vec3(1.0), rgb, c.y);
+}
+
+float wave_sin(in float x) {
+    float amplitude = 0.5;
+    float frequency = 1.0;
+    float y = sin(x * frequency);
+    float t = 0.01*(-time*50.0);
+    y += sin(x * frequency * 2.1 + t)*4.5;
+    y += sin(x * frequency * 1.72 + t*1.121)*4.0;
+    y += sin(x * frequency * 2.221 + t*0.437)*5.0;
+    y += sin(x * frequency * 3.1122+ t*4.269)*2.5;
+    y *= amplitude*0.06;
+    return y;
+}
+float wave_cos(in float x) {
+    float amplitude = 0.5;
+    float frequency = 2.0;
+    float y = cos(x * frequency);
+    float t = 0.01*(-time*30.0);
+    y += cos(x * frequency * 2.1 + t)*4.5;
+    y += cos(x * frequency * 1.72 + t*1.121)*4.0;
+    y += cos(x * frequency * 2.221 + t*0.437)*5.0;
+    y += cos(x * frequency * 3.1122+ t*4.269)*2.5;
+    y *= amplitude*0.06;
+    return y;
+}
+vec2 wave(in vec2 v) {
+    return vec2(wave_sin(v.x), wave_cos(v.y));
+}
+
+void main() {
+    vec2 uv = wave(v_Uv);
+    vec3 color = hsb2rgb(vec3(uv.x + sin(uv.y), 0.7, 1.0));
+
+    o_Target = vec4(color,1.0);
+}
+</code></pre>
+<p>它移动周围的颜色，产生好看的波浪，效果如下方链接视频所示：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_fancy_background.mp4">视频资源</a></p>
+</blockquote>
+<p>现在轮到你玩它了，找到你喜欢的东西。如果你不太理解着色器，你可以尝试对上面的着色器做一些小修改，你也可以去 <a href="https://www.shadertoy.com/">Shadertoy</a> 查找一些资料。例如，下面是一个 <a href="https://www.shadertoy.com/view/XsXXDn">shader</a> 配置，它由 Danilo Guanabara 转换自 Shadertoy：</p>
+<pre><code>// shaders/background.frag
+#version 450
+
+// Creation, by Silexars (Danilo Guanabara)
+// From https://www.shadertoy.com/view/XsXXDn
+
+layout(location = 0) in vec4 v_Position;
+layout(location = 1) in vec2 v_Uv;
+layout(location = 0) out vec4 o_Target;
+
+layout(set = 2, binding = 0) uniform ShaderInputs_time {
+    float time;
+};
+layout(set = 2, binding = 1) uniform ShaderInputs_resolution {
+    vec2 resolution;
+};
+
+void main() {
+    vec3 c;
+    vec2 r = resolution;
+    float l,z=time;
+    for(int i=0;i&lt;3;i++) {
+        vec2 uv,p = v_Uv; // / r;
+        uv = p;
+        p -= 0.5;
+        p.x *= r.x/r.y;
+        z += 0.07;
+        l = length(p);
+        uv += p/l*(sin(z)+1.)*abs(sin(l*9.0-z*2.0));
+        c[i] = (0.01)/length(abs(mod(uv,1.0)-0.5));
+    }
+    o_Target = vec4(c/l,time);
+}
+</code></pre>
+<p>效果如下方链接视频所示：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_creation_background.mp4">视频资源</a></p>
+</blockquote>
+<h2><a class="header" href="#美化点击动画" id="美化点击动画">美化点击动画</a></h2>
+<p>我们之前已经为失败的箭头添加了有趣动画，但当成功命中箭头时，我们啥也没做。它就这样消失了，这有点让人失望。我们将这一点进行改进。</p>
+<p>我们将有四个不同的“精灵”，每个精灵在每个目标区域箭头下都有一个着色器。然后，每当正确命中箭头时，相应的精灵下的着色器就会启动动画，动画持续一段时间后，再消失。</p>
+<p>注意：这个如果用技术实现会比较复杂，但这样可以展示很多东西。实现这一点有个捷径是在每次正确点击箭头时创建一个精灵，然后几秒钟后删除掉。</p>
+<p>打开 <code>shaders/target_arrows.rs</code> 文件。我们为这些精灵添加一个组件（我把它叫做“普通目标箭头”），它只是指示目标箭头的方向和位置：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct TargetArrowSparkle {
+    direction: Directions,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们再添加另一条边到渲染图中，并将另一个结构体作为参数传递给着色器。这将保留最近一次正确命中箭头的时间，以及对应得分：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// shaders/target_arrows.rs
+#[derive(RenderResources, TypeUuid)]
+#[uuid = &quot;c9400817-b3a3-4baa-8bfa-0320b9b87b17&quot;]
+pub struct TimeSinceLastCorrect {
+    last_time: f32,
+    points: f32,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>请注意，当我们向目标箭头添加 <code>TimeSinceLastCorrect</code> 组件时，每个组件都有自己的值，这些值是不共享的，所以我们需要单独设定它们。</p>
+<p>现在，我们添加一个“启动系统”用于创建精灵：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// shaders/target_arrows.rs
+use super::*;
+use crate::consts::*;
+use crate::types::Directions::{self, *};
+
+pub fn setup_target_arrows(
+    commands: &amp;mut Commands,
+    mut pipelines: ResMut&lt;Assets&lt;PipelineDescriptor&gt;&gt;,
+    mut shaders: ResMut&lt;Assets&lt;Shader&gt;&gt;,
+    mut render_graph: ResMut&lt;RenderGraph&gt;,
+    window: Res&lt;WindowDescriptor&gt;,
+) {
+    // 创建一个新的着色器管道
+    let pipeline_handle = pipelines.add(PipelineDescriptor::default_config(ShaderStages {
+        vertex: shaders.add(Shader::from_glsl(
+            ShaderStage::Vertex,
+            include_str!(&quot;target_arrows.vert&quot;),
+        )),
+        fragment: Some(shaders.add(Shader::from_glsl(
+            ShaderStage::Fragment,
+            include_str!(&quot;target_arrows.frag&quot;),
+        ))),
+    }));
+
+    // 把 TimeSinceLastCorrect 加到渲染图中
+    render_graph.add_system_node(
+        &quot;last_time&quot;,
+        RenderResourcesNode::&lt;TimeSinceLastCorrect&gt;::new(true),
+    );
+    render_graph
+        .add_node_edge(&quot;last_time&quot;, base::node::MAIN_PASS)
+        .unwrap();
+
+    let directions = [Up, Down, Left, Right];
+    for direction in directions.iter() {
+        // z 值不同，所以它们不会重叠
+        let z = match direction {
+            Up =&gt; 0.3,
+            Down =&gt; 0.4,
+            Left =&gt; 0.5,
+            Right =&gt; 0.6,
+        };
+
+        let mut transform =
+            Transform::from_translation(Vec3::new(TARGET_POSITION, direction.y(), z));
+        transform.scale = Vec3::new(300., 300., 1.);
+        commands
+            .spawn(SpriteBundle {
+                render_pipelines: RenderPipelines::from_pipelines(vec![RenderPipeline::new(
+                    pipeline_handle.clone(),
+                )]),
+                transform,
+                visible: Visible {
+                    is_transparent: true,
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
+            .with(TargetArrowSparkle {
+                direction: *direction,
+            })
+            .with(TimeSinceLastCorrect {
+                last_time: 3.,
+                points: 0.5,
+            })
+            .with(ShaderInputs {
+                time: 0.,
+                resolution: Vec2::new(window.width / window.height, 1.),
+            });
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个系统就像是 <code>setup_target_arrows</code>，<code>setup_render_graph</code> 和 <code>setup_background</code> 的混合体。我们首先创建一个 <code>PipelineDescriptor</code>，然后添加 <code>TimeSinceLastCorrect</code> 作为渲染图的边，最后我们创建一个存放所有方向的数组，然后迭代它，创建 4 个精灵组，并添加 <code>TargetArrowSparkle</code>，<code>TimeSinceLastCorrect</code> 和 <code>ShaderInputs</code> 组件。</p>
+<p>我们把 <code>last_time</code> 设为 3 秒进行测试。这样，当时间达到三秒时，动画就开始了。当我们设置好所有内容后，我们会将其更改为负值，因为我们希望箭头在被正确点击时触发。</p>
+<p>我们还需要为这个着色器创建新文件：</p>
+<pre><code>#version 450
+
+layout(location = 0) in vec3 Vertex_Position;
+layout(location = 1) in vec3 Vertex_Normal;
+layout(location = 2) in vec2 Vertex_Uv;
+
+layout(location = 1) out vec2 v_Uv;
+
+layout(set = 0, binding = 0) uniform Camera {
+    mat4 ViewProj;
+};
+layout(set = 1, binding = 0) uniform Transform {
+    mat4 Model;
+};
+
+void main() {
+    v_Uv = Vertex_Uv;
+    gl_Position = ViewProj * Model * vec4(Vertex_Position, 1.0);
+}
+</code></pre>
+<p>vertex 着色器的实现基本上和 <code>shaders/background.vert</code> 一样。更有趣的是 <code>shaders/target_arrows.frag</code>：</p>
+<pre><code># shaders/target_arrows.frag
+#version 450
+
+#define TWO_PI 6.28318530718
+
+layout(location = 0) in vec4 v_Position;
+layout(location = 1) in vec2 v_Uv;
+layout(location = 0) out vec4 o_Target;
+
+layout(set = 2, binding = 0) uniform ShaderInputs_time {
+    float time;
+};
+layout(set = 2, binding = 1) uniform ShaderInputs_resolution {
+    vec2 resolution;
+};
+layout(set = 3, binding = 0) uniform TimeSinceLastCorrect_last_time {
+    float last_time;
+};
+layout(set = 3, binding = 1) uniform TimeSinceLastCorrect_points {
+    float points;
+};
+
+float interval(in float a, in float b, in float val) {
+    return step(a, val) * smoothstep(1.0 - b - 0.1, 1.0 - b, 1. - val);
+}
+
+float circle(in vec2 uv, in float _radius){
+    vec2 dist = uv - vec2(0.5);
+    return 1.0 - smoothstep(_radius - (_radius * 0.01),
+                            _radius + (_radius * 0.01),
+                            dot(dist, dist) * 4.0);
+}
+
+float smoothcircle(in vec2 _st, in float s){
+    vec2 dist = _st-vec2(0.5);
+    return 4. * dot(dist,dist) / (s);
+}
+
+void main() {
+    // 0. when the circle shouldn't be shown
+    float alpha = interval(last_time, last_time + 0.6, time);
+
+    // Circle radius
+    float radius = time - last_time;
+    // 0. for not in circle, 1. for circle
+    // float circle = circle(v_Uv, radius) * (1. - circle(v_Uv, radius - 0.1));
+    float circle = smoothcircle(v_Uv, radius) * smoothcircle(v_Uv, radius) * circle(v_Uv, radius);
+
+    // rgb(92, 175, 29);
+    vec3 colorMin = vec3(0.36078431373,0.6862745098,0.1137254902);
+    // rgb(255, 255, 6);
+    vec3 colorMax = vec3(1.,1.,0.02352941176);
+
+    // Get color according to points
+    vec3 color = mix(colorMin, colorMax, points);
+
+    o_Target = vec4(color * circle, circle * alpha);
+}
+</code></pre>
+<p>这个着色器有点复杂，但简而言之，它的作用是创建一个半径随时间增加的圆。圆圈在 <code>last_time</code> 后存在 <code>0.6</code> 秒。我们把值设为 3 来添加 <code>TimeSinceLastCorrect</code>，并且和 <code>ShaderInputs</code> 一样，每个字段的绑定值都会增加。圆形的颜色根据点的不同而有所变化。</p>
+<p>我们还需要把 <code>setup_target_arrows</code> 加到 <code>ShaderPlugin</code> 中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// shaders/mod.rs
+mod target_arrows;
+use target_arrows::*;
+
+pub struct ShadersPlugin;
+impl Plugin for ShadersPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.add_asset::&lt;ShaderInputs&gt;()
+            .add_asset::&lt;TimeSinceLastCorrect&gt;()
+            .add_startup_system(setup_render_graph.system())
+            .add_system(update_time.system())
+            .add_system(update_resolution.system())
+            .add_startup_system(setup_background.system())
+            .add_system(update_background_size.system())
+            .add_startup_system(setup_target_arrows.system()); // &lt;--- New
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在运行游戏，将看到如下面链接视频所展示的效果：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_half_done_fancy_clicking.mp4">视频资源</a></p>
+</blockquote>
+<p>如你所看到的，就在歌曲开始后，第 3 秒时，所有的圆圈开始变大，约过半秒后它们就消失了。太好了，这意味这着色器和定时器都正常工作了！我们仍然缺少一些东西来更新一些值，所以我们添加一个“系统”，用于当箭头被正确的按下时，更新 <code>last_time</code> 值。在此之前，我们使其默认值为负的：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// shaders/target_arrows.rs
+.with(TimeSinceLastCorrect {
+    last_time: -10.,
+    points: 0.,
+})
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在如果你运行这个游戏，圆圈就不会出现了。</p>
+<p>之前，我们已经看到了如何侦听事件，但我们仍然没有看到硬币的另一面。我们现在就准备探索一下。我们将创建一个正确点击箭头时发生的事件。我们在 <code>arrows.rs</code> 文件中的 <code>despawn_arrows</code> 中产生这个事件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// arrows.rs
+/// 事件结构体
+pub struct CorrectArrowEvent {
+    pub direction: Directions,
+    pub points: usize,
+}
+
+/// 当他们到达目标区域时，正确点击按钮，箭头就会消失
+fn despawn_arrows(
+    commands: &amp;mut Commands,
+    query: Query&lt;(Entity, &amp;Transform, &amp;Arrow)&gt;,
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+    mut score: ResMut&lt;ScoreResource&gt;,
+    mut correct_arrow_events: ResMut&lt;Events&lt;CorrectArrowEvent&gt;&gt;,
+) {
+    for (entity, transform, arrow) in query.iter() {
+        let pos = transform.translation.x;
+
+        // Check if arrow is inside clicking threshold
+        if (TARGET_POSITION - THRESHOLD..=TARGET_POSITION + THRESHOLD).contains(&amp;pos)
+            &amp;&amp; arrow.direction.key_just_pressed(&amp;keyboard_input)
+        {
+            commands.despawn(entity);
+
+            let points = score.increase_correct(TARGET_POSITION - pos);
+
+            // 新代码
+            
+            // 发送事件
+            correct_arrow_events.send(CorrectArrowEvent {
+                direction: arrow.direction,
+                points,
+            });
+        }
+
+        // 当箭头离开屏幕时消除它们
+        if pos &gt;= 2. * TARGET_POSITION {
+            commands.despawn(entity);
+            score.increase_fails();
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们首先要做的是创建一个新的 <code>CorrectArrowEvent</code> 结构体，它用来表示我们的事件。对于 <code>despawn_arrows</code>，我们添加了 <code>ResMut&lt;Events&lt;CorrectArrowEvent&gt;&gt;</code> 参数，这样我们就能通过 <code>send</code> 方法发送事件。为了发送一个事件，我们需要传入一个 <code>CorrectArrowEvent</code> 结构体，它携带箭头的方向以及玩家的得分。</p>
+<p>现在我们需要把 <code>.init_resource::&lt;Events&lt;CorrectArrowEvent&gt;&gt;()</code> 添加到 <code>ArrowsPlugin</code>，我们已经准备好了。很简单，对吧？</p>
+<p>现在我们要在 <code>shaders/target_arrows.rs</code> 中添加一个“系统”，它负责更新“目标区域箭头”中的 <code>last_time</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// shaders/target_arrows.rs
+pub fn correct_arrow_event_listener(
+    time: Res&lt;Time&gt;,
+    mut correct_event_reader: Local&lt;EventReader&lt;CorrectArrowEvent&gt;&gt;,
+    correct_events: Res&lt;Events&lt;CorrectArrowEvent&gt;&gt;,
+    mut query: Query&lt;(&amp;TargetArrowSparkle, &amp;mut TimeSinceLastCorrect)&gt;,
+) {
+    for event in correct_event_reader.iter(&amp;correct_events) {
+        for (arrow, mut last_correct) in query.iter_mut() {
+            if arrow.direction == event.direction {
+                last_correct.last_time = time.seconds_since_startup() as f32;
+                last_correct.points = event.points as f32 / 100.;
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>它通过监听事件，寻找与目标方向相关的箭头精灵，并更新其中的 <code>last_time</code> 和 <code>points</code> 值。</p>
+<p>把最后一个“系统”加到 <code>ShaderPlugin</code>，<code>.add_system(correct_arrow_event_listener.system())</code>。现在如果你运行游戏，当你正确点击箭头时，就会看到圆圈效果：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_target_arrow_circles.mp4">视频资源</a></p>
+</blockquote>
+<p>这就是这个游戏中我们要做的所有着色工作。和以往一样，你可以随便修改代码，添加更多效果，进行实验！</p>
+<h2><a class="header" href="#增加状态" id="增加状态">增加状态</a></h2>
+<p>在下一节，我们将制作一个非常简单的歌曲选择菜单。为此，我们将在一些状态值上下手，这就需要修改一些地方。为了创建一个状态，我们需要新建一个新的枚举，并将其包装成 <a href="https://docs.rs/bevy/0.4.0/bevy/ecs/struct.State.html">State</a> 的资源加到游戏代码中。然后，我们可以使用 <code>on_state_update</code>，<code>on_state_enter</code> 和 <code>on_state_exit</code> 等方法为每个系统分配特定的状态。</p>
+<p>我们开始吧。首先，打开 <code>consts.rs</code>，添加 state 枚举：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Stage for our systems
+pub const APP_STATE_STAGE: &amp;str = &quot;app_state_stage&quot;;
+
+/// States
+#[derive(Clone, PartialEq, Eq, Hash)]
+pub enum AppState {
+    Menu,
+    Game,
+    MakeMap,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>AppState</code> 将代表我们游戏的三个模式：歌曲选择菜单，游戏和（尚未实现的）地图制作模式。</p>
+<p>我们，还添加了一个字符串用于表示我们的系统的阶段。现在我们进入 <code>main.rs</code> 中，添加 <code>State</code> 以及更新后的新阶段两个资源：</p>
+<pre><pre class="playground"><code class="language-rust">// main.rs
+use crate::consts::*;
+
+fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_resource(State::new(AppState::Menu)) // &lt;--- 新代码
+        .add_stage_after( // &lt;--- 新代码
+            stage::UPDATE,
+            APP_STATE_STAGE,
+            StateStage::&lt;AppState&gt;::default(),
+        )
+        .init_resource::&lt;ScoreResource&gt;()
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin)
+        .add_plugin(UIPlugin)
+        .add_plugin(AudioPlugin)
+        .add_plugin(ShadersPlugin)
+        .run();
+}
+</code></pre></pre>
+<p>现在游戏不会有任何变化，因为我们的“系统”仍然以普通的方式加入。为了改变这一点，我们将从修改 <code>arrows.rs</code> 中的 <code>ArrowsPlugin</code> 入手：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// arrows.rs
+pub struct ArrowsPlugin;
+impl Plugin for ArrowsPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.init_resource::&lt;ArrowMaterialResource&gt;()
+            .init_resource::&lt;Events&lt;CorrectArrowEvent&gt;&gt;()
+            .on_state_enter(
+                APP_STATE_STAGE,
+                AppState::Game,
+                setup_target_arrows.system(),
+            )
+            .on_state_update(APP_STATE_STAGE, AppState::Game, spawn_arrows.system())
+            .on_state_update(APP_STATE_STAGE, AppState::Game, move_arrows.system())
+            .on_state_update(APP_STATE_STAGE, AppState::Game, despawn_arrows.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们必须把 <code>add_startup_system</code>替换为 <code>on_stage_enter</code>，将 <code>add_system</code> 替换为 <code>on_stage_update</code>。对于这些函数，我们必须传入“系统”运行的阶段和状态。因为我们想要所有这些运行在 <code>Game</code> 状态，就是我们使用的那个。</p>
+<p>现在我们看看 <code>ui.rs</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ui.rs
+use crate::consts::*;
+
+pub struct UIPlugin;
+impl Plugin for UIPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.on_state_enter(APP_STATE_STAGE, AppState::Game, setup_ui.system())
+            .on_state_update(APP_STATE_STAGE, AppState::Game, update_time_text.system())
+            .on_state_update(APP_STATE_STAGE, AppState::Game, update_score_text.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>audio.rs</code> 中的代码:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// audio.rs
+use crate::consts::*;
+
+pub struct AudioPlugin;
+impl Plugin for AudioPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.on_state_update(APP_STATE_STAGE, AppState::Game, start_song.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们已经修改了所有与 <code>Game</code> 状态相关的“系统”，所以如果你现在运行游戏，除了看到动画背景外，什么也不会发生，因为我们要从 <code>Menu</code> 开始，但是我们还没有相关的“系统”。</p>
+<h2><a class="header" href="#添加基础菜单" id="添加基础菜单">添加基础菜单</a></h2>
+<p>我们现在将制作一个带有按钮的菜单，它可以让我们选择一首歌曲或进入游戏地图制作模式。我们将它保存在一个新的文件 <code>menu.rs</code> 中。我们新建一个资源来保存对应的素材：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::consts::*;
+use bevy::prelude::*;
+
+struct ButtonMaterials {
+    none: Handle&lt;ColorMaterial&gt;,
+    normal: Handle&lt;ColorMaterial&gt;,
+    hovered: Handle&lt;ColorMaterial&gt;,
+    pressed: Handle&lt;ColorMaterial&gt;,
+    font: Handle&lt;Font&gt;,
+}
+
+impl FromResources for ButtonMaterials {
+    fn from_resources(resources: &amp;Resources) -&gt; Self {
+        let mut materials = resources.get_mut::&lt;Assets&lt;ColorMaterial&gt;&gt;().unwrap();
+        let asset_server = resources.get_mut::&lt;AssetServer&gt;().unwrap();
+
+        ButtonMaterials {
+            none: materials.add(Color::NONE.into()),
+            normal: materials.add(Color::rgb(0.15, 0.15, 0.15).into()),
+            hovered: materials.add(Color::rgb(0.25, 0.25, 0.25).into()),
+            pressed: materials.add(Color::rgb(0.35, 0.75, 0.35).into()),
+            font: asset_server.load(&quot;fonts/FiraSans-Bold.ttf&quot;),
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这看起来很标准。接下来，我们将创建一个“系统”来构建菜单元素。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+struct MenuUI;
+fn setup_menu(commands: &amp;mut Commands, button_materials: Res&lt;ButtonMaterials&gt;) {
+    commands
+        .spawn(NodeBundle {
+            style: Style {
+                size: Size::new(Val::Percent(100.), Val::Percent(100.)),
+                display: Display::Flex,
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::FlexStart,
+                justify_content: JustifyContent::FlexStart,
+                ..Default::default()
+            },
+            material: button_materials.none.clone(),
+            ..Default::default()
+        })
+        .with(MenuUI)
+        .with_children(|parent| {
+            // 生成新按钮
+            parent
+                .spawn(ButtonBundle {
+                    style: Style {
+                        size: Size::new(Val::Px(350.0), Val::Px(65.0)),
+                        margin: Rect::all(Val::Auto),
+                        justify_content: JustifyContent::Center,
+                        align_items: AlignItems::Center,
+                        ..Default::default()
+                    },
+                    material: button_materials.normal.clone(),
+                    ..Default::default()
+                })
+                .with_children(|parent| {
+                    parent.spawn(TextBundle {
+                        text: Text {
+                            value: &quot;Play&quot;.to_string(),
+                            font: button_materials.font.clone(),
+                            style: TextStyle {
+                                font_size: 20.0,
+                                color: Color::rgb(0.9, 0.9, 0.9),
+                                ..Default::default()
+                            },
+                        },
+                        ..Default::default()
+                    });
+                });
+        });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这看起来非常类似于 <code>ui.rs</code> 中的 <code>setup_ui</code>。但结构类似于 <code>NodeBundle &gt; ButtonBundle &gt; TextBundle</code>。</p>
+<p>我们还要创建一个删除所有按钮的系统，这样我们就可以在离开菜单时运行它。如果不这样做，菜单按钮会一直停留在游戏屏幕上。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+fn despawn_menu(commands: &amp;mut Commands, query: Query&lt;(Entity, &amp;MenuUI)&gt;) {
+    for (entity, _) in query.iter() {
+        commands.despawn_recursive(entity);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>给这个系统实现插件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+pub struct MenuPlugin;
+impl Plugin for MenuPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.init_resource::&lt;ButtonMaterials&gt;()
+            .on_state_enter(APP_STATE_STAGE, AppState::Menu, setup_menu.system())
+            .on_state_exit(APP_STATE_STAGE, AppState::Menu, despawn_menu.system());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>把它添加到 <code>main.rs</code> 中，导入它并在 <code>main</code> 函数中增加 <code>.add_plugin(MenuPlugin)</code> 调用：</p>
+<pre><pre class="playground"><code class="language-rust">// main.rs
+mod menu;
+use menu::MenuPlugin;
+
+fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_resource(State::new(AppState::Menu))
+        .add_stage_after(
+            stage::UPDATE,
+            APP_STATE_STAGE,
+            StateStage::&lt;AppState&gt;::default(),
+        )
+        .init_resource::&lt;ScoreResource&gt;()
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin)
+        .add_plugin(UIPlugin)
+        .add_plugin(AudioPlugin)
+        .add_plugin(ShadersPlugin)
+        .add_plugin(MenuPlugin) // &lt;--- 新代码
+        .run();
+}
+
+
+fn setup(commands: &amp;mut Commands) {
+    commands
+        .spawn(Camera2dBundle::default())
+        .spawn(CameraUiBundle::default());
+}
+</code></pre></pre>
+<p>我们还要更改 <code>setup</code>，不再是 <code>SongConfig</code> 资源，因为我们会在玩家点击按钮选择歌曲时添加它。</p>
+<p>现在运行游戏会显示下面这样的按钮：</p>
+<p><img src="https://caballerocoll.com/images/rhythm_basic_menu.png" alt="" /></p>
+<p>目前，单击按钮并将鼠标悬停在按钮上会发现按钮什么也没有干，所以我们需要让菜单能根据需要有所反应。首先，我们将添加一个系统，根据按钮的交互改变颜色：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+fn button_color_system(
+    button_materials: Res&lt;ButtonMaterials&gt;,
+    mut query: Query&lt;
+        (&amp;Interaction, &amp;mut Handle&lt;ColorMaterial&gt;),
+        (Mutated&lt;Interaction&gt;, With&lt;Button&gt;),
+    &gt;,
+) {
+    for (interaction, mut material) in query.iter_mut() {
+        match *interaction {
+            Interaction::Clicked =&gt; {
+                *material = button_materials.pressed.clone();
+            }
+            Interaction::Hovered =&gt; {
+                *material = button_materials.hovered.clone();
+            }
+            Interaction::None =&gt; {
+                *material = button_materials.normal.clone();
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里我们使用的是 <code>Interaction</code> 组件，它和 <code>ButtonBundle</code> 一起。它有三个不同的变体，<code>Clicked</code>，<code>Hovered</code> 和 <code>None</code>。分别表示：单机按钮，悬停在按钮上，不做任何事。我们将匹配按钮的所有可能的值，从而做出不同的反应。将 <code>MenuPlugin</code> 加到游戏中，运行游戏，观察鼠标悬停、点击或移开时按钮的颜色是如何变化的。</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_button_interactions.mp4">视频资源</a></p>
+</blockquote>
+<h2><a class="header" href="#优化菜单" id="优化菜单">优化菜单</a></h2>
+<p>我们还需要两个东西：在文件夹中显示歌曲列表菜单，以及正式开始游戏的按钮。我们从第一点开始，在 <code>menu.rs</code> 中增加一个方法：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+use std::fs::read_dir;
+
+pub fn get_songs() -&gt; Vec&lt;String&gt; {
+    let paths = read_dir(&quot;assets/songs&quot;).unwrap();
+
+    let mut vec = vec![];
+    for path in paths {
+        let path = path.unwrap().path();
+
+        if &quot;toml&quot; == path.as_path().extension().unwrap() {
+            vec.push(
+                path.as_path()
+                    .file_stem()
+                    .unwrap()
+                    .to_str()
+                    .unwrap()
+                    .to_string(),
+            );
+        }
+    }
+    vec
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个函数使用 <a href="https://doc.rust-lang.org/std/fs/fn.read_dir.html"><code>read_dir</code></a> 获取 <code>songs</code> 目录中的文件，并将 <code>.toml</code> 后缀文件路径追加到数组中。</p>
+<p>现在我们可以从 <code>setup_menu</code> 内部调用这个函数，来为 <code>get_songs</code> 得到的每个文件增加按钮。首先，我们创建一个枚举组件加到按钮中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+enum MenuButton {
+    MakeMap,
+    PlaySong(String),
+}
+impl MenuButton {
+    fn name(&amp;self) -&gt; String {
+        match self {
+            Self::MakeMap =&gt; &quot;Make map&quot;.to_string(),
+            Self::PlaySong(song) =&gt; format!(&quot;Play song: {}&quot;, song),
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>枚举的第一个变体 <code>MakeMap</code> 用于进入地图制作模式（如果实现了）。另一个变体 <code>PlaySong</code> 用于开始特定的歌曲游戏。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+fn setup_menu(commands: &amp;mut Commands, button_materials: Res&lt;ButtonMaterials&gt;) {
+    // 制作按钮列表
+    let mut buttons: Vec&lt;MenuButton&gt; = get_songs()
+        .iter()
+        .map(|name| MenuButton::PlaySong(name.clone()))
+        .collect();
+    buttons.push(MenuButton::MakeMap);
+
+    commands
+        .spawn(NodeBundle {
+            style: Style {
+                size: Size::new(Val::Percent(100.), Val::Percent(100.)),
+                display: Display::Flex,
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::FlexStart,
+                justify_content: JustifyContent::FlexStart,
+                ..Default::default()
+            },
+            material: button_materials.none.clone(),
+            ..Default::default()
+        })
+        .with(MenuUI)
+        .with_children(|parent| {
+            // 将所有按钮以子按钮的方式加入
+            for button in buttons {
+                // 生成新按钮
+                parent
+                    .spawn(ButtonBundle {
+                        style: Style {
+                            size: Size::new(Val::Px(350.0), Val::Px(65.0)),
+                            margin: Rect::all(Val::Auto),
+                            justify_content: JustifyContent::Center,
+                            align_items: AlignItems::Center,
+                            ..Default::default()
+                        },
+                        material: button_materials.normal.clone(),
+                        ..Default::default()
+                    })
+                    .with_children(|parent| {
+                        parent.spawn(TextBundle {
+                            text: Text {
+                                value: button.name(),
+                                font: button_materials.font.clone(),
+                                style: TextStyle {
+                                    font_size: 20.0,
+                                    color: Color::rgb(0.9, 0.9, 0.9),
+                                    ..Default::default()
+                                },
+                            },
+                            ..Default::default()
+                        });
+                    })
+                    .with(button);
+            }
+        });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们已替换了 <code>with_children</code> 的内容，来循环遍历按钮列表，从而创建按钮。</p>
+<p>注意：我们设置按钮的方式有点菜，所以如果你有很多按钮显示的话，它会看起来很奇怪！添加一个滚动条或者其他改善方式就留给读者作为练习了。</p>
+<p>效果如下图所示：</p>
+<p><img src="https://caballerocoll.com/images/rhythm_menu_with_correct_buttons.png" alt="" /></p>
+<p>现在我们要让按钮可用。为此，我们添加另一个“系统”来监听点击事件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+use crate::types::load_config;
+
+fn button_press_system(
+    commands: &amp;mut Commands,
+    asset_server: Res&lt;AssetServer&gt;,
+    query: Query&lt;(&amp;Interaction, &amp;MenuButton), (Mutated&lt;Interaction&gt;, With&lt;Button&gt;)&gt;,
+    mut state: ResMut&lt;State&lt;AppState&gt;&gt;,
+) {
+    for (interaction, button) in query.iter() {
+        // 在这一帧中检测按钮是否被点击
+        if *interaction == Interaction::Clicked {
+            match button {
+                // 如果地图制作按钮被点击，改变模式
+                MenuButton::MakeMap =&gt; state
+                    .set_next(AppState::MakeMap)
+                    .expect(&quot;Couldn't switch state to MakeMap&quot;),
+                // 如果它是一个播放歌曲按钮，加载对应配置，插入资源，然后改变态模式
+                MenuButton::PlaySong(song) =&gt; {
+                    let config = load_config(&amp;*format!(&quot;{}.toml&quot;, song), &amp;asset_server);
+                    commands.insert_resource(config);
+                    state
+                        .set_next(AppState::Game)
+                        .expect(&quot;Couldn't switch state to Game&quot;)
+                }
+            };
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这个系统中，我们循环遍历每个按钮，并检查它们是否处于点击状态。如果是，我们会匹配按钮的类型，执行相应的逻辑。对于 <code>MakeMap</code>，我们只需使用 <code>set_next</code> 改变状态。对于 <code>PlaySong</code>，用我们创建的 <code>SongConfig</code> 函数来加载选定歌曲的 <code>SongConfig</code>，在将状态更改为 <code>Game</code> 之前，我们使用 <code>insert_resource</code> 添加歌曲。</p>
+<p>最后，我们应该把这个系统添加到 <code>MenuPlugin</code>，设置成 <code>Menu</code> 状态更新时运行：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// menu.rs
+pub struct MenuPlugin;
+impl Plugin for MenuPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.init_resource::&lt;ButtonMaterials&gt;()
+            .on_state_enter(APP_STATE_STAGE, AppState::Menu, setup_menu.system())
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::Menu,
+                button_color_system.system(),
+            )
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::Menu,
+                button_press_system.system(),
+            )
+            .on_state_exit(APP_STATE_STAGE, AppState::Menu, despawn_menu.system());
+    
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在运行游戏，我们会看到按钮正常工作，开始游戏：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_menu_changing_state.mp4">视频资源</a></p>
+</blockquote>
+<p>但有个大问题！当我们开始游戏时，时间在跑了，箭头却没有显示！因为我们使用 <code>time_since_startup</code> 来检查何时生成箭头，当我们进入 <code>Game</code> 状态时，值已经过了第一个箭头的生成时间，所以不会出现，其它箭头也不会出现。为了解决这个问题，我们将在后面制作一个包装器，这样我们就可以在进入 <code>Game</code> 模式时重置它。</p>
+<h2><a class="header" href="#时间系统封装" id="时间系统封装">时间系统封装</a></h2>
+<p>我们的时间包装器非常类似于 Bevy 的时间资源实现，不同的是它需要在我们进入 <code>Game</code> 和 <code>MakeMap</code> 状态时重置时间系统。复制所有代码只是为了改善一些糟糕的东西，但这会让我们在未来做其他工作时带来方便，比如暂停。这也是一个了解 Bevy 源码的好机会。</p>
+<p>此外，通过同时拥有一个正常的时间资源和我们自己包装的版本，可以让我们使用正常的时间资源，以及其他需要控制时间的场景。例如，我们要继续为游戏背景使用正常时间，因为我们希望它在所有状态下都能工作。</p>
+<p>打开一个新文件， <code>time.rs</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::consts::*;
+use bevy::{
+    prelude::*,
+    utils::{Duration, Instant},
+};
+
+pub struct ControlledTime {
+    delta: Duration,
+    last_update: Option&lt;Instant&gt;,
+    delta_seconds_f64: f64,
+    delta_seconds: f32,
+    seconds_since_startup: f64,
+    startup: Instant,
+}
+impl Default for ControlledTime {
+    fn default() -&gt; Self {
+        Self {
+            delta: Duration::from_secs(0),
+            last_update: None,
+            startup: Instant::now(),
+            delta_seconds_f64: 0.0,
+            seconds_since_startup: 0.0,
+            delta_seconds: 0.0,
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里我们添加了一个与 Bevy 的 time 相同的结构体，使用相同的 <code>Default</code> 实现，我们将其称为 <code>ControlledTime</code>。</p>
+<p>现在，添加我们想要的方法，它来自于<a href="https://github.com/bevyengine/bevy/blob/3b2c6ce49b3b9ea8bc5cb68f8d350a80ff928af6/crates/bevy_core/src/time/time.rs">这个资源</a>，此外我们还会添加一个 <code>reset_time</code> 函数，它将时间设置为 0：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// time.rs
+impl ControlledTime {
+    pub fn reset_time(&amp;mut self) {
+        self.startup = Instant::now();
+        self.seconds_since_startup = 0.0;
+    }
+
+    pub fn update(&amp;mut self) {
+        let now = Instant::now();
+        self.update_with_instant(now);
+    }
+
+    pub fn update_with_instant(&amp;mut self, instant: Instant) {
+        if let Some(last_update) = self.last_update {
+            self.delta = instant - last_update;
+            self.delta_seconds_f64 = self.delta.as_secs_f64();
+            self.delta_seconds = self.delta.as_secs_f32();
+        }
+
+        let duration_since_startup = instant - self.startup;
+        self.seconds_since_startup = duration_since_startup.as_secs_f64();
+        self.last_update = Some(instant);
+    }
+
+    /// 当前标记和最后一次标记的时间差是 [`f32`] 秒
+    #[inline]
+    pub fn delta_seconds(&amp;self) -&gt; f32 {
+        self.delta_seconds
+    }
+
+    /// 当前标记和最后一次标记的时间差是 [`f64`] 秒
+    #[inline]
+    pub fn delta_seconds_f64(&amp;self) -&gt; f64 {
+        self.delta_seconds_f64
+    }
+
+    /// 启动后的时间，以秒为单位
+    #[inline]
+    pub fn seconds_since_startup(&amp;self) -&gt; f64 {
+        self.seconds_since_startup
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>考虑到这一点，我们需要一个能够更新时间的“系统”：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// time.rs
+pub fn update_time(mut time: ResMut&lt;ControlledTime&gt;) {
+    time.update();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>并且有一个系统对时间进行重置</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// time.rs
+pub fn reset_time_when_entering_game(mut time: ResMut&lt;ControlledTime&gt;) {
+    time.reset_time();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们还会添加一个插件来把它们放在一起：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// time.rs
+pub struct TimePlugin;
+impl Plugin for TimePlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.init_resource::&lt;ControlledTime&gt;()
+            .on_state_update(APP_STATE_STAGE, AppState::Game, update_time.system())
+            .on_state_update(APP_STATE_STAGE, AppState::MakeMap, update_time.system())
+            .on_state_enter(
+                APP_STATE_STAGE,
+                AppState::Game,
+                reset_time_when_entering_game.system(),
+            )
+            .on_state_enter(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                reset_time_when_entering_game.system(),
+            );
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们在 <code>Game</code> 和 <code>MapMaker</code> 执行期间设置了 <code>update_time</code>，并且 <code>reset_time_when_entering_game</code> 在这两种模式下都会执行。</p>
+<p>跟其它插件一样，我们在 <code>main.rs</code> 中添加：</p>
+<pre><pre class="playground"><code class="language-rust">// main.rs
+mod time;
+use time::TimePlugin;
+
+fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_resource(State::new(AppState::Menu))
+        .add_stage_after(
+            stage::UPDATE,
+            APP_STATE_STAGE,
+            StateStage::&lt;AppState&gt;::default(),
+        )
+        .init_resource::&lt;ScoreResource&gt;()
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin)
+        .add_plugin(UIPlugin)
+        .add_plugin(AudioPlugin)
+        .add_plugin(ShadersPlugin)
+        .add_plugin(MenuPlugin)
+        .add_plugin(TimePlugin) // &lt;--- New
+        .run();
+}
+</code></pre></pre>
+<p>我们需要做的最后一件事就是用 <code>ControlledTime</code> 代替 <code>Time</code>。</p>
+<p>首先是 <code>ui.rs</code>，我们只需改变 <code>update_time_text</code> 中的 <code>time</code> 参数：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ui.rs
+use crate::time::ControlledTime;
+
+fn update_time_text(time: Res&lt;ControlledTime&gt;, mut query: Query&lt;(&amp;mut Text, &amp;TimeText)&gt;) {
+    [...]
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>audio.rs</code> 文件也一样，将 <code>Time</code> 替换为 <code>ControlledTime</code></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// audio.rs
+use crate::time::ControlledTime;
+
+fn start_song(audio: Res&lt;Audio&gt;, time: Res&lt;ControlledTime&gt;, config: Res&lt;SongConfig&gt;) {
+    [...]
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>最后是 <code>arrows.rs</code> 文件，要修改的地方多一些：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// main.rs
+use crate::time::ControlledTime;
+
+/// Spawns arrows
+fn spawn_arrows(
+    commands: &amp;mut Commands,
+    mut song_config: ResMut&lt;SongConfig&gt;,
+    materials: Res&lt;ArrowMaterialResource&gt;,
+    time: Res&lt;ControlledTime&gt;,
+) {
+    [...]
+}
+
+/// Moves the arrows forward
+fn move_arrows(time: Res&lt;ControlledTime&gt;, mut query: Query&lt;(&amp;mut Transform, &amp;Arrow)&gt;) {
+    [...]
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在运行游戏，可以看到菜单和游戏正常工作了：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_working_menu_and_game.mp4">视频资源</a></p>
+</blockquote>
+<p>太棒了！</p>
+<h2><a class="header" href="#添加简单的地图制作模式" id="添加简单的地图制作模式">添加简单的地图制作模式</a></h2>
+<p>在本节中，我们添加一个场景模式来帮助我们给歌曲创建地图。我们想要的是当歌曲播放时，我们何时按下按键，并将它们保存到一个文件中。</p>
+<p>我们打开一个新文件 <code>map_maker.rs</code>，我们从添加资源和“系统”开始：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use crate::time::ControlledTime;
+use crate::consts::*;
+use crate::types::{
+    ArrowTimeToml,
+    Directions::{self, *},
+    Speed,
+};
+use bevy::{
+    app::AppExit,
+    input::{keyboard::KeyCode, Input},
+    prelude::*,
+};
+use serde_derive::Serialize;
+use std::fs::File;
+use std::io::prelude::*;
+
+#[derive(Serialize, Debug, Default)]
+/// 跟踪按键被按下的时间
+struct Presses {
+    arrows: Vec&lt;ArrowTimeToml&gt;,
+}
+
+/// 保存被按下的键
+fn save_key_presses(
+    time: Res&lt;ControlledTime&gt;,
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+    mut presses: ResMut&lt;Presses&gt;,
+) {
+    let directions = [Up, Down, Left, Right];
+    for direction in directions.iter() {
+        if direction.key_just_pressed(&amp;keyboard_input) {
+            presses.arrows.push(ArrowTimeToml {
+                click_time: time.seconds_since_startup(),
+                speed: Speed::Slow,
+                direction: *direction,
+            });
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们大量添加需要增加的东西，我们创建 <code>Presses</code> 资源，它保存了一个 <code>ArrowTimeToml</code> 列表，以及一个当方向键被按下时添加到该列表的“系统”，并循环所有方向的按键。</p>
+<p>我们还需要一个系统来监听 <code>AppExit</code> 事件，并将 <code>ArrowTimeToml</code> 列表保存到文件中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// map_maker.rs
+fn save_to_file_on_exit(
+    mut event_reader: Local&lt;EventReader&lt;AppExit&gt;&gt;,
+    events: Res&lt;Events&lt;AppExit&gt;&gt;,
+    presses: Res&lt;Presses&gt;,
+) {
+    for _event in event_reader.iter(&amp;events) {
+        let text = toml::to_string(&amp;*presses).expect(&quot;Couldn't convert to toml text&quot;);
+
+        let mut file = File::create(&quot;map.toml&quot;).expect(&quot;Couldn't open map.toml&quot;);
+        file.write_all(text.as_bytes())
+            .expect(&quot;Couldn't write to map.toml&quot;);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们得做点什么来提高这个模式的易用性。当玩家按下一个按键时，相应的方向会有箭头出现在屏幕上。我们将添加两个系统，一个生成箭头，一个切换箭头的可见性：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// map_maker.rs
+struct MapMakerArrow(Directions);
+
+/// Creates map maker arrows
+fn setup_map_maker_arrows(
+    commands: &amp;mut Commands,
+    mut materials: ResMut&lt;Assets&lt;ColorMaterial&gt;&gt;,
+    asset_server: ResMut&lt;AssetServer&gt;,
+) {
+    let border_handle = materials.add(asset_server.load(&quot;images/arrow_border.png&quot;).into());
+
+    let directions = [Up, Down, Left, Right];
+    for direction in directions.iter() {
+        let y = match direction {
+            Up =&gt; 150.,
+            Down =&gt; 50.,
+            Left =&gt; -50.,
+            Right =&gt; -150.,
+        };
+
+        let mut transform = Transform::from_translation(Vec3::new(0., y, 1.));
+        transform.rotate(Quat::from_rotation_z(direction.rotation()));
+        commands
+            .spawn(SpriteBundle {
+                material: border_handle.clone(),
+                sprite: Sprite::new(Vec2::new(140., 140.)),
+                transform,
+                ..Default::default()
+            })
+            .with(MapMakerArrow(*direction));
+    }
+}
+
+/// 根据是否按下对应的键来切换可见性
+fn toggle_map_maker_arrows(
+    mut query: Query&lt;(&amp;mut Visible, &amp;MapMakerArrow)&gt;,
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+) {
+    for (mut visible, arrow) in query.iter_mut() {
+        visible.is_visible = arrow.0.key_pressed(&amp;keyboard_input);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>第一个“系统”非常类似于 <code>spawn_target_arrows</code>，它只是创建精灵，并添加我们刚刚声明的 <code>MapMakerArrow</code> 组件。第二个系统是 <code>toggle_map_maker_arrows</code>，根据箭头对应的方向键是否被按下来设置箭头的可见性。我们通过设置精灵的 <code>Visible</code> 中的 <code>is_visible</code> 字段来做到这一点。</p>
+<p>这里有一个问题，我们目前给 <code>Directions</code> 声明的 <code>key_just_pressed</code> 方法使用了 <code>just_pressed</code>，这只会在按键被按下的第一帧时才会生效。我们希望玩家按下按键，箭头就立即显示，所以我们添加了另一种 <code>pressed</code> 方法，它可以实现我们想要的：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// types.rs
+impl Directions {
+    [Other methods...]
+
+    /// 检查是否按下与当前方向相同的方向键
+    pub fn key_pressed(&amp;self, input: &amp;Input&lt;KeyCode&gt;) -&gt; bool {
+        let keys = match self {
+            Directions::Up =&gt; [KeyCode::Up, KeyCode::D],
+            Directions::Down =&gt; [KeyCode::Down, KeyCode::F],
+            Directions::Left =&gt; [KeyCode::Left, KeyCode::J],
+            Directions::Right =&gt; [KeyCode::Right, KeyCode::K],
+        };
+
+        keys.iter().any(|code| input.pressed(*code))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这样，我们的 <code>toggle_map_maker_arrows</code> 系统就可以正常工作了！我们还要给所有的歌曲地图实现一个插件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// map_maker.rs
+pub struct MapMakerPlugin;
+impl Plugin for MapMakerPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.init_resource::&lt;Presses&gt;()
+            .on_state_enter(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                setup_map_maker_arrows.system(),
+            )
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                toggle_map_maker_arrows.system(),
+            )
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                save_key_presses.system(),
+            )
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                save_to_file_on_exit.system(),
+            );
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>要想让它运行起来，我们还需要在 <code>main.rs</code> 中加上“系统”的调用代码：</p>
+<pre><pre class="playground"><code class="language-rust">// main.rs
+mod map_maker;
+use map_maker::MapMakerPlugin;
+
+fn main() {
+    App::build()
+        // Set antialiasing to use 4 samples
+        .add_resource(Msaa { samples: 4 })
+        // Set WindowDescriptor Resource to change title and size
+        .add_resource(WindowDescriptor {
+            title: &quot;Rhythm!&quot;.to_string(),
+            width: 800.,
+            height: 600.,
+            ..Default::default()
+        })
+        .add_resource(State::new(AppState::Menu))
+        .add_stage_after(
+            stage::UPDATE,
+            APP_STATE_STAGE,
+            StateStage::&lt;AppState&gt;::default(),
+        )
+        .init_resource::&lt;ScoreResource&gt;()
+        .add_startup_system(setup.system())
+        .add_system(exit_on_esc_system.system())
+        .add_plugins(DefaultPlugins)
+        .add_plugin(ArrowsPlugin)
+        .add_plugin(UIPlugin)
+        .add_plugin(AudioPlugin)
+        .add_plugin(ShadersPlugin)
+        .add_plugin(MenuPlugin)
+        .add_plugin(TimePlugin)
+        .add_plugin(MapMakerPlugin) // &lt;--- 新增代码
+        .run();
+}
+</code></pre></pre>
+<p>现在，我们可以运行游戏来看看地图制作模式是否能正常工作：</p>
+<blockquote>
+<p><a href="https://caballerocoll.com/images/rhythm/rhythm_map_maker_mode.mp4">视频资源</a></p>
+</blockquote>
+<p>请记住，在游戏终端中使用 ESC 键退出，而不是 <code>Ctrl+C</code> 键，这样才能保存文件成功。</p>
+<p>这是我们得到的一个文件示例：</p>
+<pre><code class="language-map.toml">[[arrows]]
+click_time = 1.04939044
+speed = &quot;Slow&quot;
+direction = &quot;Up&quot;
+
+[[arrows]]
+click_time = 1.658164574
+speed = &quot;Slow&quot;
+direction = &quot;Down&quot;
+
+[[arrows]]
+click_time = 2.191576505
+speed = &quot;Slow&quot;
+direction = &quot;Up&quot;
+
+[[arrows]]
+click_time = 2.558483463
+speed = &quot;Slow&quot;
+direction = &quot;Up&quot;
+
+[[arrows]]
+click_time = 2.858588189
+speed = &quot;Slow&quot;
+direction = &quot;Left&quot;
+
+[[arrows]]
+click_time = 3.4904190330000002
+speed = &quot;Slow&quot;
+direction = &quot;Up&quot;
+
+[[arrows]]
+click_time = 3.9252477949999998
+speed = &quot;Slow&quot;
+direction = &quot;Up&quot;
+
+[[arrows]]
+click_time = 4.240984206
+speed = &quot;Slow&quot;
+direction = &quot;Left&quot;
+
+[[arrows]]
+click_time = 4.62353972
+speed = &quot;Slow&quot;
+direction = &quot;Up&quot;
+
+[[arrows]]
+click_time = 4.97381796
+speed = &quot;Slow&quot;
+direction = &quot;Up&quot;
+
+[[arrows]]
+click_time = 5.308837329
+speed = &quot;Slow&quot;
+direction = &quot;Left&quot;
+</code></pre>
+<p>现在我们可以将它添加到 <code>assets/songs</code> 目录下，添加 <code>name</code> 和 <code>filename</code> 字段，这样就有了歌曲的工作地图！</p>
+<p>我们需要做的最后一件事是在地图制作模式下播放歌曲，否则它就显得有点鸡肋。我们简单实现一下，并且给使用的歌曲路径硬编码，这样可以让教程简短一些（如果还算短的话）。我们将使用路径 <code>assets/map_maker_song.mp3</code> 中的歌曲。玩家必须在地图制作器中修改文件路径来更换歌曲。每个人都可以实现一些自己的“系统”，以更容易地选择地图制作器中使用的歌曲。</p>
+<h2><a class="header" href="#在地图制作器中播放歌曲" id="在地图制作器中播放歌曲">在地图制作器中播放歌曲</a></h2>
+<p>为了让音乐进入地图制作器，我们先要添加一个资源来保存 <code>Handle&lt;AudioSource&gt;</code>。我们要为该资源实现 <code>FromResources</code>，这样可以在开始时就加载它，当把它加载到地图制作器中时，它就准备好可以玩了：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MapMakerAudio(Handle&lt;AudioSource&gt;);
+impl FromResources for MapMakerAudio {
+    fn from_resources(resources: &amp;Resources) -&gt; Self {
+        let asset_server = resources.get_mut::&lt;AssetServer&gt;().unwrap();
+        let audio = asset_server.load(&quot;map_maker_song.mp3&quot;);
+        Self(audio)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这一次我决定使用一个元组结构体来处理资源，因为我们只有一个字段。<code>FromResources</code> 实现了静态资源服务器，它可以加载音频资源。</p>
+<p>在那之后，我们要创建一个新“系统”来进行播放音频，我们将把它设置为进入 <code>MakeMap</code> 的状态时执行：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// map_maker.rs
+fn start_song(audio: Res&lt;Audio&gt;, map_maker_audio: Res&lt;MapMakerAudio&gt;) {
+    audio.play(map_maker_audio.0.clone());
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们要做的最后一件事是将这两个资源加到插件中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// map_maker.rs
+pub struct MapMakerPlugin;
+impl Plugin for MapMakerPlugin {
+    fn build(&amp;self, app: &amp;mut AppBuilder) {
+        app.init_resource::&lt;Presses&gt;()
+            .init_resource::&lt;MapMakerAudio&gt;() // &lt;--- 新代码
+            .on_state_enter(APP_STATE_STAGE, AppState::MakeMap, start_song.system()) // &lt;--- 新代码
+            .on_state_enter(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                setup_map_maker_arrows.system(),
+            )
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                toggle_map_maker_arrows.system(),
+            )
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                save_key_presses.system(),
+            )
+            .on_state_update(
+                APP_STATE_STAGE,
+                AppState::MakeMap,
+                save_to_file_on_exit.system(),
+            );
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>找一个音频文件，并将其放到 <code>assets/map_maker_song.mp3</code> 中，如果你运行游戏，进入地图制作模式时，应该可以听到音频播放了！</p>
+<p>至此，我们的游戏教程就结束了。和往常一样，你可以随意尝试，修改一些东西，让它成为你的东西！如果你有任何的改进，请在 <a href="https://twitter.com/guimcaballero">Twitter</a> 标记我，这样我就能看到了！</p>
+<h2><a class="header" href="#下一步" id="下一步">下一步</a></h2>
+<p>如果你还没想好要做什么样的二次开发，以下提供一些可以尝试的想法：</p>
+<ul>
+<li>1.添加必须在特定的时间内保持状态的箭头。</li>
+<li>2.改进地图制作器，增加选择歌曲的功能。</li>
+<li>3.给游戏增加一个游戏结束画面。</li>
+<li>4.增加一种歌曲播放完后，回到菜单的方式</li>
+<li>5.创建一个可以改变点击阈值的“系统”，可以让玩家在困难模式时选择简单模式，玩家很轻松则切换到困难模式。</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_3/arenas-in-rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_3/arenas-in-rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

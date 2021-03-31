@@ -1,0 +1,871 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>「译」用 Rust 编写 LLVM 的玩具编译器 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item expanded "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html" class="active"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#译用rust编写llvm的玩具编译器" id="译用rust编写llvm的玩具编译器">「译」用Rust编写LLVM的玩具编译器</a></h1>
+<p>译者：<a href="https://github.com/iamazy">iamazy</a> / 后期编辑：张汉东</p>
+<blockquote>
+<p>原文：<a href="https://blog.ulysse.io/post/a-toy-front-end-for-llvm-written-in-rust/">A Toy Front-End for LLVM, written in Rust</a></p>
+</blockquote>
+<hr />
+<h2><a class="header" href="#正文" id="正文">正文</a></h2>
+<blockquote>
+<p>我目前的副业是用 Rust 编写一个可以将代码转换成 LLVM IR 的编译器。LLVM 的 API 对于新手来说有点令人生畏，而且没有很多有关的教程（有限的教程大多数还是基于 C++ 的，如何使用 Rust 做同样的事并不总是那么明确）。我希望当我准备做一件事情时，有人可以手把手的教我，这也是我要写这篇文章的原因。</p>
+</blockquote>
+<p>对于 Rust，与 LLVM 的接口交互的最佳选择是使用 <code>llvm-sys</code>。互联网上的一些热心朋友在<a href="http://rustdoc.taricorp.net/llvm-sys/llvm_sys/">这里</a>托管了一些关于 <code>llvm-sys</code> 的文档。当然，你还应该去查看 LLVM 的<a href="http://llvm.org/docs/tutorial/LangImpl01.html">官方指南</a>，因为它可以帮助你理解 LLVM 是如何“思考”的。这篇文章基本上是 LLVM 官方指南的 Rust 翻译。</p>
+<p>你可以从这里获取最终的<a href="https://github.com/ucarion/llvm-rust-getting-started">代码</a>。</p>
+<h2><a class="header" href="#搭建开发环境" id="搭建开发环境">搭建开发环境</a></h2>
+<p>对于新手，使用 LLVM 开发有一个可以复用的方式：</p>
+<pre><code class="language-shell"># `curl` is just so we can next install Rust
+sudo apt-get -y install clang curl llvm-3.8-dev
+curl https://sh.rustup.rs -sSf | sh
+
+# The `llvm-sys` crate expects something called `llvm-config` on your PATH.
+sudo ln -s /usr/bin/llvm-config-3.8 /usr/bin/llvm-config
+</code></pre>
+<p>如果你是在 Ubuntu 上执行上面的语句（你可能需要执行 <code>apt-get update</code> ），则没有任何问题。如果不是，你需要使用下面的 <code>Vagrantfile</code> 文件在 Vagrant Box 中运行上述语句。</p>
+<pre><code class="language-shell">Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;bento/ubuntu-16.04&quot;
+end
+</code></pre>
+<p>你可以从执行 <code>cargo init llvm-example --bin</code> 开始，并将下面（从 llvm-sys 中拷贝）的代码写入 <code>src/main.rs</code> 中：</p>
+<pre><pre class="playground"><code class="language-rust">//! Construct a function that does nothing in LLVM IR.
+
+extern crate llvm_sys as llvm;
+
+use std::ptr;
+
+fn main() {
+    unsafe {
+        // Set up a context, module and builder in that context.
+        let context = llvm::core::LLVMContextCreate();
+        let module = llvm::core::LLVMModuleCreateWithName(b&quot;nop\0&quot;.as_ptr() as *const _);
+        let builder = llvm::core::LLVMCreateBuilderInContext(context);
+
+        // Get the type signature for void nop(void);
+        // Then create it in our module.
+        let void = llvm::core::LLVMVoidTypeInContext(context);
+        let function_type = llvm::core::LLVMFunctionType(void, ptr::null_mut(), 0, 0);
+        let function = llvm::core::LLVMAddFunction(module, b&quot;nop\0&quot;.as_ptr() as *const _, function_type);
+
+        // Create a basic block in the function and set our builder to generate
+        // code in it.
+        let bb = llvm::core::LLVMAppendBasicBlockInContext(context, function,b&quot;entry\0&quot;.as_ptr() as *const _);
+        llvm::core::LLVMPositionBuilderAtEnd(builder, bb);
+
+        // Emit a `ret void` into the function
+        llvm::core::LLVMBuildRetVoid(builder);
+
+        // Dump the module as IR to stdout.
+        llvm::core::LLVMDumpModule(module);
+
+        // Clean up. Values created in the context mostly get cleaned up there.
+        llvm::core::LLVMDisposeBuilder(builder);
+        llvm::core::LLVMDisposeModule(module);
+        llvm::core::LLVMContextDispose(context);
+    }
+}
+</code></pre></pre>
+<p>并在你的 <code>Cargo.toml</code> 文件中：</p>
+<pre><code class="language-toml">[package]
+name = &quot;llvm-example&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;Ulysse Carion &lt;ulysse@ulysse.io&gt;&quot;]
+
+[[bin]]
+name = &quot;main&quot;
+
+[dependencies]
+llvm-sys = &quot;0.2&quot;
+</code></pre>
+<p>你可以获得：</p>
+<pre><code class="language-shell">vagrant@vagrant:/vagrant$ cargo run
+   Compiling llvm-example v0.1.0 (file:///vagrant)
+     Running `target/debug/main`
+; ModuleID = 'nop'
+
+define void @nop() {
+entry:
+  ret void
+}
+</code></pre>
+<p>完美！现在我们可以开始编写自己的东西了。</p>
+<h2><a class="header" href="#一段不太平凡的程序" id="一段不太平凡的程序">一段不太平凡的程序</a></h2>
+<p>首先，让我们编译一个程序，该程序通过从 main 函数中返回一个整数来简单的设置一个返回码。</p>
+<p>下面是我使用的方式（我们有时候需要使用一个解析器，所以我先添加了 <code>peg</code> 库）：</p>
+<pre><pre class="playground"><code class="language-rust">#![feature(plugin)]
+#![plugin(peg_syntax_ext)]
+
+extern crate llvm_sys as llvm;
+
+use std::ffi::CString;
+use std::fs::File;
+use std::io::Read;
+use std::ptr;
+
+fn main() {
+    let mut input = String::new();
+    let mut f = File::open(&quot;in.ex&quot;).unwrap();
+    f.read_to_string(&amp;mut input).unwrap();
+
+    let parsed_input = parser::program(&amp;input).unwrap();
+
+    unsafe {
+        codegen(parsed_input);
+    }
+}
+
+peg! parser(r#&quot;
+    #[pub]
+    program -&gt; String
+        = i:int_literal &quot;\n&quot; { i }
+
+    int_literal -&gt; String
+        = [0-9]+ { match_str.to_owned() }
+&quot;#);
+
+unsafe fn codegen(input: String) {
+    let context = llvm::core::LLVMContextCreate();
+    let module = llvm::core::LLVMModuleCreateWithName(b&quot;example_module\0&quot;.as_ptr() as *const _);
+    let builder = llvm::core::LLVMCreateBuilderInContext(context);
+
+    // In LLVM, you get your types from functions.
+    let int_type = llvm::core::LLVMInt64TypeInContext(context);
+    let function_type = llvm::core::LLVMFunctionType(int_type, ptr::null_mut(), 0, 0);
+    let function = llvm::core::LLVMAddFunction(module, b&quot;main\0&quot;.as_ptr() as *const _, function_type);
+
+    let entry_name = CString::new(&quot;entry&quot;).unwrap();
+    let bb = llvm::core::LLVMAppendBasicBlockInContext(context, function, entry_name.as_ptr());
+    llvm::core::LLVMPositionBuilderAtEnd(builder, bb);
+
+    // The juicy part: construct a `LLVMValue` from a Rust value:
+    let int_value: u64 = input.parse().unwrap();
+    let int_value = llvm::core::LLVMConstInt(int_type, int_value, 0);
+
+    llvm::core::LLVMBuildRet(builder, int_value);
+
+    // Instead of dumping to stdout, let's write out the IR to `out.ll`
+    let out_file = CString::new(&quot;out.ll&quot;).unwrap();
+    llvm::core::LLVMPrintModuleToFile(module, out_file.as_ptr(), ptr::null_mut());
+
+    llvm::core::LLVMDisposeBuilder(builder);
+    llvm::core::LLVMDisposeModule(module);
+    llvm::core::LLVMContextDispose(context);
+}
+</code></pre></pre>
+<p>它起作用了！测试一下：</p>
+<pre><code class="language-shell">vagrant@vagrant:/vagrant$ cat in.ex
+42
+vagrant@vagrant:/vagrant$ cargo run
+     Running `target/debug/main`
+vagrant@vagrant:/vagrant$ lli-3.8 out.ll ; echo $?
+42
+</code></pre>
+<p>有点酷哦！顺便提一下，下面是 <code>out.ll</code> 文件的内容：</p>
+<pre><code class="language-s">; ModuleID = 'example_module'
+
+define i64 @main() {
+entry:
+  ret i64 42
+}
+</code></pre>
+<h2><a class="header" href="#算术" id="算术">算术</a></h2>
+<p>让我们添加对数字的加减乘除操作的支持。为了实现这个，我们需要扩展我们的语法。我们引入一个枚举来代表 AST（抽象语法树）。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub enum Expr {
+    Add(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Sub(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Mul(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Div(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Literal(String),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>并扩展语法：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// `product` and `sum` are that way to get operator precedence
+peg! parser(r#&quot;
+    use super::Expr;
+
+    #[pub]
+    program -&gt; Expr
+        = e:expression &quot;\n&quot; { e }
+
+    expression -&gt; Expr
+        = sum
+
+    sum -&gt; Expr
+        = a:product _ &quot;+&quot; _ b:sum { Expr::Add(Box::new(a), Box::new(b)) }
+        / a:product _ &quot;-&quot; _ b:sum { Expr::Sub(Box::new(a), Box::new(b)) }
+        / product
+
+    product -&gt; Expr
+        = a:int_literal _ &quot;*&quot; _ b:product { Expr::Mul(Box::new(a), Box::new(b)) }
+        / a:int_literal _ &quot;/&quot; _ b:product { Expr::Div(Box::new(a), Box::new(b)) }
+        / int_literal
+
+    int_literal -&gt; Expr
+        = [0-9]+ { Expr::Literal(match_str.to_owned()) }
+
+    _ = &quot; &quot;*
+&quot;#);
+<span class="boring">}
+</span></code></pre></pre>
+<p>接下来，可以提交代码。你可以指定诸如 “addtmp” 的字符串，这些字符串将被用作 IR 中对应“寄存器”名称的一部分。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// When you write out instructions in LLVM, you get back `LLVMValueRef`s. You
+// can then use these references in other instructions.
+unsafe fn codegen_expr(context: LLVMContextRef, builder: LLVMBuilderRef, expr: Expr) -&gt; LLVMValueRef {
+    match expr {
+        Expr::Literal(int_literal) =&gt; {
+            let int_type = llvm::core::LLVMInt64TypeInContext(context);
+            llvm::core::LLVMConstInt(int_type, int_literal.parse().unwrap(), 0)
+        },
+
+        Expr::Add(lhs, rhs) =&gt; {
+            let lhs = codegen_expr(context, builder, *lhs);
+            let rhs = codegen_expr(context, builder, *rhs);
+
+            let name = CString::new(&quot;addtmp&quot;).unwrap();
+            llvm::core::LLVMBuildAdd(builder, lhs, rhs, name.as_ptr())
+        },
+
+        Expr::Sub(lhs, rhs) =&gt; {
+            let lhs = codegen_expr(context, builder, *lhs);
+            let rhs = codegen_expr(context, builder, *rhs);
+
+            let name = CString::new(&quot;subtmp&quot;).unwrap();
+            llvm::core::LLVMBuildSub(builder, lhs, rhs, name.as_ptr())
+        },
+
+        Expr::Mul(lhs, rhs) =&gt; {
+            let lhs = codegen_expr(context, builder, *lhs);
+            let rhs = codegen_expr(context, builder, *rhs);
+
+            let name = CString::new(&quot;multmp&quot;).unwrap();
+            llvm::core::LLVMBuildMul(builder, lhs, rhs, name.as_ptr())
+        },
+
+        Expr::Div(lhs, rhs) =&gt; {
+            let lhs = codegen_expr(context, builder, *lhs);
+            let rhs = codegen_expr(context, builder, *rhs);
+
+            let name = CString::new(&quot;divtmp&quot;).unwrap();
+            llvm::core::LLVMBuildUDiv(builder, lhs, rhs, name.as_ptr())
+        },
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在，你可以执行 <code>10 * 4 + 20/2 - 8</code> 之类的程序！如果你问我，那可真是太酷了。</p>
+<h2><a class="header" href="#变量" id="变量">变量</a></h2>
+<p>我们将采用简单的方式并假设程序不会执行任何烦人的操作，如引用未定义的变量等。我们只将变量存储在寄存器中，并将它们存在 <code>HashMap&lt;String, LLVMValueRef&gt;</code> 中，之所以有用是因为运行该程序只有这一种方式。</p>
+<p>我们扩展语言和解析器：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub enum Expr {
+    Literal(String),
+    Ref(String),
+    Assign(String, Box&lt;Expr&gt;),
+    Add(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Sub(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Mul(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Div(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+}
+
+peg! parser(r#&quot;
+    use super::Expr;
+
+    #[pub]
+    program -&gt; Vec&lt;Expr&gt;
+        = e:(expression ** &quot;\n&quot;) &quot;\n&quot; { e }
+
+    expression -&gt; Expr
+        = i:identifier _ &quot;=&quot; _ s:sum { Expr::Assign(i, Box::new(s)) }
+        / sum
+
+    sum -&gt; Expr
+        = a:product _ &quot;+&quot; _ b:sum { Expr::Add(Box::new(a), Box::new(b)) }
+        / a:product _ &quot;-&quot; _ b:sum { Expr::Sub(Box::new(a), Box::new(b)) }
+        / product
+
+    product -&gt; Expr
+        = a:ref_or_literal _ &quot;*&quot; _ b:product { Expr::Mul(Box::new(a), Box::new(b)) }
+        / a:ref_or_literal _ &quot;/&quot; _ b:product { Expr::Div(Box::new(a), Box::new(b)) }
+        / ref_or_literal
+
+    ref_or_literal -&gt; Expr
+        = i:identifier { Expr::Ref(i) }
+        / int_literal
+
+    identifier -&gt; String
+        = [a-zA-Z]+ { match_str.to_owned() }
+
+    int_literal -&gt; Expr
+        = [0-9]+ { Expr::Literal(match_str.to_owned()) }
+
+    _ = &quot; &quot;*
+&quot;#);
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后为这两个新的表达式添加支持：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe fn codegen_expr(context: LLVMContextRef, builder: LLVMBuilderRef, names: &amp;mut HashMap&lt;String, LLVMValueRef&gt;, expr: Expr) -&gt; LLVMValueRef {
+    match expr {
+        // ...
+
+        Expr::Ref(name) =&gt; {
+            *names.get(&amp;name).unwrap()
+        },
+
+        Expr::Assign(name, expr) =&gt; {
+            let new_value = codegen_expr(context, builder, names, *expr);
+            names.insert(name, new_value);
+            new_value
+        },
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>并迅速的在 <code>codegen</code> 函数中更新：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let zero = llvm::core::LLVMConstInt(int_type, 0, 0);
+
+let mut names = HashMap::new();
+let mut return_value = zero; // return value on empty program
+for expr in input {
+    return_value = codegen_expr(context, builder, &amp;mut names, expr);
+}
+llvm::core::LLVMBuildRet(builder, return_value);
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在让我们来一探究竟：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>vagrant@vagrant:/vagrant$ cat in.ex
+a = 3
+b = 76
+a + b
+vagrant@vagrant:/vagrant$ cargo run
+     Running `target/debug/main`
+vagrant@vagrant:/vagrant$ cat out.ll
+; ModuleID = 'example_module'
+
+define i64 @main() {
+entry:
+  ret i64 79
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#if" id="if">If</a></h2>
+<p>在使用 <code>if</code> 关键字的时候遇到一些麻烦。让 <code>if</code> 起作用的最简单的方式就是将所有的变量存储在堆栈上。并让 LLVM 做一些优化。在 LLVM 中，你可以通过 <code>alloca</code> 指令创建一个栈变量，并使用 <code>load/store</code> 进行读写。</p>
+<p>为了实现这个，我们通过添加新的解析规则再一次扩展了语言和语法。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>expression -&gt; Expr
+    = if_expression
+    / i:identifier _ &quot;=&quot; _ s:expression { Expr::Assign(i, Box::new(s)) }
+    / sum
+
+if_expression -&gt; Expr
+    = &quot;if&quot; _ e:expression _ &quot;{\n&quot; _ then_body:statements _ &quot;}&quot; _ &quot;else&quot; _ &quot;{\n&quot; _ else_body:statements _ &quot;}&quot; {
+        Expr::If(Box::new(e), then_body, else_body)
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>并在 AST 节点上添加了一个新的类型：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub enum Expr {
+    Literal(String),
+    Ref(String),
+    Assign(String, Box&lt;Expr&gt;),
+    Add(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Sub(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Mul(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    Div(Box&lt;Expr&gt;, Box&lt;Expr&gt;),
+    If(Box&lt;Expr&gt;, Vec&lt;Expr&gt;, Vec&lt;Expr&gt;),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>最后，完成关于 <code>if</code> 表达式的代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe fn codegen_expr(context: LLVMContextRef, builder: LLVMBuilderRef, func: LLVMValueRef, names: &amp;mut HashMap&lt;String, LLVMValueRef&gt;, expr: Expr) -&gt; LLVMValueRef {
+    match expr {
+        // ...
+
+        Expr::If(condition, then_body, else_body) =&gt; {
+            let condition_value = codegen_expr(context, builder, func, names, *condition);
+            let int_type = llvm::core::LLVMInt64TypeInContext(context);
+            let zero = llvm::core::LLVMConstInt(int_type, 0, 0);
+
+            // `is_nonzero` is a 1-bit integer
+            let name = CString::new(&quot;is_nonzero&quot;).unwrap();
+            let is_nonzero = llvm::core::LLVMBuildICmp(builder, llvm::LLVMIntPredicate::LLVMIntNE, condition_value, zero, name.as_ptr());
+
+            // It's fine to create blocks first, and then fill them in later.
+            let entry_name = CString::new(&quot;entry&quot;).unwrap();
+            let then_block = llvm::core::LLVMAppendBasicBlockInContext(context, func, entry_name.as_ptr());
+            let else_block = llvm::core::LLVMAppendBasicBlockInContext(context, func, entry_name.as_ptr());
+            let merge_block = llvm::core::LLVMAppendBasicBlockInContext(context, func, entry_name.as_ptr());
+
+            llvm::core::LLVMBuildCondBr(builder, is_nonzero, then_block, else_block);
+
+            llvm::core::LLVMPositionBuilderAtEnd(builder, then_block);
+            let mut then_return = zero;
+            for expr in then_body {
+                then_return = codegen_expr(context, builder, func, names, expr);
+            }
+            llvm::core::LLVMBuildBr(builder, merge_block);
+
+            llvm::core::LLVMPositionBuilderAtEnd(builder, else_block);
+            let mut else_return = zero;
+            for expr in else_body {
+                else_return = codegen_expr(context, builder, func, names, expr);
+            }
+            llvm::core::LLVMBuildBr(builder, merge_block);
+
+            // Position the builder so that it's ready to work on the next
+            // expression.
+            llvm::core::LLVMPositionBuilderAtEnd(builder, merge_block);
+            zero
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>代码有点多，但是完成了你所期待的事情。现在，你可以像这样来运行程序：</p>
+<pre><code class="language-groovy">a = 1
+if a {
+    a = 42
+} else {
+    a = 13
+}
+a
+</code></pre>
+<p>上述代码对应的 IR 如下所示：</p>
+<pre><code class="language-s">; ModuleID = 'example_module'
+
+define i64 @main() {
+entry:
+  %a = alloca i64
+  store i64 1, i64* %a
+  %a1 = load i64, i64* %a
+  %is_nonzero = icmp ne i64 %a1, 0
+  br i1 %is_nonzero, label %entry2, label %entry3
+
+entry2:                                           ; preds = %entry
+  store i64 42, i64* %a
+  br label %entry4
+
+entry3:                                           ; preds = %entry
+  store i64 13, i64* %a
+  br label %entry4
+
+entry4:                                           ; preds = %entry3, %entry2
+  %a5 = load i64, i64* %a
+  ret i64 %a5
+}
+</code></pre>
+<p>然而，我们还没有结束。目前，我们的 “if” 表达式的返回结果始终为 zero（见上述 <code>codegen_expr</code> 函数中 If 分支的返回值）。而我们想要的正好与其相反，如果我们执行了 “then” 路径，则 if 的求值结果应该为 then_return，否则返回 else_return。</p>
+<p>你如何使用 LLVM 跟踪它执行了哪个分支？通过使用 “phi” 节点。你给 phi 指令一个 (block, value) 对，该 phi 节点将会返回与先前执行的块相对应的值。</p>
+<p>我们可以这样结束 if。注意，我们必须更新 then_block 和 else_block，因为这是我们在 “then/else” 分支中需要的最后一个块，并且前面的 then_block 是 “then/else” 的第一个块。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// This is mostly the same code as before, just note the new calls to
+// `LLVMGetInsertBlock`.
+
+llvm::core::LLVMPositionBuilderAtEnd(builder, then_block);
+let mut then_return = zero;
+for expr in then_body {
+    then_return = codegen_expr(context, builder, func, names, expr);
+}
+llvm::core::LLVMBuildBr(builder, merge_block);
+let then_block = llvm::core::LLVMGetInsertBlock(builder);
+
+llvm::core::LLVMPositionBuilderAtEnd(builder, else_block);
+let mut else_return = zero;
+for expr in else_body {
+    else_return = codegen_expr(context, builder, func, names, expr);
+}
+llvm::core::LLVMBuildBr(builder, merge_block);
+let else_block = llvm::core::LLVMGetInsertBlock(builder);
+
+// Insert the phi node
+llvm::core::LLVMPositionBuilderAtEnd(builder, merge_block);
+let phi_name = CString::new(&quot;iftmp&quot;).unwrap();
+let phi = llvm::core::LLVMBuildPhi(builder, int_type, phi_name.as_ptr());
+
+let mut values = vec![then_return, else_return];
+let mut blocks = vec![then_block, else_block];
+
+llvm::core::LLVMAddIncoming(phi, values.as_mut_ptr(), blocks.as_mut_ptr(), 2);
+phi
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后，你就得到了一个令人惊叹的编译器：</p>
+<pre><code class="language-shell">vagrant@vagrant:/vagrant$ cat in.ex
+a = 1
+b = 0
+c = if a {
+    if b {
+        11
+    } else {
+        40
+    }
+} else {
+    if b {
+        10
+    } else {
+        20
+    }
+}
+c + 2
+vagrant@vagrant:/vagrant$ cargo run
+     Running `target/debug/main`
+vagrant@vagrant:/vagrant$ lli-3.8 out.ll ; echo $?
+42
+</code></pre>
+<p>太酷了！下面是我们提供的示例输入程序的 IR：</p>
+<pre><code class="language-s">; ModuleID = 'example_module'
+
+define i64 @main() {
+entry:
+  %a = alloca i64
+  %b = alloca i64
+  %c = alloca i64
+  store i64 1, i64* %a
+  store i64 0, i64* %b
+  %a1 = load i64, i64* %a
+  %is_nonzero = icmp ne i64 %a1, 0
+  br i1 %is_nonzero, label %entry2, label %entry3
+
+entry2:                                           ; preds = %entry
+  %b5 = load i64, i64* %b
+  %is_nonzero6 = icmp ne i64 %b5, 0
+  br i1 %is_nonzero6, label %entry7, label %entry8
+
+entry3:                                           ; preds = %entry
+  %b10 = load i64, i64* %b
+  %is_nonzero11 = icmp ne i64 %b10, 0
+  br i1 %is_nonzero11, label %entry12, label %entry13
+
+entry4:                                           ; preds = %entry14, %entry9
+  %iftmp16 = phi i64 [ %iftmp, %entry9 ], [ %iftmp15, %entry14 ]
+  store i64 %iftmp16, i64* %c
+  %c17 = load i64, i64* %c
+  %addtmp = add i64 %c17, 2
+  ret i64 %addtmp
+
+entry7:                                           ; preds = %entry2
+  br label %entry9
+
+entry8:                                           ; preds = %entry2
+  br label %entry9
+
+entry9:                                           ; preds = %entry8, %entry7
+  %iftmp = phi i64 [ 11, %entry7 ], [ 40, %entry8 ]
+  br label %entry4
+
+entry12:                                          ; preds = %entry3
+  br label %entry14
+
+entry13:                                          ; preds = %entry3
+  br label %entry14
+
+entry14:                                          ; preds = %entry13, %entry12
+  %iftmp15 = phi i64 [ 10, %entry12 ], [ 20, %entry13 ]
+  br label %entry4
+}
+
+</code></pre>
+<p>请注意：这些块具有以下的模式：不包含第一个条目，它们三个为一组，第一个是 “then” 分支，然后是 “else” 分支，最后是 “merge” 块（带有可识别的 phi 指令）。每一次我们遇到 “if” 表达式时都会在 main 后面附加三个新块。因为要在 AST 中递归查询三元组，所以块的三元组是有序的。</p>
+<p>这就是我想要分享的全部内容！希望在这一点上你可以有足够的实力来决定你的命运。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_3/arenas-in-rust.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_3/rust-to-system-essence-concurrent.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_3/arenas-in-rust.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_3/rust-to-system-essence-concurrent.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

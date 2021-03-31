@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DatenLord | Rust实现RDMA - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item expanded "><a href="../chapter_3/rust_rdma.html" class="active"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#datenlord--用-rust实现-rdma" id="datenlord--用-rust实现-rdma">DatenLord | 用 Rust实现 RDMA</a></h1>
+<p>作者：王璞 / 后期编辑：张汉东</p>
+<hr />
+<p>RDMA是常用于高性能计算(HPC)领域的高速网络，在存储网络等专用场景也有广泛的用途。RDMA最大的特点是通过软硬件配合，在网络传输数据的时候，完全不需要CPU/内核参与，从而实现高性能的传输网络。最早RDMA要求使用InfiniBand (IB)网络，采用专门的IB网卡和IB交换机。现在RDMA也可以采用以太网交换机，但是还需要专用的IB网卡。虽然也有基于以太网卡用软件实现RDMA的方案，但是这种方案没有性能优势。</p>
+<p>RDMA在实际使用的时候，需要采用特定的接口来编程，而且由于RDMA在传输数据的过程中，CPU/内核不参与，因此很多底层的工作需要在RDMA编程的时候自行实现。比如RDMA传输时涉及的各种内存管理工作，都要开发者调用RDMA的接口来完成，甚至自行实现，而不像在socket编程的时候，有内核帮忙做各种缓存等等。也正是由于RDMA编程的复杂度很高，再加上先前RDMA硬件价格高昂，使得RDMA不像TCP/IP得到广泛使用。</p>
+<p>本文主要介绍我们用Rust对RDMA的C接口封装时碰到的各种问题，并探讨下如何用Rust对RDMA实现safe封装。下面首先简单介绍RDMA的基本编程方式，然后介绍下采用Rust对RDMA的C接口封装时碰到的各种技术问题，最后介绍下后续工作。我们用Rust实现的RDMA封装已经开源，包括<a href="https://github.com/datenlord/rdma-sys">rdma-sys</a>和<a href="https://github.com/datenlord/async-rdma">async-rdma</a>，前者是对RDMA接口的unsafe封装，后者是safe封装（尚未完成）。</p>
+<h2><a class="header" href="#rdma编程理念" id="rdma编程理念">RDMA编程理念</a></h2>
+<p>先首先简要介绍下RDMA编程，因为本文重点不是如何用RDMA编程，所以主要介绍下RDMA的编程理念。RDMA的全称是Remote Direct Memory Access，从字面意思可以看出，RDMA要实现直接访问远程内存，RDMA的很多操作就是关于如何在本地节点和远程节点之间实现内存访问。</p>
+<p>RDMA的数据操作分为“单边”和“双边”，双边为send/receive，单边是read/write，本质都是在本地和远程节点之间共享内存。对于双边来说，需要双方节点的CPU共同参与，而单边则仅仅需要一方CPU参与即可，对于另一方的CPU是完全透明的，不会触发中断。根据上述解释，大家可以看出“单边”传输才是被用来传输大量数据的主要方法。但是“单边”传输也面临这下列挑战：</p>
+<ol>
+<li>
+<p>由于RDMA在数据传输过程中不需要内核参与，所以内核也无法帮助RDMA缓存数据，因此RDMA要求在写入数据的时候，数据的大小不能超过接收方准备好的共享内存大小，否则出错。所以发送方和接收方在写数据前必须约定好每次写数据的大小。</p>
+</li>
+<li>
+<p>此外，由于RDMA在数据传输过程中不需要内核参与，因此有可能内核会把本地节点要通过RDMA共享给远程节点的内存给交换出去，所以RDMA必须要跟内核申请把共享的内存空间常驻内存，这样保证远程节点通过RDMA安全访问本地节点的共享内存。</p>
+</li>
+<li>
+<p>再者，虽然RDMA需要把本地节点跟远程节点共享的内存空间注册到内核，以防内核把共享内存空间交换出去，但是内核并不保证该共享内存的访问安全。即本地节点的程序在更新共享内存数据时，有可能远程节点正在访问该共享内存，导致远程节点读到不一致的数据；反之亦然，远程节点在写入共享内存时，有可能本地节点的程序也正在读写该共享内存，导致数据冲突或不一致。使用RDMA编程的开发者必须自行保证共享内存的数据一致性，这也是RDMA编程最复杂的关键点。</p>
+</li>
+</ol>
+<p>总之，RDMA在数据传输过程中绕开了内核，极大提升性能的同时，也带来很多复杂度，特别是关于内存管理的问题，都需要开发者自行解决。</p>
+<h2><a class="header" href="#rdma的unsafe封装" id="rdma的unsafe封装">RDMA的unsafe封装</a></h2>
+<p>RDMA的编程接口主要是C实现的<a href="https://github.com/linux-rdma/rdma-core">rdma-core</a>，最开始我们觉得用Rust的<a href="https://github.com/rust-lang/rust-bindgen">bingen</a>可以很容易生成对rdma-core的Rust封装，但实际中却碰到了很多问题。</p>
+<p>首先，rdma-core有大量的接口函数是inline方式定义，至少上百个inline函数接口，bindgen在生成Rust封装时直接忽略所有的inline函数，导致我们必须手动实现。Rust社区有另外几个开源项目也实现了对rdma-core的Rust封装，但是都没有很好解决inline函数的问题。此外，我们在自行实现rdma-core的inline函数Rust封装时，保持了原有的函数名和参数名不变。</p>
+<p>其次，rdma-core有不少宏定义，bindgen在生成Rust封装时也直接忽略所有的宏定义，于是我们也必须手动实现一些关键的宏定义，特别是要手动实现rdma-core里用宏定义实现的接口函数和一些关键常量。</p>
+<p>再有，rdma-core有很多数据结构的定义用到了union，但是bindgen对C的union处理得不好，并不是直接转换成Rust里的union。更严重的是rdma-core的数据结构里还用到匿名union，如下所示：</p>
+<pre><code class="language-C">struct ibv_wc {
+    ...
+	union {
+		__be32		imm_data;
+		uint32_t	invalidated_rkey;
+	};
+    ...
+};
+</code></pre>
+<p>由于Rust不支持匿名union，针对这些rdma-core的匿名union，bindgen在生成的Rust binding里会自动生成union类型的名字，但是bindgen自动生成的名字对开发者很不友好，诸如<code>ibv_flow_spec__bindgen_ty_1__bindgen_ty_1</code>这种名字，所以我们都是手动重新定义匿名union，如下所示：</p>
+<pre><code class="language-Rust">#[repr(C)]
+pub union imm_data_invalidated_rkey_union_t {
+    pub imm_data: __be32,
+    pub invalidated_rkey: u32,
+}
+
+#[repr(C)]
+pub struct ibv_wc {
+    ...
+    pub imm_data_invalidated_rkey_union: imm_data_invalidated_rkey_union_t,
+    ...
+}
+</code></pre>
+<p>再次，rdma-core里引用了很多C的数据结构，诸如<code>pthread_mutex_t</code>和<code>sockaddr_in</code>之类，这些数据结构应该使用<a href="https://github.com/rust-lang/libc">Rust libc</a>里定义好的，而不是由bindgen再重新定义一遍。所以我们需要配置bindgen不重复生成libc里已经定义好的数据结构的Rust binding。</p>
+<p>简单一句话总结下，bindgen对生成rdma-core的unsafe封装只能起到一半作用，剩下很多工作还需要手动完成，非常细碎。不过好处是，RDMA接口已经稳定，此类工作只需要一次操作即可，后续几乎不会需要大量更新。</p>
+<h2><a class="header" href="#rdma的safe封装" id="rdma的safe封装">RDMA的safe封装</a></h2>
+<p>关于RDMA的safe封装，有两个层面的问题需要考虑：</p>
+<ul>
+<li>如何做到符合Rust的规范和惯例；</li>
+<li>如何实现RDMA操作的内存安全。</li>
+</ul>
+<p>首先，关于RDMA的各种数据结构类型，怎样才能封装成对Rust友好的类型。rdma-core里充斥着大量的指针，绝大多数指针被bindgen定义为<code>*mut</code>类型，少部分定义为<code>*const</code>类型。在Rust里，这些裸指针类型不是<code>Sync</code>也不是<code>Send</code>，因此不能多线程访问。如果把这些裸指针转化为引用，又涉及到生命周期问题，而这些指针指向的数据结构都是rdma-core生成的，大都需要显式的释放，比如<code>struct ibv_wq</code>这个数据结构由<code>ibv_create_wq()</code>函数创建，并由<code>ibv_destroy_wq()</code>函数释放：</p>
+<pre><code class="language-C">struct ibv_wq *ibv_create_wq(...);
+
+int ibv_destroy_wq(struct ibv_wq *wq);
+</code></pre>
+<p>但是用Rust开发RDMA应用的时候，Rust代码并不直接管理<code>struct ibv_wq</code>这个数据结构的生命周期。进一步，在Rust代码中并不会直接修改rdma-core创建的各种数据结构，Rust代码都是通过调用rdma-core的接口函数来操作各种RDMA的数据结构/指针。所以对Rust代码来说，rdma-core生成的各种数据结构的指针，本质是一个句柄/handler，这个handler的类型是不是裸指针类型并不重要。于是，为了在Rust代码中便于多线程访问，我们把rdma-core返回的裸指针类型都转换成<code>usize</code>类型，当需要调用rdma-core的接口函数时，再从usize转换成相应的裸指针类型。这么做听上去很hack，但背后的原因还是很显而易见的。进一步，对于在rdma-core中需要手动释放的资源，可以通过实现Rust的<code>Drop trait</code>，在<code>drop()</code>函数中调用rdma-core相应的接口实现资源自动释放。</p>
+<p>其次，关于RDMA的内存安全问题，这部分工作尚未完成。目前RDMA的共享内存访问安全问题在学术界也是个热门研究课题，并没有完美的解决方案。本质上讲，RDMA的共享内存访问安全问题是由于为了实现高性能网络传输、绕过内核做内存共享带来的，内核在内存管理方面做了大量的工作，RDMA的数据传输绕过内核，因此RDMA无法利用内核的内存管理机制保证内存安全。如果要把内核在内存管理方面的工作都搬到用户态来实现RDMA共享内存访问安全，这么做的话一方面复杂度太高，另一方面也不一定有很好的性能。</p>
+<p>在实际使用中，人们会对RDMA的使用方式进行规约，比如不允许远程节点写本地节点的共享内存，只允许远程节点读。但即便是只允许远程读取，也有可能有数据不一致的问题。比如远程节点读取了共享内存的前半段数据，本地节点开始更新共享内存。假定本地节点更新的数据很少而远程节点读取的数据很多，因此本地节点更新的速度比远程节点读取的速度快，导致有可能本地节点在远程节点读后半段数据前更新完毕，这样远程节点读取的是不一致的数据，前半段数据不包括更新数据但是后半段包括更新数据。远程节点读到的这个不一致的数据，既不是先前真实存在的某个版本的数据，也不是全新版本的数据，破坏了数据一致性的保证。</p>
+<p>针对RDMA内存安全问题，一个常见的解决方案是采用无锁(Lock-free)数据结构。无锁数据结构本质上就是解决并发访问下保证内存安全问题，当多个线程并发修改时，无锁数据结构保证结果的一致性。针对上面提到的远程读、本地写的方式，可以采用<a href="https://en.wikipedia.org/wiki/Seqlock">Seqlock</a>来实现。即每块RDMA的共享内存空间关联一个序列号(sequence number)，本地节点每次修改共享内存前就把序列号加一，远程节点在读取开始和结束后检查序列号是否有变化，没有变化说明读取过程中共享内存没有被修改，序列号有变化说明读取过程中共享内存被修改，读到了有可能不一致的数据，则远程节点重新读取共享内存。</p>
+<p>如果要放宽对RDMA的使用规约，即远程节点和本地节点都可以读写共享内存的场景，那么就需要采用更加复杂的算法或无锁数据结构，诸如<a href="https://en.wikipedia.org/wiki/Copy-on-write">Copy-on-Write</a>和<a href="https://en.wikipedia.org/wiki/Read-copy-update">Read-Copy-Update</a>等。内核中大量使用Copy-on-Write和Read-Copy-Update这两种技术来实现高效内存管理。这方面的工作有不少技术难度。</p>
+<h2><a class="header" href="#后续工作" id="后续工作">后续工作</a></h2>
+<p>下一步在完成对RDMA的safe封装之后，我们规划用Rust实现对RDMA接口函数的异步调用。因为RDMA都是IO操作，非常适合异步方式来实现。</p>
+<p>对RDMA接口函数的异步处理，最主要的工作是关于RDMA的完成队列的消息处理。RDMA采用了多个工作队列，包括接收队列(RQ)，发送队列(SQ)以及完成队列(CQ)，这些队列一般是RDMA的硬件来实现。其中发送队列和接收队列的功能很好理解，如字面意思，分别是存放待发送和待接收的消息，消息是指向内存中的一块区域，在发送时该内存区域包含要发送的数据，在接收时该内存区域用于存放接收数据。在发送和接收完成后，RDMA会在完成队列里放入完成消息，用于指示相应的发送消息或接收消息是否成功。用户态RDMA程序可以定期不定期查询完成队列里的完成消息，也可以通过中断的方式在CPU收到中断后由内核通知应用程序处理。</p>
+<p>异步IO本质上都是利用Linux的epoll机制，由内核来通知用户态程序某个IO已经就绪。对RDMA操作的异步处理，方法也一样。RDMA是通过创建设备文件来实现用户态RDMA程序跟内核里的RDMA模块交互。在安装RDMA设备和驱动后，RDMA会创建一个或多个字符设备文件，<code>/dev/infiniband/uverbsN</code>，N从0开始，有几个RDMA设备就有几个<code>uverbsN</code>设备文件。如果只有一个那就是<code>/dev/infiniband/uverbs0</code>。用户态RDMA程序要实现针对RDMA完成队列的异步消息处理，就是采用Linux提供的epoll机制，对RDMA的<code>uverbsN</code>设备文件进行异步查询，在完成队列有新消息时通知用户态RDMA程序来处理消息。</p>
+<p>关于RDMA的封装，这块工作我们还没有完成，我们打算把RDMA的safe封装以及对RDMA的共享内存管理都实现，这样才能方便地使用Rust进行RDMA编程，同时我们欢迎有感兴趣的朋友一起参与。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_3/rust_cpu_affinity.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_3/async-vision-doc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_3/rust_cpu_affinity.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_3/async-vision-doc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

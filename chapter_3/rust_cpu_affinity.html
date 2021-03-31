@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item expanded "><a href="../chapter_3/rust_cpu_affinity.html" class="active"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#蚂蚁集团-ceresdb-团队--rust-cpu-affinity-初探" id="蚂蚁集团-ceresdb-团队--rust-cpu-affinity-初探">蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></h1>
+<p>作者：Ruihang Xia / 后期编辑：张汉东</p>
+<h1><a class="header" href="#brief" id="brief">Brief</a></h1>
+<p>在看 <a href="https://cassandra.apache.org/">Apache Cassandra</a> 的时候了解到 <a href="https://www.scylladb.com/">ScyllaDB</a> 能在完全兼容它的情况下性能提升很多，通过进一步了解接触到了 thread per core 这种架构，这篇文章从一个简单的 cache 结构出发，实现了三个不同的方案，并对它们进行比较，最后给出了在这个过程中学习到的一些东西。</p>
+<p>Thread Per Core 简单来说就是将应用的每一个线程绑定到一个计算核心上，通过 sharding 的方式将计算拆解分配到对应的核上。这是一种 shared nothing 的方式，每个核单独持有计算所需要的数据，独立完成计算任务，从而避免掉多余的线程同步开销。同时每个核心和工作线程一一对应，减少上下文切换的开销。</p>
+<p>在 <a href="https://github.com/waynexia/shard-affinity">waynexia/shard-affinity</a> 中，我分别用普通的不做限制调度、local set 给计算任务分组以及 绑定任务、核心与线程三种方式实现同一个目的的 cache 结构。这三种实现分别对应 <em>shard-affinity/load/src</em> 目录下的 <em>threading-rs</em>, <em>local_set-rs</em> 和 <em>affinity-rs</em> 三个文件。接下来将对这三种方法实现方法进行分析。下文提到的原始代码都在这个仓库里面，为了简洁进行了部分省略。</p>
+<h1><a class="header" href="#cache" id="cache">Cache</a></h1>
+<p>假设我们有一个类似 <code>Map&lt;Id, Data&gt;</code> 的结构，它缓存了我们所需要的数据，请求分为对它进行 <code>append()</code> 或者 <code>get()</code>，通过读写锁进行线程同步并提供内部可变性，对外暴露 <code>&amp;self</code> 的接口。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct CacheCell {
+    items: RwLock&lt;Map&lt;Id, RwLock&lt;Item&gt;&gt;&gt;,
+}
+
+impl CacheCell {
+    pub fn get(&amp;self, id: Id, size: usize) -&gt; Option&lt;Bytes&gt;{}
+    pub fn append(&amp;self, id: usize, bytes: Bytes) {}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先为了能让多个任务在同时操作 cache 的时候仍能得到符合预期的结果，我们可以使用 lock-free 的结构，或者对它加上一把锁将并发的操作串行化。而我们发现对不同的 id 进行的操作并不会互相影响。所以可以将线程同步所影响的结构粒度变小，以这个 cache 所参考的 gorilla in-memory data structure 为例，将 id 分为进行分组，由对应的 cell 进行管理。将锁的粒度变小，以支持更高的并发操作。</p>
+<img src="ceresdb/gorilla-fig7.png" width="75%">
+<blockquote>
+<p>图一，from <a href="https://www.vldb.org/pvldb/vol8/p1816-teller.pdf">Gorilla</a> paper Fig.7: Gorilla in-memory data structure.</p>
+</blockquote>
+<p>选这个结构作为实例有两个原因，首先这是一个实际生产系统所使用的结构，比较有实际意义；并且它比较简单易于实现，而且本身就已经对 id 进行了 sharding，方便进行后续的使用。</p>
+<h1><a class="header" href="#threading" id="threading">Threading</a></h1>
+<p>先来看比较常见的做法，拿若干个 <code>cache</code> 放一起合成一个 <code>Vec&lt;Cache&gt;&gt;</code>，根据每次请求的 id 路由到对应的 cache 进行操作。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl ThreadingLoad{
+    pub fn append(&amp;self, id: Id, bytes: Bytes) {
+        self.shards[route_id(id)].append(id, bytes);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>而在使用的时候，则是开一个多线程的 tokio runtime，向里面 spawn 不同 id 的请求。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let rt = Builder::new_multi_thread().build();
+let load = ThreadingLoad::new();
+
+rt.spawn(async move {
+    let id = random::&lt;usize&gt;();
+    load.append(id, bytes);
+})
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这之后，由 tokio 去调度任务执行，完成之后给我们结果，我们不用关心这个任务具体是怎样被调度的，产生的计算发生在哪个核上。而且我们底下的所有结构都付出了代价让它们 <code>Send</code> 和 <code>Sync</code>，也不用去担心一个对象同时被多个东西操作会出现奇怪的结果。</p>
+<h1><a class="header" href="#localset" id="localset">LocalSet</a></h1>
+<p>这里是使用 tokio 的 <a href="https://docs.rs/tokio/1.3.0/tokio/task/struct.LocalSet.html">LocalSet</a> 来实现的。它能将指定的任务绑在同一个线程上进行执行。这样子带来的好处就是我们可以使用 <code>!Send</code> 的东西了。</p>
+<p>具体来说，由上面我们知道不同的 id 之间的操作不会互相影响，所以能够将锁粒度变小。同样的，不同 id 的任务计算所需要用到的数据也不会重叠，也就是避免了一份数据可能被多个内核同时访问的场景，从而不需要考虑我们的修改对其他内核的可见性。基于这一点，之前付出的性能代价来给数据实现 <code>Send</code> 和 <code>Sync</code> 也可以被节省下来。比如引用计数可以从 <code>Arc</code> 变成 <code>Rc</code>，或者说所有为了保证可见性所加的指令屏障都可以去掉。</p>
+<p>从实现来看，在我的这台有十六个逻辑核心的设备上，将所有的 shards 分给15个线程进行管理，另外一个来进行任务的分发，任务分发线程与其余每个线程之间都有一个 channel 来进行任务的传输。这里分发的任务有两种：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Task {
+    Append(Id, Bytes, oneshot::Sender&lt;()&gt;),
+    Get(Id, usize, oneshot::Sender&lt;()&gt;),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>每个里面包含对应任务所需要的参数，以及一个用于通知任务完成的 channel。每次请求到来时，任务分发线程组装好所需要的参数，根据 id 发送给对应的执行线程，之后等待执行结果。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub async fn append(&amp;self, id: Id, bytes: Bytes) {
+    let (tx, rx) = oneshot::channel();
+    let task = Task::Append(id, bytes, tx);
+    self.txs[route_id(id)].send(task).unwrap();
+
+    rx.await.unwrap()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h1><a class="header" href="#affinity" id="affinity">Affinity</a></h1>
+<p>在上面的实现中，我们只是将一组任务所需要的数据和计算绑在了一起，避免线程同步的开销。在运行中核心之间负载不均衡的时候，能够观察到明显的操作系统调度的行为。这样子只减少了开始提到的两种开销中的一种，上下文切换的开销仍然还在。操作系统的调度很多时候并不能明白应用的行为，所以在第三种方法中我们将每个线程与核绑定起来，或者是说告诉操作系统要去如何调度我们的线程。</p>
+<p>线程的分配和上面 LocalSet 方案一样，将 shards 分配到除了一个分发线程之外的其余线程中，并每个线程绑一个核。通过 <a href="https://crates.io/crates/core_affinity">core_affinity</a> crate 来设置 <a href="https://en.wikipedia.org/wiki/Processor_affinity">cpu affinity</a>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let core_ids = core_affinity::get_core_ids().unwrap();
+core_affinity::set_for_current(_);
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for core_id in core_ids {
+    thread::spawn(move || {
+        core_affinity::set_for_current(core_id);
+    });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>除了设置了 cpu affinity 之外，还有其他地方与上一种方案不同。首先这里在 channels 中分发的是已经构造好的 future，而不是分发参数之后再构造；其次这里的 runtime 是一个简单的 FIFO 队列；最后每个线程的 caches 通过 thread local storage 的方式存储。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>self.runtime.spawn(route_id(id), async move {
+    thread_local! (static SHARD:AffinityShard = AffinityShard::new() );
+
+    SHARD.with(|shard| {
+        shard.append(id, bytes);
+    });
+
+    tx.send(()).unwrap();
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>这些区别只是单纯展现实现差异，并且由于 cache 内部的内存还是采用的默认分配器从堆上分配，这里的 TLS 实际上也没有起到什么作用，后文会继续提到这个点。</p>
+<p>在这种情况下，每个计算线程可以在一定程度上简化成一个单线程模型进行考虑，整个系统也变成了非抢占式、协作的调度，利用 rust 的 coroutine 由任务自己在需要等待资源的时候通过 await yield 出来。除了之前提到的那些方面之外相信还有许多其他可以开发的空间。</p>
+<p>以及这种 affinity 的方案也是一个能很好的在应用侧进行 NUMA 实践的场景，结合前面提到的 TLS，另一种方法就是使用一个感知 NUMA 的内存分配器。不过我的设备并不支持 NUMA，所以没有进行进一步的测试。</p>
+<h1><a class="header" href="#test" id="test">Test</a></h1>
+<p>在 <em>shard_affinity/src</em> 下有三个 binary 代码文件，分别是对三种情况进行的一个简单的测试。工作负载的参数可以在 <em>shard_affinity/src/lib.rs</em> 下看到。在我的环境下，三个方案以 128 并发分别进行 1024 次写以及 4096 次读 16KB 的数据耗时如下。为了让数据集中，将 id 的范围设置到了 0 至 1023.</p>
+<img src="ceresdb/result.png" width="75%">
+<blockquote>
+<p>图二，本地进行测试结果。纵坐标为延时（毫秒），越低越好。</p>
+</blockquote>
+<p>可以看到，local set 和 affinity 两种方案的表现并不如 threading 的好。初步分析时在 local set 和 affinity 两种方案下都是由一个线程做入口进行任务生成和分发，即多出了额外的任务路由开销，在测试的时候能看到 cpu 的负载也是一高多底，而且由于模拟的任务单个执行时间都比较短，路由线程也会更先到达瓶颈。</p>
+<p>在将工作线程数都调整为 8 （逻辑核心数量的一半）之后，可以看到 threading 和 affinity 的差别有所减小。对于目前仍然存在的 gap，通过 flamegraph 分析可能是 affinity 需要对每个任务收发请求和结果带来的.</p>
+<img src="ceresdb/adjust-worker.png" width="75%">
+<blockquote>
+<p>图三，调整 worker 数量之后的结果。纵坐标为延时（毫秒），越低越好。</p>
+</blockquote>
+<p>由于所有的内存数据，即状态都被预先分散到各个核上，因此对 sharding 的方案也有要求。当 affinity 由于热点等原因出现负载不均衡时，进行 re-balance 一般会是一个比较耗时的操作，灵活性这方面不如 threading 模式。此外计算的分布方法也很重要，比如目前由一个线程向其他线程分发的方式就在测试中出现了问题。考虑到实际的系统计算负载的组成更加复杂，如何很好的分散计算任务也是需要慎重决定的。</p>
+<h1><a class="header" href="#others" id="others">Others</a></h1>
+<p>在 affinity 的实现中，为了展示大部分组件都是手造的简单模型。而 thread per core 其实已经有许多优秀的框架能够简化在这种架构下开发的难度，比如开头提到的 <a href="https://www.scylladb.com/">scylladb</a> 所使用的框架 <a href="http://seastar.io/">seastar</a>，这篇文章的写作过程中也参考了它们的很多文档。rust 也有类似的框架 <a href="https://crates.io/crates/glommio">glommio</a>，这是一个比较新的库，前不久刚放出第一个比较正式的 release。</p>
+<p>在 thread per core 架构下，除了应用的逻辑需要发生变化，许多常用的组件也都要产生改动，为了一般多线程场景设计的那些向线程同步付出了代价的结构如使用了 Arc 的地方是不是可以换成 Rc 等，这些都是需要考虑的。也希望能围绕这个发展出很好的生态。</p>
+<h1><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h1>
+<p>在简单的对比过不同方法的实现和性能之后，从我的观点来看 thread per core 是一个非常值得尝试的方法，它能够在某种程度上简化开发时所考虑的场景，也很适合目前动辄几十上百核的服务器，而且也有 <a href="https://www.scylladb.com/">scylladb</a> 这种成熟的实践。不过这个对于已经基本成型的系统来说所需要作的改动比较大。我们期望 thread per core 带来的提升是通过减小同步开销以及提高的缓存命中率实现更低的延时以及更平稳的性能，而且这些改动所能带来的提升与增加的复杂度，工作量和风险性相比则需要进行权衡。</p>
+<h1><a class="header" href="#关于我们" id="关于我们">关于我们</a></h1>
+<p>我们是蚂蚁智能监控技术中台的时序存储团队，我们正在使用 Rust 构建高性能、低成本并具备实时分析能力的新一代时序数据库，欢迎加入或者推荐，目前我们也正在寻找优秀的实习生，也欢迎广大应届同学来我们团队实习，请联系：jiachun.fjc@antgroup.com</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_3/hw_rust_rvm_wasm_ai.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_3/rust_rdma.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_3/hw_rust_rvm_wasm_ai.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_3/rust_rdma.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

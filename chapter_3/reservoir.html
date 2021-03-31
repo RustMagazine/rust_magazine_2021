@@ -1,0 +1,619 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性 - rust-magazine</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）| 待发布</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item expanded "><a href="../chapter_3/reservoir.html" class="active"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">6.</strong> 四月刊（April）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">rust-magazine</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#蓄水池算法改进---面向抽奖场景保证等概率性" id="蓄水池算法改进---面向抽奖场景保证等概率性">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></h1>
+<p>作者：huangjj / 后期编辑：张汉东</p>
+<blockquote>
+<p>免责声明：禁止任何个人或团体使用本文研究成果用于实施任何违反中华人民共和国法律法规的活动
+如有违反，均与本文作者无关</p>
+</blockquote>
+<hr />
+<h2><a class="header" href="#正文" id="正文">正文</a></h2>
+<p>在我们通常遇到的抽奖场景，于年会时将所有人的编号都放到箱子里面抽奖，然后每次抽出中奖者
+决定奖项。而在这过程中，因为先抽中者已经确定了奖项，然后不能够参与后续的奖项的抽奖；而后
+续参与抽奖的人员则其实会以越来越低的概率参与抽奖:</p>
+<blockquote>
+<p>例：在上述场景中共有 \( n \) 人参与抽取 \( m ( \lt n) \) 个奖项，</p>
+<p>抽取第一个奖项概率为： \( { m \over n } \)</p>
+<p>那么因为抽了第一个奖项，剩下 \( n - 1 \) 人参与 \( m - 1 \) 个奖项，被抽中的概率
+为 \( m - 1 \over n - 1 \)。
+那么 \( m \lt n \Rightarrow -m \gt -n \Rightarrow mn - m \gt nm - n \Rightarrow m(n-1) \gt n(m - 1) \Rightarrow { m \over n } \gt { m - 1 \over n - 1 }\)，
+即如果前面的奖项没有抽到，后面抽到奖项的概率会更低。</p>
+</blockquote>
+<p>因此，在人数 \( n \) 大于奖项数 \( m \) 的时候，我们通过以越来越低的概率干涉前面
+已经取得取得奖项的结果，来保证先参与抽奖的人中奖的概率随着人数的增多中奖的概率也变低，
+最后中奖的概率为 \( m \over n \)。但是在实际场景中，\( m \) 个奖项可能不仅相同
+（如划分了一二三等奖），因此对于蓄水池算法的改进提出了新的要求：</p>
+<ul>
+<li>不论人数多少（当还是要保证有人来参与抽奖 \( n \gt 1\) )所有人获得特定奖项的概率相同</li>
+<li>每当新来一人参与抽奖时，如果他没有中奖，可以即场告知未中</li>
+</ul>
+<h2><a class="header" href="#算法描述与等概率性证明" id="算法描述与等概率性证明">算法描述与等概率性证明</a></h2>
+<p>我们分两种情况讨论：</p>
+<ul>
+<li>一种是当人数不足以覆盖所有的奖项的场景（ \(n \lt m \) )，</li>
+<li>另外一种是当抽奖人数远大于所有奖项加起来的数目。（ \( n \gt m \)）。</li>
+</ul>
+<p>然后我们再回来看看能不能找到一种很方便的方法桥接两种情况。</p>
+<p>同时，我们假设 \( m \) 个奖项两两互不相同。</p>
+<h3><a class="header" href="#抽奖人数不足时-n-lt-m--" id="抽奖人数不足时-n-lt-m--">抽奖人数不足时（ \(n \lt m \) )</a></h3>
+<p>因为当人数不足时，所有参与者都能抽奖，因此我们要保证每个人获得特定奖项的概率为 \( 1 \over m \)。
+算法描述：</p>
+<blockquote>
+<p>记 \( Choosen \) 为容量为 \( m \) 的数组，
+\( Choosen[k] (1 \le k \le m) \) 表示第 k 个奖项的当前占有情况，
+初始值为 \( None \),</p>
+<p>\( Players \) 为参与参与抽奖的人的序列</p>
+<ol>
+<li>令 \( i := 1 \)，当 \( i \le n \) 时，做如下操作：
+<ul>
+<li>产生随机数 \( r_1 (1 \le r_1 \le i) \)</li>
+<li>如果 \( r_1 \lt i \)，\( Choosen[i] := Choosen[r_1] \)</li>
+<li>\( Choosen[r_1] := Players[i] \)</li>
+<li>\( i := i + 1 \)</li>
+</ul>
+</li>
+<li>当 \( i \le m \) 时，做如下操作：
+<ul>
+<li>产生随机数 \( r_2 (1 \le r_2 \le i) \)</li>
+<li>如果 \( r_2 \lt i \):
+<ul>
+<li>\( Choosen[i] := Choosen[r_2] \)</li>
+<li>\( Choosen[r_2] := None \)</li>
+</ul>
+</li>
+<li>\( i := i + 1 \)</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h4><a class="header" href="#等概率性证明" id="等概率性证明">等概率性证明</a></h4>
+<p>我们先证明，在填入中奖者的第 \( k (1 \le k \le m) \) 轮过程中，能够保证对于前 \( k \)
+个奖项中的每一个奖项，每一位中奖者抽中其中第 \( i (1 \le i \le k) \) 个奖项的概率为
+\(1 \over k \)，证明如下：</p>
+<p>我们采用数学归纳法来证明：</p>
+<ol>
+<li><strong>奠基</strong>：当 \( k = 1 \) 时，易知该中奖者一定会抽中第一个奖项，前一个奖项中只有第一个
+选项，所以此时每一位中奖者抽中第 \( k = 1 \) 的概率为 \( 1 = { 1 \over 1 } = { 1 \over k } \);</li>
+<li><strong>归纳</strong>:
+<ul>
+<li>假设当 \(k = j (1 \le j \lt m) \)时，每一位抽奖者抽中第 \( i (1 \le i \le j) \)的概率为
+\( 1 \over j \)</li>
+<li>当 \( k = j + 1 \), 有：
+<ul>
+<li>第 \( j + 1 \) 位抽奖着抽中任意第 \( i' (1 \le i' \le j + 1) \) 个奖项的概率为 \( 1 \over { j + 1 } \)
+（假设产生的随机数 \( r_1、r_2 \) 足够的均匀）;</li>
+<li>对于前 \( j \) 位抽奖者，每一位都有 \( 1 \over { j + 1 } \)，的概率将自己的奖项更换位第 \( j + 1 \)个奖项；</li>
+<li>对于前 \( j \) 位抽奖者，每一位依然占有原有第 \( i' \) 个奖项的概率为：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>\[ \begin{equation}
+\begin{aligned}
+P\{前 j 位抽奖者 j + 1 轮中仍然持有 i' \} &amp; = P\{前 j 位抽奖者j轮已经持有 i' \} \cdot P\{第 j + 1 位抽奖者没有抽中 i' \} \\
+&amp; = P\{前 j 位抽奖者j轮已经持有 i' \} \cdot (1 - P\{第 j + 1 位抽奖者抽中 i' \}) \\
+&amp; = \frac{1}{j} \cdot (1 - \frac{1}{j+1}) \\
+&amp; = \frac{1}{j} \cdot \frac{j}{j+1} \\
+&amp; = \frac{1}{j + 1} \\
+&amp; = \frac{1}{k} \\
+\end{aligned}
+\label{1.1} \tag{1.1}
+\end{equation}
+\]</p>
+<p>由上，可知每一轮迭代之后，前 \( k \) 个奖项对于已经参与的 \( k \)中奖者来说抽中的概率均等，为 \( 1 \over k \)，
+故到了第 \( n \) 轮操作后，我们可以通过不断填充 \( None \)值来稀释概率，最后达到 \( 1 \over m \) 的等概率性。</p>
+<p>特殊地，当 \( n == m \) 时，每个抽奖者抽到特定奖项的概率也为 \(1 \over n \)。</p>
+<h3><a class="header" href="#抽奖人数足够多时-n-gt-m--" id="抽奖人数足够多时-n-gt-m--">抽奖人数足够多时（ \(n \gt m \) )</a></h3>
+<p>类似地，当 \(n \gt m \)时，对于每一个抽奖序号 \( k \gt m \) 的抽奖者，我们生成随机数 \( r_3(1 \le r_3 \le n) \)，并且在
+\( r_3 \le m \) 的时候，替换对应原本占有奖项的抽奖者；可以证明在这种情况下，能保证每个人抽到特定奖项的概率为 \(1 \over n \)<sup class="footnote-reference"><a href="#1">1</a></sup>。</p>
+<h3><a class="header" href="#整合后的算法" id="整合后的算法">整合后的算法</a></h3>
+<blockquote>
+<p>记 \( Choosen \) 为容量为 \( m \) 的数组，
+\( Choosen[k] (1 \le k \le m) \) 表示第 \( k \) 个奖项的当前占有情况，
+初始值为 \( None \),</p>
+<p>\( replaced \) 为原本已经中奖，但是被人替换的抽奖者</p>
+<p>\( Players \) 为参与参与抽奖的人的序列，每次只能获取一个 \( player \)</p>
+<p>记 \( n := 0 \)为当前参与抽奖的人数</p>
+<ol>
+<li>在抽奖结束前，每次遇到一个新的 \( player \) 执行以下操作：
+<ul>
+<li>\( placed := None \)</li>
+<li>\( n := n + 1 \)</li>
+<li>产生随机数 \( r (1 \le r \le n) \)</li>
+<li>如果 \( r \le m \)：
+<ul>
+<li>\( replaced := Choosen[r] \)</li>
+<li>\( Choosen[r] := player \)</li>
+</ul>
+</li>
+<li>如果 \( r \lt n \) 并且 \( n \le m \)：
+<ul>
+<li>\( Choosen[n] := replaced \)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在抽奖结束时，如果 \( n \lt m \), 执行以下操作：
+<ul>
+<li>\( i := n \)</li>
+<li>当 \( i \lt m \)时，重复执行以下操作：
+<ul>
+<li>\( i := i + 1 \)</li>
+<li>产生随机数 \( r_2 (1 \le r_2 \le i) \)</li>
+<li>如果 \( r_2 \lt i \):
+<ul>
+<li>\( Choosen[i] := Choosen[r_2] \)</li>
+<li>\( Choosen[r_2] := None \)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h2><a class="header" href="#程序实现" id="程序实现">程序实现</a></h2>
+<h3><a class="header" href="#rust" id="rust">Rust</a></h3>
+<p>作者偏好 <a href="https://kaisery.gitbooks.io/trpl-zh-cn/">Rust 编程语言</a>，故使用 Rust 实现。</p>
+<h4><a class="header" href="#特质trait" id="特质trait">特质（trait）</a></h4>
+<p>Rust 中的<a href="https://kaisery.gitbooks.io/trpl-zh-cn/ch10-02-traits.html">特质（trait）</a>
+是其用于复用行为抽象的特性，尽管比起 Java 或 C# 的接口 （Interface）更加强大，但在此文中，
+熟悉 Java/C# 的读者把特质视作接口就可以了。</p>
+<h3><a class="header" href="#建模与实现" id="建模与实现">建模与实现</a></h3>
+<p>本文使用面向对象（Object-Oriented）编程范式<sup class="footnote-reference"><a href="#2">2</a></sup>来进行抽象，如下所示：</p>
+<pre><code class="language-rs">extern crate rand;
+use rand::random;
+use rand::seq::SliceRandom;
+use rand::thread_rng;
+
+trait ReservoirSampler {
+    // 每种抽样器只会在一种总体中抽样，而总体中所有个体都属于相同类型
+    type Item;
+
+    // 流式采样器无法知道总体数据有多少个样本，因此只逐个处理，并返回是否将样本纳入
+    // 样本池的结果，以及可能被替换出来的样本
+    fn sample(&amp;mut self, it: Self::Item) -&gt; (bool, Option&lt;Self::Item&gt;);
+
+    // 任意时候应当知道当前蓄水池的状态
+    fn samples(&amp;self) -&gt; &amp;[Option&lt;Self::Item&gt;];
+}
+
+struct Lottery&lt;P&gt; {
+    // 记录当前参与的总人数
+    total: usize,
+
+    // 奖品的名称与人数
+    prices: Vec&lt;Price&gt;,
+
+    // 当前的幸运儿
+    lucky: Vec&lt;Option&lt;P&gt;&gt;,
+}
+
+#[derive(Clone, Debug)]
+struct Price {
+    name: String,
+    cap: usize,
+}
+
+impl&lt;P&gt; ReservoirSampler for Lottery&lt;P&gt; {
+    type Item = P;
+
+    fn sample(&amp;mut self, it: Self::Item) -&gt; (bool, Option&lt;Self::Item&gt;) {
+        let lucky_cap = self.lucky.capacity();
+
+        self.total += 1;
+
+        // 概率渐小的随机替换
+        let r = random::&lt;usize&gt;() % self.total + 1;
+        let mut replaced = None;
+        if r &lt;= lucky_cap {
+            replaced = self.lucky[r - 1].take();
+            self.lucky[r - 1] = Some(it);
+        }
+
+        if self.total &lt;= lucky_cap &amp;&amp; r &lt; self.total {
+            self.lucky[self.total - 1] = replaced.take();
+        }
+
+        (r &lt;= lucky_cap, replaced)
+    }
+
+    fn samples(&amp;self) -&gt; &amp;[Option&lt;Self::Item&gt;] {
+        &amp;self.lucky[..]
+    }
+}
+
+impl&lt;P: Debug&gt; Lottery&lt;P&gt; {
+    fn release(self) -&gt; Result&lt;Vec&lt;(String, Vec&lt;P&gt;)&gt;, &amp;'static str&gt; {
+        let lucky_cap = self.lucky.capacity();
+
+        if self.lucky.len() == 0 {
+            return Err(&quot;No one attended to the lottery!&quot;);
+        }
+
+        let mut final_lucky = self.lucky.into_iter().collect::&lt;Vec&lt;Option&lt;P&gt;&gt;&gt;();
+        let mut i = self.total;
+        while i &lt; lucky_cap {
+            i += 1;
+
+            // 概率渐小的随机替换
+            let r = random::&lt;usize&gt;() % i + 1;
+            if r &lt;= lucky_cap {
+                final_lucky[i - 1] = final_lucky[r - 1].take();
+            }
+        }
+        println!(&quot;{:?}&quot;, final_lucky);
+
+        let mut result = Vec::with_capacity(self.prices.len());
+        let mut counted = 0;
+        for p in self.prices {
+            let mut luck = Vec::with_capacity(p.cap);
+
+            for i in 0 .. p.cap {
+                if let Some(it) = final_lucky[counted + i].take() {
+                    luck.push(it);
+                }
+            }
+
+            result.push((p.name, luck));
+            counted += p.cap;
+        }
+
+        Ok(result)
+    }
+}
+
+// 构建者模式（Builder Pattern），将所有可能的初始化行为提取到单独的构建者结构中，以保证初始化
+// 后的对象(Target)的数据可靠性。此处用以保证所有奖品都确定后才能开始抽奖
+struct LotteryBuilder {
+    prices: Vec&lt;Price&gt;,
+}
+
+impl LotteryBuilder {
+    fn new() -&gt; Self {
+        LotteryBuilder {
+            prices: Vec::new(),
+        }
+    }
+
+    fn add_price(&amp;mut self, name: &amp;str, cap: usize) -&gt; &amp;mut Self {
+        self.prices.push(Price { name: name.into(), cap });
+        self
+    }
+
+    fn build&lt;P: Clone&gt;(&amp;self) -&gt; Lottery&lt;P&gt; {
+        let lucky_cap = self.prices.iter()
+            .map(|p| p.cap)
+            .sum::&lt;usize&gt;();
+
+        Lottery {
+            total: 0,
+            prices: self.prices.clone(),
+            lucky: std::vec::from_elem(Option::&lt;P&gt;::None, lucky_cap),
+        }
+    }
+}
+
+fn main() {
+    let v = vec![8, 1, 1, 9, 2];
+    let mut lottery = LotteryBuilder::new()
+        .add_price(&quot;一等奖&quot;, 1)
+        .add_price(&quot;二等奖&quot;, 1)
+        .add_price(&quot;三等奖&quot;, 5)
+        .build::&lt;usize&gt;();
+
+
+    for it in v {
+        lottery.sample(it);
+        println!(&quot;{:?}&quot;, lottery.samples());
+    }
+
+    println!(&quot;{:?}&quot;, lottery.release().unwrap());
+}
+</code></pre>
+<h2><a class="header" href="#优点" id="优点">优点</a></h2>
+<ul>
+<li>流式处理，可以适应任意规模的参与人群</li>
+<li>在保证每一位抽奖者都有相同的概率获得特定奖项的同时，还能保证每一个抽奖者的获得的奖项均不相同</li>
+</ul>
+<h2><a class="header" href="#缺点" id="缺点">缺点</a></h2>
+<ul>
+<li>所有参与抽奖的人都必须<strong>依次</strong>经过服务器处理，因为需要获知准确的总人数来保证等概率性。
+一个改进的方法是，在人数足够多的时候，将总人数用总人数的特定数量级替代（给后续参加者的
+一点点小福利——但是因为总人数足够多，所以总体中奖概率还是很低），在客户端完成中奖的选定</li>
+<li><strong>等概率性完全依赖随机数 <code>r</code> 生成</strong>。 因为奖品初始化时不需要考虑打乱顺序，因此如果在
+随机这一步被技术破解，使得抽奖者可以选择自己能获取的奖项，则会破坏公平性。改进方案是，
+在 <code>release</code> 的时候再一次对奖品顺序进行随机的打乱。</li>
+<li>这种抽奖方式还限定了每人只能抽取一次奖品，否则会出现一个人占有多个奖项的情况。</li>
+</ul>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>可以参考<a href="https://huangjj27.gitlab.io/reservoirsampling/#%E5%85%AC%E5%B9%B3%E6%80%A7%E7%AD%89%E6%A6%82%E7%8E%87--frackn--%E6%8A%BD%E5%8F%96-%E8%AF%81%E6%98%8E">博主以前的博客</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>作者理解的面向对象 = 对象是交互的最基本单元 + 对象通过相互发送消息进行交互。而特质/接口以及
+对象其他公开的方法定义了对象可以向外发送/从外接收的消息。</p>
+</div>
+<h2><a class="header" href="#下一步可能展开的工作" id="下一步可能展开的工作">下一步可能展开的工作</a></h2>
+<p>目前所有抽奖者都按照相等的概率抽奖，而在一些场景下可能按照一些规则给与某些抽奖者优惠
+（例如绩效越高的员工中奖概率越大），因此下一步可能考虑如何按照权重赋予每位抽奖者各自的
+中奖概率。</p>
+<h2><a class="header" href="#致谢" id="致谢">致谢</a></h2>
+<p>感谢茶壶君（<a href="https://github.com/ksqsf">@ksqsf</a>）一语惊醒梦中人，清楚明确地表达了需求；
+感谢张汉东老师 (<a href="https://github.com/ZhangHanDong">@ZhangHanDong</a>)老师提点了之后可以开展研究的方向；
+感谢在这次讨论中提供意见的其他 Rust 社区的朋友，谢谢你们！</p>
+<h2><a class="header" href="#作者介绍" id="作者介绍">作者介绍</a></h2>
+<p>huangjj，Rust 爱好者，公众号：坏姐姐日常入门 Rust。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_3/ink.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_3/rust-mysql.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_3/ink.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_3/rust-mysql.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
