@@ -14,7 +14,7 @@ default-theme = "rust"
 google-analytics = "UA-188947685-1"
 git-repository-url = "https://github.com/RustMagazine/rust_magazine_2021"
 additional-js = ["mermaid.min.js", "mermaid-init.js"]
-
+mathjax-support = true
 
 [output.html.playground]
 editable = true
@@ -23,5 +23,10 @@ copy-js = true
 [output.html.fold]
 enable = true
 level = 0
+
+# [output.latex]
+# latex    = true  # default = true
+# pdf      = true  # default = false
+# markdown = true  # default = false
 
 
