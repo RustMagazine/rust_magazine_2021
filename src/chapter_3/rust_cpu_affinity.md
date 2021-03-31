@@ -27,7 +27,7 @@ impl CacheCell {
 
 首先为了能让多个任务在同时操作 cache 的时候仍能得到符合预期的结果，我们可以使用 lock-free 的结构，或者对它加上一把锁将并发的操作串行化。而我们发现对不同的 id 进行的操作并不会互相影响。所以可以将线程同步所影响的结构粒度变小，以这个 cache 所参考的 gorilla in-memory data structure 为例，将 id 分为进行分组，由对应的 cell 进行管理。将锁的粒度变小，以支持更高的并发操作。
 
-<img src="gorilla-fig7.png" width="75%">
+<img src="ceresdb/gorilla-fig7.png" width="75%">
 
 > 图一，from [Gorilla](https://www.vldb.org/pvldb/vol8/p1816-teller.pdf) paper Fig.7: Gorilla in-memory data structure.
 
@@ -126,7 +126,7 @@ self.runtime.spawn(route_id(id), async move {
 # Test
 在 *shard_affinity/src* 下有三个 binary 代码文件，分别是对三种情况进行的一个简单的测试。工作负载的参数可以在 *shard_affinity/src/lib.rs* 下看到。在我的环境下，三个方案以 128 并发分别进行 1024 次写以及 4096 次读 16KB 的数据耗时如下。为了让数据集中，将 id 的范围设置到了 0 至 1023.
 
-<img src="result.png" width="75%">
+<img src="ceresdb/result.png" width="75%">
 
 > 图二，本地进行测试结果。纵坐标为延时（毫秒），越低越好。
 
@@ -134,7 +134,7 @@ self.runtime.spawn(route_id(id), async move {
 
 在将工作线程数都调整为 8 （逻辑核心数量的一半）之后，可以看到 threading 和 affinity 的差别有所减小。对于目前仍然存在的 gap，通过 flamegraph 分析可能是 affinity 需要对每个任务收发请求和结果带来的.
 
-<img src="adjust worker.png" width="75%">
+<img src="ceresdb/adjust-worker.png" width="75%">
 
 > 图三，调整 worker 数量之后的结果。纵坐标为延时（毫秒），越低越好。
 

@@ -12,7 +12,6 @@
 
 整个过程， 作者既给出了`C++`代码， 也给出了`Rust`代码，对于熟悉 C++的同学，可以更加清晰的了解两种语言的不同。
 
-![](../image/boll.png)
 
 [链接](https://jduchniewicz.com/posts/2021/02/c-to-rust-or-how-to-render-your-mindset/)
 

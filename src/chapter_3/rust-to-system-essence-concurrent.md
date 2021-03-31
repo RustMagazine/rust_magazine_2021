@@ -1,4 +1,4 @@
-## 透过 rust 探索系统的本原：并发篇
+## 透过 Rust 探索系统的本原：并发篇
 
 作者：陈天 / 后期编辑：[NiZerin](https://github.com/NiZerin)
 

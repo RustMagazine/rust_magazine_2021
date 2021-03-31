@@ -4,8 +4,21 @@
 
 > 原文链接：https://caballerocoll.com/blog/bevy-rhythm-game/
 
+本文相关：
 
-## 介绍
+> Rust中文社群线上学习室 | 使用 Bevy 实现节奏大师游戏 
+⁣> 
+> - 01 [录屏](https://rust-lang.feishu.cn/minutes/obcnw4jtr2832779jmg373wz)
+> - 02 [录屏⁣](https://rust-lang.feishu.cn/minutes/obcnxrrm878zw3q7c9z7bx6p)
+>
+> Rust 中文社群 飞书群 邀请你加入：
+> 
+> - 对话群： https://applink.feishu.cn/TeLAcbDR 
+> - 话题群：https://applink.feishu.cn/TeLD868w
+
+---
+
+## 正文
 
 在这个教程中，我们基于 Rust 使用 Bevy 引擎实现一个节奏大师游戏。目的是展现如何用 Bevy 实现一些东西，特别是一些更高级的功能，如着色器，状态，和音频。
 
