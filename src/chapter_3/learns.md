@@ -4,6 +4,29 @@
 - 作者：`Rust`日报小组
 - 后期编辑：苏胤榕（DaviRain）
 
+## Rust 常见疑问汇总
+
+Rust tg 群 「Rust 众」总结了这份 Rust 常见疑问汇总。
+
+本期摘录：
+
+1. 如何在特质(trait)里添加异步函数？
+
+目前 Rust 不支持在特质里直接添加异步函数，但可以使用 [async-trait](https://crates.io/crates/async-trait) 这个库来实现。这个库会将异步函数改写为返回 `Pin<Box<dyn Future>>` 的普通函数以绕过目前语言层面的限制，但也因此有堆分配以及动态分发这两个额外的代价，所以不会被直接添加到 Rust 语言中。
+
+在特质里不支持使用异步函数是由于异步函数本质上是一个返回 `impl Future<Output = T>` 的函数，而目前 Rust 的类型系统还无法表达在特质的方法的返回类型上使用 impl Trait。有两个已经通过的 RFC 旨在解决这一问题：[RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) 泛型关联类型和 [RFC 2071](https://rust-lang.github.io/rfcs/2071-impl-trait-existential-types.html) `impl Trait` 存在类型，但它们的编译器支持还在实现中。
+
+2. 为什么 Rust 生成的程序体积比较大？如何最小化程序体积？
+
+有多个因素使得 Rust 在默认情况下有着相对较大的程序体积，包括了单态化、调试符号、标准库等。一般来说，Rust 偏向于为性能优化而非更小的体积。
+
+通常使用发布模式编译（--release），以及（在 Linux 和 macOS 下）使用 strip 删除符号信息可以在一定程度上缩小程序体积。更多方法可以参考 [`Minimizing Rust Binary Size`](https://github.com/johnthagen/min-sized-rust)，对这一问题有较完整的介绍。
+
+欢迎贡献：
+
+更多阅读： [https://rust-zh.github.io/faq/](https://rust-zh.github.io/faq/)
+
+
 ## C++ to Rust - or how to render your mindset
 
 作者打算使用 Rust 重新实现 C++教程 `<<Ray tracing in One Weekend>>`，本文目标人群是对于 Rust 感兴趣的，或者对图像渲染感兴趣的人。
@@ -298,6 +321,6 @@ Rust 中有 零大小类型的概念，简称 `ZST` (Zero-Sized Types). 这些
 
 ##【系列文章】学会飞行：使用 Rust / 神经网络 / 遗传算法 来模拟进化
 
-[Part I](https://pwy.io/en/posts/learning-to-fly-pt1/)
-[Part II](https://pwy.io/en/posts/learning-to-fly-pt2/)
-[Part III](https://pwy.io/en/posts/learning-to-fly-pt3/)
+- [Part I](https://pwy.io/en/posts/learning-to-fly-pt1/)
+- [Part II](https://pwy.io/en/posts/learning-to-fly-pt2/)
+- [Part III](https://pwy.io/en/posts/learning-to-fly-pt3/)

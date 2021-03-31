@@ -6,6 +6,13 @@
 
 ---
 
+## 华为 | openEuler 社区在 3 月 29 日正式成立了 Rust SIG
+
+
+近日，openEuler 社区正式成立了 Rust SIG 组织。在维护 openEuler 操作系统内 Rust 工具链相关软件包的同时，也致力于将上游 Rust 社区优秀开源项目引入到 openEuler 操作系统中。openEuler 社区未来会持续和国内 Rust 社区和相关厂商通力合作，推动 Rust 语言在国内的发展，吸引更多的开发者关注和使用 Rust 语言。
+
+欢迎订阅 rust@openeuler.org 邮件列表，参与到社区讨论中。
+
 ## Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献
 
 自今年年初以来，AWS Rust 团队一直在起草我们的章程和宗旨。
