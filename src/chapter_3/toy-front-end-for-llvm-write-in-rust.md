@@ -1,12 +1,10 @@
 # 「译」用Rust编写LLVM的玩具编译器
 
-译者：[iamazy](https://github.com/iamazy)
+译者：[iamazy](https://github.com/iamazy) / 后期编辑：张汉东
+
+> 原文：[A Toy Front-End for LLVM, written in Rust](https://blog.ulysse.io/post/a-toy-front-end-for-llvm-written-in-rust/)
 
 ---
-
-原文：[A Toy Front-End for LLVM, written in Rust](https://blog.ulysse.io/post/a-toy-front-end-for-llvm-written-in-rust/)
-
-
 
 > 我目前的副业是用 Rust 编写一个可以将代码转换成 LLVM IR 的编译器。LLVM 的 API 对于新手来说有点令人生畏，而且没有很多有关的教程（有限的教程大多数还是基于 C++ 的，如何使用 Rust 做同样的事并不总是那么明确）。我希望当我准备做一件事情时，有人可以手把手的教我，这也是我要写这篇文章的原因。
 

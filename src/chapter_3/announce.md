@@ -11,7 +11,7 @@
 
 ### 社区协作项目动态介绍
 
-介绍两个新创建的协作项目：
+**介绍两个新创建的协作项目：**
 
 1. [Star Rust](https://github.com/ZhangHanDong/star-rust)。该项目用于记录 Rust 开源生态中的明星项目。不同于 awesome-rust ，该项目侧重于记录明星项目，及其介绍、架构、应用、源码解读。
 2. [Real World Rust Design Pattern](https://github.com/ZhangHanDong/real-world-rust-design-pattern)。该项目用于挖掘 Rust 开源生态中知名项目的设计模式。
@@ -19,6 +19,13 @@
 以上项目是需要社区大家一起完成的，如果你是一个喜欢学习并且输出的人，并且对上面项目感兴趣，欢迎大家一起做贡献。
 
 将来这些内容，也会摘录到本刊中。
+
+
+**【活动预告】2021.04.10 北京 Rust Meetup **
+
+ 报名链接 ：  [http://hdxu.cn/ZxJjK](http://hdxu.cn/ZxJjK)
+
+ 该活动相关议题内容也请关注下期月刊。
 
 
 ### 上期（二月刊）访问数据统计小结

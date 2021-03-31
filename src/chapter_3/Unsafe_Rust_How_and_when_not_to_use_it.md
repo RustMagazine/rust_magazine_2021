@@ -1,10 +1,10 @@
 # 「译」Unsafe Rust 的取舍
 
-译者：
-- [MATRIXKOO](https://github.com/MATRIXKOO)
-- [NiZerin](https://github.com/NiZerin)
+译者： （ [MATRIXKOO](https://github.com/MATRIXKOO) 和 [NiZerin](https://github.com/NiZerin) ） / 后期编辑： 张汉东
 
-原文：[Unsafe Rust: How and when (not) to use it](https://blog.logrocket.com/unsafe-rust-how-and-when-not-to-use-it/)
+> 原文：[Unsafe Rust: How and when (not) to use it](https://blog.logrocket.com/unsafe-rust-how-and-when-not-to-use-it/)
+
+---
 
 ## 在本中，我将说明您需要了解的有关`unsafe Rust`的所有信息。我将专注于以下几个方面来讲解。
 

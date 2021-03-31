@@ -1,5 +1,11 @@
 ## 透过 Rust 探索系统的本原：安全篇
 
+作者：陈天 / 后期编辑：[NiZerin](https://github.com/NiZerin)
+
+> 原文链接：[https://mp.weixin.qq.com/s/HCHYr5sWnEG_qOGE3hfNnQ](https://mp.weixin.qq.com/s/HCHYr5sWnEG_qOGE3hfNnQ)
+
+---
+
 安全是我的老本行，隔一段时间不拉出来谈一谈就不舒服。我个人觉得：做应用不谈安全都是在耍流氓。
 
 按照 CISSP[1] 的定义，安全有八大领域：
@@ -407,7 +413,3 @@ for _ in 0..10 {
 > 连接千万条，安全第一条。网络不加密，亲人两行泪。- 鲁迅：不是我说的
 
 
-
-作者：陈天
-
-原文链接：[https://mp.weixin.qq.com/s/HCHYr5sWnEG_qOGE3hfNnQ](https://mp.weixin.qq.com/s/HCHYr5sWnEG_qOGE3hfNnQ)

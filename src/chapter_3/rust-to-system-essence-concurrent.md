@@ -1,6 +1,8 @@
 ## 透过 rust 探索系统的本原：并发篇
 
-作者：陈天
+作者：陈天 / 后期编辑：[NiZerin](https://github.com/NiZerin)
+
+> 原文链接：[https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA](https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA)
 
 ---
 
@@ -185,8 +187,4 @@ Rust 下和 S3 打交道的库是 Rusoto，Rusoto 是全异步的处理，因而
 
 整个流程同样看上去不容易实现，但最终添加的也就是二十行代码而已（不计入 S3 具体上传的代码）。
 
-------
 
-
-
-原文链接：[https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA](https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA)

@@ -23,6 +23,13 @@
 
 [仓库](https://github.com/EbTech/rust-algorithms)
 
+## 回顾异步Rust
+
+parity 工程师 tomaka 这篇博文，总结了他在日常开发中遇到的 Rust 异步的一些关键问题，值得一读。
+
+[阅读](https://tomaka.medium.com/a-look-back-at-asynchronous-rust-d54d63934a1c)
+
+
 ## Rust: 提防转义序列 \n
 
 [serde](https://github.com/serde-rs/serde)是在Rust生态系统最流行的crate，一个用于高效地序列化和deseri一个LIZING数据结构。它支持多种数据格式，包括JSON，YAML，MessagePack等。与许多其他（反）序列化器不同，它不使用运行时反射，而是使用Rust的引人注目的特征系统。这使Serde异常有效，因为数据结构本质上知道如何序列化或反序列化自身，并且它们通过实现`Serialize`or`Deserialize`特性来实现。幸运的是，这要归功于大多数类型，这要归功于derive宏。您可能会像我一样遇到陷阱，在这篇博客文章中，作者想特别谈一谈：**转义序列。**
@@ -274,3 +281,24 @@ Rust 中有 零大小类型的概念，简称 `ZST` (Zero-Sized Types). 这些
 本文详细的介绍了 Rust 模块系统，从为什么需要模块系统？ 到如何使用的非常详细，希望对模块系统深入掌握的同学可以看看。
 
 [原文链接](https://aloso.github.io/2021/03/28/module-system.html)
+
+## LibP2p 指南
+
+
+这个教程展示如何使用Rust和出色的libp2p库构建一个非常简单的点对点应用程序。
+
+[阅读](https://blog.logrocket.com/libp2p-tutorial-build-a-peer-to-peer-app-in-rust/)
+
+[示例代码](https://github.com/zupzup/rust-peer-to-peer-example)
+
+## 指南： 写一个 微ECS （ Entity Component System）系统
+
+通过编写一个简单的 ECS 系统来学习什么是 ECS 。
+
+[阅读](https://ianjk.com/ecs-in-rust/)
+
+##【系列文章】学会飞行：使用 Rust / 神经网络 / 遗传算法 来模拟进化
+
+[Part I](https://pwy.io/en/posts/learning-to-fly-pt1/)
+[Part II](https://pwy.io/en/posts/learning-to-fly-pt2/)
+[Part III](https://pwy.io/en/posts/learning-to-fly-pt3/)

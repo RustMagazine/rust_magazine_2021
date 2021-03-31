@@ -26,6 +26,7 @@
 - 杨楚天（yct21）
 - [Matrixtang](https://github.com/MATRIXKOO)
 - m1zzx2 
+- [NiZerin](https://github.com/NiZerin) 
 
 - <其他成员招募位> 招募条件见下方
 

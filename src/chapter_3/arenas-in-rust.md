@@ -1,10 +1,10 @@
 # 「译」Arenas in Rust
 
-原文: [Arenas in Rust](https://manishearth.github.io/blog/2021/03/15/arenas-in-rust/)
+译者：[MATRIXKOO](https://github.com/MATRIXKOO) / 后期编辑：张汉东
 
-译者：[MATRIXKOO](https://github.com/MATRIXKOO)
+> 原文: [Arenas in Rust](https://manishearth.github.io/blog/2021/03/15/arenas-in-rust/)
 
-
+---
 
 # Rust 中的 Arenas 内存池
 
