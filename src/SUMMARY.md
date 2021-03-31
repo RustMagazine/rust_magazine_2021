@@ -52,7 +52,7 @@
     - [io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件](./chapter_2/io_uring_async_rw.md)
     - [如何为 Rust 语言做贡献 | Part 1](./chapter_2/contribute_to_the_rust_part1.md)
 
-- [三月刊（March）| 待发布](./chapter_3/toc.md)
+- [三月刊（March）](./chapter_3/toc.md)
     - [发刊通告](./chapter_3/announce.md)
     - [Rust官方动态](./chapter_3/lang.md)
     - [社区热点](./chapter_3/hots.md)

@@ -13,6 +13,10 @@
 
 欢迎订阅 rust@openeuler.org 邮件列表，参与到社区讨论中。
 
+订阅方法：
+
+https://openeuler.org/zh/community/mailing-list/ 在这个页面找到 Rust SIG，然后进去有 SubScribe 按钮，输入你到邮箱订阅。然后会收到一封邮件，你回复这封邮件即可。
+
 ## Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献
 
 自今年年初以来，AWS Rust 团队一直在起草我们的章程和宗旨。
