@@ -32,6 +32,7 @@
 ### 学习园地
 
 - [解读 Rust 1.51 稳定版解读](./rust_1.51.md)
+- [no_std 环境下的可执行文件](./no_std_binary.md)
 - [「译」用Rust编写LLVM的玩具编译器](./toy-front-end-for-llvm-write-in-rust.md)
 - [「译」Unsafe Rust 的取舍](./Unsafe_Rust_How_and_when_not_to_use_it.md)
 - [「译」基于 Rust 用 Bevy 实现节奏大师游戏](./Rhythm-game-in-Rust-using-bevy.md)
