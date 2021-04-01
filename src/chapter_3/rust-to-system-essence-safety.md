@@ -10,11 +10,11 @@
 
 按照 CISSP[1] 的定义，安全有八大领域：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5hemtibIpteyZOKLZMzVLF5X5EmcR6eGU2VCTckeLpU0tMlPTBQUVBgg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/1.webp)
 
 本文只关注 Communication and Network Security 中 TCP/IP 范畴下的 Session Layer Security，也就是 TCP/UDP 层之上的安全方案：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5LiaGzu9WeNs7BQV88sr7bU0nt0CiaSiavIMckBsZ5CwHvpb8j0WeFaiaMQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/2.webp)
 
 目前业界首选的方案是 TLS[2]。在所有流行的应用层解决方案中，都离不开 TLS。
 
@@ -40,7 +40,7 @@
 
 下图阐述了安全领域涉及机密性和完整性的主要算法：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5VBs96wMJWs3TdicQYe6JEFjib4KHmPP6CH6XaBrWn4pCBqQbAo1P07gg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/3.webp)
 
 注意，这里的一些算法是泛称，而非具体某种算法。比如：sha3 算法族下面除了 keccak 以外，还有 blake2，blake3 等其他算法；而 ECC 算法下面，属于签名算法的有 Ed25519，Ed448 等，属于非对称加密的有 x25519，x448 等。
 
@@ -56,7 +56,7 @@
 
 我们知道，在网络传输中，非对称加密的效率不高，不适合大量数据的加密，而对称加密则需要双方共享密钥，才能正常通讯。因此，我们需要一种手段，在不安全的网络信道中，只传输部分信息，通过这部分信息 + 本地的私有信息，协商出来双方一致的共享密钥。第三方即便获得明文传输的信息，也无法推导出密钥。如果这样的手段行得通，那么，我们就可以在网络通讯的握手过程，生成每个 session 独立的共享密钥（session key），后续的通讯都通过这个（这对）密钥来加密完成。这个协商的过程就是 DH 算法（Diffie-Hellman Key Exchange Algorithm）[5]（对算法细节感兴趣的可以去看 wikipedia）：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5w5CKXZOosHFwqWlS9tSPrk0tE5oWCg3bUL63QBS9fdibYUE29hCPFCQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/4.webp)
 
 DH 算法是 TLS 以及 Noise protocol 的基石。如果没有它，我们就不会有目前这样一个繁荣且安全的互联网世界。
 
@@ -124,7 +124,7 @@ assert_eq!(alice_shared_secret.as_bytes(), bob_shared_secret.as_bytes());
 
 我们这里所说的证书，是 PKI 体系下的 X.509 证书[16]。X.509 证书用于证明一个公钥的身份。我说我是 domain.com 的合法服务器，何以见得？我生成一对私钥和公钥，通过其签署一个 CSR（Certificate Signing Request [17]），里面通过 CN（Common Name）声索我对 `*.domain.com` 的占有。一般一个 CSR 包含这些信息：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5d4iagGokT62RBnCNiacSGyiaJcssEia350mEYRW36Yh89ibPZB4P74iaPl3w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/5.webp)
 
 随后我把 CSR 提交给一个由某个根证书签署的 CA，由其签名并发回给我。这样，任何应用通过 HTTPS 连接 domain.com 时就可以正常通讯。
 
@@ -138,7 +138,7 @@ CA 机构是 internet 的不可或缺，却相对脆弱的一环。Letsencrypt �
 
 当然可以。你可以生成自己的 CA cert（自签名），然后用 CA key 签名 Server cert。你的客户端在启动 TLS 连接时，信任你自己的 CA cert 即可。你甚至还可以通过你的 CA 给每个客户端签名，让服务器也同时验证客户端是你信任的客户端。如下图所示：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5nD5PdHBs19k6Cvl4PXqMH01rTK9nSEL915FAtMn5Xzy6BNfhBia7iaKQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/6.webp)
 
 一个新的客户端在注册新用户/登录时，服务器会从 CA 获取证书，连同用户登录获得的 token 一同返回给客户端。之后，客户端访问任何服务端的 API（除 auth 之外），都需要提供 client cert 供服务器验证，这样，额外增加安全性，并且，可以杜绝 Charles Proxy 这样的中间人。
 
@@ -148,15 +148,15 @@ CA 机构是 internet 的不可或缺，却相对脆弱的一环。Letsencrypt �
 
 下面是我通过 celllar 生成的 CA 证书（注意 `CA: TRUE`）：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI59nsAjYGiane0JUibib5wQur1z0E6Hibey6m5ziaBp9bO20amAkhnufrRicLA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/7.webp)
 
 以及该 CA 签署的服务器证书（注意 `CA: FALSE` 和 `TLS Web Server Authentication`）：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5CV6aQgdYMUX95AlNia4C6empPlOK8dkD8Gtw4QOWkicyzKng6dPX3zzQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/8.webp)
 
 以及该 CA 签署的客户端证书（注意 `CA: FALSE` 以及 `TLS Web Client Authentication`）：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5YLVQplxFpVVR65ibXoRk9Bw1hPZq3yia1VoMib8CNohsoSTJricgwMp7jw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/9.webp)
 
 将 TLS 应用在 HTTP 之外
 
@@ -315,7 +315,7 @@ tokio::spawn(async move {
 
 因为避免使用证书这样天然具有中心化的东西，Noise Protocol 在 p2p 领域走出了新的天地。从最简单的 NN（双方都没有固定公钥）KK（双方都知道对方的固定公钥），到最复杂的 XX（双方都有固定公钥，通过网络加密传输给对方），Noise Protocol 定义了 12 种协商模式，再辅以不同的哈希和加密算法，可以组合出上百种安全方案，总有一种适合你：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5yuXHbVLb1Lyl4RP16nkQyRuk9HjmJ2Y9g4miccY8GrnqdmOMkhIz7RQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-safety/10.webp)
 
 在 Rust 下，snow[26] 是 Noise Protocol 的非常成熟的实现，而 libp2p 则使用了 snow 来实现 libp2p 协议的安全层。
 
@@ -411,5 +411,3 @@ for _ in 0..10 {
 ## 贤者时刻
 
 > 连接千万条，安全第一条。网络不加密，亲人两行泪。- 鲁迅：不是我说的
-
-
