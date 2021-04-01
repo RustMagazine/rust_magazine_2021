@@ -27,7 +27,7 @@ rust 是一门非常优秀的语言，我虽然没有特别正式介绍过 rust 
 1. 监听 8888 端口
 2. 写一个死循环，不断 `accept` socket，然后对 socket 里收到的数据进行处理。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ085aibogerTGhY5pEVkyJ097s9kiao0Onibu7jlsJTcJFtBezezKeIJjxd57fibCr9UEN3FicKEpZy7vibw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/1.webp)
 
 但这样是串行服务，我们只有处理完上一个 socket 的数据，才有机会处理下一个 socket，吞吐量非常有限。显然，我们需要改进。
 
@@ -35,7 +35,7 @@ rust 是一门非常优秀的语言，我虽然没有特别正式介绍过 rust 
 
 接下来我们需要解决串行服务的瓶颈。一个方法是 `accept` 之后，将新的 socket 放入一个线程里执行，于是主线程不会被阻塞住，可以继续 `accept` 后续的 socket。这样，每个 client 过来的请求都可以独立地处理。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ085aibogerTGhY5pEVkyJ097xWGJ9W8iaFc1zNdTnVuKyQSgVjzegTWmKRLgibSJlw6B8QYG1xB9CeHw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/2.png)
 
 可是，这带来了一个显而易见的问题：我们的 KV db 成为了一个共享状态，它在多个线程之间共享数据。这是并发处理的第一种范式：共享状态的并发（Shared-State Concurrency）。
 
@@ -63,7 +63,7 @@ fn main() {
 
 但即使我们无法通过使用不同实现的锁来优化对共享状态访问的效率，我们还是有很多方法来优化锁。无论何种方法，其核心思想是：**尽可能减少锁的粒度**。比如，对数据库而言，我们可以对整个数据库管理系统加锁，也可以对单个数据库的访问加锁，还可以对数据表的访问加锁，甚至对数据表中的一行或者一列加锁。对于我们的 KV db 而言，我们可以创建 N 个 hashmap（模拟多个数据库），然后把 Key 分散到这 N 个 hashmap 中，这样，不管使用什么锁，其粒度都变成之前的 1/N 了。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ085aibogerTGhY5pEVkyJ097YQKCgptLFVGmuWtnXZCCNlhoyYv4XLEjiasHxRnM25XAwbrjwknLg5w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/3.webp)
 
 新的 KV db 的定义，以及添加 / 访问数据的代码：
 
@@ -125,7 +125,7 @@ rust 里面的 dashmap 提供了一个类似思路的高并发访问的 hashmap�
 
 使用消息通道的思路，我们可以进一步迭代我们的 KvDb —— 在处理 socket 的线程和处理 state 的线程之间建立一个 mpsc channel：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ085aibogerTGhY5pEVkyJ097htqVtCE4EuK3qJNwCDRXZrqQgD2pEJPKXr0Kp5HmrAyuibdrDpTq4jw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/4.png)
 
 这种方式是否更高效？不见得。但从并发处理的角度来看，它结构上更清晰，不容易出错。
 
@@ -173,18 +173,16 @@ golang 内建了 channel，使用 goroutine 和 channel 来处理并发。其语
 
 所以，我们可以在系统启动时（或者服务器启动时），在普通的线程和 tokio 管理的线程（Runtime）间创建好一个 channel，然后在各自的上下文中处理流入流出 channel 的数据，如下图所示：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ09Drv8s8Bbeb0O5SegjEe6GR7ibHrFQ2tOPXozmjfDNhOQO8YarWcQUKa8dgwftZNEdzgicn85a9TicQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/5.webp)
 
 本文中我们提到的这个 KV store 的例子太简单，并不涉及同步线程和异步线程之间的同步，我举个其它例子。上篇文章《[从微秒到纳秒](http://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&mid=2649828863&idx=1&sn=5ff0ccb8b286e9ba86e2c944f244ce6d&chksm=8704afe3b07326f50e903b975d655248b0136dff262a776291cf662d7c7a0f30889648570b9f&scene=21#wechat_redirect)》讲了如何使用多线程来处理不同 repo 下的事件的写入。下图是之前文章里的主流程：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ09Drv8s8Bbeb0O5SegjEe6GZAygZ3II45P6icfg2LGSLx7L9Syoj6hTrAapAzD8R4ZN8Gz3qzhGXsQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/6.webp)
 
 在这个流程的基础上，我们需要添加一个新的功能：当日志文件 rotate 时，我们发一个消息出去，由一组 uploader 线程负责把刚刚关闭封存的日志文件传输到 S3。
 
 Rust 下和 S3 打交道的库是 Rusoto，Rusoto 是全异步的处理，因而我们需要一个 Tokio runtime 来处理异步的任务。我们可以在 `Server.start` 接口来处理 Runtime 的创建，然后创建 channel，把 rx 交给 Tokio runtime 下运行的一个死循环的异步任务，这个任务从 rx 里取数据，然后 spawn 新的异步任务将 file 上传到 S3 对应 bucket 的 key 下。而 channel 的 tx 端则传给每个 repo 的 `LoggerWriter`，这样，`LoggerWriter` 在做 rotation 的时候，就可以通过 tx 发送要上传给 S3 的本地文件名 file，以及上传到 S3 的对象的 key。如下图所示：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ09Drv8s8Bbeb0O5SegjEe6GibSeqJKE4ibzJvhiaPqAE5icxibjyrhH1IFcUicGkWQAM1RcDjKGU9MoOpYQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/7.webp)
 
 整个流程同样看上去不容易实现，但最终添加的也就是二十行代码而已（不计入 S3 具体上传的代码）。
-
-
