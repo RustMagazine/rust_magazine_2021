@@ -1,9 +1,10 @@
 [book]
+title = "Rust精选"
 authors = ["blackanger"]
+description = "The roots aren't deep but the seeds are planted!"
 language = "zh_CN"
 multilingual = false
 src = "src"
-title = "rust-magazine"
 
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
@@ -23,6 +24,10 @@ copy-js = true
 [output.html.fold]
 enable = true
 level = 0
+
+[preprocessor.rss]
+files-glob = "chapter_*/**/*.md"
+url-base = "https://rustmagazine.github.io/rust_magazine_2021/"
 
 # [output.latex]
 # latex    = true  # default = true
