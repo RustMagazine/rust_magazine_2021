@@ -178,9 +178,9 @@
 <hr />
 <p>安全是我的老本行，隔一段时间不拉出来谈一谈就不舒服。我个人觉得：做应用不谈安全都是在耍流氓。</p>
 <p>按照 CISSP[1] 的定义，安全有八大领域：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5hemtibIpteyZOKLZMzVLF5X5EmcR6eGU2VCTckeLpU0tMlPTBQUVBgg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/1.webp" alt="" /></p>
 <p>本文只关注 Communication and Network Security 中 TCP/IP 范畴下的 Session Layer Security，也就是 TCP/UDP 层之上的安全方案：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5LiaGzu9WeNs7BQV88sr7bU0nt0CiaSiavIMckBsZ5CwHvpb8j0WeFaiaMQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/2.webp" alt="" /></p>
 <p>目前业界首选的方案是 TLS[2]。在所有流行的应用层解决方案中，都离不开 TLS。</p>
 <p>在 p2p 领域，TLS 并不那么受待见，大家似乎更喜欢和 TLS 提供了同等安全水平，但更加去中心化（不需要 CA[3]）的 noise protocol[4]。我去年写过一篇关于 Noise protocol 的文章：<a href="http://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&amp;mid=2649828386&amp;idx=1&amp;sn=555e16a024e027f6cde350a0a09d3af4&amp;chksm=8704ae3eb0732728040c309dbd4200c93483f6f40b1ac86dc7d8810f53290d870657b89ea5ce&amp;scene=21#wechat_redirect">Noise 框架：构建安全协议的蓝图</a>。</p>
 <p>本文围绕 TLS 和 Noise protocol，以及它们在 Rust 下的使用场景，谈谈我们如何做安全的系统和应用。</p>
@@ -201,7 +201,7 @@
 <p>为了保证完整性，我们会使用哈希算法，数字签名来保证数据的一致性。</p>
 <p>为了保证机密性，我们会使用对称和非对称加密来保证在传输途中，以及在数据载体上的机密性。机密性往往需要完整性作为先决条件；而完整性不一定需要机密性作为先决条件。</p>
 <p>下图阐述了安全领域涉及机密性和完整性的主要算法：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5VBs96wMJWs3TdicQYe6JEFjib4KHmPP6CH6XaBrWn4pCBqQbAo1P07gg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/3.webp" alt="" /></p>
 <p>注意，这里的一些算法是泛称，而非具体某种算法。比如：sha3 算法族下面除了 keccak 以外，还有 blake2，blake3 等其他算法；而 ECC 算法下面，属于签名算法的有 Ed25519，Ed448 等，属于非对称加密的有 x25519，x448 等。</p>
 <p>如果你看了我前几周的文章，大概对我介绍的《<a href="http://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&amp;mid=2649828843&amp;idx=1&amp;sn=f60193eba1debfdbab4d9ea48ddf8203&amp;chksm=8704aff7b07326e1c265b21c1617c436e2ab4b4f8911c9b7b64cc8b9f5d34e993aa875090e87&amp;scene=21#wechat_redirect">胖客户端，廋服务器</a>》有些印象。文章中我提到了服务端把用户端的事件写入到事件日志中，客户端可以 clone / pull 这些事件日志，在本地生成相应的状态。那么问题来了，客户端怎么知道 clone 下来的事件日志是未经第三方篡改的事件日志呢？很简单，我们只需对日志文件做个 hash，然后用服务器的私钥对这个 hash 做一个签名，把签名附带在文件头上。这样客户端收到文件后，用服务器的公钥验证这个签名即可。这样，只要服务器的私钥不泄露，这个签名就可以验证文件的完整性。在比特币的世界里，每个区块的完整性都由打包该区块的矿工的签名来保证，而整个链的完整性则由哈希链和中本聪共识（最长链）保证。</p>
 <p>进一步的，如果我们用户的私有 repo 下的所有事件日志都只有用户自己才能访问，其他人（包括服务端应用）都无法访问，那么我们可以用用户的公钥来加密 repo 的所有事件日志。</p>
@@ -209,7 +209,7 @@
 <p>当我们需要保证存储在媒介上的信息的安全性时，一切都简单而直观；但当我们需要保证在网络传输中的实时信息的安全性时，我们就面临着巨大的挑战。</p>
 <p>这其中第一个挑战就是：每个连接使用什么密钥来加密数据？</p>
 <p>我们知道，在网络传输中，非对称加密的效率不高，不适合大量数据的加密，而对称加密则需要双方共享密钥，才能正常通讯。因此，我们需要一种手段，在不安全的网络信道中，只传输部分信息，通过这部分信息 + 本地的私有信息，协商出来双方一致的共享密钥。第三方即便获得明文传输的信息，也无法推导出密钥。如果这样的手段行得通，那么，我们就可以在网络通讯的握手过程，生成每个 session 独立的共享密钥（session key），后续的通讯都通过这个（这对）密钥来加密完成。这个协商的过程就是 DH 算法（Diffie-Hellman Key Exchange Algorithm）[5]（对算法细节感兴趣的可以去看 wikipedia）：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5w5CKXZOosHFwqWlS9tSPrk0tE5oWCg3bUL63QBS9fdibYUE29hCPFCQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/4.webp" alt="" /></p>
 <p>DH 算法是 TLS 以及 Noise protocol 的基石。如果没有它，我们就不会有目前这样一个繁荣且安全的互联网世界。</p>
 <p>在 Rust 下，如果你需要直接使用 DH 算法，可以使用 dalek 出品的 <code>x25519-dalek</code>[6]。它是使用 curve25519 [7] 的 ECDH（Elliptic Curve Diffie-Hellman） 的实现。代码如下：</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -285,23 +285,23 @@ assert_eq!(alice_shared_secret.as_bytes(), bob_shared_secret.as_bytes());
 </ul>
 <h3><a class="header" href="#证书是个什么鬼" id="证书是个什么鬼">证书是个什么鬼？</a></h3>
 <p>我们这里所说的证书，是 PKI 体系下的 X.509 证书[16]。X.509 证书用于证明一个公钥的身份。我说我是 domain.com 的合法服务器，何以见得？我生成一对私钥和公钥，通过其签署一个 CSR（Certificate Signing Request [17]），里面通过 CN（Common Name）声索我对 <code>*.domain.com</code> 的占有。一般一个 CSR 包含这些信息：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5d4iagGokT62RBnCNiacSGyiaJcssEia350mEYRW36Yh89ibPZB4P74iaPl3w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/5.webp" alt="" /></p>
 <p>随后我把 CSR 提交给一个由某个根证书签署的 CA，由其签名并发回给我。这样，任何应用通过 HTTPS 连接 domain.com 时就可以正常通讯。</p>
 <p>在 letsencrypt[18] 成为主流之前，证书是个几乎相当于特许经营的好生意。像 godaddy 这样的家伙，一个证书可以卖上百美金一年，简直如同抢钱。证书作为一门生意，极大地破坏了互联网的安全性，很多小的玩家不想支付每年的证书费用，干脆就避免使用 HTTPS。letsencrypt 的出现，几乎摧毁了各大吃相难看的 CA 的生意。Letsencrypt 自动化了证书的申请流程，只要你能把某个域名指向你的服务器，让 letsencrypt 验证到你请求的域名就是你拥有的域名，可以立即签署一个有效期是 3 个月的免费证书。至于证书的有效期为啥不能更长，这个，根本不是技术原因，我猜是来自做垂死挣扎的既得利益者们的压力。</p>
 <h3><a class="header" href="#能不能自己做-ca" id="能不能自己做-ca">能不能自己做 CA？</a></h3>
 <p>CA 机构是 internet 的不可或缺，却相对脆弱的一环。Letsencrypt 只是解决了证书收费的问题，不过没有解决 CA 机构本身的脆弱性 — 任何一个中心化的，可以签署证书，被数亿设备信任的机构都是有安全风险的，因为黑客随时盯着这些机构的漏洞。一旦一个CA 被攻陷，黑客们可以伪造出成千上万的域名的服务器证书。</p>
 <p>有没有可能一个应用的客户端和服务器使用自己的 CA，绕过任何 CA 机构？</p>
 <p>当然可以。你可以生成自己的 CA cert（自签名），然后用 CA key 签名 Server cert。你的客户端在启动 TLS 连接时，信任你自己的 CA cert 即可。你甚至还可以通过你的 CA 给每个客户端签名，让服务器也同时验证客户端是你信任的客户端。如下图所示：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5nD5PdHBs19k6Cvl4PXqMH01rTK9nSEL915FAtMn5Xzy6BNfhBia7iaKQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/6.webp" alt="" /></p>
 <p>一个新的客户端在注册新用户/登录时，服务器会从 CA 获取证书，连同用户登录获得的 token 一同返回给客户端。之后，客户端访问任何服务端的 API（除 auth 之外），都需要提供 client cert 供服务器验证，这样，额外增加安全性，并且，可以杜绝 Charles Proxy 这样的中间人。</p>
 <p>当然这样的手段只适合客户端代码由你自己控制（比如 iOS/android/OSX/Linux/Windows app）。你无法让你的服务器证书通过浏览器的安全验证（因为证书不在系统根证书的信任列表中），因而，任何使用浏览器访问你的服务器的用户将无法使用你的服务。</p>
 <p>如果你对这样的方案感兴趣，可以看看我的 crate: tyrchen/cellar[19]。它借鉴比特币分层钱包[20]的设计，可以从一个 passphrase 衍生出确定的分层密码/密钥/证书。生成的证书可以被应用在 TLS 应用中，比如：tyrchen/mobc-tonic[21]（我做的一个 grpc client connection pool）。</p>
 <p>下面是我通过 celllar 生成的 CA 证书（注意 <code>CA: TRUE</code>）：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI59nsAjYGiane0JUibib5wQur1z0E6Hibey6m5ziaBp9bO20amAkhnufrRicLA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/7.webp" alt="" /></p>
 <p>以及该 CA 签署的服务器证书（注意 <code>CA: FALSE</code> 和 <code>TLS Web Server Authentication</code>）：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5CV6aQgdYMUX95AlNia4C6empPlOK8dkD8Gtw4QOWkicyzKng6dPX3zzQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/8.webp" alt="" /></p>
 <p>以及该 CA 签署的客户端证书（注意 <code>CA: FALSE</code> 以及 <code>TLS Web Client Authentication</code>）：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5YLVQplxFpVVR65ibXoRk9Bw1hPZq3yia1VoMib8CNohsoSTJricgwMp7jw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/9.webp" alt="" /></p>
 <p>将 TLS 应用在 HTTP 之外</p>
 <p>TLS 可以保护我们的 HTTP 应用，其中包括 REST/GraphQL/Websocket API，以及 gRPC API。虽然目前 HTTP 是几乎绝大多数互联网应用使用的协议，但还有大量的其它基于 TCP 层的协议。如果你要保证这些协议的安全性，使用 TLS 是一个简单直接的选择。</p>
 <p>然而，理解和使用好 OpenSSL 库不是一件容易的事情。十多年前，我曾经用 C 语言和老旧的 OpenSSL （0.9.x）打过交道，那体验<strong>相当</strong>不好。Python / Erlang 有不错的 OpenSSL 的封装，在应用中使用 TLS 比较舒服自然。如果你熟悉的语言没有很好的库去包装 OpenSSL，那么，在应用中使用 TLS 就不那么容易。</p>
@@ -462,7 +462,7 @@ tokio::spawn(async move {
 </li>
 </ul>
 <p>因为避免使用证书这样天然具有中心化的东西，Noise Protocol 在 p2p 领域走出了新的天地。从最简单的 NN（双方都没有固定公钥）KK（双方都知道对方的固定公钥），到最复杂的 XX（双方都有固定公钥，通过网络加密传输给对方），Noise Protocol 定义了 12 种协商模式，再辅以不同的哈希和加密算法，可以组合出上百种安全方案，总有一种适合你：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/SER9L29WQ0icoNQU1Me0GOUz6F3GUZSI5yuXHbVLb1Lyl4RP16nkQyRuk9HjmJ2Y9g4miccY8GrnqdmOMkhIz7RQ/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+<p><img src="https://oss.iacblog.com/rust/rust-to-system-essence-safety/10.webp" alt="" /></p>
 <p>在 Rust 下，snow[26] 是 Noise Protocol 的非常成熟的实现，而 libp2p 则使用了 snow 来实现 libp2p 协议的安全层。</p>
 <p>下面是使用 snow 在 TCP 协议之上建立加密信道的实例。我们可以看到，仅需额外的几行代码就可以将你的网络应用打造得非常安全：</p>
 <ul>
