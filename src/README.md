@@ -10,6 +10,11 @@
 - [语雀阅读](https://www.yuque.com/chaosbot/rust_magazine_2021)
 - [仓库地址](https://github.com/RustMagazine/rust_magazine_2021)
 
+### 如何订阅本刊 RSS ?
+
+1. 订阅地址：[https://rustmagazine.github.io/rust_magazine_2021/rss.xml](https://rustmagazine.github.io/rust_magazine_2021/rss.xml)
+
+2. 复制订阅地址到你最喜欢的订阅工具开始订阅。
 
 ---
 
