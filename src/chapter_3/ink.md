@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Write smart contracts in Rust | Hello, Ink!
+
+---
+
 # 用 Rust 写智能合约 | Hello, Ink! 
 
 作者：李大狗（李骜华）/ 后期编辑： 张汉东

@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: New Year, New People, New Weather Rust Study Notes
+
+---
+
 # 新年新人新气象 | Rust 学习笔记
 
 作者：李大狗（李骜华）/ 后期编辑： 张汉东

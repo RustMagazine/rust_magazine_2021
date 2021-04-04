@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Analysis and Practice of Rust Scientific Computing Multidimensional Array Operation Library
+
+---
+
 # 华为 | Rust 科学计算多维数组运算库的分析与实践
 
 作者： 李原 / 后期编辑： 张汉东

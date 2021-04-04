@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Ant Group CeresDB Team | Thoughts on Rust Error Handling
+
+---
+
 # 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考
 
 作者：evenyag / 后期编辑：张汉东

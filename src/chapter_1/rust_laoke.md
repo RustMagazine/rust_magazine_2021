@@ -1,5 +1,10 @@
-# 本月简报 | Rust 唠嗑室本月汇总
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: Rust chat room this month summary
 
+---
+
+# 本月简报 | Rust 唠嗑室本月汇总 
 
 - 来源：[Rust 唠嗑室](https://space.bilibili.com/25566598)
 - 主持人：MikeTang

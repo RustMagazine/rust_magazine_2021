@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: Rust language in the embedded field
+
+---
+
 # 嵌入式领域的Rust语言
 
 作者：洛佳

@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Use Rust to implement a command-line game of life
+
+---
+
 # 「译」使用 Rust 实现命令行生命游戏
 
 译者：m1zzx2 

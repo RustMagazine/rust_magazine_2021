@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Ant Group CeresDB Team | A Preliminary Study of Rust CPU Affinity
+
+---
+
 # 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探
 
 作者：Ruihang Xia / 后期编辑：张汉东

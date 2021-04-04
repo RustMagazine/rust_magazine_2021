@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: Tsinghua rCore OS tutorial introduction
+
+---
+
 # 用`Rust`写操作系统 | 清华 rCore OS 教程介绍
 
 编辑：张汉东

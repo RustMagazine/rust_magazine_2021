@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Executable file under `no_std` environment
+
+---
+
 # `no_std` 环境下的可执行文件
 
 作者: 吴翱翔@pymongo / 后期编辑： 张汉东

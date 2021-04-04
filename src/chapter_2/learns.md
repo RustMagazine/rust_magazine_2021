@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Learning resources
+
+---
+
 # 本月简报 | 学习资源
 
 - 来源：[Rust日报](https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f)

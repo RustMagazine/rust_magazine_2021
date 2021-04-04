@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Use Rust to implement asynchronous random file reading based on io_uring
+
+---
+
 # io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件
 
 作者：迟先生（skyzh）/ 后期编辑：张汉东
