@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: how to contribute to the Rust language part 1
+
+---
+
 # 如何为 Rust 语言做贡献 | Part 1
 
 作者：CrLF0710（野喵）/ 后期编辑：张汉东

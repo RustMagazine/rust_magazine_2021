@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: JIT development practice
+
+---
+
 # RustChinaConf2020 精选 | JIT 开发实践
 
 说明：本文为视频演讲文字版，编者听录的时候可能会出现一些误差，欢迎指正。

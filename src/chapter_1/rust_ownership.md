@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: Illustrating Rust ownership and life cycle
+
+---
+
 # 图解 Rust 所有权与生命周期
 
 作者：肖猛

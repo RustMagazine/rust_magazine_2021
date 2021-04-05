@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Trusted Programming - Huawei's practice and vision for leading Rust language development
+
+---
+
 # 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景
 
 作者：（俞一峻、Amanieu d'Antras、Nghi D. Q. Bui） / 后期编辑：张汉东

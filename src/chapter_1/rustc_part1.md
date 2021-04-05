@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: Illustrating Rust compiler and language design Part 1, Rust compilation process and macro expansion
+
+---
+
 # 图解 Rust 编译器与语言设计 | Part 1 ：Rust 编译过程与宏展开
 
 作者：张汉东

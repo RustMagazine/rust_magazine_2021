@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Rust精选</title><link></link><description>The roots aren&apos;t deep but the seeds are planted!</description><generator>mdbook-rss 0.1.0</generator><item><title>本月简报 | Rust官方动态</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/lang.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报：官方动态'>本月简报：官方动态</h1>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Rust精选</title><link></link><description>The roots aren&apos;t deep but the seeds are planted!</description><generator>mdbook-rss 0.1.0</generator><item><title>本月简报 | Rust官方动态</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/lang.html</link><description><![CDATA[january official news]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报：官方动态'>本月简报：官方动态</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -242,7 +242,7 @@ let a_to_z_set = (&#8217;a&#8217;..=&#8217;z&#8217;).collect::&lt;HashSet&lt;_&g
 <h2 id='rust_playground_支持_vim_模式'>Rust Playground 支持 vim 模式</h2>
 
 <p>Rust Playground <code>vim</code> 模式，可以通过输入 <code>:w</code> 回车运行编译，非常棒的使用体验。</p>
-]]></content:encoded></item><item><title>本月简报 |社区热点</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/hots.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_社区热点'>本月简报 | 社区热点</h1>
+]]></content:encoded></item><item><title>本月简报 |社区热点</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/hots.html</link><description><![CDATA[Hot News in january]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_社区热点'>本月简报 | 社区热点</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -368,7 +368,7 @@ assert_eq!(receiver.recv().await, Ok(&quot;Hello&quot;));</code></pre>
 <p>到目前为止，编译器的三大 Leader ：Niko 和 Felix 去了亚马逊，Wesley Wiser 去了微软。之前 Facebook 也在招人组建 Rust 编译器团队，侧面反应出大厂们对 Rust 正在做战略布局。</p>
 
 <p>原文链接：<a href='https://twitter.com/wesleywiser/status/1354896012113022984'>https://twitter.com/wesleywiser/status/1354896012113022984</a></p>
-]]></content:encoded></item><item><title>本月简报 | 推荐项目</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/projects.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_推荐项目'>本月简报 | 推荐项目</h1>
+]]></content:encoded></item><item><title>本月简报 | 推荐项目</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/projects.html</link><description><![CDATA[recommended project in january]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_推荐项目'>本月简报 | 推荐项目</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -707,7 +707,7 @@ assert_eq!(receiver.recv().await, Ok(&quot;Hello&quot;));</code></pre>
 <p><a href='https://github.com/H-M-H/Weylus'>仓库链接</a></p>
 </li>
 </ul>
-]]></content:encoded></item><item><title>本月简报 | 学习资源</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/learns.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报：学习资源'>本月简报：学习资源</h1>
+]]></content:encoded></item><item><title>本月简报 | 学习资源</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/learns.html</link><description><![CDATA[learning resources]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报：学习资源'>本月简报：学习资源</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -972,7 +972,7 @@ assert_eq!(receiver.recv().await, Ok(&quot;Hello&quot;));</code></pre>
 <p><a href='https://edgarluque.com/blog/wrapping-errors-in-rust'>原文链接</a></p>
 
 <p><a href='https://www.reddit.com/r/rust/comments/l3x6p0/wrapping_errors_in_rust/'>on reddit</a></p>
-]]></content:encoded></item><item><title>本月简报 | Rust唠嗑室本月汇总</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_laoke.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_rust_唠嗑室本月汇总'>本月简报 | Rust 唠嗑室本月汇总</h1>
+]]></content:encoded></item><item><title>本月简报 | Rust唠嗑室本月汇总</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_laoke.html</link><description><![CDATA[Rust chat room this month summary]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_rust_唠嗑室本月汇总'>本月简报 | Rust 唠嗑室本月汇总</h1>
 
 <ul>
 <li>来源：<a href='https://space.bilibili.com/25566598'>Rust 唠嗑室</a></li>
@@ -1029,7 +1029,7 @@ assert_eq!(receiver.recv().await, Ok(&quot;Hello&quot;));</code></pre>
 <p><a href='https://crates.io/crates/prost'>Prost</a></p>
 
 <p><a href='https://github.com/rink1969/proto_desc_printer'>Demo 代码</a></p>
-]]></content:encoded></item><item><title>RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/jit.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='rustchinaconf2020_精选_|_jit_开发实践'>RustChinaConf2020 精选 | JIT 开发实践</h1>
+]]></content:encoded></item><item><title>RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/jit.html</link><description><![CDATA[JIT development practice]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='rustchinaconf2020_精选_|_jit_开发实践'>RustChinaConf2020 精选 | JIT 开发实践</h1>
 
 <p>说明：本文为视频演讲文字版，编者听录的时候可能会出现一些误差，欢迎指正。</p>
 
@@ -1225,7 +1225,7 @@ null_pointer_exception:
 </ol>
 
 <p>​</p>
-]]></content:encoded></item><item><title>RustChinaConf2020 精选 | Rust 异步与并发</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_async.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='rustchinaconf2020_精选_|_rust_异步与并发'>RustChinaConf2020 精选 | Rust 异步与并发</h1>
+]]></content:encoded></item><item><title>RustChinaConf2020 精选 | Rust 异步与并发</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_async.html</link><description><![CDATA[Rust Async and concurrency on China Rust conference]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='rustchinaconf2020_精选_|_rust_异步与并发'>RustChinaConf2020 精选 | Rust 异步与并发</h1>
 
 <p>说明：本文为视频演讲文字版，编者听录的时候可能会出现一些误差，欢迎指正。</p>
 
@@ -1536,7 +1536,7 @@ impl Future for WaitGroup {
 <p>注意到如果某一个 <code>worker</code> 完成了 task，它并不需要去唤醒 <code>Waker</code>，<code>WaitGroup</code> 只关心所有任务都结束了，只需要让最后一个 <code>worker</code> 去唤醒 <code>waker</code>。什么时候是最后一个 <code>worker</code> 呢？我们可以借用标准库里的 <code>Arc</code>，<code>Arc</code> 是一个共享引用，当所有的 <code>Arc</code> 强引用都销毁的时候，就会析构内部的数据，只要在 <code>Arc</code> 包装的数据的 <code>drop</code> 方法里面把 <code>waker</code> 唤醒就可以了。</p>
 
 <p><code>WaitGroup</code> 持有一个弱引用，所有的 <code>Worker</code> 都持有强引用，<code>WaitGroup</code> 在 <code>poll</code> 的时候试图把弱引用升级成强引用，如果升级失败了，说明所有的强引用都没了，也就是任务都执行完了，就可以返回 <code>Ready</code>。如果升级成功了，说明现在至少还有一个强引用，那就把 <code>waker</code> 注册到 <code>AtomicWaker</code> 里面。这里有一个边界条件，在升级结束的瞬间，所有的 <code>worker</code> 全部 <code>drop</code> 掉了，这时还不会调用 <code>wake</code>，因为在升级成功时，会产生一个临时的强引用 <code>inner</code>，这时更新waker后，在这个临时的强引用销毁的时候调用 <code>drop</code>，然后调用 <code>waker.wake()</code> 把任务唤醒，因此不会丢失通知。整个过程就完整了。</p>
-]]></content:encoded></item><item><title>生产实践 |「译」1password 的 Rust 实践</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/1password.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='生产实践_|「译」1password_的_rust_实践'>生产实践 |「译」1password 的 Rust 实践</h1>
+]]></content:encoded></item><item><title>生产实践 |「译」1password 的 Rust 实践</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/1password.html</link><description><![CDATA[1password's Rust pratice]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='生产实践_|「译」1password_的_rust_实践'>生产实践 |「译」1password 的 Rust 实践</h1>
 
 <h2 id=''></h2>
 
@@ -1628,7 +1628,7 @@ struct Teacher {
 <ul>
 <li>严炳（ryan），算法，大数据开发从业者，喜欢和有开源精神的人一起共事。</li>
 </ul>
-]]></content:encoded></item><item><title>生产实践 | 溪塔科技: 用Rust写Protobuf扩展</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/cita_protobuf-ext.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='溪塔科技:_用rust写protobuf扩展'>溪塔科技: 用Rust写Protobuf扩展</h1>
+]]></content:encoded></item><item><title>生产实践 | 溪塔科技: 用Rust写Protobuf扩展</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/cita_protobuf-ext.html</link><description><![CDATA[develop protobu extension with Rust]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='溪塔科技:_用rust写protobuf扩展'>溪塔科技: 用Rust写Protobuf扩展</h1>
 
 <p>作者： 宁志伟</p>
 
@@ -1731,7 +1731,7 @@ struct Teacher {
 <p>后期编辑：</p>
 
 <p><a href='https://github.com/higker'>丁 烁(Jarvib Ding)</a>，Rust 爱好者。</p>
-]]></content:encoded></item><item><title>学习园地 | 「系列」Rust设计模式之创建者模式</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust-design-patterns/builder.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='建造者模式（builder)'>建造者模式（Builder)</h1>
+]]></content:encoded></item><item><title>学习园地 | 「系列」Rust设计模式之创建者模式</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust-design-patterns/builder.html</link><description><![CDATA[The Builder pattern of Rust design pattern]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='建造者模式（builder)'>建造者模式（Builder)</h1>
 
 <h2 id='概述'>概述</h2>
 
@@ -2866,7 +2866,7 @@ pub fn try_clone(&amp;self) -&gt; Option&lt;RequestBuilder&gt; {
 <p>https://github.com/http-rs/surf/blob/31315743b91ff003231183c1ec5a3cd2b698c58a/src/request_builder.rs</p>
 
 <p>https://docs.rs/futures/0.3.12/futures/executor/struct.ThreadPoolBuilder.html</p>
-]]></content:encoded></item><item><title>学习园地 | 关于 io_uring 与 Rust 的思考</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/io_uring_and_rust.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='关于_io_uring_与_rust_的思考'>关于 io_uring 与 Rust 的思考</h1>
+]]></content:encoded></item><item><title>学习园地 | 关于 io_uring 与 Rust 的思考</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/io_uring_and_rust.html</link><description><![CDATA[think about io_uring and Rust]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='关于_io_uring_与_rust_的思考'>关于 io_uring 与 Rust 的思考</h1>
 
 <p>作者：王徐旸</p>
 
@@ -3171,7 +3171,7 @@ where
 <p>王徐旸，大三学生，2018 年开始学习和使用 Rust 语言，造轮子爱好者。</p>
 
 <p>GitHub ID: <a href='https://github.com/Nugine'>Nugine</a></p>
-]]></content:encoded></item><item><title>学习园地 | 「译」 GraphQL in Rust</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/graphql_in_rust/graphql_in_rust.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='学习园地_|_「译」_graphql_in_rust'>学习园地 | 「译」 GraphQL in Rust</h1>
+]]></content:encoded></item><item><title>学习园地 | 「译」 GraphQL in Rust</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/graphql_in_rust/graphql_in_rust.html</link><description><![CDATA[Rust GraphQL]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='学习园地_|_「译」_graphql_in_rust'>学习园地 | 「译」 GraphQL in Rust</h1>
 
 <h2 id='译者序'>译者序</h2>
 
@@ -3185,64 +3185,76 @@ where
 
 <ul>
 <li>
-<p><a href='#介绍'>介绍</a></p>
+<p><a href='#学习园地--译-graphql-in-rust'>学习园地 | 「译」 GraphQL in Rust</a></p>
 
 <ul>
+<li><a href='#译者序'>译者序</a></li>
+
+<li><a href='#目录'>目录</a></li>
+
+<li><a href='#介绍'>介绍</a></li>
+
 <li><a href='#概览'>概览</a></li>
 
 <li><a href='#技术栈'>技术栈</a></li>
 
 <li><a href='#开发工具'>开发工具</a></li>
-</ul>
-</li>
 
-<li>
-<p>实现</p>
+<li><a href='#实现'>实现</a></li>
 
-<ul>
 <li><a href='#依赖库'>依赖库</a></li>
 
 <li><a href='#核心功能'>核心功能</a></li>
 
 <li><a href='#查询和类型定义'>查询和类型定义</a></li>
 
-<li><a href='#解决N+1问题'>解决N+1问题</a></li>
+<li><a href='#解决n1问题'>解决N+1问题</a></li>
+</ul>
+</li>
 
-<li><a href='#接口定义'>接口定义</a></li>
+<li>
+<p><a href='#接口定义'>接口定义</a></p>
 
+<ul>
 <li><a href='#自定义标量'>自定义标量</a></li>
 
-<li><a href='#定义变更(Mutation'>定义变更(Mutation)</a>)</li>
+<li><a href='#定义变更mutation'>定义变更(Mutation)</a></li>
 
-<li><a href='#定义订阅(Subscription'>定义订阅(Subscription)</a>)</li>
+<li><a href='#定义订阅subscription'>定义订阅(Subscription)</a></li>
 
 <li><a href='#集成测试'>集成测试</a></li>
 
-<li><a href='#GraphQL客户端'>GraphQL客户端</a></li>
+<li><a href='#graphql客户端'>GraphQL客户端</a></li>
 
-<li><a href='#API安全'>API安全</a></li>
+<li><a href='#api安全'>API安全</a></li>
+
+<li><a href='#限制查询的深度和复杂度'>限制查询的深度和复杂度</a></li>
+
+<li><a href='#认证'>认证</a></li>
+
+<li><a href='#鉴权'>鉴权</a></li>
 
 <li><a href='#定义枚举'>定义枚举</a></li>
 
 <li><a href='#日期处理'>日期处理</a></li>
 
-<li><a href='#支持ApolloFederation'>支持Apollo Federation</a></li>
+<li><a href='#支持apollofederation'>支持ApolloFederation</a></li>
 
-<li><a href='#ApolloServer'>Apollo Server</a></li>
+<li><a href='#apolloserver'>ApolloServer</a></li>
 
 <li><a href='#数据库交互'>数据库交互</a></li>
 
-<li><a href='#运行和API测试'>运行和API测试</a></li>
+<li><a href='#运行和api测试'>运行和API测试</a></li>
 
 <li><a href='#订阅测试'>订阅测试</a></li>
 
-<li><a href='#CI/CD'>CI/CD</a></li>
-</ul>
-</li>
+<li><a href='#cicd'>CI/CD</a></li>
 
 <li><a href='#结论'>结论</a></li>
 
 <li><a href='#有用的链接'>有用的链接</a></li>
+</ul>
+</li>
 </ul>
 
 <p>在今天的文章中，我将描述如何使用Rust及其生态系统创建GraphQL后端服务。 本文提供了创建GraphQL API时最常见任务的实现示例。最后，将使用Apollo Server和Apollo Federation将三个微服务组合为一个端点。 这使客户端可以同时从任意数量的源中获取数据，而无需知道哪些数据来自哪个源。</p>
@@ -4394,7 +4406,7 @@ Server ready at http://0.0.0.0:4000/</code></pre>
 
 <li><a href='https://github.com/apollographql/federation-demo'>Apollo Federation demo</a></li>
 </ul>
-]]></content:encoded></item><item><title>学习园地 | 图解 Rust 所有权与生命周期</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_ownership.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='图解_rust_所有权与生命周期'>图解 Rust 所有权与生命周期</h1>
+]]></content:encoded></item><item><title>学习园地 | 图解 Rust 所有权与生命周期</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_ownership.html</link><description><![CDATA[Illustrating Rust ownership and life cycle]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='图解_rust_所有权与生命周期'>图解 Rust 所有权与生命周期</h1>
 
 <p>作者：肖猛</p>
 
@@ -5534,7 +5546,7 @@ unsafe impl&lt;T:?Sized+Sync+Send&gt;Sync for Arc&lt;T&gt;{}</code></pre>
 <p>编辑简介：</p>
 
 <p>高宪凤(.nil?)，软件开发工程师，Rust 语言爱好者，喜欢有计划、有条理、有效率的工作，热爱开源文化，愿意为 Rust 中文社区的发展尽绵薄之力。</p>
-]]></content:encoded></item><item><title>嵌入式领域的Rust语言</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/embedded_rust.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='嵌入式领域的rust语言'>嵌入式领域的Rust语言</h1>
+]]></content:encoded></item><item><title>嵌入式领域的Rust语言</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/embedded_rust.html</link><description><![CDATA[Rust language in the embedded field]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='嵌入式领域的rust语言'>嵌入式领域的Rust语言</h1>
 
 <p>作者：洛佳</p>
 
@@ -5663,7 +5675,7 @@ unsafe impl&lt;T:?Sized+Sync+Send&gt;Sync for Arc&lt;T&gt;{}</code></pre>
 <p><strong>洛佳</strong></p>
 
 <p>华中科技大学网络空间安全学院本科生，热爱操作系统、嵌入式开发。RustSBI项目作者，3年Rust语言开发经验，社区活跃贡献者。目前致力于向产业、教学等更多的领域推广Rust语言。</p>
-]]></content:encoded></item><item><title>用Rust写操作系统 | rCore OS 教程介绍 </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rcore_intro.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='用_rust_写操作系统_|_清华_rcore_os_教程介绍'>用<code>Rust</code>写操作系统 | 清华 rCore OS 教程介绍</h1>
+]]></content:encoded></item><item><title>用Rust写操作系统 | rCore OS 教程介绍 </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rcore_intro.html</link><description><![CDATA[Tsinghua rCore OS tutorial introduction]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='用_rust_写操作系统_|_清华_rcore_os_教程介绍'>用<code>Rust</code>写操作系统 | 清华 rCore OS 教程介绍</h1>
 
 <p>编辑：张汉东</p>
 
@@ -5732,7 +5744,7 @@ unsafe impl&lt;T:?Sized+Sync+Send&gt;Sync for Arc&lt;T&gt;{}</code></pre>
 <p>在具体撰写过程中，第零章是对操作系统的一个概述，让读者对操作系统的历史、定义、特征等概念上有一个大致的了解。后面的每个章节体现了操作系统的一个微缩的历史发展过程，即从对应用由简到繁的支持的角度出发，每章会讲解如何设计一个可运行应用的操作系统，满足应用的阶段性需求。从而读者可以通过对应配套的操作系统设计实验，了解如何从一个微不足道的“小”操作系统，根据应用需求，添加或增强操作系统功能，逐步形成一个类似UNIX的相对完善的“小”操作系统。每一步都小到足以让人感觉到易于掌控，而在每一步结束时，你都有一个可以工作的“小”操作系统。另外，通过足够详尽的测试程序 ，可以随时验证读者实现的操作系统在每次更新后是否正常工作。由于实验的代码规模和实现复杂度在一个逐步递增的可控范围内，读者可以结合对应于操作系统设计实验的进一步的原理讲解，来建立操作系统概念原理和实际实现的对应关系，从而能够通过操作系统实验的实践过程来加强对理论概念的理解，通过理论概念来进一步指导操作系统实验的实现与改进。</p>
 
 <p>在你开始阅读与实践本书讲解的内容之前，你需要决定用什么编程语言来完成操作系统实验。你可以用任何你喜欢的编程语言和你喜欢的CPU上来实现操作系统。我们推荐的编程语言是Rust，我们推荐的CPU是RISC-V。</p>
-]]></content:encoded></item><item><title>Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_security_part1.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='rust_生态安全漏洞总结系列_|_part_1'><code>Rust</code>生态安全漏洞总结系列 | Part 1</h1>
+]]></content:encoded></item><item><title>Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rust_security_part1.html</link><description><![CDATA[Rust Ecological Security Vulnerability Summary Series Part 1]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='rust_生态安全漏洞总结系列_|_part_1'><code>Rust</code>生态安全漏洞总结系列 | Part 1</h1>
 
 <p>作者：张汉东 后期编辑：张汉东</p>
 
@@ -6091,7 +6103,7 @@ dbg!(eventlist);</code></pre>
 <p><code>`</code>` 启示：</p>
 
 <p>在使用 <code>std::ptr</code> 模块中接口需要注意，容易产生 UB 问题，要多多查看 API 文档。</p>
-]]></content:encoded></item><item><title>Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rustc_dev_guide_zh.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='rustc_dev_guide_中文翻译启动'>Rustc Dev Guide 中文翻译启动</h1>
+]]></content:encoded></item><item><title>Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rustc_dev_guide_zh.html</link><description><![CDATA[The translate of Rustc develop guide]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='rustc_dev_guide_中文翻译启动'>Rustc Dev Guide 中文翻译启动</h1>
 
 <p>作者：张汉东</p>
 
@@ -6156,7 +6168,7 @@ dbg!(eventlist);</code></pre>
 <p>所以，翻译 《Rust 编译器开发指南》就成了我完成这个 Flag 的第一步。希望大家踊跃参与。</p>
 </li>
 </ol>
-]]></content:encoded></item><item><title>Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rustc_part1.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='图解_rust_编译器与语言设计_|_part_1_：rust_编译过程与宏展开'>图解 Rust 编译器与语言设计 | Part 1 ：Rust 编译过程与宏展开</h1>
+]]></content:encoded></item><item><title>Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/rustc_part1.html</link><description><![CDATA[Illustrating Rust compiler and language design Part 1, Rust compilation process and macro expansion]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='图解_rust_编译器与语言设计_|_part_1_：rust_编译过程与宏展开'>图解 Rust 编译器与语言设计 | Part 1 ：Rust 编译过程与宏展开</h1>
 
 <p>作者：张汉东</p>
 
@@ -6325,7 +6337,7 @@ dbg!(eventlist);</code></pre>
 <p>本篇文章主要介绍了 Rust 代码的编译过程，以及 Rust 宏代码的展开机制，学习这些内容，将有助于你深入理解 Rust 的概念。不知道这篇内容是否激发起你对 Rust 编译器对兴趣呢？编译器是一个深坑，让我们慢慢挖掘它。</p>
 
 <p>感谢阅读。</p>
-]]></content:encoded></item><item><title>一月刊（January）</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/toc.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='一月刊'>一月刊</h1>
+]]></content:encoded></item><item><title>一月刊（January）</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_1/toc.html</link><description><![CDATA[january magazine]]></description><author>blackanger</author><pubDate>Sat, 30 Jan 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='一月刊'>一月刊</h1>
 
 <p><img src='../image/rust_magazine3.png' alt='logo' /></p>
 
@@ -6398,7 +6410,7 @@ dbg!(eventlist);</code></pre>
 
 <li><a href='./rustc_part1.md'>图解 Rust 编译器与语言设计 | Part 1</a></li>
 </ul>
-]]></content:encoded></item><item><title>发刊通告</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/announce.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='二月发刊通告'>二月发刊通告</h1>
+]]></content:encoded></item><item><title>发刊通告</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/announce.html</link><description><![CDATA[announcement issued in February]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='二月发刊通告'>二月发刊通告</h1>
 
 <p>时光易逝，转眼二月即将过去，春暖花开的三月即将到来。过年的余味犹在，但我们不得不继续踏上征途。</p>
 
@@ -6509,7 +6521,7 @@ C --&amp;gt;|语雀| H[在线文档]</code></pre>
 
 <li>其他</li>
 </ul>
-]]></content:encoded></item><item><title>本月简报 | Rust官方动态</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/lang.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_rust官方动态'>本月简报 | Rust官方动态</h1>
+]]></content:encoded></item><item><title>本月简报 | Rust官方动态</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/lang.html</link><description><![CDATA[Rust official news in February]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_rust官方动态'>本月简报 | Rust官方动态</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -6692,7 +6704,7 @@ fn generic_function&lt;const M: usize&gt;(arr: [i32; M]) {
 <p>如果迁移之后，在no_std模式下也可以使用Error trait了。</p>
 
 <p>链接：<a href='https://github.com/rust-lang/rust/pull/77384#issuecomment-772835929'>https://github.com/rust-lang/rust/pull/77384#issuecomment-772835929</a></p>
-]]></content:encoded></item><item><title>本月简报 |社区热点</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/hots.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|社区热点'>本月简报 |社区热点</h1>
+]]></content:encoded></item><item><title>本月简报 |社区热点</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/hots.html</link><description><![CDATA[Hot community news in February]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|社区热点'>本月简报 |社区热点</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -6859,7 +6871,7 @@ fn generic_function&lt;const M: usize&gt;(arr: [i32; M]) {
 <p>取得成功是一次漫长的旅程，但完全值得，即使您不是每天都在使用它，也一定会通过学习它而成为一名更好的程序员，如果失去了，那就重新去发现编程的乐趣🤗。</p>
 
 <p>一句话总结：Rust生而平静。凌晨3点不再有不好的惊喜，因为依赖项更新了它的API使得不再有bug。没有更多恼人的配置自动缩放或什么。而且响应时间非常短，您的用户因此会爱上您的产品。</p>
-]]></content:encoded></item><item><title>本月简报 | 推荐项目</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/projects.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_推荐项目'>本月简报 | 推荐项目</h1>
+]]></content:encoded></item><item><title>本月简报 | 推荐项目</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/projects.html</link><description><![CDATA[Recommended projects in February]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_推荐项目'>本月简报 | 推荐项目</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -7126,7 +7138,7 @@ fn generic_function&lt;const M: usize&gt;(arr: [i32; M]) {
 <p>访谈链接： <a href='https://notamonadtutorial.com/lam-an-actor-model-vm-for-webassembly-and-native-d7939362e1b8'>https://notamonadtutorial.com/lam-an-actor-model-vm-for-webassembly-and-native-d7939362e1b8</a></p>
 
 <p>项目链接： <a href='https://abstractmachines.dev/'>https://abstractmachines.dev/</a></p>
-]]></content:encoded></item><item><title>本月简报 | 学习资源</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/learns.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_学习资源'>本月简报 | 学习资源</h1>
+]]></content:encoded></item><item><title>本月简报 | 学习资源</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/learns.html</link><description><![CDATA[Learning resources]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_学习资源'>本月简报 | 学习资源</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -7353,7 +7365,7 @@ Box&lt;Vec&lt;dyn A&gt;&gt;;</code></pre>
 <h2 id='国外_rust_咨询公司_ferrous_system_的嵌入式课程资料'>国外 Rust 咨询公司 Ferrous System 的嵌入式课程资料</h2>
 
 <p>链接：<a href='https://embedded-trainings.ferrous-systems.com/preparations.html'>https://embedded-trainings.ferrous-systems.com/preparations.html</a></p>
-]]></content:encoded></item><item><title>本月简报 | Rust唠嗑室本月汇总</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_laoke.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_rust_唠嗑室本月汇总'>本月简报 | Rust 唠嗑室本月汇总</h1>
+]]></content:encoded></item><item><title>本月简报 | Rust唠嗑室本月汇总</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_laoke.html</link><description><![CDATA[Rust chat room February summary]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_rust_唠嗑室本月汇总'>本月简报 | Rust 唠嗑室本月汇总</h1>
 
 <ul>
 <li>来源：<a href='https://space.bilibili.com/25566598'>Rust 唠嗑室</a></li>
@@ -7675,7 +7687,7 @@ fn main() {
 
 <li>https://vitejs.dev/</li>
 </ol>
-]]></content:encoded></item><item><title>知乎 Rust 圆桌年话专题问答精选</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_zhihu.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='知乎_rust_圆桌年话专题问答精选'>知乎 Rust 圆桌年话专题问答精选</h1>
+]]></content:encoded></item><item><title>知乎 Rust 圆桌年话专题问答精选</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_zhihu.html</link><description><![CDATA[Knowing Rust Roundtable Annual Special Questions and Answers]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='知乎_rust_圆桌年话专题问答精选'>知乎 Rust 圆桌年话专题问答精选</h1>
 
 <p>编辑：张汉东</p>
 
@@ -7916,7 +7928,7 @@ impl Derived for DerivedImpl {
 
 <li><a href='https://www.zhihu.com/question/30408031'>我应该放弃 C++，学习 Rust 吗？</a></li>
 </ul>
-]]></content:encoded></item><item><title>华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/huawei_rust.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='华为_|_可信编程_--_华为引领rust语言开发的实践和愿景'>华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</h1>
+]]></content:encoded></item><item><title>华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/huawei_rust.html</link><description><![CDATA[Trusted Programming - Huawei's practice and vision for leading Rust language development]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='华为_|_可信编程_--_华为引领rust语言开发的实践和愿景'>华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</h1>
 
 <p>作者：（俞一峻、Amanieu d&#8217;Antras、Nghi D. Q. Bui） / 后期编辑：张汉东</p>
 
@@ -8041,7 +8053,7 @@ cargo build --target aarch64_be-unknown-linux-gnu_ilp32</code></pre>
 <p>Amanieu d&#8217;Antras: 可信编程首席专家/华为可信软件工程开源实验室/华为爱尔兰研究所</p>
 
 <p>Nghi D. Q. Bui: 可信编程首席专家/华为可信软件工程开源实验室/华为爱尔兰研究所</p>
-]]></content:encoded></item><item><title>PingCAP | TiKV 高性能追踪的实现解析</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_trace.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='pingcap_|_tikv_高性能追踪的实现解析'>PingCAP | TiKV 高性能追踪的实现解析</h1>
+]]></content:encoded></item><item><title>PingCAP | TiKV 高性能追踪的实现解析</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_trace.html</link><description><![CDATA[PingCAP TiKV High-Performance Tracking Implementation Analysis]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='pingcap_|_tikv_高性能追踪的实现解析'>PingCAP | TiKV 高性能追踪的实现解析</h1>
 
 <p>作者：钟镇炽 / 后期编辑：张汉东</p>
 
@@ -8467,7 +8479,7 @@ async fn bar_async() {
 <h2 id='结语'>结语</h2>
 
 <p>TiKV 作为底层 KV 数据库，对其增加观测性功能天然有着与普通业务程序完全不一样的性能要求，非常具有挑战性。除了追踪以外，TiKV 及其上层 SQL 数据库 TiDB 也还有其他富有挑战性的观测性需求。PingCAP 的 Observability 团队专注于这类观测难题的解决与功能实现，感兴趣的同学可投递简历到 <a href='mailto:hire@pingcap.com'>hire@pingcap.com</a> 加入我们，或加入 Slack channel <a href='https://slack.tidb.io/invite?team=tidb-community&amp;channel=sig-diagnosis&amp;ref=tracing'>\#sig-diagnosis</a> 参与技术讨论。</p>
-]]></content:encoded></item><item><title>蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_error_handle.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='蚂蚁集团_ceresdb_团队_|_关于_rust_错误处理的思考'>蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</h1>
+]]></content:encoded></item><item><title>蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_error_handle.html</link><description><![CDATA[Ant Group CeresDB Team | Thoughts on Rust Error Handling]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='蚂蚁集团_ceresdb_团队_|_关于_rust_错误处理的思考'>蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</h1>
 
 <p>作者：evenyag / 后期编辑：张汉东</p>
 
@@ -8783,7 +8795,7 @@ fn unpack_config(data: &amp;str) -&gt; &amp;str {
 
 <li>https://github.com/rust-lang-nursery/error-chain</li>
 </ul>
-]]></content:encoded></item><item><title>华为 | Rust中的错误传递和日志记录</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_error_handle_and_log.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='rust中的错误传递和日志记录'>Rust中的错误传递和日志记录</h1>
+]]></content:encoded></item><item><title>华为 | Rust中的错误传递和日志记录</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_error_handle_and_log.html</link><description><![CDATA[Error delivery and logging in Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='rust中的错误传递和日志记录'>Rust中的错误传递和日志记录</h1>
 
 <p>作者：楼智豪 / 后期编辑：张汉东</p>
 
@@ -9228,7 +9240,7 @@ DEBUG 2018-02-05 02:00:45.541 [file:src/main.rs][line:43] CPU OVerload in locati
 <p>楼智豪</p>
 
 <p>任职于华为技术有限公司嵌入式软件能力中心，本文章仅代表作者个人观点，不代表公司意见。</p>
-]]></content:encoded></item><item><title>新年新人新气象 | Rust 学习笔记</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_study.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='新年新人新气象_|_rust_学习笔记'>新年新人新气象 | Rust 学习笔记</h1>
+]]></content:encoded></item><item><title>新年新人新气象 | Rust 学习笔记</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_study.html</link><description><![CDATA[New Year, New People, New Weather Rust Study Notes]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='新年新人新气象_|_rust_学习笔记'>新年新人新气象 | Rust 学习笔记</h1>
 
 <p>作者：李大狗（李骜华）/ 后期编辑： 张汉东</p>
 
@@ -9884,7 +9896,7 @@ impl From&lt;PublicKeyError&gt; for CreateError {
 <hr><p>作者简介：</p>
 
 <p>李大狗（李骜华），上海对外经贸大学区块链技术与应用研究中心副主任、柏链教育 CTO、FISCO BCOS（微众银行区块链框架）区块链认证讲师、5 年区块链工程师、北京大学硕士。 研究领域包括：区块链系统、共识机制、智能合约、区块链应用、数字身份等。</p>
-]]></content:encoded></item><item><title>「译」使用 Rust 实现命令行生命游戏</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/cli_gameoflife.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「译」使用_rust_实现命令行生命游戏'>「译」使用 Rust 实现命令行生命游戏</h1>
+]]></content:encoded></item><item><title>「译」使用 Rust 实现命令行生命游戏</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/cli_gameoflife.html</link><description><![CDATA[Use Rust to implement a command-line game of life]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「译」使用_rust_实现命令行生命游戏'>「译」使用 Rust 实现命令行生命游戏</h1>
 
 <p>译者：m1zzx2</p>
 
@@ -10428,7 +10440,7 @@ use std::io::{BufRead, BufReader};</code></pre>
 <p>译者介绍：</p>
 
 <p>m1zzx2 ，Rust 初学者，知乎工程师。</p>
-]]></content:encoded></item><item><title>「译」使用 Tokio 实现 Actor 系统</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/actor_with_tokio.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「译」使用_tokio_实现_actor_系统'>「译」使用 Tokio 实现 Actor 系统</h1>
+]]></content:encoded></item><item><title>「译」使用 Tokio 实现 Actor 系统</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/actor_with_tokio.html</link><description><![CDATA[implement Actor system with tokio]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「译」使用_tokio_实现_actor_系统'>「译」使用 Tokio 实现 Actor 系统</h1>
 
 <p>译者：Matrixtang</p>
 
@@ -10684,7 +10696,7 @@ impl MyActorHandle {
 <p>译者简介：</p>
 
 <p>Matrixtang，Rust/cpp 程序员，对编译相关领域感兴趣，不会 pwn 的安全爱好者。</p>
-]]></content:encoded></item><item><title>解读 Rust 1.50 稳定版</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_1.50.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='解读_rust_1.50_稳定版'>解读 Rust 1.50 稳定版</h1>
+]]></content:encoded></item><item><title>解读 Rust 1.50 稳定版</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_1.50.html</link><description><![CDATA[Deciphering the stable version of Rust 1.50]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='解读_rust_1.50_稳定版'>解读 Rust 1.50 稳定版</h1>
 
 <p>作者：张汉东 / 后期编辑： 张汉东</p>
 
@@ -10928,7 +10940,7 @@ if tt.as_char() == &#8217;=&#8217; { </code></pre>
 </ul>
 
 <p>因为 <a href='https://github.com/NuxiNL/cloudabi#note-this-project-is-unmaintained'>CloudABI 不再被维护了</a>，可以考虑 WASI 了，WASI 的一些概念就是受到 CloudABI 的启发，现在算是 CloudABI 的接班人了。</p>
-]]></content:encoded></item><item><title>解读 Rust 2021 Edition RFC </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_2021_edition.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='解读_rust_2021_edition_rfc'>解读 Rust 2021 Edition RFC</h1>
+]]></content:encoded></item><item><title>解读 Rust 2021 Edition RFC </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_2021_edition.html</link><description><![CDATA[Interpreting the Rust 2021 Edition RFC]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='解读_rust_2021_edition_rfc'>解读 Rust 2021 Edition RFC</h1>
 
 <p>作者/编辑：张汉东</p>
 
@@ -11003,7 +11015,7 @@ if tt.as_char() == &#8217;=&#8217; { </code></pre>
 <p>通过以上内容，我想你应该对目前官方的 Rust 2021 Edition 工作内容有所了解。目前该 RFC 还在持续且激烈的讨论中，更多内容可以移步<a href='https://github.com/rust-lang/rfcs/pull/3085'>该 RFC 的 PR</a>中参看。</p>
 
 <p>在官方的 <a href='https://doc.rust-lang.org/edition-guide/rust-next/index.html'>Edition Guide</a> 文档中，已经增加了 <a href='https://doc.rust-lang.org/edition-guide/rust-next/index.html#the-next-edition'>Next Edition</a> 可能发布的功能集合，感兴趣可以自行关注。</p>
-]]></content:encoded></item><item><title>前端入门 ｜ Rust 和 WebAssembly </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_wasm_frontend.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='前端入门_｜_rust_和_webassembly'>前端入门 ｜ Rust 和 WebAssembly</h1>
+]]></content:encoded></item><item><title>前端入门 ｜ Rust 和 WebAssembly </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_wasm_frontend.html</link><description><![CDATA[Rust and WebAssembly]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='前端入门_｜_rust_和_webassembly'>前端入门 ｜ Rust 和 WebAssembly</h1>
 
 <p>作者: 陈鑫(lencx) / 后期编辑：张汉东</p>
 
@@ -11380,7 +11392,7 @@ init()
 
 <li>GitHub: https://github.com/lencx</li>
 </ul>
-]]></content:encoded></item><item><title>实践案例 | 使用 Bevy 游戏引擎制作炸弹人</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_game_bevy_bomber.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='实践案例_|_使用_bevy_游戏引擎制作炸弹人'>实践案例 | 使用 Bevy 游戏引擎制作炸弹人</h1>
+]]></content:encoded></item><item><title>实践案例 | 使用 Bevy 游戏引擎制作炸弹人</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/rust_game_bevy_bomber.html</link><description><![CDATA[Practical case | Using Bevy game engine to make Bomberman]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='实践案例_|_使用_bevy_游戏引擎制作炸弹人'>实践案例 | 使用 Bevy 游戏引擎制作炸弹人</h1>
 
 <p>作者：Cupnfish / 后期编辑：张汉东</p>
 
@@ -11389,13 +11401,19 @@ init()
 <h3 id='目录'>目录</h3>
 
 <ul>
-<li><a href='#引擎简介'>Bevy 引擎简介</a></li>
+<li>
+<p><a href='#实践案例--使用-bevy-游戏引擎制作炸弹人'>实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></p>
+
+<ul>
+<li><a href='#目录'>目录</a></li>
+
+<li><a href='#引擎简介'>引擎简介</a></li>
 
 <li><a href='#前言'>前言</a></li>
 
 <li><a href='#开发动机'>开发动机</a></li>
 
-<li><a href='#rust开发环境推介'>rust开发环境推介</a></li>
+<li><a href='#rust-开发环境推介'>Rust 开发环境推介</a></li>
 
 <li><a href='#编译速度'>编译速度</a></li>
 
@@ -11420,6 +11438,8 @@ init()
 <li><a href='#日志'>日志</a></li>
 
 <li><a href='#碎碎念'>碎碎念</a></li>
+</ul>
+</li>
 </ul>
 
 <h3 id='引擎简介'>引擎简介</h3>
@@ -12116,7 +12136,7 @@ fn main() {
 
 <li>QQ：760280519</li>
 </ul>
-]]></content:encoded></item><item><title>io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/io_uring_intro.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='linux_全新异步接口_io_uring_的_rust_生态盘点'>Linux 全新异步接口 io_uring 的 Rust 生态盘点</h1>
+]]></content:encoded></item><item><title>io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/io_uring_intro.html</link><description><![CDATA[Rust ecological inventory of Linux's new asynchronous interface io_uring]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='linux_全新异步接口_io_uring_的_rust_生态盘点'>Linux 全新异步接口 io_uring 的 Rust 生态盘点</h1>
 
 <p>作者：施继成@DatenLord / 后期编辑：张汉东</p>
 
@@ -12275,7 +12295,7 @@ futures::executor::block_on(async move {
 <p>另一方面，操作系统的 IO 模型已经很久没有发生大的变化，仍然是以内核为主体来执行IO任务，这样的方式带来不少额外的开销，诸如数据拷贝、系统调用引起的阻塞以及进程上下文切换等等。</p>
 
 <p>为了提高 IO 性能，DatenLord 采用绕过内核 (bypass Kernel) 的方式，主要在用户态实现 IO 功能，避免内核执行 IO 任务带来的额外开销，从而实现高性能分布式存储。</p>
-]]></content:encoded></item><item><title>io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/io_uring_async_rw.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='io_uring_|_用_rust_实现基于_io_uring_的异步随机读文件'>io<em>uring | 用 Rust 实现基于 io</em>uring 的异步随机读文件</h1>
+]]></content:encoded></item><item><title>io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/io_uring_async_rw.html</link><description><![CDATA[Use Rust to implement asynchronous random file reading based on io_uring]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='io_uring_|_用_rust_实现基于_io_uring_的异步随机读文件'>io<em>uring | 用 Rust 实现基于 io</em>uring 的异步随机读文件</h1>
 
 <p>作者：迟先生（skyzh）/ 后期编辑：张汉东</p>
 
@@ -12429,7 +12449,7 @@ unsafe { ring.submission().push(entry)?; }</code></pre>
 <hr><p>作者简介：</p>
 
 <p>迟先生（skyzh），上海交通大学大三学生，SJTUG 镜像站维护者，沉迷写 Rust。</p>
-]]></content:encoded></item><item><title>如何为 Rust 语言做贡献 | Part 1</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/contribute_to_the_rust_part1.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='如何为_rust_语言做贡献_|_part_1'>如何为 Rust 语言做贡献 | Part 1</h1>
+]]></content:encoded></item><item><title>如何为 Rust 语言做贡献 | Part 1</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/contribute_to_the_rust_part1.html</link><description><![CDATA[how to contribute to the Rust language part 1]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='如何为_rust_语言做贡献_|_part_1'>如何为 Rust 语言做贡献 | Part 1</h1>
 
 <p>作者：CrLF0710（野喵）/ 后期编辑：张汉东</p>
 
@@ -12589,7 +12609,7 @@ channel = &quot;nightly&quot;</code></pre>
 <p>CrLF0710，C++程序员/ Rust业余爱好者/ Rust Team版本发布团队分类处理工作组（负责参与 Rust Project 的issues 和 PR 分类管理）成员。</p>
 
 <p>业余时间写些<code>Rust</code>代码，也对<code>rustc</code>, <code>cargo</code>, <code>chalk</code>, <code>rustup</code>, <code>rustbook</code>等都做过一些代码贡献。偶尔在知乎Rust主题专栏<a href='https://www.zhihu.com/column/rust-quickstart'>《学一点Rust又不会怀孕》</a>上写一些文章。</p>
-]]></content:encoded></item><item><title>二月刊（February）</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/toc.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='二月刊'>二月刊</h1>
+]]></content:encoded></item><item><title>二月刊（February）</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_2/toc.html</link><description><![CDATA[February magazine]]></description><author>blackanger</author><pubDate>Sat, 27 Feb 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='二月刊'>二月刊</h1>
 
 <p><img src='../image/rust_magazine3.png' alt='logo' /></p>
 
@@ -12672,7 +12692,7 @@ channel = &quot;nightly&quot;</code></pre>
 <ul>
 <li><a href='./contribute_to_the_rust_part1.md'>如何为 Rust 语言做贡献 | Part 1</a></li>
 </ul>
-]]></content:encoded></item><item><title>发刊通告</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/announce.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='发刊通告'>发刊通告</h1>
+]]></content:encoded></item><item><title>发刊通告</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/announce.html</link><description><![CDATA[Mar annouce]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='发刊通告'>发刊通告</h1>
 
 <p>编辑：张汉东</p>
 
@@ -12767,7 +12787,7 @@ channel = &quot;nightly&quot;</code></pre>
 </ul>
 
 <p>后续也期待大家投稿。欢迎大家直接使用本刊 mdbook 模版进行创作投稿发PR！</p>
-]]></content:encoded></item><item><title>Rust官方动态</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/lang.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='rust官方动态'>Rust官方动态</h1>
+]]></content:encoded></item><item><title>Rust官方动态</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/lang.html</link><description><![CDATA[Rust official news]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='rust官方动态'>Rust官方动态</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -12884,7 +12904,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 <p>现在已经有方法可以将miri编译到wasm了。</p>
 
 <p><a href='https://github.com/rust-lang/miri/issues/722#issuecomment-795763551'>issue </a></p>
-]]></content:encoded></item><item><title>社区热点</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hots.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='社区热点'>社区热点</h1>
+]]></content:encoded></item><item><title>社区热点</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hots.html</link><description><![CDATA[Hot Community news in Mar]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='社区热点'>社区热点</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -13101,7 +13121,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 
 <li><a href='https://b23.tv/UR07IW'>https://b23.tv/UR07IW</a></li>
 </ul>
-]]></content:encoded></item><item><title>推荐项目</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/projects.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_推荐项目'>本月简报 | 推荐项目</h1>
+]]></content:encoded></item><item><title>推荐项目</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/projects.html</link><description><![CDATA[Recommended projects]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_推荐项目'>本月简报 | 推荐项目</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -13446,7 +13466,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 </ul>
 
 <p>這是一個ECS框架 速度比上一版增加快了2倍</p>
-]]></content:encoded></item><item><title>学习资源</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/learns.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_学习资源'>本月简报 | 学习资源</h1>
+]]></content:encoded></item><item><title>学习资源</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/learns.html</link><description><![CDATA[Learning Resources]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='本月简报_|_学习资源'>本月简报 | 学习资源</h1>
 
 <ul>
 <li>来源：<a href='https://rustcc.cn/section?id=f4703117-7e6b-4caf-aa22-a3ad3db6898f'>Rust日报</a></li>
@@ -13769,7 +13789,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 
 <li><a href='https://pwy.io/en/posts/learning-to-fly-pt3/'>Part III</a></li>
 </ul>
-]]></content:encoded></item><item><title>Rust 唠嗑室本月汇总</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_laoke.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='rust_唠嗑室本月汇总'>Rust 唠嗑室本月汇总</h1>
+]]></content:encoded></item><item><title>Rust 唠嗑室本月汇总</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_laoke.html</link><description><![CDATA[Rust chat room this month summary]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='rust_唠嗑室本月汇总'>Rust 唠嗑室本月汇总</h1>
 
 <ul>
 <li>来源：<a href='https://space.bilibili.com/25566598'>Rust 唠嗑室</a></li>
@@ -13832,7 +13852,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 
 <li>https://github.com/immux/immux</li>
 </ul>
-]]></content:encoded></item><item><title>华为 | 基于Rust的下一代虚拟化平台-StratoVirt</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hw_rust_stratovirt.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='华为_|_基于rust的下一代虚拟化平台-stratovirt'>华为 | 基于Rust的下一代虚拟化平台-StratoVirt</h1>
+]]></content:encoded></item><item><title>华为 | 基于Rust的下一代虚拟化平台-StratoVirt</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hw_rust_stratovirt.html</link><description><![CDATA[Rust-based next-generation virtualization platform-StratoVirt]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='华为_|_基于rust的下一代虚拟化平台-stratovirt'>华为 | 基于Rust的下一代虚拟化平台-StratoVirt</h1>
 
 <p>作者： 徐飞 / 后期编辑： 张汉东</p>
 
@@ -14017,7 +14037,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 <p>项目wiki：https://gitee.com/openeuler/stratovirt/wikis</p>
 
 <p>项目交流：<a href='https://mailweb.openeuler.org/postorius/lists/virt.openeuler.org/'>virt邮件列表</a>或是提交一个<a href='https://gitee.com/openeuler/stratovirt/issues'>issue</a>。</p>
-]]></content:encoded></item><item><title>华为 | Rust 科学计算多维数组运算库的分析与实践</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hw_ndarray.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='华为_|_rust_科学计算多维数组运算库的分析与实践'>华为 | Rust 科学计算多维数组运算库的分析与实践</h1>
+]]></content:encoded></item><item><title>华为 | Rust 科学计算多维数组运算库的分析与实践</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hw_ndarray.html</link><description><![CDATA[Analysis and Practice of Rust Scientific Computing Multidimensional Array Operation Library]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='华为_|_rust_科学计算多维数组运算库的分析与实践'>华为 | Rust 科学计算多维数组运算库的分析与实践</h1>
 
 <p>作者： 李原 / 后期编辑： 张汉东</p>
 
@@ -14100,7 +14120,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 <p>这里再介绍一下Rust标准库中的stdarch仓库，这个库作为标准库的一部分为所有Rust开发者提供了各种常见硬件架构的simd指令集，由官方的simd工作组和库团队成员负责开发和维护，但目前除了x86平台的各种特性在去年年末刚刚稳定(stable)之外，其他架构都还处于unstable状态，因此整个simd特性还不能在稳定的Rust版本中使用，也需要各方开发者前来贡献。stdarch和Rust编译器、LLVM都有密切的联系。stdarch负责对不同架构、不同版本的指令集进行模块分类、封装和测试，并提供给用户相应的函数接口。底层的汇编实现和汇编优化是在Rust编译器和LLVM中，因此stdarch需要对编译器和LLVM的实现进行封装。这里分为两种情况，一种是各架构通用的simd接口，例如加减乘除、位运算等，这些指令会在编译器的代码生成部分静态调用LLVM的相关接口进行实现，再由stdarch使用extern “platform-intrinsics”关键字进行引入和封装。另一种是各架构提供的专用指令，例如x86的vcomi指令、arm的vsli指令等，一般是针对特定的计算场景提供，比如vsli代表向左位移再插入相应元素。这种情况下需要通过静态链接的形式调用llvm中的相关实现并进行封装。而stdarch中提供的接口依然是区分架构和向量寄存器长度的，而我提到的simd透明化或者说usimd，就是在此基础上向用户屏蔽掉硬件差异，以提供更通用的计算接口。</p>
 
 <p>此文主要由一些n维数组运算库ndarray的具体问题及技术解决展开，引出一些对Rust语言、以及科学计算领域技术的延伸和思考。希望对大家的Rust学习和开发有所帮助。</p>
-]]></content:encoded></item><item><title>华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hw_rust_rvm_wasm_ai.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='华为_|_基于_tvm_rust_runtime_和_wasm_沙箱运行_ai_模型'>华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</h1>
+]]></content:encoded></item><item><title>华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/hw_rust_rvm_wasm_ai.html</link><description><![CDATA[Run AI model based on TVM Rust Runtime and WASM sandbox]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='华为_|_基于_tvm_rust_runtime_和_wasm_沙箱运行_ai_模型'>华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</h1>
 
 <p>作者： 王辉 / 后期编辑： 张汉东</p>
 
@@ -14298,7 +14318,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 
 <li><strong>生态众筹项目</strong>：近期社区发布了<a href='https://github.com/tinyms-ai/awesome-rusted-ai'>awesome-rusted-ai</a>众筹项目，用于记录所有与Rust语言和AI领域联动相关的开源项目</li>
 </ul>
-]]></content:encoded></item><item><title>蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_cpu_affinity.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='蚂蚁集团_ceresdb_团队_|_rust_cpu_affinity_初探'>蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</h1>
+]]></content:encoded></item><item><title>蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_cpu_affinity.html</link><description><![CDATA[Ant Group CeresDB Team | A Preliminary Study of Rust CPU Affinity]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='蚂蚁集团_ceresdb_团队_|_rust_cpu_affinity_初探'>蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</h1>
 
 <p>作者：Ruihang Xia / 后期编辑：张汉东</p>
 
@@ -14440,7 +14460,7 @@ core_affinity::set_for_current(_);</code></pre>
 <h1 id='关于我们'>关于我们</h1>
 
 <p>我们是蚂蚁智能监控技术中台的时序存储团队，我们正在使用 Rust 构建高性能、低成本并具备实时分析能力的新一代时序数据库，欢迎加入或者推荐，目前我们也正在寻找优秀的实习生，也欢迎广大应届同学来我们团队实习，请联系：jiachun.fjc@antgroup.com</p>
-]]></content:encoded></item><item><title>DatenLord | Rust实现RDMA</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_rdma.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='datenlord_|_用_rust实现_rdma'>DatenLord | 用 Rust实现 RDMA</h1>
+]]></content:encoded></item><item><title>DatenLord | Rust实现RDMA</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_rdma.html</link><description><![CDATA[DatenLord | Implement RDMA in Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='datenlord_|_用_rust实现_rdma'>DatenLord | 用 Rust实现 RDMA</h1>
 
 <p>作者：王璞 / 后期编辑：张汉东</p>
 
@@ -14547,7 +14567,7 @@ int ibv_destroy_wq(struct ibv_wq *wq);</code></pre>
 <p>异步IO本质上都是利用Linux的epoll机制，由内核来通知用户态程序某个IO已经就绪。对RDMA操作的异步处理，方法也一样。RDMA是通过创建设备文件来实现用户态RDMA程序跟内核里的RDMA模块交互。在安装RDMA设备和驱动后，RDMA会创建一个或多个字符设备文件，<code>/dev/infiniband/uverbsN</code>，N从0开始，有几个RDMA设备就有几个<code>uverbsN</code>设备文件。如果只有一个那就是<code>/dev/infiniband/uverbs0</code>。用户态RDMA程序要实现针对RDMA完成队列的异步消息处理，就是采用Linux提供的epoll机制，对RDMA的<code>uverbsN</code>设备文件进行异步查询，在完成队列有新消息时通知用户态RDMA程序来处理消息。</p>
 
 <p>关于RDMA的封装，这块工作我们还没有完成，我们打算把RDMA的safe封装以及对RDMA的共享内存管理都实现，这样才能方便地使用Rust进行RDMA编程，同时我们欢迎有感兴趣的朋友一起参与。</p>
-]]></content:encoded></item><item><title>建立 Async Rust 的共同愿景</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/async-vision-doc.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='建立_async_rust_的共同愿景'>建立 Async Rust 的共同愿景</h1>
+]]></content:encoded></item><item><title>建立 Async Rust 的共同愿景</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/async-vision-doc.html</link><description><![CDATA[Establish a shared vision for Async Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='建立_async_rust_的共同愿景'>建立 Async Rust 的共同愿景</h1>
 
 <p>译者：<a href='https://github.com/NiZerin'>NiZerin</a></p>
 
@@ -14590,7 +14610,7 @@ int ibv_destroy_wq(struct ibv_wq *wq);</code></pre>
 <h3 id='想帮忙？'>想帮忙？</h3>
 
 <p>如果您想帮助我们编写愿景文档，我们很乐意为您贡献自己的经验和愿景！目前，我们专注于创建现状故事。我们正在寻找人们撰写 PR 或谈论他们在问题或其他方面的经验。如果您想开始使用，请查看有关<a href='https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html'>现状故事的模板</a> -它具有打开 PR 所需的所有信息。另外，您可以查看<a href='https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html'>“如何实现愿景”</a> 页面，其中详细介绍了整个愿景文档过程。</p>
-]]></content:encoded></item><item><title>Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='我们的_aws_rust_团队将如何为_rust_未来的成功做出贡献'>我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</h1>
+]]></content:encoded></item><item><title>Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html</link><description><![CDATA[How our AWS Rust team will contribute to the future success of Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='我们的_aws_rust_团队将如何为_rust_未来的成功做出贡献'>我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</h1>
 
 <p>译者：<a href='https://github.com/NiZerin'>NiZerin</a></p>
 
@@ -14657,7 +14677,7 @@ int ibv_destroy_wq(struct ibv_wq *wq);</code></pre>
 <h4 id='除非你知道更好的…'>除非你知道更好的…</h4>
 
 <p>传统上，每条宗旨都以“除非你知道更好的信条”开头。 这个想法是，宗旨总是随着环境的变化而变化。 这些是我们目前的宗旨，我们希望随着我们更多地了解 AWS 和 Rust 社区合作的最佳方式，它们会不断发展。</p>
-]]></content:encoded></item><item><title>no_std 环境下的可执行文件</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/no_std_binary.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='no_std_环境下的可执行文件'><code>no_std</code> 环境下的可执行文件</h1>
+]]></content:encoded></item><item><title>no_std 环境下的可执行文件</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/no_std_binary.html</link><description><![CDATA[Executable file under `no_std` environment]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='no_std_环境下的可执行文件'><code>no_std</code> 环境下的可执行文件</h1>
 
 <p>作者: 吴翱翔@pymongo / 后期编辑： 张汉东</p>
 
@@ -14769,7 +14789,7 @@ rustflags = [&quot;-C&quot;, &quot;link-arg=-nostartfiles&quot;]</code></pre>
 <hr><h2 id='总结'>总结</h2>
 
 <p>当前 Rust 的 no<em>std 生态仅在 linux 上比较完善，Rust/C/C++ 在 no</em>std 环境下想要打印<code>Hello World</code>还得用汇编指令 syscall 系统调用，需要开发者对汇编语言和操作系统有一定的了解才能在 no_std 环境下开发</p>
-]]></content:encoded></item><item><title>用 Rust 写智能合约 | Hello, Ink!  </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/ink.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='用_rust_写智能合约_|_hello,_ink!'>用 Rust 写智能合约 | Hello, Ink!</h1>
+]]></content:encoded></item><item><title>用 Rust 写智能合约 | Hello, Ink!  </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/ink.html</link><description><![CDATA[Write smart contracts in Rust | Hello, Ink!]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='用_rust_写智能合约_|_hello,_ink!'>用 Rust 写智能合约 | Hello, Ink!</h1>
 
 <p>作者：李大狗（李骜华）/ 后期编辑： 张汉东</p>
 
@@ -15080,7 +15100,7 @@ pub fn get(&amp;self) -&gt; bool {
 <hr><p>作者简介：</p>
 
 <p>李大狗（李骜华），上海对外经贸大学区块链技术与应用研究中心副主任、柏链教育 CTO、FISCO BCOS（微众银行区块链框架）区块链认证讲师、5 年区块链工程师、北京大学硕士。 研究领域包括：区块链系统、共识机制、智能合约、区块链应用、数字身份等。</p>
-]]></content:encoded></item><item><title>「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/reservoir.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='蓄水池算法改进_-_面向抽奖场景保证等概率性'>蓄水池算法改进 - 面向抽奖场景保证等概率性</h1>
+]]></content:encoded></item><item><title>「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/reservoir.html</link><description><![CDATA[Reservoir algorithm improvement-guaranteed equal probability for lottery scenes]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='蓄水池算法改进_-_面向抽奖场景保证等概率性'>蓄水池算法改进 - 面向抽奖场景保证等概率性</h1>
 
 <p>作者：huangjj / 后期编辑：张汉东</p>
 
@@ -15359,7 +15379,7 @@ fn main() {
 <h2 id='作者介绍'>作者介绍</h2>
 
 <p>huangjj，Rust 爱好者，公众号：坏姐姐日常入门 Rust。</p>
-]]></content:encoded></item><item><title>Rust中使用MySQL</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-mysql.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「rust入门系列」rust_中使用_mysql'>「Rust入门系列」Rust 中使用 Mysql</h1>
+]]></content:encoded></item><item><title>Rust中使用MySQL</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-mysql.html</link><description><![CDATA[Use Mysql in Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「rust入门系列」rust_中使用_mysql'>「Rust入门系列」Rust 中使用 Mysql</h1>
 
 <p>作者：张军军 / 后期编辑：张汉东</p>
 
@@ -15546,7 +15566,7 @@ match res.unwrap() {
 
 <li>命名参数查询使用：<code>exec_first</code></li>
 </ul>
-]]></content:encoded></item><item><title>「系列」Rust设计模式 ｜ 工厂模式</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-design-pattern-factory.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「系列」设计模式之工厂模式'>「系列」设计模式之工厂模式</h1>
+]]></content:encoded></item><item><title>「系列」Rust设计模式 ｜ 工厂模式</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-design-pattern-factory.html</link><description><![CDATA[Factory mode of design mode]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「系列」设计模式之工厂模式'>「系列」设计模式之工厂模式</h1>
 
 <p>作者：苏胤榕（DaviRain） / 后期编辑：张汉东</p>
 
@@ -15706,7 +15726,7 @@ fn main() {
 </ul>
 </li>
 </ul>
-]]></content:encoded></item><item><title>「译」数据操作：Rust vs Pandas</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_vs_pandas.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「译」数据操作：rust_vs_pandas'>「译」数据操作：Rust vs Pandas</h1>
+]]></content:encoded></item><item><title>「译」数据操作：Rust vs Pandas</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust_vs_pandas.html</link><description><![CDATA[Data manipulation Rust vs Pandas]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「译」数据操作：rust_vs_pandas'>「译」数据操作：Rust vs Pandas</h1>
 
 <p>译者：<a href='https://github.com/pi-pi-miao'>pi-pi-miao</a> / 后期编辑：张汉东</p>
 
@@ -16145,7 +16165,7 @@ struct DataFrameCountry {
 <h3 id='git_repository'>Git repository</h3>
 
 <p><a href='https://github.com/haixuanTao/Data-Manipulation-Rust-Pandas'>点击这里</a></p>
-]]></content:encoded></item><item><title>「译」Unsafe Rust 的取舍</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「译」unsafe_rust_的取舍'>「译」Unsafe Rust 的取舍</h1>
+]]></content:encoded></item><item><title>「译」Unsafe Rust 的取舍</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html</link><description><![CDATA[The trade-offs of Unsafe Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「译」unsafe_rust_的取舍'>「译」Unsafe Rust 的取舍</h1>
 
 <p>译者： （ <a href='https://github.com/MATRIXKOO'>MATRIXKOO</a> 和 <a href='https://github.com/NiZerin'>NiZerin</a> ） / 后期编辑： 张汉东</p>
 
@@ -16479,7 +16499,7 @@ mod simd {
 <p><code>LogRocket</code> 就像Web应用程序中的 <code>DVR</code> ，实际上记录了 Rust 应用程序中发生的所有事情。 它可以汇总并报告问题发生时应用程序所处的状态，而不用猜测为什么会发生问题。 <code>LogRocket</code> 还会监视应用程序的性能，报告诸如客户端CPU负载，客户端内存使用情况等指标。</p>
 
 <p>走一条 rust debug 现代化之路吧!  <a href='https://logrocket.com/signup'>点击即用</a>.</p>
-]]></content:encoded></item><item><title>「译」基于 Rust 用 Bevy 实现节奏大师游戏</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/Rhythm-game-in-Rust-using-bevy.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「译」基于_rust_用_bevy_实现节奏大师游戏'>「译」基于 Rust 用 Bevy 实现节奏大师游戏</h1>
+]]></content:encoded></item><item><title>「译」基于 Rust 用 Bevy 实现节奏大师游戏</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/Rhythm-game-in-Rust-using-bevy.html</link><description><![CDATA[Implement a rhythm master game with Bevy based on Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「译」基于_rust_用_bevy_实现节奏大师游戏'>「译」基于 Rust 用 Bevy 实现节奏大师游戏</h1>
 
 <p>译者：<a href='https://github.com/suhanyujie'>suhanyujie</a>/ 后期编辑：张汉东</p>
 
@@ -19525,7 +19545,7 @@ impl Plugin for MapMakerPlugin {
 
 <li>5.创建一个可以改变点击阈值的“系统”，可以让玩家在困难模式时选择简单模式，玩家很轻松则切换到困难模式。</li>
 </ul>
-]]></content:encoded></item><item><title>「译」Arenas in Rust</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/arenas-in-rust.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「译」arenas_in_rust'>「译」Arenas in Rust</h1>
+]]></content:encoded></item><item><title>「译」Arenas in Rust</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/arenas-in-rust.html</link><description><![CDATA[Arenas in Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「译」arenas_in_rust'>「译」Arenas in Rust</h1>
 
 <p>译者：<a href='https://github.com/MATRIXKOO'>MATRIXKOO</a> / 后期编辑：张汉东</p>
 
@@ -19828,7 +19848,7 @@ let lonely = Arena::add_person(ref_to_arena, &quot;lonely&quot;, vec![]);</code>
 <p>这也适用于诸如  <a href='https://docs.rs/typed-arena/'>typed-arena </a>之类的库；如果需要创建循环引用，则将无法在为放置在 <code>arena</code>  上的类型上编写自定义析构函数。但是只要避免创建循环引用就可以使用 <code>typed-arena</code> 编写自定义析构函数了；因此将无法使用内部可变性来使一个 <code>arena</code> 指向另一个 <code>arena</code>。</p>
 
 <p>感谢 <a href='https://mpc.sh/'>Mark Cohen</a> 和 <a href='https://twitter.com/kneecaw/'>Nika Layzell</a> 审阅了这篇文章的草稿。</p>
-]]></content:encoded></item><item><title>「译」用 Rust 编写 LLVM 的玩具编译器</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/toy-front-end-for-llvm-write-in-rust.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='「译」用rust编写llvm的玩具编译器'>「译」用Rust编写LLVM的玩具编译器</h1>
+]]></content:encoded></item><item><title>「译」用 Rust 编写 LLVM 的玩具编译器</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/toy-front-end-for-llvm-write-in-rust.html</link><description><![CDATA[Write LLVM toy compiler with Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「译」用rust编写llvm的玩具编译器'>「译」用Rust编写LLVM的玩具编译器</h1>
 
 <p>译者：<a href='https://github.com/iamazy'>iamazy</a> / 后期编辑：张汉东</p>
 
@@ -20419,7 +20439,7 @@ entry14:                                          ; preds = %entry13, %entry12
 <p>请注意：这些块具有以下的模式：不包含第一个条目，它们三个为一组，第一个是 “then” 分支，然后是 “else” 分支，最后是 “merge” 块（带有可识别的 phi 指令）。每一次我们遇到 “if” 表达式时都会在 main 后面附加三个新块。因为要在 AST 中递归查询三元组，所以块的三元组是有序的。</p>
 
 <p>这就是我想要分享的全部内容！希望在这一点上你可以有足够的实力来决定你的命运。</p>
-]]></content:encoded></item><item><title>透过 Rust 探索系统的本原：并发篇</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-to-system-essence-concurrent.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h2 id='透过_rust_探索系统的本原：并发篇'>透过 Rust 探索系统的本原：并发篇</h2>
+]]></content:encoded></item><item><title>透过 Rust 探索系统的本原：并发篇</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-to-system-essence-concurrent.html</link><description><![CDATA[Exploring the origin of the system through Rust Concurrency]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h2 id='透过_rust_探索系统的本原：并发篇'>透过 Rust 探索系统的本原：并发篇</h2>
 
 <p>作者：陈天 / 后期编辑：<a href='https://github.com/NiZerin'>NiZerin</a></p>
 
@@ -20642,7 +20662,7 @@ impl KvDb {
 <p><img src='https://oss.iacblog.com/rust/rust-to-system-essence-concurrent/7.webp' alt='' /></p>
 
 <p>整个流程同样看上去不容易实现，但最终添加的也就是二十行代码而已（不计入 S3 具体上传的代码）。</p>
-]]></content:encoded></item><item><title>透过 Rust 探索系统的本原：安全篇</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-to-system-essence-safety.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h2 id='透过_rust_探索系统的本原：安全篇'>透过 Rust 探索系统的本原：安全篇</h2>
+]]></content:encoded></item><item><title>透过 Rust 探索系统的本原：安全篇</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-to-system-essence-safety.html</link><description><![CDATA[Exploring the origin of the system through Rust Security]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h2 id='透过_rust_探索系统的本原：安全篇'>透过 Rust 探索系统的本原：安全篇</h2>
 
 <p>作者：陈天 / 后期编辑：<a href='https://github.com/NiZerin'>NiZerin</a></p>
 
@@ -21107,7 +21127,7 @@ for _ in 0..10 {
 <h2 id='贤者时刻'>贤者时刻</h2>
 
 <p>&gt; &gt; 连接千万条，安全第一条。网络不加密，亲人两行泪。- 鲁迅：不是我说的</p>
-]]></content:encoded></item><item><title>如何为 Rust 语言做贡献 | Part 2</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/contribute_to_the_rust_part2.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='如何为_rust_语言做贡献_|_part_2'>如何为 Rust 语言做贡献 | Part 2</h1>
+]]></content:encoded></item><item><title>如何为 Rust 语言做贡献 | Part 2</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/contribute_to_the_rust_part2.html</link><description><![CDATA[Mar annouce]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='如何为_rust_语言做贡献_|_part_2'>如何为 Rust 语言做贡献 | Part 2</h1>
 
 <p>作者：CrLF0710（野喵）/ 后期编辑：张汉东</p>
 
@@ -21166,7 +21186,7 @@ for _ in 0..10 {
 <p>在交流时要稍微注意一点的是，关于称呼。欧美有很多人对性别平权、少数群体之类的比较在意。稍微注意下He/She两个词的使用千万不要用错，如果不确定，就用They就好了。</p>
 
 <p>话说，官方 Zulip 里有一个中文频道 <code>t-community/l10n/zh</code>，不过蛮冷清的。大家感兴趣的话可以来聊关于翻译的话题啊。</p>
-]]></content:encoded></item><item><title>三月刊（March）</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/toc.html</link><description><![CDATA[]]></description><author>blackanger</author><pubDate></pubDate><content:encoded><![CDATA[<h1 id='三月刊'>三月刊</h1>
+]]></content:encoded></item><item><title>三月刊（March）</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/toc.html</link><description><![CDATA[March]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='三月刊'>三月刊</h1>
 
 <p><img src='../image/rust_magazine3.png' alt='logo' /></p>
 

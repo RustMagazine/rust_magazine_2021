@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: 1password's Rust pratice
+
+---
+
 # 生产实践 |「译」1password 的 Rust 实践
 
 ---

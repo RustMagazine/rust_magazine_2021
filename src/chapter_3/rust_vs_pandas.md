@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Data manipulation Rust vs Pandas
+
+---
+
 # 「译」数据操作：Rust vs Pandas
 
 译者：[pi-pi-miao](https://github.com/pi-pi-miao) / 后期编辑：张汉东
