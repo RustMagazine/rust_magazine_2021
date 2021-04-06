@@ -331,7 +331,7 @@ P\{前 j 位抽奖者 j + 1 轮中仍然持有 i' \} &amp; = P\{前 j 位抽奖�
 是其用于复用行为抽象的特性，尽管比起 Java 或 C# 的接口 （Interface）更加强大，但在此文中，
 熟悉 Java/C# 的读者把特质视作接口就可以了。</p>
 <h3><a class="header" href="#建模与实现" id="建模与实现">建模与实现</a></h3>
-<p>本文使用面向对象（Object-Oriented）编程范式<sup class="footnote-reference"><a href="#2">2</a></sup>来进行抽象，如下所示：</p>
+<p>如下所示：</p>
 <pre><code class="language-rs">extern crate rand;
 use rand::random;
 use rand::seq::SliceRandom;
@@ -499,10 +499,6 @@ fn main() {
 </ul>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>可以参考<a href="https://huangjj27.gitlab.io/reservoirsampling/#%E5%85%AC%E5%B9%B3%E6%80%A7%E7%AD%89%E6%A6%82%E7%8E%87--frackn--%E6%8A%BD%E5%8F%96-%E8%AF%81%E6%98%8E">博主以前的博客</a></p>
-</div>
-<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
-<p>作者理解的面向对象 = 对象是交互的最基本单元 + 对象通过相互发送消息进行交互。而特质/接口以及
-对象其他公开的方法定义了对象可以向外发送/从外接收的消息。</p>
 </div>
 <h2><a class="header" href="#下一步可能展开的工作" id="下一步可能展开的工作">下一步可能展开的工作</a></h2>
 <p>目前所有抽奖者都按照相等的概率抽奖，而在一些场景下可能按照一些规则给与某些抽奖者优惠
