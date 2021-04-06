@@ -177,38 +177,53 @@
 <p><em>学习Rust的过程很艰辛，需要保持一颗修行的心，当你能够越过那一座座阻碍在面前的高山，也许才能够发现它真正的美好。</em></p>
 <h2><a class="header" href="#目录" id="目录">目录</a></h2>
 <ul>
+<li><a href="#%E5%AD%A6%E4%B9%A0%E5%9B%AD%E5%9C%B0--%E8%AF%91-graphql-in-rust">学习园地 | 「译」 GraphQL in Rust</a>
+<ul>
+<li><a href="#%E8%AF%91%E8%80%85%E5%BA%8F">译者序</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
 <li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a>
 <ul>
 <li><a href="#%E6%A6%82%E8%A7%88">概览</a></li>
 <li><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88">技术栈</a></li>
 <li><a href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7">开发工具</a></li>
-</ul>
-</li>
-<li>实现
-<ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a></li>
 <li><a href="#%E4%BE%9D%E8%B5%96%E5%BA%93">依赖库</a></li>
 <li><a href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD">核心功能</a></li>
 <li><a href="#%E6%9F%A5%E8%AF%A2%E5%92%8C%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89">查询和类型定义</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3N+1%E9%97%AE%E9%A2%98">解决N+1问题</a></li>
-<li><a href="#%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89">接口定义</a></li>
-<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E9%87%8F">自定义标量</a></li>
-<li><a href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E6%9B%B4(Mutation)">定义变更(Mutation)</a></li>
-<li><a href="#%E5%AE%9A%E4%B9%89%E8%AE%A2%E9%98%85(Subscription)">定义订阅(Subscription)</a></li>
-<li><a href="#%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">集成测试</a></li>
-<li><a href="#GraphQL%E5%AE%A2%E6%88%B7%E7%AB%AF">GraphQL客户端</a></li>
-<li><a href="#API%E5%AE%89%E5%85%A8">API安全</a></li>
-<li><a href="#%E5%AE%9A%E4%B9%89%E6%9E%9A%E4%B8%BE">定义枚举</a></li>
-<li><a href="#%E6%97%A5%E6%9C%9F%E5%A4%84%E7%90%86">日期处理</a></li>
-<li><a href="#%E6%94%AF%E6%8C%81ApolloFederation">支持Apollo Federation</a></li>
-<li><a href="#ApolloServer">Apollo Server</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92">数据库交互</a></li>
-<li><a href="#%E8%BF%90%E8%A1%8C%E5%92%8CAPI%E6%B5%8B%E8%AF%95">运行和API测试</a></li>
-<li><a href="#%E8%AE%A2%E9%98%85%E6%B5%8B%E8%AF%95">订阅测试</a></li>
-<li><a href="#CI/CD">CI/CD</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3n1%E9%97%AE%E9%A2%98">解决N+1问题</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89">接口定义</a>
+<ul>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E9%87%8F">自定义标量</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E6%9B%B4mutation">定义变更(Mutation)</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E8%AE%A2%E9%98%85subscription">定义订阅(Subscription)</a></li>
+<li><a href="#%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">集成测试</a></li>
+<li><a href="#graphql%E5%AE%A2%E6%88%B7%E7%AB%AF">GraphQL客户端</a></li>
+<li><a href="#api%E5%AE%89%E5%85%A8">API安全</a>
+<ul>
+<li><a href="#%E9%99%90%E5%88%B6%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6">限制查询的深度和复杂度</a></li>
+<li><a href="#%E8%AE%A4%E8%AF%81">认证</a></li>
+<li><a href="#%E9%89%B4%E6%9D%83">鉴权</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E6%9E%9A%E4%B8%BE">定义枚举</a>
+<ul>
+<li><a href="#%E6%97%A5%E6%9C%9F%E5%A4%84%E7%90%86">日期处理</a></li>
+</ul>
+</li>
+<li><a href="#%E6%94%AF%E6%8C%81apollofederation">支持ApolloFederation</a></li>
+<li><a href="#apolloserver">ApolloServer</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92">数据库交互</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E5%92%8Capi%E6%B5%8B%E8%AF%95">运行和API测试</a></li>
+<li><a href="#%E8%AE%A2%E9%98%85%E6%B5%8B%E8%AF%95">订阅测试</a></li>
+<li><a href="#cicd">CI/CD</a></li>
 <li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
 <li><a href="#%E6%9C%89%E7%94%A8%E7%9A%84%E9%93%BE%E6%8E%A5">有用的链接</a></li>
+</ul>
+</li>
 </ul>
 <p>在今天的文章中，我将描述如何使用Rust及其生态系统创建GraphQL后端服务。 本文提供了创建GraphQL API时最常见任务的实现示例。最后，将使用Apollo Server和Apollo Federation将三个微服务组合为一个端点。 这使客户端可以同时从任意数量的源中获取数据，而无需知道哪些数据来自哪个源。</p>
 <h2><a class="header" href="#介绍" id="介绍">介绍</a></h2>
