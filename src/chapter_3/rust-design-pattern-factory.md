@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Factory mode of design mode
+
+---
+
 # 「系列」设计模式之工厂模式
 
 作者：苏胤榕（DaviRain） / 后期编辑：张汉东

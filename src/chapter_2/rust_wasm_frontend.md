@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Rust and WebAssembly
+
+---
+
 # 前端入门 ｜ Rust 和 WebAssembly
 
 作者: 陈鑫(lencx) / 后期编辑：张汉东

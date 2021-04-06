@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: implement Actor system with tokio
+
+---
+
 # 「译」使用 Tokio 实现 Actor 系统
 
 译者：Matrixtang

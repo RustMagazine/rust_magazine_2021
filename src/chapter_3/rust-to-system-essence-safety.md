@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Exploring the origin of the system through Rust Security
+
+---
+
 ## 透过 Rust 探索系统的本原：安全篇
 
 作者：陈天 / 后期编辑：[NiZerin](https://github.com/NiZerin)

@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Run AI model based on TVM Rust Runtime and WASM sandbox
+
+---
+
 # 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型
 
 作者： 王辉 / 后期编辑： 张汉东

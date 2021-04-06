@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: March
+
+---
+
 # 三月刊
 
 ![logo](../image/rust_magazine3.png)

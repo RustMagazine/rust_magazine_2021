@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Error delivery and logging in Rust
+
+---
+
 # Rust中的错误传递和日志记录
 
 作者：楼智豪 / 后期编辑：张汉东

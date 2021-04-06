@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Rust ecological inventory of Linux's new asynchronous interface io_uring
+
+---
+
 # Linux 全新异步接口 io_uring 的 Rust 生态盘点
 
 作者：施继成@DatenLord / 后期编辑：张汉东

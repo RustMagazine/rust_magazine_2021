@@ -1,6 +1,10 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: How our AWS Rust team will contribute to the future success of Rust
+
+---
+
 # 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献
-
-
 
 译者：[NiZerin](https://github.com/NiZerin)
 

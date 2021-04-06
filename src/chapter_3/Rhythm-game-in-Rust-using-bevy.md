@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Implement a rhythm master game with Bevy based on Rust
+
+---
+
 # 「译」基于 Rust 用 Bevy 实现节奏大师游戏
 
 译者：[suhanyujie](https://github.com/suhanyujie)/ 后期编辑：张汉东

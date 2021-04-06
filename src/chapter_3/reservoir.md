@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Reservoir algorithm improvement-guaranteed equal probability for lottery scenes
+
+---
+
 # 蓄水池算法改进 - 面向抽奖场景保证等概率性
 
 作者：huangjj / 后期编辑：张汉东

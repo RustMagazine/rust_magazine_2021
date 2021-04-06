@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Rust-based next-generation virtualization platform-StratoVirt
+
+---
+
 # 华为 | 基于Rust的下一代虚拟化平台-StratoVirt
 
 作者： 徐飞 / 后期编辑： 张汉东
