@@ -167,10 +167,20 @@ Rg3d是一个使用Rust编写的游戏引擎，渲染后端用的是OpenGl的Rus
 
 而本篇blog也就沿着上面提到的这篇blog讨论了Rust异步编程种是否存在同样的问题。结论已经被标题出卖了，Rust异步不是有色函数！
 
-[Read More](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)
+[What Color is Your Function?](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)
 
 [Rust's async isn't f#@king colored!](https://www.hobofan.com/blog/2021-03-10-rust-async-colored/)
 
+
+## Rust的异步是有颜色, 但没什么大不了
+
+语言设计领域的一个争议点是 `有色函数`， 即将函数分为异步函数和非异步函数。这个术语来源于2015年一篇名为`《What Color is Your Function?》`的文章, 它用颜色来比喻JavaScript和其他带有显式异步函数的语言中的同步和异步函数之间常常令人痛苦的不匹配。
+
+Rust 中，也有很多人讨论这个问题， 比如前几天有一片文章 `Rust’s async isn’t f#@king colored!`。
+
+这里作者将通过原始的定义和实践，来表达自己的观点: Rust 是有颜色的。
+
+[原文链接](https://morestina.net/blog/1686/rust-async-is-colored)
 
 
 ## 看到Toml文件，真是相见恨晚
@@ -212,16 +222,6 @@ Rust 和 C 的编程风格差异很大，但两者开发的程序在运行速度
 本文讨论了 Rust 和 Go 的优缺点，以及如何互相补充支持。
 
 [文章链接](https://thenewstack.io/rust-vs-go-why-theyre-better-together/?s=09)
-
-## Rust的异步是有颜色, 但没什么大不了
-
-语言设计领域的一个争议点是 `有色函数`， 即将函数分为异步函数和非异步函数。这个术语来源于2015年一篇名为`《What Color is Your Function?》`的文章, 它用颜色来比喻JavaScript和其他带有显式异步函数的语言中的同步和异步函数之间常常令人痛苦的不匹配。
-
-Rust 中，也有很多人讨论这个问题， 比如前几天有一片文章 `Rust’s async isn’t f#@king colored!`。
-
-这里作者将通过原始的定义和实践，来表达自己的观点: Rust 是有颜色的。
-
-[原文链接](https://morestina.net/blog/1686/rust-async-is-colored)
 
 
 ## 使用 Rust 写一个 Postgres SQL 打印器: Part I
@@ -325,7 +325,7 @@ Rust 中有 零大小类型的概念，简称 `ZST` (Zero-Sized Types). 这些
 
 [阅读](https://ianjk.com/ecs-in-rust/)
 
-##【系列文章】学会飞行：使用 Rust / 神经网络 / 遗传算法 来模拟进化
+## 【系列文章】学会飞行：使用 Rust / 神经网络 / 遗传算法 来模拟进化
 
 - [Part I](https://pwy.io/en/posts/learning-to-fly-pt1/)
 - [Part II](https://pwy.io/en/posts/learning-to-fly-pt2/)
