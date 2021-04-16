@@ -1,7 +1,14 @@
-# 生产实践 |「翻译」1password 的 Rust 实践
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: 1password's Rust pratice
 
 ---
 
+# 生产实践 |「译」1password 的 Rust 实践
+
+---
+
+[英文原文](https://serokell.io/blog/rust-in-production-1password)
 
 Rust已经风靡编程语言界。自2015年发布1.0版本以来，它一直是最受喜爱的编程语言之一，拥有一批忠实的开发者和贡献者。
 
@@ -82,4 +89,14 @@ export interface Teacher {
 
 [2]  另一款开源的密码管理器[bitwarden](https://bitwarden.com/).  也有rust 实现后台[bitwarden_rs](https://github.com/dani-garcia/bitwarden_rs).  有兴趣可以进一步阅读。
 
+
+---
+
+译者简介：
+
+柴杰，中国科学技术大学集成电路工程专业，在读硕士研究生。兴趣与专长为虚拟内存系统、分布式系统。
+
+审校：
+
+- 严炳（ryan），算法，大数据开发从业者，喜欢和有开源精神的人一起共事。
 
