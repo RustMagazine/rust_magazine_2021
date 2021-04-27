@@ -173,7 +173,7 @@ CPU 处理一条指令一般要分为几个步骤：
 
 Wikipedia 上的这张图可以帮助理解（图中文字颜色为黑色，推荐用 Light 主题查看）。
 
-![](./image/instruction-pipeline.png)
+![](./image/improve-std-slice/instruction-pipeline.png)
 
 了解前面的这些概念之后，我们来看一下为什么 CPU 需要做分支预测？
 
@@ -255,11 +255,11 @@ fn count(self) -> usize {
 
 - 标准库的汇编截图
 
-![](./image/branch-compare.png)
+![](./image/improve-std-slice/branch-compare.png)
 
 - 优化(1)的汇编截图
 
-![](./image/branch-compare2.png)
+![](./image/improve-std-slice/branch-compare2.png)
 
 > 需要注意的是 `jmp` 指令是直接跳转，不需要进行分支预测。感兴趣的朋友可以看一下我在 Godbolt 上的对比：[https://rust.godbolt.org/z/8dGbY8Pe1](https://rust.godbolt.org/z/8dGbY8Pe1)。这个网站是神器，强烈推荐！
 
@@ -295,7 +295,7 @@ where
 
 优化(2)的代码明显比标准库和优化(1)的代码更容易理解，再看一下它的生成的汇编代码。
 
-![](./image/branch-compare3.png)
+![](./image/improve-std-slice/branch-compare3.png)
 
 可以看出来依然是两条 `jne` 指令，所以非重复模式下的性能可能还是没有标准库的高，但是确实比优化(1)的性能要好很多。过了几天 libs 组的 [m-ou-se](https://github.com/m-ou-se) 回复了[评论](https://github.com/rust-lang/rust/pull/74024#issuecomment-713818146)。她也做了 benchmark，发现对于原生类型比如 **u32** 下 l1 级别的数据量依然比标准库慢，但是那些需要更多时间比较的类型（比如 String）的情况下，新的实现在所有 case 下性能都要优于标准库的实现。后面大家又讨论了许多，最终  **m-ou-se** 决定先跑一个 crater 测试，先验证一下这个 PR 对 crates.io 上所有的 crate 影响面大不大。最终 library 团队会议一致同意可以 merge 这个 PR。
 

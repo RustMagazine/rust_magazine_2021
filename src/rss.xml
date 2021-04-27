@@ -13630,9 +13630,19 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 
 <p>而本篇blog也就沿着上面提到的这篇blog讨论了Rust异步编程种是否存在同样的问题。结论已经被标题出卖了，Rust异步不是有色函数！</p>
 
-<p><a href='https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/'>Read More</a></p>
+<p><a href='https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/'>What Color is Your Function?</a></p>
 
 <p><a href='https://www.hobofan.com/blog/2021-03-10-rust-async-colored/'>Rust&#8217;s async isn&#8217;t f#@king colored!</a></p>
+
+<h2 id='rust的异步是有颜色,_但没什么大不了'>Rust的异步是有颜色, 但没什么大不了</h2>
+
+<p>语言设计领域的一个争议点是 <code>有色函数</code>， 即将函数分为异步函数和非异步函数。这个术语来源于2015年一篇名为<code>《What Color is Your Function?》</code>的文章, 它用颜色来比喻JavaScript和其他带有显式异步函数的语言中的同步和异步函数之间常常令人痛苦的不匹配。</p>
+
+<p>Rust 中，也有很多人讨论这个问题， 比如前几天有一片文章 <code>Rust’s async isn’t f#@king colored!</code>。</p>
+
+<p>这里作者将通过原始的定义和实践，来表达自己的观点: Rust 是有颜色的。</p>
+
+<p><a href='https://morestina.net/blog/1686/rust-async-is-colored'>原文链接</a></p>
 
 <h2 id='看到toml文件，真是相见恨晚'>看到Toml文件，真是相见恨晚</h2>
 
@@ -13675,16 +13685,6 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 <p>本文讨论了 Rust 和 Go 的优缺点，以及如何互相补充支持。</p>
 
 <p><a href='https://thenewstack.io/rust-vs-go-why-theyre-better-together/?s=09'>文章链接</a></p>
-
-<h2 id='rust的异步是有颜色,_但没什么大不了'>Rust的异步是有颜色, 但没什么大不了</h2>
-
-<p>语言设计领域的一个争议点是 <code>有色函数</code>， 即将函数分为异步函数和非异步函数。这个术语来源于2015年一篇名为<code>《What Color is Your Function?》</code>的文章, 它用颜色来比喻JavaScript和其他带有显式异步函数的语言中的同步和异步函数之间常常令人痛苦的不匹配。</p>
-
-<p>Rust 中，也有很多人讨论这个问题， 比如前几天有一片文章 <code>Rust’s async isn’t f#@king colored!</code>。</p>
-
-<p>这里作者将通过原始的定义和实践，来表达自己的观点: Rust 是有颜色的。</p>
-
-<p><a href='https://morestina.net/blog/1686/rust-async-is-colored'>原文链接</a></p>
 
 <h2 id='使用_rust_写一个_postgres_sql_打印器:_part_i'>使用 Rust 写一个 Postgres SQL 打印器: Part I</h2>
 
@@ -13780,7 +13780,7 @@ Some(Enum::A | Enum::B | Enum::C | Enum::D) =&gt; ..</code></pre>
 
 <p><a href='https://ianjk.com/ecs-in-rust/'>阅读</a></p>
 
-<p>\##【系列文章】学会飞行：使用 Rust / 神经网络 / 遗传算法 来模拟进化</p>
+<h2 id='【系列文章】学会飞行：使用_rust_/_神经网络_/_遗传算法_来模拟进化'>【系列文章】学会飞行：使用 Rust / 神经网络 / 遗传算法 来模拟进化</h2>
 
 <ul>
 <li><a href='https://pwy.io/en/posts/learning-to-fly-pt1/'>Part I</a></li>
@@ -14683,23 +14683,9 @@ int ibv_destroy_wq(struct ibv_wq *wq);</code></pre>
 
 <p>&gt; &gt; 原文: <a href='https://pymongo.github.io/#/2021/03/statically_linked_executable.md'>no_std binary(static link)</a></p>
 
-<h2 id='引子'>引子</h2>
+<p>由于作者身边只有 linux 操作系统的设备，所以本文内容仅探讨 Rust/C/C++ 在 linux 操作系统下 no_std 的可执行文件</p>
 
-<p>用 mac/windows 的读者可以试试<code>gcc -nostdlib main.c</code>能不能编译通过，</p>
-
-<p>如果连C语言的 no<em>std 可执行文件都编译不了，那 Rust 的 no</em>std 环境也不能编译可执行文件.</p>
-
-<p>目前无论是C语言还是 Rust, 仅在 linux 系统下能编译 no<em>std 的可执行文件，用 mac 或 windows 系统的读者要装 linux 虚拟机才能学习 no</em>std</p>
-
-<p>mac/windows 都能编译 no<em>std 的 library,但是 mac 运行 no</em>std 的 binary 会报错<code>illegal hardware instruction</code></p>
-
-<p>RustChinaConf 2020的<a href='https://www.bilibili.com/video/BV1Yy4y1e7zR?p=12'>Rust, RISC-V和智能合约</a>中展示了一个 Rust 最简单的 no_std 可执行文件</p>
-
-<p>我私下问过该topic演讲嘉宾，为什么 PPT 上的 no_std 代码在 mac 上运行会报错<code>illegal hardware instruction</code></p>
-
-<p>嘉宾建议我在 linux 系统下运行，我换 linux 后果然就正常运行了</p>
-
-<p>no<em>std 可执行文件意味着不能依赖操作系统的动态链接库，意味着可执行文件将是纯 statically</em>linked_executable</p>
+<p>本文更多探讨的是编译生成纯静态链接没有动态链接的 no_std 可执行文件，不仅连 Rust 的标准库也不用，连操作系统自带的 C 标准库也不用的环境</p>
 
 <p>推荐这个 <a href='https://fasterthanli.me/series/making-our-own-executable-packer'>Making our own executable packer</a>(linux) 系列文章:</p>
 
@@ -14727,13 +14713,13 @@ int ibv_destroy_wq(struct ibv_wq *wq);</code></pre>
 
 <p>&gt; &gt; as s.s &amp;&amp; ld s.o &amp;&amp; ./a.out</p>
 
-<p>可以用ldd工具校验编译生成的可执行文件是不是 statically linked (没有引入任何动态链接库)</p>
+<p>可以用 ldd 工具校验编译生成的可执行文件是不是 statically linked (没有引入任何动态链接库)</p>
 
-<p>汇编的劣势在于代码跟硬件架构绑定，gcc 编译这段代码时加上<code>-m32</code>参数指定生成32位的可执行文件时就会报错</p>
+<p>汇编的劣势在于代码跟硬件架构绑定，gcc 编译这段汇编代码时加上<code>-m32</code>参数指定生成32位的可执行文件时就会报错</p>
 
 <h2 id='c_编译_no_std_可执行文件'>C 编译 no_std 可执行文件</h2>
 
-<p>用<code>gcc -nostdlib</code>参数很容易生成无动态链接库的可执行文件</p>
+<p>用 gcc 或 clang 的 <code>-nostdlib</code>参数很容易生成无动态链接库的可执行文件</p>
 
 <pre><code class="language-`">[w@w-manjaro temp]$ echo &quot;int main(){return 0;}&quot; &gt; main.c &amp;&amp; gcc -nostdlib main.c &amp;&amp; ldd ./a.out
 /usr/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000001000
@@ -14745,6 +14731,16 @@ int ibv_destroy_wq(struct ibv_wq *wq);</code></pre>
         statically linked</code></pre>
 
 <p>当然也可以让 gcc 加上<code>-m32</code>参数生成32位的可执行文件</p>
+
+<p>注意在 mac 或 windows 上用gcc 或 clang 的 <code>-nostdlib</code>参数可能会报错</p>
+
+<pre><code class="language-`">$ clang -nostdlib c.c
+ld: dynamic main executables must link with libSystem.dylib for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)</code></pre>
+
+<p>根据苹果开发者文档，<a href='https://developer.apple.com/library/archive/qa/qa1118/_index.html'>Apple does not support statically linked binaries on Mac OS X</a></p>
+
+<p>可能 macOS 要用特殊的 ld 工具或稍微复杂点的方法才能编译纯静态链接的可执行文件，不过这不在本文的探讨范围内了</p>
 
 <h2 id='rust_编译_no_std_可执行文件'>Rust 编译 no_std 可执行文件</h2>
 
@@ -14786,9 +14782,7 @@ fn my_panic(_info: &amp;core::panic::PanicInfo) -&gt; ! {
 <pre><code class="language-`">[target.&#8217;cfg(target_os = &quot;linux&quot;)&#8217;]
 rustflags = [&quot;-C&quot;, &quot;link-arg=-nostartfiles&quot;]</code></pre>
 
-<hr><h2 id='总结'>总结</h2>
-
-<p>当前 Rust 的 no<em>std 生态仅在 linux 上比较完善，Rust/C/C++ 在 no</em>std 环境下想要打印<code>Hello World</code>还得用汇编指令 syscall 系统调用，需要开发者对汇编语言和操作系统有一定的了解才能在 no_std 环境下开发</p>
+<p>如果只是编译 no_std 环境下的 动态链接库(cdylib)，则不需要加上述 rustc 参数</p>
 ]]></content:encoded></item><item><title>用 Rust 写智能合约 | Hello, Ink!  </title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/ink.html</link><description><![CDATA[Write smart contracts in Rust | Hello, Ink!]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='用_rust_写智能合约_|_hello,_ink!'>用 Rust 写智能合约 | Hello, Ink!</h1>
 
 <p>作者：李大狗（李骜华）/ 后期编辑： 张汉东</p>
@@ -15194,7 +15188,7 @@ pub fn get(&amp;self) -&gt; bool {
 
 <h3 id='建模与实现'>建模与实现</h3>
 
-<p>本文使用面向对象（Object-Oriented）编程范式[^2]来进行抽象，如下所示：</p>
+<p>如下所示：</p>
 
 <pre><code class="language-`rs">extern crate rand;
 use rand::random;
@@ -15366,8 +15360,6 @@ fn main() {
 
 <p><a href='https://huangjj27.gitlab.io/reservoirsampling/#%E5%85%AC%E5%B9%B3%E6%80%A7%E7%AD%89%E6%A6%82%E7%8E%87--frackn--%E6%8A%BD%E5%8F%96-%E8%AF%81%E6%98%8E'>^1]: 可以参考[博主以前的博客</a></p>
 
-<p>[^2]: 作者理解的面向对象 = 对象是交互的最基本单元 + 对象通过相互发送消息进行交互。而特质/接口以及 对象其他公开的方法定义了对象可以向外发送/从外接收的消息。</p>
-
 <h2 id='下一步可能展开的工作'>下一步可能展开的工作</h2>
 
 <p>目前所有抽奖者都按照相等的概率抽奖，而在一些场景下可能按照一些规则给与某些抽奖者优惠 （例如绩效越高的员工中奖概率越大），因此下一步可能考虑如何按照权重赋予每位抽奖者各自的 中奖概率。</p>
@@ -15379,13 +15371,13 @@ fn main() {
 <h2 id='作者介绍'>作者介绍</h2>
 
 <p>huangjj，Rust 爱好者，公众号：坏姐姐日常入门 Rust。</p>
-]]></content:encoded></item><item><title>Rust中使用MySQL</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-mysql.html</link><description><![CDATA[Use Mysql in Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「rust入门系列」rust_中使用_mysql'>「Rust入门系列」Rust 中使用 Mysql</h1>
+]]></content:encoded></item><item><title>Rust中使用MySQL</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_3/rust-mysql.html</link><description><![CDATA[Use Mysql in Rust]]></description><author>blackanger</author><pubDate>Sat, 27 Mar 2021 16:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='「rust入门系列」rust_中使用_mysql'>「Rust入门系列」Rust 中使用 MySQL</h1>
 
 <p>作者：张军军 / 后期编辑：张汉东</p>
 
 <p>&gt; &gt; 这个系列的文章，我计划给大家讲解如何在Rust中使用Mysql作为存储，先从简单的开始，然后在后面展示如何在开发<code>Web api</code>中使用。</p>
 
-<h3 id='数据表'>数据表</h3>
+<h2 id='数据表'>数据表</h2>
 
 <p>本次我会使用一张订单表<code>order</code>。订单表的具体<code>schema</code>如下。</p>
 
@@ -15402,7 +15394,7 @@ fn main() {
 insert into student (name, age, id_card, last_update) values (&#8217;张三&#8217;, 23, &#8217;123456789X&#8217;, CURRENT_DATE());
 insert into student (name, age, id_card, last_update) values (&#8217;李四&#8217;, 24, &#8217;8382353902&#8217;, CURRENT_DATE())</code></pre>
 
-<h3 id='创建应用程序'>创建应用程序</h3>
+<h2 id='创建应用程序'>创建应用程序</h2>
 
 <pre><code class="language-`rust">cargo new mysql-test-01</code></pre>
 
@@ -15414,7 +15406,7 @@ chrono = &quot;0.4&quot;</code></pre>
 
 <p>在这里，我使用<code>chrono</code>来处理日期和时间列。具体 可以参考<a href='https://docs.rs/chrono/0.4.19/chrono/'> `https://docs.rs/chrono/0.4.19/chrono/`</a></p>
 
-<h3 id='开始'>开始</h3>
+<h2 id='开始'>开始</h2>
 
 <p>在main.rs中导入命名空间</p>
 
@@ -15436,7 +15428,7 @@ use chrono::prelude::*; // 用来处理日期</code></pre>
 
 <p>第一次下载和编译所有依赖，可能需要一点点时间，看到命令行编译过去了，表示和数据库已经打通了。</p>
 
-<h3 id='流式查询'>流式查询</h3>
+<h2 id='流式查询'>流式查询</h2>
 
 <p>流式查询，其实结果数据是逐行读取的。 好处就是，整个数据永远不会存储在内存中，如果要读取大量数据，使用<code>query_iter</code>很好。</p>
 
@@ -15449,7 +15441,7 @@ use chrono::prelude::*; // 用来处理日期</code></pre>
 
 <p>上面代码中的<code>row</code>的类型是<code>mysql_common::row::Row</code>，这种类型把数据以字节的形式存储。所以这里需要把低级的字节转换成我们想要的类型比如<code>i32,String</code>等，这里我使用了<code>from_row</code>。注意，转换后的数据以元组的形式返回，其中每一项和选择列的顺序相同。</p>
 
-<h3 id='聚合查询结果'>聚合查询结果</h3>
+<h2 id='聚合查询结果'>聚合查询结果</h2>
 
 <p>其实， 可以将查询结果收集到Vec中。 Vec中的每个元素都是一个元组。</p>
 
@@ -15462,7 +15454,7 @@ for r in res {
 
 <p><code>query</code>函数已经将字节转换为选择的数据类型，因此不需要再转换了。 需要注意的就是，这里必须明确元组的数据类型。 否则，编译器没办法做转换。</p>
 
-<h3 id='结果到结构体'>结果到结构体</h3>
+<h2 id='结果到结构体'>结果到结构体</h2>
 
 <p>使用元组也可以。 但是我们实际写代码时，数据表列数多，最普遍的做法就是定义一个结构体。比如这里叫<code>Student</code>, 然后，可以使用<code>query_map</code>将查询结果映射到<code>Student</code>对象。这里 不需要置顶元组的数据类型，编译器会自动推导字段类型根据Student类型</p>
 
@@ -15551,7 +15543,7 @@ match res.unwrap() {
             },
         );</code></pre>
 
-<p>总结</p>
+<h2 id='总结'>总结</h2>
 
 <ul>
 <li>经常使用的时间处理库：<code>chrono</code></li>
