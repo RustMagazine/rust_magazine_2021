@@ -299,6 +299,10 @@ where
 
 可以看出来依然是两条 `jne` 指令，所以非重复模式下的性能可能还是没有标准库的高，但是确实比优化(1)的性能要好很多。过了几天 libs 组的 [m-ou-se](https://github.com/m-ou-se) 回复了[评论](https://github.com/rust-lang/rust/pull/74024#issuecomment-713818146)。她也做了 benchmark，发现对于原生类型比如 **u32** 下 l1 级别的数据量依然比标准库慢，但是那些需要更多时间比较的类型（比如 String）的情况下，新的实现在所有 case 下性能都要优于标准库的实现。后面大家又讨论了许多，最终  **m-ou-se** 决定先跑一个 crater 测试，先验证一下这个 PR 对 crates.io 上所有的 crate 影响面大不大。最终 library 团队会议一致同意可以 merge 这个 PR。
 
+> 关于 [crater](https://github.com/rust-lang/crater) 测试：
+>
+> crater 大概就是针对整个 crates.io 上所有的 crate 给要测试的编译器版本（比如我的 PR ）跑一次测试，看这个改动对线上所有 crate 影响大不大。crates.io 上超过5万个 crate，一般跑一次 crater 需要将近一周的时间。我的这个 crater 跑完之后就是因为没有对已发布的 crate 造成什么很大的影响，所以官方才愿意合并。
+
 > From **m-ou-se**:
 >
 > "We discussed this PR in a recent library team meeting, in which we agreed that the proposed behaviour (stopping on Equal) is preferrable over optimal efficiency in some specific niche cases. Especially considering how small most of the differences are in the benchmarks above."
