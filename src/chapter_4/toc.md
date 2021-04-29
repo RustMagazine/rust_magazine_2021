@@ -44,6 +44,10 @@ description: March
 
 - [学习资源](./learn.md)
 
+### 算法与工程应用
+
+- [用 rustc 源码实现拼写错误候选词建议](./rustc_edit_distance_and_typo_checker.md)
+
 ### 语言特性与技巧
 
 - [常见问题汇总](./faq.md)

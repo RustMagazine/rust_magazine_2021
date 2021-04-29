@@ -110,6 +110,7 @@
     - [如何为 Rust 语言做贡献 | Part 3 ](./chapter_4/contribute_to_the_rust_part3.md)
     - [优化 Rust 标准库的 binary_search](./chapter_4/improve-std-slice-binary-search.md)
     - [图解 Rust 编译器与语言设计 | Part 2 ：（外篇）探索 Clippy/RustAnalyzer 工作机制](./chapter_4/rustc_part_2.md)
+    - [用 rustc 源码实现拼写错误候选词建议](./chapter_4/rustc_edit_distance_and_typo_checker.md)
     - [GitHub 趋势榜](./chapter_4/github_trending.md)
     - [推荐项目 ｜ 基础工具库](./chapter_4/tool_libs.md)
     - [推荐项目 |  框架引擎](./chapter_4/frameworks.md)

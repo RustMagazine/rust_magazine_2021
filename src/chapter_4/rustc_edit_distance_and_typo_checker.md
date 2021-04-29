@@ -91,11 +91,13 @@ edit_distance 是个动态规划算法或字符串算法的经典问题，果然
 
 我拿 rustc 源码的 lev_distance 函数在 leetcode上通过 edit_distance 一题
 
-![](rustc_edit_distance_leetcode_submit.png)
+![](../image/rustc_edit_distance_and_typo_checker_1.png)
 
 用 strsim 的相关函数也能通过编辑距离这题，但是运行耗时 4ms 会比 rustc 源码运行耗时 0ms 慢点
 
 原因是 strsim 的 edit_distance 算法动态规划的空间复杂度是 O(n^2)，而 rustc 的实现空间复杂度是 O(n)
+
+leetcode edit_distance 更多解法可以参考[我的题解](https://github.com/pymongo/leetcode-rust/blob/master/src/dp/edit_distance.rs)
 
 ### edit_distance 算法
 
@@ -186,7 +188,7 @@ nm: sanitizer_netbsd.cpp.o: no symbols
 
 我相信我编译过很多像 rust-analyzer, racer 等静态分析的库，说不定电脑本地的 cargo 缓存就有 rustc 源码的 lev_distance.rs
 
-![](kfind_lev_distance.png)
+![](../image/rustc_edit_distance_and_typo_checker_2.png)
 
 果然发现 rustc-ap-rustc_span 这个 crate 就有 lev_distance 函数
 
@@ -267,6 +269,8 @@ mac 和树莓派的 raspbian 系统都在 `/usr/share/dict/words` 存放英语�
 像 ubuntu_desktop 或 raspbian 这种带图形桌面环境的 linux 发行版一般会在 `/usr/share/dict/words` 内置语料库
 
 如果没有找到语料库，可以通过 `sudo apt install wbritish` 或 `sudo pacman -S words` 进行安装
+
+KDE 想让系统应用启用拼写检查功能，需要安装拼写检查相关的动态链接库和词典，详细过程可以看我的这篇文章: [解决 KDE spell check 报错](/2021/04/manjaro_kde_spell_check.md)
 
 除了用操作系统自带的语料库，还可以选用 github 的 [english-words](https://github.com/dwyl/english-words) 仓库作为语料库
 
@@ -776,7 +780,7 @@ thread 'test_trie_typo_checker' panicked at 'assertion failed: `(left == right)`
 
 准确的说法是**26 叉树的深度优先回溯搜索**，类似的算法可以参考 [leetcode lexicographical 一题](https://leetcode.com/problems/lexicographical-numbers/)
 
-所以单元测试的期待值校验应该改成，遍历每一个候选词用 rustc_span::lev_distance::lev_distance 去计算跟输入单词之间的编辑距离
+所以单元测试的期待值校验应该改成，遍历每一个候选词用 `rustc_span::lev_distance::lev_distance` 去计算跟输入单词之间的编辑距离
 
 如果全部候选词的编辑距离小于等于 1 则测试通过
 
@@ -810,3 +814,8 @@ Rust 2021 年 4 月的这个 [PR](https://github.com/rust-lang/rust/pull/84334/f
 总的来说前缀树存储单词表性能会比数组优秀太多，后续打算添加一个检查一篇文章的单词拼写错误例子
 
 然后再加一个实时检测 android 的 EditText 文本输入组件的单词拼写错误的示例
+
+## 参考链接
+
+- <https://wilbeibi.com/2015/05/2015-05-09-K_edit_distances/>
+- <https://www.zhihu.com/question/29592463>
