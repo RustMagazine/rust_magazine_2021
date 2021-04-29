@@ -34,17 +34,9 @@ stratovirt
 ```
 
 
-
-
-
 ## StratoVirt 地址空间模块整体设计
 
-
-
-
-
 ![image-20210425104007596](./image/hw-stratovirt/address_space_topology.png)
-
 
 
 上图中的主要结构含义如下：
