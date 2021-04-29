@@ -11,6 +11,12 @@
 - [GitHub Page 阅读](https://rustmagazine.github.io/rust_magazine_2021/)
 - [语雀阅读](https://www.yuque.com/chaosbot/rust_magazine_2021)
 
+### 如何订阅本刊 RSS ?
+
+1. 订阅地址：[https://rustmagazine.github.io/rust_magazine_2021/rss.xml](https://rustmagazine.github.io/rust_magazine_2021/rss.xml)
+
+2. 复制订阅地址到你最喜欢的订阅工具开始订阅。
+
 ---
 
 ### 编辑小组
@@ -26,6 +32,7 @@
 - 杨楚天（yct21）
 - [Matrixtang](https://github.com/MATRIXKOO)
 - m1zzx2 
+- [NiZerin](https://github.com/NiZerin) 
 
 - <其他成员招募位> 招募条件见下方
 

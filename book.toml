@@ -1,9 +1,10 @@
 [book]
+title = "Rust精选"
 authors = ["blackanger"]
+description = "The roots aren't deep but the seeds are planted!"
 language = "zh_CN"
 multilingual = false
 src = "src"
-title = "rust-magazine"
 
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
@@ -14,7 +15,7 @@ default-theme = "rust"
 google-analytics = "UA-188947685-1"
 git-repository-url = "https://github.com/RustMagazine/rust_magazine_2021"
 additional-js = ["mermaid.min.js", "mermaid-init.js"]
-
+mathjax-support = true
 
 [output.html.playground]
 editable = true
@@ -23,5 +24,14 @@ copy-js = true
 [output.html.fold]
 enable = true
 level = 0
+
+[preprocessor.rss]
+files-glob = "chapter_*/**/*.md"
+url-base = "https://rustmagazine.github.io/rust_magazine_2021/"
+
+# [output.latex]
+# latex    = true  # default = true
+# pdf      = true  # default = false
+# markdown = true  # default = false
 
 

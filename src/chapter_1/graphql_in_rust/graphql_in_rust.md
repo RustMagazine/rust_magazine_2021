@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: Rust GraphQL
+
+---
+
 # 学习园地 | 「译」 GraphQL in Rust
 
 ## 译者序
@@ -11,32 +17,38 @@ _学习Rust的过程很艰辛，需要保持一颗修行的心，当你能够越
 
 ## 目录
 
-- [介绍](#介绍)
+- [学习园地 | 「译」 GraphQL in Rust](#学习园地--译-graphql-in-rust)
+  - [译者序](#译者序)
+  - [目录](#目录)
+  - [介绍](#介绍)
     - [概览](#概览)
     - [技术栈](#技术栈)
     - [开发工具](#开发工具)
-- 实现
+    - [实现](#实现)
     - [依赖库](#依赖库)
     - [核心功能](#核心功能)
     - [查询和类型定义](#查询和类型定义)
-    - [解决N+1问题](#解决N+1问题)
-    - [接口定义](#接口定义)
+    - [解决N+1问题](#解决n1问题)
+- [接口定义](#接口定义)
     - [自定义标量](#自定义标量)
-    - [定义变更(Mutation)](#定义变更(Mutation))
-    - [定义订阅(Subscription)](#定义订阅(Subscription))
+    - [定义变更(Mutation)](#定义变更mutation)
+    - [定义订阅(Subscription)](#定义订阅subscription)
     - [集成测试](#集成测试)
-    - [GraphQL客户端](#GraphQL客户端)
-    - [API安全](#API安全)
+    - [GraphQL客户端](#graphql客户端)
+    - [API安全](#api安全)
+      - [限制查询的深度和复杂度](#限制查询的深度和复杂度)
+      - [认证](#认证)
+      - [鉴权](#鉴权)
     - [定义枚举](#定义枚举)
-    - [日期处理](#日期处理)
-    - [支持Apollo Federation](#支持ApolloFederation)
-    - [Apollo Server](#ApolloServer)
+      - [日期处理](#日期处理)
+    - [支持ApolloFederation](#支持apollofederation)
+    - [ApolloServer](#apolloserver)
     - [数据库交互](#数据库交互)
-    - [运行和API测试](#运行和API测试)
+    - [运行和API测试](#运行和api测试)
     - [订阅测试](#订阅测试)
-    - [CI/CD](#CI/CD)
-- [结论](#结论)
-- [有用的链接](#有用的链接)
+    - [CI/CD](#cicd)
+    - [结论](#结论)
+    - [有用的链接](#有用的链接)
 
 在今天的文章中，我将描述如何使用Rust及其生态系统创建GraphQL后端服务。 本文提供了创建GraphQL API时最常见任务的实现示例。最后，将使用Apollo Server和Apollo Federation将三个微服务组合为一个端点。 这使客户端可以同时从任意数量的源中获取数据，而无需知道哪些数据来自哪个源。
 

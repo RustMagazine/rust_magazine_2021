@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Deciphering the stable version of Rust 1.50
+
+---
+
 # 解读 Rust 1.50 稳定版
 
 作者：张汉东 / 后期编辑： 张汉东

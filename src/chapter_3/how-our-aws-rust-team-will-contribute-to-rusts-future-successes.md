@@ -1,4 +1,16 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: How our AWS Rust team will contribute to the future success of Rust
+
+---
+
 # 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献
+
+译者：[NiZerin](https://github.com/NiZerin)
+
+> 原文链接：[How our AWS Rust team will contribute to Rust’s future successes](https://aws.amazon.com/cn/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/)
+
+---
 
 自今年年初以来，AWS Rust 团队一直在起草我们的章程和宗旨。
 章程和宗旨是 AWS 团队用来定义我们的范围和优先事项的框架。
@@ -114,8 +126,5 @@ Rust 一直受益于它是一种“实践者”的语言。
 这些是我们目前的宗旨，我们希望随着我们更多地了解 AWS 和 Rust 社区合作的最佳方式，它们会不断发展。
 
 
-原文链接：[How our AWS Rust team will contribute to Rust’s future successes](https://aws.amazon.com/cn/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/)
 
-译者：
-- [NiZerin](https://github.com/NiZerin)
 

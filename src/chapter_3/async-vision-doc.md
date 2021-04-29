@@ -1,9 +1,21 @@
-# 建立Async Rust的共同愿景
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Establish a shared vision for Async Rust
+
+---
+
+# 建立 Async Rust 的共同愿景
+
+译者：[NiZerin](https://github.com/NiZerin)
+
+> 原文链接：[https://blog.rust-lang.org/2021/03/18/async-vision-doc.html](https://blog.rust-lang.org/2021/03/18/async-vision-doc.html)
+
+---
 
 2021年3月18日·Niko Matsakis 代表 [Async Foundations Working Group](https://rust-lang.github.io/wg-async-foundations/)
 
 
-在 [异步基金会工作组](https://rust-lang.github.io/wg-async-foundations/) 认为 Rust 能够成为最热门的选择之一为构建分布式系统，从嵌入式设备到基础云服务。无论他们将其用于什么，我们都希望所有开发人员都喜欢使用 Async Rust。为了实现这一点，我们需要将 Async Rust 移至目前的“MVP”状态之外，并使所有人都可以使用它。
+在 [异步基础工作组](https://rust-lang.github.io/wg-async-foundations/) 认为 Rust 能够成为最热门的选择之一为构建分布式系统，从嵌入式设备到基础云服务。无论他们将其用于什么，我们都希望所有开发人员都喜欢使用 Async Rust。为了实现这一点，我们需要将 Async Rust 移至目前的“MVP”状态之外，并使所有人都可以使用它。
 
 我们正在开展合作，为 Async Rust 构建共享的 [愿景文档](https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision) 。`我们的目标是让整个社区参与到集体的想象中`：我们如何才能使使用异步 I/O 的端到端体验不仅是一种务实的选择，而且是一种快乐的选择？
 
@@ -37,7 +49,4 @@
 
 如果您想帮助我们编写愿景文档，我们很乐意为您贡献自己的经验和愿景！目前，我们专注于创建现状故事。我们正在寻找人们撰写 PR 或谈论他们在问题或其他方面的经验。如果您想开始使用，请查看有关[现状故事的模板](https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html) -它具有打开 PR 所需的所有信息。另外，您可以查看[“如何实现愿景”](https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html) 页面，其中详细介绍了整个愿景文档过程。
 
-原文链接：[https://blog.rust-lang.org/2021/03/18/async-vision-doc.html](https://blog.rust-lang.org/2021/03/18/async-vision-doc.html)
 
-译者：
-- [NiZerin](https://github.com/NiZerin)

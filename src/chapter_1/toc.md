@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: january magazine
+
+---
+
 # 一月刊
 
 ![logo](../image/rust_magazine3.png)

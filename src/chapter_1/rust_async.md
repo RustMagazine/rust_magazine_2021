@@ -1,3 +1,8 @@
+---
+pub_date: Sat, 30 Jan 2021 16:00:00 GMT
+description: Rust Async and concurrency on China Rust conference
+
+---
 # RustChinaConf2020 精选 | Rust 异步与并发
 
 说明：本文为视频演讲文字版，编者听录的时候可能会出现一些误差，欢迎指正。

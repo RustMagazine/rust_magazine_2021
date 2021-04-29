@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Interpreting the Rust 2021 Edition RFC
+
+---
+
 # 解读 Rust 2021 Edition RFC 
 
 作者/编辑：张汉东

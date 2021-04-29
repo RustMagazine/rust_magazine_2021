@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: announcement issued in February
+
+---
+
 # 二月发刊通告
 
 时光易逝，转眼二月即将过去，春暖花开的三月即将到来。过年的余味犹在，但我们不得不继续踏上征途。

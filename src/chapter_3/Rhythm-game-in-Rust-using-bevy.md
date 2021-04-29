@@ -1,16 +1,31 @@
+---
+pub_date: Sat, 27 Mar 2021 16:00:00 GMT
+description: Implement a rhythm master game with Bevy based on Rust
+
+---
+
 # 「译」基于 Rust 用 Bevy 实现节奏大师游戏
 
->* Rhythm game in Rust using Bevy 译文（基于 Rust 用 Bevy 实现节奏大师游戏）
->* 原文链接：https://caballerocoll.com/blog/bevy-rhythm-game/
->* 原文作者：[Guillem Caballero Coll](https://github.com/guimcaballero)
->* 译文来自：[RustMagazine 2021 期刊](https://github.com/RustMagazine/rust_magazine_2021)
->* 译者：[suhanyujie](https://github.com/suhanyujie)
->* ps：水平有限，翻译不当之处，还请指正。
->* 标签：Rust, Bevy,  game, Rhythm game
+译者：[suhanyujie](https://github.com/suhanyujie)/ 后期编辑：张汉东
 
->2021/2/8 - 77 min read
+> 原文链接：https://caballerocoll.com/blog/bevy-rhythm-game/
 
-## 介绍
+本文相关：
+
+> Rust中文社群线上学习室 | 使用 Bevy 实现节奏大师游戏 
+⁣> 
+> - 01 [录屏](https://rust-lang.feishu.cn/minutes/obcnw4jtr2832779jmg373wz)
+> - 02 [录屏⁣](https://rust-lang.feishu.cn/minutes/obcnxrrm878zw3q7c9z7bx6p)
+>
+> Rust 中文社群 飞书群 邀请你加入：
+> 
+> - 对话群： https://applink.feishu.cn/TeLAcbDR 
+> - 话题群：https://applink.feishu.cn/TeLD868w
+
+---
+
+## 正文
+
 在这个教程中，我们基于 Rust 使用 Bevy 引擎实现一个节奏大师游戏。目的是展现如何用 Bevy 实现一些东西，特别是一些更高级的功能，如着色器，状态，和音频。
 
 如果你想在进入学习之前看看最终的代码，你可以在[这里](https://github.com/guimcaballero/bevy_rhythm)找到仓库，并且下面是一个游戏视频：

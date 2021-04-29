@@ -1,3 +1,9 @@
+---
+pub_date: Sat, 27 Feb 2021 16:00:00 GMT
+description: Practical case | Using Bevy game engine to make Bomberman
+
+---
+
 # 实践案例 | 使用 Bevy 游戏引擎制作炸弹人
 
 作者：Cupnfish / 后期编辑：张汉东
@@ -7,22 +13,24 @@
 
 ### 目录
 
-- [Bevy 引擎简介](#引擎简介)
-- [前言](#前言)
-- [开发动机](#开发动机)
-- [rust开发环境推介](#rust开发环境推介)
-- [编译速度](#编译速度)
-- [Query filter](#query-filter)
-- [QuerySet](#queryset)
-- [Event](#event)
-- [Timer](#timer)
-- [`system`的链接与代码复用](#system的链接与代码复用)
-- [如何实现游戏的不同状态](#如何实现游戏的不同状态)
-- [Rapier简短笔记](#rapier简短笔记)
-- [通过Rapier来实现碰撞过滤](#通过rapier来实现碰撞过滤)
-- [多平台支持](#多平台支持)
-- [日志](#日志)
-- [碎碎念](#碎碎念)
+- [实践案例 | 使用 Bevy 游戏引擎制作炸弹人](#实践案例--使用-bevy-游戏引擎制作炸弹人)
+    - [目录](#目录)
+    - [引擎简介](#引擎简介)
+    - [前言](#前言)
+    - [开发动机](#开发动机)
+    - [Rust 开发环境推介](#rust-开发环境推介)
+    - [编译速度](#编译速度)
+    - [Query filter](#query-filter)
+    - [QuerySet](#queryset)
+    - [Event](#event)
+    - [Timer](#timer)
+    - [`system`的链接与代码复用](#system的链接与代码复用)
+    - [如何实现游戏的不同状态](#如何实现游戏的不同状态)
+    - [Rapier简短笔记](#rapier简短笔记)
+    - [通过Rapier来实现碰撞过滤](#通过rapier来实现碰撞过滤)
+    - [多平台支持](#多平台支持)
+    - [日志](#日志)
+    - [碎碎念](#碎碎念)
 
 
 
