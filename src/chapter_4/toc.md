@@ -73,10 +73,6 @@ description: March
 - [如何为 Rust 语言做贡献 | Part 3 ](./contribute_to_the_rust_part3.md)
 - [优化 Rust 标准库的 binary_search](./improve-std-slice-binary-search.md)
 
-### 【主题专栏】图解 Rust 编译器
-
-- [图解 Rust 编译器与语言设计 | Part 2 ：（外篇）探索 Clippy/RustAnalyzer 工作机制](./rustc_part_2.md)
-
 ## 开源项目巡礼
 
 - [GitHub 趋势榜](./github_trending.md)

@@ -1,12 +1,27 @@
 # 活动回顾
 
-## Rust 唠嗑室本月汇总
+后期编辑：张汉东
+
+> 编者按：
+> 
+> 总结了本月的活动，包括线上和线下。
+> 
+> 线上： 《Rust 唠嗑室》和 《RustFriday 飞书群线上沙龙》
+
+---
+
+# 【活动预告】2021.05.15 北京线下 WebAssembly Meetup **
+
+现在征集议题 ：  [议题申请](https://mp.weixin.qq.com/s/5MFN1x8XQBeE3Zs7oqBtsQ)
+
+---
+
+# 【线上】Rust 唠嗑室本月汇总
 
 - 来源：[Rust 唠嗑室](https://space.bilibili.com/25566598/video)
 - 主持人：MikeTang
 - 后期编辑：高宪凤
 
----
 
 ### 《Rust 唠嗑室》第 21 期 - Local Native 分布式应用开发
 
@@ -64,9 +79,56 @@ io_uring 接口在 Linux 中被用于高效的异步 I/O 操作，但是使用 l
 
 ---
 
+
+# 【线上】RustFriday 飞书群线上沙龙
+
+每周五晚八点，限定两个主题：语言特性和开源项目，在线讨论。
+
+Rust 中文社群 飞书群 邀请你加入：
+
+对话群： https://applink.feishu.cn/TeLAcbDR 
+话题群：https://applink.feishu.cn/TeLD868w
+
+
+## 第三期讨论主题： Rust 语言中级中间语言 MIR 的功用
+
+1. 介绍 MIR 与 MIRI
+3. 和论文的两位第一作者共同阅读2021年新出炉的论文：《 SafeDrop：通过静态数据流分析检测 Rust 程序中的内存释放错误》
+
+参考资料：
+
+1.  https://rustc-dev-guide.rust-lang.org/mir/dataflow.html
+2. https://github.com/rust-lang/miri
+3. https://arxiv.org/pdf/2103.15420
+
+[查看回放](https://www.bilibili.com/video/BV1nU4y1h7NN/)
+
+## 第四期 讨论主题： 
+
+1.  Rust 今天新合并的 RFC : try-trait
+2.  Lunatic： 一个类似于 Erlang 的 容错 WASM 运行时
+
+[查看回放](https://www.bilibili.com/video/BV1xy4y147Ve/)
+
+## 第五期 讨论主题：
+
+1. 语言特性： 《Rust 标准库 trait 之旅》
+2. 领域项目：通过WebSocket实时共享应用程序状态框架 Aper
+
+参考资料：
+
+1. https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md
+2. https://github.com/aper-dev/aper
+3. https://aper.dev/guide/
+
+[查看回放](https://www.bilibili.com/video/BV1f5411c7qg/)
+
+
+---
+
 <center> 🔥🔥🔥🔥 <strong>Rust MeetUp</strong> 🔥🔥🔥🔥 </center>
 
-## Rust MeetUp 本月汇总
+# 【线下】Rust MeetUp 本月汇总
 
 - 来源：[Rust 活动](https://space.bilibili.com/25566598/video)
 - 上传者：MikeTang
@@ -84,6 +146,72 @@ io_uring 接口在 Linux 中被用于高效的异步 I/O 操作，但是使用 l
 
 **嘉宾**：陈天
 
-安全共有三个维度，即：Integrity, Confidentiality, Availability。当我们谈网络安全的时候，人们首先想到的是加密、解密，其实加密、解密只是属于安全的 Confidentiality 范畴。Rust 下 TLS 支持包括：openssl, rustls(基于 ring), tokio-tls-helper。更说详情可查看视频回放。
-
 [查看回放](https://www.bilibili.com/video/BV1R54y1b7qo?p=1)
+
+#### 【P2】 异步化 OS : 使用 async/await 提升 10 倍性能
+
+**嘉宾**：蚂蚁集团 田洪亮
+
+[查看回放](https://www.bilibili.com/video/BV1R54y1b7qo?p=2)
+
+#### 【P3】 Rust和高性能隐私计算
+
+**嘉宾**：数牍科技
+
+[查看回放](https://www.bilibili.com/video/BV1R54y1b7qo?p=3)
+
+#### 【P4】 用Rust实现RDMA编程
+
+**嘉宾**：王璞 @ Datenlord
+
+[查看回放](https://www.bilibili.com/video/BV1R54y1b7qo?p=4)
+
+#### 【P5】 统一相似的异步和同步代码
+
+**嘉宾**：吕国立
+
+[查看回放](https://www.bilibili.com/video/BV1R54y1b7qo?p=5)
+
+#### 【P6】 Unicode标识符简介
+
+**嘉宾**：CRLF0710
+
+[查看回放](https://www.bilibili.com/video/BV1R54y1b7qo?p=6)
+
+#### 【P7】 线性类型映射世界
+
+**嘉宾**：jolestar
+
+[查看回放](https://www.bilibili.com/video/BV1R54y1b7qo?p=7)
+
+---
+
+### Rust Meetup 成都站
+
+**时间**: 2021/04/27
+
+**地点**：成都天府软件园
+
+#### 【P1】 The Future of Embedded System Programming
+
+**嘉宾**：张奕
+
+[查看回放](https://www.bilibili.com/video/BV1Y54y1j7za?p=1)
+
+#### 【P2】 亚马逊教你轻松开发安全隔离的虚拟机
+
+**嘉宾**：孙华
+
+[查看回放](https://www.bilibili.com/video/BV1Y54y1j7za?p=2)
+
+#### 【P3】 从Rust在金融系统的应用到通用事件门溯源模型
+
+**嘉宾**：张宇
+
+[查看回放](https://www.bilibili.com/video/BV1Y54y1j7za?p=3)
+
+#### 【P4】 md5 编码器 live coding
+
+**嘉宾**：吴翱翔
+
+[查看回放](https://www.bilibili.com/video/BV1Y54y1j7za?p=4)
