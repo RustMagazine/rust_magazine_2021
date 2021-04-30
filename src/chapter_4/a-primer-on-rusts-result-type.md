@@ -1,12 +1,11 @@
 # 【译】Rust 的 Result 类型基础
 
->* A Primer on Rust’s Result Type 译文
 >* 原文链接：https://medium.com/@JoeKreydt/a-primer-on-rusts-result-type-66363cf18e6a
 >* 原文作者：[Joe Kreydt](https://medium.com/@JoeKreydt?)
->* 译文来自：[RustMagazine 2021 期刊](https://github.com/RustMagazine/rust_magazine_2021)
 >* 译者：[suhanyujie](https://www.github.com/suhanyujie)
->* 标签：Rust, Result
->* tips：水平有限，翻译不当之处，还请指正，谢谢！
+>* 后期整理：张汉东
+
+---
 
 * ![](https://miro.medium.com/max/2099/1*AoZOz1AJS15yyB3TLUn93A.jpeg)
 

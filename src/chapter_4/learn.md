@@ -4,6 +4,13 @@
 
 ---
 
+## Rust Cheat Sheet 速查
+
+ 内容包含：The Book BK, Rust by Example EX, Std Docs STD, Nomicon NOM, Reference REF。
+
+[https://cheats.rs/](https://cheats.rs/)
+
+
 ## 微软出 Rust 新手教程了
 
 微软给想学习 Rust 的朋友提供了一份新手教程, 手把手带你走出 Rust 第一步.
@@ -148,3 +155,23 @@ Stakker 被设计为分层放置在用户喜欢使用的任何事件循环之上
 - 浏览器play：[https://healthire.github.io/ld48/](https://healthire.github.io/ld48/)
 
 你可以关注 https://github.com/Healthire ，他不止用 Rust 做了这一个游戏
+
+## Rust 中如何使用 gRPC
+
+本文介绍了 如何在Rust中创建gRPC服务器和客户端。 出于可见性目的，客户端还将是Telegram机器人。
+
+[https://romankudryashov.com/blog/2021/04/grpc-rust/](https://romankudryashov.com/blog/2021/04/grpc-rust/)
+
+## 一个 actix-web 中使用 tokio-tracing 的示例
+
+[https://github.com/LukeMathWalker/tracing-actix-web](https://github.com/LukeMathWalker/tracing-actix-web)
+
+## Rust 中可能实现 移动构造函数（Move Constructors） 吗？
+
+移动构造函数（Move Constructors） 是 Cpp 11 引入的一个特性，它允许开发者通过拿其他已存在对象来构造新的对象，从而避免深拷贝导致的效率问题。
+
+如果 Rust 里也支持，那么也可以同样减少深拷贝效率问题，实现就地构造对象。 本文作者探讨了如何安全地实现这个特性，作者为此也实现了一个库 [moveit](https://crates.io/crates/moveit)。
+
+moveit 中充分利用了 Pin/Unpin 来实现该特性，除了 Rust 还支持 Cpp 的移动构造函数，以备 FFi 时候方便。虽然实现了 Unsafe trait ，但作者指明了 Safety 边界。
+
+- [https://mcyoung.xyz/2021/04/26/move-ctors/](https://mcyoung.xyz/2021/04/26/move-ctors/)

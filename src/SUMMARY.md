@@ -92,7 +92,7 @@
     - [论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误](./chapter_4/safe_drop.md)
     - [学界动态](./chapter_4/event_os_design.md)
     - [华为 | StratoVirt 地址空间管理-基于Rust的实现与优化](./chapter_4/hw_stratovirt.md)
-    - [华为 | Rust bin文件优化](./chapter_4/hw_bin_opt.md)
+    - [华为 | Rust 编译后二进制大小和常用优化方式](./chapter_4/hw_bin_opt.md)
     - [蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust](./chapter_4/ant_async_os_opt.md)
     - [蚂蚁集团 | Trait 使用及实现分析](./chapter_4/ant_trait.md)
     - [知乎 | 基于 SIMD 指令优化 Rucene](./chapter_4/zhihu_simd_rucene.md)
@@ -102,6 +102,7 @@
     - [Google | 在 Android 平台使用 Rust](./chapter_4/google_android_rust.md)
     - [MeiliSearch | 开源搜索引擎](./chapter_4/meili_search.md)
     - [学习资源](./chapter_4/learn.md)
+    - [【译】Rust 的 Result 类型基础](./chapter_4/a-primer-on-rusts-result-type.md)
     - [常见问题汇总](./chapter_4/faq.md)
     - [语言技巧](./chapter_4/tips.md)
     - [RFC 介绍 | try-trait v2](./chapter_4/try_trait_v2.md)
@@ -121,7 +122,6 @@
     - [推荐项目 |  框架引擎](./chapter_4/frameworks.md)
     - [开源产品 | TensorBase，基于Rust的现代化开源数据仓库](./chapter_4/tensorbase.md)
     - [开源产品 | eclipse zenoh 助力雾计算和边缘计算](./chapter_4/zenoh.md)
-    - [`Rust`生态安全漏洞总结系列 | Part 2](./chapter_4/rust-security-part2.md)
     - [Unsafe Rust 编码技巧 | Part 1](./chapter_4/unsafe_rust_tips.md)
 
 

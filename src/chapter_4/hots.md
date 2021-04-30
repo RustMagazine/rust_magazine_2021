@@ -131,17 +131,6 @@ Google力求Rust成为Linux内核的第二种语言，并使用它为Android操�
 
 [https://www.zdnet.com/article/programming-languages-javascript-has-most-developers-but-rust-is-the-fastest-growing/](https://www.zdnet.com/article/programming-languages-javascript-has-most-developers-but-rust-is-the-fastest-growing/)
 
-## Facebook 加入了 Rust 基金会
-
-其他基金会成员一样，Facebook致力于维持和发展Rust开源生态系统和社区。
-
-Facebook的开源生态系统负责人，现任Rust Foundation的董事会主席Joel Marcey说：“ Facebook自2016年以来就接受了Rust，并在开发的各个方面都使用了Rust，从源代码控制到编译器。” “我们正在加入Rust基金会，以帮助贡献，改进和发展这种语言，这对我们和全球开发人员都变得如此宝贵。我们期待与其他基金会成员和Rust社区一起参与，使Rust成为系统编程及其他领域的主流选择语言。”
-
-Facebook将于2021年加强对Rust的内部开发人员支持。除了公司内各个团队编写Rust代码外，现在还有一个专门的Rust团队，主要负责公司内部Rust开发的发展，包括开源贡献。加入Rust和基于Rust的项目，并与Rust社区互动。
-
-
-[https://developers.facebook.com/blog/post/2021/04/29/facebook-joins-rust-foundation/](https://developers.facebook.com/blog/post/2021/04/29/facebook-joins-rust-foundation/)
-
 ## 整理了一下 Rust 尾调用优化的状态
 
 ![tco](image/others/rust_tco.png)
@@ -271,3 +260,14 @@ Reddit 上面有人发帖问，有没有区块链之外的Rust工作？
 相比国外，国内 Rust 岗位虽然不多，但也是有的。
 
 [https://www.reddit.com/r/rust/comments/n05zhh/looking_for_a_rust_job_is_pain/](https://www.reddit.com/r/rust/comments/n05zhh/looking_for_a_rust_job_is_pain/)
+
+## 用Rust重写Tensorbord部分组件带来了100x到400x的速度提升
+
+相比原先Python和C++混合，使用大量的锁和跨语言交互的数据读取器， 在使用了Rust编写的专用进程进行数据读取后，性能提升了100x到400x。
+
+- 相关 Issue: [https://github.com/tensorflow/tensorboard/issues/4784](https://github.com/tensorflow/tensorboard/issues/4784)
+- 阅读更多：[https://www.reddit.com/r/rust/comments/mzlg5s/parts_of_tensorboard_are_being_rewritten_in_rust/](https://www.reddit.com/r/rust/comments/mzlg5s/parts_of_tensorboard_are_being_rewritten_in_rust/)
+
+## Rust 生态贡献者 排名
+
+[https://www.johndbeatty.com/rustaceanrank.html](https://www.johndbeatty.com/rustaceanrank.html)

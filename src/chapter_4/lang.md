@@ -93,6 +93,26 @@ Shane 目前领导 AWS 的 Rust平台团队。大约 30年以来，她一直在�
 希望基金会能够帮助Rust围绕许多个人和公司正在开展的活动发展新的合作关系，从而使整个社区受益。例如，大多数公司在内部对每个 Crate 的导入/更新进行附加的安全性检查，许可证/代码验证和性能分析，但如今这些信息并未在外部共享。此外，虽然理想的是用Rust编写新项目，但对于我们大多数人来说，我们需要将Rust集成到现有系统中-许多系统都是C++，并且每个系统都使用一组独特的功能，这些功能对与Rust进行有效集成提出了挑战。跨公司合作，我们可以构建适用于整个行业的解决方案。最后，对于许多关键系统（例如设备驱动程序）来说，Rust开发人员可以访问的正式验证还可以帮助我们消除软件系统中除内存安全性之外的更多问题。
 ”
 
+## Facebook 加入了 Rust 基金会
+
+其他基金会成员一样，Facebook致力于维持和发展Rust开源生态系统和社区。
+
+Facebook的开源生态系统负责人，现任Rust Foundation的董事会主席Joel Marcey说：“ Facebook自2016年以来就接受了Rust，并在开发的各个方面都使用了Rust，从源代码控制到编译器。” “我们正在加入Rust基金会，以帮助贡献，改进和发展这种语言，这对我们和全球开发人员都变得如此宝贵。我们期待与其他基金会成员和Rust社区一起参与，使Rust成为系统编程及其他领域的主流选择语言。”
+
+Facebook将于2021年加强对Rust的内部开发人员支持。除了公司内各个团队编写Rust代码外，现在还有一个专门的Rust团队，主要负责公司内部Rust开发的发展，包括开源贡献。加入Rust和基于Rust的项目，并与Rust社区互动。
+
+
+[https://developers.facebook.com/blog/post/2021/04/29/facebook-joins-rust-foundation/](https://developers.facebook.com/blog/post/2021/04/29/facebook-joins-rust-foundation/)
+
+## Rust 基金会新增四个银牌会员
+
+-  [zama](https://zama.ai/)，为数据科学和AI构建开源同态加密解决方案。 从加密库到机器学习框架，他们始终使用Rust。
+-  [Ferrous Systems](https://ferrous-systems.com/)，通过提供培训和服务来改善Rust的生态系统，并雇用Rust编译器的维护者。 它还通过为嵌入式空间提供重要的生态系统工具（例如knurling ）和共维护库（例如nrf-hal）来启用Rust on Embedded。 他们目前的标志性项目是二茂铁，以在安全关键型空间中启用Rust。
+-  [Tag1Consulting](https://www.tag1consulting.com/)，是一家全球技术咨询公司，是支持他们依赖的开源项目的热心倡导者。 他们依靠Rust进行一些项目，例如goose.rs，这是一个高度可扩展的负载测试工具，其灵感来自基于Python的Locust Framework。
+- [CleverClound](https://www.clever-cloud.com/en/)，是一个自Rust成立以来就一直存在于Rust社区中的IT自动化平台。 他们自豪地为许多Rust开源项目做出了贡献，例如nom，sozu和许多其他项目。
+
+[https://foundation.rust-lang.org/posts/2021-04-29-membership-update/](https://foundation.rust-lang.org/posts/2021-04-29-membership-update/)
+
 ## Rust 编译器（Compiler）团队 4 月份计划 
 
 2021 年 4 月 15 日， Felix Klock on 代表 Rust 编译器团队发表了博文 Rust Compiler April Steering Cycle，对于 Rust 编译器的 4 月份研讨会议，进行日程安排。
@@ -119,6 +139,8 @@ Niko 在其博客说到：
 ”
 
 [https://smallcultfollowing.com/babysteps/blog/2021/04/02/my-shiny-future/](https://smallcultfollowing.com/babysteps/blog/2021/04/02/my-shiny-future/)
+
+
 
 ## Rust GAT 离稳定又进了一步
 
@@ -164,4 +186,37 @@ Miri 是一个实验性的 Rust MIR 解释器。它可以运行 Rust 二进制�
 
 [https://github.com/rust-lang/miri/pull/1757](https://github.com/rust-lang/miri/pull/1757)
 
+
+
+## 编译器团队迎来新成员 Aaron Hill
+
+自2017年创立以来，Aaron Hill（@ Aaron1011）一直在为编译器的许多不同部分做出贡献。最近，Aaron一直致力于发现和修复增量系统中的错误和正确性问题，清理以及对宏扩展和卫生的改进， 以及其他错误修复。 除编译器外，Aaron还实现了对Miri中展开，生成自动特征文档以及将来在Cargo中不兼容报告的支持。
+
+[https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html](https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html)
+
+
+## Rustup 1.24.1 发布
+
+Rustup 1.24.0 发布之后，发现了因为代码疏漏导致`cargo fmt`无法使用，从而回滚到 1.23.1 。现在 1.24.1 修复了这个 Bug 。
+
+[https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html](https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html)
+
+## 介绍 TurboWish
+
+TurboWish 是编译器团队Leader Pnkfelix 及其领导的 Amazon Web Services团队 计划中的一套工具的总称，用于了解Rust程序的动态行为。 他们希望这些工具特别专注于洞察有关程序性能特征。
+
+目标描述：
+
+- Profile Production Code：合并TurboWish框架的开销很低：可以将其合并到生产代码中，而不会产生过多的维护负担，也不会产生显着的性能开销。
+
+- Domain-specific Feedback：框架和应用程序可以为专用度量提供数据，这些度量特定于其内部体系结构。
+
+- Understand Hidden Costs and Connections：tokio之类的框架使编写异步代码变得容易，因为它们在抽象后隐藏了许多细节（例如Rust编译器生成的生成器代码，或tokio运行时管理的任务队列）。 TurboWish公开了那些隐藏的细节，使开发人员可以将它们与其他程序事件相关联。它还暴露了人类通常必须手工重建的联系（例如，从未来到资源再到可能产生僵局的未来链），从而使人们可以直接从Rust的所有权模型中查看对象图中资源的持有方式。
+
+- Framework Agnostic：Rust的许多用户都使用tokio，但并非全部。 async-std和fuschia_async是用于异步编程的其他框架。 TurboWish可以为任何此类框架提供价值（尽管在担保时也可以提供特定于框架的功能）。对于我们的初始发行版，我们可以只专注于tokio，但是如果tokio证明是成功的，则期望与其他人集成。
+
+- EC2 Instance Type Agnostic：如果我们使用任何特定于OS的功能（例如dtrace探针），则无论实例类型如何，它们将在所有EC2 AL2实例上可用。 （特别是，我们不能要求访问CPU性能计数器。）
+
+- Part 1: [http://blog.pnkfx.org/blog/2021/04/26/road-to-turbowish-part-1-goals/](http://blog.pnkfx.org/blog/2021/04/26/road-to-turbowish-part-1-goals/)
+- Part 2: [http://blog.pnkfx.org/blog/2021/04/27/road-to-turbowish-part-2-stories/](http://blog.pnkfx.org/blog/2021/04/27/road-to-turbowish-part-2-stories/)
 

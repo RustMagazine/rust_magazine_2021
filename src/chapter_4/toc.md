@@ -30,7 +30,7 @@ description: March
 ## Rust in Production 
 
 - [华为 | StratoVirt 地址空间管理-基于Rust的实现与优化](./hw_stratovirt.md)
-- [华为 | Rust bin文件优化](./hw_bin_opt.md)
+- [华为 | Rust 编译后二进制大小和常用优化方式](./hw_bin_opt.md)
 - [蚂蚁集团 | Trait 使用及实现分析](./ant_trait.md)
 - [蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust](./ant_async_os_opt.md)
 - [知乎 | 基于 SIMD 指令优化 Rucene](./zhihu_simd_rucene.md)
@@ -46,6 +46,7 @@ description: March
 ### 新手入门
 
 - [学习资源](./learn.md)
+- [【译】Rust 的 Result 类型基础](./a-primer-on-rusts-result-type.md)
 
 ### 语言特性与技巧
 
@@ -86,5 +87,4 @@ description: March
 
 ## Rust vs Security
 
-- [`Rust`生态安全漏洞总结系列 | Part 2](./rust-security-part2.md)
 - [Unsafe Rust 编码技巧 | Part 1](./unsafe_rust_tips.md)

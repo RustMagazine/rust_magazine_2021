@@ -185,3 +185,11 @@ v0.4.0 新功能:
 目前可以对cpu、内存、io和fd的相关数据进行采集。
 
 [https://github.com/larksuite/perf-monitor-rs](https://github.com/larksuite/perf-monitor-rs)
+
+## Zellij: Rust编写的新终端复用工具
+
+![img](https://raw.githubusercontent.com/zellij-org/zellij/main/assets/demo.gif)
+
+- [https://zellij.dev/](https://zellij.dev/)
+- [https://github.com/zellij-org/zellij](https://github.com/zellij-org/zellij)
+

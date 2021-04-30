@@ -21319,6 +21319,8 @@ for _ in 0..10 {
 
 <ul>
 <li><a href='./learn.md'>学习资源</a></li>
+
+<li><a href='./a-primer-on-rusts-result-type.md'>【译】Rust 的 Result 类型基础</a></li>
 </ul>
 
 <h3 id='语言特性与技巧'>语言特性与技巧</h3>
@@ -21333,6 +21335,8 @@ for _ in 0..10 {
 <li><a href='./2021_edition_preview.md'>【官宣】Rust 2021 Edition 计划</a></li>
 
 <li><a href='./rustc_edit_distance_and_typo_checker.md'>用 rustc 源码实现拼写错误候选词建议</a></li>
+
+<li><a href='./nom_url.md'>使用 nom 解析 url</a></li>
 </ul>
 
 <h3 id='rust_与_设计模式'>Rust 与 设计模式</h3>
@@ -21384,8 +21388,6 @@ for _ in 0..10 {
 <h2 id='rust_vs_security'>Rust vs Security</h2>
 
 <ul>
-<li><a href='./rust-security-part2.md'>`Rust`生态安全漏洞总结系列 | Part 2</a></li>
-
 <li><a href='./unsafe_rust_tips.md'>Unsafe Rust 编码技巧 | Part 1</a></li>
 </ul>
 ]]></content:encoded></item></channel></rss>
