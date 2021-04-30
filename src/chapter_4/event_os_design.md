@@ -1,3 +1,10 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Academic dynamics
+
+---
+
+
 # 学界动态
 
 编辑：张汉东

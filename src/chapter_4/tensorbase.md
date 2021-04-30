@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: TensorBase - a modern open source data warehouse based on Rust
+
+---
+
 # 开源产品 | TensorBase，基于Rust的现代化开源数据仓库
 
 作者：金明剑 / 后期编辑：张汉东

@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Real World Rust Design Pattern - Facade
+
+---
+
 # 真实世界的设计模式 | 外观模式（Facade Pattern）
 
 作者：张汉东 / 编辑：张汉东

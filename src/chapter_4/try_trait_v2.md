@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Try trait V2
+
+---
+
 # RFC 介绍 | try-trait v2
 
 编辑： 张汉东

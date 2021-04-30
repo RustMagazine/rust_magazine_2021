@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Rust in Android Platform
+
+---
+
 # Google | 在 Android 平台使用 Rust
 
 翻译：budshome / 编辑：张汉东

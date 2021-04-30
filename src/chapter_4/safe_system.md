@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Safe systems programming in Rust
+
+---
+
 # 论文鉴赏 | 使用 Rust 进行安全系统编程
 
 译者： [MATRIXKOO](https://github.com/MATRIXKOO) / 编辑：张汉东

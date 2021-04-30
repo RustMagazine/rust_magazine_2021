@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: SafeDrop - Detect memory release errors of Rust programs through static data flow analysis
+
+---
+
 # 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误
 
 编辑： 张汉东

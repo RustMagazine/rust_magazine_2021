@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: tips
+
+---
+
 # 语言技巧
 
 编辑：张汉东

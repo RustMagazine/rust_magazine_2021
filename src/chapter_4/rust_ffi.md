@@ -1,3 +1,10 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Rust FFi
+
+---
+
+
 # PingCAP | 使用 Rust FFI 心得
 
 作者：骆迪安（AndyLok）/ 后期编辑：张汉东

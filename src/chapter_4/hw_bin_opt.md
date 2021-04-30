@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Rust compiled binary size and common optimization methods
+
+---
+
 # 华为 | Rust 编译后二进制大小和常用优化方式
 
 作者： 周紫鹏 / 后期编辑：张汉东

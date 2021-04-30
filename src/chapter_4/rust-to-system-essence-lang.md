@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Rust to system essence - lang
+
+---
+
 # 透过 Rust 探索系统的本原：编程语言
 
 作者：陈天 / 后期编辑：张汉东

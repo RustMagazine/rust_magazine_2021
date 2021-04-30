@@ -1,3 +1,10 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Rust 2021 Edition Plan
+
+---
+
+
 # 【官宣】Rust 2021 Edition 计划
 
 翻译/编辑：张汉东

@@ -1,3 +1,10 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: A primer on Rust Result Type
+
+---
+
+
 # 【译】Rust 的 Result 类型基础
 
 >* 原文链接：https://medium.com/@JoeKreydt/a-primer-on-rusts-result-type-66363cf18e6a

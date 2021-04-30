@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: eclipse zenoh
+
+---
+
 # 开源产品 | eclipse zenoh 助力雾计算和边缘计算
 
 原作者：Angelo @ adlinktech.com  / 编辑整理：张汉东

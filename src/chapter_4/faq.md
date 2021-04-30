@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Faq
+
+---
+
 # 常见问题汇总
 
 > 来源：[https://rust-zh.github.io/faq/](https://rust-zh.github.io/faq/)

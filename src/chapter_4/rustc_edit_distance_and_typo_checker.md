@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Use rustc source code to implement misspelling candidate word suggestions
+
+---
+
 # 用 rustc 源码实现拼写错误候选词建议
 
 作者: 吴翱翔@pymongo / 后期编辑：张汉东

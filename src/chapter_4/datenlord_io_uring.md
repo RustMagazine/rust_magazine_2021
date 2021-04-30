@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: io_uring Rust asynchronous library implementation method
+
+---
+
 # Datenlord | io_uring Rust 异步库实现方法
 
 作者：施继成 / 后期编辑：张汉东

@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Trait use and implementation analysis
+
+---
+
 # 蚂蚁集团 | Trait 使用及实现分析
 
 作者：Jiacai Liu / 后期编辑：张汉东

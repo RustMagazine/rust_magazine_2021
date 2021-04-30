@@ -81,7 +81,7 @@
     - [如何为 Rust 语言做贡献 | Part 2](./chapter_3/contribute_to_the_rust_part2.md)
 
 
-- [四月刊（April）| 待发布](./chapter_4/toc.md)
+- [四月刊（April）](./chapter_4/toc.md)
     - [发刊通告](./chapter_4/announce.md)
     - [Rust 资讯来源汇总](./chapter_4/info.md)
     - [官方动态](./chapter_4/lang.md)

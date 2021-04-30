@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Based on SIMD Instruction Optimization** Rucene
+
+---
+
 # 知乎 | **基于** **SIMD** **指令优化** **Rucene**
 
 作者：*知乎搜索技术团队* / 后期编辑：张汉东

@@ -1,3 +1,9 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: How to impl Rust lint
+
+---
+
 # 如何为 Rust 语言做贡献 Part 3 | 年轻人的第一个代码质量检测(Lint)
 
 作者：CrLF0710（野喵）/ 后期编辑：张汉东
