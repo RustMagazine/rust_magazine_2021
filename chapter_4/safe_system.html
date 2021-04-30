@@ -1,0 +1,478 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>论文鉴赏 | 使用 Rust 进行安全系统编程 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item expanded "><a href="../chapter_4/safe_system.html" class="active"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI 心得</a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#论文鉴赏--使用-rust-进行安全系统编程" id="论文鉴赏--使用-rust-进行安全系统编程">论文鉴赏 | 使用 Rust 进行安全系统编程</a></h1>
+<p>译者： <a href="https://github.com/MATRIXKOO">MATRIXKOO</a> / 编辑：张汉东</p>
+<blockquote>
+<p>论文原文： https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/fulltext#FNA</p>
+</blockquote>
+<blockquote>
+<p>编者按：</p>
+<p>该文章发布于 ACM通讯，2021年4月。</p>
+<p>作者是 德国马克斯·普朗克软件系统研究所（Max Planck institute for sofetware system）的 Ralf Jung 等。Ralf Jung 同时也是 Rust 官方团队致力于改进 Miri 以提供 Unsafe Rust 中 UB 检查。同时 Rust 安全模型形式验证项目 Rust Belt 的发起者。</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>关键观点</p>
+</blockquote>
+<ul>
+<li>
+<p>Rust 是第一个受行业支持的在高级语言带来的安全性和由较低级别的 <code>系统编程 (system programming)</code> 语言提供的资源管控之间做出长远平衡的语言。 </p>
+</li>
+<li>
+<p>它以强大的类型系统解决了这一挑战，这种基于所有权和原则的类型系统静态地防止了共享状态的改变。这种方法使许多常见的系统编程的漏洞在编译时被检测到。 </p>
+</li>
+<li>
+<p>有许多数据类型的实现从根本上取决于处于共享的可变状态，因此不能依靠 Rust 的严格要求进行类型检查所有权。为了支持这样的数据类型，Rust  明智的拥抱 <code>unsafe</code>,  使用 <code>safe</code> 的 API 封装在其中的 <code>unsafe</code> 代码。 </p>
+</li>
+<li>
+<p>作为<code>RustBelt project</code> 的一部分， 健壮的 <code>semantic type</code> 证明技术，以及先进的 <code>separation logic</code> 和机器证明技术使得我们能够为 Rust 建立严格可靠的基础。</p>
+</li>
+</ul>
+<blockquote>
+<p>译者注: <code>RustBelt project</code>: https://plv.mpi-sws.org/rustbelt/#project</p>
+<p>一个致力于用形式化证明来保证 Rust 安全性的项目</p>
+</blockquote>
+<hr />
+<p>编程语言设计在两个看似不可调和的愿望之间长期存在着矛盾对立。</p>
+<p>编程语言设计在两个看似不可调和的愿望之间长期存在着矛盾对立。</p>
+<ul>
+<li>安全 ( safe )。 我们想要强类型系统来排除静态地消除大量错误。 我们要自动内存管理。我们想要数据封装， 这样我们就可以对私有变量执行不变的对象的表示形式，并确保它们将不会被不受信任的代码破坏。 </li>
+<li>控制 (control )。 至少对于 Web浏览器，操作系统，或游戏引擎这样的 <code>系统编程 (system programming)</code> 程序，约束它们性能或资源是一个重要的问题，我们想了解数据的字节级表示。 我们想要用<code>底层语言 (low-level programming)</code> 的编程技术优化我们程序的时间和空间的使用。 我们希望在需要时使用 <code>裸机</code> 。</li>
+</ul>
+<p>然而，按照传统的看法，鱼和熊掌不能兼得。 Java 之类的语言使我们极大的安全保证，但代价是牺牲对底层的控制。结果，对于许多系统编程应用程序，唯一现实的选择是使用一种像 C 或 C++ 提供细粒度的语言控制资源管理。 但是，获得这种控制需要很高的成本。例如，微软最近报告说，他们修复的 70％ 安全漏洞都归因于内存安全违规行为 <a href="#33">33</a>，并且都是能被强类型系统排除的问题。同样，Mozilla 报告指出，绝大多数关键 他们在Firefox中发现的错误是内存有关的<a href="#16">16 </a>。如果可以以某种方式两全其美: 安全系统编程的同时对底层有控制权...</p>
+<p>键入 <strong>Rust</strong> 。由Mozilla赞助，并在过去十年中由众多不同的贡献者社区积极开发，Rust 支持许多从现代 C ++ 派生的常见的底层编程习惯用法和 API 。 但是，与C ++不同，Rust 通过强大的静态类型系统来强制安全地使用这些 API 。 </p>
+<p>特别的，像 Java 一样，Rust 可以保护程序员免受内存安全性问题的侵害（例如，<code>use-after-free</code>的错误）。 但是 Rust 更进一步地捍卫程序员免受其他主流语言无法阻止的其他更隐蔽的异常现象的影响。 例如，考虑<em>数据竞争</em>：对共享内存的不同步访问（至少其中之一是写操作）。 即使数据争用有效地构成了并发代码的未定义（或弱定义）行为，大多数<code>安全</code>语言（例如 Java 和 Go ）都允许它们的存在，并且它们是并发错误的可靠来源<a href="#35">35</a>。与之不同的是，Rust 的类型系统在编译时就能探测到数据竞争。</p>
+<p>Rust 一直在稳步普及，以至于现在许多主要的工业软件供应商（例如 Dropbox ，Facebook ，Amazon和 <code>Cloudflare</code> ）都在内部使用 Rust，并且 Rust 在 过去五年的 Stack Overflow 的 <code>最受欢迎的</code> 编程语言列表中排名第一。 微软的安全响应中心团队最近宣布，它正在积极探索对 Microsoft 使用 Rust 可能性，以减少系统软件中的安全漏洞。 <a href="#8">8</a>,<a href="#25">25</a></p>
+<p>Rust 的设计深深地吸取了关于安全系统编程的学术研究的精髓。特别是，与其他主流语言相比，Rust 设计的最大特色在于采用了<em>所有权类型系统</em>（在学术文献中通常称为<em>仿射</em>或<em>子结构</em>类型系统<a href="#36">36</a>）。所有权类型系统通过限制对象的应用， 可用于在程序执行的任何给定点进行变异来帮助程序员实施较低级编程的安全模式。 但是，Rust 至少用两种新颖而令人兴奋的方式超越了先前工作的所有权类型系统：</p>
+<ol>
+<li>Rust采用了<code>借用 (borrowing)</code>和<code>生命周期(lifetime)</code>的机制，这使得表达常见的C ++风格的习惯用法变得容易得多，并确保了它们的安全使用。 </li>
+<li>Rust还提供了丰富的 API 集（例如，用于并发抽象，高效的数据结构和内存管理），它们通过支持比 Rust 的核心类型系统更灵活的别名和突变组合，从根本上扩展了语言的功能。相应地，这些 API 不能在 Rust 的安全片段内实现：相反，它们在内部使用了该语言潜在的 <code>unsafe</code> C 风格的特性，是以一种声称不会干扰 Rust 的语言级别安全性保证的方式进行安全封装。 </li>
+</ol>
+<p>Rust 的设计的这些方面不仅对其成功至关重要，它们还提出了有关其语义和安全性保证的基本研究问题，从而使编程语言社区才刚刚开始探索。 在本文中，我们首先为读者提供了Rust 编程语言的鸟瞰图，重点介绍了 Rust 的一些基本功能，这些功能使它与同时代产品脱颖而出。其次，我们描述了 <code>RustBelt</code>初步进展，该项目是由欧洲研究委员会（ERC）资助的正在进行中的项目，其目的是为 Rust 的安全性主张提供第一个正式的（并经过机器检查的）基础。通过这个项目，我们希望激发计算机科学研究领域的其他成员开始更加关注 Rust ，并为这种突破性语言的发展做出贡献。 </p>
+<h2><a class="header" href="#动机-c-中的无效指针" id="动机-c-中的无效指针">动机: C++ 中的无效指针</a></h2>
+<p>为了演示在系统编程语言中常见的那种内存安全问题，让我们考虑一下</p>
+<p><img src="https://dl.acm.org/cms/attachment/1f582f38-4371-4a65-af48-ac767ff53686/f1.jpg" alt="" /></p>
+<p><strong>Figure 1. Use-after-free bug in C++ and how the bug is prevented in Rust.</strong></p>
+<p>在第一行中，该程序创建一个整数的 <code>std::vector</code>（可增长数组）。 <code>v</code> 的初始内容（两个元素<code>10</code>和<code>11</code>）存储在内存中的缓冲区中。在第二行中，我们创建一个指向该缓冲区的指针 <code>vptr</code>。具体来说，它指向第二个元素（当前值为 <code>11</code> ）的存储位置。现在，<code>v</code> 和  <code>vptr</code> 都指向同一个缓冲区（重叠的部分）。我们说这两个指针是 <code>混叠</code> 的。在第三行中，我们将新元素 <code>push</code> 到 <code>v</code> 的末尾。在缓冲区<code>v</code>中，将元素<code>12</code> 添加到<code>11</code>之后。如果没有更多空间可容纳其他元素，将分配一个新的缓冲区，并将所有现有元素移到上方。让我们假设这就是这里发生的情况。为什么这种情况很有趣？因为<code>vptr</code>仍然指向旧缓冲区。换句话说，在<code>v</code>中添加一个新元素已经将<code>vptr</code>变成了悬空的指针。这是可能的，因为两个指针都是引用：通过指针（<code>v</code>）进行的操作通常也会影响其所有引用（<code>vptr</code>）。 [图1]可视化了整个情况。</p>
+<p><code>vptr</code> 现在是一个悬空指针，在第四行中存在一个问题。在这里，我们从<code>vptr</code> 解引用，并且由于它是一个悬空指针，所以这是一个 <code>use-after-free</code> 错误。 </p>
+<p>实际上，这种问题很普遍，以至于它的一个实例拥有自己的名称：<em>迭代器无效</em>，这是指迭代器（通常在内部用指针实现）无效的情况，因为迭代所遍历的数据结构是可变的在迭代过程中。最常见的情况是在一个循环中遍历某个容器数据结构，然后间接但偶然地调用一个使数据结构发生突变的操作。注意，实际上，对改变数据结构的操作的调用（在我们的示例的第3行中为<code> push_back</code>）可能深深地嵌套在几层抽象的后面。特别是当重构代码或添加新功能时，通常几乎无法确定是否推送到某个 <code>vector</code>是否会使程序中其他位置的指针失效，不存在 <code>use-after-free</code>。 </p>
+<p>**与垃圾回收语言进行比较。**诸如Java ，Go 和 OCaml 之类的语言可避免使用垃圾回收的使用后释放的错误：仅当程序无法使用内存时才释放内存。因此，不能有悬空的指针，也不没有<code>use-after-free</code>。 垃圾回收存在的问题是，为了提高效率，此类语言通常不允许<em>内部</em> 指针（即，指针放入数据结构）。例如，Java中的数组<code> int []</code> 的表示方式类似于 C++ 中的 <code>std::vector &lt;int&gt;</code>（Java中的数组不能增长）。但是，与C ++不同，一个Java数组只能<code>获取</code>和 <code>设置</code>元素，而不能对其进行<code>引用</code>。为了使元素本身可寻址，它们必须是单独的对象，然后可以将对它们的引用存储在数组中--也就是说，需要将元素<code>装箱</code>。为了安全，牺牲了性能和对存储器布局的控制。 最重要的是，垃圾回收甚至不能正确解决迭代器无效的问题。在Java中遍历集合时对其进行改变不会导致指针悬空，但可能会导致在运行时抛出 <code>ConcurrentModificationException</code> 。类似地，尽管 Java 确实防止了由于空指针滥用引起的安全漏洞，但它通过引发 <code>空指针异常 (NullPointerException)</code> 的运行时检查来做到这一点。在这两种情况下，其结果显然都比 C++程序的相应未定义行为更好。这仍然有很多不足之处：我们希望从一开始(编译期)就防止错误发生，而不是交付不正确的代码然后在运行时才检测到问题。 </p>
+<p><strong>Rust解决指针无效的方法</strong>。在 Rust 中，编译器会静态检测到迭代器无效和空指针滥用等问题，它们会导致编译时错误，而不是运行时异常。为了解释它是如何工作的，请在[图1]底部参考我们C ++示例的 Rust转换。 像在 C++ 版本中一样，内存中有一个缓冲区，而 <code>vptr</code> 指向该缓冲区的中间（导致引用）； <code>push</code>可能会重新分配缓冲区，这导致 <code>vptr</code> 变成悬空的指针，并导致第4行中的 use-after-free。 </p>
+<p>但是这一切都没有发生。相反，编译器显示错误：<code>一次不能多次借用 (borrowing) 可变的变量v</code> 我们将很快回到<code>借用 (borrowing)</code>，但是关键思想（Rust 通过这种机制在存在指向数据结构的指针的情况下实现内存安全的机制）已经在这里变得显而易见：类型系统强制执行该规则（我们将在以后介绍）不会有多个可变引用。在并发的上下文中，这个原理听起来应该很熟悉，并且 Rust 确实使用这个方法来确保不存在数据竞争。但是，正如我们被 Rust 编译器拒绝的示例所示，引用和可变性的不受限制的组合即使对于顺序程序也是造成灾难的原因：在第3行中，<code>vptr</code>和<code>v</code>引用（<code>v</code>被认为是指向它的所有内容，与<code>vptr</code> 重叠），我们正在使用一个可变引用，这将导致第4行出现的内存访问错误。 </p>
+<h2><a class="header" href="#所有权和借用-borrowing" id="所有权和借用-borrowing">所有权和借用 (borrowing)</a></h2>
+<p>Rust防止不可控制的引用的核心机制是<em>所有权</em>。 Rust 中的内存始终具有唯一的所有者，如示例2中所示。 </p>
+<p><img src="https://dl.acm.org/cms/attachment/4d8b8636-fbe9-4742-a47b-e29c462cf6d0/f2.jpg" alt="" /></p>
+<p><strong>Figure 2. Rust example: Moving ownership.</strong></p>
+<p>在这里，我们构造与第一个示例类似的 <code>v</code> ，然后将其传递给<code> consume</code>。在操作上，就像在C ++中一样，参数是按值传递的，但是副本是浅复制的—指针被复制，但它们的指针不会重复。这意味着<code> v</code>和<code> w</code>指向内存中的相同缓冲区。 </p>
+<p>如果程序同时使用 <code>v</code> 和 <code>w</code> 两者就会出现这个问题，但是在第6行尝试这样做的时候会导致编译时错误。这是因为 Rust 认为  <code>v</code> 的所有权作为调用的一部分已经移动到 <code>consume</code> 上，这意味着 <code>consume</code> 可以用 <code>w</code> 来做任何想要的事情，并且调用者可能不再访问这个 <code>Vec</code> 的内存。 </p>
+<p><strong>资源管理。</strong> Rust的所有权不仅可以防止内存错误，而且还构成了 Rust 的内存管理方法（更广泛地说，是资源管理的核心。当拥有内存的变量（例如，Vector 的内存中的缓冲区的 <code>Vec &lt;T&gt;</code>类型的变量）超出作用域的时候，我们可以确定不再需要该内存了，因此编译器可以在那时自动释放内存。为此，就像在C++中一样，编译器透明地插入<em>destructor</em> 调用。例如，在 <code>consume </code>函数中，实际上没有必要显式调用析构函数方法（<code>drop</code>）。我们可以将该函数的主体保留为空，并且它将自身自动释放<code> w</code>。 </p>
+<p>因此，Rust程序员几乎不必担心内存管理：尽管缺少垃圾收集器，但它基本上是自动的。此外，内存管理也是 <code>静态的</code>（在编译时确定）这一事实产生了极大的好处：它不仅有助于降低最大的内存消耗，而且还可以在反应式系统中(例如 web 服务器 )提供良好的 <code>最坏情况</code> 的 <code>latency</code> 。最重要的是，Rust 的方法超出了内存管理的范围：文件描述符，套接字，锁，句柄等其他资源都使用相同的机制处理，因此Rust程序员不必担心关闭文件或释放锁。C++以 RAII（资源获取即初始化）的形式为使用析构函数进行自动资源管理的方式开了先河； <a href="#31">31</a> Rust 中的主要区别在于类型系统可以静态地确保资源在销毁后不再使用。 </p>
+<hr />
+<p>**可变的引用。**严格的所有权准则既令人愉悦又简单，但是使用起来并不方便。通常，人们想 <em>暂时</em> 地向某个函数提供数据，在函数允许之后后将其返回。例如，我们希望<code>v.push（12）</code> 赋予 <code>push</code> 来使 <code>v</code>改变的特权，但是我们不希望它<code>consume</code> vector <code>v</code>。 </p>
+<p>在Rust 中，这是通过 <em>借用 (borrowing)</em> 实现的，它从 <em>region types</em> 的先前工作中获得了很多启发。<a href="#13">13</a>,<a href="#34">34</a></p>
+<p>函数<code>add_ something</code>接受类型为 <code>＆mut Vec&lt;i32&gt;</code>的参数，该参数表示对<code>Vec&lt;i32&gt;</code>的 <code>可变引用</code> 。在操作上，这就像C ++中的引用一样，即 <code>Vec</code>通过引用传递。 在类型系统中，这被解释为向自调用者的<code>Vec</code>的<code>add_something</code> <em>借用 (borrowing)</em> 所有权。 </p>
+<p><a href="https://dl.acm.org/cms/attachment/8f380ed9-5373-457c-ad22-ca28804ed776/f3.jpg"><img src="https://dl.acm.org/cms/attachment/8f380ed9-5373-457c-ad22-ca28804ed776/f3.jpg" alt="f3.jpg" /></a></p>
+<p><strong>Figure 3. Rust example: Mutable references.</strong></p>
+<p>函数 <code> add_something</code> 展示了格式化过的借用 (borrowing)看起来是什么样子。 为了搞清楚为什么编译器在拒绝前面的指针无效示例，而这段代码却可以通过，我们必须引入另一个概念：<em>lifetimes</em>。 就像在现实生活中一样，借用 (borrowing)某物时，可以通过事先就可以借用 (borrowing)多久达成共识，来防止误解。 因此，当创建引用时，会为其分配一个生存期，并以完整的引用类型形式记录下来：<code>＆'a mut T</code>表示生存期<code> 'a</code>。编译器会确保引用（<code> v</code>， 在我们的示例中）仅在该生命周期内被使用，并且直到生命周期结束，引用对象才被再次使用。</p>
+<p>在我们的例子中，生存期（全部由编译器推断）分别持续到 <code>add_something</code> 和 <code>Vec::push</code> 结束。 在之前借用 (borrowing)的生命周期尚未结束之前，<code>v</code>不会被使用。</p>
+<p>相比之下，[图4] 显示了从[图1]推断出的上一个示例的生命周期。<code>vptr</code> 借用 (borrowing)生命周期的<code>'a</code> 从第2行开始，一直持续到第4行。<code>vptr</code> 因为在第4行中被使用了，因此不能变得更短了。这意味着在第3行中，<code>v</code>  使用了借出的 ，这是错误的。 </p>
+<p><img src="https://dl.acm.org/cms/attachment/e1a6ee8d-bc5e-458f-8b3d-7ade88032266/f4.jpg" alt="f4.jpg" /></p>
+<p><strong>Figure 4. Use-after-free example with inferred reference lifetime.</strong></p>
+<p>总结一下：每当通过值传递某些东西时（如在 <code>consume</code> 中），Rust 会将其解释为所有权转移。 当某些变量引用传递时（如在 <code>add_something</code> 中），Rust 将此解释为在特定生命周期内借用 (borrowing)。</p>
+<hr />
+<p>**共享引用 (shared reference)。**遵循我们可以可变引用不可共享的原则，可变引用是 <code>unique pointers</code>：它们不允许引用。 为了完善这种规则，Rust 提供了第二种引用，称为 <code>共享引用 (shared reference)</code> ，写为<code>&amp;Vec&lt;i32&gt;</code>或 <code>＆'a Vec &lt;i32&gt;</code> ，允许多个引用但不能改变。 共享引用 (shared reference)的一种主要用例是在多个线程之间共享只读数据，如图5所示。</p>
+<p><img src="https://dl.acm.org/cms/attachment/7d2a2da7-ce35-4321-a112-3d4eb716939e/f5.jpg" alt="f5.jpg" /></p>
+<p><strong>Figure 5. Rust example: Shared references.</strong></p>
+<p>在这里，我们创建一个共享引用 (shared reference) <code>vptr</code> ，指向（并借用 (borrowing)）<code> v [1]</code>。此处的竖线表示不带任何参数的 <em>closure</em>（有时也称为匿名函数或 <code> lambda</code> ）。这些闭包被传递给 <code>join</code> ，这是 Rust 版本的 <code>并行组合</code>( <code>parallel composition</code> )：它需要两个闭包，并行地运行两个闭包，等待两个闭包完成，然后返回两个结果。当<code>join</code>返回时，借用 (borrowing)结束，因此我们可以再次对<code>v</code> 进行修改。 </p>
+<p>就像可变引用一样，共享引用 (shared reference)也存在着生命周期。深入代码背后，Rust 的编译器使用生命周期来跟踪两个线程之间临时共享 <code> v</code> 的时间。在生存期结束后（第5行），<code>v</code>的原始所有者重新获得了完全控制权。此处的主要区别在于，允许多个共享引用 (shared reference)在同一生存期内共存，只要它们仅用于 <code>读取</code>  而不是用于 <code>写入</code> 即可。将示例中的两个线程之一更改为<code>||v.push(12)</code>，就可以看到这条规则的实现: 编译器会给出一条错误，告诉我们不能同时具有可变引用和对 <code>Vec</code> 的共享引用 (shared reference)。的确，该程序在读取线程和<code> v.push(12)</code> 的线程之间存在致命的数据争用，因此，编译器能静态的检测到此类情况是很重要的。 </p>
+<p>共享引用 (shared reference)在顺序执行的代码中也很有用；例如，在对 <code>vec</code> 用 <code>shared iterator</code> 进行遍历时，我们仍然可以传一个 <code>vec</code> 共享引用 (shared reference)到其他函数里。但是在本文中，我们将重点讨论为实现并发而使用共享引用 (shared reference)。 </p>
+<hr />
+<p>**总结。**为了获得安全性，Rust 类型系统强制执行以下原则：共享不可变，可变不共享。拥有 <code>T</code> 类型的值意味着变量完全 <code>拥有</code> 它。可以用可变引用（<code>&amp;mut T</code>）或共享引用 (shared reference)（<code>&amp;T</code>) 去对 <code>T</code> 进行引用。 </p>
+<h2><a class="header" href="#用-safe-api-放宽-rust-的严格所有权规则" id="用-safe-api-放宽-rust-的严格所有权规则">用 <code>safe</code> API 放宽 Rust 的严格所有权规则</a></h2>
+<p>Rust的核心所有权原则具有足够的灵活性，可以解决许多底层编程的习惯用法。但是对于实现某些数据结构而言，它可能过于严格。例如，引用态无法被更改，就不可能实现双向链接列表，因为每个节点都被其下一个和上一个节点引用 。</p>
+<p>Rust 对这个问题采取了一种不寻常的方法。比起允许其类型系统复杂化以解决不遵守该数据类型的数据结构实现，或者引入动态检查来在运行时强制执行安全检查，Rust 允许通过开发 <em><code>safe</code> 的API</em> 来放宽其所有权准则-API通过安全地控制引用的可变状态的使用来扩展语言的表达能力。尽管这些 API 的实现不遵循 Rust 严格的所有权原则（我们将在后面再讲），但 API 本身却严格利用了 Rust 的所有权和借用 (borrowing)机制以确保它们整体上保持 Rust 一致的的安全性。现在让我们看几个例子。 </p>
+<hr />
+<p><strong>共享可变状态</strong>  Rust 的共享引用 (shared reference)允许多个线程同时读取共享数据。 但是仅 <em>读取</em> 数据的线程只是事情的一半，接下来我们将看到 <code>Mutex</code> API 如何是实现跨线程安全地共享可变 <code>mutable</code> 状态。 乍一看，这似乎与我们到目前为止对 Rust 的安全性所说的一切相矛盾：Rust 的所有权准则要点不是要 <code>防止</code> 共享状态的改变吗？ 的确，但是我们将看到如何使用<code>Mutex</code> 充分限制这种改变，以免破坏内存或线程安全。 现在来看图6。</p>
+<p><img src="https://dl.acm.org/cms/attachment/a2dd9c19-b0b2-400b-bf41-0f73aa941100/f6.jpg" alt="f6.jpg" /></p>
+<p><strong>Figure 6. Rust example: Shared mutable state.</strong></p>
+<p>我们再次使用结构化并发和共享引用 (shared reference)，但是现在将 <code>vec</code> 包装在 <code>Mutex</code> 中：变量 <code>mutex_v</code> 的类型为<code> Mutex&lt;Vec&lt;i32&gt;&gt;</code>。<code> Mutex</code> 的的关键操作是<code> lock</code>。它将一直阻塞直到获得独占锁为止。当变量超出范围时，锁将由 <code>v</code> 的析构函数隐式释放。最终，如果第一个线程设法先获取锁，则该程序将打印<code> [10,11,12]</code>，如果第二个线程则获取到了， 就会打印<code> [10，11]</code>。 </p>
+<p>为了弄清楚示例程序的类型检查方式，让我们仔细研究一下<code>lock</code>。它（差不多（实际类型是 被<code>LockResult&lt;…&gt;</code> 包装起来的类型，这也是为什么使用了  <code>unwrap</code> ）的类型为 <code>fn（&amp;'a Mutex &lt;T&gt;)-&gt; MutexGuard &lt;'a，T&gt;</code> 可以使用对互斥锁的共享引用 (shared reference)来调用，这就是 Rust 允许我们在两个线程上调用锁定的原因：两个闭包都捕获<code>&amp;Mutex&lt;Vec&lt;i32&gt;&gt;</code>，并与<code>&amp;i32</code>类型的 <code>vptr</code> 一样，在我们的第一个并发示例中，两个线程可以同时使用该引用。实际上，<code>lock</code> 获取一个共享而不是可变的引用是至关重要的；否则，两个线程将无法尝试同时获取该锁，并且一开始就不需要锁。 </p>
+<p><code>lock</code> 的返回类型，即 <code>MutexGuard &lt;'a，T&gt;</code>，基本上与<code>＆'a mut T'</code> 相同：它给予对存储在锁中的<code>T</code> 的独占访问权限。此外，当超出范围时，它会自动释放锁（在 C++世界中被称为RAII <a href="#33">33</a>）。 </p>
+<p>在我们的示例中，这意味着两个线程 <em>临时</em> 都具有对该 <code>vec</code>  的独占访问权，并且它们都有可变引用，这说明了一个事实-由于锁正确地实现了互斥，因此它们永远不会同时具有可变引用，因此保持了可变引用的唯一性。换句话说，<code>Mutex</code> 可以安全地提供引用状态的改变，因为它实现了运行时检查，确保不会在改变时产生可变引用。</p>
+<hr />
+<p><strong>可变计数</strong> 我们已经看到，共享引用 (shared reference)提供了一种在程序中不同部分方之间共享数据的方法。但是，共享引用 (shared reference)具有 <code>静态确定</code> 的生存期，并且当该生存期结束时，数据将再次被唯一拥有。这与结构化并行机制（如上一示例中的 <code> join</code> ）配合得很好，但不适用于 <code>非结构化</code> 的并行机制，在这种情况下，会产生独立运行于父进程的进程。 </p>
+<p>在 Rust 中，在这种情况下共享数据的典型方法是使用 <code>原子引用计数</code> 指针：<code> Arc&lt;T&gt;</code> 是指向 <code>T</code> 的指针，它会计算存在多少指向<code>T</code> 的指针，并当最后一个指针销毁时 (引用计数归零) 释放 <code>T</code>（并释放其相关资源）。（这可以看作是轻量级实现垃圾回收的一种形式）由于数据是共享的，因此我们无法从<code>Arc&lt;T&gt;</code>中获取<code>&amp;mut T</code>，但是我们可以获得<code>&amp;T</code>。 （在这种情况下，编译器确保在引用生存期内不会破坏 <code>Arc&lt;T&gt;</code>）</p>
+<p><img src="https://dl.acm.org/cms/attachment/be6b6fee-b9f0-40b3-af33-55264c275aae/f7.jpg" alt="f7.jpg" /></p>
+<p><strong>Figure 7. Rust example: Reference counting.</strong></p>
+<p>我们首先创建一个指向我们通常 <code>vec</code> 的 <code> Arc</code> 。 <code>arc_v2</code>是通过<code>clone arc_v1</code>获得的，这意味着引用计数增加了一个，但是数据本身不会增加。 然后我们起一个使用 <code>arc_v2</code> 的线程； 即使我们在此编写的函数返回后，这个线程仍在后台运行。 因为这是非结构化的并行，所以我们必须显式地将<code> arc_v2</code> 移动（即转移其所有权）到另一个线程中运行的闭包中。 <code> Arc</code> 是一个 <code>智能指针</code>（类似于C ++中的<code> shared_ptr</code>），因此我们可以像使用<code>&amp;Vec&lt;i32&gt;</code> 一样使用它。尤其是在第3行和第4行中，我们可以打印出索引为1 的元素的值。当 <code>arc_v1</code> 和<code>arc_v2</code> 超出作用域时，它们的析构函数将被隐式调用，最后 <code>Arc</code> 会销毁 <code>vec</code> 。 </p>
+<hr />
+<p><strong>线程安全</strong> </p>
+<p>在这个关于 Rust 的简短介绍中 ，<code>Rc &lt;T&gt;</code> 是我们最后一个要谈论的类型。 <code>Rc &lt;T&gt;</code> 是一个引用计数类型，它与 <code>Arc &lt;T&gt;</code> 非常相似，但是关键区别在于<code>Arc &lt; T&gt;</code> 使用原子 （获取和添加指令）来更新引用计数，而 <code>Rc &lt;T&gt;</code> 使用非原子操作。结果，<code>Rc &lt;T&gt;</code>可能更快，但不是线程安全的。 <code> Rc&lt;T&gt;</code> 类型在复杂的顺序执行的代码中很有用，在这种情况下，共享引用 (shared reference)的强制执行的静态作用域不够灵活，或者无法静态预测对对象的最后一个引用被销毁的时间，对象无法在应该被回收时被销毁。 </p>
+<p>由于<code>Rc&lt;T&gt;</code>不是线程安全的，因此我们需要确保程序员在应该使用 <code>Arc&lt;T&gt;</code> 时不要混用使用<code>Rc&lt;T&gt;</code>。这很重要：如果我们采用我们前面的 <code>Arc</code> 示例，并用 <code>Rc</code> 替换了所有<code>Arc</code>，这样程序就会产生数据竞争，可能会过早分配内存或根本不分配内存。但是，非常值得注意的是，Rust 编译器依然能够捕获这种错误。 Rust 使用了一种叫做<code>Send</code> 的 trait ：这是一种类型的属性，只有当类型 <code>T</code> 的元素可以安全地发送到另一个线程时，类型 <code>T</code> 才能使用它。类型<code>Arc &lt;T&gt;</code>是 <code>Send</code> 的，但是<code>Rc&lt;T&gt;</code> 不是。 <code>join</code> 和<code>spawn</code>都要求它们运行的闭包捕获的所有内容都具有 <code>Send</code> ，因此，如果我们在闭包中捕获非<code>Send</code> 类型的 <code>Rc &lt;T&gt;</code> 的变量，将导致编译失败。 </p>
+<p>Rust对 <code>Send</code> 的使用证明了强静态类型的限制有时会有更强大的表现力。与 C++ 的智能引用计数指针 <code>std::shared_ptr</code> 更是如此，因为 <code>std::shared_ptr</code> 使用了原子指令。（更准确地说，在Linux上，如果程序使用 <code>pthreads</code>，它使用的任何代码可能产生线程，就会使用原子指令。 ），因为具有更有效的非线程安全变体（如<code>Rc</code> ）被认为过于冒险。相比之下，Rust的<code>send</code> 允许人们 <code>无畏编码</code> ： <a href="#26">26</a>），Rust 是一种将线程安全的数据结构（例如 <code>Arc</code>）和非线程安全的数据结构（例如<code>Rc</code>）同时包含在中的语言，同时以模块化的方式确保不会错误地使用两者。 </p>
+<h2><a class="header" href="#安全封装-unsafe" id="安全封装-unsafe">安全封装 <code>unsafe</code></a></h2>
+<p>我们已经看到了诸如 <code>Arc</code> 和 <code>Mutex</code> 这样的类型如何使 Rust 程序 安全地使用诸如引用计数和共享引用 (shared reference)之类。但是，这有一个问题：这些类型实际上不能在 Rust 中实现。或更确切地说，它们不能在 <em><code>safe Rust </code></em> 中实现：编译器会因为可能违反引用规则而拒绝执行 <code>Arc</code> 。实际上，它甚至会拒绝使用 <code>Vec</code> 来访问可能未初始化的内存。出于效率原因，<code>Vec</code> 手动管理底层缓冲区并跟踪其初始化部分。当然，<code> Arc</code> 的实现实际上并没有违反引用规则，而 <code>Vec</code> 实际上并没有访问未初始化的内存，但是这些推断对于编译器来说太过于细微了。</p>
+<p>为了解决这个问题，Rust 提供了一个 <code>后门</code> ：Rust 不仅包含我们到目前为止讨论的安 <code> Safe Rust</code>，而且还提供了一些 <code>unsafe</code> 功能，例如 C 风格的非受限指针。编译器不能保证这些功能的安全性（内存安全性和/或线程安全性），因此它们仅在标记有 <code>unsafe</code> 关键字的语法块内可用。这样，可以确保不会 <em>偶然</em> 离开 <code>Safe Rust</code>。</p>
+<blockquote>
+<p><em>我们希望激发计算机科学研究领域的其他成员开始更加关注Rust，并为这种突破性语言的发展做出贡献。</em> </p>
+</blockquote>
+<hr />
+<p>例如，<code>Arc</code> 的实现使用 <code>unsafe</code> 来实现在 <code>Safe Rust</code> 中无法表达的模式：没有明确所有者的共享引用 (shared reference)，由线程安全引用计数进行管理。 对<code>弱(weak)引用</code>的支持使情况更加复杂：<code>弱引用</code> 不能使引用对象保持存活，但可以通过原子方式检查其有效性，并升级为完整的<code>Arc</code> 。 Rust编译器根本无法静态验证当引用计数达到零时释放内存实际上是安全的。 </p>
+<hr />
+<p><strong><code>unsafe</code> 块的替代品</strong> 可以将 <code>Arc</code> 或<code>Vec</code> 之类的东西转换到语言层面。例如，Python 和 Swift 具有内置的引用计数，Python 具有与 <code>Vec</code> 等效的内置的 <code>list</code>。但是，这些语言功能是在 C 或 C++中实现的，因此它们实际上没有比 <code>unsafe Rust</code> 实现更安全。除此之外，将不安全的操作限制为语言内置的实现还严重限制了灵活性。例如，Firefox 使用 Rust 库实现了 <code>Arc</code> 的变体，但不支持弱引用，从而提高了代码的空间使用率和性能。语言是否应该为任何内置类型的设计空间中的每个可能的位置提供原语？ </p>
+<p>避免 <code>unsafe</code> 另一种选择是使类型系统具有足够的表达力，以实际能够验证诸如 <code> Arc</code> 之类的类型的安全性。但是，由于此类数据结构的安全性的可能性很小（实际上是 <code> Arc</code> 和简化的变体，其中一些已被用作最近几份正式验证论文中的主要案例研究<a href="#9">9</a>,[12],(#12)，<a href="#18">18</a>，但这基本上只能被有形式的通用定理证明经历和具有足够背景知识的研究人员使用。开发者和种定理证明社区还有很大的距离。</p>
+<hr />
+<p><strong>安全抽象</strong> 相反，Rust选择允许程序员在必要时灵活地编写不安全的代码，尽管期望它应该被  <code>safe</code> 的 API 封装。安全封装意味着，无论使用诸如 <code>Arc</code> 或 <code>Vec</code>  之类的 Rust API 都是通过 <code>unsafe</code> 代码实现的，这些 API 的用户都不会受到影响：只要用户在 <code>safe</code> 片段中编写类型正确的代码，由于 Rust 在 API 的实现中使用了不安全的代码，他们永远都观察不到异常行为。这与 C++ 形成鲜明对比，C++的弱类型系统缺乏甚至无法强制 <code>安全使用</code> API 的能力。结果，像<code>shared_ptr</code> 或 <code>vector</code> 之类的 C++ API 容易被滥用，导致引用计数错误和迭代器无效，这些错误在Rust中都不会出现。 </p>
+<p>编写不安全代码的能力就像 Rust 程序员用来使类型系统更有用而又不会将其变成定理证明器的杠杆一样，我们确信这是 Rust 成功的关键。 Rust 社区正在开发一个有着安全可用的高性能库的生态系统，让程序员可以在它们之上构建安全而高效的应用程序。 </p>
+<p>但是，当然天下没有免费的午餐：Rust 库的作者必须以某种方式确保，他们会非常谨慎，在使用 <code>unsafe</code> 的时候不会破坏 Rust 的安全保证。一方面，这比C/C++ 要好得多，因为绝大多数 Rust代码 是用该语言的 <code>safe</code> 编写的，因此 Rust 的 <code>攻击面</code> 要小得多。另一方面，当 <code>unsafe</code>  变得不可或缺的时候，程序员知道自己是否足够 <code>谨慎</code> 远非显而易见。</p>
+<p>因此，为了保持对 Rust 生态系统安全性的信心，我们真心希望有一种形式化的方法，可以正式的验证使用安全地封装在安全API 的 <code>unsafe</code> 的背后的行为。 这正是<code> RustBelt</code> 项目的目标。</p>
+<h3><a class="header" href="#rustbelt-rust-基础设施的保卫者" id="rustbelt-rust-基础设施的保卫者">RustBelt: Rust 基础设施的保卫者</a></h3>
+<p>验证 Rust 的安全性的主要挑战是考虑 <code>safe</code> 与 <code>unsafe</code> 之间的相互作用。 要了解为什么这具有挑战性，让我们简要地看一下验证编程语言安全性的标准技术，即所谓的<em>syntactic approach</em> 。<a href="#14">14</a>，<a href="#37">37</a> 使用该技术，安全性是由基于大量数学推导给出正式结构的类型检查器的  <em>syntactic typing judgment</em> 来表示的。 </p>
+<hr />
+<p><strong>Theorem 1</strong>*( <em>Syntactic type soundness</em> ) 如果程序 e 在 <em>syntactic typing judgment</em> 后是 <code>well-typed</code> 的，则 e 是安全的。 </p>
+<blockquote>
+<p>well-typed 参见 <a href="https://en.wikipedia.org/wiki/Type_safety">Type safety</a></p>
+</blockquote>
+<p>不幸的是，这个定理对于我们的目的来说太弱了，因为它仅在语法上谈论安全程序，从而排除了使用 <code>不安全</code>代码的程序。 例如，<code>if true {e} else {crash（）}</code> 在语法上不是 <code>well-typed</code>，但由于从未执行<code>crash（）</code>，所以它仍然是安全的。 </p>
+<hr />
+<p><strong>解决方案: <em>Semantic type soundness</em>.</strong></p>
+<blockquote>
+<p><a href="https://blog.sigplan.org/tag/semantic-type-soundness/">Semantic type soundness</a> </p>
+</blockquote>
+<p>为了说明 <code>safe</code> 与 <code>unsafe</code> 之间的相互作用，我们改用称为 <em>Semantic type soundness</em> 的技术，该技术根据程序的<code>行为</code>来表示安全性，而不是使用固定的推理规则集。 <em>Semantic type soundness</em> 的关键要素是 <em>logical relation(逻辑关系)</em>，该逻辑关系为每个 API 分配了 <em>safety contract</em>   。 它表示如果API 中每个方法的输入均符合其指定的类型，则输出也是如此。使用形式验证中的技术，可以证明 API 的实现满足指定的 <em>safety contract</em> ，如[图8]。</p>
+<p><img src="https://dl.acm.org/cms/attachment/2c46d078-5266-431c-96b0-80fd8eee1c18/f8.jpg" alt="f8.jpg" /></p>
+<p><strong>Figure 8. Semantic type soundness.</strong></p>
+<p>对于 <code>safe</code> 与 <code>unsafe</code> 组合的程序进行推理， <em>Semantic type soundness</em> 是理想的选择。 对于任何使用 <code>unsafe</code> 代码块的库（例如<code> Arc Mutex Rc 和 Vec</code>），都必须手动证明该实现满足 <em>safety contract</em> 。 例如： </p>
+<p><strong>Theorem 2.</strong> <em>Arc satisfies its safety contract</em>.</p>
+<p>对于程序的 <code>safe</code> 代码块，验证是自动的。 以下定理表达了这一点，该定理说，如果将组件写入 Rust 的 <code>safe</code> 代码块中，则它通过构造满足其 <em>safety contract</em>。 </p>
+<p><strong>Theorem 3</strong> (Fundamental theorem). <em>如果 组件 e 在语法上是 <code>well-typed</code>的 ，则 e 满足 safety contract</em>。</p>
+<p>综上所述，如果“<code>unsafe</code> 的只出现是在经过手动验证可以满足 <em>safety contract</em> 的库中，则这表示 Rust 程序是安全的。 </p>
+<p>**使用 <a href="https://iris-project.org/">Iris logic</a> 来解码 <em>safety contract</em>  ** <em>Semantic type soundness</em> 是一种古老的技术，至少可以追溯到米尔纳（1978年）关于类型健全性的开创性论文，<a href="#28">28</a>，但将其扩展到像 Rust 这样的工业现代语言被证明是一个艰巨的挑战。实际上，在开发“<code>&quot;step-indexed Kripke logical relations</code>”（SKLR）模型<a href="#3">3</a>,<a href="#5">5</a> 之前，将其扩展到具有可变状态和高阶函数的语言仍然是一个悬而未决的问题。<a href="#2">2</a>,<a href="#4">4</a>，作为基础证明代码项目的一部分。即便如此，使用 SKLR 模型直接编码的<em>safety contract</em>  的验证仍然是非常繁琐，低级且难以维护的。 </p>
+<p>在 <code>RustBelt</code> 项目中，我们以 Iris 的最新工作为基础<a href="#19">19</a>,<a href="#20">20</a>,<a href="#21">21</a>,<a href="#23">23</a>，(一个证明框架，用于更高阶，并发，命令式程序，使用 Coq proof assistant实现)。<a href="#1">1</a> Iris提供了一种更高级的语言来编码和使用 SKLR 模型，从而使我们能够扩展此类模型，以处理Rust等复杂的语言。特别是基于<em>separation logic</em>，<a href="#29">29</a>, <a href="#30">30</a>, Hoare逻辑的扩展<a href="#15">15</a> 专门针对指针操作程序的模块化推理，并以所有权概念为中心。这为我们提供了一种理想的语言，可用于在Rust中建模所有权类型的语义。 </p>
+<p>Iris扩展了传统的 <em>separation logic</em>，并增加了一些对 Rust 至关重要的附加功能： </p>
+<ul>
+<li>
+<p>Iris 支持<em>用户定义的 ghost state</em>：定义自定义逻辑资源的能力，这些逻辑资源对于证明程序的正确性十分有用，但并不直接对应于其物理状态下(译者注: 指内存)的任何内容。 Iris 用户定义的 <em>ghost state</em> 使我们能够验证诸如 <code>Arc</code> 之类的库的健全性，这些库的所有权并不对应于物理所有权（例如，两个单独拥有的 <code>Arc&lt;T&gt;</code> 可能在同一款内存下）-- 一种称为 <code> fictional separation</code> 的现象。<a href="#10">10</a>，<a href="#11">11</a> </p>
+<p>通过（在Iris内）派生了一个新的，特定于领域的<code>lifetime logic</code>，它还使我们能够以更高的抽象水平来思考 Rust 的借用 (borrowing)和生命周期。 </p>
+</li>
+<li>
+<p>Iris支持 <em>impredicative invariants</em> ：程序状态上的不变式，可能会循环引用其他不变式的存在。<a href="#32">32 </a><em>impredicative invariants</em> 构建核心类型系统（例如递归类型和闭包）中起着至关重要的作用。 </p>
+</li>
+</ul>
+<p>Rust 的复杂性要求我们对语义的健全性证明进行<em>machine-checked</em>, 因为这太繁琐且容易出错，无法手动进行证明。 幸运的是，Iris带有丰富的 <em>separation-logic tactics</em> ，这些策略是根据标准 Coq 策略制定的，因此可以让 Coq用户 经过 <code> time-tested</code> 的方式熟悉的开发 <em>machine-checked</em> 的语义完整性证明。 <a href="#22">22</a>,<a href="#24">24</a></p>
+<h3><a class="header" href="#结论和展望" id="结论和展望">结论和展望</a></h3>
+<p>在本文中，我们给出了 Rust 的鸟瞰图，展示了 Rust 的核心概念，例如借用 (borrowing)，生存期以及封装在 <code>safe</code> API 中的 <code>unsafe</code> 代码。这些功能帮助 Rust 第一个受行业支持的在高级语言带来的安全性和由较低级别的<code>系统编程</code>语言提供的资源管控之间做出长远平衡的语言。 </p>
+<p>为了研究 <code>Rust </code> 的安全声明，我们描述了语义类型健全性的证明技术，这使我们能够开始在 <code>RustBelt</code> 项目中为 Rust 构建严格的基础。有关Rust 和 <code>RustBelt</code> 的更多详细信息，请向感兴趣的读者可以去阅读我们的POPL'18论文<a href="#18">18</a> 和第一作者的博士学位论文。<a href="#17">17</a> </p>
+<p>我们还有很多工作要做。尽管 <code>RustBelt</code> 最近为Rust 考虑 从C++继承来的宽松内存并发模型( relaxed-memory concurrency model )<a href="#9">9</a>，当还没有涵盖许多其他 Rust 功能和 API，例如其 <code>trait</code> 系统，该系统非常复杂以至于会出现很多微妙的 bug 。 <a href="#7">7</a>，尽管验证<code>unsafe rust</code> 库的健全性目前需要形式语义的深厚背景，但我们希望最终开发出可以直接交给程序员的形式化方法。 </p>
+<p>最后，尽管 <code>RustBelt</code> 专注于为 Rust 本身打好安全基础，但我们很高兴看到其他研究项目（特别是 <code>Prusti</code> <a href="#6">6</a> 和 <code>RustHorn</code> <a href="#27">27</a>）正开始探索一个令人激动的正交方向：即Rust 的强类型系统有可能用作简化系统代码形式验证的有力工具。 </p>
+<h2><a class="header" href="#references" id="references">References</a></h2>
+<p><span id="1"></span> 1.The Coq proof assistant, 2019; https://coq.inria.fr/.</p>
+<p><span id="2"></span> 2. Ahmed, A., Appel, A.W., Richards, C.D., Swadi,  K.N., Tan, G. and Wang, D.C. Semantic foundations for typed assembly  languages. <em>TOPLAS 32</em>, 3 (2010).</p>
+<p><span id="3"></span>3. Ahmed, A.J. Semantics of types for mutable state. Ph.D. thesis, Princeton University, 2004.</p>
+<p><span id="4"></span>4. Appel, A.W. Foundational proof-carrying code. <em>LICS</em>, 2001.</p>
+<p><span id="5"></span>5. Appel, A.W. and McAllester, D. An indexed model of recursive types for foundational proof-carrying code. <em>TOPLAS 23</em>, 5 (2001).</p>
+<p><span id="6"></span>6. Astrauskas, V., Müller, P., Poli, F. and Summers, A.J. Leveraging Rust types for modular specification and verification. <em>PACMPL 3 (OOPSLA)</em>, 2019.</p>
+<p><span id="7"></span>7. Ben-Yehuda, A. Coherence can be bypassed by an indirect impl for a trait object, 2019; https://github.com/rust-lang/rustissues/57893.</p>
+<p><span id="8"></span>8. Burch, A. Using Rust in Windows. Blog post, 2019; https://msrc-blog.microsoft.com/2019/11/07/using-rust-in-windows/.</p>
+<p><span id="9"></span>9. Dang, H.-H., Jourdan, J.-H., Kaiser, J.-O. and Dreyer, D. RustBelt meets relaxed memory. <em>PACMPL 4 (POPL)</em>, 2020.</p>
+<p><span id="10"></span>10. Dinsdale-Young, T., Dodds, M., Gardner, P., Parkinson, M.J. and Vafeiadis, V. Concurrent abstract predicates. <em>ECOOP</em>, 2010.</p>
+<p><span id="11"></span>11. Dinsdale-Young, T., Gardner, P. and Wheelhouse, M.J. Abstraction and refinement for local reasoning. <em>VSTTE</em>, 2010.</p>
+<p><span id="12"></span>12. Doko, M. and Vafeiadis, V. Tackling real-life relaxed concurrency with FSL++. <em>ESOP 10201, LNCS</em>, 2017.</p>
+<p><span id="13"></span>13. Grossman, D., Morrisett, G., Jim, T., Hicks, M., Wang, Y. and Cheney, J. Region-based memory management in Cyclone. <em>PLDI</em>, 2002.</p>
+<p><span id="14"></span>14. Harper, R. <em>Practical Foundations for Programming Languages</em> (2nd Ed.). Cambridge University Press, 2016.</p>
+<p><span id="15"></span>15. Hoare, C.A.R. An axiomatic basis for computer programming. <em>Commun. ACM 12</em>, 10 (1969).</p>
+<p><span id="16"></span>16. Hosfelt, D. Implications of rewriting a browser component in Rust. Blog post, 2019; https://hacks.mozilla.org/2019/02/rewriting-a-browser-component-in-rust/.</p>
+<p><span id="17"></span>17. Jung, R. Understanding and Evolving the Rust Programming Language. Ph.D. thesis, Universität des Saarlandes, 2020; https://people.mpi-sws,org/~jung/thesis.html.</p>
+<p><span id="18"></span>18. Jung, R., Jourdan, J.-H., Krebbers, R. and Dreyer, D. RustBelt: Securing the foundations of the Rust programming language. <em>PACMPL 2 (POPL)</em>, 2018.</p>
+<p><span id="19"></span>19. Jung, R., Krebbers, R., Birkedal, L. and Dreyer, D. Higher-order ghost state. <em>ICFP</em>, 2016.</p>
+<p><span id="20"></span>20. Jung, R., Krebbers, R., Jourdan, J.-H., Bizjak, A., Birkedal, L. and Dreyer, D. Iris from the ground up: A modular  foundation for higher- order concurrent separation logic. <em>JFP 28</em> (2018).</p>
+<p><span id="21"></span>21. Jung, R., Swasey, D., Sieczkowski, F.,  Svendsen, K., Turon, A., Birkedal, L. and Dreyer, D. Iris: Monoids and  invariants as an orthogonal basis for concurrent reasoning. <em>POPL</em>, 2015.</p>
+<p><span id="22"></span>22. Krebbers, R., Jourdan, J.-H., Jung, R.,  Tassarotti, J., Kaiser, J.-O, Timany, A., Charguéraud, A. and Dreyer, D. MoSeL: A general, extensible modal framework for interactive proofs in  separation logic. <em>PACMPL 2 (ICFP)</em>, 2018.</p>
+<p><span id="23"></span>23. Krebbers, R., Jung, R., Bizjak, A., Jourdan,  J., Dreyer, D. and Birkedal, L. The essence of higher-order concurrent  separation logic. <em>ESOP</em>, 2017.</p>
+<p><span id="24"></span>24. Krebbers, R., Timany, A. and Birkedal, L. Interactive proofs in higher-order concurrent separation logic. <em>POPL</em>, 2017.</p>
+<p><span id="25"></span>25. Levick, R. Why Rust for safe systems programming. Blog post, 2019; https://msrc-blog.microsoft.com/2019/07/22/why-rust-for-safe-systems-programming/.</p>
+<p><span id="26"></span>26. Matsakis, N. and Turon, A. Rust in 2016, 2015. Blog post; https://blog.rust-lang.org/2015/08/14/Next-year.html.</p>
+<p><span id="27"></span>27. Matsushita, Y., Tsukada, T. and Kobayashi, N. RustHorn: CHC-based verification for Rust programs. <em>ESOP</em>, 2020.</p>
+<p><span id="28"></span>28. Milner, R. A theory of type polymorphism in programming. <em>J. Computer and System Sciences 17</em>, 3 (1978).</p>
+<p><span id="29"></span>29. O'Hearn, P.W., Reynolds, J.C. and Yang, H. Local reasoning about programs that alter data structures. <em>CSL</em>, 2001.</p>
+<p><span id="30"></span>30. O'Hearn, P.W. Resources, concurrency, and local reasoning. <em>Theoretical Computer Science 375</em>, 1–3 (2007).</p>
+<p><span id="31"></span>31. Stroustrup, B. <em>The C++ Programming Language</em>. Addison-Wesley, 2013.</p>
+<p><span id="32"></span>32. Svendsen, K. and Birkedal, L. Impredicative concurrent abstract predicates. <em>ESOP</em>, 2014.</p>
+<p><span id="33"></span>33. Thomas, G. A proactive approach to more secure code. Blog post, 2019; https://msrc-blog.microsoft.com/2019/07/16/a-proactive-approach-to-more-secure-code/.</p>
+<p><span id="34"></span>34. Tofte, M. and Talpin, J. Region-based memory management. Information and Computation 132, 2 (1997).</p>
+<p><span id="35"></span>35. Tu, T., Liu, X., Song, L. and Zhang, Y. Understanding real-world concurrency bugs in Go. <em>ASPLOS</em>, 2019.</p>
+<p><span id="36"></span>36. Walker, D. Substructural type systems. <em>Advanced Topics in Types and Programming Languages</em>. B.C. Pierce, Ed. MIT Press, Cambridge, MA, 2005.</p>
+<p><span id="37"></span>37. Wright, A.K. and Felleisen, M. A syntactic approach to type soundness. <em>Information and Computation 115</em>, 1 (1994).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_4/jobs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_4/safe_drop.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_4/jobs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_4/safe_drop.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

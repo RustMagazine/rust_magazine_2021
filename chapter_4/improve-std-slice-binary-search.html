@@ -1,0 +1,641 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>优化 Rust 标准库的 binary_search - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI 心得</a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item expanded "><a href="../chapter_4/improve-std-slice-binary-search.html" class="active"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#优化-rust-标准库的-binary_search" id="优化-rust-标准库的-binary_search">优化 Rust 标准库的 binary_search</a></h1>
+<p>2021 年 5 月 6 号发布的 Rust 1.52 版将会包含我的一个 PR，将标准库 <code>slice::binary_search_by()</code> 的最好时间复杂度优化到 <strong>O(1)</strong>。PR 编号 <a href="https://github.com/rust-lang/rust/pull/74024">#74024</a>，从 2020 年 7 月初提交的 PR，到 2021 年 3 月 6 号才正式合并，其中包含 70 多条评论，前后历时大半年。这个 PR 虽然改动不算很大，但是笔者在其中也学到了不少知识点，所以特意写一篇文章总结一下，希望能帮助到大家。</p>
+<p>首先看一下 <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search_by"><code>slice::binary_search_by()</code></a> 这个方法的示例来了解一下它的用途。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s = [0, 1, 1, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55];
+
+let seek = 13;
+assert_eq!(s.binary_search_by(|probe| probe.cmp(&amp;seek)), Ok(9));
+let seek = 4;
+assert_eq!(s.binary_search_by(|probe| probe.cmp(&amp;seek)), Err(7));
+let seek = 100;
+assert_eq!(s.binary_search_by(|probe| probe.cmp(&amp;seek)), Err(13));
+let seek = 1;
+let r = s.binary_search_by(|probe| probe.cmp(&amp;seek));
+assert!(match r { Ok(1..=4) =&gt; true, _ =&gt; false, });
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个函数的作用就是在给定的有序 slice 中二分查找目标值 <code>seek</code>。如果找到了返回 <code>Ok(pos)</code>，<code>pos</code> 即目标值所在的位置；没找到则返回 <code>Err(pos)</code>, 这里的 <code>pos</code> 的位置可以用来将 <code>seek</code> 插入 slice 后依然保持有序。其他的 <code>slice::binary_search()</code>，<code>slice::binary_search_by_key()</code> 系列方法都是调用这个 <code>slice::binary_search_by()</code>，这里不再赘叙。</p>
+<p>但是，1.52 之前的实现有一个小问题，如果 slice 中存在多个连续的目标值，则它会一直找到最后一个才返回，所以最好时间复杂度也是 <code>O(log n)</code>，而不是 <code>O(1)</code>，也就是找到了就马上返回。这是 1.52 之前的代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[stable(feature = &quot;rust1&quot;, since = &quot;1.0.0&quot;)]
+#[inline]
+pub fn binary_search_by&lt;'a, F&gt;(&amp;'a self, mut f: F) -&gt; Result&lt;usize, usize&gt;
+where
+    F: FnMut(&amp;'a T) -&gt; Ordering,
+{
+    let s = self;
+    let mut size = s.len();
+    if size == 0 {
+        return Err(0);
+    }
+    let mut base = 0usize;
+    while size &gt; 1 {
+        let half = size / 2;
+        let mid = base + half;
+        // SAFETY: the call is made safe by the following inconstants:
+        // - `mid &gt;= 0`: by definition
+        // - `mid &lt; size`: `mid = size / 2 + size / 4 + size / 8 ...`
+        let cmp = f(unsafe { s.get_unchecked(mid) });
+        base = if cmp == Greater { base } else { mid };
+        size -= half;
+    }
+    // SAFETY: base is always in [0, size) because base &lt;= mid.
+    let cmp = f(unsafe { s.get_unchecked(base) });
+    if cmp == Equal { Ok(base) } else { Err(base + (cmp == Less) as usize) }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>既然我们发现这个问题了，很简单，我们在 <code>while</code> 循环中判断 <code>cmp == Equal</code> 不就行了？如果相等就直接返回 <code>Ok</code>，否则继续二分去查找。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>while size &gt; 1 {
+    let half = size / 2;
+    let mid = base + half;
+    // SAFETY:
+    // mid is always in [0, size), that means mid is &gt;= 0 and &lt; size.
+    // mid &gt;= 0: by definition
+    // mid &lt; size: mid = size / 2 + size / 4 + size / 8 ...
+    let cmp = f(unsafe { s.get_unchecked(mid) });
+    if cmp == Equal {
+        return Ok(base);
+    } else if cmp == Less {
+        base = mid
+    };
+    size -= half;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>为了简洁性，这里（包括后面）都会适当省略重复代码。</p>
+</blockquote>
+<p>嗯，看起来逻辑上没问题，单测也跑通过了，提交一个 PR，我们暂且叫它<strong>优化(1)</strong>。没过几天 <a href="https://github.com/dtolnay">dtolnay</a> review 了我的 PR 并回复了：<code>Would you be able to put together a benchmark assessing the worst case impact? The new implementation does potentially 50% more conditional branches in the hot loop.</code></p>
+<p>确实，Rust 标准库对性能要求非常高，我们必须要有足够多 case 对新旧版本做 benchmark 对比，尽可能避免新的版本导致性能上的 regression。这是当时我做的 benchmark 数据：</p>
+<pre><code>// 标准库的实现
+test slice::binary_search_l1           ... bench:          59 ns/iter (+/- 4)
+test slice::binary_search_l1_with_dups ... bench:          59 ns/iter (+/- 3)
+test slice::binary_search_l2           ... bench:          76 ns/iter (+/- 5)
+test slice::binary_search_l2_with_dups ... bench:          77 ns/iter (+/- 17)
+test slice::binary_search_l3           ... bench:         183 ns/iter (+/- 23)
+test slice::binary_search_l3_with_dups ... bench:         185 ns/iter (+/- 19)
+</code></pre>
+<pre><code>// 新版实现
+test slice::binary_search_l1           ... bench:          58 ns/iter (+/- 2)
+test slice::binary_search_l1_with_dups ... bench:          37 ns/iter (+/- 4)
+test slice::binary_search_l2           ... bench:          76 ns/iter (+/- 3)
+test slice::binary_search_l2_with_dups ... bench:          57 ns/iter (+/- 6)
+test slice::binary_search_l3           ... bench:         200 ns/iter (+/- 30)
+test slice::binary_search_l3_with_dups ... bench:         157 ns/iter (+/- 6)
+</code></pre>
+<p>可以看出来在 with_dups 模式（即重复元素较多）下，新的实现有很明显的提升，但是 l3 级别的普通模式性能反而要差很多。可能的原因正如 <strong>dtolnay</strong> 所说的 <code>The new implementation does potentially 50% more conditional branches in the hot loop</code>。那 <code>conditional branches</code> 具体是什么？为什么它在热循环中如此关键？这里引入这篇文章的第一个知识点：<strong>分支预测</strong>。</p>
+<h2><a class="header" href="#分支预测branch-prediction" id="分支预测branch-prediction">分支预测(Branch prediction)</a></h2>
+<p><strong>分支预测</strong> (<code>branch prediction</code>) 是现代 CPU 为了加快指令并行化速度在碰到分支时提前预测下一个可能执行的分支的一种技术。 CPU 中一般都内置专门的分支预测器 (Branch predictor)。强烈推荐先阅读 Stackoverflow 这个高赞回答 <a href="https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array">Why is processing a sorted array faster than processing an unsorted array?</a>，里面比较清晰易懂的解释了分支预测是什么以及对性能带来的影响。关于<strong>分支预测</strong>完全可以写一篇专门的文章介绍了，我这里只把我学到的知识总结一下。</p>
+<h3><a class="header" href="#分支" id="分支">分支</a></h3>
+<p>首先我们要了解一下<a href="https://en.wikipedia.org/wiki/Branch_(computer_science)"><strong>分支</strong></a>到底是指什么？在高级语言层面，很显然分支就是 <code>if/else/else if</code>，<code>goto</code> 或者 <code>switch/match</code> 这种语句。他们会转换成汇编代码中的 <code>jump</code> 指令。比如 x86 汇编的各种 <code>j</code> 开头的 <code>jump</code> 指令：</p>
+<table><thead><tr><th>指令</th><th>作用</th></tr></thead><tbody>
+<tr><td>jmp</td><td>Always jump</td></tr>
+<tr><td>je</td><td>Jump if cmp is equal</td></tr>
+<tr><td>jne</td><td>Jump if cmp is not equal</td></tr>
+<tr><td>jg</td><td>Signed &gt; (greater)</td></tr>
+<tr><td>jge</td><td>Signed &gt;=</td></tr>
+<tr><td>jl</td><td>Signed &lt; (less than)</td></tr>
+<tr><td>jle</td><td>Signed &lt;=</td></tr>
+<tr><td>ja</td><td>Unsigned &gt; (above)</td></tr>
+<tr><td>jae</td><td>Unsigned &gt;=</td></tr>
+<tr><td>jb</td><td>Unsigned &lt; (below)</td></tr>
+<tr><td>jbe</td><td>Unsigned &lt;=</td></tr>
+<tr><td>jecxz</td><td>Jump if ecx is 0</td></tr>
+<tr><td>jc</td><td>Jump if carry: used for unsigned overflow, or multiprecision add</td></tr>
+<tr><td>jo</td><td>Jump if there was signed overflow</td></tr>
+</tbody></table>
+<p>比如我们随便写一段包含 <code>if/else</code> 逻辑的代码，编译之后的汇编代码中就会包含类似的 <code>jump</code> 指令：</p>
+<pre><pre class="playground"><code class="language-rust">#![allow(unused_assignments)]
+pub fn main() {
+  // 接收用户从命令行中输入的参数
+  let mut a: usize = std::env::args().nth(1).unwrap().parse().unwrap_or_defaul();
+  if a &gt; 42 { 
+    a = 1;
+  } else {
+    a = 0;
+  }
+}
+</code></pre></pre>
+<p>这段代码逻辑这么写主要是为了保持汇编指令的尽量简单。这里是对应的汇编代码，只保留了跟 <code>if/else</code> 有关的部分，完整的代码链接在这里：<a href="https://rust.godbolt.org/z/ahcKcK1Er">https://rust.godbolt.org/z/ahcKcK1Er</a>。</p>
+<pre><code class="language-assembly">.LBB99_7:
+        cmp     qword ptr [rsp + 56], 42 ; if a &gt; 42
+        jbe     .LBB99_10
+        mov     qword ptr [rsp + 56], 1  ; a = 1
+        jmp     .LBB99_11
+.LBB99_10:
+        mov     qword ptr [rsp + 56], 0  ; a = 0
+.LBB99_11:
+        add     rsp, 200
+        ret
+</code></pre>
+<p>我在代码里面加了几条注释（汇编里面用分号注释）表明了该条指令对应的 Rust 代码，可以看出来 <code>jbe</code> 指令会判断是否跳转到 <code>.LBB99_10</code> 还是不跳转继续执行下面的 <code>mov</code>。</p>
+<p>了解了分支是什么之后还不够，我们依然不知道具体是为啥 CPU 需要做分支预测。接下来我们需要了解一下另外一个概念：<strong>指令流水线</strong>。</p>
+<h3><a class="header" href="#指令流水线instruction-pipelining" id="指令流水线instruction-pipelining">指令流水线(instruction pipelining)</a></h3>
+<p><strong>指令流水线</strong>是从 <strong>instruction pipelining</strong> 翻译过来的一个名词，主要是指为了提高单个处理器指令处理效率的一种技术，早在上个世纪 70 年代的芯片就有这种技术了。</p>
+<p>CPU 处理一条指令一般要分为几个步骤：</p>
+<ul>
+<li>取指令(Instruction Fetch)</li>
+<li>解指令(Instruction Decode)</li>
+<li>执行指令 (Execute)</li>
+<li>回写结果到寄存器 (Register write back)</li>
+</ul>
+<p>这非常类似工厂生产某件需要多道工序的商品一样。想象一下，如果工厂每次都是完整的按照工序把第一件商品生产出来之后再进行同样的步骤生产下一件商品的话，这个生产速度得多慢！所以 19 世纪人类就诞生了工业化的流水线，把所有这些工序分解并行化。第一件商品在工序(2)的时候，丝毫不影响第二件商品进入工序(1)。指令也完全可以这样，CPU 可以把指令执行过程流水线化，把不同的指令执行步骤分给不同的逻辑门 (<a href="https://en.wikipedia.org/wiki/Logic_gate">logic stage</a>)处理，第一条指令进入<strong>解指令</strong>阶段的时候，第二条指令就可以进入<strong>取指令</strong>阶段了。</p>
+<p>Wikipedia 上的这张图可以帮助理解（图中文字颜色为黑色，推荐用 Light 主题查看）。</p>
+<p><img src="./image/improve-std-slice/instruction-pipeline.png" alt="" /></p>
+<p>了解前面的这些概念之后，我们来看一下为什么 CPU 需要做分支预测？</p>
+<h3><a class="header" href="#为什么需要分支预测" id="为什么需要分支预测">为什么需要分支预测？</a></h3>
+<p><strong>指令流水线</strong>会按照工厂流水线一样执行指令，这其中也包括前面讲的 <strong>jump</strong> 指令。而 <strong>jump</strong> 指令有一个问题就是它需要知道下一个时钟周期该跳转还是不跳转，而这需要等前面的判断逻辑执行完了之后才知道。比如上面的例子 <strong>cmp</strong> 判断完之后，<code>jump</code> 指令才能决定是跳转到 <code>.LBB99_10</code> 部分，还是不跳转继续执行下去。但是 CPU 指令流水线才不会等，否则白白的浪费一个时钟周期。所以人们发明了一种办法来避免出现这种问题，这就是<strong>分支预测</strong>。</p>
+<p>CPU 的分支预测器会提前预测这条 <strong>jump</strong> 指令可能会跳转的到哪个分支，然后把预测的那条分支放到流水线中去执行。如果预测正确，CPU 可以继续执行后面的指令；如果预测失败了(branch misprediction)，那只能丢弃刚刚执行的分支结果，重新切换到正确的分支执行。可以看到，如果出现过多的预测失败，分支预测反而很影响性能。不过现在 CPU 的分支预测器经过这么多年的发展已经越来越先进了，人们会采用各种方式不断提高分支预测器的预测准确率，详细可以查看 Wikipedia 的 <a href="https://en.wikipedia.org/wiki/Branch_predictor">Branch_predictor</a> 了解更多。</p>
+<h3><a class="header" href="#热循环中避免分支预测" id="热循环中避免分支预测">热循环中避免分支预测</a></h3>
+<p>虽然现代 CPU 都有分支预测器，但我们在软件层面依然要尽量避免发生分支预测，特别是在热循环中。最常用的优化方法就是避免在循环中写 <code>if/else</code> 语句，即 <code>branchless code</code>。标准库中有大量这种 <code>branchless code</code> 的案例来优化性能，比如 <code>std::collection::Filter</code> 的 <code>count()</code> 方法。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Filter&lt;I, P&gt; {
+    iter: I,
+    predicate: P,
+}
+
+impl&lt;I: Iterator, P&gt; Iterator for Filter&lt;I, P&gt;
+where
+    P: FnMut(&amp;I::Item) -&gt; bool,
+{
+    type Item = I::Item;
+
+    // this special case allows the compiler to make `.filter(_).count()`
+    // branchless. Barring perfect branch prediction (which is unattainable in
+    // the general case), this will be much faster in &gt;90% of cases (containing
+    // virtually all real workloads) and only a tiny bit slower in the rest.
+    //
+    // Having this specialization thus allows us to write `.filter(p).count()`
+    // where we would otherwise write `.map(|x| p(x) as usize).sum()`, which is
+    // less readable and also less backwards-compatible to Rust before 1.10.
+    //
+    // Using the branchless version will also simplify the LLVM byte code, thus
+    // leaving more budget for LLVM optimizations.
+    #[inline]
+    fn count(self) -&gt; usize {
+        #[inline]
+        fn to_usize&lt;T&gt;(mut predicate: impl FnMut(&amp;T) -&gt; bool) -&gt; impl FnMut(T) -&gt; usize {
+            move |x| predicate(&amp;x) as usize
+        }
+
+        self.iter.map(to_usize(self.predicate)).sum()
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>标准库的 <code>Filter</code> 类型在实现 <code>Iterator</code> 的时候重写了 <code>count()</code> 方法。想想如果我们没有意识到分支预测这个问题的情况下可能会这么实现：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Bad
+#[inline]
+fn count(self) -&gt; usize {
+    let sum = 0;
+
+    self.iter.for_each(|x| {
+        if self.predicate(x) {
+            sum += 1;
+        }
+    });
+    
+    sum
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>但这种实现在循环中有一个 <code>if</code> 语句，导致 CPU 需要进行大量的分支预测，而这些分支预测几乎都是随机的，CPU 很难根据历史记录提高预测的准确度，导致性能会比较低。而标准库的实现完全是 branchless 的，不仅性能好很多，而且也能方便 LLVM 做更多优化。</p>
+<blockquote>
+<ul>
+<li>
+<p>关于怎样写好 <code>branchless code</code> 来优化性能又是另一个值得专门讨论的主题了，网上也有大量资料可以学习。但是 <code>branchless code</code> 会牺牲不少代码可读性，并不建议盲目的使用。</p>
+</li>
+<li>
+<p><code>branchless code</code> 的额外好处是还能帮助避免遭受<strong>旁路攻击</strong>(英文 timing attack 或者 side-channel attack)。参考：<a href="https://en.wikipedia.org/wiki/Timing_attack">https://en.wikipedia.org/wiki/Timing_attack</a>。</p>
+</li>
+</ul>
+</blockquote>
+<p>继续回到我们刚才的那个 PR。我们的版本比标准库旧的版本在某些 case 下性能要低确实跟分支预测有关，因为我们的代码多了一种分支需要预测。</p>
+<p>为了方便大家对比，我把汇编的截图贴到下面。我们只需要关注我标记文字的那几个颜色就可以。很容易看出来新版实现多了一个 <code>jne</code> 的跳转指令，导致 CPU 需要多做一次分支预测。</p>
+<blockquote>
+<p>申明：启用 <code>-O</code> 参数之后汇编指令会被优化得更精简，这里没有启用 <code>-O</code> 是为了对应到每一行源码方便对比。</p>
+</blockquote>
+<ul>
+<li>标准库的汇编截图</li>
+</ul>
+<p><img src="./image/improve-std-slice/branch-compare.png" alt="" /></p>
+<ul>
+<li>优化(1)的汇编截图</li>
+</ul>
+<p><img src="./image/improve-std-slice/branch-compare2.png" alt="" /></p>
+<blockquote>
+<p>需要注意的是 <code>jmp</code> 指令是直接跳转，不需要进行分支预测。感兴趣的朋友可以看一下我在 Godbolt 上的对比：<a href="https://rust.godbolt.org/z/8dGbY8Pe1">https://rust.godbolt.org/z/8dGbY8Pe1</a>。这个网站是神器，强烈推荐！</p>
+</blockquote>
+<h2><a class="header" href="#优化2" id="优化2">优化（2）</a></h2>
+<p>所以我推测原作者实现标准库的 <code>binary_search_by()</code> 的时候不考虑 <code>O(1)</code> 最好时间复杂度的可能原因之一就是为了避免多余的分支预测。因为你要想 <code>O(1)</code> 就避免不了提前 return，要想提前 return 你就避免不了分支判断。那怎么办呢？PR 里面有一个大牛 <a href="https://github.com/tesuji">tesuji</a> 提供了一种思路：既然我们避免不了分支预测，那我们尽量帮助 CPU 更好的做好分支预测吧。于是我采用了他的方案，具体 commit 在<a href="https://github.com/rust-lang/rust/commit/7d078cfb94fa75e5dee699535f3f9781d3a1d47d">这里</a>，我们暂且叫它<strong>优化(2)</strong>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn binary_search_by&lt;'a, F&gt;(&amp;'a self, mut f: F) -&gt; Result&lt;usize, usize&gt;
+where
+    F: FnMut(&amp;'a T) -&gt; Ordering,
+{
+    let mut left = 0;
+    let mut right = self.len();
+    while left &lt; right {
+        // never overflow because `slice::len()` max is `isize::MAX`.
+        let mid = (left + right) / 2;
+        // SAFETY: the call is made safe by the following invariants:
+        // - `mid &gt;= 0`
+        // - `mid &lt; size`: `mid` is limited by `[left; right)` bound.
+        let cmp = f(unsafe { self.get_unchecked(mid) });
+        if cmp == Less {
+            left = mid + 1;
+        } else if cmp == Greater {
+            right = mid;
+        } else {
+            return Ok(mid);
+        }
+    }
+    Err(left)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>优化(2)的代码明显比标准库和优化(1)的代码更容易理解，再看一下它的生成的汇编代码。</p>
+<p><img src="./image/improve-std-slice/branch-compare3.png" alt="" /></p>
+<p>可以看出来依然是两条 <code>jne</code> 指令，所以非重复模式下的性能可能还是没有标准库的高，但是确实比优化(1)的性能要好很多。过了几天 libs 组的 <a href="https://github.com/m-ou-se">m-ou-se</a> 回复了<a href="https://github.com/rust-lang/rust/pull/74024#issuecomment-713818146">评论</a>。她也做了 benchmark，发现对于原生类型比如 <strong>u32</strong> 下 l1 级别的数据量依然比标准库慢，但是那些需要更多时间比较的类型（比如 String）的情况下，新的实现在所有 case 下性能都要优于标准库的实现。后面大家又讨论了许多，最终  <strong>m-ou-se</strong> 决定先跑一个 crater 测试，先验证一下这个 PR 对 crates.io 上所有的 crate 影响面大不大。最终 library 团队会议一致同意可以 merge 这个 PR。</p>
+<blockquote>
+<p>关于 <a href="https://github.com/rust-lang/crater">crater</a> 测试：</p>
+<p>crater 大概就是针对整个 crates.io 上所有的 crate 给要测试的编译器版本（比如我的 PR ）跑一次测试，看这个改动对线上所有 crate 影响大不大。crates.io 上超过5万个 crate，一般跑一次 crater 需要将近一周的时间。我的这个 crater 跑完之后就是因为没有对已发布的 crate 造成什么很大的影响，所以官方才愿意合并。</p>
+</blockquote>
+<blockquote>
+<p>From <strong>m-ou-se</strong>:</p>
+<p>&quot;We discussed this PR in a recent library team meeting, in which we agreed that the proposed behaviour (stopping on Equal) is preferrable over optimal efficiency in some specific niche cases. Especially considering how small most of the differences are in the benchmarks above.&quot;</p>
+<p>&quot;The breakage in the crater report looks reasonably small. Also, now that <code>partition_point</code> is getting stabilized, there's a good alternative for those who want the old behaviour of <code>binary_search_by</code>. So we should go ahead and start on getting this merged. :)&quot;</p>
+</blockquote>
+<h2><a class="header" href="#整数溢出问题" id="整数溢出问题">整数溢出问题</a></h2>
+<p>然而 <a href="https://github.com/scottmcm">scottmcm</a> 又指出了另外一个问题：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// never overflow because `slice::len()` max is `isize::MAX`.
+let mid = (left + right) / 2;
+<span class="boring">}
+</span></code></pre></pre>
+<p>这行代码在零大小类型(Zero Sized Type，简称 ZST)下却可能会 overflow! 我们来分析一下为什么。</p>
+<p><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.len"><code>slice::len()</code></a> 的返回值是 <code>usize</code> 类型，但是对于非零大小的类型(non-ZST)，<code>slice::len()</code> 的值最大也只能是 <code>isize::MAX</code>。所以就像注释上写的那样 <code>(isize::MAX + isize::MAX) / 2</code> 是不能可能超过 <code>usize::MAX</code> 的，所以不会发生 overflow。但是对于 ZST 类型就不一样了，如果 <code>slice</code> 里面所有元素都是零大小的（比如 <code>()</code>），那这个 <code>slice</code> 的长度完全可以达到 <code>usize::MAX</code>。虽然对于 <code>[(); usize::MAX].binary_search(&amp;())</code> 这种情况我们会在 <code>O(1)</code> 的时间复杂度上找到结果并马上返回，但是如果我们这么写 <code>b.binary_search_by(|_| Ordering::Less)</code>，它就发生整数溢出了。</p>
+<h3><a class="header" href="#为什么-slicelen-对于-non-zst-最大值是-isize-呢" id="为什么-slicelen-对于-non-zst-最大值是-isize-呢">为什么 <code>slice::len()</code> 对于 non-ZST 最大值是 <code>isize</code> 呢？</a></h3>
+<p>最简单直接的原因是我们不能构造一个所有元素都为 non-ZST 并且长度为 <code>usize::MAX</code> 的数组或 <code>slice</code>，编译器在编译阶段直接会报错。比如以最简单的只占 1 个字节的 <code>bool</code> 类型为例，<code>[bool; usize::MAX]</code> 的大小将等于 <code>std::mem::size_of::&lt;bool&gt;() * usize::MAX</code>, 这是一个很大的数字了，整个计算机地址空间都不够。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    assert_eq!(std::mem::size_of::&lt;bool&gt;(), 1);
+    // error: values of the type `[bool; 18446744073709551615]` are too big 
+    // for the current architecture
+    let _s = [true; usize::MAX];
+}
+</code></pre></pre>
+<p>但是对于 ZST 是可以的，因为 <code>std::mem::size_of::&lt;()&gt;() * usize::MAX</code> 依然是零。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    assert_eq!(std::mem::size_of::&lt;()&gt;(), 0);
+    let s = [(); usize::MAX];
+    assert_eq!(s.len(), usize::MAX);
+}
+</code></pre></pre>
+<p>不过上面的解释依然不够严谨，比如 <code>std::mem::size_of::&lt;bool&gt;() * isize::MAX</code> 也依然是一个很大的数字呀，为啥 <code>isize::MAX</code> 就可以？根本原因在于 Rust 指针寻址最大 offset 只允许 <code>isize::MAX</code>，至于为什么是 <code>isize::MAX</code>，<a href="https://doc.rust-lang.org/std/primitive.pointer.html#method.offset"><code>std::pointer::offset()</code></a> 的文档有解释。另外也可以看一下 <a href="https://doc.rust-lang.org/std/slice/fn.from_raw_parts.html"><code>std::slice::from_raw_parts()</code></a> 的文档。而对于 ZST 的类型，编译器会做优化，它压根不需要寻址，所以最大大小可以是 <code>usize::MAX</code>。</p>
+<h2><a class="header" href="#最终版本" id="最终版本">最终版本</a></h2>
+<p>意识到整数溢出的问题之后，解决方式也比较简单，这是我当时的<a href="https://github.com/rust-lang/rust/pull/74024/commits/3eb5bee242fae12c4cf547bfe0665653c20ca0c2">提交</a>，并且还增加了针对 overflow 的单元测试。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn binary_search_by&lt;'a, F&gt;(&amp;'a self, mut f: F) -&gt; Result&lt;usize, usize&gt;
+    where
+        F: FnMut(&amp;'a T) -&gt; Ordering,
+    {
+        let mut size = self.len();
+        let mut left = 0;
+        let mut right = size;
+        while left &lt; right {
+            let mid = left + size / 2;
+
+            // SAFETY: the call is made safe by the following invariants:
+            // - `mid &gt;= 0`
+            // - `mid &lt; size`: `mid` is limited by `[left; right)` bound.
+            let cmp = f(unsafe { self.get_unchecked(mid) });
+            // The reason why we use if/else control flow rather than match
+            // is because match reorders comparison operations, which is 
+            // perf sensitive.
+            // This is x86 asm for u8: https://rust.godbolt.org/z/8Y8Pra.
+            if cmp == Less {
+                left = mid + 1;
+            } else if cmp == Greater {
+                right = mid;
+            } else {
+                return Ok(mid);
+            }
+
+            size = right - left;
+        }
+        Err(left)
+    }
+
+#[test]
+fn test_binary_search_by_overflow() {
+    let b = [(); usize::MAX];
+    assert_eq!(b.binary_search_by(|_| Ordering::Equal), Ok(usize::MAX / 2));
+    assert_eq!(b.binary_search_by(|_| Ordering::Greater), Err(0));
+    assert_eq!(b.binary_search_by(|_| Ordering::Less), Err(usize::MAX));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们确实应该尽量避免写 <code>let mid = (left + right) / 2</code> 这种很容易发生整数溢出的代码，换成 <code>let mid = left + size / 2</code> 这种，可以避免发生 overflow。</p>
+<p>另外还有人问为什么这里使用 <code>if/else</code> 而不是 <code>match</code> 语句？我们查看两个版本的汇编指令后发现 <code>match</code> 版本生成的汇编代码不仅指令更多而且还重排了 <code>cmp</code> 指令的顺序，性能似乎更差。理论上这两个版本生成的汇编指令应该可以做到一致的，我暂时没有深究原因为什么 <code>match</code> 版本的汇编会差一些，其他读者感兴趣可以研究一下。</p>
+<h2><a class="header" href="#总结" id="总结">总结</a></h2>
+<p>表面波澜不惊，实则暗流涌动。一个看起来十分简单的 PR 里面其实涉及到很多内容。学无止境，笔者通过这个 PR 收获了很多，现在分享出来同时也希望能够激励更多国内开发者参与进来。Rust 社区文化是如此开放和包容，任何人只要发现有可以改进的地方都可以随时给 Rust 仓库提交 PR 或 issue，这样做不仅能帮助 Rust 越来越好，你自己也会得到巨大的成长和收获！</p>
+<hr />
+<h2><a class="header" href="#关于我" id="关于我">关于我</a></h2>
+<p>Id: Folyd，GitHub：<a href="https://github.com/folyd">@folyd</a>。字节跳动飞书 Rust 工程师，<a href="https://rust.extension.sh">Rust Search Extension</a> 作者。</p>
+<h2><a class="header" href="#招聘" id="招聘">招聘</a></h2>
+<p>字节跳动<a href="https://feishu.cn">飞书</a>团队自 2017 年就开始使用 Rust 开发飞书多端跨平台 SDK，为 Android / iOS / Window / macOS / Linux 等平台提供高质量的底层基础库，同时飞书内部的效率工具和少数后端系统也全部采用 Rust 开发。我们可能是国内 Rust 工程师最多的团队之一！我们长期招聘热爱 Rust、喜欢 Rust、看好 Rust 前景的工程师加入。支持实习、校招、社招。Base 北京，欢迎大家自荐或推荐，请联系 wx: <code>newpants629</code>，或者直接在内推链接投递简历：<a href="https://job.toutiao.com/s/eB1j29f">https://job.toutiao.com/s/eB1j29f</a>。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_4/contribute_to_the_rust_part3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_4/github_trending.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_4/contribute_to_the_rust_part3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_4/github_trending.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

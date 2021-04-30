@@ -1,0 +1,1061 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>使用 nom 解析 url - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI 心得</a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item expanded "><a href="../chapter_4/nom_url.html" class="active"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#使用-nom-解析-url" id="使用-nom-解析-url">使用 nom 解析 url</a></h1>
+<p>编辑：张汉东</p>
+<hr />
+<blockquote>
+<p><a href="https://blog.logrocket.com/parsing-in-rust-with-nom/">原文</a> </p>
+</blockquote>
+</br>
+<p><img src="../image/parsing-rust-nom.png" alt="nom" /></p>
+</br>
+<p>在本教程中，我们将演示如何使用 nom 解析器组合器库在 Rust 中编写一个非常基础的 URL 解析器。我们将包含以下内容</p>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%A7%A3%E6%9E%90%E5%99%A8%E7%BB%84%E5%90%88%E5%99%A8?">什么是解析器组合器?</a></li>
+<li><a href="#nom%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84">nom是如何工作的</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AEnom">设置nom</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a></li>
+<li><a href="#nom%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">nom中的错误处理</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8Rust%E5%86%99%E4%B8%80%E4%B8%AA%E8%A7%A3%E6%9E%90%E5%99%A8">使用Rust写一个解析器</a></li>
+<li><a href="#%E8%A7%A3%E6%9E%90%E5%BE%85%E6%8E%88%E6%9D%83%E7%9A%84URL">解析待授权的URL</a></li>
+<li><a href="#Rust%E8%A7%A3%E6%9E%90%EF%BC%9A%E4%B8%BB%E6%9C%BA%EF%BC%8CIP%E5%92%8C%E7%AB%AF%E5%8F%A3">Rust解析：主机，IP和端口</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8Rust%E8%A7%A3%E6%9E%90%E8%B7%AF%E5%BE%84">使用Rust解析路径</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E5%92%8C%E7%89%87%E6%AE%B5">查询和片段</a></li>
+<li><a href="#%E5%9C%A8Rust%E4%B8%AD%E4%BD%BF%E7%94%A8nom%E8%A7%A3%E6%9E%90%EF%BC%9A%E6%9C%80%E7%BB%88%E7%9A%84%E6%B5%8B%E8%AF%95">在Rust中使用nom解析：最终的测试</a></li>
+</ul>
+<h2><a class="header" href="#什么是解析器组合器" id="什么是解析器组合器">什么是解析器组合器?</a></h2>
+<p>解析器组合器是高阶函数，可以接受多个解析器作为输入，并返回一个新的解析器作为输出。</p>
+<p>这种方式让你可以为简单的任务(如：解析某个字符串或数字)构建解析器，并使用组合器函数将它们组合成一个递归下降(recursive descent)的解析器。</p>
+<p>组合解析的好处包括可测试性，可维护性和可读性。每个部件都非常小且具有自我隔离性，从而使整个解析器由模块化组件构成。</p>
+<p>如果你对这个概念不熟悉，我强烈推荐你阅读 Bodil Stokke 的<a href="./01-%E7%94%A8Rust%E5%AD%A6%E4%B9%A0%E8%A7%A3%E6%9E%90%E5%99%A8%E7%BB%84%E5%90%88%E5%99%A8.html">用 Rust 学习解析器组合器</a>。</p>
+<h2><a class="header" href="#nom是如何工作的" id="nom是如何工作的">nom是如何工作的</a></h2>
+<p><a href="https://github.com/Geal/nom">nom</a> 是使用 Rust 编写的解析器组合器库，它可以让你创建安全的解析器，而不会占用内存或影响性能。它依靠 Rust 强大的类型系统和内存安全来生成既正确又高效的解析器，并使用函数，宏和特征来抽象出容易出错的管道。</p>
+<p>为了演示 <code>nom</code> 是如何工作的，我们将创建一个基础的 URL 解析器。我们不会完整的实现 <a href="https://url.spec.whatwg.org/">URL 规范</a>；这将远远超出此代码示例的范围。相反，我们将采用一些捷径。</p>
+<p>最终的目标是能够将合法的 URL (如：<a href="https://www.zupzup.org/about/?someVal=5&amp;anotherVal=hello#anchor">https://www.zupzup.org/about/?someVal=5&amp;anotherVal=hello#anchor</a> 和 <a href="http://user:pw@127.0.0.1:8080">http://user:pw@127.0.0.1:8080</a>) 解析成相关的结构，并在解析过程中为非法的 URL 返回一个有用的错误。</p>
+<p>而且，由于可测试性被认为是解析器组合器的一大优势，我们将对大多数组件进行测试，以了解其具体的优势。</p>
+<p>让我们开始吧！</p>
+<h2><a class="header" href="#设置nom" id="设置nom">设置nom</a></h2>
+<p>为了进行下面的一系列操作，你需要安装最新的 Rust 版本 (1.44+)。</p>
+<p>首先，创建一个新的 Rust 项目:</p>
+<pre><code class="language-console">cargo new --lib rust-nom-example
+cd rust-nom-example
+</code></pre>
+<p>然后，编辑<code>Cargo.toml</code>文件并添加你需要的依赖：</p>
+<pre><code class="language-toml">[dependencies]
+nom = &quot;6.0&quot;
+</code></pre>
+<p>是的，我们需要的是最新版本的<code>nom</code>库(在撰写本文时是 6.0)。</p>
+<h2><a class="header" href="#数据类型" id="数据类型">数据类型</a></h2>
+<p>编写解析器时，通常先定义输出结构以了解你需要哪些部分是很有意义的。</p>
+<p>在这里，我们正在解析一个 URL，因此，让我们给它定义一个结构：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, PartialEq, Eq)]
+pub struct URI&lt;'a&gt; {
+    scheme: Scheme,
+    authority: Option&lt;Authority&lt;'a&gt;&gt;,
+    host: Host,
+    port: Option&lt;u16&gt;,
+    path: Option&lt;Vec&lt;&amp;'a str&gt;&gt;,
+    query: Option&lt;QueryParams&lt;'a&gt;&gt;,
+    fragment: Option&lt;&amp;'a str&gt;,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub enum Scheme {
+    HTTP,
+    HTTPS,
+}
+
+pub type Authority&lt;'a&gt; = (&amp;'a str, Option&lt;&amp;'a str&gt;);
+
+#[derive(Debug, PartialEq, Eq)]
+pub enum Host {
+    HOST(String),
+    IP([u8; 4]),
+}
+
+pub type QueryParam&lt;'a&gt; = (&amp;'a str, &amp;'a str);
+pub type QueryParams&lt;'a&gt; = Vec&lt;QueryParam&lt;'a&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>让我们逐行进行说明。</p>
+<p>这些字段是根据它们在常规 URI 中出现的顺序进行排列的。首先，我们有 scheme。在这里，我们将 URI 的前缀限制为<code>http://</code>和<code>https://</code>，但是请注意，这里还有很多其它可选的 scheme。</p>
+<p>接下来是<code>authority</code>部分，它由用户名和可选密码组成，通常是完全可选的。</p>
+<p>host 可以是 IP，(在我们的示例中仅为 IPv4)，也可以是主机字符串，如：<code>example.org</code>，后面跟一个可选的port，port 仅是个数字：如：<code>localhost:8080</code>。</p>
+<p>在端口之后是 path。它是由<code>/</code>分割的字符串序列，如：<code>/some/important/path</code>。query 和 fragment 部分是可选的，它们表示 URL 的<code>?query=some-value&amp;another=5</code>和<code>#anchor</code>部分。query 是字符串元组的可选列表，而 fragment 只是可选字符串(完整的 URL 示例是<code>https://some/important/?query=some-value&amp;another=5#anchor</code>)。</p>
+<p>如果你对这些类型中的生命周期(<code>'a</code>)感到困惑，请不用感到沮丧；它不会真的影响到我们写代码的方式。本质上，我们可以使用指向输入字符串各部分的指针，而不是为 URL 的每一部分分配新的字符串，只要输入的生命周期和我们 URI 结构一样长就可以了。</p>
+<p>在开始解析之前，让我们实现<code>From</code>特征将合法的 scheme 转换成<code>Scheme</code>枚举：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl From&lt;&amp;str&gt; for Scheme {
+    fn from(i: &amp;str) -&gt; Self {
+        match i.to_lowercase().as_str() {
+            &quot;http://&quot; =&gt; Scheme::HTTP,
+            &quot;https://&quot; =&gt; Scheme::HTTPS,
+            _ =&gt; unimplemented!(&quot;no other schemes supported&quot;),
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>顺便说一句，让我们从顶部开始，开始解析 scheme。</p>
+<h2><a class="header" href="#nom中的错误处理" id="nom中的错误处理">nom中的错误处理</a></h2>
+<p>在我们开始之前，先讨论一下 <code>nom</code> 中的错误处理。虽然我们不会面面俱到，但是至少会让调用者大致了解在解析的哪一步出了什么问题。</p>
+<p>为了达到我们的目的，我们将使用<code>nom</code>中的<code>context</code>组合器。在<code>nom</code>中，一个解析器通常会返回如下类型：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type IResult&lt;I, O, E = (I, ErrorKind)&gt; = Result&lt;(I, O), Err&lt;E&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>在本例中，我们将返回一个输入值(<code>&amp;str</code> - 输入字符串)的元组类型。它包含仍需要解析的字符串，以及输出的值。当解析失败时，它也会返回一个错误。</p>
+<p>标准的<code>IResult</code>只允许我们使用 nom 内置的错误类型，如果我们想要创建自定义的错误类型以及在这些错误中添加一些上下文呢？</p>
+<p><code>ParserError</code> 特征和 <code>VerboseError</code> 类型让我们可以构建自己的错误类型，并可以在已有的错误中添加上下文。在这个简单的例子中，我们将会在我们的解析错误类型中添加上下文。为了方便起见，让我们定义一个自己的结果类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type Res&lt;T, U&gt; = IResult&lt;T, U, VerboseError&lt;T&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>除了它带有<code>VerboseError</code>之外，本质上是相同的。这意味着我们可以使用 nom 的上下文组合器，它允许我们在任何解析器中隐式地添加错误上下文。</p>
+<p>nom 的官方文档包含这些选项，但是错误处理并不是最直观的方法。</p>
+<p>为了看到它的实际效果，让我们为该 scheme 创建第一个解析器。</p>
+<h2><a class="header" href="#使用rust写一个解析器" id="使用rust写一个解析器">使用Rust写一个解析器</a></h2>
+<p>为了解析 URL 的scheme，我们想要匹配<code>http://</code>和<code>https://</code>，除此之外没有别的了。由于我们使用的是功能强大的解析器组合器库，因此我们不需要手动编写底层的解析器。<code>nom</code> 已经帮我们覆盖了。</p>
+<p><a href="https://github.com/fucking-translation/tutorial/Rust/nom/%E9%80%89%E6%8B%A9nom%E7%BB%84%E5%90%88%E5%99%A8.md">解析器组合器宏清单</a>讲述了在某些用例中如何使用 nom 中的解析器组合器。</p>
+<p>我们将会使用<code>tag_no_case</code>解析器和<code>alt</code>组合器来做基础的说明：“每个小写(输入)应该是<code>http://</code>或<code>https://</code>” 。在本教程中，我们将只使用常规函数，但请注意，nom 中的许多解析器和组合器也可以作为宏使用。</p>
+<p>在 Rust 中使用 nom 如下所示：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn scheme(input: &amp;str) -&gt; Res&lt;&amp;str, Scheme&gt; {
+    context(
+        &quot;scheme&quot;,
+        alt((tag_no_case(&quot;HTTP://&quot;), tag_no_case(&quot;HTTPS://&quot;))),
+    )(input)
+    .map(|(next_input, res)| (next_input, res.into()))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如你所示：我们使用<code>context</code>组合器封装了实际的解析器并在其中添加了<code>scheme</code>上下文，因此，此处触发的任何错误都将在结果中标记为<code>scheme</code>。</p>
+<p>一旦将解析器和组合器组装成了整个解析器，便使用输入字符串来调用它，这是我们唯一的输入参数。然后我们对结果进行<code>map</code> - 如上所述，它由剩余的输入和解析的输出组成，并通过实现前面提到的<code>.into()</code>特征将我们解析后的 scheme 转换成<code>Scheme</code>枚举。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cfg(test)]
+mod tests {
+    use super::*;
+    use nom::{
+        error::{ErrorKind, VerboseError, VerboseErrorKind},
+        Err as NomErr,
+    };
+
+    #[test]
+    fn test_scheme() {
+        assert_eq!(scheme(&quot;https://yay&quot;), Ok((&quot;yay&quot;, Scheme::HTTPS)));
+        assert_eq!(scheme(&quot;http://yay&quot;), Ok((&quot;yay&quot;, Scheme::HTTP)));
+        assert_eq!(
+            scheme(&quot;bla://yay&quot;),
+            Err(NomErr::Error(VerboseError {
+                errors: vec![
+                    (&quot;bla://yay&quot;, VerboseErrorKind::Nom(ErrorKind::Tag)),
+                    (&quot;bla://yay&quot;, VerboseErrorKind::Nom(ErrorKind::Alt)),
+                    (&quot;bla://yay&quot;, VerboseErrorKind::Context(&quot;scheme&quot;)),
+                ]
+            }))
+        );
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如你所见，在成功的情况下，我们取回已解析<code>Scheme</code>枚举和剩余待解析的字符串(<code>yay</code>)。另外，如果有错误，我们将列举出已触发的错误以及定义的上下文列表(<code>scheme</code>)。</p>
+<p>在本例中，两次<code>tag</code>调用都失败了，因此，<code>alt</code>组合器也失败了，因为它无法产生单个值。</p>
+<p>那不是很难。在上面我们基本上只是解析了一个常量的字符串，让我们通过解析<code>authority</code>部分来尝试更高级的内容。</p>
+<h2><a class="header" href="#解析待授权的url" id="解析待授权的url">解析待授权的URL</a></h2>
+<p>如果我们还记得我们在之前的 URI 的结构，尤其是 authority 部分，我们会看到我们正在寻找一个完全可选的结构。如果它存在，则需要一个用户名和一个可选的密码。</p>
+<p>这是我们使用的类型别名：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub type Authority&lt;'a&gt; = (&amp;'a str, Option&lt;&amp;'a str&gt;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们该怎么办呢？在 URL 中，它看起来像：</p>
+<p><a href="https://username:password@example.org">https://username:password@example.org</a></p>
+<p><code>:password</code>是可选的，但是在任何情况下，它都会以<code>@</code>作为结尾，所以我们可以通过使用<code>terminated</code>解析器开始。这给了我们一个字符串，该字符串是通过终止另一个字符串得到的。</p>
+<p>在<code>authority</code>部分中，我们看到<code>:</code>作为一个分隔符。根据文档，我们可以使用<code>separated_pair</code>组合器，它通过分割一个字符串给我们提供了两个值。但是我们如何处理实际的文本呢？这里有几种选项，一种是使用<code>alphanumeric1</code>解析器。它生成了一个至少包含一个字符的字母数字字符串。</p>
+<p>为了简单起见，我们不必担心可以在 URL 的不同部分使用哪些字符。这与编写和构造解析器无关，只会使所有的内容变得更长且更不方便。出于我们的目的，我们假设 URL 的大部分都可以由字母数字组成，有时候还包含连字符和点 - 根据 <a href="https://url.spec.whatwg.org/#url-code-points">URL 标准</a>，这当然是错误的。</p>
+<p>让我们来看看组合后的<code>authority</code>解析器：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn authority(input: &amp;str) -&gt; Res&lt;&amp;str, (&amp;str, Option&lt;&amp;str&gt;)&gt; {
+    context(
+        &quot;authority&quot;,
+        terminated(
+            separated_pair(alphanumeric1, opt(tag(&quot;:&quot;)), opt(alphanumeric1)),
+            tag(&quot;@&quot;),
+        ),
+    )(input)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们通过运行一些测试用例来检验它是否工作：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_authority() {
+    assert_eq!(
+        authority(&quot;username:password@zupzup.org&quot;),
+        Ok((&quot;zupzup.org&quot;, (&quot;username&quot;, Some(&quot;password&quot;))))
+    );
+    assert_eq!(
+        authority(&quot;username@zupzup.org&quot;),
+        Ok((&quot;zupzup.org&quot;, (&quot;username&quot;, None)))
+    );
+    assert_eq!(
+        authority(&quot;zupzup.org&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;.org&quot;, VerboseErrorKind::Nom(ErrorKind::Tag)),
+                (&quot;zupzup.org&quot;, VerboseErrorKind::Context(&quot;authority&quot;)),
+            ]
+        }))
+    );
+    assert_eq!(
+        authority(&quot;:zupzup.org&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (
+                    &quot;:zupzup.org&quot;,
+                    VerboseErrorKind::Nom(ErrorKind::AlphaNumeric)
+                ),
+                (&quot;:zupzup.org&quot;, VerboseErrorKind::Context(&quot;authority&quot;)),
+            ]
+        }))
+    );
+    assert_eq!(
+        authority(&quot;username:passwordzupzup.org&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;.org&quot;, VerboseErrorKind::Nom(ErrorKind::Tag)),
+                (
+                    &quot;username:passwordzupzup.org&quot;,
+                    VerboseErrorKind::Context(&quot;authority&quot;)
+                ),
+            ]
+        }))
+    );
+    assert_eq!(
+        authority(&quot;@zupzup.org&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (
+                    &quot;@zupzup.org&quot;,
+                    VerboseErrorKind::Nom(ErrorKind::AlphaNumeric)
+                ),
+                (&quot;@zupzup.org&quot;, VerboseErrorKind::Context(&quot;authority&quot;)),
+            ]
+        }))
+    )
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>看起来很不错！对于各种情况，我们都有与之对应的测试用例，缺少密码，缺少<code>@</code>以及其他几种错误的情况。</p>
+<p>让我们继续来到 <code>host</code> 部分。</p>
+<h2><a class="header" href="#rust解析主机ip和端口" id="rust解析主机ip和端口">Rust解析：主机，IP和端口</a></h2>
+<p>因为 host 部分可以包含 主机字符串或者 IP，这一步将会有点复杂。更糟的是，在结尾还有一个可选的<code>:port</code>。</p>
+<p>为了尽可能保持简单，我们只支持 IPv4 的 IP。我们将从 host 开始。让我们看一下它的实现并逐行进行说明。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn host(input: &amp;str) -&gt; Res&lt;&amp;str, Host&gt; {
+    context(
+        &quot;host&quot;,
+        alt((
+            tuple((many1(terminated(alphanumerichyphen1, tag(&quot;.&quot;))), alpha1)),
+            tuple((many_m_n(1, 1, alphanumerichyphen1), take(0 as usize))),
+        )),
+    )(input)
+    .map(|(next_input, mut res)| {
+        if !res.1.is_empty() {
+            res.0.push(res.1);
+        }
+        (next_input, Host::HOST(res.0.join(&quot;.&quot;)))
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先你注意到这里有两个选项(<code>alt</code>)。在这两种情况下，都有一个元组，并包含了一个解析器链。</p>
+<p>在第一种情况下，我们想要一个或多个(<code>many1</code>)字母数字字符串，包含一个连字符，被一个<code>.</code>终结并以顶级域名 (alpha1) 结尾。</p>
+<p><code>alphanumerichyphen1</code>解析器如下所示：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn alphanumerichyphen1&lt;T&gt;(i: T) -&gt; Res&lt;T, T&gt;
+where
+    T: InputTakeAtPosition,
+    &lt;T as InputTakeAtPosition&gt;::Item: AsChar,
+{
+    i.split_at_position1_complete(
+        |item| {
+            let char_item = item.as_char();
+            !(char_item == '-') &amp;&amp; !char_item.is_alphanum()
+        },
+        ErrorKind::AlphaNumeric,
+    )
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这有点复杂，但基本上是 nom 中<code>alphanumeric1</code>解析器带有<code>-</code>的复制版本。我不知道它是否是最好的方式，但是它确实有用。</p>
+<p>在任何情况下，主机部分都有第二个选项，它是一个字符串，如：<code>localhost</code>。</p>
+<p>为什么我们要用将1和1传给<code>many_m_n</code>解析器这种看起来很无用的方式来表示呢？这里的问题是，在<code>alt</code>组合器中，所有的选项都必须返回相同的类型 - 在这里，它是一个字符串向量和另一个字符串的元组。</p>
+<p>我们也在<code>map</code>函数中看到，如果元组的第二部分不为空(顶级域名)，则将其添加到元组的第一部分。最后，我们构建了一个 HOST 枚举，将字符串部分用一个<code>.</code>相连，并创建了一个原始的主机字符串。</p>
+<p>让我们来看一些测试用例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_host() {
+    assert_eq!(
+        host(&quot;localhost:8080&quot;),
+        Ok((&quot;:8080&quot;, Host::HOST(&quot;localhost&quot;.to_string())))
+    );
+    assert_eq!(
+        host(&quot;example.org:8080&quot;),
+        Ok((&quot;:8080&quot;, Host::HOST(&quot;example.org&quot;.to_string())))
+    );
+    assert_eq!(
+        host(&quot;some-subsite.example.org:8080&quot;),
+        Ok((&quot;:8080&quot;, Host::HOST(&quot;some-subsite.example.org&quot;.to_string())))
+    );
+    assert_eq!(
+        host(&quot;example.123&quot;),
+        Ok((&quot;.123&quot;, Host::HOST(&quot;example&quot;.to_string())))
+    );
+    assert_eq!(
+        host(&quot;$$$.com&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;$$$.com&quot;, VerboseErrorKind::Nom(ErrorKind::AlphaNumeric)),
+                (&quot;$$$.com&quot;, VerboseErrorKind::Nom(ErrorKind::ManyMN)),
+                (&quot;$$$.com&quot;, VerboseErrorKind::Nom(ErrorKind::Alt)),
+                (&quot;$$$.com&quot;, VerboseErrorKind::Context(&quot;host&quot;)),
+            ]
+        }))
+    );
+    assert_eq!(
+        host(&quot;.com&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;.com&quot;, VerboseErrorKind::Nom(ErrorKind::AlphaNumeric)),
+                (&quot;.com&quot;, VerboseErrorKind::Nom(ErrorKind::ManyMN)),
+                (&quot;.com&quot;, VerboseErrorKind::Nom(ErrorKind::Alt)),
+                (&quot;.com&quot;, VerboseErrorKind::Context(&quot;host&quot;)),
+            ]
+        }))
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>让我们来到 主机是 IP 的情况。首先，我们需要能够解析 IPv4 的 IP 中每一个的部分(如：127.0.0.1)：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn ip_num(input: &amp;str) -&gt; Res&lt;&amp;str, u8&gt; {
+    context(&quot;ip number&quot;, n_to_m_digits(1, 3))(input).and_then(|(next_input, result)| {
+        match result.parse::&lt;u8&gt;() {
+            Ok(n) =&gt; Ok((next_input, n)),
+            Err(_) =&gt; Err(NomErr::Error(VerboseError { errors: vec![] })),
+        }
+    })
+}
+
+fn n_to_m_digits&lt;'a&gt;(n: usize, m: usize) -&gt; impl FnMut(&amp;'a str) -&gt; Res&lt;&amp;str, String&gt; {
+    move |input| {
+        many_m_n(n, m, one_of(&quot;0123456789&quot;))(input)
+            .map(|(next_input, result)| (next_input, result.into_iter().collect()))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>为了获取每一个数字，我们尝试使用<code>n_to_m_digits</code>解析器来寻找一到三个连续的数字并将他们转换成 <code>u8</code>。</p>
+<p>通过这种方式，我们可以查看如何将完整的 IP 解析成<code>u8</code>数组：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn ip(input: &amp;str) -&gt; Res&lt;&amp;str, Host&gt; {
+    context(
+        &quot;ip&quot;,
+        tuple((count(terminated(ip_num, tag(&quot;.&quot;)), 3), ip_num)),
+    )(input)
+    .map(|(next_input, res)| {
+        let mut result: [u8; 4] = [0, 0, 0, 0];
+        res.0
+            .into_iter()
+            .enumerate()
+            .for_each(|(i, v)| result[i] = v);
+        result[3] = res.1;
+        (next_input, Host::IP(result))
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这里，我们要查找的查好是3个后面跟<code>.</code>的<code>ip_num</code>，然后是另一个<code>ip_num</code>。在映射函数中，我们将这些独立的结果拼接，从而将<code>u8</code>数组转换成<code>Host::IP</code>枚举。</p>
+<p>再一次，我们将写一些测试用例来确保它是正常工作的：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_ipv4() {
+    assert_eq!(
+        ip(&quot;192.168.0.1:8080&quot;),
+        Ok((&quot;:8080&quot;, Host::IP([192, 168, 0, 1])))
+    );
+    assert_eq!(ip(&quot;0.0.0.0:8080&quot;), Ok((&quot;:8080&quot;, Host::IP([0, 0, 0, 0]))));
+    assert_eq!(
+        ip(&quot;1924.168.0.1:8080&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;4.168.0.1:8080&quot;, VerboseErrorKind::Nom(ErrorKind::Tag)),
+                (&quot;1924.168.0.1:8080&quot;, VerboseErrorKind::Nom(ErrorKind::Count)),
+                (&quot;1924.168.0.1:8080&quot;, VerboseErrorKind::Context(&quot;ip&quot;)),
+            ]
+        }))
+    );
+    assert_eq!(
+        ip(&quot;192.168.0000.144:8080&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;0.144:8080&quot;, VerboseErrorKind::Nom(ErrorKind::Tag)),
+                (
+                    &quot;192.168.0000.144:8080&quot;,
+                    VerboseErrorKind::Nom(ErrorKind::Count)
+                ),
+                (&quot;192.168.0000.144:8080&quot;, VerboseErrorKind::Context(&quot;ip&quot;)),
+            ]
+        }))
+    );
+    assert_eq!(
+        ip(&quot;192.168.0.1444:8080&quot;),
+        Ok((&quot;4:8080&quot;, Host::IP([192, 168, 0, 144])))
+    );
+    assert_eq!(
+        ip(&quot;192.168.0:8080&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;:8080&quot;, VerboseErrorKind::Nom(ErrorKind::Tag)),
+                (&quot;192.168.0:8080&quot;, VerboseErrorKind::Nom(ErrorKind::Count)),
+                (&quot;192.168.0:8080&quot;, VerboseErrorKind::Context(&quot;ip&quot;)),
+            ]
+        }))
+    );
+    assert_eq!(
+        ip(&quot;999.168.0.0:8080&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;999.168.0.0:8080&quot;, VerboseErrorKind::Nom(ErrorKind::Count)),
+                (&quot;999.168.0.0:8080&quot;, VerboseErrorKind::Context(&quot;ip&quot;)),
+            ]
+        }))
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>将它们放置在一起，我们需要另一个可以同时解析 IP 和 host 的解析器，并返回一个<code>Host</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn ip_or_host(input: &amp;str) -&gt; Res&lt;&amp;str, Host&gt; {
+    context(&quot;ip or host&quot;, alt((ip, host)))(input)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>最后，让我们来解析端口(原文遗漏)：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn port(input: &amp;str) -&gt; Res&lt;&amp;str, u16&gt; {
+    context(
+        &quot;port&quot;,
+        tuple((
+            tag(&quot;:&quot;),
+            n_to_m_digits(1, 5)
+        )),
+    )(input)
+        .and_then(|(next_input, result)| {
+            let port = result.1.parse::&lt;u16&gt;();
+            match port {
+                Ok(port) =&gt; Ok((next_input, port)),
+                Err(e) =&gt; Err(NomErr::Error(VerboseError { errors: vec![ (input, VerboseErrorKind::Nom(ErrorKind::Digit))] }))
+            }
+        })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>并使用一些测试用例保证它是可以正常工作的：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_port() {
+    assert_eq!(port(&quot;:0&quot;), Ok((&quot;&quot;, 0u16)));
+    assert_eq!(port(&quot;:65535&quot;), Ok((&quot;&quot;, 65535u16)));
+    assert_eq!(
+        port(&quot;:65536&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;:65536&quot;, VerboseErrorKind::Nom(ErrorKind::Digit))
+            ]
+        })));
+    assert_eq!(
+        port(&quot;:a&quot;),
+        Err(NomErr::Error(VerboseError {
+            errors: vec![
+                (&quot;a&quot;, VerboseErrorKind::Nom(ErrorKind::OneOf)),
+                (&quot;a&quot;, VerboseErrorKind::Nom(ErrorKind::ManyMN)),
+                (&quot;:a&quot;, VerboseErrorKind::Context(&quot;port&quot;))
+            ]
+        })));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>还不错，一切正常！</p>
+<h2><a class="header" href="#使用rust解析路径" id="使用rust解析路径">使用Rust解析路径</a></h2>
+<p>下一步是解决路径问题。在此，我们再次假设该路径中的字符串只能包含带有连字符和点的字母数字字符串，并使用以下帮助程序进行解析：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn url_code_points&lt;T&gt;(i: T) -&gt; Res&lt;T, T&gt;
+where
+    T: InputTakeAtPosition,
+    &lt;T as InputTakeAtPosition&gt;::Item: AsChar,
+{
+    i.split_at_position1_complete(
+        |item| {
+            let char_item = item.as_char();
+            !(char_item == '-') &amp;&amp; !char_item.is_alphanum() &amp;&amp; !(char_item == '.')
+            // ... actual ascii code points and url encoding...: https://infra.spec.whatwg.org/#ascii-code-point
+        },
+        ErrorKind::AlphaNumeric,
+    )
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>为了解析<code>path</code>，我们希望可以将由<code>/</code>分隔的字符串解析成字符串向量：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn path(input: &amp;str) -&gt; Res&lt;&amp;str, Vec&lt;&amp;str&gt;&gt; {
+    context(
+        &quot;path&quot;,
+        tuple((
+            tag(&quot;/&quot;),
+            many0(terminated(url_code_points, tag(&quot;/&quot;))),
+            opt(url_code_points),
+        )),
+    )(input)
+    .map(|(next_input, res)| {
+        let mut path: Vec&lt;&amp;str&gt; = res.1.iter().map(|p| p.to_owned()).collect();
+        if let Some(last) = res.2 {
+            path.push(last);
+        }
+        (next_input, path)
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们总是由<code>/</code>开始。这已经是一个合法的路径了，但是我们仍然可以有<code>0</code>个或更多个(<code>many0</code>)由<code>/</code>分隔的字符串，后面跟一个最终的可选的字符串(如：<code>index.php</code>)。</p>
+<p>在映射中，我们检查元组的第三部分(最后一部分)是否存在，如果存在，则将其添加到路径向量中。</p>
+<p>让我们为路径也写一点测试用例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_path() {
+    assert_eq!(path(&quot;/a/b/c?d&quot;), Ok((&quot;?d&quot;, vec![&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])));
+    assert_eq!(path(&quot;/a/b/c/?d&quot;), Ok((&quot;?d&quot;, vec![&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])));
+    assert_eq!(path(&quot;/a/b-c-d/c/?d&quot;), Ok((&quot;?d&quot;, vec![&quot;a&quot;, &quot;b-c-d&quot;, &quot;c&quot;])));
+    assert_eq!(path(&quot;/a/1234/c/?d&quot;), Ok((&quot;?d&quot;, vec![&quot;a&quot;, &quot;1234&quot;, &quot;c&quot;])));
+    assert_eq!(
+        path(&quot;/a/1234/c.txt?d&quot;),
+        Ok((&quot;?d&quot;, vec![&quot;a&quot;, &quot;1234&quot;, &quot;c.txt&quot;]))
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>看起来不错！我们获取到了路径中的不同部分以及剩余的字符串，并且它们都被添加到了字符串向量中了。</p>
+<p>让我们通过解析 query 和 URL 部分的 fragment 来增强功能。</p>
+<h2><a class="header" href="#查询和片段" id="查询和片段">查询和片段</a></h2>
+<p>查询主要是由键值对组成：第一个键前面跟一个<code>?</code>，其余的查询由<code>&amp;</code>进行分隔。再一次，我们将自己限制为有限的<code>url_code_points</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn query_params(input: &amp;str) -&gt; Res&lt;&amp;str, QueryParams&gt; {
+    context(
+        &quot;query params&quot;,
+        tuple((
+            tag(&quot;?&quot;),
+            url_code_points,
+            tag(&quot;=&quot;),
+            url_code_points,
+            many0(tuple((
+                tag(&quot;&amp;&quot;),
+                url_code_points,
+                tag(&quot;=&quot;),
+                url_code_points,
+            ))),
+        )),
+    )(input)
+    .map(|(next_input, res)| {
+        let mut qps = Vec::new();
+        qps.push((res.1, res.3));
+        for qp in res.4 {
+            qps.push((qp.1, qp.3));
+        }
+        (next_input, qps)
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>实际上这相当不错，因为解析器是非常直观(intuitive)且可读性的。我们解析<code>?</code>后面的第一个键值对的元组，使用<code>=</code>分隔，然后同样的操作执行<code>0</code>或多次，它们是以<code>&amp;</code>而不是<code>?</code>开头。</p>
+<p>然后，在映射中，我们简单的将所有的键值对放在向量中，然后就有了我们在文章的开头定义的结构。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub type QueryParam&lt;'a&gt; = (&amp;'a str, &amp;'a str);
+pub type QueryParams&lt;'a&gt; = Vec&lt;QueryParam&lt;'a&gt;&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里有一组基础的测试用例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_query_params() {
+    assert_eq!(
+        query_params(&quot;?bla=5&amp;blub=val#yay&quot;),
+        Ok((&quot;#yay&quot;, vec![(&quot;bla&quot;, &quot;5&quot;), (&quot;blub&quot;, &quot;val&quot;)]))
+    );
+
+    assert_eq!(
+        query_params(&quot;?bla-blub=arr-arr#yay&quot;),
+        Ok((&quot;#yay&quot;, vec![(&quot;bla-blub&quot;, &quot;arr-arr&quot;),]))
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>最后一部分是 fragment，它其实就是一个<code>#</code>后面跟一个字符串：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn fragment(input: &amp;str) -&gt; Res&lt;&amp;str, &amp;str&gt; {
+    context(&quot;fragment&quot;, tuple((tag(&quot;#&quot;), url_code_points)))(input)
+        .map(|(next_input, res)| (next_input, res.1))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在介绍了所有这些复杂的解析器之后，为了达到良好的效果，让我们编写一些完整性检查测试：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_fragment() {
+    assert_eq!(fragment(&quot;#bla&quot;), Ok((&quot;&quot;, &quot;bla&quot;)));
+    assert_eq!(fragment(&quot;#bla-blub&quot;), Ok((&quot;&quot;, &quot;bla-blub&quot;)));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#在rust中使用nom解析最终的测试" id="在rust中使用nom解析最终的测试">在Rust中使用nom解析:最终的测试</a></h2>
+<p>让我们将它们都放在最顶层的 URI 解析器函数中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn uri(input: &amp;str) -&gt; Res&lt;&amp;str, URI&gt; {
+    context(
+        &quot;uri&quot;,
+        tuple((
+            scheme,
+            opt(authority),
+            ip_or_host,
+            opt(port),
+            opt(path),
+            opt(query_params),
+            opt(fragment),
+        )),
+    )(input)
+    .map(|(next_input, res)| {
+        let (scheme, authority, host, port, path, query, fragment) = res;
+        (
+            next_input,
+            URI {
+                scheme,
+                authority,
+                host,
+                port,
+                path,
+                query,
+                fragment,
+            },
+        )
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们有一个强制的(mandatory)<code>scheme</code>，后面跟一个可选的<code>authority</code>，然后再跟一个强制的<code>ip 或 host</code>。最后后面跟可选的<code>port</code>，<code>path</code>，<code>query 参数</code>，和一个<code>fragment</code>。</p>
+<p>在映射中，剩下的唯一一件事就是将解析后的元素构成成我们的<code>URI</code>结构。</p>
+<p>在这一点上，你可以看到整个结构的美观性和模块化。如果 uri 函数是你的起点，那么你可以从头到尾查看每个单独的解析器，以了解整个过程在做什么。</p>
+<p>当然，我们也需要对<code>uri</code>解析器进行一些测试：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_uri() {
+    assert_eq!(
+        uri(&quot;https://www.zupzup.org/about/&quot;),
+        Ok((
+            &quot;&quot;,
+            URI {
+                scheme: Scheme::HTTPS,
+                authority: None,
+                host: Host::HOST(&quot;www.zupzup.org&quot;.to_string()),
+                port: None,
+                path: Some(vec![&quot;about&quot;]),
+                query: None,
+                fragment: None
+            }
+        ))
+    );
+
+    assert_eq!(
+        uri(&quot;http://localhost&quot;),
+        Ok((
+            &quot;&quot;,
+            URI {
+                scheme: Scheme::HTTP,
+                authority: None,
+                host: Host::HOST(&quot;localhost&quot;.to_string()),
+                port: None,
+                path: None,
+                query: None,
+                fragment: None
+            }
+        ))
+    );
+
+    assert_eq!(
+        uri(&quot;https://www.zupzup.org:443/about/?someVal=5#anchor&quot;),
+        Ok((
+            &quot;&quot;,
+            URI {
+                scheme: Scheme::HTTPS,
+                authority: None,
+                host: Host::HOST(&quot;www.zupzup.org&quot;.to_string()),
+                port: Some(443),
+                path: Some(vec![&quot;about&quot;]),
+                query: Some(vec![(&quot;someVal&quot;, &quot;5&quot;)]),
+                fragment: Some(&quot;anchor&quot;)
+            }
+        ))
+    );
+
+    assert_eq!(
+        uri(&quot;http://user:pw@127.0.0.1:8080&quot;),
+        Ok((
+            &quot;&quot;,
+            URI {
+                scheme: Scheme::HTTP,
+                authority: Some((&quot;user&quot;, Some(&quot;pw&quot;))),
+                host: Host::IP([127, 0, 0, 1]),
+                port: Some(8080),
+                path: None,
+                query: None,
+                fragment: None
+            }
+        ))
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>它没问题！你可以在 <a href="https://github.com/zupzup/rust-nom-parsing">Github</a>找到完整的代码。</p>
+<h2><a class="header" href="#结论" id="结论">结论</a></h2>
+<p>真是太好了！我希望本文能够使你对 Rust 中的解析器特别是解析器组合器感到兴奋。</p>
+<p><code>nom</code>库解析速度特别快，是很多生产级别的库和系统的基础。除此之外，它还提供了出色的 API 和文档。</p>
+<p>Rust 生态系统还提供了更多的解析选项，如：<a href="https://github.com/Marwes/combine">combine</a> 和 <a href="https://github.com/pest-parser/pest">pest</a>。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_4/rustc_edit_distance_and_typo_checker.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_4/facade.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_4/rustc_edit_distance_and_typo_checker.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_4/facade.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

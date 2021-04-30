@@ -1,0 +1,945 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>用 rustc 源码实现拼写错误候选词建议 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI 心得</a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item expanded "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html" class="active"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">7.</strong> 五月刊（May）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#用-rustc-源码实现拼写错误候选词建议" id="用-rustc-源码实现拼写错误候选词建议">用 rustc 源码实现拼写错误候选词建议</a></h1>
+<p>作者: 吴翱翔@pymongo / 后期编辑：张汉东</p>
+<blockquote>
+<p>原文: <a href="https://pymongo.github.io/#/2021/04/rustc_edit_distance_and_typo_checker.md">用 rustc 源码实现拼写错误候选词建议</a></p>
+</blockquote>
+<hr />
+<p>最近想给一个聊天应用的聊天消息输入框加上拼写错误检查，毕竟 word, keynote 等涉及文本输入的软件都有拼写错误检查和纠错功能</p>
+<p>于是想到开发中经常用的 rustup, cargo, rustc 不就内置了拼写错误时纠错建议的功能么?</p>
+<p>在 rustup 输入错误的单词时例如 <code>rustup dog</code>，此时 rustup 就会提示把 <code>dog</code> 改成 <code>doc</code></p>
+<pre><code>[w@w-manjaro ~]$ rustup dog
+error: The subcommand 'dog' wasn't recognized
+        Did you mean 'doc'?
+</code></pre>
+<h2><a class="header" href="#字符串的编辑距离" id="字符串的编辑距离">字符串的编辑距离</a></h2>
+<h3><a class="header" href="#rustup-的拼写纠错建议的实现" id="rustup-的拼写纠错建议的实现">rustup 的拼写纠错建议的实现</a></h3>
+<p>以 <code>Did you mean</code> 的关键词全文搜索 rustup 源码，找到出处在 <code>src/cli/error.rs</code></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn maybe_suggest_toolchain(bad_name: &amp;str) -&gt; String {
+    let bad_name = &amp;bad_name.to_ascii_lowercase();
+    static VALID_CHANNELS: &amp;[&amp;str] = &amp;[&quot;stable&quot;, &quot;beta&quot;, &quot;nightly&quot;];
+    lazy_static! {
+        static ref NUMBERED: Regex = Regex::new(r&quot;^\d+\.\d+$&quot;).unwrap();
+    }
+
+    if NUMBERED.is_match(bad_name) {
+        return format!(
+            &quot;. Toolchain numbers tend to have three parts, e.g. {}.0&quot;,
+            bad_name
+        );
+    }
+
+    // Suggest only for very small differences
+    // High number can result in inaccurate suggestions for short queries e.g. `rls`
+    const MAX_DISTANCE: usize = 3;
+
+    let mut scored: Vec&lt;_&gt; = VALID_CHANNELS
+        .iter()
+        .filter_map(|s| {
+            let distance = damerau_levenshtein(bad_name, s);
+            if distance &lt;= MAX_DISTANCE {
+                Some((distance, s))
+            } else {
+                None
+            }
+        })
+        .collect();
+    scored.sort();
+    if scored.is_empty() {
+        String::new()
+    } else {
+        format!(&quot;. Did you mean '{}'?&quot;, scored[0].1)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>damerau_levenshtein</code> 其实就是描述两个字符串之间的差异，<code>damerau_levenshtein</code> 距离越小则两个字符串越接近</p>
+<p>该函数的将输入的错误单词跟正确的候选词挨个计算 <code>damerau_levenshtein</code> 距离，</p>
+<p>最后排序下 <code>damerau_levenshtein</code> 距离输出最小的候选词</p>
+<p>rustup的 <code>damerau_levenshtein</code> 来自 <em><strong>strsim</strong></em> 库，除了 rustup, darling 等知名库也导入了 strsim 库</p>
+<p>查阅维基百科的 <code>damerau_levenshtein</code> 词条后发现 <code>damerau_levenshtein</code> 的同义词是 <code>levenshtein_distance</code> 和 <code>edit_distance</code></p>
+<h3><a class="header" href="#用-rustc-源码竟然过了算法题" id="用-rustc-源码竟然过了算法题">用 rustc 源码竟然过了算法题</a></h3>
+<p>rustc 源码会尽量不用第三方库，所以我猜测 rustc 不会像 rustup 那样用 strsim 源码，那就看看 rustc 的实现会不会更好</p>
+<p>在 Rust 的 github 仓库中搜索<code>edit distance</code>关键字能找到<a href="https://github.com/rust-lang/rust/commit/93d01eb443d0f871716c9d7faa3b69dc49662663">Make the maximum edit distance of typo suggestions</a> 的 commit</p>
+<p>typo 就是单词拼写错误的意思，本文也会将单词拼写错误简称为 typo</p>
+<p>顺着这个 commit 的改动在 <code>find_best_match_for_name</code> 函数内调用了 <code>lev_distance</code> 函数去计算两个字符串的编辑距离</p>
+<p>edit_distance 是个动态规划算法或字符串算法的经典问题，果然 leetcode 上有 <a href="https://leetcode.com/problems/edit-distance/">edit_distance 的算法题</a></p>
+<p>我拿 rustc 源码的 lev_distance 函数在 leetcode上通过 edit_distance 一题</p>
+<p><img src="image/rustc_edit/rustc_edit_distance_and_typo_checker_1.png" alt="" /></p>
+<p>用 strsim 的相关函数也能通过编辑距离这题，但是运行耗时 4ms 会比 rustc 源码运行耗时 0ms 慢点</p>
+<p>原因是 strsim 的 edit_distance 算法动态规划的空间复杂度是 O(n^2)，而 rustc 的实现空间复杂度是 O(n)</p>
+<h3><a class="header" href="#edit_distance-算法" id="edit_distance-算法">edit_distance 算法</a></h3>
+<p>从 rustc 源码的 lev_distance 函数签名 <code>fn lev_distance(a: &amp;str, b: &amp;str) -&gt; usize</code> 来看</p>
+<p>输入的是两个字符串 a 和 b, 返回值表示 a 和 b 的 edit_distance</p>
+<p>edit_distance 表示从字符串 a 修改成 b 或从字符串 b 修改成 a 至少需要的操作(插入/删除/替换一个字母)次数</p>
+<p>例如一个拼写错误的单词 <code>bpple</code> 需要一次替换操作，将第一个字母 <code>b</code> 替换成 <code>a</code> 才能变成 <code>apple</code></p>
+<p>所以字符串 <code>bpple</code> 和 <code>apple</code> 之间的 edit_distance 就是 1</p>
+<p>以下是一段 edit_distance 的二维数组 dp 状态的实现，可以结合代码注释进行理解，详细的推断和动态规划状态转移方程可以看 leetcode 的官方题解</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 从字符串word1修改成word2至少需要多少次操作(replace/insert/delete)
+#[allow(clippy::needless_range_loop)]
+fn edit_distance_dp(word1: String, word2: String) -&gt; i32 {
+    let (word1, word2) = (word1.into_bytes(), word2.into_bytes());
+    let (word1_len, word2_len) = (word1.len(), word2.len());
+    // # dp[i][j]表示word1[..i]至少需要多少次操作(replace/insert/delete)替换成B[..j]
+    // 很容易想到的其中一种状态转移的情况: 如果word1[i]==word2[j]，那么dp[i][j]==dp[i-1][j-1]
+    let mut dp = vec![vec![0; word2_len+1]; word1_len+1];
+    for i in 0..=word1_len {
+        // 需要i次删除操作才能让word1[..i]修改成空的字符串word2[..0]
+        dp[i][0] = i;
+    }
+    for j in 0..=word2_len {
+        // 需要j次插入操作才能让空字符串word1[..0]修改成word2[..j]
+        dp[0][j] = j;
+    }
+    for i in 1..=word1_len {
+        for j in 1..=word2_len {
+            if word1[i-1] == word2[j-1] {
+                dp[i][j] = dp[i-1][j-1];
+            } else {
+                // dp[i-1][j-1] + 1: word1[i-1]和word2[i-2]不同，所以替换次数+1,
+                //                   如果dp的决策层选择replace操作，dp[i][j]总共操作数等于dp[i-1][j-1]+1
+                // d[i-1][j]表示往word1末尾插入word2[j]，dp[i][j-1]表示word1删掉末尾的字母让word1和word2更接近
+                dp[i][j] = dp[i-1][j-1].min(dp[i-1][j]).min(dp[i][j-1]) + 1;
+            }
+        }
+    }
+    dp[word1_len][word2_len] as i32
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>由于 rustc 源码为了性能选用了一位数组存储动态规划的状态，用到了很多状态压缩、滚动数组之类的技巧，较难理解，本文就不对 rustc 的动态规划 edit_distance 算法做解释</p>
+<hr />
+<h2><a class="header" href="#引用-rustc-编辑距离的函数" id="引用-rustc-编辑距离的函数">引用 rustc 编辑距离的函数</a></h2>
+<h3><a class="header" href="#rustc-动态链接库" id="rustc-动态链接库">rustc 动态链接库?</a></h3>
+<p>考虑到 rustc 源码的 lev_distance 会比 strsim 库性能略微好点，所以就直接调 rustc 源码的 lev_distance 就行了</p>
+<p>当我尝试在代码中加入 <code>extern crate rustc</code> 时就出现以下报错:</p>
+<blockquote>
+<p>error[E0462]: found staticlib <code>rustc</code> instead of rlib or dylib</p>
+</blockquote>
+<p>然后 rustc 会提示找到个类似的静态链接库文件 </p>
+<blockquote>
+<p>/home/w/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib/librustc-nightly_rt.asan.a</p>
+</blockquote>
+<p>然后我试着用 nm 命令去读取库文件的函数符号表</p>
+<pre><code>$ nm -D librustc-nightly_rt.tsan.a
+...
+sanitizer_linux_s390.cpp.o:
+nm: sanitizer_linux_s390.cpp.o: no symbols
+
+sanitizer_mac.cpp.o:
+nm: sanitizer_mac.cpp.o: no symbols
+
+sanitizer_netbsd.cpp.o:
+nm: sanitizer_netbsd.cpp.o: no symbols
+...
+</code></pre>
+<p>发现里面有一个 <code>sanitizer_netbsd.cpp</code> 的文件，网上搜索得知这是 llvm 的源文件</p>
+<p>所以这些 <code>librustc-nightly_rt</code> 开头的库全是 llvm 相关的静态链接库，并不是 rustc 的库</p>
+<h3><a class="header" href="#rustc-ap-rustc_span" id="rustc-ap-rustc_span">rustc-ap-rustc_span</a></h3>
+<p>我相信我编译过很多像 rust-analyzer, racer 等静态分析的库，说不定电脑本地的 cargo 缓存就有 rustc 源码的 lev_distance.rs</p>
+<p><img src="image/rustc_edit/rustc_edit_distance_and_typo_checker_2.png" alt="" /></p>
+<p>果然发现 rustc-ap-rustc_span 这个 crate 就有 lev_distance 函数</p>
+<p>再参考 StackoverFlow 的问题 <a href="https://stackoverflow.com/questions/48372993/how-to-use-rustc-crate?rq=1">How to use <code>rustc</code> crate?</a> 和 racer 源码后发现</p>
+<p>而以 <code>rustc-ap-rustc_</code> 命名开头的库都是由 Rust 官方团队的 <a href="https://github.com/alexcrichton/rustc-auto-publish">alexcrichton</a>
+定期从 rustc 源码中同步代码并发布到 crates.io 中</p>
+<p>为了进一步验证带<code>rustc-ap</code>前缀的库是不是从 rustc 源码导出的，再看看很可能用到部分 rustc 源码的 rust-analyzer</p>
+<pre><code>[w@w-manjaro rust-analyzer]$ grep -r --include=&quot;*.toml&quot; &quot;rustc-ap&quot; .
+./crates/syntax/Cargo.toml:rustc_lexer = { version = &quot;714.0.0&quot;, package = &quot;rustc-ap-rustc_lexer&quot; }
+</code></pre>
+<p>果然发现 rust-analyzer 用到了 <code>rustc-ap-rustc_lexer</code> 这个库，毕竟 rust-analyzer 是做静态分析的，跟编译器的部分功能有点重合很正常</p>
+<p>其实像 rust-analyzer 和 racer 等静态分析工具都会用到 rustc-ap-rustc_* 这样命名开头的 rustc 编译器组件库</p>
+<p>我参考 racer 源码可以在 Cargo.toml 中这么引入 rustc_span，进而使用 rustc_span 的 lev_distance 函数</p>
+<blockquote>
+<p>rustc_span = { package=&quot;rustc-ap-rustc_span&quot;, version=&quot;714.0.0&quot; }</p>
+</blockquote>
+<h3><a class="header" href="#rustc-dev-component" id="rustc-dev-component">rustc-dev component</a></h3>
+<p>阅读 rustup component 相关文档得知，rustc-dev 组件包含了 rustc 的动态链接库和源码(方便静态分析)</p>
+<blockquote>
+<p>rustup component add rustc-dev</p>
+</blockquote>
+<p>然后就可以使用 rustc 编译器的各种组件</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![feature(rustc_private)]
+<span class="boring">fn main() {
+</span>extern crate rustc_span;
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#rust-analyzer-对-rustc-静态分析" id="rust-analyzer-对-rustc-静态分析">rust-analyzer 对 rustc 静态分析</a></h3>
+<p>然后在 Cargo.toml 中加入以下内容，</p>
+<pre><code class="language-toml">[package.metadata.rust-analyzer]
+rustc_private = true
+</code></pre>
+<p>然后 rust-analyzer 能对 rustc API 的使用进行静态分析</p>
+<p>然后参考 rust-analyzer 的这两个 <a href="https://github.com/rust-analyzer/rust-analyzer/issues/6714">#6714</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/issues/7589">#7589</a></p>
+<p>想让 rust-analyzer 对 rustc 函数的使用进行静态分析，需要设置 rustc 源码的路径:</p>
+<blockquote>
+<p>&quot;rust-analyzer.rustcSource&quot;: &quot;/home/w/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc_driver/Cargo.toml&quot;</p>
+</blockquote>
+<p>rustc-dev component 会提供 rustc-src 也就是 rustc 源码</p>
+<p>目前 rust-analyzer 还不支持 <code>extern crate test</code> 的静态分析，但我看 rust-src component 提供了 test crate 的源码:</p>
+<blockquote>
+<p>/home/w/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/test/Cargo.toml</p>
+</blockquote>
+<p>所以 rust-analyzer 和 intellij-rust 将来有望支持 test crate 的静态分析</p>
+<p>不过像 libc 虽然 rustup 每个 toolchain 都装了 libc 的 rlib 类型的动态链接库，可惜 rust-src component 没有包括 libc 源码</p>
+<p>所以用 <code>extern crate libc</code> 的方式引入 toolchain 自带的 libc 还是不能做静态分析的</p>
+<hr />
+<h2><a class="header" href="#语料库" id="语料库">语料库</a></h2>
+<p>拼写错误候选词建议需求的实现思路可以是: 对常用英语单词的每个单词跟拼写错误的单词去计算编辑距离，取编辑距离最近的 5 个单词作为获选词建议</p>
+<p>字符串间编辑距离的算法可以直接用 rustc 源码的 lev_distance，常用英语单词表则需要一个语料库</p>
+<h3><a class="header" href="#usrsharedictwords" id="usrsharedictwords">/usr/share/dict/words</a></h3>
+<p>mac 和树莓派的 raspbian 系统都在 <code>/usr/share/dict/words</code> 存放英语语料库，用于系统预装的记事本等应用进行拼写错误检查</p>
+<p>像 ubuntu_desktop 或 raspbian 这种带图形桌面环境的 linux 发行版一般会在 <code>/usr/share/dict/words</code> 内置语料库</p>
+<p>如果没有找到语料库，可以通过 <code>sudo apt install wbritish</code> 或 <code>sudo pacman -S words</code> 进行安装</p>
+<p>除了用操作系统自带的语料库，还可以选用 github 的 <a href="https://github.com/dwyl/english-words">english-words</a> 仓库作为语料库</p>
+<hr />
+<h2><a class="header" href="#拼写错误检查器-trait" id="拼写错误检查器-trait">拼写错误检查器 trait</a></h2>
+<p>为了方便更换语料库存储的数据结构，需要先对语料库的行为抽象出一个 trait，便于重构或复用代码</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait TypoSuggestion: Sized + Default {
+    const MAX_EDIT_DISTANCE: usize = 1;
+    const NUMBER_OF_SUGGESTIONS: usize = 5;
+    fn insert(&amp;mut self, word: String);
+    fn read_os_dictionary(&amp;mut self) {
+        /** OS_DICTIONARY_PATH
+        macos/raspbian: os built-in diction
+        ubuntu: sudo apt install wbritish
+        archlinux: sudo pacman -S words
+        */
+        const OS_DICTIONARY_PATH: &amp;str = &quot;/usr/share/dict/words&quot;;
+        use std::io::{BufRead, BufReader};
+        let word_file = BufReader::new(std::fs::File::open(OS_DICTIONARY_PATH).unwrap());
+        for word in word_file.lines().flatten() {
+            self.insert(word)
+        }
+    }
+    /// return type Self must bound Sized
+    fn new() -&gt; Self {
+        let mut typo_checker = Self::default();
+        typo_checker.read_os_dictionary();
+        typo_checker
+    }
+    fn is_typo(&amp;self, word: &amp;str) -&gt; bool;
+    fn typo_suggestions(&amp;self, word: &amp;str) -&gt; Vec&lt;String&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>trait TypoSuggestion 核心就两个函数: <code>fn is_typo()</code> 判断输入的单词是否在语料库中， <code>fn typo_suggestions()</code> 如果输入的单词拼写错误才返回若干个最相似的候选词建议</p>
+<h2><a class="header" href="#vecstring-实现候选词建议" id="vecstring-实现候选词建议">Vec<String> 实现候选词建议</a></h2>
+<p>既然操作系统语料库是个每行都是一个单词的文本文件，很容易想到用 <code>Vec&lt;String&gt;</code> 去存储每个单词，我将这个实现命名为: VecTypoChecker</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Default)]
+pub struct VecTypoChecker {
+    words: Vec&lt;String&gt;,
+}
+
+impl TypoSuggestion for VecTypoChecker {
+    fn insert(&amp;mut self, word: String) {
+        self.words.push(word);
+    }
+
+    fn is_typo(&amp;self, word: &amp;str) -&gt; bool {
+        !self.words.contains(&amp;word.to_string())
+    }
+
+    fn typo_suggestions(&amp;self, word: &amp;str) -&gt; Vec&lt;String&gt; {
+        let input_word = word.to_string();
+        if !self.is_typo(&amp;input_word) {
+            return vec![];
+        }
+        let mut suggestions = vec![];
+        for word in self.words.iter() {
+            let edit_distance = rustc_span::lev_distance::lev_distance(&amp;input_word, word);
+            if edit_distance &lt;= Self::MAX_EDIT_DISTANCE {
+                suggestions.push(word.clone());
+            }
+            if suggestions.len() &gt; Self::NUMBER_OF_SUGGESTIONS {
+                break;
+            }
+        }
+        suggestions
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>VecTypoChecker 的测试代码如下:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_typo_checker() {
+    let typo_checker = VecTypoChecker::new();
+    let input_word = &quot;doo&quot;;
+    println!(
+        &quot;Unknown word `{}`, did you mean one of {:?}?&quot;,
+        input_word,
+        typo_checker.typo_suggestions(input_word)
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>测试代码的输出结果示例:</p>
+<blockquote>
+<p>Unknown word <code>doo</code>, did you mean one of [&quot;boo&quot;, &quot;coo&quot;, &quot;dao&quot;, &quot;do&quot;, &quot;doa&quot;, &quot;dob&quot;]?</p>
+</blockquote>
+<h3><a class="header" href="#vectypochecker-的时间复杂度" id="vectypochecker-的时间复杂度">VecTypoChecker 的时间复杂度</a></h3>
+<p>is_typo 要遍历整个数组判断输入单词是否在单词表里，显然时间复杂度是 O(n)</p>
+<p>假设单词表中平均单词长度为 k，输入单词的长度为 L，typo_suggestions 的时间复杂度则要 O(n*L*k)</p>
+<h3><a class="header" href="#valgrind-和-memusage-测量堆内存使用" id="valgrind-和-memusage-测量堆内存使用">valgrind 和 memusage 测量堆内存使用</a></h3>
+<p>其实用数组去存储语料库的每个单词的内存利用率是很低的，很多单词都是重复部分很多</p>
+<p>先用 wc 和 du 命令查看操作系统单词表的收录的单词数和占用硬盘空间大小</p>
+<blockquote>
+<p>[w@w-manjaro ~]$ wc -l /usr/share/dict/words</p>
+<p>123115 /usr/share/dict/words</p>
+<p>[w@w-manjaro ~]$ du -h `readlink -f /usr/share/dict/words`</p>
+<p>1.2M    /usr/share/dict/american-english</p>
+</blockquote>
+<p>那 12 万个单词 1.2M 的单词文件以数组的数据结构在内存中需要占用多少空间呢？</p>
+<p>由于 Rust 标准库的 <code>std::mem::size_of</code> 只能测量栈上的空间，标准库没有测量智能指针在堆上占用空间的方法</p>
+<p>所以只能借助可执行文件的内存分析工具 <code>valgrind --tool=massif</code> 或 <code>memusage</code></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_vec_typo_checker() {
+    let _ = VecTypoChecker::new();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在 memusage 工具内运行上述单元测试，测试内只进行将操作系统语料库读取成 <code>Vec&lt;String&gt;</code> 的操作</p>
+<blockquote>
+<p>memusage cargo test test_vec_typo_checker</p>
+</blockquote>
+<p>这里只关注 memeusage 输出结果的<strong>堆内存</strong>峰值信息:</p>
+<blockquote>
+<p>Memory usage summary: heap total: 4450158, heap peak: 4409655, stack peak: 8800</p>
+</blockquote>
+<p><code>VecTypoChecker::new()</code> 过程的堆内存峰值 大约是 4.2 MB，可能有些 Rust内部对象 堆内存使用会影响结果</p>
+<p>所以我效仿称重是要「去皮」的操作，让 memusage 测量一个 Rust 空函数的运行时堆内存峰值，空函数的堆内存峰值是 2-3 kb</p>
+<p>Rust 其它的一些堆内存使用相比 <code>VecTypoChecker::new()</code> 的 4.2 MB 小到可以忽略不计</p>
+<h2><a class="header" href="#trie-前缀树字典树" id="trie-前缀树字典树">Trie 前缀树/字典树</a></h2>
+<p>1.2M 大约 12 万个单词用数组去存储大约需要 4.2M 的堆空间，显然不是很高效</p>
+<p>例如 doc, dot, dog 三个单词，如果用 Vec 数组去存储，大约需要 9 个字节</p>
+<p>但是如果用&quot;链表&quot;去存储，这三个单词链表的前两个节点 'd' 和 'o' 可以共用，这样只需要 5 个链表节点大约 5 个字节的内存空间</p>
+<p>这样像链表一样共用单词的共同前缀的数据结构叫 <strong>trie</strong>，广泛用于输入法，搜索引擎候选词，代码自动补全等领域</p>
+<h3><a class="header" href="#前缀树的数据结构" id="前缀树的数据结构">前缀树的数据结构</a></h3>
+<p>正好 leetcode 上也有 <a href="https://leetcode.com/problems/implement-trie-prefix-tree/">Implement Trie (Prefix Tree) 这种实现 trie 的算法题</a></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Default)]
+pub struct TrieTypoChecker {
+    children: [Option&lt;Box&lt;Self&gt;&gt;; 26],
+    is_word: bool
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>解读下前缀树数据结构的 <code>children: [Option&lt;Box&lt;Self&gt;&gt;; 26]</code> 字段</p>
+<p>26 表示当前节点往下延伸一共能扩展出 26 个小写字母，用 Option 表达了某个小写字母的子节点是否存在</p>
+<p>用 Box 是因为参考了 Rust 单链表的实现，我们希望树的节点能分配到堆内存上，否则编译器会报错 <code>recursive type has infinite size</code></p>
+<p>想更深入探讨 Rust 链表相关问题的读者可以自行阅读 <a href="https://rust-unofficial.github.io/too-many-lists/">too-many-lists</a> 系列文章</p>
+<p>前缀树的 is_word 字段表示从根节点到当前节点的路径能组成一个单词</p>
+<p>如果没有这个 is_word 标注，那么插入一个 apple 单词时，无法得知 apple 路径上的 app 是不是也是一个单词</p>
+<p><code>#[derive(Default)]</code>的目的是方便创建一个子节点全为 None 的前缀树节点</p>
+<h3><a class="header" href="#前缀树的路径压缩" id="前缀树的路径压缩">前缀树的路径压缩</a></h3>
+<p>实际生产环境中前缀树实现会比上述实现要复杂得多，要考虑类似「<strong>并查集</strong>」的「<strong>路径压缩</strong>」</p>
+<p>例如有个单词是<code>aaaaa</code>，那么插入到前缀树就会形成深度为 5 层的树</p>
+<p>树的深度过深不够&quot;饱满&quot;，这样内存利用率不高，需要把树 <em><strong>压扁</strong></em> (路径压缩)</p>
+<h3><a class="header" href="#前缀树的插入" id="前缀树的插入">前缀树的插入</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl TypoSuggestion for TrieTypoChecker {
+    fn insert(&amp;mut self, word: String) {
+        let mut curr_node = self;
+        for letter in word.into_bytes().into_iter().map(|ch| (ch - b'a') as usize) {
+            curr_node = curr_node.children[letter].get_or_insert_with(|| Box::new(Self::default()))
+        }
+        curr_node.is_word = true;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>但上述前缀树的插入方法，在读取操作系统的自带的单词表时会 <code>panicked at 'attempt to subtract with overflow'</code></p>
+<p>原因是操作系统的单词表中除了小写字母还有大写字母和单引号</p>
+<p>为了简便我们把单词表中的大写字母转为小写再去掉除小写字母以外的字符，这样就能把单词表转为前缀树</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn insert(&amp;mut self, word: String) {
+    let word = word
+        .into_bytes()
+        .into_iter()
+        .map(|ch| ch.to_ascii_lowercase())
+        .filter(|ch| matches!(ch, b'a'..=b'z'))
+        .collect::&lt;Vec&lt;u8&gt;&gt;();
+    let mut curr_node = self;
+    for letter in word.into_iter().map(|ch| (ch - b'a') as usize) {
+        curr_node = curr_node.children[letter].get_or_insert_with(|| Box::new(Self::default()))
+    }
+    curr_node.is_word = true;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>再写个构造前缀树并读取操作系统单词表的测试用例，跟数组的实现对比下空间复杂度</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn test_trie_typo_checker() {
+    let _ = TrieTypoChecker::new();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>memusage cargo test test_trie_typo_checker</p>
+</blockquote>
+<p>memusage 测试结果显示，前缀树存储 12 万 个单词只需要花 784 kb 的堆内存空间</p>
+<p>相比单词表磁盘文件占用 1.2M 硬盘空间，用前缀树存储只 700 多 kb 确实有「<strong>压缩</strong>」的效果</p>
+<p>相比用数组存储单词表消耗 4.2M 内存，前缀树在<em>空间复杂度</em>上大约有 80% 的提升</p>
+<p>再写一个性能测试对比数组和前缀树读取单词表的时间复杂度</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![feature(test)]
+<span class="boring">fn main() {
+</span>extern crate test;
+use typo_checker::{TypoSuggestion, VecTypoChecker, TrieTypoChecker};
+
+#[bench]
+fn bench_vec_read_dictionary(bencher: &amp;mut test::Bencher) {
+    bencher.iter(|| {
+        VecTypoChecker::new();
+    });
+}
+
+#[bench]
+fn bench_trie_read_dictionary(bencher: &amp;mut test::Bencher) {
+    bencher.iter(|| {
+        TrieTypoChecker::new();
+    });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>benchmark 的运行结果:</p>
+<pre><code>     Running unittests (target/release/deps/bench-c073956b9e337dbe)
+
+running 2 tests
+test bench_trie_read_dictionary ... bench:  39,724,024 ns/iter (+/- 2,954,476)
+test bench_vec_read_dictionary  ... bench:  11,928,761 ns/iter (+/- 386,083)
+</code></pre>
+<p>发现前缀树插入 12 万个单词比数组快 3 倍，而且前缀树插入单词时还有「<strong>去重</strong>」的功能，数组插入单词想去重还要额外的性能开销</p>
+<p>小结: 前缀树读单词表，时间复杂度上比数组快 3 倍多，空间复杂度上比数组节约 80%</p>
+<h3><a class="header" href="#前缀树的查询" id="前缀树的查询">前缀树的查询</a></h3>
+<p>查询某个单词是否在前缀树内，其实就是前文提到的 TypoSuggestion trait 的 is_typo 函数</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn is_typo(&amp;self, word: &amp;str) -&gt; bool {
+    let word = word.as_bytes();
+    let mut curr_node = self;
+    for letter in word {
+        let index = (letter - b'a') as usize;
+        match curr_node.children[index] {
+            Some(ref child_node) =&gt; {
+                curr_node = child_node.as_ref();
+            }
+            None =&gt; {
+                return true;
+            }
+        }
+    }
+    !curr_node.is_word
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>再写一个 benchmark 对比数组和前缀树的查询功能</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[bench]
+fn bench_vec_search(bencher: &amp;mut test::Bencher) {
+    let typo_checker = VecTypoChecker::new();
+    bencher.iter(|| {
+        assert_eq!(typo_checker.is_typo(&quot;doo&quot;), true);
+        assert_eq!(typo_checker.is_typo(&quot;lettuce&quot;), false);
+    });
+}
+
+#[bench]
+fn bench_trie_search(bencher: &amp;mut test::Bencher) {
+    let typo_checker = TrieTypoChecker::new();
+    bencher.iter(|| {
+        assert_eq!(typo_checker.is_typo(&quot;doo&quot;), true);
+        assert_eq!(typo_checker.is_typo(&quot;lettuce&quot;), false);
+    });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>查询功能的测试结果:</p>
+<pre><code>test bench_trie_search          ... bench:           8 ns/iter (+/- 2)
+test bench_vec_search           ... bench:     351,254 ns/iter (+/- 176,276)
+</code></pre>
+<p>小结: 查询某个单词是否在前缀树比数组快了 5 个数量级</p>
+<hr />
+<h2><a class="header" href="#前缀树的编辑距离" id="前缀树的编辑距离">前缀树的编辑距离</a></h2>
+<p>虽说前缀树的插入和查询都比数组快，但前缀树的删除比数组要难，前缀树编辑距离的实现更是非常难(需要记忆化深度优先搜索等诸多复杂算法)</p>
+<p>知乎上有个相关的提问: <a href="https://www.zhihu.com/question/29592463">鹅厂面试题，英语单词拼写检查算法 - 知乎</a></p>
+<p>很多回答都引用了<a href="http://norvig.com/spell-correct.html">这篇文章</a></p>
+<p>说实话最佳回答或上述文章都大量使用了 Python 的字符串拼接，每次拼接操作都会 new 一块字符串的堆内存</p>
+<p>这样频繁字符串拼接操作性能开销大，不能让我满意</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl TypoSuggestion for TrieTypoChecker {
+    fn typo_suggestions(&amp;self, word: &amp;str) -&gt; Vec&lt;String&gt; {
+        let mut dfs_helper = DfsHelper {
+            suggestions: vec![],
+            path: vec![],
+            typo_checker: &amp;self,
+        };
+        dfs_helper.dfs(&amp;self);
+        dfs_helper.suggestions
+    }
+}
+
+/// 为了偷懒，把dfs一些不关键的递归间全局共享的状态放到一个结构体
+struct DfsHelper&lt;'a&gt; {
+    /// 返回值
+    suggestions: Vec&lt;String&gt;,
+    /// 当前深度优先搜索，从根节点到当前节点的遍历路径
+    path: Vec&lt;u8&gt;,
+    typo_checker: &amp;'a TrieTypoChecker,
+}
+
+impl&lt;'a&gt; DfsHelper&lt;'a&gt; {
+    fn dfs(&amp;mut self, curr_node: &amp;TrieTypoChecker) {
+
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>由于搜索的是前缀树内相似的单词，所以不适合用广度优先搜索去遍历，用递归实现深度优先搜索比较方便</p>
+<p>为了减少 dfs 函数传参个数以及便于增删和管理递归函数的「无需<strong>回溯</strong>」的入参，我定义了一个 DfsHelper</p>
+<p>首先由于前缀树整体是个树，不方便像数组实现遍历所有单词挨个与输入单词之间计算编辑距离</p>
+<p>虽然较难前缀树的编辑距离实现难度很高，但是还是先写出<strong>单元测试</strong>，以 TDD 的方式开发逐渐迭代和逼近正确的实现代码</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>#[test]
+fn test_trie_typo_checker() {
+    const TEST_CASES: [(&amp;str, &amp;[&amp;str]); 1] = [
+        (&quot;doo&quot;, &amp;[&quot;boo&quot;, &quot;coo&quot;, &quot;dao&quot;, &quot;do&quot;, &quot;doa&quot;, &quot;dob&quot;])
+    ];
+    let typo_checker = TrieTypoChecker::new();
+    for (input, output) in std::array::IntoIter::new(TEST_CASES) {
+        assert_eq!(typo_checker.typo_suggestions(input), output);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#递归的结束条件" id="递归的结束条件">递归的结束条件</a></h3>
+<p>由于前文中的 trait TypoSuggestion 的 NUMBER_OF_SUGGESTIONS 参数默认为 5</p>
+<p>所以很容易想到一个递归结束条件就是 当前深度优先搜索已经找到 5 个 候选词了</p>
+<p>另一个递归结束条件就是输入单词已经被扫描完了</p>
+<h3><a class="header" href="#深度优先搜索的剪枝" id="深度优先搜索的剪枝">深度优先搜索的剪枝</a></h3>
+<p>如果当前遍历到的单词跟输入的单词的编辑距离超过 1,就可以进行「剪枝」</p>
+<p>这样能大大减少遍历前缀树的节点数量，作者水平有限，可能还有其它递归结束条件和剪枝条件没能想到</p>
+<h3><a class="header" href="#简陋的编辑距离搜索" id="简陋的编辑距离搜索">简陋的编辑距离搜索</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl TypoSuggestion for TrieTypoChecker {
+    // ...
+    fn typo_suggestions(&amp;self, word: &amp;str) -&gt; Vec&lt;String&gt; {
+        let mut dfs_helper = DfsHelper {
+            input_word: word.as_bytes().to_vec(),
+            input_word_len: word.len(),
+            output_suggestions: vec![],
+            path: vec![],
+        };
+        dfs_helper.dfs(&amp;self, 0, 1);
+        dfs_helper.output_suggestions
+    }
+}
+
+struct DfsHelper {
+    /// 输入的单词
+    input_word: Vec&lt;u8&gt;,
+    input_word_len: usize,
+    /// 返回值
+    output_suggestions: Vec&lt;String&gt;,
+    /// 当前深度优先搜索，从根节点到当前节点的路径(path root to curr_node)
+    path: Vec&lt;u8&gt;,
+}
+
+impl DfsHelper {
+    fn dfs(&amp;mut self, curr_node: &amp;TrieTypoChecker, input_word_index: usize, edit_times: i32) {
+        if edit_times &lt; 0 {
+            return;
+        }
+
+        if input_word_index == self.input_word_len {
+            if curr_node.is_word {
+                self.output_suggestions.push(unsafe { String::from_utf8_unchecked(self.path.clone()) });
+            }
+            if edit_times == 0 {
+                return;
+            }
+            // 输入单词遍历遍历完了，如果还有编辑次数可用，则用剩余的编辑次数给当前dfs遍历路径组成的单词词尾巴追加字母
+            // 例如 input_word=&quot;do&quot;, trie从根到当前节点的路径d-&gt;o遍历完还剩余1次编辑次数，则可以用做增加操作，把g加到当前路径中
+            for (i, child_node_opt) in curr_node.children.iter().take(26).enumerate() {
+                if let Some(child_node) = child_node_opt {
+                    self.path.push(b'a' + i as u8);
+                    self.dfs(child_node, input_word_index, edit_times-1);
+                    self.path.pop().unwrap();
+                }
+            }
+            return;
+        }
+
+        if self.output_suggestions.len() &gt;= TrieTypoChecker::NUMBER_OF_SUGGESTIONS {
+            return;
+        }
+
+        let curr_letter_index = (self.input_word[input_word_index] - b'a') as usize;
+        for (i, child_node_opt) in curr_node.children.iter().take(26).enumerate() {
+            if let Some(child_node) = child_node_opt {
+                if i == curr_letter_index {
+                    self.path.push(self.input_word[input_word_index]);
+                    self.dfs(child_node, input_word_index+1, edit_times);
+                    self.path.pop().unwrap();
+                } else {
+                    // replace
+                    self.path.push(b'a' + i as u8);
+                    self.dfs(child_node, input_word_index+1, edit_times-1);
+                    self.path.pop().unwrap();
+                }
+            }
+        }
+
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>输出看上去很接近拼写错误单词:</p>
+<blockquote>
+<p>Unknown word <code>doo</code>, did you mean one of [&quot;boo&quot;, &quot;coo&quot;, &quot;doa&quot;, &quot;dob&quot;, &quot;doc&quot;, &quot;dod&quot;, &quot;doe&quot;, &quot;dog&quot;, &quot;don&quot;, &quot;doom&quot;, &quot;door&quot;, &quot;dos&quot;, &quot;dot&quot;, &quot;dow&quot;, &quot;doz&quot;]?</p>
+</blockquote>
+<p>遗憾的是还未能实现编辑距离的删除操作，相比知乎上那个最佳回答还少了很多情况的判断</p>
+<p>再看看单元测试的情况:</p>
+<pre><code>thread 'test_trie_typo_checker' panicked at 'assertion failed: `(left == right)`
+  left: `[&quot;boo&quot;, &quot;coo&quot;, &quot;doa&quot;, &quot;dob&quot;, &quot;doc&quot;, &quot;dod&quot;, &quot;doe&quot;, &quot;dog&quot;, &quot;don&quot;, &quot;doom&quot;, &quot;door&quot;, &quot;dos&quot;, &quot;dot&quot;, &quot;dow&quot;, &quot;doz&quot;]`,
+ right: `[&quot;boo&quot;, &quot;coo&quot;, &quot;dao&quot;, &quot;do&quot;, &quot;doa&quot;, &quot;dob&quot;]`', src/lib.rs:182:9
+</code></pre>
+<p>首先肉眼看错误单词 doo 返回的候选词基本满足，期望返回 5 个候选词，结果超过返回超过 5 个</p>
+<p>但是没有将 do 收录进候选词，因为上述代码还没支持编辑距离的删除操作</p>
+<p>其次候选词的排序似乎跟数组的实现不一样，原因是这个前缀树的遍历并不是跟数组按字母顺序遍历单词表一样</p>
+<p>准确的说法是<strong>26 叉树的深度优先回溯搜索</strong>，类似的算法可以参考 <a href="https://leetcode.com/problems/lexicographical-numbers/">leetcode lexicographical 一题</a></p>
+<p>所以单元测试的期待值校验应该改成，遍历每一个候选词用 rustc_span::lev_distance::lev_distance 去计算跟输入单词之间的编辑距离</p>
+<p>如果全部候选词的编辑距离小于等于 1 则测试通过</p>
+<h3><a class="header" href="#简陋编辑距离实现的不足" id="简陋编辑距离实现的不足">简陋编辑距离实现的不足</a></h3>
+<ol>
+<li>还没支持字符串编辑距离的删除操作</li>
+<li>没有测试入参 edit_times &gt;= 2 的情况</li>
+<li>应该用迭代模拟递归，递归代码对编译器不友好，难优化</li>
+<li>应当做成 iterator 或 generator 可以逐个输出值，返回值要实现标准库相关的 Iter trait</li>
+<li>改良测试用例的期待值校验方法</li>
+</ol>
+<hr />
+<h2><a class="header" href="#单词拼写检查器还能干什么" id="单词拼写检查器还能干什么">单词拼写检查器还能干什么</a></h2>
+<p>作者一开始参与 sqlx 项目也是只能提 PR 修些 <code>typo</code> (typo 就是单词拼写错误的意思)</p>
+<p>通过修 typo 的过程更仔细的阅读了多遍源码，更深入理解 sqlx 的架构，日后渐渐修复了 sqlx sqlite 部分的几个 Bug</p>
+<p>本文讲述的这个拼写检查器，还可以用来检查开源项目的一些 typo</p>
+<p>Rust 2021 年 4 月的这个 <a href="https://github.com/rust-lang/rust/pull/84334/files">PR</a>
+只是修复些拼写错误，但也算对 Rust 的开源社区做出贡献</p>
+<p>希望更多人能像作者这样从修复 typo 开始参与开源项目，慢慢能解决更困难的 issue，逐渐为开源社区做出更大的贡献</p>
+<h2><a class="header" href="#项目的-github-链接与总结" id="项目的-github-链接与总结">项目的 github 链接与总结</a></h2>
+<p>拼写错误候选词建议源码的 github 仓库链接: <a href="https://github.com/pymongo/typo_checker">https://github.com/pymongo/typo_checker</a> (持续更新，欢迎 star)</p>
+<p>总的来说前缀树存储单词表性能会比数组优秀太多，后续打算添加一个检查一篇文章的单词拼写错误例子</p>
+<p>然后再加一个实时检测 android 的 EditText 文本输入组件的单词拼写错误的示例</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_4/2021_edition_preview.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_4/nom_url.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_4/2021_edition_preview.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_4/nom_url.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
