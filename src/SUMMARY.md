@@ -93,7 +93,7 @@
     - [学界动态](./chapter_4/event_os_design.md)
     - [华为 | StratoVirt 地址空间管理-基于Rust的实现与优化](./chapter_4/hw_stratovirt.md)
     - [华为 | Rust 编译后二进制大小和常用优化方式](./chapter_4/hw_bin_opt.md)
-    - [蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust](./chapter_4/ant_async_os_opt.md)
+    - [蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust](./chapter_4/ant_async_os_opt.md)
     - [蚂蚁集团 | Trait 使用及实现分析](./chapter_4/ant_trait.md)
     - [知乎 | 基于 SIMD 指令优化 Rucene](./chapter_4/zhihu_simd_rucene.md)
     - [Datenlord | Rust 异步实现 io_uring ](./chapter_4/datenlord_io_uring.md)

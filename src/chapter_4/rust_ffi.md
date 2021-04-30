@@ -93,7 +93,7 @@ Cxx 是一个安全沟通 Rust 和 Cpp 的库。在 Rust 这边会封装一个�
 
 FFi 比较常见的问题就是内存分配问题。比如，想把Rust 里的 String 传递给 Cpp 来使用。如果 Cpp 去析构这个 String，那么就会引发段错误。因为 Cpp 不知道这个String是哪来的，它会当作自己的。
 
-![35](image/ffi/36.png)
+![36](image/ffi/36.png)
 
 如何解决这个问题？
 
@@ -118,7 +118,7 @@ Cxx 库还定义了其他类型。
 
 然后 Cxx 会自动生成 Cpp 的头文件，对应关系如图。
 
-![42](image/ffi/47.png)
+![47](image/ffi/47.png)
 
 用户可以这样去使用。
 
