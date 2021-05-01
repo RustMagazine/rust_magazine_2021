@@ -23420,7 +23420,7 @@ String dump of section &#8217;.dynstr&#8217;:
 <h4 id='结论'>结论</h4>
 
 <p>Rust由于其组名规则和语言特性等原因，在使用了各种优化之后，编译出来的二进制大小大概是C语言的三倍左右，主要增大在代码段和动态符号表上。但是Rust语言比C的表达能力更强，同样的功能下，可以使用更少于C的代码量来实现，所以其二进制的增大还是可以接受。</p>
-]]></content:encoded></item><item><title>蚂蚁集团 | 异步化OS：我们如何利用Rustasyncawait提升10x性能-Rust</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_4/ant_async_os_opt.html</link><description><![CDATA[Asynchronous OS - Using async/await to bring 10 times performance improvement]]></description><author>blackanger</author><pubDate>Thu, 30 Apr 2021 18:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='蚂蚁集团_|_异步化os：利用_async/await_带来_10_倍性能提升'>蚂蚁集团 | 异步化OS：利用 async/await 带来 10 倍性能提升</h1>
+]]></content:encoded></item><item><title>蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_4/ant_async_os_opt.html</link><description><![CDATA[Asynchronous OS - Using async/await to bring 10 times performance improvement]]></description><author>blackanger</author><pubDate>Thu, 30 Apr 2021 18:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='蚂蚁集团_|_异步化os：利用_async/await_带来_10_倍性能提升'>蚂蚁集团 | 异步化OS：利用 async/await 带来 10 倍性能提升</h1>
 
 <p>作者：蚂蚁集团 田洪亮 / 编辑： 张汉东</p>
 
@@ -24295,7 +24295,7 @@ _mm_cvtsi128_si32     // 取4个i32中最右边的一个</code></pre>
 
 <p>FFi 比较常见的问题就是内存分配问题。比如，想把Rust 里的 String 传递给 Cpp 来使用。如果 Cpp 去析构这个 String，那么就会引发段错误。因为 Cpp 不知道这个String是哪来的，它会当作自己的。</p>
 
-<p><img src='image/ffi/36.png' alt='35' /></p>
+<p><img src='image/ffi/36.png' alt='36' /></p>
 
 <p>如何解决这个问题？</p>
 
@@ -24319,7 +24319,7 @@ _mm_cvtsi128_si32     // 取4个i32中最右边的一个</code></pre>
 
 <p>然后 Cxx 会自动生成 Cpp 的头文件，对应关系如图。</p>
 
-<p><img src='image/ffi/47.png' alt='42' /></p>
+<p><img src='image/ffi/47.png' alt='47' /></p>
 
 <p>用户可以这样去使用。</p>
 

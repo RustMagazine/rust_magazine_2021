@@ -97,7 +97,7 @@
     - [蚂蚁集团 | Trait 使用及实现分析](./chapter_4/ant_trait.md)
     - [知乎 | 基于 SIMD 指令优化 Rucene](./chapter_4/zhihu_simd_rucene.md)
     - [Datenlord | Rust 异步实现 io_uring ](./chapter_4/datenlord_io_uring.md)
-    - [PingCAP | 使用 Rust FFI 心得](./chapter_4/rust_ffi.md)
+    - [PingCAP | 使用 Rust FFI ](./chapter_4/rust_ffi.md)
     - [Netwarp | libp2p-rs与IPFS-Rust ](./chapter_4/libp2p_ipfs.md)
     - [Google | 在 Android 平台使用 Rust](./chapter_4/google_android_rust.md)
     - [MeiliSearch | 开源搜索引擎](./chapter_4/meili_search.md)
