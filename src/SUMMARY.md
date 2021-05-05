@@ -125,6 +125,22 @@
 
 
 - [五月刊（May）| 待发布]()
+    - [发刊通告](./chapter_5/announce.md)
+    - [Rust 资讯来源汇总](./chapter_5/info.md)
+    - [官方动态](./chapter_5/lang.md)
+    - [社区热点](./chapter_5/hots.md)
+    - [活动回顾](./chapter_5/events.md)
+    - [本月招聘](./chapter_5/jobs.md)
+    - [学习资源](./chapter_5/learn.md)
+    - [常见问题汇总](./chapter_5/faq.md)
+    - [语言技巧](./chapter_5/tips.md)
+    - [Rust 贡献名单上的无名英雄](./chapter_5/rusts-most-unrecognized-contributor.md)
+    - [GitHub 趋势榜](./chapter_5/github_trending.md)
+    - [推荐项目 ｜ 基础工具库](./chapter_5/tool_libs.md)
+    - [推荐项目 |  框架引擎](./chapter_5/frameworks.md)
+    - [Unsafe Rust 编码技巧 | Part 1](./chapter_5/unsafe_rust_tips.md)
+
+
 - [六月刊（June）| 待发布]()
 - [七月刊（July）| 待发布]()
 - [八月刊（August）| 待发布]()
