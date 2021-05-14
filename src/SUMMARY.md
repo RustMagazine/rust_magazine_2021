@@ -139,6 +139,7 @@
     - [推荐项目 ｜ 基础工具库](./chapter_5/tool_libs.md)
     - [推荐项目 |  框架引擎](./chapter_5/frameworks.md)
     - [Unsafe Rust 编码技巧 | Part 1](./chapter_5/unsafe_rust_tips.md)
+    - [借鉴数据库缓存解决动态规划困难题](./chapter_5/cache_and_recursion_memoization.md)
 
 
 - [六月刊（June）| 待发布]()

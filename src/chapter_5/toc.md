@@ -36,6 +36,10 @@
 - [语言技巧](./tips.md)
 
 
+### 算法
+
+- [借鉴数据库缓存解决动态规划困难题](./cache_and_recursion_memoization.md)
+
 ### Rust 与 设计模式
 
 
