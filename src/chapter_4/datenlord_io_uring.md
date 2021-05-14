@@ -54,9 +54,9 @@ io_uring 和 Rust 现有异步模型不同，该异步操作是由操作系统�
 
 ## 内存安全
 
-Rust 语言的内存安全要求不能出现 data race 和 use after free 的情况，而 io_uring 的使用模型则存在现在的风险。操作系统会异步地操作内存 buffer，这块 buffer 如果被用户同步操作测会出现 data race 的情况。因此被Proactor 线程占用的内存必须独占，否则任何被取消的 I/O 操作都会导致内存被用户态同时使用。
+Rust 语言的内存安全要求不能出现 data race 和 use after free 的情况，而 io_uring 的使用模型则存在现在的风险。操作系统会异步地操作内存 buffer，这块 buffer 如果被用户同步操作则会出现 data race 的情况。因此被Proactor 线程占用的内存必须独占，否则任何被取消的 I/O 操作都会导致内存被用户态同时使用。
 
-为了达到上述目的，Reactor 的基于 reference 的接口不能被使用，需要采用新的接口，如下所示：
+为了达到上述目的，Reactor 的基于 引用（reference） 的接口不能被使用，需要采用新的接口，如下所示：
 
 ```rust
 pub async fn read(
