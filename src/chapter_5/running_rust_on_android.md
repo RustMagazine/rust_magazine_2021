@@ -219,7 +219,7 @@ $ cd android/ && ./gradlew && ./gradlew build
 
 这些都完成后，我启动了构建，它成功了！我将`.apk`安装在我闲置的 Android 设备中，但是...好像有哪里不太对劲呢！
 
-![two-launcher-activities](./img/two-launcher-activities.png)
+![two-launcher-activities](./image/two-launcher-activities.png)
 
 我的应用一旦安装成功后，会在应用的启动界面产生两个快捷方式。其中一个启动 Java 的 UI 界面，而另一个启动包含 Rust 代码的 NativeActivity。在阅读了更多关于 Activity 和 AndroidManifest 的内容后，我了解到，造成此问题的部分是 NativeActivity 的 [<intent-filter>](https://developer.android.com/guide/topics/manifest/intent-filter-element) - 即 [category](https://developer.android.com/reference/android/content/Intent#CATEGORY_LAUNCHER) 节点声明应在启动器中显示它。一旦我将它移除，一切就会恢复正常，NativeActivity 不再显示在启动器中。
 
