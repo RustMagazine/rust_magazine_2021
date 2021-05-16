@@ -123,7 +123,7 @@ $ ./configure --host=aarch64-linux-android --with-pic
 $ make -j $(nproc)
 ```
 
-## 接住我，Scotty
+## Pick me up, Scotty
 
 使用上述方法，成功构建了 SQLite，生成了`libsqlite3.so`。现在只需要知道如何让 Cargo 使用它即可。在浏览 Cargo Book 时，我遇到了讲述[环境变量](https://doc.rust-lang.org/cargo/reference/environment-variables.html)的一个章节，它提及了`RUSTFLAGS`。和 Make 或 CMake 对待`CFLAGS`和`CXXFLAGS`一样，`RUSTFLAGS`的内容被 Cargo 传递给`rustc`编译器，允许它影响编译器的行为。
 
