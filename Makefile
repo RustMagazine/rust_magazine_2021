@@ -1,9 +1,10 @@
 .PHONY: deploy
 
 init:
-	git worktree add /tmp/book gh-pages
+	git worktree remove -f /tmp/book
+	git worktree add -f /tmp/book gh-pages
 
-deploy: book
+deploy: init
 	@echo "====> deploying to github"
 	mdbook build
 	rm -rf /tmp/book/*
@@ -11,4 +12,4 @@ deploy: book
 	cd /tmp/book && \
 		git add -A && \
 		git commit -m "deployed on $(shell date) by ${USER}" && \
-		git push origin gh-pages
+		git push -f origin gh-pages
