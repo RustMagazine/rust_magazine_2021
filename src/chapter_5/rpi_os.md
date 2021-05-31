@@ -65,7 +65,7 @@ GPIO（General Purpose I/O Ports）意思为通用输入/输出端口，通俗�
 
 以树莓派 4B 为例，其 40 针脚见下图:
 
-![gpio](./img/gpio.png)
+![gpio](./image/rpi/gpio.png)
 
 UART（Universal Asynchronous Receiver/Transmitter)，是一种串行通信协议，其中数据是串行传输的，一次传输一个字节的数据，即逐位传输。作为把并行输入信号转成串行输出信号的芯片，UART 通常被集成于其他通讯接口的连结上。
 
@@ -73,7 +73,7 @@ UART（Universal Asynchronous Receiver/Transmitter)，是一种串行通信协�
 
 UART 的端口至少有 RX、TX 和地线三个针脚。RX 负责读取，TX 负责输出。如果有两个 UART 端口，它们的连接方式如下：
 
-![uart](./img/uart_connect.png)
+![uart](./image/rpi/uart_connect.png)
 
 注意这里是：`usb2ttl(RXD) <-> gpio(TXD)` 以及 `usb2ttl(TXD) <-> gpio(RXD)`。另外注意，不要连接usb2tt 上的电源线到树莓派，小心烧坏树莓派。
 
@@ -90,7 +90,7 @@ UART 的端口至少有 RX、TX 和地线三个针脚。RX 负责读取，TX 负
 
 公式：
 
-![baud](./img/baud.png)
+![baud](./image/rpi/baud.png)
 
 其中，`fck`为 USART 时钟， `USARTDIV` 是一个存放在波特率寄存器(USART_BRR)的一个无符号定点数。其中 `DIV_Mantissa[11:0]`位定义 USARTDIV 的整数部分，`DIV_Fraction[3:0]`位定义 USARTDIV 的小数部分。
 

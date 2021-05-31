@@ -10,7 +10,7 @@ description: Rust gRPC Load Balancing
 
 ---
 
-> [原文](https://truelayer.com/blog/grpc-load-balancing-in-rust) / 
+> [原文](https://truelayer.com/blog/grpc-load-balancing-in-rust) 
 
 **在我们的开源系列的第一篇文章中，我们分享了 gRPC 客户端侧负载均衡的解决方案：使用 ginepro。**
 
@@ -79,7 +79,7 @@ HTTP/2 连接是持久的：客户端(或负载均衡器)和特定服务器之�
 
 由于网络负载均衡器在 OSI 栈的第四层（传输层）起作用，因此它们只能推断 TCP 和 UDP 连接。因此，它们只能将流量从一台客户端转发到一台固定的服务器（记住，连接是持久的）。
 
-![load-balancing-in-rust-2](./image/load-balancing-in-rust-2.webp)
+![load-balancing-in-rust-2](./image/grpc/load-balancing-in-rust-2.webp)
 
 为了解决这个问题，HTTP/2 负载均衡器必须能够检查应用程序的流量。这就是应用程序负载均衡器的用途：它们可以区分请求，并为每个传入请求选择一个新的服务器。
 
@@ -89,7 +89,7 @@ HTTP/2 连接是持久的：客户端(或负载均衡器)和特定服务器之�
 
 让我们对一个玩具系统进行思考：一个客户端和两个服务器，在 HTTP/2 之上讨论 gRPC。
 
-![load-balancing-in-rust-3](./image/load-balancing-in-rust-3.webp)
+![load-balancing-in-rust-3](./image/grpc/load-balancing-in-rust-3.webp)
 
 当客户端启动时，它执行**服务发现**(如 DNS 请求)：我可以将请求发往哪些 IP？
 
@@ -103,7 +103,7 @@ HTTP/2 连接是持久的：客户端(或负载均衡器)和特定服务器之�
 
 客户端开始将其所有请求路由到服务器 B，即使生成服务器 C 来替换服务器 A。
 
-![load-balancing-in-rust-4](./image/load-balancing-in-rust-4.webp)
+![load-balancing-in-rust-4](./image/grpc/load-balancing-in-rust-4.webp)
 
 服务器 C 完全未使用，浪费资源并恶化系统的性能 (服务器 B 过载)。
 
@@ -133,7 +133,7 @@ HTTP/2 连接是持久的：客户端(或负载均衡器)和特定服务器之�
 
 相反，这也增加了很多复杂性，并且你无法在不同语言中重用该实现。
 
-![load-balancing-in-rust-5](./image/load-balancing-in-rust-5.webp)
+![load-balancing-in-rust-5](./image/grpc/load-balancing-in-rust-5.webp)
 
 ### 外部线程
 
@@ -155,7 +155,7 @@ HTTP/2 连接是持久的：客户端(或负载均衡器)和特定服务器之�
 - 维护与 look-aside 进程的连接 (我应该请求哪一台服务器)
 - 在后台与所有健康的服务器建立并维护开放连接
 
-![load-balancing-in-rust-6](./image/load-balancing-in-rust-6.webp)
+![load-balancing-in-rust-6](./image/grpc/load-balancing-in-rust-6.webp)
 
 ### 代理
 
@@ -167,15 +167,15 @@ HTTP/2 连接是持久的：客户端(或负载均衡器)和特定服务器之�
 
 - **Service Mesh**：专用基础架构层，用于控制服务到服务的通信(如 Istio 和 Linkerd)，作为 sidecar 进行部署。
 
-![load-balancing-in-rust-7](./image/load-balancing-in-rust-7.webp)
+![load-balancing-in-rust-7](./image/grpc/load-balancing-in-rust-7.webp)
 
 - **Service Proxy**：所有客户端都需要连接的单个独立服务，并为每个 gRPC 服务做配置。
 
-![load-balancing-in-rust-9](./image/load-balancing-in-rust-9.webp)
+![load-balancing-in-rust-8](./image/grpc/load-balancing-in-rust-8.webp)
 
 - **Sidecar 代理**：sidecar 代理与每个客户端部署在一起，并全部通过相同的 gRPC 服务配置代理。
 
-![load-balancing-in-rust-9](./image/load-balancing-in-rust-9.webp)
+![load-balancing-in-rust-9](./image/grpc/load-balancing-in-rust-9.webp)
 
 然而，没有任何一种方案是完美的，它们之间总有一个权衡：
 

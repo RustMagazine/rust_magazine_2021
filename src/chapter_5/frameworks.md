@@ -6,6 +6,8 @@ description: Rust Frameworks
 
 # 推荐项目 |  框架引擎
 
+编辑：张汉东
+
 ## Cube.js: Rust 实现的 BI 框架
 
 Cube.js 是一个开源的分析 API 平台。主要用于构建内部商业智能工具或将客户面向客户的分析添加到现有应用程序。

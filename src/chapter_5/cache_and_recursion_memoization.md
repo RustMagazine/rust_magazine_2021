@@ -4,7 +4,7 @@ description: Cache and Recurision Memoization
 
 ---
 
-# 借鉴数据库缓存解决动态规划困难题
+# 借鉴数据库缓存解决动态规划难题
 
 作者: 吴翱翔 / 后期编辑：张汉东
 
@@ -356,7 +356,7 @@ fn test_num_ways() {
 
 进而写出了带缓存的深度优先搜索解法，解决了溢出等小问题后终于通过了
 
-![](./image/cache_and_recursion_memoization.png)
+![](./image/cache/cache_and_recursion_memoization.png)
 
 ## 为什么不是 dp[i][j] 的动态规划写法
 

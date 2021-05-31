@@ -315,7 +315,7 @@ pub struct Foo <T> {
 }
 ```
 
-![deriveInput类型和结构体的对应关系](./image/derive_input_mapping.png)
+![deriveInput类型和结构体的对应关系](./image/derive_macro/derive_input_mapping.png)
 
 
 > 划重点： 通过上面的例子，要建立起一种认知，rust中各个语法元素，都可以被不同的数据结构(也就是`syn`包提供的语法树节点类型)来表示。我们上面的例子是带领大家分析了`syn::DeriveInput`结构和struct定义之间的对应关系，后续我们还会遇到各种各样的语法元素，我们不能一一给大家作图展示对应关系，这就要求大家能够自己阅读`syn`包的文档，并逐步掌握rust语言中常见语法元素与`syn`包中对应的各种数据结构。方法都是一样的，并不困难，学会多看文档。
