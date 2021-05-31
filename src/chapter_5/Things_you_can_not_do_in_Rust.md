@@ -1,6 +1,10 @@
 # Rust 中无法办到的事情(以及如何替代)
 
-> [原文](https://blog.logrocket.com/what-you-cant-do-in-rust-and-what-to-do-instead/) / 译者：Matrixtang
+译者：Matrixtang
+
+> [原文](https://blog.logrocket.com/what-you-cant-do-in-rust-and-what-to-do-instead/) 
+
+---
 
 作为 [Rust subreddit](https://www.reddit.com/r/rust/)的主持人，我经常发布有关开发人员试图将其各自的语言范例转换为 Rust 的帖子，结果不一而足，取得了不同程度的成功。 在本指南中，我将描述开发人员在将其他语言范例转换为 Rust 时遇到的一些问题，并提出一些替代解决方案来帮助你客服 Rust 的局限性。
 

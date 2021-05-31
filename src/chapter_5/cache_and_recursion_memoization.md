@@ -1,6 +1,8 @@
-# [借鉴数据库缓存解决动态规划困难题](/2021/05/cache_and_recursion_memoization.md)
+# 借鉴数据库缓存解决动态规划困难题
 
-作者: 吴翱翔
+作者: 吴翱翔 / 后期编辑：张汉东
+
+---
 
 > 原文: [缓存解决动态规划难题](https://pymongo.github.io/#/2021/05/cache_and_recursion_memoization.md)
 
@@ -340,7 +342,7 @@ fn test_num_ways() {
 }
 ```
 
-完整源码: <https://github.com/pymongo/leetcode-rust/blob/b6f0101a50a70512c12dd33333bfa535307ac40e/src/dp/number_of_ways_to_stay_in_the_same_place_after_some_steps.rs#L277>
+完整源码: [https://github.com/pymongo/leetcode-rust/blob/b6f0101a50a70512c12dd33333bfa535307ac40e/src/dp/number_of_ways_to_stay_in_the_same_place_after_some_steps.rs#L277](https://github.com/pymongo/leetcode-rust/blob/b6f0101a50a70512c12dd33333bfa535307ac40e/src/dp/number_of_ways_to_stay_in_the_same_place_after_some_steps.rs#L277)
 
 ## 小结下逐步优化题解的过程
 

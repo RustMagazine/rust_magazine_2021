@@ -6,7 +6,8 @@
 >
 > 总结了本月的活动，包括线上和线下。
 >
-> 线上： 《Rust 唠嗑室》和 《RustFriday 飞书群线上沙龙》
+> - 线上：《Rust 唠嗑室》和 《RustFriday 飞书群线上沙龙》
+> - 线下: WebAssembly meetup 北京站
 
 ---
 
@@ -133,3 +134,32 @@ Rust 中文社群 飞书群 邀请你加入：
 1. https://www.edx.org/course/webassembly-actors-from-cloud-to-edge
 
 [查看回放](https://www.bilibili.com/video/BV1B44y1r7HA)
+
+
+# 【线下】WebAssembly meetup 20210515 北京站
+
+活动 PPT : [https://github.com/alabulei1/WebAssembly-meetups/tree/main/meetup-beijing-20210515](https://github.com/alabulei1/WebAssembly-meetups/tree/main/meetup-beijing-20210515)
+
+1. 基于WebAssembly的人像分割技术在RTC领域的应用
+
+分享人：声网 Agora-高纯
+
+B 站回放：[https://www.bilibili.com/video/BV1u54y1V79y](https://www.bilibili.com/video/BV1u54y1V79y)
+
+2. 用 Serverless WebAssembly 解决 SaaS 平台的定制化难题
+
+分享人：WasmEdge-Michael Yuan
+
+B 站回放：[https://www.bilibili.com/video/BV17v411L7Zg?from=search&seid=14369338767741516201](https://www.bilibili.com/video/BV17v411L7Zg?from=search&seid=14369338767741516201)
+
+3. 基于WebAssembly 的ServiceMesh
+
+分享人：旷视-王续
+
+B 站回放：[https://www.bilibili.com/video/BV1yy4y1W7FE?from=search&seid=101009679390055518](https://www.bilibili.com/video/BV1yy4y1W7FE?from=search&seid=101009679390055518)
+
+4. WebAssembly 在浏览器端的实践
+
+分享人：金山软件-黄烈锦
+
+B 站回放：[https://www.bilibili.com/video/BV1f5411u7v7?from=search&seid=16899798704041782034](https://www.bilibili.com/video/BV1f5411u7v7?from=search&seid=16899798704041782034)

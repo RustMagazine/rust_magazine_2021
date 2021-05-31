@@ -69,9 +69,11 @@ Rust for Windows v0.9最近已发布，其中包括全面的消费支持以及�
 
 [Read More](https://www.reddit.com/r/rust/comments/ndm4ne/spacex_about_the_rust_programming_language/)
 
-## 【Rust 安全案例】Rust 也能写出漏洞，但都是逻辑漏洞
+## 【Rust 安全案例】 Rust 的安全并不是指能写出 0 Bug 代码
 
-2021年05月18日，openSUSE 邮件列表里收到一份安全报告，主题如下：
+> 题外话： 之前看到知乎上有人说 Rust 2021 年光 CVE 就有近百个。那咱们今天就捡个热乎的 CVE  看看到底是咋回事。
+
+2021-05-18 ，openSUSE 邮件列表里收到一份安全报告，主题如下：
 
 [oss-security] please: CVE-2021-31153，CVE-2021-31154，CVE-2021-31155: local root exploit and further
 
@@ -94,19 +96,128 @@ please 是一个 Rust 实现的替代 sudo 的工具，该库作者向 SUSE 团�
 [Read More](https://marc.info/?l=oss-security&m=162133298513412&w=2)
 [Read More](https://bugzilla.suse.com/show_bug.cgi?id=1183669)
 
-## Facebook 将进一步深化 Rust 使用和支持
+## Rust for Windows v0.9最近已发布
 
-Rust 在 Facebook 一共经历过 3 个阶段：
+意味着你可以用 Rust 调用任意 Windows API
 
-- 2016-2017：早期源码控制中的使用，创建了 eden 项目 以增加项目代码的最大提交率。
-- 2017-2019：接受采纳阶段，不少 Python 和 JS 的后端程序员由于性能和编译时错误检测开始使用 Rust。
-- 2019-2020：专门支持阶段，2019 年 Rust 的开发人数呈指数增长，一个显著的例子是 Rust 作为 Diem 区块链（FaceBook 的电子钱包 Novi 是 Diem 组织的一员）的主语言。于是一个小的 Rust 开发小组被创建，专门致力于工具和集成方面的挑战。
+(目测一大波 Rust 实现的恶意软件即将来袭 。。。)
 
-未来，短期内主要会聚焦以下四个领域：
+- [https://blogs.windows.com/windowsdeveloper/2021/05/06/announcing-rust-for-windows-v0-9/](https://blogs.windows.com/windowsdeveloper/2021/05/06/announcing-rust-for-windows-v0-9/)
+- [https://github.com/microsoft/windows-rs](https://github.com/microsoft/windows-rs)
+- [https://docs.microsoft.com/en-us/windows/dev-environment/rust/](https://docs.microsoft.com/en-us/windows/dev-environment/rust/)
 
-- 从语言和工具链的角度支持内部用户。
-- 在 FaceBook 以外的社区中做出积极贡献。
-- Rust 与 C++ 简单安全的互操作性。
-- 积极支持和参与 Rust 基金会。
+**观点：对 Windows-rs 的 看法**
 
-[Read More](https://engineering.fb.com/2021/04/29/developer-tools/rust/?utm_campaign=Learning%20Posts&utm_content=166528802&utm_medium=social&utm_source=twitter&hss_channel=tw-1359556530618646530)
+来自：Tony Huang 
+
+仔细看了一下winrt的设计，还是很不错的，集微软技术大成。
+
+Windows技术栈中很重要的一个技术是COM。它的作用就是定义了一个语言无关的abi，让不同的语言可以无压力的互相交互。
+
+举个例子，以前我们用VB6的时候可以使用COM调用ActiveX控件，然后到了.Net，还可以在.Net中直接使用COM组件，甚至可以把自己包装成COM组件来提供服务。
+
+然后，我们再来看Windows在应用程序接口方面，和Linux有什么本质的不同。
+
+在Linux中，所有对内核的调用，最终都是syscall，这个实际上是在每个arch上，通过一个syscall的number做的绑定，还是比较简陋的。操作系统只能提供很有限的syscall，其它的要嘛通过第三方库，要嘛通过ioctl里面的魔幻处理来实现。
+
+而Windows完全不同，它的操作系统API是通过动态链接库的形式提供的。典型的就是那3个dll：KERNEL32.dll, USER32.dll, 和 GDI32.dll。那么它具体怎么跟内核交互，或者如何与系统的其它服务协作为应用程序提供这些功能，就是由操作系统的发行版决定的。从用户程序的视角来说，我只是调用了一个函数。如果使用了新的API，但是跑在老的系统上，只是会动态链接错误，找不到指定的symbol就好了。甚至可以通过API动态的检测是否存在某个接口。
+
+而WinRT的技术基础就是基于COM技术，把这个功能变得更加强大了。
+
+首先所有的操作系统组件（甚至你自己的组件），都可以通过COM把接口暴露出来，提供一份winmd文件，描述了你提供的接口。
+
+然后针对不同的语言，微软官方提供了一个工具，依据这个winmd文件自动生成binding。
+
+比如C++/WinRT，就是提供了一个编译器，在编译你自己的程序之前，根据你的依赖和windows sdk中的winmd文件生成c++的header，给你调用。然后运行时再使用COM把具体的dll和接口注入进来。
+
+而windows-rs（Rust for Windows）干的事情是一样的，但是它很巧妙的利用了cargo的 build.rs 机制，在编译时做这个binding的生成工作 （具体参考 readme： https://github.com/microsoft/windows-rs/blob/master/readme.md）。
+
+所以对于微软来说，由于操作系统的abi是语言无关的，通过winmd（从com的idl编译而来）描述的。那么对于新的语言的支持，只需要2个事情：
+
+1. 针对legacy的win32 api做一下手动的binding
+2. 针对新的WinRT API写一个对应的binding生成器
+
+理论上来说，只要你用的api范围够小，rust for windows是能支持rust编译器支持的最低版本的windows的。
+
+## 用于Rust的新 AWS 开发工具包– Alpha 版发布
+
+- [https://aws.amazon.com/blogs/developer/a-new-aws-sdk-for-rust-alpha-launch/](https://aws.amazon.com/blogs/developer/a-new-aws-sdk-for-rust-alpha-launch/)
+- [https://github.com/awslabs/aws-sdk-rust](https://github.com/awslabs/aws-sdk-rust)
+
+## intellij-rust 提交了展开属性宏的 PR
+
+[https://github.com/intellij-rust/intellij-rust/pull/7194](https://github.com/intellij-rust/intellij-rust/pull/7194)
+
+## 1password 宣布登陆 Linux 平台
+
+
+摘录：
+
+1. Linux 1Password的后端和底层逻辑是用Rust 编写的。 由于其强大的安全性，Rust已在企业中得到广泛采用，甚至被提议作为Linux内核的官方语言。
+2. Linux 1Password 的数据加密使用 [ring库](https://github.com/briansmith/ring)
+3. 用户界面使用 React+neon（Node.js 模块的 Rust 绑定）+Rust
+4. 1Password 公司为了回馈开源社区，赞助了 tokio 和   rust-analyzer，并且也开源了自己的一些项目。
+
+[https://blog.1password.com/welcoming-linux-to-the-1password-family/?utm_medium=social&utm_source=twitter&utm_campaign=linuxblog&utm_ref=social](https://blog.1password.com/welcoming-linux-to-the-1password-family/?utm_medium=social&utm_source=twitter&utm_campaign=linuxblog&utm_ref=social)
+
+## Fuchsia OS 发布，reddit 网友讨论 Rust 等代码所占比例
+
+- Rust 22%,
+- C++ 18%,
+- C 4%,
+- Go 2%,
+- Python 1%,
+- Dart 1%
+
+其余 52% 都是 json 相关的，不算os内主流语言。 单独算这几门语言，Rust 的占比接近 50% 了
+
+[https://www.reddit.com/r/rust/comments/nldg5c/fuchsia_os_partially_written_in_rust_has_shipped/](https://www.reddit.com/r/rust/comments/nldg5c/fuchsia_os_partially_written_in_rust_has_shipped/)
+
+## Rust binary search PR 导致 Polkadot 线上事故的缘由 
+
+知名公链波卡 (Polkadot) 5 月 24 号某个节点发生了一次比较大的线上事故(Out Of Memory)，是因为 Rust 标准库 binary search 一个优化 PR 导致的。
+
+该PR 跑了将近一周时间的 crater 测试，也没有发现对线上 5 万多个 crate 有什么大影响。Rust 1.52 发布之后，没想到依然有人中招了，而且还是价值几十亿美金的项目。
+
+@brson 特意发了 issue 说到这件事，但是 Rust 社区的人都认为这件事跟这个 PR 没有关系，因为 binary search 碰到多个重复的元素的时候确实是返回任意一个，文档上也说得很清楚了（所以这种情况下不会保证两个版本返回的位置一致，这也是 Polkadot 出现线上事故的原因)。
+
+该 PR 作者(Folyd)说 ：
+
+> 不管怎样，这件事给我的触动还是蛮大的。软件开发是复杂的，其本质原因在于现实生活就是复杂的。软件工程师只能尽可能规避发生这种情况的风险，但是没有办法做到万无一失吧。就像这位工程师说的我这是中了 Hyrum 定律（Google 一个叫 Hyrum 的工程师提的定律，可以理解为 API 领域的墨菲定律）。
+
+Polkadot 的事故后复盘：[https://polkadot.network/a-polkadot-postmortem-24-05-2021/](https://polkadot.network/a-polkadot-postmortem-24-05-2021/)
+
+@brson 的 issue: [https://github.com/rust-lang/rust/issues/85773](https://github.com/rust-lang/rust/issues/85773)
+
+binary search优化 PR：[https://github.com/rust-lang/rust/pull/74024](https://github.com/rust-lang/rust/pull/74024)
+
+关于 PR 的文章：[https://zhuanlan.zhihu.com/p/371460665](https://zhuanlan.zhihu.com/p/371460665)
+
+Hyrum 定律：[https://www.hyrumslaw.com/](https://www.hyrumslaw.com/)
+
+
+## rustc_codegen_gcc: GCC-rs 的一个简单替代项目
+
+GCC-rs  是 用 Cpp 重新实现 Rustc 的一个 GCC 前端。
+
+为什么有 GCC-rs 这个项目？
+
+1. 想要支持更多的 CPU 架构
+2. 跨语言 LTO。GCC-RS FAQ将Linux列为激励示例。 具有讽刺意味的是，Linux支持ltvm但不是gcc！
+3. Rust 自举（Bootstrap）链很长，因为需要从C到OCAML，然后编译预发布 Rust 以编译 Rust 1.0编译 Rust 1.1 、1.2等，直到捕获最多1.53（或者最新版本）。 因此，如果您可以用C++中编写的 Rust 编译器直接编译1.53，则可以节省一些时间。
+4. 复用 GCC 插件
+
+但 rustc_codegen_gcc  作者认为 GCC-rs 其实没有很好的解决这些问题。
+
+rustc_codegen_gcc 项目只需将GCC插入现有的Rust编译器作为代码生成后端，就可以简单的达成这些目标。
+
+该项目的主要目标是能够在LLVM不支持的平台上编译 Rust 代码。 次要目标是检查使用GCC后端是否提供任何编译速度改进。
+
+当前 rustc_codegen_gcc 还是 WIP。
+
+
+[https://github.com/antoyo/rustc_codegen_gcc](https://github.com/antoyo/rustc_codegen_gcc)
+
+[https://github.com/Rust-GCC/gccrs](https://github.com/Rust-GCC/gccrs)
+
+文章：[https://shnatsel.medium.com/the-simpler-alternative-to-gcc-rs-90da2b3685d3](https://shnatsel.medium.com/the-simpler-alternative-to-gcc-rs-90da2b3685d3)

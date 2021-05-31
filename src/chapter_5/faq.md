@@ -92,22 +92,73 @@ Rust 里 String 总是按 UTF-8 编码的。而索引旨在进行恒定时间操
 
 切片为啥加 & ，因为 Rust 里 切片 是一个 DST，必须放 & 后面。
 
-
 ---
 
+## 错误处理推荐使用什么库？
+
+目前一般认为对于应用程序推荐使用 [anyhow]，而对于库推荐使用 [thiserror]。
+
+anyhow 提供了一个基于[特质对象]的错误类型，可以很容易地将不同来源的错误统一到单一来源，并可以方便地为错误添加上下文，以及就地创建新的错误。
+
+thiserror 则提供了一个 derive 宏，方便为自定义的错误类型实现 [`Error` 特质][error-trait]。
+
+[anyhow]: https://crates.io/crates/anyhow
+[thiserror]: https://crates.io/crates/thiserror
+[error-trait]: https://doc.rust-lang.org/std/error/trait.Error.html
 
 
+## # `fn()` 类型与 `Fn()` 等特质的关系和区别是什么？
+
+在 Rust 中，每一个函数，无论是由 `fn` 关键字定义的一般函数，还是由闭包表达式定义的闭包，都有一个各自独立的匿名类型。为了能间接地使用函数，Rust 准备了两种方式，即 [`fn()`][fn] 类型与 [`Fn()`][Fn-trait]、[`FnMut()`][FnMut-trait] 和 [`FnOnce()`][FnOnce-trait] 等[特质]。
+
+要表达不同的类型，最常见的方法即是使用特质（作为类型约束，即 `T: Fn()` 和 `impl Fn()`，或者使用[特质对象]，即 `dyn Fn()`），`Fn()` 一族就是用于表达函数类型的特质。
+
+`fn()` 不是一个特质，而是一个具体的类型，表示一个函数指针。功能上它与特质对象类似，可以近似地看作 `&'static dyn Fn()`。但 `fn()` 与 `Fn()` 不同，它不包含对上下文的引用，因而只有一般函数或没有捕获任何上下文的闭包能够被转换成 `fn()`。因此它也与 `&dyn Fn()` 不同，不需要使用[胖指针]。它的大小与普通的指针一致。
+
+因为 `fn()` 是一个函数指针，通过它调用函数与通过特质对象一样是间接调用，而使用 `Fn()` 等特质约束的泛型则是通过[单态化]来直接调用的。
 
 
----
+[fn]: https://doc.rust-lang.org/std/primitive.fn.html
+[Fn-trait]: https://doc.rust-lang.org/std/ops/trait.Fn.html
+[FnMut-trait]: https://doc.rust-lang.org/std/ops/trait.FnMut.html
+[FnOnce-trait]: https://doc.rust-lang.org/std/ops/trait.FnOnce.html
 
-## 其他摘录
+## # Rust 的 `Future` 是基于轮询的，这种方式不会有性能问题吗？
 
-> 来源：[https://rust-zh.github.io/faq/](https://rust-zh.github.io/faq/)
->
-> 欢迎贡献：
-> 
-> 更多阅读： [https://rust-zh.github.io/faq/](https://rust-zh.github.io/faq/)
+`Future` 的轮询是带通知机制的轮询，与传统意义上的轮询不完全一样。
 
----
+当[执行器](<> "executor")调用 `Future` 的 [`poll`][poll] 方法时会传入一个 [`Waker`][waker]，而 `Future` 可以将这个 `Waker` 保存起来，当自己的状态有所变化时，通过其通知执行器可以再次对自己进行轮询。通过这个机制，执行器可以避免反复轮询一个未准备好的 `Future`，避免了传统轮询带来的性能问题。
+
+
+[poll]: https://doc.rust-lang.org/std/future/trait.Future.html#tymethod.poll
+[waker]: https://doc.rust-lang.org/std/task/struct.Waker.html
+
+## 标准库的 `Future`、futures crate、tokio 和 async-std 等之间的关系是什么？
+
+标准库的 [`Future`][future] [特质]以及相关的 [`Context`][context]、[`Pin`][pin]、[`Waker`][waker] 等是核心。由于编译器编译[异步函数]需要依赖它们的定义，因而它们必须被包含在标准库里。
+
+[futures] 是 `Future` 的扩展，提供了许多虽不必进入标准库但依然重要的基础性的东西，比如 [`FutureExt`][future-ext]、[`StreamExt`][stream-ext] 等扩展特质和基础的[通道][channel]、[执行器][executor]实现等。
+
+[tokio] 和 [async-std] 是同一个层次的，主要提供异步运行时的实现，都依赖 futures 提供的元语，但因为处理的层次不同，所以可以看到一些自定义的与 futures 差不多的模块。
+
+此外，虽然目前 [`Stream`][stream] 是由 futures 提供的，但未来如果编译器要实现[异步生成器][generator]，这个特质也很可能会进入标准库，因而对其的扩展也依然放进了独立的 `StreamExt` 里。
+
+
+[future]: https://doc.rust-lang.org/std/future/trait.Future.html
+[context]: https://doc.rust-lang.org/std/task/struct.Context.html
+[pin]: https://doc.rust-lang.org/std/pin/struct.Pin.html
+[waker]: https://doc.rust-lang.org/std/task/struct.Waker.html
+
+[futures]: https://crates.io/crates/futures
+[future-ext]: https://docs.rs/futures/0.3/futures/future/trait.FutureExt.html
+[stream]: https://docs.rs/futures/0.3/futures/stream/trait.Stream.html
+[stream-ext]: https://docs.rs/futures/0.3/futures/stream/trait.StreamExt.html
+[channel]: https://docs.rs/futures/0.3/futures/channel/index.html
+[executor]: https://docs.rs/futures/0.3/futures/executor/index.html
+
+[tokio]: https://crates.io/crates/tokio
+[async-std]: https://crates.io/crates/async-std
+
+[generator]: https://rust-lang.github.io/rfcs/2394-async_await.html#generators-and-streams "async generator"
+
 

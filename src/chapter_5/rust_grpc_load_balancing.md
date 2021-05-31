@@ -1,6 +1,10 @@
 # Rust 中的 gRPC 负载均衡
 
-> [原文](https://truelayer.com/blog/grpc-load-balancing-in-rust) / 译者: iamazy
+译者: iamazy 
+
+---
+
+> [原文](https://truelayer.com/blog/grpc-load-balancing-in-rust) / 
 
 **在我们的开源系列的第一篇文章中，我们分享了 gRPC 客户端侧负载均衡的解决方案：使用 ginepro。**
 

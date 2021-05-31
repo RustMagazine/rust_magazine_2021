@@ -1,6 +1,10 @@
 # 在 Android 中运行 Rust 
 
-> [原文](https://blog.svgames.pl/article/running-rust-on-android) / 译者：iamazy
+译者：iamazy
+
+---
+
+> [原文](https://blog.svgames.pl/article/running-rust-on-android) / 
 
 为了我目前的一位客户，我们决定将 Rust 作为我们主要的编程语言。做出这个决定的原因有很多：除了技术优势外，还有一个无可争议的事实就是：Rust 仍然是一门相对较新的语言，花哨且时髦 - 当你是一家初创公司时，使用十几年前的技术可能会让你陷入困境。我的意思是 - 不使用创新的技术如何进行创新？最快的成功方式就是对其大肆宣传。
 

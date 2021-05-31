@@ -1,4 +1,4 @@
-# Rust 发行 6 周年
+# Rust 发布六周年
 
 作者：The Rust Team / 译者：杨楚天
 

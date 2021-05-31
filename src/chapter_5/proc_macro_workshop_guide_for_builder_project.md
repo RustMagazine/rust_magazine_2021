@@ -1,14 +1,16 @@
-# Rust过程宏系列教程(2)--实现proc-macro-workshop项目之Builder题目
+# Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现
 
-作者：米明恒
+作者：米明恒 / 后期编辑：张汉东
 
-文字版本首发于https://blog.ideawand.com/2021/03/24/rust_procedural_macro/rust_proc_marco_workshop_guide-02/
-
-视频版本首发于https://space.bilibili.com/500416539
+> 文字版首发：[https://blog.ideawand.com/2021/03/24/rust_procedural_macro/rust_proc_marco_workshop_guide-02/](https://blog.ideawand.com/2021/03/24/rust_procedural_macro/rust_proc_marco_workshop_guide-02/)
+>
+> 视频版本首发：[https://space.bilibili.com/500416539](https://space.bilibili.com/500416539)
+>
+> 了解过程宏开发环境并熟悉基本原理请阅读：[https://blog.ideawand.com/2021/02/27/rust_procedural_macro/rust_proc_marco_workshop_guide-01/](https://blog.ideawand.com/2021/02/27/rust_procedural_macro/rust_proc_marco_workshop_guide-01/)
 
 ---
 
-上一期中，我们介绍了Rust过程宏开发的基础流程，从本期开始，我们以戴维·托尔奈（David Tolnay，也就是`syn`和`quote`这两个库的作者）的教学项目`proc-macro-workshop`出发，带领大家实战几个Rust过程宏的编写。
+本文以戴维·托尔奈（David Tolnay，也就是`syn`和`quote`这两个库的作者）的教学项目`proc-macro-workshop`出发，带领大家实战几个Rust过程宏的编写。
 
 `proc-macro-workshop`是一个包含5个过程宏的“解题游戏”，每一个过程宏都是有实际应用价值的案例，通过一系列由简到繁的测试用例，指导你去完成每一个过程宏的开发，而我们要做的，就是编写代码，像闯关游戏一样依次通过每一个测试用例，在这个过程中，我们会学到不同类型的过程宏的开发方法。
 
@@ -16,8 +18,6 @@
 
 序言视频版：
 <iframe src="//player.bilibili.com/player.html?aid=332284630&bvid=BV16A411N7m2&cid=316964888&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
 
 首先克隆https://github.com/dtolnay/proc-macro-workshop这个项目到本地，我们将在这个项目中进行开发
 
