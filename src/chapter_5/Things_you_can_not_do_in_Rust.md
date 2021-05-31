@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Things you can not do in Rust
+
+---
+
 # Rust 中无法办到的事情(以及如何替代)
 
 译者：Matrixtang

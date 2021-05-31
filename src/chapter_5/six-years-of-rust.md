@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Six Years of Rust
+
+---
+
 # Rust 发布六周年
 
 作者：The Rust Team / 译者：杨楚天

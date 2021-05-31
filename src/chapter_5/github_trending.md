@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: GitHub Rust trending
+
+---
+
 # GitHub 趋势榜
 
 编辑：张汉东

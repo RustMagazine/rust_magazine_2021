@@ -1,7 +1,14 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust Toc
+
+---
+
 # 五月刊
 
 ![logo](../image/rust_magazine3.png)
 
+目录顺序排名不分先后！
 
 ## 发刊通告
 

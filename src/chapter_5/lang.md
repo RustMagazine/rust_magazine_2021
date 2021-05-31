@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust Lang
+
+---
+
 # Rust 官方动态
 
 编辑： 张汉东

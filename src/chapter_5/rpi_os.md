@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust RPI OS
+
+---
+
 # 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART
 
 作者：张汉东

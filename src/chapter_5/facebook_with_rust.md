@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Facebook with Rust 
+
+---
+
 # Facebook 应用 Rust 简史
 
 编辑整理：张汉东

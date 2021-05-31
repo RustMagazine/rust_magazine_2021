@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Kernel Huge Page Subsystem
+
+---
+
 # Rust 与 OS | 一种有效的页表系统抽象设计
 
 作者：洛佳 / 后期编辑 ：张汉东

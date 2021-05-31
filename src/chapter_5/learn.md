@@ -1,9 +1,14 @@
-# 本月简报 | 学习资源
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust Learn
 
-- 来源：[Rust Weekly](https://rustcc.cn/section?
-  id=f4703117-7e6b-4caf-aa22-a3ad3db6898f)
-- [Rustcc 日报]
-- 整理者: Matrixtang
+---
+
+# 学习资源
+
+编辑: Matrixtang
+
+---
 
 ## RESTful API in Sync & Async Rust
 
@@ -141,3 +146,13 @@ Rust 程序员经常被编译器 "折磨" 的失去活来, 其实不妨把编译
 [原文](https://developers.redhat.com/blog/2021/04/30/how-rust-makes-rayons-data-parallelism-magical)
 
 `Rayon` 是用于 Rust 编程语言的数据并行性库。使用 `Rayon` 在 Rust 中开启并行之路。
+
+## Linux 基金会提供的免费 WebAssembly 课程
+
+此在线课程是为已经在构建微服务和云本机应用程序开发方面有经验的开发人员设计的。 简而言之，这不是WebAssembly的介绍。 但是，如果您准备在本地构建，试验和测试功能即服务（FaaS），则该类适合您。
+
+具体来说，您将学习如何使用Rust创建和托管WebAssembly模块。 您还将学习如何将JavaScript WebAssembly API用于浏览器，以及有关WebAssembly的替代性非Web主机运行时的信息。
+
+您将了解到可以使用社区工具和开源项目添加到基本WebAssembly规范中。 学完这些，您将清楚地了解如何构建基于WebAssembly的应用程序以及它们的实际工作方式。
+
+[https://www.zdnet.com/article/linux-foundation-offers-free-webassembly-online-class/](https://www.zdnet.com/article/linux-foundation-offers-free-webassembly-online-class/)

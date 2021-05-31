@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust Jobs
+
+---
+
 # 本月招聘
 
 ## 中国科学院软件研究所 PLCT Lab

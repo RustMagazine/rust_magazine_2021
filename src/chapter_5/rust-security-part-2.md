@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust Security Part2
+
+---
+
 # Rust生态安全漏洞总结系列 | Part 2
 
 作者：张汉东

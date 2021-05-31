@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust GAT
+
+---
+
 # 了解一点关于泛型关联类型(GAT)的事
 
 作者：CrLF0710 / 后期编辑：张汉东

@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: ink programming
+
+---
+
 # Rust 与 区块链 | `ink!` 编程实战（一）: 初识 `ink!`
 
 作者： 朱春雷

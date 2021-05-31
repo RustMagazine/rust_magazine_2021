@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rusts Most Unrecognized Contributor
+
+---
+
 # 造就 Rust 的无名英雄
 
 作者：Brian / 译者&&编辑：张汉东

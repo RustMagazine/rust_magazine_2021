@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust and PL
+
+---
+
 # 漫谈编程语言的设计和实现
 
 作者：柴杰 

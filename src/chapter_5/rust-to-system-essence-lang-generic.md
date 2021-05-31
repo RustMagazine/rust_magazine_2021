@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust To System Essence Lang Generic
+
+---
+
 # 透过 Rust 探索系统的本原：泛型
 
 作者：陈天 / 后期编辑：张汉东

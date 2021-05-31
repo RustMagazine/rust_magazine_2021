@@ -1,3 +1,9 @@
+---
+pub_date: Tue, 31 May 2021 21:00:00 GMT
+description: Rust Tips
+
+---
+
 # 语言技巧
 
 编辑：张汉东
