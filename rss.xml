@@ -31851,7 +31851,7 @@ loop {
 
 <h2 id=''></h2>
 
-<p>&gt; &gt; <a href='https://truelayer.com/blog/grpc-load-balancing-in-rust'>原文</a> /</p>
+<p>&gt; &gt; <a href='https://truelayer.com/blog/grpc-load-balancing-in-rust'>原文</a></p>
 
 <p><strong>在我们的开源系列的第一篇文章中，我们分享了 gRPC 客户端侧负载均衡的解决方案：使用 ginepro。</strong></p>
 
@@ -31916,7 +31916,7 @@ let grpc_client = TestClient::new(channel);</code></pre>
 
 <p>由于网络负载均衡器在 OSI 栈的第四层（传输层）起作用，因此它们只能推断 TCP 和 UDP 连接。因此，它们只能将流量从一台客户端转发到一台固定的服务器（记住，连接是持久的）。</p>
 
-<p><img src='./image/load-balancing-in-rust-2.webp' alt='load-balancing-in-rust-2' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-2.webp' alt='load-balancing-in-rust-2' /></p>
 
 <p>为了解决这个问题，HTTP/2 负载均衡器必须能够检查应用程序的流量。这就是应用程序负载均衡器的用途：它们可以区分请求，并为每个传入请求选择一个新的服务器。</p>
 
@@ -31926,7 +31926,7 @@ let grpc_client = TestClient::new(channel);</code></pre>
 
 <p>让我们对一个玩具系统进行思考：一个客户端和两个服务器，在 HTTP/2 之上讨论 gRPC。</p>
 
-<p><img src='./image/load-balancing-in-rust-3.webp' alt='load-balancing-in-rust-3' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-3.webp' alt='load-balancing-in-rust-3' /></p>
 
 <p>当客户端启动时，它执行<strong>服务发现</strong>(如 DNS 请求)：我可以将请求发往哪些 IP？</p>
 
@@ -31940,7 +31940,7 @@ let grpc_client = TestClient::new(channel);</code></pre>
 
 <p>客户端开始将其所有请求路由到服务器 B，即使生成服务器 C 来替换服务器 A。</p>
 
-<p><img src='./image/load-balancing-in-rust-4.webp' alt='load-balancing-in-rust-4' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-4.webp' alt='load-balancing-in-rust-4' /></p>
 
 <p>服务器 C 完全未使用，浪费资源并恶化系统的性能 (服务器 B 过载)。</p>
 
@@ -31974,7 +31974,7 @@ let grpc_client = TestClient::new(channel);</code></pre>
 
 <p>相反，这也增加了很多复杂性，并且你无法在不同语言中重用该实现。</p>
 
-<p><img src='./image/load-balancing-in-rust-5.webp' alt='load-balancing-in-rust-5' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-5.webp' alt='load-balancing-in-rust-5' /></p>
 
 <h3 id='外部线程'>外部线程</h3>
 
@@ -32002,7 +32002,7 @@ let grpc_client = TestClient::new(channel);</code></pre>
 <li>在后台与所有健康的服务器建立并维护开放连接</li>
 </ul>
 
-<p><img src='./image/load-balancing-in-rust-6.webp' alt='load-balancing-in-rust-6' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-6.webp' alt='load-balancing-in-rust-6' /></p>
 
 <h3 id='代理'>代理</h3>
 
@@ -32016,19 +32016,19 @@ let grpc_client = TestClient::new(channel);</code></pre>
 <li><strong>Service Mesh</strong>：专用基础架构层，用于控制服务到服务的通信(如 Istio 和 Linkerd)，作为 sidecar 进行部署。</li>
 </ul>
 
-<p><img src='./image/load-balancing-in-rust-7.webp' alt='load-balancing-in-rust-7' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-7.webp' alt='load-balancing-in-rust-7' /></p>
 
 <ul>
 <li><strong>Service Proxy</strong>：所有客户端都需要连接的单个独立服务，并为每个 gRPC 服务做配置。</li>
 </ul>
 
-<p><img src='./image/load-balancing-in-rust-9.webp' alt='load-balancing-in-rust-9' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-8.webp' alt='load-balancing-in-rust-8' /></p>
 
 <ul>
 <li><strong>Sidecar 代理</strong>：sidecar 代理与每个客户端部署在一起，并全部通过相同的 gRPC 服务配置代理。</li>
 </ul>
 
-<p><img src='./image/load-balancing-in-rust-9.webp' alt='load-balancing-in-rust-9' /></p>
+<p><img src='./image/grpc/load-balancing-in-rust-9.webp' alt='load-balancing-in-rust-9' /></p>
 
 <p>然而，没有任何一种方案是完美的，它们之间总有一个权衡：</p>
 
@@ -32855,7 +32855,7 @@ pub struct Foo &lt;T&gt; {
     bar: i64,
 }</code></pre>
 
-<p><img src='./image/derive_input_mapping.png' alt='deriveInput类型和结构体的对应关系' /></p>
+<p><img src='./image/derive_macro/derive_input_mapping.png' alt='deriveInput类型和结构体的对应关系' /></p>
 
 <p>&gt; &gt; 划重点： 通过上面的例子，要建立起一种认知，rust中各个语法元素，都可以被不同的数据结构(也就是<code>syn</code>包提供的语法树节点类型)来表示。我们上面的例子是带领大家分析了<code>syn::DeriveInput</code>结构和struct定义之间的对应关系，后续我们还会遇到各种各样的语法元素，我们不能一一给大家作图展示对应关系，这就要求大家能够自己阅读<code>syn</code>包的文档，并逐步掌握rust语言中常见语法元素与<code>syn</code>包中对应的各种数据结构。方法都是一样的，并不困难，学会多看文档。</p>
 
@@ -34189,7 +34189,7 @@ $ cd android/ &amp;&amp; ./gradlew &amp;&amp; ./gradlew build</code></pre>
 
 <p>这些都完成后，我启动了构建，它成功了！我将<code>.apk</code>安装在我闲置的 Android 设备中，但是...好像有哪里不太对劲呢！</p>
 
-<p><img src='./image/two-launcher-activities.png' alt='two-launcher-activities' /></p>
+<p><img src='./image/android/two-launcher-activities.png' alt='two-launcher-activities' /></p>
 
 <p>我的应用一旦安装成功后，会在应用的启动界面产生两个快捷方式。其中一个启动 Java 的 UI 界面，而另一个启动包含 Rust 代码的 NativeActivity。在阅读了更多关于 Activity 和 AndroidManifest 的内容后，我了解到，造成此问题的部分是 NativeActivity 的 [&lt;intent-filter&gt; ](https://developer.android.com/guide/topics/manifest/intent-filter-element) - 即 <a href='https://developer.android.com/reference/android/content/Intent#CATEGORY_LAUNCHER'>category</a> 节点声明应在启动器中显示它。一旦我将它移除，一切就会恢复正常，NativeActivity 不再显示在启动器中。</p>
 
@@ -35743,7 +35743,7 @@ pub extern &quot;cdecl&quot; fn call_from_c() {
 
 <li><em>http://www.dpldocs.info/experimental-docs/core.sys.darwin.crt<em>externs.\</em>NSGetArgc.html.</em></li>
 </ol>
-]]></content:encoded></item><item><title>借鉴数据库缓存解决动态规划难题</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_5/cache_and_recursion_memoization.html</link><description><![CDATA[Cache and Recurision Memoization]]></description><author>blackanger</author><pubDate>Tue, 31 May 2021 21:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='借鉴数据库缓存解决动态规划困难题'>借鉴数据库缓存解决动态规划困难题</h1>
+]]></content:encoded></item><item><title>借鉴数据库缓存解决动态规划难题</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_5/cache_and_recursion_memoization.html</link><description><![CDATA[Cache and Recurision Memoization]]></description><author>blackanger</author><pubDate>Tue, 31 May 2021 21:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='借鉴数据库缓存解决动态规划难题'>借鉴数据库缓存解决动态规划难题</h1>
 
 <p>作者: 吴翱翔 / 后期编辑：张汉东</p>
 
@@ -36085,7 +36085,7 @@ fn test_num_ways() {
 
 <p>进而写出了带缓存的深度优先搜索解法，解决了溢出等小问题后终于通过了</p>
 
-<p><img src='./image/cache_and_recursion_memoization.png' alt='' /></p>
+<p><img src='./image/cache/cache_and_recursion_memoization.png' alt='' /></p>
 
 <h2 id='为什么不是_dp\[i]\[j]_的动态规划写法'>为什么不是 dp\[i]\[j] 的动态规划写法</h2>
 
@@ -36560,7 +36560,7 @@ impl PageMode for Sv39 {
 
 <p>以树莓派 4B 为例，其 40 针脚见下图:</p>
 
-<p><img src='./img/gpio.png' alt='gpio' /></p>
+<p><img src='./image/rpi/gpio.png' alt='gpio' /></p>
 
 <p>UART（Universal Asynchronous Receiver/Transmitter)，是一种串行通信协议，其中数据是串行传输的，一次传输一个字节的数据，即逐位传输。作为把并行输入信号转成串行输出信号的芯片，UART 通常被集成于其他通讯接口的连结上。</p>
 
@@ -36568,7 +36568,7 @@ impl PageMode for Sv39 {
 
 <p>UART 的端口至少有 RX、TX 和地线三个针脚。RX 负责读取，TX 负责输出。如果有两个 UART 端口，它们的连接方式如下：</p>
 
-<p><img src='./img/uart_connect.png' alt='uart' /></p>
+<p><img src='./image/rpi/uart_connect.png' alt='uart' /></p>
 
 <p>注意这里是：<code>usb2ttl(RXD) &lt;-&gt; gpio(TXD)</code> 以及 <code>usb2ttl(TXD) &lt;-&gt; gpio(RXD)</code>。另外注意，不要连接usb2tt 上的电源线到树莓派，小心烧坏树莓派。</p>
 
@@ -36592,7 +36592,7 @@ impl PageMode for Sv39 {
 
 <p>公式：</p>
 
-<p><img src='./img/baud.png' alt='baud' /></p>
+<p><img src='./image/rpi/baud.png' alt='baud' /></p>
 
 <p>其中，<code>fck</code>为 USART 时钟， <code>USARTDIV</code> 是一个存放在波特率寄存器(USART<em>BRR)的一个无符号定点数。其中 `DIV</em>Mantissa[11:0]<code>位定义 USARTDIV 的整数部分，</code>DIV_Fraction[3:0]`位定义 USARTDIV 的小数部分。</p>
 
@@ -37646,6 +37646,8 @@ impl Formatter for HtmlFormatter {
 
 <p><a href='https://github.com/crate-ci/typos'>https://github.com/crate-ci/typos</a></p>
 ]]></content:encoded></item><item><title>推荐项目 |  框架引擎</title><link>https://rustmagazine.github.io/rust_magazine_2021/chapter_5/frameworks.html</link><description><![CDATA[Rust Frameworks]]></description><author>blackanger</author><pubDate>Tue, 31 May 2021 21:00:00 GMT</pubDate><content:encoded><![CDATA[<h1 id='推荐项目_|__框架引擎'>推荐项目 |  框架引擎</h1>
+
+<p>编辑：张汉东</p>
 
 <h2 id='cube.js:_rust_实现的_bi_框架'>Cube.js: Rust 实现的 BI 框架</h2>
 

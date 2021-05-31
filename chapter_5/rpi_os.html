@@ -211,11 +211,11 @@
 <p>在学习这一章之前，还是需要一些前置知识的。对树莓派如果不了解的话，很难理解它的代码在做什么。这部分内容，如果你暂时不想看，或者已经了解过，可以跳过。需要的时候可以回头看看。</p>
 <p>GPIO（General Purpose I/O Ports）意思为通用输入/输出端口，通俗地说，就是一些引脚，可以通过它们输出高低电平或者通过它们读入引脚的状态-是高电平或是低电平。GPIO是个比较重要的概念，用户可以通过GPIO口和硬件进行数据交互(如UART)，控制硬件工作(如LED、蜂鸣器等),读取硬件的工作状态信号（如中断信号）等。GPIO口的使用非常广泛。掌握了GPIO，差不多相当于掌握了操作硬件的能力。</p>
 <p>以树莓派 4B 为例，其 40 针脚见下图:</p>
-<p><img src="./img/gpio.png" alt="gpio" /></p>
+<p><img src="./image/rpi/gpio.png" alt="gpio" /></p>
 <p>UART（Universal Asynchronous Receiver/Transmitter)，是一种串行通信协议，其中数据是串行传输的，一次传输一个字节的数据，即逐位传输。作为把并行输入信号转成串行输出信号的芯片，UART 通常被集成于其他通讯接口的连结上。</p>
 <p>为了和树莓派串口通信，我们将树莓派的 UART 针脚连接到个人电脑（下面简称 PC）上。</p>
 <p>UART 的端口至少有 RX、TX 和地线三个针脚。RX 负责读取，TX 负责输出。如果有两个 UART 端口，它们的连接方式如下：</p>
-<p><img src="./img/uart_connect.png" alt="uart" /></p>
+<p><img src="./image/rpi/uart_connect.png" alt="uart" /></p>
 <p>注意这里是：<code>usb2ttl(RXD) &lt;-&gt; gpio(TXD)</code> 以及 <code>usb2ttl(TXD) &lt;-&gt; gpio(RXD)</code>。另外注意，不要连接usb2tt 上的电源线到树莓派，小心烧坏树莓派。</p>
 <p><strong>uart 协议层</strong></p>
 <p>协议层中，规定了数据包的内容，它由起始位、主体数据、校验位以及停止位组成，通信双方的数据包格式要约定一致才能正常收发数据 。</p>
@@ -228,7 +228,7 @@
 </ul>
 <p><strong>uart 波特率计算</strong></p>
 <p>公式：</p>
-<p><img src="./img/baud.png" alt="baud" /></p>
+<p><img src="./image/rpi/baud.png" alt="baud" /></p>
 <p>其中，<code>fck</code>为 USART 时钟， <code>USARTDIV</code> 是一个存放在波特率寄存器(USART_BRR)的一个无符号定点数。其中 <code>DIV_Mantissa[11:0]</code>位定义 USARTDIV 的整数部分，<code>DIV_Fraction[3:0]</code>位定义 USARTDIV 的小数部分。</p>
 <p>例如：<code>DIV_Mantissa=24(0x18)</code>，<code>DIV_Fraction=10(0x0A)</code>，此时 USART_BRR 值为<code>0x18A</code>；那么USARTDIV的小数位<code>10/16=0.625</code>；整数位24，最终USARTDIV的值为<code>24.625</code>。</p>
 <p>波特率的常用值有 <code>2400</code>、<code>9600</code>、<code>19200</code>、<code>115200</code>。</p>
