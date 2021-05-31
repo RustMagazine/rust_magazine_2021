@@ -24153,9 +24153,9 @@ _mm_cvtsi128_si32     // 取4个i32中最右边的一个</code></pre>
 
 <h2 id='内存安全'>内存安全</h2>
 
-<p>Rust 语言的内存安全要求不能出现 data race 和 use after free 的情况，而 io_uring 的使用模型则存在现在的风险。操作系统会异步地操作内存 buffer，这块 buffer 如果被用户同步操作测会出现 data race 的情况。因此被Proactor 线程占用的内存必须独占，否则任何被取消的 I/O 操作都会导致内存被用户态同时使用。</p>
+<p>Rust 语言的内存安全要求不能出现 data race 和 use after free 的情况，而 io_uring 的使用模型则存在现在的风险。操作系统会异步地操作内存 buffer，这块 buffer 如果被用户同步操作则会出现 data race 的情况。因此被Proactor 线程占用的内存必须独占，否则任何被取消的 I/O 操作都会导致内存被用户态同时使用。</p>
 
-<p>为了达到上述目的，Reactor 的基于 reference 的接口不能被使用，需要采用新的接口，如下所示：</p>
+<p>为了达到上述目的，Reactor 的基于 引用（reference） 的接口不能被使用，需要采用新的接口，如下所示：</p>
 
 <pre><code class="language-`rust">pub async fn read(
     fd: RawFd,
