@@ -1,0 +1,685 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust 与 OS | 一种有效的页表系统抽象设计 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item expanded "><a href="../chapter_5/kernel_huge_page_subsystem.html" class="active"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> 六月刊（June）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rust-与-os--一种有效的页表系统抽象设计" id="rust-与-os--一种有效的页表系统抽象设计">Rust 与 OS | 一种有效的页表系统抽象设计</a></h1>
+<p>作者：洛佳 / 后期编辑 ：张汉东</p>
+<hr />
+<p>从段进化到页，是操作系统内存抽象的一大进步之处。页式存储管理由软硬件共同实现，软件提供映射关系，
+硬件来加速地址翻译的过程。为了更好地设计硬件，往往要求软件页满足一定的数据要求。</p>
+<p>这篇笔记尝试梳理软件层次上，页的实现过程。将会包括大页的分配算法，物理地址的对齐，多种分页模式的兼容设计，
+以及如何使用泛型、模块化等现代语言技术实现它们。</p>
+<p>可能讲得不清楚，请各位看官海涵。</p>
+<h2><a class="header" href="#大页分配算法" id="大页分配算法">大页分配算法</a></h2>
+<p>页式存储系统拥有“大页”的概念。在一些架构下，大页要求地址对齐。
+即大页的物理地址必须对齐到特定的级别，随后的低级页号和索引，将共同看作更长的索引使用。
+这就对分配算法提出了一定的要求。</p>
+<p>归纳需要解决的问题。我们的问题是：给定页表系统<code>M</code>，最大等级为<code>n</code>；对虚拟页号<code>v = (vn-1, ...v1, v0)</code>和待映射连续页数<code>n</code>,
+找到一组页的映射集合<code>U = { (v_开始, p_开始, 长度) }</code>，使得页号<code>v</code>能映射到物理页号<code>p</code>。
+考虑使用大页优化这一过程，使<code>| U |</code>越少越好，但需要注意对齐要求，即对等级为<code>k</code>的大页，
+起始地址为<code>(vn-1, ...vk, 0, ...0)</code>的<code>k-1</code>到<code>0</code>级均为0，即假如<code>k</code>级的对齐要求为<code>a[k]</code>，有<code>v = 0 (mod a[k])</code>。</p>
+<p>在<code>M = Sv39系统</code>中，最大等级<code>n = 3</code>，对齐要求<code>a[0] = 1</code>, <code>a[1] = 512</code>, <code>a[2] = 26'2144</code>[注释1]。即，每一级别包含512个页表项。</p>
+<p>为了简化问题理解，我们定义一个<code>M = 简单的页表系统</code>，最大等级也为<code>n = 3</code>，但<code>a[0] = 1</code>, <code>a[1] = 4</code>, <code>a[2] = 16</code>。
+每一级别包含3个页表项。给定虚拟地址<code>v = (2, 2, 2)</code>到<code>v + n = (5, 2, 1)</code>，要映射到物理地址<code>p = (2, 2, 2)</code>。</p>
+<p>现在我们在最高的3级，将要分配<code>r(v) = (2, 2, 2)..=(5, 2, 1)</code>到<code>p = (2, 2, 2)</code>。
+如果直接使用大页，将必须保证2、1级的编号都为0。也就是说，只能分配<code>r(v) = (3, 0, 0)..(5, 0, 0)</code>到<code>p = (3, 0, 0)</code>。</p>
+<p>为什么不分配<code>(2, 0, 0)..(3, 0, 0)</code>到<code>(2, 0, 0)</code>呢？因为这将分配超过<code>(2, 2, 2)..=(5, 2, 1)</code>的范围，
+和我们要求解的问题不同。同理，也不能分配<code>(5, 0, 0)..(6, 0, 0)</code>到<code>(5, 0, 0)</code>。这部分的范围，需要借助更低级的大页来完成。</p>
+<p>第3级的分配完成了，然后我们借助2级页表，分配附近零碎的<code>(2, 3, 0)..(3, 0, 0)</code>和<code>(5, 0, 0)..(5, 2, 0)</code>。
+分配<code>(2, 3, 0)..(3, 0, 0)</code>到<code>(2, 3, 0)</code>；<code>(5, 0, 0)..(5, 2, 0)</code>到<code>(5, 0, 0)</code>。</p>
+<p>最后，借助1级页表，分配<code>(2, 2, 2)..(2, 3, 0)</code>到<code>(2, 2, 2)</code>；<code>(5, 2, 0)..(5, 2, 2)</code>到<code>(5, 2, 0)</code>。
+至此，所有的分配完成了。</p>
+<p>由于这种方法要求在虚拟的大页上分配物理的大页，两个大页的基地址必须有相同的对齐方式，因此，
+初始传入的虚拟页号和物理页号，差值必须对齐到相应的页，即<code>v = p (mod a[k])</code>，才可以使用这种分配方法；否则就应当使用更低等级的分配方法。
+（想想看为什么？）否则就会在分配过程中，产生对齐要求的异常。</p>
+<p>比如<code>v = (2, 2, 2)</code>到<code>p = (2, 2, 2)</code>，就可以使用3级；而<code>v = (2, 2, 2)</code>到<code>p = (2, 1, 2)</code>，就只能使用2级。</p>
+<p><img src="./image/kernel_huge_page_subsystem/huge_page_alloc_example.png" alt="大页分配图示" /></p>
+<p>推广这个结论，我们可以得到一个规律。首先，使用贪心的方法，将地址的上下限分别向内取整，分配最大的大页给最高的地址范围。
+然后，对两边的零碎范围，使用低1级的页表，继续分配。继续降低等级，直到所有的页都被分配完毕。</p>
+<p><img src="./image/kernel_huge_page_subsystem/huge_page_algorithm.png" alt="大页分配算法推导" /></p>
+<p>根据对齐规则和所需求的页数，逐级降低算法的起始等级。对等级<code>n = 3</code>的页表系统，以分支形式，我们编写顺序规则的伪代码。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// input: v: VirtPageNum, p: PhysPageNum, n: usize, a: PageMode;
+if (v - p) % (a[2].frame_align()) == 0 &amp;&amp; n &gt;= a[2].frame_align() {
+    let l2n = (vs2 - ve2) / a[2].frame_align();
+    map(2, ve2, vs2, ve2-v+p);
+    let l1n = (ve2 - ve1 + vs1 - vs2) / a[1].frame_align();
+    map(1, ve1, ve2, ve1-v+p); map(1, vs2, vs1, vs2-v+p);
+    let l0n = (n + ve1 - vs1) / a[0].frame_align();
+    map(0, v, ve1, p); map(0, vs1, v+n, vs1-v+p);
+} else if (v - p) % (a[1].frame_align()) == 0 &amp;&amp; n &gt;= a[1].frame_align() {
+    let l1n = (vs1 - ve1) / a[1].frame_align();
+    map(1, ve1, vs1, ve1-v+p);
+    let l0n = (n + ve1 - vs1) / a[0].frame_align();
+    map(0, v, ve1, p); map(0, vs1, v+n, vs1-v+p);
+} else if (v - p) % (a[0].frame_align()) == 0 &amp;&amp; n &gt;= a[0].frame_align() {
+    let l0n = n / a[0].frame_align();
+    map(0, v, v+n, p);
+} else {
+    panic!(&quot;Can't map v to p under this page mode&quot;)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们发现，等级低算法的中间变量，也在等级高的地方出现了。于是这个算法可以改成循环的形式。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// input: v: VirtPageNum, p: PhysPageNum, n: usize, M: PageMode;
+for i in M::visit_levels_until(PageLevel::leaf_level()) { // 遍历顺序：[n, ...1, 0]
+    let align = M::a(i); // i层的对齐要求
+    if (v - p) % align != 0 || n &lt; align { // 对齐要求达不到等级，或者数量不够，使用低级算法
+        continue;
+    }
+    let (mut ve_prev, mut vs_prev) = (None, None);
+    for j in M::visit_levels_from(i) { // 遍历顺序：[j, j-1, ...0]
+        let a = M::a(j); // j层的对齐要求
+        let ve_cur = a * roundup(v / a)
+        let vs_cur = a * rounddown((v + n) / a)
+        if let (Some(ve_prev), Some(vs_prev)) = (ve_prev, vs_prev) {
+            map(j, ve_cur..ve_prev); // 执行映射函数
+            map(j, vs_prev..vs_cur);
+        } else {
+            map(j, ve_cur..vs_cur);
+        }
+        (ve_prev, vs_prev) = (Some(ve_cur), Some(vs_cur));
+    }
+    break;
+} 
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个算法就可以用于任何等级的页表系统了，因此题目要求的算法得到解决。
+使用Rust语言的生成器或者迭代器包装算法，即可得到比较好的算法实现。</p>
+<p>传统分配算法是，将地址段内的所有地址，映射到最小的页帧上。此时，需要管理多少个页帧，就需要分配多少个页。
+大页分配算法通过分配满足对齐要求更少的页，就能完成同样的任务。我们如何比较大页分配算法和传统算法分配的页数呢？</p>
+<p>我们取用<code>M = Sv39系统</code>。其中，最大等级<code>n = 3</code>，对齐要求<code>a[0] = 1</code>, <code>a[1] = 512</code>, <code>a[2] = 26'2144</code>。</p>
+<p>同样分配<code>505'5550</code>个页帧，假设页号对齐能满足最大的<code>26'2144</code>，采用不同的虚拟页号。</p>
+<table><thead><tr><th align="left">虚拟页号</th><th align="left">数量</th><th align="left">所需页表数</th><th align="left">节省</th><th align="left">等级0</th><th align="left">等级1</th><th align="left">等级2</th></tr></thead><tbody>
+<tr><td align="left">0</td><td align="left">505'5550</td><td align="left">227</td><td align="left">0.00%</td><td align="left">62</td><td align="left">146</td><td align="left">19</td></tr>
+<tr><td align="left">10</td><td align="left">505'5550</td><td align="left">1249</td><td align="left">0.02%</td><td align="left">574</td><td align="left">657</td><td align="left">18</td></tr>
+<tr><td align="left">20</td><td align="left">505'5550</td><td align="left">1249</td><td align="left">0.02%</td><td align="left">574</td><td align="left">657</td><td align="left">18</td></tr>
+<tr><td align="left">512</td><td align="left">505'5550</td><td align="left">738</td><td align="left">0.01%</td><td align="left">62</td><td align="left">658</td><td align="left">18</td></tr>
+<tr><td align="left">1024</td><td align="left">505'5550</td><td align="left">738</td><td align="left">0.01%</td><td align="left">62</td><td align="left">658</td><td align="left">18</td></tr>
+<tr><td align="left">1025</td><td align="left">505'5550</td><td align="left">1249</td><td align="left">0.02%</td><td align="left">574</td><td align="left">657</td><td align="left">18</td></tr>
+<tr><td align="left">26'2144</td><td align="left">505'5550</td><td align="left">227</td><td align="left">0.00%</td><td align="left">62</td><td align="left">146</td><td align="left">19</td></tr>
+<tr><td align="left">100'0000</td><td align="left">505'5550</td><td align="left">738</td><td align="left">0.01%</td><td align="left">574</td><td align="left">145</td><td align="left">19</td></tr>
+</tbody></table>
+<table><thead><tr><th align="left">虚拟页号</th><th align="left">数量</th><th align="left">所需页表数</th><th align="left">节省</th><th align="left">等级0</th><th align="left">等级1</th><th align="left">等级2</th></tr></thead><tbody>
+<tr><td align="left">30'0000</td><td align="left">1</td><td align="left">1</td><td align="left">100.00%</td><td align="left">1</td><td align="left">N/A</td><td align="left">N/A</td></tr>
+<tr><td align="left">30'0000</td><td align="left">10</td><td align="left">10</td><td align="left">100.00%</td><td align="left">10</td><td align="left">N/A</td><td align="left">N/A</td></tr>
+<tr><td align="left">30'0000</td><td align="left">100</td><td align="left">100</td><td align="left">100.00%</td><td align="left">100</td><td align="left">N/A</td><td align="left">N/A</td></tr>
+<tr><td align="left">30'0000</td><td align="left">1000</td><td align="left">489</td><td align="left">48.90%</td><td align="left">488</td><td align="left">1</td><td align="left">N/A</td></tr>
+<tr><td align="left">30'0000</td><td align="left">1'0000</td><td align="left">291</td><td align="left">2.91%</td><td align="left">272</td><td align="left">19</td><td align="left">N/A</td></tr>
+<tr><td align="left">30'0000</td><td align="left">10'0000</td><td align="left">355</td><td align="left">0.36%</td><td align="left">160</td><td align="left">195</td><td align="left">N/A</td></tr>
+<tr><td align="left">30'0000</td><td align="left">100'0000</td><td align="left">995</td><td align="left">0.10%</td><td align="left">64</td><td align="left">929</td><td align="left">2</td></tr>
+<tr><td align="left">30'0000</td><td align="left">1000'0000</td><td align="left">752</td><td align="left">0.01%</td><td align="left">128</td><td align="left">587</td><td align="left">37</td></tr>
+</tbody></table>
+<p>可以发现，Sv39下对齐要求高、页帧数量大时，大页只需要小于一千个页表，就能管理百万个页帧空间，非常节省页表的数量。
+页帧数量小时，由于对齐要求不高，节省的数量并不明显；对齐要求低时，节省数量也不明显。</p>
+<p>实际使用时，尽量给出最大的对齐要求，这样可以在分配大量页帧时，节省更多的页帧空间。
+这一结果对芯片外设的布局也有指导作用，如果高级的嵌入式芯片拥有较多外设，尽量将外设的物理地址放置到更高的对齐要求上，
+这样操作系统管理时就可以腾出更多的内存空间，供应用使用。</p>
+<p>[注释1]：表格中的'号表示万位分隔符，<a href="https://zhuanlan.zhihu.com/p/358635675">成会明院士：传承祖先的智慧，倡导中文中阿拉伯数字书写方式采用“4位数分隔法”. 中国科学院院刊</a></p>
+<h2><a class="header" href="#抽象软件设计" id="抽象软件设计">抽象软件设计</a></h2>
+<p>以Rust语言为例，给出页系统常见结构的抽象方法。</p>
+<h3><a class="header" href="#页号" id="页号">页号</a></h3>
+<p>首先定义物理和虚拟页号。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+pub struct PhysPageNum(usize);
+
+#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+pub struct VirtPageNum(usize);
+<span class="boring">}
+</span></code></pre></pre>
+<p>“物理页号长度 + 偏移长度”可能大于“架构地址宽度”，这允许我们访问大于架构宽度的地址。
+比如RISC-V RV32下，使用Sv32系统，可以访问34位的物理地址，即使架构只有32位。</p>
+<p>物理页号和虚拟页号，可以通过对应的地址转换而来。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl PhysPageNum {
+    pub fn addr_begin&lt;M: PageMode&gt;(&amp;self) -&gt; PhysAddr {
+        PhysAddr(self.0 &lt;&lt; M::FRAME_SIZE_BITS)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这种转换关系要求输入页表的模式。不同架构下，地址的偏移量可能不同。</p>
+<h3><a class="header" href="#页帧分配器" id="页帧分配器">页帧分配器</a></h3>
+<p>然后我们需要一个页帧分配器。模仿Rust语言alloc包的设计，可以给出结构如下。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait FrameAllocator {
+    fn allocate_frame(&amp;self) -&gt; Result&lt;PhysPageNum, FrameAllocError&gt;;
+    fn deallocate_frame(&amp;self, ppn: PhysPageNum);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>构造页帧分配器时，应当给定一个物理页的范围。</p>
+<p>而后，每次请求分配，其中的算法将返回分配的结果，或者当没有页存在时，返回一个错误。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl StackFrameAllocator {
+    pub fn new(start: PhysPageNum, end: PhysPageNum) -&gt; Self {
+        StackFrameAllocator { current: start, end, recycled: Vec::new() }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>页帧分配器只分配编号，不会向被分配的内存中存储或读取数据，所以它的设计与alloc库简单。</p>
+<p>这种设计是为了方便测试页帧分配器的正确性和性能。</p>
+<h3><a class="header" href="#装箱的页帧" id="装箱的页帧">装箱的页帧</a></h3>
+<p>或者说<code>FrameBox</code>，借鉴了Rust中拥有所有权的Box名称，表示拥有所有权的一个页帧。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug)]
+pub struct FrameBox&lt;A: FrameAllocator = DefaultFrameAllocator&gt; {
+    ppn: PhysPageNum, // 相当于*mut类型的指针
+    frame_alloc: A,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>每次新建时，从页帧分配器<code>frame_alloc</code>中得到新的页帧，然后使用所有权语义包装妥当。
+当它的生命周期结束，调用页帧分配器，释放所占有的页帧。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;A: FrameAllocator&gt; FrameBox&lt;A&gt; {
+    // 分配页帧并创建FrameBox
+    pub fn try_new_in(frame_alloc: A) -&gt; Result&lt;FrameBox&lt;A&gt;, FrameAllocError&gt; {
+        let ppn = frame_alloc.allocate_frame()?;
+        Ok(FrameBox { ppn, frame_alloc })
+    }
+}
+
+impl&lt;A: FrameAllocator&gt; Drop for FrameBox&lt;A&gt; {
+    fn drop(&amp;mut self) {
+        // 释放所占有的页帧
+        self.frame_alloc.deallocate_frame(self.ppn);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>装箱的页帧实际地保管了页帧内存的所有权，可以向内写入数据，从中读取数据。</p>
+<h3><a class="header" href="#页式地址空间" id="页式地址空间">页式地址空间</a></h3>
+<p>一个表示分页系统实现的结构体，它保管着所有包含的页帧箱子，在释放时会释放其中的所有页帧。</p>
+<p>这个结构体拥有一个分页模式的类型参数，用于计算页帧插入算法。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 表示一个分页系统实现的地址空间
+//
+// 如果属于直接映射或者线性偏移映射，不应当使用这个结构体，应当使用其它的结构体。
+#[derive(Debug)]
+pub struct PagedAddrSpace&lt;M: PageMode, A: FrameAllocator = DefaultFrameAllocator&gt; {
+    root_frame: FrameBox&lt;A&gt;,
+    frames: Vec&lt;FrameBox&lt;A&gt;&gt;,
+    frame_alloc: A,
+    page_mode: M,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>当创建页式地址空间时，立即分配一个根页表。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;M: PageMode, A: FrameAllocator + Clone&gt; PagedAddrSpace&lt;M, A&gt; {
+    // 创建一个空的分页地址空间。一定会产生内存的写操作
+    pub fn try_new_in(page_mode: M, frame_alloc: A) -&gt; Result&lt;Self, FrameAllocError&gt; {
+        // 新建一个根页表要求的页帧
+        let mut root_frame = FrameBox::try_new_in(frame_alloc.clone())?;
+        // 而后，向帧里填入一个空的根页表 
+        unsafe { fill_frame_with_initialized_page_table::&lt;A, M&gt;(&amp;mut root_frame) };
+        Ok(Self { root_frame, frames: Vec::new(), frame_alloc, page_mode })
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>创建结构后，当插入新的映射关系，使用上一节提供的插入算法，得到需要插入的范围，然后读写页帧箱，完成插入操作。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;M: PageMode, A: FrameAllocator + Clone&gt; PagedAddrSpace&lt;M, A&gt; {    
+    // 设置页表项。如果寻找的过程中，中间的页表没创建，那么创建它们
+    unsafe fn alloc_get_table(&amp;mut self, entry_level: PageLevel, vpn_start: VirtPageNum)
+    -&gt; Result&lt;&amp;mut M::PageTable, FrameAllocError&gt; 
+    {
+        let mut ppn = self.root_frame.phys_page_num();
+        for &amp;level in M::visit_levels_before(entry_level) {
+            let page_table = unref_ppn_mut::&lt;M&gt;(ppn);
+            let vidx = M::vpn_index(vpn_start, level);
+            match M::slot_try_get_entry(&amp;mut page_table[vidx]) {
+                Ok(entry) =&gt; ppn = M::entry_get_ppn(entry),
+                Err(mut slot) =&gt; {  // 需要一个内部页表，这里的页表项却没有数据，我们需要填写数据
+                    let frame_box = FrameBox::try_new_in(self.frame_alloc.clone())?;
+                    M::slot_set_child(&amp;mut slot, frame_box.phys_page_num());
+                    ppn = frame_box.phys_page_num();
+                    self.frames.push(frame_box);
+                }
+            }
+        }
+        // println!(&quot;[kernel-alloc-map-test] in alloc_get_table PPN: {:x?}&quot;, ppn);
+        let page_table = unref_ppn_mut::&lt;M&gt;(ppn); // 此时ppn是当前所需要修改的页表
+        // 创建了一个没有约束的生命周期。不过我们可以判断它是合法的，因为它的所有者是Self，在Self的周期内都合法
+        Ok(&amp;mut *(page_table as *mut _))
+    }
+    pub fn allocate_map(&amp;mut self, vpn: VirtPageNum, ppn: PhysPageNum, n: usize, flags: M::Flags)
+    -&gt; Result&lt;(), FrameAllocError&gt; 
+    {
+        for (page_level, vpn_range) in MapPairs::solve(vpn, ppn, n, self.page_mode) {
+            // println!(&quot;[kernel-alloc-map-test] PAGE LEVEL: {:?}, VPN RANGE: {:x?}&quot;, page_level, vpn_range);
+            let table = unsafe { self.alloc_get_table(page_level, vpn_range.start) }?;
+            let idx_range = M::vpn_index_range(vpn_range.clone(), page_level);
+            // println!(&quot;[kernel-alloc-map-test] IDX RANGE: {:?}&quot;, idx_range);
+            for vidx in idx_range {
+                let this_ppn = PhysPageNum(ppn.0 - vpn.0 + M::vpn_level_index(vpn_range.start, page_level, vidx).0);
+                // println!(&quot;[kernel-alloc-map-test] Table: {:p} Vidx {} -&gt; Ppn {:x?}&quot;, table, vidx, this_ppn);
+                match M::slot_try_get_entry(&amp;mut table[vidx]) {
+                    Ok(_entry) =&gt; panic!(&quot;already allocated&quot;),
+                    Err(slot) =&gt; M::slot_set_mapping(slot, this_ppn, flags.clone())
+                }
+            }
+        }
+        Ok(())
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#包装的页帧分配算法" id="包装的页帧分配算法">包装的页帧分配算法</a></h3>
+<p>定义与实现如下。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug)]
+pub struct MapPairs&lt;M&gt; {
+    ans_iter: alloc::vec::IntoIter&lt;(PageLevel, Range&lt;VirtPageNum&gt;)&gt;,
+    mode: M,
+}
+
+impl&lt;M: PageMode&gt; MapPairs&lt;M&gt; {
+    pub fn solve(vpn: VirtPageNum, ppn: PhysPageNum, n: usize, mode: M) -&gt; Self {
+        let mut ans = Vec::new();
+        /* 省略求解过程 */
+        Self { ans_iter: ans.into_iter(), mode }
+    }
+}
+
+impl&lt;M&gt; Iterator for MapPairs&lt;M&gt; {
+    type Item = (PageLevel, Range&lt;VirtPageNum&gt;);
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+        self.ans_iter.next()
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>每次迭代它的结果，会返回一个应当分配的页帧。应当根据这个结果，设置映射关系。</p>
+<h3><a class="header" href="#激活函数" id="激活函数">激活函数</a></h3>
+<p>这个函数的实现与具体架构有关，此处以RISC-V Sv39为例。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 切换地址空间，同时需要提供1.地址空间的详细设置 2.地址空间编号
+pub unsafe fn activate_paged_riscv_sv39(root_ppn: PhysPageNum, asid: AddressSpaceId) {
+    use riscv::register::satp::{self, Mode};
+    satp::set(Mode::Sv39, asid.0 as usize, root_ppn.0);
+    asm!(&quot;sfence.vma {}&quot;, in(reg) asid.0 as usize);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>执行完毕后，就已经进入新的地址空间了。注意当前的pc地址仍未改变，如果进入新空间后，
+指令对应的代码段已经消失了，将产生异常。因此，一般使用各个虚拟空间中共同映射的“跳板页”，完成这一切换过程。</p>
+<h3><a class="header" href="#本设计的优缺点" id="本设计的优缺点">本设计的优缺点</a></h3>
+<p>这个设计的优点是，你会发现只需要传入泛型参数M，代表页表模式，就能自动填写算法剩余的部分。</p>
+<p>比如，RISC-V Sv39模式可以实现为页表模式，传入泛型参数M；它的定义如下。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Sv39分页系统模式；RISC-V RV64下有效
+#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+pub struct Sv39;
+
+impl PageMode for Sv39 {
+    const FRAME_SIZE_BITS: usize = 12;
+    const PPN_BITS: usize = 44;
+    type PageTable = Sv39PageTable;
+    type Entry = Sv39PageEntry;
+    type Slot = Sv39PageSlot;
+    type Flags = Sv39Flags;
+    /* 省略了大量的工具函数 */
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>只需要实现模式M中的这些参数，就可以无缝使用这个页表空间系统，包括求解算法。</p>
+<p>完整的代码实现在<a href="https://github.com/HUST-OS/luojia-os-labs/blob/main/03-virt-addr-kern/src/mm.rs">这里</a>。</p>
+<p>这种方法也有缺点，就是需要支持泛型的编程语言才可以使用；比如操作系统内核用Rust写，可以采用这种编程方法。</p>
+<h2><a class="header" href="#目前常见的硬件页表系统" id="目前常见的硬件页表系统">目前常见的硬件页表系统</a></h2>
+<p>RISC-V提供了Sv39和Sv48；它们分别是3、4级的页表系统，等级越高，能管理的虚拟空间越大。</p>
+<p>我们使用上一节的描述方法，描述这些页表系统的基本参数。</p>
+<table><thead><tr><th align="left">页表系统M</th><th align="left">虚拟地址</th><th align="left">物理地址</th><th align="left">等级n</th><th align="left">对齐要求a</th></tr></thead><tbody>
+<tr><td align="left">RISC-V Sv39</td><td align="left">39</td><td align="left">55</td><td align="left">3</td><td align="left">1, 512, 26'2144</td></tr>
+<tr><td align="left">RISC-V Sv48</td><td align="left">48</td><td align="left">55</td><td align="left">4</td><td align="left">1, 512, 26'2144, 1'3421'7728</td></tr>
+<tr><td align="left">RISC-V Sv32</td><td align="left">32</td><td align="left">34*</td><td align="left">2</td><td align="left">1, 1024</td></tr>
+<tr><td align="left">龙芯 LA64</td><td align="left">48</td><td align="left">60</td><td align="left">4</td><td align="left">1, 4096/2048*, ...</td></tr>
+<tr><td align="left">龙芯 LA32</td><td align="left">32</td><td align="left">36</td><td align="left">2</td><td align="left">1, 1024</td></tr>
+<tr><td align="left">arm64</td><td align="left">48</td><td align="left">39</td><td align="left">4</td><td align="left">1, 512, 26'2144, 1'3421'7728</td></tr>
+<tr><td align="left">arm32</td><td align="left">32</td><td align="left">32</td><td align="left">2</td><td align="left">1, 256</td></tr>
+<tr><td align="left">x86-64 (旧)</td><td align="left">48</td><td align="left">47</td><td align="left">4</td><td align="left">1, 512, 26'2144, 1'3421'7728</td></tr>
+<tr><td align="left">x86-64 (新)</td><td align="left">57</td><td align="left">52</td><td align="left">5</td><td align="left">1, 512, 26'2144, 1'3421'7728, 687'1947'6736</td></tr>
+<tr><td align="left">x86-32</td><td align="left">32</td><td align="left">32</td><td align="left">2</td><td align="left">1, 1024</td></tr>
+</tbody></table>
+<p>*Sv32的物理地址的确超过32位</p>
+<p>*龙芯LA64架构中，双页存储结构对齐要求不同</p>
+<p>系统启动时，内核可以激活Sv39，页表的等级少，开销较低，启动快。随后，根据需求，可以更换到更大空间的页表系统，来容纳更多应用。</p>
+<h2><a class="header" href="#页式内存管理笔记" id="页式内存管理笔记">页式内存管理笔记</a></h2>
+<p>在文章的最后，我们花一些时间尝试整理页式内存管理概念的笔记。</p>
+<h3><a class="header" href="#页式内存管理" id="页式内存管理">页式内存管理</a></h3>
+<p>要管理挂载的外设和内存块，我们定义物理地址，它是真实硬件中资源单元的编号。
+所有的物理地址构成一个地址空间；地址空间是可由地址索引的，具体资源和硬件的集合。</p>
+<p>我们的应用程序可以直接在物理地址上运行。然而，为了便于程序独占地址空间，便于连续地规划内存，
+我们为它们构造虚拟空间。于是程序可以在虚拟地址上运行，虚拟地址是虚拟空间中内存单元的编号。</p>
+<p>从前我们使用段的方式管理内存。为了减少内碎片和内存的浪费，我们引入了分页管理系统。</p>
+<p>分页系统将地址空间分为连续的等大内存块，它们被称作页帧。
+又将一个或多个连续页帧组成一个页，页的大小由硬件实现决定，软件必须按硬件给定页的大小。</p>
+<p>管理页的数据结构称作页表。在内存中，页表通常占一个页帧的大小，以便硬件上的分页系统管理。
+页表在内存中的存储位置被称作页号。</p>
+<p>超过一个页帧大小的页，又被称作大页。管理大页的页表中，每个项目代表一个子页。
+这个项目被称作页表的页表项，通常由权限位、控制位和物理页号组成。</p>
+<p>将地址空间看作最大的页，根页表就是管理最大页的页表。根页表的页号会被保存在专用的位置中，以作为硬件查询的起始地址使用。</p>
+<h3><a class="header" href="#翻译过程与地址对齐" id="翻译过程与地址对齐">翻译过程与地址对齐</a></h3>
+<p>现代的页表系统中，无论等级，都称管理页的数据结构为页表。页表的翻译过程大致等同于这个步骤：</p>
+<ol>
+<li>取出根页表的页号</li>
+<li>读取虚拟地址的特定区域，作为本级页表的索引</li>
+<li>根据索引，取出管理更小页的页表项</li>
+<li>如果页表项指向子页表，读取页号，返回到步骤2</li>
+</ol>
+<p>在这个简化的步骤中，可能出现非常多的异常。需要注意的是，如果当前页表项指向物理页号，这个物理页号有对齐要求。</p>
+<p>我们如果使用<code>(v0, v1, v2):offset</code>代表一个虚拟地址。</p>
+<p>如果<code>rt[v0][v1]</code>指向子页表，那么将继续查找<code>rt[v0][v1][v2]</code>。得到物理页号<code>(p0, p1, p2)</code>。
+和off结合，得到物理地址<code>(p0, p1, p2):offset</code>。</p>
+<p>如果<code>rt[v0][v1]</code>指向一个物理页，这是一个大页的页表项。页表项中，得到物理页号<code>(p0, p1, 0)</code>，
+直接将v2、off拼接，得到大页对应的物理地址为<code>(p0, p1):v2,offset</code>；相当于延长了偏移量的位数。</p>
+<p>采用后一种形式时，硬件通常要求物理页号只有高于大页的等级有效，低于它的无效。
+也就是说，如果页表项<code>(p0, p1, p2)</code>的p2不等于零，将会返回页异常。这就是大页页表系统的对齐要求。</p>
+<hr />
+<p>作者简介：</p>
+<p><strong>洛佳</strong></p>
+<p>华中科技大学网络空间安全学院本科生，热爱操作系统、嵌入式开发。3年Rust语言开发经验，社区活跃贡献者。目前致力于向产业、教学等更多的领域推广Rust语言。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_5/cache_and_recursion_memoization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_5/rpi_os.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_5/cache_and_recursion_memoization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_5/rpi_os.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
