@@ -10,6 +10,8 @@ description: Rust language in the embedded field
 
 ---
 
+![k210芯片](embedded_rust/k210.jpg)
+
 Rust语言是二十一世纪的语言新星。Rust被人广泛承认的一点，就是因为它能运行在多样的目标上，
 从桌面和服务器设备，到资源有限的嵌入式设备。
 
