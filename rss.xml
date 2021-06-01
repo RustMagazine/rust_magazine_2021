@@ -31425,7 +31425,7 @@ fn main() {
 
 <p>这样就可以将其可视化，从下图中，我们可以清晰地看到所有的内存来源：</p>
 
-<p><img src='https://cdn.nlark.com/yuque/0/2021/png/332268/1622025435135-93f3b5be-112d-43c9-a399-4faa4b69ebfd.png' alt='mem-profile' /></p>
+<p><img src='./image/ant/1.png' alt='mem-profile' /></p>
 
 <p>这个 demo 的整体流程就完成了，距离应用到生产的话，只差一些 trivial 的工作，下面是我们在生产的实践：</p>
 
