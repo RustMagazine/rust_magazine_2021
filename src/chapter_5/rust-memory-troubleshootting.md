@@ -105,7 +105,7 @@ jeprof --show_bytes --pdf <path_to_binary> ./profile.out > ./profile.pdf
 
 这样就可以将其可视化，从下图中，我们可以清晰地看到所有的内存来源：
 
-![mem-profile](https://cdn.nlark.com/yuque/0/2021/png/332268/1622025435135-93f3b5be-112d-43c9-a399-4faa4b69ebfd.png) 
+![mem-profile](./image/ant/1.png) 
 
 这个 demo 的整体流程就完成了，距离应用到生产的话，只差一些 trivial 的工作，下面是我们在生产的实践：
 - 将其封装成 http 服务，可以通过 curl 命令直接触发，将结果通过 http response 返回。
