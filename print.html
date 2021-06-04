@@ -29148,7 +29148,7 @@ describe('Flipper', () =&gt; {
 </code></pre>
 <p>​</p>
 <p>看到如下结果，代表已成功完成测试，Redspot 的插件会自动计算并打印出执行合约操作的 Gas 费用。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388273850-a437e397-5837-451d-bdfc-50244c573703.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=191&amp;id=uf7b84ada&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=381&amp;originWidth=1080&amp;originalType=binary&amp;size=121000&amp;status=done&amp;style=none&amp;taskId=u907e391b-f0a0-4a5e-af78-0f3555dd9a2&amp;width=540" alt="image.png" />
+<img src="chapter_5/./image/ink/1.png" alt="image.png" />
 ​</p>
 <h3><a class="header" href="#144-部署-flipper-合约" id="144-部署-flipper-合约">1.4.4 部署 flipper 合约</a></h3>
 <p>在 Substrate 中，部署合约的过程分为两个步骤：</p>
@@ -29164,35 +29164,30 @@ describe('Flipper', () =&gt; {
 </code></pre>
 <p>​</p>
 <p>打开网址 https://polkadot.js.org/apps，配置连接本地启动的开发节点。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388384139-cfdfe4d3-09bf-49b8-b376-3751e0f5c311.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=405&amp;id=ub986fb01&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=810&amp;originWidth=644&amp;originalType=binary&amp;size=114649&amp;status=done&amp;style=none&amp;taskId=u5d5a9002-36dd-4183-8ac8-c1531547a78&amp;width=322" alt="image.png" />
+<img src="chapter_5/./image/ink/2.png" alt="image.png" />
 ​</p>
 <p>点击菜单栏上“开发者”中的子菜单“合约”，打开合约页面后，点击“Upload &amp; deploy code”按钮。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388411805-2c9ecbe0-1fa3-455c-98a3-ed801ab967fd.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=204&amp;id=u829fdbd4&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=408&amp;originWidth=1080&amp;originalType=binary&amp;size=133007&amp;status=done&amp;style=none&amp;taskId=u3a69f9ba-7275-471f-a043-bdead76139a&amp;width=540" alt="image.png" />
+<img src="chapter_5/./image/ink/3.png" alt="image.png" />
 ​</p>
 <p>“upload &amp; deploy code 1/2”窗口对应部署合约的第一个步骤——上传代码到区块链上。选择有帐户余额的部署帐户，再上传 Flipper.contract 文件，确认智能合约的信息后，点击“Next”按钮。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388434760-1a143bca-4260-4523-accf-755dddb57a5f.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=158&amp;id=ub4ff1118&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=316&amp;originWidth=1080&amp;originalType=binary&amp;size=88123&amp;status=done&amp;style=none&amp;taskId=u6a160253-0242-4226-84ca-d0eb52106ab&amp;width=540" alt="image.png" /></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388452538-53e82cc3-2b61-4f95-a2f4-661d7adadfa1.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=215&amp;id=u599a0be2&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=430&amp;originWidth=1080&amp;originalType=binary&amp;size=105377&amp;status=done&amp;style=none&amp;taskId=u10367478-8ab0-469d-8dc6-9ba95f38a23&amp;width=540" alt="image.png" /></p>
+<img src="chapter_5/./image/ink/4.png" alt="image.png" /></p>
+<p><img src="chapter_5/./image/ink/5.png" alt="image.png" /></p>
 <p>“upload &amp; deploy code 2/2”窗口对应部署合约的第二个步骤——创建合约实例。设置捐赠的数量用以支付合约的存储租金与 Gas 费，再点击“部署”按钮。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388475724-f0781892-ec5a-4939-8287-ff1361fc22f4.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=240&amp;id=ub7a15826&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=480&amp;originWidth=1080&amp;originalType=binary&amp;size=96193&amp;status=done&amp;style=none&amp;taskId=u77567c5d-739b-4d54-bbf8-f55f0484205&amp;width=540" alt="image.png" />
+<img src="chapter_5/./image/ink/6.png" alt="image.png" />
 ​</p>
 <p>在“批准交易”窗口，点击“签名并提交”按钮，即可完成合约部署。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388500539-f75d0be3-94e5-4361-8de5-dd6649839855.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=196&amp;id=ufd535753&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=391&amp;originWidth=1080&amp;originalType=binary&amp;size=168443&amp;status=done&amp;style=none&amp;taskId=u1bc2542e-167b-4fb2-acbb-0cc85efbea7&amp;width=540" alt="image.png" />
-​</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388512078-1546bf77-82d8-4d59-8c58-c29550407856.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=180&amp;id=u80b51552&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=359&amp;originWidth=1080&amp;originalType=binary&amp;size=136561&amp;status=done&amp;style=none&amp;taskId=ube96f01b-7667-4b77-bd6c-95998dee376&amp;width=540" alt="image.png" />
-​</p>
+<img src="chapter_5/./image/ink/7.png" alt="image.png" /></p>
+<p><img src="chapter_5/./image/ink/8.png" alt="image.png" /></p>
+<p>​</p>
 <h3><a class="header" href="#145-调用-flipper-合约" id="145-调用-flipper-合约">1.4.5 调用 flipper 合约</a></h3>
 <p>flipper 合约已成功部署，可以与它进行交互了！
 ​</p>
-<p>我们可以看到布尔对象的当前值是 false，这是因为创建合约实例时将初始值设置为 false。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388553159-243ccadb-9e06-485e-b5ba-9a5cac6d4114.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=80&amp;id=u57c48db4&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=159&amp;originWidth=1080&amp;originalType=binary&amp;size=49039&amp;status=done&amp;style=none&amp;taskId=uf955cb04-0753-4cd9-a290-971f4ff4023&amp;width=540" alt="image.png" />
-​</p>
-<p>点击“flip()”左边的“exec”按钮，调用合约的 flip 方法，签名提交后布尔对象的当前值变成了 true，这个合约交互结果符合预期。
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388573326-b133b594-632c-4059-90df-6007ae4e6122.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=266&amp;id=u21201966&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=531&amp;originWidth=1080&amp;originalType=binary&amp;size=165322&amp;status=done&amp;style=none&amp;taskId=u1e4c936d-c58b-4278-8b81-62f6ea57426&amp;width=540" alt="image.png" />
-​</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388584492-a0bab8bd-e068-4a64-9e9e-214b40a9bac6.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=210&amp;id=u6e33287b&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=419&amp;originWidth=1080&amp;originalType=binary&amp;size=173663&amp;status=done&amp;style=none&amp;taskId=u5cb1974d-fb92-4772-96d6-961907dffbd&amp;width=540" alt="image.png" />
-​</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388595186-41274636-649f-4797-bda8-86fa6be551de.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=179&amp;id=ue5fa3b2b&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=358&amp;originWidth=1080&amp;originalType=binary&amp;size=123000&amp;status=done&amp;style=none&amp;taskId=u9c4f84a9-d366-4b87-b9b6-0bca8f3d27b&amp;width=540" alt="image.png" />
-​</p>
+<p>我们可以看到布尔对象的当前值是 false，这是因为创建合约实例时将初始值设置为 false。</p>
+<p><img src="chapter_5/./image/ink/9.png" alt="image.png" /></p>
+<p>点击“flip()”左边的“exec”按钮，调用合约的 flip 方法，签名提交后布尔对象的当前值变成了 true，这个合约交互结果符合预期。</p>
+<p><img src="chapter_5/./image/ink/10.png" alt="image.png" /></p>
+<p><img src="chapter_5/./image/ink/11.png" alt="image.png" /></p>
+<p><img src="chapter_5/./image/ink/12.png" alt="image.png" /></p>
 <p>我们可以看到，Patract 工具套件为开发 ink! 项目带来了极大的便利，本系列后续文章的示例都将使用 Patract 工具套件来构建。
 ​</p>
 <h2><a class="header" href="#15-参考资料" id="15-参考资料">1.5 参考资料</a></h2>
@@ -29213,10 +29208,10 @@ https://docs.patract.io</p>
 </ol>
 <hr />
 <p>推荐 Rust 入门学习书籍《Rust 编程入门、实战与进阶》，该书详细讲解 Rust 核心语法，注重编码能力训练，将数据结构、算法与 Rust 编程结合，精选 39 道 LeetCode 高频算法面试真题。需要购买书籍的朋友，可以扫描下方二维码。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388665960-17c7443d-e53d-401e-b4a1-ad939814a83b.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=960&amp;id=u3608c71f&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=1920&amp;originWidth=1080&amp;originalType=binary&amp;size=1527952&amp;status=done&amp;style=none&amp;taskId=u74674526-7e34-43b7-8884-2c2552c4625&amp;width=540" alt="image.png" /></p>
+<p><img src="chapter_5/./image/ink/13.png" alt="image.png" /></p>
 <hr />
-<p><strong>扫码关注公众号</strong>
-<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388723600-27f235d4-66a7-41f3-81e6-5d8fd19a8ea8.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=129&amp;id=ua3d2f650&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=258&amp;originWidth=258&amp;originalType=binary&amp;size=41167&amp;status=done&amp;style=none&amp;taskId=u60fd4199-cb7e-4821-ab2d-c5b4e7290fd&amp;width=129" alt="image.png" /></p>
+<p><strong>扫码关注公众号</strong></p>
+<p><img src="chapter_5/./image/ink/14.png" alt="image.png" /></p>
 <h1><a class="header" href="#常见问题汇总-2" id="常见问题汇总-2">常见问题汇总</a></h1>
 <blockquote>
 <p>说明：</p>
