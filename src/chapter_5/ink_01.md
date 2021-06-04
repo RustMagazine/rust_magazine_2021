@@ -352,7 +352,7 @@ npx redspot test tests/flipper.test.ts --no-compile
 ​
 
 看到如下结果，代表已成功完成测试，Redspot 的插件会自动计算并打印出执行合约操作的 Gas 费用。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388273850-a437e397-5837-451d-bdfc-50244c573703.png#clientId=u20ed317f-89af-4&from=paste&height=191&id=uf7b84ada&margin=%5Bobject%20Object%5D&name=image.png&originHeight=381&originWidth=1080&originalType=binary&size=121000&status=done&style=none&taskId=u907e391b-f0a0-4a5e-af78-0f3555dd9a2&width=540)
+![image.png](./image/ink/1.png)
 ​
 
 ### 1.4.4 部署 flipper 合约
@@ -373,29 +373,28 @@ europa --tmp
 ​
 
 打开网址 https://polkadot.js.org/apps，配置连接本地启动的开发节点。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388384139-cfdfe4d3-09bf-49b8-b376-3751e0f5c311.png#clientId=u20ed317f-89af-4&from=paste&height=405&id=ub986fb01&margin=%5Bobject%20Object%5D&name=image.png&originHeight=810&originWidth=644&originalType=binary&size=114649&status=done&style=none&taskId=u5d5a9002-36dd-4183-8ac8-c1531547a78&width=322)
+![image.png](./image/ink/2.png)
 ​
 
 点击菜单栏上“开发者”中的子菜单“合约”，打开合约页面后，点击“Upload & deploy code”按钮。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388411805-2c9ecbe0-1fa3-455c-98a3-ed801ab967fd.png#clientId=u20ed317f-89af-4&from=paste&height=204&id=u829fdbd4&margin=%5Bobject%20Object%5D&name=image.png&originHeight=408&originWidth=1080&originalType=binary&size=133007&status=done&style=none&taskId=u3a69f9ba-7275-471f-a043-bdead76139a&width=540)
+![image.png](./image/ink/3.png)
 ​
 
 “upload & deploy code 1/2”窗口对应部署合约的第一个步骤——上传代码到区块链上。选择有帐户余额的部署帐户，再上传 Flipper.contract 文件，确认智能合约的信息后，点击“Next”按钮。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388434760-1a143bca-4260-4523-accf-755dddb57a5f.png#clientId=u20ed317f-89af-4&from=paste&height=158&id=ub4ff1118&margin=%5Bobject%20Object%5D&name=image.png&originHeight=316&originWidth=1080&originalType=binary&size=88123&status=done&style=none&taskId=u6a160253-0242-4226-84ca-d0eb52106ab&width=540)
+![image.png](./image/ink/4.png)
 
-
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388452538-53e82cc3-2b61-4f95-a2f4-661d7adadfa1.png#clientId=u20ed317f-89af-4&from=paste&height=215&id=u599a0be2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=1080&originalType=binary&size=105377&status=done&style=none&taskId=u10367478-8ab0-469d-8dc6-9ba95f38a23&width=540)
+![image.png](./image/ink/5.png)
 
 
 “upload & deploy code 2/2”窗口对应部署合约的第二个步骤——创建合约实例。设置捐赠的数量用以支付合约的存储租金与 Gas 费，再点击“部署”按钮。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388475724-f0781892-ec5a-4939-8287-ff1361fc22f4.png#clientId=u20ed317f-89af-4&from=paste&height=240&id=ub7a15826&margin=%5Bobject%20Object%5D&name=image.png&originHeight=480&originWidth=1080&originalType=binary&size=96193&status=done&style=none&taskId=u77567c5d-739b-4d54-bbf8-f55f0484205&width=540)
+![image.png](./image/ink/6.png)
 ​
 
 在“批准交易”窗口，点击“签名并提交”按钮，即可完成合约部署。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388500539-f75d0be3-94e5-4361-8de5-dd6649839855.png#clientId=u20ed317f-89af-4&from=paste&height=196&id=ufd535753&margin=%5Bobject%20Object%5D&name=image.png&originHeight=391&originWidth=1080&originalType=binary&size=168443&status=done&style=none&taskId=u1bc2542e-167b-4fb2-acbb-0cc85efbea7&width=540)
-​
+![image.png](./image/ink/7.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388512078-1546bf77-82d8-4d59-8c58-c29550407856.png#clientId=u20ed317f-89af-4&from=paste&height=180&id=u80b51552&margin=%5Bobject%20Object%5D&name=image.png&originHeight=359&originWidth=1080&originalType=binary&size=136561&status=done&style=none&taskId=ube96f01b-7667-4b77-bd6c-95998dee376&width=540)
+![image.png](./image/ink/8.png)
+
 ​
 
 ### 1.4.5 调用 flipper 合约
@@ -403,18 +402,16 @@ flipper 合约已成功部署，可以与它进行交互了！
 ​
 
 我们可以看到布尔对象的当前值是 false，这是因为创建合约实例时将初始值设置为 false。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388553159-243ccadb-9e06-485e-b5ba-9a5cac6d4114.png#clientId=u20ed317f-89af-4&from=paste&height=80&id=u57c48db4&margin=%5Bobject%20Object%5D&name=image.png&originHeight=159&originWidth=1080&originalType=binary&size=49039&status=done&style=none&taskId=uf955cb04-0753-4cd9-a290-971f4ff4023&width=540)
-​
+
+![image.png](./image/ink/9.png)
 
 点击“flip()”左边的“exec”按钮，调用合约的 flip 方法，签名提交后布尔对象的当前值变成了 true，这个合约交互结果符合预期。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388573326-b133b594-632c-4059-90df-6007ae4e6122.png#clientId=u20ed317f-89af-4&from=paste&height=266&id=u21201966&margin=%5Bobject%20Object%5D&name=image.png&originHeight=531&originWidth=1080&originalType=binary&size=165322&status=done&style=none&taskId=u1e4c936d-c58b-4278-8b81-62f6ea57426&width=540)
-​
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388584492-a0bab8bd-e068-4a64-9e9e-214b40a9bac6.png#clientId=u20ed317f-89af-4&from=paste&height=210&id=u6e33287b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=419&originWidth=1080&originalType=binary&size=173663&status=done&style=none&taskId=u5cb1974d-fb92-4772-96d6-961907dffbd&width=540)
-​
+![image.png](./image/ink/10.png)
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388595186-41274636-649f-4797-bda8-86fa6be551de.png#clientId=u20ed317f-89af-4&from=paste&height=179&id=ue5fa3b2b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=358&originWidth=1080&originalType=binary&size=123000&status=done&style=none&taskId=u9c4f84a9-d366-4b87-b9b6-0bca8f3d27b&width=540)
-​
+![image.png](./image/ink/11.png)
+
+![image.png](./image/ink/12.png)
 
 我们可以看到，Patract 工具套件为开发 ink! 项目带来了极大的便利，本系列后续文章的示例都将使用 Patract 工具套件来构建。
 ​
@@ -434,11 +431,11 @@ https://docs.patract.io
 
 推荐 Rust 入门学习书籍《Rust 编程入门、实战与进阶》，该书详细讲解 Rust 核心语法，注重编码能力训练，将数据结构、算法与 Rust 编程结合，精选 39 道 LeetCode 高频算法面试真题。需要购买书籍的朋友，可以扫描下方二维码。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388665960-17c7443d-e53d-401e-b4a1-ad939814a83b.png#clientId=u20ed317f-89af-4&from=paste&height=960&id=u3608c71f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1920&originWidth=1080&originalType=binary&size=1527952&status=done&style=none&taskId=u74674526-7e34-43b7-8884-2c2552c4625&width=540)
+![image.png](./image/ink/13.png)
 
 ---
 
 **扫码关注公众号**
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/321202/1622388723600-27f235d4-66a7-41f3-81e6-5d8fd19a8ea8.png#clientId=u20ed317f-89af-4&from=paste&height=129&id=ua3d2f650&margin=%5Bobject%20Object%5D&name=image.png&originHeight=258&originWidth=258&originalType=binary&size=41167&status=done&style=none&taskId=u60fd4199-cb7e-4821-ab2d-c5b4e7290fd&width=129)
 
+![image.png](./image/ink/14.png)
 
