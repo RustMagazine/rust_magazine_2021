@@ -29517,7 +29517,7 @@ impl PointerFamily for ArcPointer {
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>struct MyDataStructure&lt;PointerSel: PointerFamily&gt; {
+</span>struct MyDataStructure&lt;T, PointerSel: PointerFamily&gt; {
     data: PointerSel::PointerType&lt;T&gt;
 }
 <span class="boring">}

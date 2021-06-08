@@ -35256,7 +35256,7 @@ impl PointerFamily for ArcPointer {
 
 <p>挺简单的吧，这样你就定义了两个“选择器”类型，可以用它来代表要用的是Rc还是Arc。实际用用看：</p>
 
-<pre><code class="language-`rust">struct MyDataStructure&lt;PointerSel: PointerFamily&gt; {
+<pre><code class="language-`rust">struct MyDataStructure&lt;T, PointerSel: PointerFamily&gt; {
     data: PointerSel::PointerType&lt;T&gt;
 }</code></pre>
 
