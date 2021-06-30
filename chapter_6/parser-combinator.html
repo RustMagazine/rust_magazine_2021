@@ -1,0 +1,1351 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>用 Rust 学习解析器组合子 (combinator) - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.7.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.8.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.9.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.10.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.11.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.12.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.13.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.14.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.15.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.16.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.17.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.18.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item expanded "><a href="../chapter_6/parser-combinator.html" class="active"><strong aria-hidden="true">8.22.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.23.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.24.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.25.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.26.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#用-rust-学习解析器组合子-combinator" id="用-rust-学习解析器组合子-combinator">用 Rust 学习解析器组合子 (combinator)</a></h1>
+<p><a href="https://bodil.lol/parser-combinators/">原文</a></p>
+<blockquote>
+<p>译者: <a href="https://github.com/iamazy">iamazy</a>, <a href="https://github.com/MATRIXKOO">Matrixtang</a></p>
+</blockquote>
+<p>本文向已是 Rust 程序员的人们传授解析器组合子的基础知识。它假定不涉及其他知识，并将解释与 Rust 没有直接关系的所有内容，以及为达到此目的使用 Rust 的一些令人意外的特性。如果你不了解 Rust，他不会教你 Rust 的内容，但是这样的话，同样也无法更好的教你解析器和组合子的知识。如果你想要学习 Rust 语言，我推荐 <a href="https://doc.rust-lang.org/book/">Rust 编程语言</a> 这本书。</p>
+<h2><a class="header" href="#beginners-mind" id="beginners-mind">Beginner's Mind</a></h2>
+<p>当每个程序员发现自己需要解析器时，它们的生活将变得有意义。</p>
+<p>初级程序员将会问：“什么是解析器？”。<br />
+中级程序员将会说：“这很简单，我将写一串正则表达式”。<br />
+高级程序员将会说：“退一步考虑问题，我知道<code>Lex</code>(词法分析器)和<code>Yacc</code>(语法解析器)”</p>
+<p>初级程序员的想法是正确的。</p>
+<p>不是说正则表达式不好(但是请不要用正则表达式写复杂的解析器)。使用经过 <code>数千年 (millennia)</code> 磨练至完美的解析器和词法分析生成器之类的强大工具并不是没有乐趣可言。但是从头开始一点一点学习解析器将更有趣。这两者只是对当前实际问题的抽象，如果你直接选择正则表达式或者解析器生成工具，你将失去这一份乐趣。在初学者眼中，正如人们说的：本来(解决这个问题)有很多种方法，但是在专家眼里，已经形成思维定视，只会选择一种他们最习惯的方式。
+在本文中我们将从头开始学习如何构建解析器，基于被称为解析器组合子的函数式编程语言的通用技术。一旦你掌握了它们的基本概念，它们的优势将非常巨大，同时又非常接近第一原理。因为这里唯一的抽象是你将在基础的组合子之上构建你自己的抽象。所有这些，你必须先构建它们，才能使用它们。</p>
+<h2><a class="header" href="#how-to-work-through-this-article" id="how-to-work-through-this-article">How To Work Through This Article</a></h2>
+<p>强烈建议你初始化一个 Rust 项目，并且在<code>src/lib.rs</code>中书写你阅读到的代码片段(你可以直接从页面上直接复制，但是最好还是自己手敲，因为这样会自动确保你完整阅读代码)。本文将按序介绍你需要的每段代码。请注意，有时会引入你先前编写功能的最新版本，这时，你需要将旧版本替换为新版本。</p>
+<p>该代码是使用 2018 年语言版本的<code>rustc</code>的 1.34.0 版本编写的。你应该尽可能使用最新版本的编译器，只要你确保你使用的是 2018 的版本即可(检查<code>Cargo.toml</code>文件中是否包含<code>edition = &quot;2018&quot;</code>)。代码不需要任何的外部依赖。</p>
+<p>如果要运行本文中的测试用例，请执行<code>cargo test</code>。</p>
+<h2><a class="header" href="#the-xcruciating-markup-language" id="the-xcruciating-markup-language">The Xcruciating Markup Language</a></h2>
+<p>我们将用简化的 XML 格式写一个解析器，如下所示：</p>
+<pre><code class="language-xml">&lt;parent-element&gt;
+  &lt;single-element attribute=&quot;value&quot; /&gt;
+&lt;/parent-element&gt;
+</code></pre>
+<p>XML 元素使用<code>&lt;</code>符号开头和一个由字母组成的标志符开头，后面可以根任意数量的字母，数字和<code>-</code>。后面跟一些空格，以及一些属性对的可选列表：前面定义一个标识符，后面跟一个<code>=</code>符号和一个双引号字符串，最后以<code>/&gt;</code>结尾来表示一个没有子节点的单个元素。或者用<code>&gt;</code>表示后面跟了一串子节点，最终是一个以<code>&lt;/</code>开头的结束标签，后跟一个必须与开始标识匹配的标志符，然后以<code>&gt;</code>结束。</p>
+<p>这就是我们将要支持的特性。没有命名空间，没有文本节点，其余的都没有，并且没有模式校验。我们甚至都不会自寻烦恼，去实现字符串的转义引号(<code>\&quot;</code>) - 它们由第一个双引号开始，到下一个双引号结束，就是这样。如果你想在实际字符串中使用双引号，你可以将这个不合理的要求转移到其他地方。</p>
+<p>我们将用下面的结构体来解析这些元素。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone, Debug, PartialEq, Eq)]
+struct Element {
+    name: String,
+    attributes: Vec&lt;(String, String)&gt;,
+    children: Vec&lt;Element&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>没有花哨的类型，仅仅用字符串表示名称(那是每个标签开始的标志符)，用字符串元组表示属性(标志符和对应的值)，还有一个看起来和父元素完全一样的子元素列表。</p>
+<p>(如果你正在输入，请加上那一系列的<code>derive</code>，你将在后面用到它们)。</p>
+<h2><a class="header" href="#defining-the-parser" id="defining-the-parser">Defining The Parser</a></h2>
+<p>好了，是时候编写解析器了。</p>
+<p>解析是从数据流中派生结构的过程。解析器就是要弄清楚该结构的工具。</p>
+<p>在我们即将探索的知识中，解析器最简单的一种形式就是一个函数，该函数接受一些输入并返回解析后的输出以及输入的其余部分，或者是一个错误信息：“我无法解析该输入”。</p>
+<p>事实证明，简而言之，更复杂的解析器看起来也是如此。如果你要获取友好的错误提示，你可能会使输入，输出和错误的含义复杂化，但是解析器的特征依然如此：消费输入并产生解析后的数据以及输入的其余部分，或者会让你知道无法将输入解析成输出。</p>
+<p>让我们将其(解析器)写成函数的形式。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Fn(Input) -&gt; Result&lt;(Input, Output), Error&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>更具体的说，就我们而言，我们希望可以填充这些类型，就像下面代码块所示。因为我们要做的是将一个字符串转化为<code>Element</code>结构体，并且在这方面我们不想陷入错综复杂的错误提示中，所以当我们不能够解析输入的字符串时，只需返回一段提示错误的字符串即可。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Fn(&amp;str) -&gt; Result&lt;(&amp;str, Element), &amp;str&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们使用字符串切片(<code>&amp;str</code>)，是因为他是指向字符串的有效指针。我们可以进一步对其进行切片，通过切掉已解析的部分来消耗输入，并将余下的输入和结果一起返回。</p>
+<p>可能使用<code>&amp;[u8]</code>类型作为输入(一串字节数组，如果将输入的字节限制在<code>ASCII</code>范围内，则<code>u8</code>和<code>char</code>相对应)会看起来更加干净，尤其是字符串切片(<code>&amp;str</code>)的行为和大多数切片的行为有所不同。你不能够通过一个数字来检索它们，你必须使用一个分片<code>input[0..1]</code>。另一方面，它们对于解析字符串有很多有用的函数，而字节切片没有。</p>
+<p>事实上，我们通常都需要依赖这些函数而不是像<code>input[0]</code>这样对他进行索引。因为 Rust 的字符串是<code>UTF-8</code>格式的，这些索引并不总是对应于单个字符，所以对于我们来说，让标准库为我们处理这些问题更好。</p>
+<h2><a class="header" href="#our-first-parser" id="our-first-parser">Our First Parser</a></h2>
+<p>让我们来一起写一个解析器，只需要关注字符串中的第一个字符并判断它是否是字母<code>a</code></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn the_letter_a(input: &amp;str) -&gt; Result&lt;(&amp;str, ()), &amp;str&gt; {
+  match input.chars().next() {
+      Some('a') =&gt; Ok((&amp;input['a'.len_utf8()..], ())),
+      _ =&gt; Err(input),
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先，我们来看一下输入和输入和输出的类型：和上面讨论的一样，我们让字符串切片作为输入，并返回携带<code>(&amp;str, ())</code>元组或者错误类型<code>&amp;str</code>的<code>Result</code>。<code>(&amp;str, ())</code>元组比较有趣：正如我们所说的，我们想要返回一个包含下一次待解析的输入和输出。<code>&amp;str</code>是下一次输入，解析返回的结果仅仅是一个单元类型<code>()</code>。因为如果解析成功，只可能有一种结果(我们找到了字母<code>a</code>)，但是这里我们并不需要返回字母<code>a</code>，我们只需要告诉调用者我们成功发现了字母<code>a</code>即可。</p>
+<p>然后，让我们看下解析器本身的代码。我们从提取输入的第一个字符开始：<code>input.chars().next()</code>。依靠标准库来避免带来的 Unicode 编码问题并不是在开玩笑 - 我们要求它为字符串的字符提供一个<code>chars()</code>迭代器，然后从中取出第一项。该项是封装在<code>Option</code>中的<code>char</code>类型，因此是<code>Option&lt;char&gt;</code>，如果它的值为<code>None</code>则表示我们尝试在空字符串中提取一个<code>char</code>。</p>
+<p>更糟的是，<code>char</code>可能并不是你想的那样是 Unicode 字符。它很可能就是 Unicode 所说的“<a href="http://www.unicode.org/glossary/#grapheme_cluster">字素簇</a>”，它可以由几个<code>char</code>组成，实际上代表“<a href="http://www.unicode.org/glossary/#unicode_scalar_value">标量值</a>”，大约比字素簇低两级。但是这种方式太疯狂了，出于我们(讲解)的目的，我们可能根本不会看到除 ASCII 之外的字符集，所以这种情况我们不做讨论。</p>
+<p>我们模式匹配上了<code>Some('a')</code>，这是我们正在寻找的特定结果，如果匹配上，则返回结果<code>Ok((&amp;input['a'.len_utf8()..], ()))</code>。也就是说，我们在字符串切片中删除了刚刚解析的<code>'a'</code>并返回剩余部分以及我们的解析结果(一个空的<code>()</code>)。考虑到 Unicode 怪物，我们在切片之前向标准库询问了<code>'a'</code>在 UTF-8 编码中的长度，但是，请永远不要假设 Unicode 怪物。</p>
+<p>如果我们匹配到其他的<code>Some(char)</code>或者<code>None</code>，我们将返回一个错误。你可能还记得，我们的错误类型目前还是解析失败时的字符串切片，也就是作为<code>input</code>传入的字符串切片。它不以<code>'a'</code>开头，因此这是我们的错误。但这不是一个大的错误，但是至少比“其他地方出了问题”要好一些。</p>
+<p>虽然我们不需要使用此解析器解析 XML，但是我们要做的第一件事就是查找<code>&lt;</code>，因此我们可能需要一些相似的东西。我们还需要专门解析<code>&gt;</code>，<code>/</code>，<code>=</code>，因此我们可以创建一个函数为我们想要的字符构建一个解析器？</p>
+<h2><a class="header" href="#a-parser-builder" id="a-parser-builder">A Parser Builder</a></h2>
+<p>我们想象一下：编写一个函数，可以为任意长度的静态字符串(而不仅仅是单个字符)生成一个解析器。这种方式甚至更容易，因为一个字符串切片已经是一个合法的 UTF-8 字符串切片，我们不需要再去考虑 Unicode 怪物。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn match_literal(expected: &amp;'static str)
+    -&gt; impl Fn(&amp;str) -&gt; Result&lt;(&amp;str, ()), &amp;str&gt;
+{
+    move |input| match input.get(0..expected.len()) {
+        Some(next) if next == expected =&gt; {
+            Ok((&amp;input[expected.len()..], ()))
+        }
+        _ =&gt; Err(input),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个函数看起来有点不同。</p>
+<p>我们先看下类型。我们的函数看起来不再像是一个解析器，它将我们期望的字符串作为参数，并返回一个看似解析器的东西。它是一个返回函数的函数 - 换言之，是一个高阶函数。基本上，我们在编写一个函数，该函数可以构建一个类似之前的<code>the_letter_a</code>函数。</p>
+<p>因此，我们不是在函数体中完成工作，而是返回一个闭包用来处理这些事情，该闭包与我们之前解析器的类型签名相匹配。</p>
+<p>模式匹配看起来是一样的，除了我们不能直接匹配字符串字面量，因为我们不知道它具体是什么，所以我们使用匹配条件<code>if next == expected</code>代替。否则它和以前完全一样，只是在闭包的主体内。</p>
+<h2><a class="header" href="#testing-our-parser" id="testing-our-parser">Testing Our Parser</a></h2>
+<p>我们来为它编写测试用例，确保这个函数没有问题。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn literal_parser() {
+    let parse_joe = match_literal(&quot;Hello Joe!&quot;);
+    assert_eq!(
+        Ok((&quot;&quot;, ())),
+        parse_joe(&quot;Hello Joe!&quot;)
+    );
+    assert_eq!(
+        Ok((&quot; Hello Robert!&quot;, ())),
+        parse_joe(&quot;Hello Joe! Hello Robert!&quot;)
+    );
+    assert_eq!(
+        Err(&quot;Hello Mike!&quot;),
+        parse_joe(&quot;Hello Mike!&quot;)
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先，我们构建了一个解析器：<code>match_literal(&quot;Hello Joe!&quot;)</code>。它应该消耗字符串<code>&quot;Hello Joe!&quot;</code>并返回字符串的剩余部分，或者失败并返回整个字符串。</p>
+<p>在第一种情况下，我们为它提供了它期望的确切字符串，并看到它返回了一个空字符串以及<code>()</code>值，这表示“我们解析了期望的字符串，并且不需要将它真的返回”。</p>
+<p>在第二种情况下，我们提供了字符串<code>&quot;Hello Joe! Hello Robert!&quot;</code>，并且我们看到它确实消耗了字符串<code>&quot;Hello Joe!&quot;</code>并且返回了输入字符串的剩余部分：<code>&quot;Hello Robert!&quot;</code>(包括空格)。</p>
+<p>在第三种情况下，我们提供了一个不正确的输入<code>&quot;Hello Mike!&quot;</code>，并注意到该函数拒绝了这个输入并返回了一个错误。不是说 Mike 作为一般规则是不正确的，而是它不是此解析器所需要的。</p>
+<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<ul>
+<li>你能在标准库中找到一个关于<code>str</code>类型的方法，让你编写<code>match_literal()</code>时不必做麻烦的<code>get</code>索引吗？</li>
+</ul>
+<h2><a class="header" href="#a-parser-for-something-less-specific" id="a-parser-for-something-less-specific">A Parser For Something Less Specific</a></h2>
+<p>我们可以继续解析<code>&lt;</code>，<code>&gt;</code>，<code>=</code>以及<code>&lt;/</code>和<code>/&gt;</code>。我们几乎已经完成了。</p>
+<p><code>&lt;</code>之后需要识别的部分是元素名称。我们不能通过简单的字符串比较做到这一点。但是我们可以使用正则表达式。</p>
+<p>但是我们需要克制一下自己，这将是一个很容易在简单代码中复用的正则表达式，我们不需要为此引入<code>regex</code>库。让我们尝试一下是否可以只使用 Rust 标准库来编写自己的解析器。</p>
+<p>回顾元素名称标志符的规则：首位是字母，后跟零个或多个字母，数字或<code>-</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn identifier(input: &amp;str) -&gt; Result&lt;(&amp;str, String), &amp;str&gt; {
+    let mut matched = String::new();
+    let mut chars = input.chars();
+
+    match chars.next() {
+        Some(next) if next.is_alphabetic() =&gt; matched.push(next),
+        _ =&gt; return Err(input),
+    }
+
+    while let Some(next) = chars.next() {
+        if next.is_alphanumeric() || next == '-' {
+            matched.push(next);
+        } else {
+            break;
+        }
+    }
+
+    let next_index = matched.len();
+    Ok((&amp;input[next_index..], matched))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>与往常一样，我们首先查看类型。这次我们不是编写函数来构建解析器，只需要编写解析器本身，就像第一次一样。这里显著的区别是，我们返回元组中的<code>String</code>和剩余的输入，而不是<code>()</code>的结果类型。这个<code>String</code>将包含我们刚刚解析的标志符。</p>
+<p>考虑到这一点，我们首先创建一个空字符串并将称之为<code>matched</code>。它是我们将要返回的结果值。我们在<code>input</code>中获取一个字符的迭代器，我们将对其进行拆解。</p>
+<p>第一步是查看前面是否有字母。我们从迭代器中取出第一个字符并检查它是否是一个字母：<code>next.is_alphabetic()</code>。Rust 标准库当然是帮我们来处理 Unicode 的 - 这将匹配任何字母表中的字母，而不仅仅是 ASCII。如果它是一个字母，我们将它放入我们的<code>matched</code>字符串中，如果不是，显然我们不是在查看元素标志符，所以我们立即返回一个错误。</p>
+<p>第二步，我们不断从迭代器中取出字符，将它们放入我们正在构建的字符串中，直到我们找到一个既不是<code>is_alphanumeric()</code>(就像是<code>is_alphabetic()</code>，它只是不能匹配字母表中的任何数字)也不是破折号<code>'-'</code>的字符。</p>
+<p>当我们第一次看到不符合这些条件的字符时，意味着我们已经完成了解析，所以我们跳出循环并返回我们构建的<code>String</code>，记住去掉我们在<code>input</code>中消耗的字符。如果迭代器用完了字符，意味着我们到达了<code>input</code>的末尾。</p>
+<p>值得注意的是，当我们看到不是字母数字 (alphanumeric) 或破折号(<code>-</code>)的内容时，我们不会返回错误。一旦我们匹配了第一个字母，我们就已经有足够的东西来创建一个有效的标志符。而且在我们解析完标志符以后，输入字符串中有更多待解析的字符是非常正常的，所以我们只是停止解析并返回我们的结果，只有当我们找不到第一个字母时，我们才真正的返回错误，因为在这种情况下，肯定没有标志符。</p>
+<p>还记得我们要将 XML 文档解析成的<code>Element</code>结构吗？</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Element {
+    name: String,
+    attributes: Vec&lt;(String, String)&gt;,
+    children: Vec&lt;Element&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们实际上只是完成了解析器的第一部分，<code>name</code>字段。我们解析器返回的字符串就在那里。它也是解析每个<code>attribute</code>第一部分需要的解析器。</p>
+<p>让我们对其进行测试。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn identifier_parser() {
+    assert_eq!(
+        Ok((&quot;&quot;, &quot;i-am-an-identifier&quot;.to_string())),
+        identifier(&quot;i-am-an-identifier&quot;)
+    );
+    assert_eq!(
+        Ok((&quot; entirely an identifier&quot;, &quot;not&quot;.to_string())),
+        identifier(&quot;not entirely an identifier&quot;)
+    );
+    assert_eq!(
+        Err(&quot;!not at all an identifier&quot;),
+        identifier(&quot;!not at all an identifier&quot;)
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们可以在第一种情况中看到，字符串<code>&quot;i-am-an-identifier&quot;</code>被完整解析，只留下空的字符串。在第二种情况中，解析器返回<code>&quot;not&quot;</code>作为标志符，并且字符串的剩余部分作为剩余的输入返回。在第三种情况中，解析彻底 (outright) 失败，因为它找到的第一个字符不是字母。</p>
+<h2><a class="header" href="#combinators" id="combinators">Combinators</a></h2>
+<p>现在，我们已经可以解析<code>&lt;</code>，以及之后的标志符了，但是我们需要同时将它们进行解析，以便在这里可以取得进展。因此接下来将编写另一个解析器的构造函数，它将两个解析器作为输入并返回一个新的解析器，并按顺序解析它们。换言之，它是一个解析器组合子，因为它将两个解析器组合成一个新的解析器。让我们看看我们是否能够做到这一点。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn pair&lt;P1, P2, R1, R2&gt;(parser1: P1, parser2: P2) -&gt; impl Fn(&amp;str) -&gt; Result&lt;(&amp;str, (R1, R2)), &amp;str&gt;
+where
+    P1: Fn(&amp;str) -&gt; Result&lt;(&amp;str, R1), &amp;str&gt;,
+    P2: Fn(&amp;str) -&gt; Result&lt;(&amp;str, R2), &amp;str&gt;,
+{
+    move |input| match parser1(input) {
+        Ok((next_input, result1)) =&gt; match parser2(next_input) {
+            Ok((final_input, result2)) =&gt; Ok((final_input, (result1, result2))),
+            Err(err) =&gt; Err(err),
+        },
+        Err(err) =&gt; Err(err),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里有点复杂，但是你知道该怎么做：从查看类型开始。</p>
+<p>首先，我们有四种类型变量：<code>P1</code>，<code>P2</code>，<code>R1</code>以及<code>R2</code>。这是 Parser1，Parser2，Result1，Result2 的缩写。<code>P1</code>，<code>P2</code>是函数，你会注意到它们遵循解析器函数的既定模式 (established pattern)：就像返回值，它们将<code>&amp;str</code>作为输入并返回一个<code>Result</code>类型，该<code>Result</code>类型可能是一个包含剩余输入以及解析结果的二元组，或者是一个错误。</p>
+<p>但是查看每个函数的结果类型：<code>P1</code>如果解析成功，将会产生<code>R1</code>，<code>P2</code>同理会产生<code>R2</code>。最终解析器的结果 - 从我们的函数返回的结果 - 是<code>(R1, R2)</code>。因此该解析器的工作是先在输入上运行解析器<code>P1</code>，然后在<code>P1</code>返回的剩余输入上运行<code>P2</code>，如果这两个解析器都执行成功，则我们将两个解析器返回的结果组合进元组<code>(R1, R2)</code>。</p>
+<p>查看代码，我们看到这也正是它所做得。我们首先在输入上运行第一个解析器，然后是第二个解析器，接着将两个结果组合成一个元组并返回。如果这些解析器中的任何一个执行失败，我们会立即返回它给出的错误。</p>
+<p>这样，我们应该能够结合之前的两个解析器<code>match_literal</code>和<code>identifier</code>来实际解析 XML 标签的第一部分(<code>&lt;my-first-element/&gt;</code>)。让我们编写测试用例看它是否正确。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn pair_combinator() {
+    let tag_opener = pair(match_literal(&quot;&lt;&quot;), identifier);
+    assert_eq!(
+        Ok((&quot;/&gt;&quot;, ((), &quot;my-first-element&quot;.to_string()))),
+        tag_opener(&quot;&lt;my-first-element/&gt;&quot;)
+    );
+    assert_eq!(Err(&quot;oops&quot;), tag_opener(&quot;oops&quot;));
+    assert_eq!(Err(&quot;!oops&quot;), tag_opener(&quot;&lt;!oops&quot;));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>它看起来成功了！但是看下结果类型：<code>((), String)</code>。很明显，我们只关心右边的值 - <code>String</code>。这种情况相当普遍 - 我们的一些解析器只匹配输入中的模式但不产生值，因此可以安全的忽略他们的输出。为了适应这种模式，我们将使用<code>pair</code>组合子编写另外两个组合子<code>left</code>，它丢弃第一个解析器的结果，只返回第二个，以及它的相反数<code>right</code>，我们想在上面的测试中使用<code>right</code>而不是<code>pair</code> - 它可以丢弃二元组左边的<code>()</code>只保留右边的<code>String</code>。</p>
+<h2><a class="header" href="#enter-the-functor" id="enter-the-functor">Enter The Functor</a></h2>
+<p>在我们深入讨论之前，先介绍另一个组合子：<code>map</code>，它将使编写这两个解析器更加简单。</p>
+<p>这个组合子有一个目的：改变结果的类型。例如，假设你有一个解析器返回<code>((), String)</code>，但是你希望能够将其返回值类型修改为<code>String</code>。</p>
+<p>为了做到这点，我们传入一个函数，该函数知道如何将原始类型转换成新的类型。在我们的示例中，该函数十分简单：<code>|(_left, right)| right</code>。它的一般格式就像<code>Fn(A) -&gt; B</code>，其中<code>A</code>是解析器的原始类型，<code>B</code>是期望的新类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn map&lt;P, F, A, B&gt;(parser: P, map_fn: F) -&gt; impl Fn(&amp;str) -&gt; Result&lt;(&amp;str, B), &amp;str&gt;
+where
+    P: Fn(&amp;str) -&gt; Result&lt;(&amp;str, A), &amp;str&gt;,
+    F: Fn(A) -&gt; B,
+{
+    move |input| match parser(input) {
+        Ok((next_input, result)) =&gt; Ok((next_input, map_fn(result))),
+        Err(err) =&gt; Err(err),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这些类型说明什么？<code>P</code>是我们的解析器。它在成功时将返回<code>A</code>。<code>F</code>是我们将用于将<code>P</code>映射到我们的返回值中的函数，它看起来和<code>P</code>很像，但是它的返回值类型是<code>B</code>而不是<code>A</code>。</p>
+<p>在代码中，我们运行<code>parser(input)</code>，如果执行成功，我们将拿到<code>result</code>并在其上运行函数<code>map_fn(result)</code>，然后将<code>A</code>转换成<code>B</code>。</p>
+<p>实际上，我们可以稍微放纵 (indulge) 一下自己并缩短一下这个函数，因为<code>map</code>实际上是处理<code>Result</code>的一种常见模式：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn map&lt;P, F, A, B&gt;(parser: P, map_fn: F) -&gt; impl Fn(&amp;str) -&gt; Result&lt;(&amp;str, B), &amp;str&gt;
+where
+    P: Fn(&amp;str) -&gt; Result&lt;(&amp;str, A), &amp;str&gt;,
+    F: Fn(A) -&gt; B,
+{
+    move |input|
+        parser(input)
+            .map(|(next_input, result)| (next_input, map_fn(result)))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这种模式在 Haskell 以及范畴论 (category theory) 中被称为”函子 (functor)“。如果你在其中有一个类型为<code>A</code>的东西，并且有一个可用的<code>map</code>函数，你可以将某个函数从<code>A</code>传递到<code>B</code>以将其转换成相同类型的东西，但是在其中使用类型<code>B</code>，这就是一个函子。你可以在 Rust 中很多地方见到它，如在 <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map">Option</a> 中，<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map">Result</a> 中，<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map">Iterator</a> 甚至在 <a href="https://docs.rs/futures/0.1.26/futures/future/trait.Future.html#method.map">Future</a> 中，但它没有被明确命名。因为在 Rust 的类型系统中，你不能真正的将函子表示为泛化的东西，因为它缺乏更高级的类型，但那是另一回事了，所以我们只需关注这些函子，寻找<code>map</code>函数即可。</p>
+<h2><a class="header" href="#time-for-a-trait" id="time-for-a-trait">Time For A Trait</a></h2>
+<p>你可能已经注意到，我们不断重复解析器类型签名的格式：<code>Fn(&amp;str) -&gt; Result&lt;(&amp;str, Output), &amp;str&gt;</code>。你可能已经厌倦了像我写的那样完整的阅读它，所以我认为是时候引入一个 trait，让这些更具有可读性，还可以为解析器添加一些扩展性。</p>
+<p>但是首先，我们先为一直使用的返回值类型创建一个类型别名：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type ParseResult&lt;'a, Output&gt; = Result&lt;(&amp;'a str, Output), &amp;'a str&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在，我们可以不用一直输入那串冗长的类型，可以直接使用<code>ParseResult&lt;String&gt;</code>。我们可以在这里添加一个生命周期，因为类型的声明需要它，但是大多数时候 Rust 编译器可以帮你推断。通常，可以尝试不添加生命周期，并观察 rustc 是否报错，如果报错则添加生命周期。</p>
+<p>在此例中，<code>'a</code>特指<code>input</code>的生命周期。</p>
+<p>现在，对于 trait，我们也需要在这里声明生命周期，并且当你使用该 trait 时，生命周期通常也是必须的。这是一个额外的输入，但它击败了以前的版本。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Parser&lt;'a, Output&gt; {
+    fn parse(&amp;self, input: &amp;'a str) -&gt; ParseResult&lt;'a, Output&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>它目前只有一个方法：<code>parse()</code>方法，它看起来似曾相识：它和我们之前编写的解析器函数基本相同。</p>
+<p>为了让它更加简单，我们实际上可以为任何匹配解析器签名的函数实现这个 trait。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a, F, Output&gt; Parser&lt;'a, Output&gt; for F
+where
+    F: Fn(&amp;'a str) -&gt; ParseResult&lt;Output&gt;,
+{
+    fn parse(&amp;self, input: &amp;'a str) -&gt; ParseResult&lt;'a, Output&gt; {
+        self(input)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>通过这种方式，我们不仅可以传递迄今为止已传递的相同函数作为解析器，并完全实现<code>Parser</code> trait，还可以使用其他类型作为解析器。</p>
+<p>但是，更重要的是，它把我们从必须一直输入这些函数签名的噩梦中解救了出来。让我们重写<code>map</code>函数，并看它是如何工作的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn map&lt;'a, P, F, A, B&gt;(parser: P, map_fn: F) -&gt; impl Parser&lt;'a, B&gt;
+where
+    P: Parser&lt;'a, A&gt;,
+    F: Fn(A) -&gt; B,
+{
+    move |input|
+        parser.parse(input)
+            .map(|(next_input, result)| (next_input, map_fn(result)))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里需要特别注意的一件事是：我们现在必须执行<code>parser.parse(input)</code>，而不是将解析器作为函数调用，因为我们不知道类型<code>P</code>是否是函数，我们只知道它实现了<code>Parser</code>，并且我们必须使用<code>Parser</code>提供的接口。但是函数体看起来完全一样，类型看起来也更加简洁。只是有一个新的额外噪音：生命周期<code>'a</code>，但总的来说是一个很大的改进。</p>
+<p>如果我们以相同的方式重新编写<code>pair</code>函数，会看起来更加简洁：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn pair&lt;'a, P1, P2, R1, R2&gt;(parser1: P1, parser2: P2) -&gt; impl Parser&lt;'a, (R1, R2)&gt;
+where
+    P1: Parser&lt;'a, R1&gt;,
+    P2: Parser&lt;'a, R2&gt;,
+{
+    move |input| match parser1.parse(input) {
+        Ok((next_input, result1)) =&gt; match parser2.parse(next_input) {
+            Ok((final_input, result2)) =&gt; Ok((final_input, (result1, result2))),
+            Err(err) =&gt; Err(err),
+        },
+        Err(err) =&gt; Err(err),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>和之前一样，这里唯一的改变就是类型签名更加简洁，并且需要执行<code>parser.parse(input)</code>而不是<code>parse(input)</code>。</p>
+<p>实际上，我们还可以简化<code>pair</code>函数的主题，通过使用<code>map</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn pair&lt;'a, P1, P2, R1, R2&gt;(parser1: P1, parser2: P2) -&gt; impl Parser&lt;'a, (R1, R2)&gt;
+where
+    P1: Parser&lt;'a, R1&gt;,
+    P2: Parser&lt;'a, R2&gt;,
+{
+    move |input| {
+        parser1.parse(input).and_then(|(next_input, result1)| {
+            parser2.parse(next_input)
+                .map(|(last_input, result2)| (last_input, (result1, result2)))
+        })
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Result</code>的<code>and_then</code>方法和<code>map</code>类似，不同之处在于<code>map</code>函数不会返回新值到<code>Result</code>内部，而是返回一个新的<code>Result</code>。上面的代码与先前使用<code>match</code>块的版本效果相同。稍后我们将回到<code>and_then</code>，但是现在，既然我们有一个干净简洁的<code>map</code>，我们可以真正实现<code>left</code>，<code>right</code>组合子。</p>
+<h2><a class="header" href="#left-and-right" id="left-and-right">Left And Right</a></h2>
+<p>有了<code>pair</code>和<code>map</code>，我们可以非常简洁的编写<code>left</code>和<code>right</code>组合子：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn left&lt;'a, P1, P2, R1, R2&gt;(parser1: P1, parser2: P2) -&gt; impl Parser&lt;'a, R1&gt;
+where
+    P1: Parser&lt;'a, R1&gt;,
+    P2: Parser&lt;'a, R2&gt;,
+{
+    map(pair(parser1, parser2), |(left, _right)| left)
+}
+
+fn right&lt;'a, P1, P2, R1, R2&gt;(parser1: P1, parser2: P2) -&gt; impl Parser&lt;'a, R2&gt;
+where
+    P1: Parser&lt;'a, R1&gt;,
+    P2: Parser&lt;'a, R2&gt;,
+{
+    map(pair(parser1, parser2), |(_left, right)| right)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们使用<code>pair</code>组合子将两个解析器组合成一个解析器，然后使用<code>map</code>组合子选择其结果元组中我们想要保留的部分。</p>
+<p>现在我们需要为元素标签的前两部分重写测试，使它更简洁一些，在此过程中，我们将获得了一些重要的新解析器组合子功能。</p>
+<p>不过，我们必须先更新我们的两个解析器以使用<code>Parser</code>和<code>ParseResult</code>。<code>match_literal</code>是更复杂的一个：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn match_literal&lt;'a&gt;(expected: &amp;'static str) -&gt; impl Parser&lt;'a, ()&gt; {
+    move |input: &amp;'a str| match input.get(0..expected.len()) {
+        Some(next) if next == expected =&gt; Ok((&amp;input[expected.len()..], ())),
+        _ =&gt; Err(input),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>除了改变返回值类型之外，我们还必须确保闭包的输入类型是<code>&amp;'a str</code>，否则 rustc 会报错。</p>
+<p>对于<code>identifier</code>，只需更改返回值类型即可，编译器会自动为你推断生命周期。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn identifier(input: &amp;str) -&gt; ParseResult&lt;String&gt; {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>接下来进行测试，可以看见在结果中没有那个笨拙 (ungainly) 的<code>()</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn right_combinator() {
+    let tag_opener = right(match_literal(&quot;&lt;&quot;), identifier);
+    assert_eq!(
+        Ok((&quot;/&gt;&quot;, &quot;my-first-element&quot;.to_string())),
+        tag_opener.parse(&quot;&lt;my-first-element/&gt;&quot;)
+    );
+    assert_eq!(Err(&quot;oops&quot;), tag_opener.parse(&quot;oops&quot;));
+    assert_eq!(Err(&quot;!oops&quot;), tag_opener.parse(&quot;&lt;!oops&quot;));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#one-or-more" id="one-or-more">One Or More</a></h2>
+<p>让我们继续解析元素标签。我们已经解析了<code>&lt;</code>和标志符。然后呢？应该是我们的第一个属性对。</p>
+<p>实际上这些属性对是可选的。我们需要找到一种方式来处理这种可选的标记。</p>
+<p>等等，实际上在我们得到第一个可选属性对之前我们必须处理一些事情：空格。</p>
+<p>在元素名称的末尾以及第一个属性名称(如果存在的话)的开头之间，存在一个空格。我们需要处理这个空格。</p>
+<p>甚至更糟的是，我们需要处理一个或多个空格，因为<code>&lt;element attribute=&quot;value&quot;/&gt;</code>也是一个合法的语法，即使它的空格很多。所以这似乎是我们考虑是否可以编写一个组合子来表示一个或多个解析器想法的好时机。</p>
+<p>我们在<code>identifier</code>解析器中已经处理过这个问题，但是一切都是在那里手动完成的。毫不奇怪，总体思路的代码并没有什么不同。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn one_or_more&lt;'a, P, A&gt;(parser: P) -&gt; impl Parser&lt;'a, Vec&lt;A&gt;&gt;
+where
+    P: Parser&lt;'a, A&gt;,
+{
+    move |mut input| {
+        let mut result = Vec::new();
+
+        if let Ok((next_input, first_item)) = parser.parse(input) {
+            input = next_input;
+            result.push(first_item);
+        } else {
+            return Err(input);
+        }
+
+        while let Ok((next_input, next_item)) = parser.parse(input) {
+            input = next_input;
+            result.push(next_item);
+        }
+
+        Ok((input, result))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>首先，我们构建的解析器返回值类型是<code>A</code>，组合解析器的返回值类型是<code>Vec&lt;A&gt;</code> - 任意数量的<code>A</code>。</p>
+<p>这个代码看起来确实和<code>identifier</code>很像。首先，我们解析第一个元素，如果不存在，则返回一个错误。然后我们尽可能多的解析元素，直到解析失败，此时我们返回包含收集元素的向量。</p>
+<p>将上述代码修改为支持解析零次或多次的解析器也很简单，只需删除前部分<code>if</code>判断即可：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn zero_or_more&lt;'a, P, A&gt;(parser: P) -&gt; impl Parser&lt;'a, Vec&lt;A&gt;&gt;
+where
+    P: Parser&lt;'a, A&gt;,
+{
+    move |mut input| {
+        let mut result = Vec::new();
+
+        while let Ok((next_input, next_item)) = parser.parse(input) {
+            input = next_input;
+            result.push(next_item);
+        }
+
+        Ok((input, result))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>让我们编写测试用例以验证这两个解析器的功能符合预期。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn one_or_more_combinator() {
+    let parser = one_or_more(match_literal(&quot;ha&quot;));
+    assert_eq!(Ok((&quot;&quot;, vec![(), (), ()])), parser.parse(&quot;hahaha&quot;));
+    assert_eq!(Err(&quot;ahah&quot;), parser.parse(&quot;ahah&quot;));
+    assert_eq!(Err(&quot;&quot;), parser.parse(&quot;&quot;));
+}
+
+#[test]
+fn zero_or_more_combinator() {
+    let parser = zero_or_more(match_literal(&quot;ha&quot;));
+    assert_eq!(Ok((&quot;&quot;, vec![(), (), ()])), parser.parse(&quot;hahaha&quot;));
+    assert_eq!(Ok((&quot;ahah&quot;, vec![])), parser.parse(&quot;ahah&quot;));
+    assert_eq!(Ok((&quot;&quot;, vec![])), parser.parse(&quot;&quot;));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>请注意两者的不同之处：对于<code>one_or_more</code>，解析空字符串时会返回错误，因为它需要找到至少一个满足其子解析器的输入，但是对于<code>zero_or_more</code>，一个空字符串只是意味着没有满足条件的输入，它并不是一个错误。</p>
+<p>鉴于此，可以考虑将这两个方法进行泛化，因为一个是另一个的副本，只是移除了一部分功能。用<code>zero_or_more</code>来表示<code>one_or_more</code>可能会很诱人 (tempt)。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn one_or_more&lt;'a, P, A&gt;(parser: P) -&gt; impl Parser&lt;'a, Vec&lt;A&gt;&gt;
+where
+    P: Parser&lt;'a, A&gt;,
+{
+    map(pair(parser, zero_or_more(parser)), |(head, mut tail)| {
+        tail.insert(0, head);
+        tail
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这里，我们遇到了 Rust 的一个问题，我甚至不是指<code>Vec</code>没有<code>cons</code>方法的问题，但我知道每个阅读那段代码的 Lisp 程序员都在思考这个问题：那就是所有权。</p>
+<p>我们拥有这个解析器，所以我们不能将其作为参数传递两次，编译器会试图对你大喊，因为你试图移动一个已经移动的值。那么我们可以让组合子代替引用吗？不，事实证明，我们还遇到另一整套借用检查器的问题 - 我们目前不会试图解决这些问题。并且因为这些解析器是函数，所以它们不会实现<code>Clone</code>，该 trait 本来可以帮我们节省一整天的时间，所以我们被困在一个约束中，我们不能在组合子中轻易地复用我们的解析器。</p>
+<p>不过，这不是一个大问题。它只是说明我们不能使用组合子来表达<code>one_or_more</code>，但事实证明，这两个通常是你需要的唯一组合子，它们往往会重用解析器，而且，如果你想变得非常花哨，除了解析器，你还可以编写一个带有<code>RangeBound</code>的组合子，并在一个范围内对其进行重复：<code>zero_or_more</code>使用<code>range(0..)</code>，<code>one_or_more</code>使用<code>range(1..)</code>，<code>five_or_six</code>使用<code>range(5..=6)</code>，依此类推。</p>
+<p>不过，让我们把它留给读者作为练习。现在我们只需使用<code>zero_or_more</code>和<code>one_or_more</code>即可。</p>
+<p>另一个练习可能是找到解决这些所有权问题的方法 - 也许可以通过将解析器包装在<code>Rc</code>中使其支持克隆？</p>
+<h2><a class="header" href="#a-predicate-combinator-a-hrefhttpsbodillolparser-combinatorsa-predicate-combinatora" id="a-predicate-combinator-a-hrefhttpsbodillolparser-combinatorsa-predicate-combinatora">A Predicate Combinator <a href="https://bodil.lol/parser-combinators/#a-predicate-combinator">#</a></a></h2>
+<p>我们现在有了需要用 <code>one_or_more</code> 解析空白的 <code>xml</code> 块，并用 <code>zero_or_more</code> 解析属性对。 其实，稍等一下。我们其实不想先解析空格 <em>然后</em> 解析属性 (<code>attributes</code>)。如果你考虑一下，如果没有属性，空格是可选的，我们可能会遇到直接的 <code>&gt;</code> 或 <code>/&gt;</code>。但是如果有一个属性，那么<em>必须</em>是空格。幸运的是，每个属性之间也必须有空格，如果有多个，所以我们在这里真正看到的是一系列<em>零或更多</em>出现的<em>一个或多个</em>空格项，然后是属性。</p>
+<p>我们首先需要一个解析单个空白项的解析器。我们可以选择下列三种方式之一。</p>
+<p>一，我们可以愚蠢地使用我们的 <code>match_literal</code> 解析器和一个只包含一个空格的字符串。为什么这么傻？因为空格也是换行符、制表符和大量呈现为空格的奇怪 Unicode 字符。我们将不得不再次依赖 Rust 的标准库，当然 <code>char</code> 有一个 <code>is_whitespace</code> 方法，就像它有 <code>is_alphabetic</code> 和 <code>is_alphanumeric</code> 一样。</p>
+<p>二，我们可以使用 <code>is_whitespace</code> Predicate 写出另外一个解析器，它消耗任意数量的空白字符，就像我们之前编写的 <code>identifier</code> 一样。</p>
+<p>三，我们可以写的更加巧妙。编写一个解析器 <code>any_char</code>，它返回一个单一的 <code>char</code>，只要输入中还剩下一个，以及一个组合子 <code>pred</code>，它接受一个解析器和一个谓词 (Predicate）函数，并像这样将两者结合起来：<code>pred (any_char, |c| c.is_whitespace())</code>。这有一个额外的好处，通过它，编写我们将需要的最终的解析器变得非常容易：属性值的引用字符串。 <code>any_char</code> 解析器写起来很简单，但我们得记得注意那些 UTF-8 问题。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn any_char(input: &amp;str) -&gt; ParseResult&lt;char&gt; {
+    match input.chars().next() {
+        Some(next) =&gt; Ok((&amp;input[next.len_utf8()..], next)),
+        _ =&gt; Err(input),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>对 <code>经验丰富</code> 的我们来说， <code>pred</code> 组合子也并没有给我们太多惊喜 。 我们调用解析器，然后我们在解析器成功的情况下调用我们的谓词函数，并且只有当它返回 true 时，我们才真正返回 <code>success</code>，否则我们将返回与解析器失败一致的错误。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn pred&lt;'a, P, A, F&gt;(parser: P, predicate: F) -&gt; impl Parser&lt;'a, A&gt;
+where
+    P: Parser&lt;'a, A&gt;,
+    F: Fn(&amp;A) -&gt; bool,
+{
+    move |input| {
+        if let Ok((next_input, value)) = parser.parse(input) {
+            if predicate(&amp;value) {
+                return Ok((next_input, value));
+            }
+        }
+        Err(input)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>写一个快速测试以确保一切正常：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn predicate_combinator() {
+    let parser = pred(any_char, |c| *c == 'o');
+    assert_eq!(Ok((&quot;mg&quot;, 'o')), parser.parse(&quot;omg&quot;));
+    assert_eq!(Err(&quot;lol&quot;), parser.parse(&quot;lol&quot;));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>有了这两个组件，我们可以用一个快速的单行代码编写我们的 <code>whitespace_char</code> 解析器：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn whitespace_char&lt;'a&gt;() -&gt; impl Parser&lt;'a, char&gt; {
+    pred(any_char, |c| c.is_whitespace())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>并且，现在我们有了<code>whitespace_char</code>，我们也可以用它实现我们之前的想法，<em>一个或多个空白</em>，以及它的姊妹想法，<em>零个或多个空白</em>。 让我们专注于几个简单的地方，并分别称它们为<code>space1</code>和<code>space0</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn space1&lt;'a&gt;() -&gt; impl Parser&lt;'a, Vec&lt;char&gt;&gt; {
+    one_or_more(whitespace_char())
+}
+
+fn space0&lt;'a&gt;() -&gt; impl Parser&lt;'a, Vec&lt;char&gt;&gt; {
+    zero_or_more(whitespace_char())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#quoted-strings" id="quoted-strings">Quoted Strings</a></h2>
+<p>完成所有这些组件后，我们现在终于可以解析这些属性了吗？ 当然啦，我们只需要确保我们拥有所有这些属性组件的单独的解析器。 我们已经为属性名称提供了 <code>identifier</code>（尽管使用 <code>any_char</code> 和 <code>pred</code> 加上我们的 <code>*_or_more</code> 组合子来重写它是很诱人的）。 <code>=</code> 只是 <code>match_literal(&quot;=&quot;)</code>。 不过，我们只有一个带引号的字符串解析器，所以让我们把它组合起来。 幸运地是，我们已经拥有了完成它所需的所有组合子。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn quoted_string&lt;'a&gt;() -&gt; impl Parser&lt;'a, String&gt; {
+    map(
+        right(
+            match_literal(&quot;\&quot;&quot;),
+            left(
+                zero_or_more(pred(any_char, |c| *c != '&quot;')),
+                match_literal(&quot;\&quot;&quot;),
+            ),
+        ),
+        |chars| chars.into_iter().collect(),
+    )
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>组合子的嵌套在这一点上变得有点烦人，但我们暂时不会重构所有代码来修复它，而是专注于这里发生的事情。</p>
+<p>最外面的组合子是一个 <code>map</code>，因为前面提到的烦人的嵌套，从这开始理解代码是很让人困惑的，所以让我们试着找出它真正开始的地方：第一个引号字符。在<code>map</code>里面，有一个<code>right</code>，而<code>right</code>的第一部分就是我们要找的：<code>match_literal(&quot;\&quot;&quot;)</code>。那是我们的引号的开始 。</p>
+<p><code>right</code> 的第二部分是字符串的其余部分。在 <code>left</code> 里面，我们很快注意到那个 <code>left</code> 的 <em>right</em> 参数，我们一直忽视的那个: 是另一个 <code>match_literal(&quot;\&quot;&quot;)</code> - 引号的结束。所以左手部分是我们用引号包裹的字符串。</p>
+<p>我们在这里利用新的 <code>pred</code> 和 <code>any_char</code> 来获得一个接受<em>除另一个引号之外的任何内容</em>的解析器，并将其放入 <code>zero_or_more</code> 中，因此我们所说的实现如下：</p>
+<ul>
+<li>
+<p>一个引号</p>
+</li>
+<li>
+<p>后跟零个或多个<em>不是</em>另一个引号的内容</p>
+</li>
+<li>
+<p>接着是另一个引号</p>
+<p>并且，在 <code>right</code> 和 <code>left</code> 之间，我们丢弃结果值中的引号并取回引用的字符串。</p>
+<p>但是等等，这不是一个字符串。还记得 <code>zero_or_more</code> 返回什么吗？内部解析器的返回类型 A 的 <code>Vec&lt;A&gt;</code>。对于<code>any_char</code>来说，就是<code>char</code>。那么，我们得到的不是字符串而是<code>Vec&lt;char&gt;</code>。这就是 <code>map</code> 的用武之地：我们使用它把 <code>Vec&lt;char&gt;</code> 转换为 <code>String</code>，因为你可以从 <code>Iterator&lt;Item = char&gt;</code> 构建一个 <code>String</code>，所以我们可以调用 <code>vec_of_chars.into_iter().collect()</code>，并且由于类型推断的强大功能，我们有了 <code>String</code>。</p>
+<p>在我们继续之前，让我们编写一个快速测试以确保一切正常，因为如果我们需要这么多词来解释它，这可能不是我们作为程序员对自己有信心的样子。</p>
+</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn quoted_string_parser() {
+    assert_eq!(
+        Ok((&quot;&quot;, &quot;Hello Joe!&quot;.to_string())),
+        quoted_string().parse(&quot;\&quot;Hello Joe!\&quot;&quot;)
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>所以, 终于, 我们可以解析点属性了.</p>
+<h2><a class="header" href="#at-last-parsing-attributes" id="at-last-parsing-attributes">At Last, Parsing Attributes</a></h2>
+<p>我们现在可以解析空格、标识符、<code>=</code> 符号和带引号的字符串。 最后，这就是我们解析属性所需的全部内容。</p>
+<p>首先，让我们为一个属性对编写一个解析器。 我们将把它们存储为 <code>Vec&lt;(String, String)&gt;</code>，你可能还记得，所以我们需要一个解析器来处理 <code>(String, String)</code> 元组,来提供给我们值得信赖的 <code>zero_or_more</code> 组合子。 让我们看看我们是否可以写出一个。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn attribute_pair&lt;'a&gt;() -&gt; impl Parser&lt;'a, (String, String)&gt; {
+    pair(identifier, right(match_literal(&quot;=&quot;), quoted_string()))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>易如反掌！ 总结一下：我们已经有一个方便的组合子来解析一个值的元组，<code>pair</code>，所以我们将它与 <code>identifier</code> 解析器一起使用，产生一个 <code>String</code> 和一个带有 <code>=</code> 符号的 <code>right</code>， 它包括了我们不想保留的值，以及我们新的 <code>quoted_string</code> 解析器，它给了我们另一个 <code>String</code>。</p>
+<p>现在，让我们将其与 <code>zero_or_more</code> 结合起来构建该 <code>vector</code> - 但不要忘记它们之间的空白。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn attributes&lt;'a&gt;() -&gt; impl Parser&lt;'a, Vec&lt;(String, String)&gt;&gt; {
+    zero_or_more(right(space1(), attribute_pair()))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>零次或多次出现以下内容：一个或多个空白字符，然后是一个属性对。 我们使用<code>right</code>来丢弃空格并保留属性对。</p>
+<p>让我们测试一下。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn attribute_parser() {
+    assert_eq!(
+        Ok((
+            &quot;&quot;,
+            vec![
+                (&quot;one&quot;.to_string(), &quot;1&quot;.to_string()),
+                (&quot;two&quot;.to_string(), &quot;2&quot;.to_string())
+            ]
+        )),
+        attributes().parse(&quot; one=\&quot;1\&quot; two=\&quot;2\&quot;&quot;)
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>测试通过! 起飞!</p>
+<p>实际上，并没有，在叙述者点上, 我的 <code>rustc</code> 抱怨我的类型变得非常复杂，我需要增加最大允许的类型大小才能继续。你也可能遇到这种情况，如果发生了, 你需要知道如何处理它。 幸好，在这些情况下，<code>rustc</code> 通常会给出很好的建议，所以当它告诉你将 <code>#![type_length_limit = &quot;...some big number...&quot;]</code> 添加到文件顶部时，就按照它说的去做。 实际上，只需将其设为 <code>#![type_length_limit = &quot;16777216&quot;]</code>，这将使我们进一步深入复杂类型的平流层。 全力以赴，我们现在是宇航员！</p>
+<h2><a class="header" href="#so-close-now" id="so-close-now">So Close Now</a></h2>
+<p>这个时候，事情似乎即将开始合为一体，这让人松了一口气，因为我们的类型正在快速接近 NP 完整性。 我们只需要处理两个版本的元素标签：单个元素和带有子元素的父元素，但是我们非常有信心，一旦我们有了这些，解析子元素将只是 <code>zero_or_more</code> 的问题， 对吧？</p>
+<p>所以让我们先从单一元素开始，把孩子的问题推迟一点。 或者，更好的是，让我们首先为两者的所有共同点编写一个解析器：开头的 <code>&lt;</code>、元素名称和属性。 让我们看看我们是否可以从几个组合子中得到 <code>(String, Vec&lt;(String, String)&gt;)</code>类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn element_start&lt;'a&gt;() -&gt; impl Parser&lt;'a, (String, Vec&lt;(String, String)&gt;)&gt; {
+    right(match_literal(&quot;&lt;&quot;), pair(identifier, attributes()))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>有了它，我们可以快速地给它打上标签，为单个元素创建一个解析器。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn single_element&lt;'a&gt;() -&gt; impl Parser&lt;'a, Element&gt; {
+    map(
+        left(element_start(), match_literal(&quot;/&gt;&quot;)),
+        |(name, attributes)| Element {
+            name,
+            attributes,
+            children: vec![],
+        },
+    )
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>万岁，感觉我们的目标已经触手可及了——我们现在实际上正在构建一个 <code>Element</code>！</p>
+<p>让我们来测试一下这个现代科技的奇迹吧。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn single_element_parser() {
+    assert_eq!(
+        Ok((
+            &quot;&quot;,
+            Element {
+                name: &quot;div&quot;.to_string(),
+                attributes: vec![(&quot;class&quot;.to_string(), &quot;float&quot;.to_string())],
+                children: vec![]
+            }
+        )),
+        single_element().parse(&quot;&lt;div class=\&quot;float\&quot;/&gt;&quot;)
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>...我想我们才刚刚突破大气层。</p>
+<p><code>single_element</code> 的返回类型非常复杂，编译器会花费很长时间，直到遇到我们之前给它的非常大的类型大小限制 (<code>#![type_length_limit = &quot;&quot;]</code>)，要求更大的类型。 很明显我们不能再忽视这个问题，因为它是一个相当简单的解析器和(应该只需要)几分钟的编译时间——对于成品来说甚至可能是几个小时——似乎有点不合理。</p>
+<p>在继续之前，你最好在我们修复问题时注释掉这两个函数和测试......</p>
+<h2><a class="header" href="#to-infinity-and-beyond" id="to-infinity-and-beyond">To Infinity And Beyond</a></h2>
+<p>如果你曾经尝试过在 Rust 中编写递归类型，你可能已经知道我们的小问题的解决方案。</p>
+<p>递归类型的一个非常简单的例子是单向链表。 原则上，可以将其表示为这样的枚举：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum List&lt;A&gt; {
+    Cons(A, List&lt;A&gt;),
+    Nil,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>rustc</code> 会非常明智地反对你的递归类型 <code>List&lt;A&gt;</code> ,因为它具有无限大小，因为在每个 <code>List::&lt;A&gt;::Cons</code> 内部是另一个 <code>List&lt;A&gt;</code>，这意味着它也是一个 <code>List&lt;A&gt;</code>......直到无穷大。就 <code>rustc</code> 而言，我们要求一个无限列表，我们要求它能够<em>分配</em>一个无限列表。</p>
+<p>在许多语言中，无限列表原则上对于类型系统来说不是问题，实际上对于 Rust 也不是问题。问题是在 Rust 中，如前所述，我们需要能够<em>分配</em>它，或者更确切地说，我们需要能够在我们构造它时预先确定类型的 <em>大小</em>，以及当类型是无限的，这意味着大小也必须是无限的。</p>
+<p>解决方案是使用一点间接性。我们的<code>List::Cons</code> 不是<code>A</code> 的一个元素和<code>A</code> 的另一个<em>list</em>，而是我们使它成为<code>A</code> 的一个元素和一个指向<code>A</code> 列表的<em>指针</em>。我们知道指针的大小，不管它指向什么都是一样的，所以我们的 List::Cons 现在有一个固定的和可预测的大小，无论列表的大小如何。在 Rust 中，将一个拥有的东西变成指向堆上拥有的东西的指针的方法是用 <code>box</code> 包裹它。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum List&lt;A&gt; {
+    Cons(A, Box&lt;List&lt;A&gt;&gt;),
+    Nil,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Box</code> 的另一个有趣的特性是它里面的类型可以是抽象的。 这意味着我们可以让类型检查器处理一个非常简洁的 <code>Box&lt;dyn Parser&lt;'a, A&gt;&gt;</code>，而不是我们现在非常复杂的解析器函数类型。</p>
+<p>听起来不错。 有什么缺点？ 好吧，我们可能会因为必须遵循该指针而失去一两个指令周期，也可能是编译器失去了一些优化解析器的机会。 但回想一下 Knuth 关于过早优化(1)的告诫：它会没事的。 你完全可以负担得起这些周期。 来这里是为了解 解析器组合子，而不是了解手写的超专业化 <a href="https://github.com/lemire/simdjson">SIMD 解析器</a>（尽管它们本身就很令人兴奋）。 因此，除了迄今为止我们一直在使用的裸函数之外，让我们继续为 <em>boxed</em> 解析器函数实现 <code>Parser</code>。</p>
+<blockquote>
+<p>译者注: 1: 过早优化是万恶之源</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct BoxedParser&lt;'a, Output&gt; {
+    parser: Box&lt;dyn Parser&lt;'a, Output&gt; + 'a&gt;,
+}
+
+impl&lt;'a, Output&gt; BoxedParser&lt;'a, Output&gt; {
+    fn new&lt;P&gt;(parser: P) -&gt; Self
+    where
+        P: Parser&lt;'a, Output&gt; + 'a,
+    {
+        BoxedParser {
+            parser: Box::new(parser),
+        }
+    }
+}
+
+impl&lt;'a, Output&gt; Parser&lt;'a, Output&gt; for BoxedParser&lt;'a, Output&gt; {
+    fn parse(&amp;self, input: &amp;'a str) -&gt; ParseResult&lt;'a, Output&gt; {
+        self.parser.parse(input)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>出于礼节，我们创建了一个新类型 <code>BoxedParser</code>来保存我们的 <code>box</code>。 要从任何其他类型的解析器（包括另一个<code>BoxedParser</code>，即使那毫无意义）创建一个新的<code>BoxedParser</code>，我们提供了一个函数<code>BoxedParser::new(parser)</code>，它只会将该解析器放入 我们的新类型中的一个 <code>Box</code>。 最后，我们为它实现了 <code>Parser</code>，这样它就可以作为解析器互换使用。</p>
+<p>这使我们能够将解析器函数放入 <code>Box</code>，并且 <code>BoxedParser</code> 将与函数一样用作 <code>Parser</code>。 现在，正如前面提到的，这意味着将解析器移动到堆中，并且必须取消引用一个指针才能找到它，这可能会花费我们<em>几个宝贵的纳秒</em>，所以我们实际上可能想要推迟使用 <code>box</code>。 将一些更常用的组合子放到 <code>box</code> 就足够了。</p>
+<h2><a class="header" href="#an-opportunity-presents-itself" id="an-opportunity-presents-itself"><strong>An Opportunity Presents Itself</strong></a></h2>
+<p>但是，稍等片刻，这为我们提供了解决另一个变得麻烦的问题的机会。</p>
+<p>还记得我们写的最后几个解析器吗？ 因为我们的组合子是独立的函数，当我们嵌套大量的组合子时，我们的代码开始变得有点不可读。 回想一下我们的 <code>quoted_string</code> 解析器：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn quoted_string&lt;'a&gt;() -&gt; impl Parser&lt;'a, String&gt; {
+    map(
+        right(
+            match_literal(&quot;\&quot;&quot;),
+            left(
+                zero_or_more(pred(any_char, |c| *c != '&quot;')),
+                match_literal(&quot;\&quot;&quot;),
+            ),
+        ),
+        |chars| chars.into_iter().collect(),
+    )
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果我们可以在解析器上使用这些组合子方法而不是独立函数，它会有更好的可读性。 如果我们可以将组合子声明为 <code>Parser</code> trait 上的方法会怎样？</p>
+<p>问题是，如果我们这样做，我们就失去了依赖 <code>impl Trait</code> 作为返回类型的能力，因为 <code>impl Trait</code> 不允许出现在 trait 声明中。</p>
+<p>……但现在我们有了<code>BoxedParser</code>。 我们不能声明一个返回 <code>impl Parser&lt;'a, A&gt;</code> 的 trait ，但我们肯定<em>可以</em>声明一个返回 <code>BoxedParser&lt;'a, A&gt;</code> 的 trait 。</p>
+<p>最好的部分是我们甚至可以使用默认实现声明这些，这样我们就不必为实现 <code>Parser</code> 的每个类型重新实现每个组合子。</p>
+<p>让我们用 <code>map</code> 来试试，通过扩展我们的 <code>Parser</code> trait 如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Parser&lt;'a, Output&gt; {
+    fn parse(&amp;self, input: &amp;'a str) -&gt; ParseResult&lt;'a, Output&gt;;
+
+    fn map&lt;F, NewOutput&gt;(self, map_fn: F) -&gt; BoxedParser&lt;'a, NewOutput&gt;
+    where
+        Self: Sized + 'a,
+        Output: 'a,
+        NewOutput: 'a,
+        F: Fn(Output) -&gt; NewOutput + 'a,
+    {
+        BoxedParser::new(map(self, map_fn))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>啊这，好多<code>'a'</code>，唉，它们都是必要的。 幸运的是，我们仍然可以不变地重用旧的组合子函数——而且，我们还得到一个额外的好处，不仅可以获得更好的语法来应用它们，我们还通过自动 <code>box</code> 来摆脱爆炸性的 <code>impl Trait</code> 类型。 现在我们可以稍微改进我们的 <code>quoted_string</code> 解析器：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn quoted_string&lt;'a&gt;() -&gt; impl Parser&lt;'a, String&gt; {
+    right(
+        match_literal(&quot;\&quot;&quot;),
+        left(
+            zero_or_more(pred(any_char, |c| *c != '&quot;')),
+            match_literal(&quot;\&quot;&quot;),
+        ),
+    )
+    .map(|chars| chars.into_iter().collect())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>乍一看现在更明显，正在对 <code>right()</code> 的结果调用 <code>.map()</code>。</p>
+<p>我们也可以给 <code>pair</code>、<code>left</code> 和 <code>right</code> 相同的处理，但是对于这三个，我认为当它们是函数时读起来更容易，因为它们反映了 <code>pair</code> 的输出结构 类型。 如果你不同意，完全可以像我们对 <code>map</code> 所做的那样将它们添加到 trait 中，并且非常欢迎你继续尝试将其作为练习。</p>
+<p>不过，另一个主要候选人是 <code>pred</code>。 让我们将它的定义添加到 <code>Parser</code> trait 中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn pred&lt;F&gt;(self, pred_fn: F) -&gt; BoxedParser&lt;'a, Output&gt;
+where
+    Self: Sized + 'a,
+    Output: 'a,
+    F: Fn(&amp;Output) -&gt; bool + 'a,
+{
+    BoxedParser::new(pred(self, pred_fn))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这下我们就可以用 <code>pred</code> 重写 <code>quoted_string</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>zero_or_more(any_char.pred(|c| *c != '&quot;')),
+<span class="boring">}
+</span></code></pre></pre>
+<p>我认为这读起来更好一些，我认为我们也会保留 <code>zero_or_more</code> 原样 - 它读起来就像应用了以下谓词的零个或多个 <code>any_char</code>，这对我来说听起来很半。 当然，如果你愿意这么写，你也可以继续将 <code>zero_or_more</code> 和 <code>one_or_more</code> 移到 trait 中。</p>
+<p>除了重写<code>quoted_string</code>，我们还要修正<code>single_element</code>中的<code>map</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn single_element&lt;'a&gt;() -&gt; impl Parser&lt;'a, Element&gt; {
+    left(element_start(), match_literal(&quot;/&gt;&quot;)).map(|(name, attributes)| Element {
+        name,
+        attributes,
+        children: vec![],
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>让我们试着取消对 <code>element_start</code> 和我们之前注释掉的测试的注释，看看情况是否变得更好。 开始编译并尝试运行测试......</p>
+<p>……而且，是的，现在编译时间恢复正常了。 甚至可以继续删除文件顶部的字体大小设置。</p>
+<p>这只是通过 <code>box</code> 两个 <code>map</code> 和一个 <code>pred</code> - <em>而且</em>我们从中得到了更好的语法！</p>
+<h2><a class="header" href="#having-children" id="having-children">Having Children</a></h2>
+<p>现在让我们为父元素的开始标记编写解析器。 它几乎与<code>single_element</code> 相同，只是它以<code>&gt;</code> 结尾而不是<code>/&gt;</code>。 后面还有零个或多个子元素和一个结束标记，但首先我们需要解析实际的开始标记，所以让我们完成这个函数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn open_element&lt;'a&gt;() -&gt; impl Parser&lt;'a, Element&gt; {
+    left(element_start(), match_literal(&quot;&gt;&quot;)).map(|(name, attributes)| Element {
+        name,
+        attributes,
+        children: vec![],
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在，我们如何得到这些子元素？ 它们将是单个元素或父元素本身，并且它们有零个或多个，所以我们有我们可信赖的 <code>zero_or_more</code> 组合子，但是我们提供什么？ 我们还没有编写过的一件事是多重解析器：解析<em>或者</em>单个元素<em>或</em>父元素的东西。</p>
+<p>为了完成这个特性，我们需要一个组合子，它按顺序尝试两个解析器：如果第一个解析器成功，我们就完成了，我们返回它的结果，就是这样。 如果失败，我们不会返回错误，而是在<em>相同的输入</em>上尝试第二个解析器。 如果成功，很好，如果没有，我们也会返回错误，因为这意味着我们的两个解析器都失败了，这是一个整体性失败。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn either&lt;'a, P1, P2, A&gt;(parser1: P1, parser2: P2) -&gt; impl Parser&lt;'a, A&gt;
+where
+    P1: Parser&lt;'a, A&gt;,
+    P2: Parser&lt;'a, A&gt;,
+{
+    move |input| match parser1.parse(input) {
+        ok @ Ok(_) =&gt; ok,
+        Err(_) =&gt; parser2.parse(input),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这使得我们可以声明一个解析器<code>element</code>，它匹配单个元素或父元素（现在，我们只使用<code>open_element</code> 来表示它，一旦我们有了<code>element</code>，我们将处理 <code>element</code>）。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn element&lt;'a&gt;() -&gt; impl Parser&lt;'a, Element&gt; {
+    either(single_element(), open_element())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在让我们为结束标记添加一个解析器。 它具有必须匹配开始标签的特性，这意味着解析器必须知道开始标签的名称是什么。 但这就是函数参数的用途，对吧？</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn close_element&lt;'a&gt;(expected_name: String) -&gt; impl Parser&lt;'a, String&gt; {
+    right(match_literal(&quot;&lt;/&quot;), left(identifier, match_literal(&quot;&gt;&quot;)))
+        .pred(move |name| name == &amp;expected_name)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>事实证明，那个 <code>pred</code> 组合子真的很有用，不是吗？</p>
+<p>现在，让我们为完整的父元素解析器、子元素和所有元素组合起来：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parent_element&lt;'a&gt;() -&gt; impl Parser&lt;'a, Element&gt; {
+    pair(
+        open_element(),
+        left(zero_or_more(element()), close_element(…oops)),
+    )
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>通过使用 <code>and_then</code>，我们现在可以通过使用该函数构建正确版本的 <code>close_element</code> 来获得正确的结果。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parent_element&lt;'a&gt;() -&gt; impl Parser&lt;'a, Element&gt; {
+    open_element().and_then(|el| {
+        left(zero_or_more(element()), close_element(el.name.clone())).map(move |children| {
+            let mut el = el.clone();
+            el.children = children;
+            el
+        })
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在看起来有点复杂，因为 <code>and_then</code> 必须在 <code>open_element()</code> 中进行，在那里我们找到进入 <code>close_element</code> 的地方。这意味着 <code>open_element</code> 之后的解析器的其余部分都必须在 <code>and_then</code> 闭包内构造。此外，因为该闭包现在是来自 <code>open_element</code> 的 <code>Element</code> 结果的唯一接收者，我们返回的解析器也必须向前传递该信息。</p>
+<p>我们在生成的解析器上 <code>map</code>的内部闭包具有对外部闭包中的 <code>Element</code>（<code>el</code>）的引用。我们必须使用 <code>clone()</code> ，因为一个 <code>Fn</code> 中，只有对它的引用。我们获取内部解析器的结果（我们的 <code>Vec&lt;Element&gt;</code> 子元素）并将其添加到我们克隆的 <code>Element</code> 中，然后将其作为最终结果返回。</p>
+<p>我们现在需要做的就是返回到我们的 <code>element</code> 解析器并确保我们将 <code>open_element</code> 更改为 <code>parent_element</code>，这样它就会解析整个元素结构，而不是只是它的开头，我相信我们已经完成了！</p>
+<h2><a class="header" href="#word-or-do-i-have-to" id="word-or-do-i-have-to">Word Or Do I Have To?</a></h2>
+<p>还记得我们讨论过 <code>map</code> 模式如何在 Planet Haskell 上被称为“函子”吗？</p>
+<p><code>and_then</code> 模式是你在 Rust 中经常看到的另一种模式，通常与 <code>map</code> 位于相同的位置。它在 <code>Iterator</code> 上被称为 <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map"><code>flat_map</code></a>，但它的模式与其他模式相同。</p>
+<p>它的花名是<code>monad</code>。如果你有一个东西 <code>Thing&lt;A&gt;</code>，并且你有一个可用的 <code>and_then</code> 函数，它可以将一个函数从 <code>A</code> 传递给 <code>Thing&lt;B&gt;</code>，这样现在你就有了一个新的 <code>Thing&lt;B&gt;</code> 来替代原来的，这就是一个 monad。</p>
+<p>该函数可能会立即被调用，比如当你有一个 <code>Option&lt;A&gt;</code> 时，我们已经知道它是一个 <code>Some(A)</code> 还是一个 <code>None</code>，我们直接应用该函数，如果它是一个 <code>Some(A)</code>，那么就会给我们一个<code>Some(B)</code>。</p>
+<p>它也可能被称为 <code>惰性 (lazy)</code>。例如，如果有一个仍在等待解析的 <code>Future&lt;A&gt;</code>，它不会立即调用该函数来创建一个 <code>Future&lt;B&gt;</code>，而是创建一个新的 <code>Future&lt;B&gt;</code>它包含 <code>Future&lt;A&gt;</code> 和函数，然后等待 <code>Future&lt;A&gt;</code> 完成。当它这样做时，它会使用 <code>Future&lt;A&gt;</code> 的结果调用函数，这样就搞定了 <a href="https://bodil.lol/parser-combinators/#footnote_1">1</a>(He isn't really your uncle.)，得到你的 <code>Future&lt; B&gt;</code> 。换句话说，在<code>Future</code> 的情况下，可以将传递给<code>and_then</code> 的函数视为<em>回调函数</em>，因为它会在完成时使用原始 future 的结果进行调用。它还比这更有趣，因为它返回一个 <em>new</em> <code>Future</code>，它可能已经或可能没有被解决，所以它是一种将 future 连在一起的方法。</p>
+<p>然而，与函子一样，Rust 的类型系统目前不能表达 <code>monad</code>，所以让我们只需注意这种模式被称为 <code>monad</code>，而且令人失望的是，这和网上的搜到的意思并不一样，它与墨西哥卷饼毫无关系。</p>
+<h2><a class="header" href="#whitespace-redux" id="whitespace-redux">Whitespace, Redux</a></h2>
+<p>只有最后一件事。</p>
+<p>我们现在应该有一个能够解析一些 XML 的解析器，但是他并不能很好的接受空格。 标签之间应该允许任意空格，这样我们就可以自由地在标签之间插入换行符等（原则上，标识符和文字之间应该允许空格，比如<code>&lt; div /&gt;</code>，但这里跳过它）。 在这一点上，我们应该能够毫不费力地为此组合一个快速组合子。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn whitespace_wrap&lt;'a, P, A&gt;(parser: P) -&gt; impl Parser&lt;'a, A&gt;
+where
+    P: Parser&lt;'a, A&gt;,
+{
+    right(space0(), left(parser, space0()))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果我们将 <code>element</code> 包裹在里面，它将忽略 <code>element</code> 周围的所有前面和后面空格，这意味着我们可以随意使用尽可能多的换行符和尽可能多的缩进。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn element&lt;'a&gt;() -&gt; impl Parser&lt;'a, Element&gt; {
+    whitespace_wrap(either(single_element(), parent_element()))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#were-finally-there" id="were-finally-there">We're Finally There!</a></h2>
+<p>我想我们终于做到了！ 让我们写个测试庆祝一下！</p>
+<pre><code class="language-RUST">#[test]
+fn xml_parser() {
+    let doc = r#&quot;
+        &lt;top label=&quot;Top&quot;&gt;
+            &lt;semi-bottom label=&quot;Bottom&quot;/&gt;
+            &lt;middle&gt;
+                &lt;bottom label=&quot;Another bottom&quot;/&gt;
+            &lt;/middle&gt;
+        &lt;/top&gt;&quot;#;
+    let parsed_doc = Element {
+        name: &quot;top&quot;.to_string(),
+        attributes: vec![(&quot;label&quot;.to_string(), &quot;Top&quot;.to_string())],
+        children: vec![
+            Element {
+                name: &quot;semi-bottom&quot;.to_string(),
+                attributes: vec![(&quot;label&quot;.to_string(), &quot;Bottom&quot;.to_string())],
+                children: vec![],
+            },
+            Element {
+                name: &quot;middle&quot;.to_string(),
+                attributes: vec![],
+                children: vec![Element {
+                    name: &quot;bottom&quot;.to_string(),
+                    attributes: vec![(&quot;label&quot;.to_string(), &quot;Another bottom&quot;.to_string())],
+                    children: vec![],
+                }],
+            },
+        ],
+    };
+    assert_eq!(Ok((&quot;&quot;, parsed_doc)), element().parse(doc));
+}
+
+</code></pre>
+<p>下面这个测试会因为有未闭合 tag 而解析失败：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test]
+fn mismatched_closing_tag() {
+    let doc = r#&quot;
+        &lt;top&gt;
+            &lt;bottom/&gt;
+        &lt;/middle&gt;&quot;#;
+    assert_eq!(Err(&quot;&lt;/middle&gt;&quot;), element().parse(doc));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>好消息是它返回不匹配的结束标记作为错误。 坏消息是它实际上并没有<em>说</em>问题是不匹配的结束标签，只是<em>错误在哪里</em>。 总比没有好，但是，老实说，随着错误消息的出现，它仍然很糟糕。 但是想让它能成功的找到错至少得再写一篇同样长的文章。</p>
+<p>让我们关注好消息：我们使用解析器组合子从头开始编写了一个解析器！ 我们知道解析器既构成函子又构成单子，因此你现在可以在令人生畏的范畴论知识聚会上给人们留下深刻印象了<a href="https://bodil.lol/parser-combinators/#footnote_2">2</a>。（Please don't be that person at parties. 别真的这么干）</p>
+<p>最重要的是，我们现在知道解析器组合子是如何从头开始工作的。 现在没有人能阻止我们！</p>
+<h2><a class="header" href="#victory-puppies" id="victory-puppies">Victory Puppies</a></h2>
+<p><img src="https://bodil.lol/parser-combinators/many-puppies.gif" alt="img" /></p>
+<h2><a class="header" href="#further-resources" id="further-resources">Further Resources</a></h2>
+<p>首先，我对用严格的 <code>rust</code>术语 向你解释 monad 感到内疚，而且我知道如果我不向你指出 <a href="https://homepages.com">他的开创性论文</a>，Phil Wadler 会对我非常不满。 其中详细介绍了更多令人兴奋的细节——包括它们与解析器组合子的关系。</p>
+<p>本文中的想法与 <a href="https://crates.io/crates/pom"><code>pom</code></a> 解析器组合子库背后的想法极为相似，如果这让你想在同一个解析器组合子中使用风格，我强烈推荐它。</p>
+<p>Rust 解析器组合子的最新技术仍然是 <a href="https://crates.io/crates/nom"><code>nom</code></a>，以至于前面提到的 <code>pom</code> 显然是派生的名称（而且没有比这更好的称赞了），但它采用了与我们今天在这里构建的方法截然不同的方法。</p>
+<p>另一个流行的 Rust 解析器组合库是 <a href="https://crates.io/crates/combine"><code>combine</code></a>，它可能也值得一看。</p>
+<p>Haskell 的开创性解析器组合库是 <a href="http://hackage.haskell.org/package/parsec">Parsec</a>。</p>
+<p>最后，我对解析器组合子的第一次认识归功于 Graham Hutton 所著的 <a href="http://www.cs.nott.ac.uk/%7Epszgmh/pih.html"><em>Programming in Haskell</em></a>，这是一本很棒的书，不仅容易读而且还会教给你 Haskell 的积极副作用。</p>
+<h2><a class="header" href="#licence" id="licence">Licence</a></h2>
+<p>This work by <a href="https://bodil.lol/">Bodil Stokke</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+<p>本文由 Bodil Stokke 撰写，基于署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)协议。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_6/rust_study_part_7.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_6/web3-part1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_6/rust_study_part_7.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_6/web3-part1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

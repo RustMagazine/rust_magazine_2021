@@ -1,0 +1,1180 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>华为 | 如何定制 Cargo Clippy  - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.7.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.8.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.9.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.10.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.11.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.12.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item expanded "><a href="../chapter_6/custom-clippy.html" class="active"><strong aria-hidden="true">8.13.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.14.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.15.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.16.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.17.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.18.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.22.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.23.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.24.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.25.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.26.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#华为--如何定制-rust-clippy" id="华为--如何定制-rust-clippy">华为 | 如何定制 Rust Clippy</a></h1>
+<p>作者：华为可信软件工程和开源2012实验室</p>
+<hr />
+<h2><a class="header" href="#clippy-是什么" id="clippy-是什么">Clippy 是什么</a></h2>
+<p>Clippy 是 Rust 官方提供的 代码检查 lint 工具，通过静态分析，来检查代码中有问题或不符合指定规范的代码。</p>
+<p>项目地址：<a href="https://github.com/rust-lang/rust-clippy">https://github.com/rust-lang/rust-clippy</a> </p>
+<h3><a class="header" href="#安装" id="安装">安装</a></h3>
+<blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>rustup component add clippy
+<span class="boring">}
+</span></code></pre></pre>
+</blockquote>
+<h3><a class="header" href="#使用" id="使用">使用</a></h3>
+<blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo clippy
+<span class="boring">}
+</span></code></pre></pre>
+</blockquote>
+<h3><a class="header" href="#配置" id="配置">配置</a></h3>
+<p>可以在项目中添加 <code>clippy.toml</code> 或 <code>.clippy.toml</code> 来指定使用的 Lints 。</p>
+<p>类似于：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>avoid-breaking-exported-api = false
+blacklisted-names = [&quot;toto&quot;, &quot;tata&quot;, &quot;titi&quot;]
+cognitive-complexity-threshold = 30
+<span class="boring">}
+</span></code></pre></pre>
+<p>Cargo Clippy 中目前包含<a href="https://rust-lang.github.io/rust-clippy/master/index.html">超过 450 个 Lint</a> 。</p>
+<h3><a class="header" href="#rust-编译器内置-lint-介绍" id="rust-编译器内置-lint-介绍">Rust 编译器内置 Lint 介绍</a></h3>
+<p>在 Rust 编译器 中 lint 包含四种级别：</p>
+<ul>
+<li>allow ，编译器</li>
+<li>warn</li>
+<li>deny</li>
+<li>forbid</li>
+</ul>
+<p>每个 lint 都有一个 默认级别。下面是一个分类：</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/rustc/lints/listing/allowed-by-default.html#allowed-by-default-lints">默认允许的  Lints</a> : 默认情况下，编译器允许的 Lints 。</li>
+<li><a href="https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html">默认警告Lints</a> : 默认情况下，编译器会警告的 LInts 。</li>
+<li><a href="https://doc.rust-lang.org/rustc/lints/listing/deny-by-default.html">默认拒绝的  Lints</a> ： 默认情况下，编译器会拒绝的lints。</li>
+</ul>
+<p>编译器内置 Lint 主要是围绕 Rust 语言特性。开发者可以通过配置文件来修改 Lints 等级。</p>
+<h3><a class="header" href="#clippy-中的-lints" id="clippy-中的-lints">Clippy 中的 Lints</a></h3>
+<p><strong>Clippy 中的 Lints 级别包括：</strong></p>
+<ul>
+<li>Allow</li>
+<li>Warn</li>
+<li>Deny</li>
+<li>Deprecated</li>
+</ul>
+<p><strong>Clippy 中的 lints 分类如下表：</strong></p>
+<table><thead><tr><th>分类</th><th>描述</th><th>默认级别</th></tr></thead><tbody>
+<tr><td><code>clippy::all</code></td><td>all lints that are on by default (correctness, style, complexity, perf)<br />所有默认的 Lints 都会被开启（正确性、风格、复杂性、性能）</td><td><strong>warn/deny</strong></td></tr>
+<tr><td><code>clippy::correctness</code></td><td>code that is outright wrong or very useless<br />代码是完全错误或根本无用的</td><td><strong>deny</strong></td></tr>
+<tr><td><code>clippy::style</code></td><td>code that should be written in a more idiomatic way<br />代码应该用更惯用的方式来写</td><td><strong>warn</strong></td></tr>
+<tr><td><code>clippy::complexity</code></td><td>code that does something simple but in a complex way<br />代码把简单的事情写复杂了</td><td><strong>warn</strong></td></tr>
+<tr><td><code>clippy::perf</code></td><td>code that can be written to run faster<br />代码的写法在性能上还可以改进</td><td><strong>warn</strong></td></tr>
+<tr><td><code>clippy::pedantic</code></td><td>lints which are rather strict or might have false positives<br />这些 lints 相当严格或可能有误报</td><td>allow</td></tr>
+<tr><td><code>clippy::nursery</code></td><td>new lints that are still under development<br />仍然在开发中的新 lints</td><td>allow</td></tr>
+<tr><td><code>clippy::cargo</code></td><td>lints for the cargo manifest<br />用于cargo manifest 的 lints</td><td>allow</td></tr>
+</tbody></table>
+<p>总的来说，Clippy 对代码的检查主要是包括下面五个方面：</p>
+<ul>
+<li>
+<p>代码正确性（Correctness）。检查代码中不正确的写法。</p>
+</li>
+<li>
+<p>代码风格（Style）。相比于 rustfmt，clippy 更偏向于代码实践中的惯用法检查。</p>
+</li>
+<li>
+<p>代码复杂性（Complexity）。检查过于复杂的写法，用更简洁的写法代替。</p>
+</li>
+<li>
+<p>代码不灵动 （Pedantic）。写法过于教条。</p>
+</li>
+<li>
+<p>代码性能（Perf）。</p>
+</li>
+</ul>
+<p><strong>代码正确性</strong></p>
+<p>Lint 示例：  <a href="https://rust-lang.github.io/rust-clippy/master/index.html#absurd_extreme_comparisons">absurd_extreme_comparisons</a> (荒谬的极值比较)</p>
+<blockquote>
+<p>检查关系中的一方是其类型的最小值或最大值的比较，如果涉及到永远是真或永远是假的情况，则发出警告。只有整数和布尔类型被检查。</p>
+</blockquote>
+<p>代码示例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let vec: Vec&lt;isize&gt; = Vec::new();
+if vec.len() &lt;= 0 {}
+if 100 &gt; i32::MAX {} // 这里会报错：Deny ，因为 100 不可能大于 i32::MAX
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>代码风格</strong></p>
+<p>Lint 示例： <a href="https://rust-lang.github.io/rust-clippy/master/index.html#assertions_on_constants">assertions_on_constants</a> （对常量的断言）</p>
+<blockquote>
+<p>用于检查 assert!(true) 和 assert!(false)  的情况。</p>
+</blockquote>
+<p>代码示例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>assert!(false)
+assert!(true)
+const B: bool = false;
+assert!(B) // 会被编译器优化掉。
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>代码复杂性</strong></p>
+<p>Lint 示例：  <a href="https://rust-lang.github.io/rust-clippy/master/index.html#bind_instead_of_map">bind_instead_of_map</a></p>
+<blockquote>
+<p>检查 <code>_.and_then(|x| Some(y))</code>, <code> _.and_then(|x| Ok(y))</code> or <code>_.or_else(|x| Err(y))</code> 这样的用法，建议使用更简洁的写法 <code>_.map(|x| y)</code> or <code>_.map_err(|x| y) </code>。</p>
+</blockquote>
+<p>代码示例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// bad
+let _ = opt().and_then(|s| Some(s.len()));
+let _ = res().and_then(|s| if s.len() == 42 { Ok(10) } else { Ok(20) });
+let _ = res().or_else(|s| if s.len() == 42 { Err(10) } else { Err(20) });
+
+// good
+let _ = opt().map(|s| s.len());
+let _ = res().map(|s| if s.len() == 42 { 10 } else { 20 });
+let _ = res().map_err(|s| if s.len() == 42 { 10 } else { 20 });
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>代码不灵动</strong></p>
+<p>Lints 示例： <a href="https://rust-lang.github.io/rust-clippy/master/index.html#cast_lossless">cast_lossless</a></p>
+<blockquote>
+<p>用于检查可以被安全转换（conversion）函数替代的数字类型之间的转换（ cast ）。</p>
+</blockquote>
+<p><code>as</code>强制转换与<code>From</code>转换从根本上不同。 <code>From</code>转换是“<strong>简单</strong>和安全”，而<code>as</code>强制转换纯粹是“安全”。在考虑数字类型时，仅在保证输出相同的情况下才存在<code>From</code>转换，即，不会丢失任何信息(不会出现截断或下限或精度下降)。 <code>as</code>强制转换没有此限制。</p>
+<p>代码示例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// bad
+fn as_u64(x: u8) -&gt; u64 {
+    x as u64
+}
+
+// good
+fn as_u64(x: u8) -&gt; u64 {
+    u64::from(x) // from内部其实也是as，但只要是实现 from 的，都是无损转换，在代码可读性、语义上更好
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>代码性能</strong></p>
+<p>Lints 示例： <a href="https://rust-lang.github.io/rust-clippy/master/#append_instead_of_extend">append_instead_of_extend</a></p>
+<blockquote>
+<p>检查动态数组中是否出现 <code>extend</code>，建议使用 <code>append</code>代替。</p>
+</blockquote>
+<p>代码示例：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut a = vec![1, 2, 3];
+let mut b = vec![4, 5, 6];
+
+// Bad
+a.extend(b.drain(..));
+
+// Good
+a.append(&amp;mut b); // 用 append 代替 extend 更加高效和简洁。
+<span class="boring">}
+</span></code></pre></pre>
+<p>还有一些其他分类，比如包括一些「约束性（Restriction）」建议、对 cargo.toml 的检查、以及正在开发中的Lints 等。</p>
+<h3><a class="header" href="#如何定制-clippy-lint" id="如何定制-clippy-lint">如何定制 Clippy Lint</a></h3>
+<p><strong>定制 Clippy Lint 有两种办法：</strong></p>
+<ol>
+<li>方法一：fork <a href="https://github.com/rust-lang/rust-clippy">rust-clippy</a> 项目，自己维护。因为使用了不稳定的接口，所以维护和使用不太方便。</li>
+<li>方法二：使用第三方  <a href="https://github.com/trailofbits/dylint">Dylint</a> 工具。维护自定义 lint 比方法一更方便。</li>
+</ol>
+<h4><a class="header" href="#方法一fork-clippy" id="方法一fork-clippy">方法一：fork clippy</a></h4>
+<p>在 fork Clippy 定制自己的 LInt 之前，还需要了解 Clippy 的 工作机制。</p>
+<h5><a class="header" href="#clippy-工作机制" id="clippy-工作机制">Clippy 工作机制</a></h5>
+<p><img src="./image/clippy/clippy.png" alt="clippy" /></p>
+<p>Clippy 通过 <code>rust_driver</code> 和 <code>rustc_interface</code> 这两个库，可以把 <code>rustc</code> 作为库来调用。</p>
+<p><code>rustc_driver</code> 本质上就像是整个<code>rustc</code> 编译器的<code>main函数</code>（入口）。它使用在<code>rustc_interface crate</code>中定义的接口以正确的顺序运行编译器。</p>
+<p><code>rustc_interface crate</code>为外部用户提供了一个（未稳定的）API，用于在编译过程中的特定时间运行代码，允许第三方（例如<code>RLS</code>或<code>rustdoc</code>）有效地使用<code>rustc</code>的内部结构作为分析<code>crate</code> 或 模拟编译器过程的库。</p>
+<p>对于那些使用 <code>rustc</code> 作为库的人来说，<code>rustc_interface::run_compiler() </code>函数是进入编译器的主要入口。它接收一个编译器的配置和一个接收编译器的闭包。<code>run_compiler</code>从配置中创建一个编译器并将其传递给闭包。在闭包中，你可以使用编译器来驱动查询，以编译一个 crate 并获得结果。这也是 <code>rustc_driver</code> 所做的。</p>
+<p><code>rustc_interface</code> 组件库中定义了<code>Compiler</code> 结构体，持有 <code>register_lints</code> 字段。该 <code>Compiler</code>结构体就是编译器会话实例，可以通过它传递编译器配置，并且运行编译器。</p>
+<p><code>register_lints</code> 是 持有 <code>LintStore</code> 可变借用的闭包，其类型签名是 <code>Option&lt;Box&lt;dyn Fn(&amp;Session, &amp;mut LintStore) + Send + Sync&gt;&gt;</code>。</p>
+<p><code>LintStore</code> 是 <a href="https://github.com/rust-lang/rust/blob/master/compiler/rustc_lint/src/context.rs#L55">rustc_lint</a> 组件库中定义的类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct LintStore {
+    /// Registered lints.
+    lints: Vec&lt;&amp;'static Lint&gt;,
+
+    // 构造不同种类的 lint pass
+    /// Constructor functions for each variety of lint pass.
+    ///
+    /// These should only be called once, but since we want to avoid locks or
+    /// interior mutability, we don't enforce this (and lints should, in theory,
+    /// be compatible with being constructed more than once, though not
+    /// necessarily in a sane manner. This is safe though.)
+    pub pre_expansion_passes: Vec&lt;Box&lt;dyn Fn() -&gt; EarlyLintPassObject + sync::Send + sync::Sync&gt;&gt;,
+    pub early_passes: Vec&lt;Box&lt;dyn Fn() -&gt; EarlyLintPassObject + sync::Send + sync::Sync&gt;&gt;,
+    pub late_passes: Vec&lt;Box&lt;dyn Fn() -&gt; LateLintPassObject + sync::Send + sync::Sync&gt;&gt;,
+    /// This is unique in that we construct them per-module, so not once.
+    pub late_module_passes: Vec&lt;Box&lt;dyn Fn() -&gt; LateLintPassObject + sync::Send + sync::Sync&gt;&gt;,
+
+    /// Lints indexed by name.
+    by_name: FxHashMap&lt;String, TargetLint&gt;,
+
+  	// lint group，通过一个名字触发多个警告，把lint分组
+    /// Map of registered lint groups to what lints they expand to.
+    lint_groups: FxHashMap&lt;&amp;'static str, LintGroup&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>可以注册的 <code>lint pass</code> 还分好几类：</p>
+<ul>
+<li>early_passes：表示该类型的 <code>lint pass</code>对应的是 <code>EarlyContext</code>，是在 AST 层级的 lint 检查，还未到 HIR 层面。</li>
+<li>late_passes：表示该类型的 <code>lint pass</code>对应的是 <code>LateContext</code>，是在 类型检查之后的 lint 检查。意味着这样的检查需要获取类型信息。类型检查是在 HIR 层级做的。</li>
+</ul>
+<p>在 <code>rust_interface</code> 中，还定义了相应的 check 方法：<a href="https://github.com/rust-lang/rust/blob/master/compiler/rustc_lint/src/passes.rs#L156">early_lint_methods! 定义的很多check方法</a> 和 <a href="https://github.com/rust-lang/rust/blob/master/compiler/rustc_lint/src/passes.rs#L12">late_lint_methods</a>。</p>
+<p>声明一个 <code>lint pass</code> 需要使用 <code>declare_late_lint_pass!</code> 宏 中定义的 <code>rustc_lint::LateLintPass trait</code>。</p>
+<p>再来看 <code>run_compiler</code>函数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn run_compiler&lt;R: Send&gt;(mut config: Config, f: impl FnOnce(&amp;Compiler) -&gt; R + Send) -&gt; R {
+    tracing::trace!(&quot;run_compiler&quot;);
+    let stderr = config.stderr.take();
+    util::setup_callbacks_and_run_in_thread_pool_with_globals(
+        config.opts.edition,
+        config.opts.debugging_opts.threads,
+        &amp;stderr,
+        || create_compiler_and_run(config, f), // 设置一个回调函数
+    )
+}
+
+// 回调函数
+pub fn create_compiler_and_run&lt;R&gt;(config: Config, f: impl FnOnce(&amp;Compiler) -&gt; R) -&gt; R {
+    let registry = &amp;config.registry;
+    let (mut sess, codegen_backend) = util::create_session(
+        config.opts,
+        config.crate_cfg,
+        config.diagnostic_output,
+        config.file_loader,
+        config.input_path.clone(),
+        config.lint_caps,
+        config.make_codegen_backend,
+        registry.clone(),
+    );
+    // 。。。省略
+  	let compiler = Compiler {
+        sess,
+        codegen_backend,
+        input: config.input,
+        input_path: config.input_path,
+        output_dir: config.output_dir,
+        output_file: config.output_file,
+        register_lints: config.register_lints, // 配置 register_lints
+        override_queries: config.override_queries,
+    };
+
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>再看看 <code>rustc_driver</code>库，其中定义了 <a href="https://github.com/rust-lang/rust/blob/master/compiler/rustc_driver/src/lib.rs#L84"><code>Callbacks trait</code></a> ：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Callbacks {
+    /// Called before creating the compiler instance
+    fn config(&amp;mut self, _config: &amp;mut interface::Config) {}
+    /// Called after parsing. Return value instructs the compiler whether to
+    /// continue the compilation afterwards (defaults to `Compilation::Continue`)
+    fn after_parsing&lt;'tcx&gt;(
+        &amp;mut self,
+        _compiler: &amp;interface::Compiler,
+        _queries: &amp;'tcx Queries&lt;'tcx&gt;,
+    ) -&gt; Compilation {
+        Compilation::Continue
+    }
+    /// Called after expansion. Return value instructs the compiler whether to
+    /// continue the compilation afterwards (defaults to `Compilation::Continue`)
+    fn after_expansion&lt;'tcx&gt;(
+        &amp;mut self,
+        _compiler: &amp;interface::Compiler,
+        _queries: &amp;'tcx Queries&lt;'tcx&gt;,
+    ) -&gt; Compilation {
+        Compilation::Continue
+    }
+    /// Called after analysis. Return value instructs the compiler whether to
+    /// continue the compilation afterwards (defaults to `Compilation::Continue`)
+    fn after_analysis&lt;'tcx&gt;(
+        &amp;mut self,
+        _compiler: &amp;interface::Compiler,
+        _queries: &amp;'tcx Queries&lt;'tcx&gt;,
+    ) -&gt; Compilation {
+        Compilation::Continue
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>该trait中定义了在编译不同阶段要执行的回调函数。</p>
+<p>所以，在 Clippy 的 <code>driver.rs</code> 中就做了如下定义：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct ClippyCallbacks {
+    clippy_args_var: Option&lt;String&gt;,
+}
+
+// 为 ClippyCallbacks 实现 rustc_driver::Callbacks ，定义 config 方法
+// 该 config 方法创建编译器实例之前被执行的
+impl rustc_driver::Callbacks for ClippyCallbacks {
+    fn config(&amp;mut self, config: &amp;mut interface::Config) {
+        let previous = config.register_lints.take();
+        let clippy_args_var = self.clippy_args_var.take();
+        config.parse_sess_created = Some(Box::new(move |parse_sess| {
+            track_clippy_args(parse_sess, &amp;clippy_args_var);
+        }));
+        // 注册 lints
+        config.register_lints = Some(Box::new(move |sess, lint_store| {
+            // technically we're ~guaranteed that this is none but might as well call anything that
+            // is there already. Certainly it can't hurt.
+            if let Some(previous) = &amp;previous {
+                (previous)(sess, lint_store);
+            }
+
+            let conf = clippy_lints::read_conf(sess);
+            clippy_lints::register_plugins(lint_store, sess, &amp;conf);
+            clippy_lints::register_pre_expansion_lints(lint_store);
+            clippy_lints::register_renamed(lint_store);
+        }));
+
+        // FIXME: #4825; This is required, because Clippy lints that are based on MIR have to be
+        // run on the unoptimized MIR. On the other hand this results in some false negatives. If
+        // MIR passes can be enabled / disabled separately, we should figure out, what passes to
+        // use for Clippy.
+        config.opts.debugging_opts.mir_opt_level = Some(0);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>所以，Clippy 通过 <code>ClippyCallbacks </code> 的 <code>config</code> 来注册 lints 。在 <code>config</code> 函数内部，通过调用 <code>clippy_lints::read_conf(sess)</code> 来读取 clippy 配置文件里的lint。在 <code>clippy_lints</code> 里还定义了 <a href="https://github.com/rust-lang/rust-clippy/blob/master/clippy_lints/src/lib.rs#L426">register_plugins</a>，使用 <code>rustc_lint::LintStore</code> 来注册 clippy 里定义的 lints。</p>
+<p>以上就是 Clippy 的工作机制。</p>
+<h5><a class="header" href="#自定义-clippy-lints" id="自定义-clippy-lints">自定义 Clippy lints</a></h5>
+<p>通过了解 Clippy 工作机制，可以看得出来，如果要自定义 Clippy lints，是需要严重依赖 <code>rustc</code> 版本的，因为 <code>rustc_interface</code> 提供的接口并不稳定。所以维护成本比较高。</p>
+<p>如果一定要通过这种方式自定义 Clippy lints ，需要按以下步骤开发。</p>
+<h6><a class="header" href="#安装配置-clippy" id="安装配置-clippy"><strong>安装配置 Clippy</strong></a></h6>
+<ol>
+<li>下载 Clippy 源码。</li>
+<li>执行 <code>cargo build</code> 和 <code>cargo test</code> 。因为Clippy 测试套件非常大，所以可以只测试部分套件，比如，<code>cargo uitest</code>，或 <code>cargo test --test dogfood</code>。如果 UITest 和预期不符，可以使用 <code>cargo dev bless</code>更新相关文件。</li>
+<li>Clippy 提供了一些开发工具，可以通过 <code>cargo dev --help</code> 查看。</li>
+</ol>
+<blockquote>
+<p>UI测试的目的是捕捉编译器的完整输出，这样我们就可以测试演示的所有方面。</p>
+</blockquote>
+<p>测试正常的话，修改Clippy 生成二进制的名字，防止影响我们开发环境中安装的 Clippy命令。</p>
+<ol>
+<li>在 <code>Cargo.toml</code>中修改 </li>
+</ol>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>[[bin]]
+name = &quot;cargo-myclippy&quot; // 此处原本是 &quot;cargo-clippy&quot;
+test = false
+path = &quot;src/main.rs&quot;
+
+[[bin]]
+name = &quot;clippy-mydriver&quot; //  此处原本是 &quot;clippy-mydriver&quot;
+path = &quot;src/driver.rs&quot;
+<span class="boring">}
+</span></code></pre></pre>
+<ol start="2">
+<li>修改 <code>src/main.rs</code></li>
+</ol>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>.with_file_name(&quot;clippy-mydriver&quot;); // 将使用 `clippy-driver` 的地方修改为 `clippy-mydriver`
+<span class="boring">}
+</span></code></pre></pre>
+<h6><a class="header" href="#起一个有意义的名字" id="起一个有意义的名字"><strong>起一个有意义的名字</strong></a></h6>
+<p>定义 lints 需要先起一个符合<a href="https://rust-lang.github.io/rfcs/0344-conventions-galore.html#lints"> Lints 命名规范</a> 的名字。</p>
+<p>Lints 命名规范的首要原则就是：lint 名字要有意义。比如 <code>allow dead_code</code>，这是有意义的，但是<code>allow unsafe_code</code>这个就有点过分了。</p>
+<p>具体来说，有几条注意事项：</p>
+<ol>
+<li>Lint 名称应该标明被检查的「坏东西」。比如 <code>deprecated</code>，所以，<code>#[allow(deprecated)](items)</code>是合法的。但是 <code>ctypes</code>就不如<code>improper_ctypes</code> 更明确。</li>
+<li>命名要简洁。比如 <code>deprecated</code>，就比 <code>deprecated_item</code>更简洁。</li>
+<li>如果一个 lint 应用于特定的语法，那么请使用复数形式。比如使用 <code>unused_variables</code>而不是<code>unused_variable</code>。</li>
+<li>捕捉代码中不必要的、未使用的或无用的方面的行文应该使用术语<code>unused</code>，例如<code>unused_imports</code>、<code>unused_typecasts</code>。</li>
+<li>lint 命名请使用蛇形（snake case）命名，与函数名的方式相同。</li>
+</ol>
+<h6><a class="header" href="#设置样板代码" id="设置样板代码"><strong>设置样板代码</strong></a></h6>
+<p>假如新的 lint 叫 <code>foo_functions</code>，因为该lint不需要用到类型信息（比如某结构体是否实现 Drop），所以需要定义 EarlyLintPass。</p>
+<p>在 Clippy 项目根目录下，通过以下命令创建 Lint:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo dev new_lint --name=foo_functions --pass=early --category=pedantic
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果没有提供 category ，则默认是 nursery 。</p>
+<p>执行完该命令以后，在 <code>Clippy-lint/src/</code> 目录下就会多一个 <code>foo_functions.rs </code>的文件，文件中包含了样板代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rustc_lint::{EarlyLintPass, EarlyContext};
+use rustc_session::{declare_lint_pass, declare_tool_lint};
+use rustc_ast::ast::*;
+
+// 此宏用于定义 lint
+declare_clippy_lint! {
+    /// **What it does:**
+    ///
+    /// **Why is this bad?**
+    ///
+    /// **Known problems:** None.
+    ///
+    /// **Example:**
+    ///
+    /// ```rust
+    /// // example code where clippy issues a warning
+    /// ```
+    /// Use instead:
+    /// ```rust
+    /// // example code which does not raise clippy warning
+    /// ```
+    pub FOO_FUNCTIONS, // lint 名字大写
+    pedantic, // lint 分类
+    &quot;default lint description&quot; // lint 描述
+}
+
+// 定义 lint pass。 注意，lint 和 lint pass 并不一定成对出现
+declare_lint_pass!(FooFunctions =&gt; [FOO_FUNCTIONS]);
+
+// 因为不需要使用类型信息，此处实现 EarlyLintPass
+impl EarlyLintPass for FooFunctions {}
+
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>除了此文件，还会创建 <code>test/ui/foo_functions.rs</code> 测试文件。</p>
+<p>接下来，需要执行 <code> cargo dev update_lints</code> 命令来注册新 lint。</p>
+<h6><a class="header" href="#添加-lint-pass-内容" id="添加-lint-pass-内容"><strong>添加 Lint pass 内容</strong></a></h6>
+<p>先来写一些测试代码。</p>
+<p>Clippy使用UI测试进行测试。UI测试检查Clippy的输出是否与预期完全一致。每个测试都是一个普通的Rust文件，包含我们要检查的代码。Clippy的输出与一个.stderr文件进行比较。注意，你不需要自己创建这个文件，我们将进一步讨论生成.stderr文件。</p>
+<p>我们首先打开在test/ui/foo_functions.rs创建的测试文件。</p>
+<p>用一些例子来更新该文件，以便开始使用。</p>
+<pre><pre class="playground"><code class="language-rust">#![warn(clippy::foo_functions)]
+
+// Impl methods
+struct A;
+impl A {
+    pub fn fo(&amp;self) {}
+    pub fn foo(&amp;self) {}
+    pub fn food(&amp;self) {}
+}
+
+// Default trait methods
+trait B {
+    fn fo(&amp;self) {}
+    fn foo(&amp;self) {}
+    fn food(&amp;self) {}
+}
+
+// Plain functions
+fn fo() {}
+fn foo() {}
+fn food() {}
+
+fn main() {
+    // We also don't want to lint method calls
+    foo();
+    let a = A;
+    a.foo();
+}
+</code></pre></pre>
+<p>可以使用 <code>TESTNAME=foo_functions cargo uitest</code>来执行测试。</p>
+<p>可以看到输出：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>test [ui] ui/foo_functions.rs ... ok
+<span class="boring">}
+</span></code></pre></pre>
+<p>接下来，打开 <code>src/foo_functions.rs</code> 编写 Lint 代码。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>declare_clippy_lint! {
+    /// **What it does:**
+    ///
+    /// **Why is this bad?**
+    ///
+    /// **Known problems:** None.
+    ///
+    /// **Example:**
+    ///
+    /// ```rust
+    /// // example code
+    /// ```
+    pub FOO_FUNCTIONS,
+    pedantic, // 该类型的lint 等级 默认是 Allow
+    &quot;function named `foo`, which is not a descriptive name&quot; // 修改 lint 声明的描述内容
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>可以通过执行 <code>cargo dev serve</code>在本地打开网页服务，可以查到 <code>foo_functions</code>显示的描述。</p>
+<p><img src="./image/clippy/foo-fn.png" alt="foo-fn" /></p>
+<p>`<code>Pedantic</code>的默认lint 等级是<code>allow\</code>，定义于 <a href="https://github.com/rust-lang/rust-clippy/blob/master/clippy_lints/src/lib.rs#L119">https://github.com/rust-lang/rust-clippy/blob/master/clippy_lints/src/lib.rs#L119</a></p>
+<p>通常在声明了lint之后，我们必须运行<code>cargo dev update_lints</code> 来更新一些文件，以便 Clippy 知道新的 Lint。由于上面是用<code>cargo dev new_lint ... </code>命令来生成lint声明，所以这是自动完成的。</p>
+<p>虽然 update_lints自动完成了大部分工作，但它并没有自动完成所有工作。我们必须在<code>clippy_lints/src/lib.rs</code>的<code>register_plugins</code>函数中手动注册我们的<code>lint pass</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span> 
+<span class="boring">fn main() {
+</span>pub fn register_plugins(store: &amp;mut rustc_lint::LintStore, sess: &amp;Session, conf: &amp;Conf) {
+    // 此处省略 2000 行代码
+		// foo_functions
+    store.register_early_pass(|| box foo_functions::FooFunctions);
+
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>该函数有 2000 多行代码，维护起来可想而知多么麻烦了。</p>
+<p>因为此 lint pass 只是检查函数名字，不涉及类型检查，所以只需要 AST 层面的处理即可。关于 EarlyLintPass 和 LateLintPass 的区别前文已经介绍过。EarlyLintPass 比 LateLintPass 更快一些，然而 Clippy 的性能并不是关注的重点。</p>
+<p>由于我们在检查函数名时不需要类型信息，所以在运行新的lint自动化时，我们使用了<code>--pass=early</code>，所有的样板导入都相应地被添加了。</p>
+<p>下一步就可以实现 Lint 的检查逻辑了。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/foo_functions.rs 
+impl EarlyLintPass for FooFunctions {
+  	// 此处 check_fn 是内置 EarlyLintPass trait 包含方法，前文介绍过
+    fn check_fn(&amp;mut self, cx: &amp;EarlyContext&lt;'_&gt;, fn_kind: FnKind&lt;'_&gt;, span: Span, _: NodeId) {
+        // TODO: Emit lint here 此处编写检查逻辑
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>对于如何检查函数名字，在 <code>clippy_utils/src/diagnostics.rs</code>中定义了一些帮助函数。经过查找，<code>span_lint_and_help</code>函数在此处使用比较适合。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/foo_functions.rs 
+use clippy_utils::diagnostics::span_lint_and_help;
+use rustc_span::Span;
+use rustc_ast::{ast::NodeId, visit::FnKind};
+
+impl EarlyLintPass for FooFunctions {
+    fn check_fn(&amp;mut self, cx: &amp;EarlyContext&lt;'_&gt;, fn_kind: FnKind&lt;'_&gt;, span: Span, _: NodeId) {
+        span_lint_and_help(
+            cx,
+            FOO_FUNCTIONS,
+            span,
+            &quot;function named `foo`&quot;,
+            None,
+            &quot;consider using a more meaningful name&quot;
+        );
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>执行测试代码，输出如下：</p>
+<p><img src="./image/clippy/uitest.jpeg" alt="uitest" /></p>
+<p><img src="./image/clippy/uitest2.jpeg" alt="uitest2" /></p>
+<p>诊断信息是有效果了，但是缺乏一些lint检测逻辑。所以进一步修改：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl EarlyLintPass for FooFunctions {
+    fn check_fn(&amp;mut self, cx: &amp;EarlyContext&lt;'_&gt;, fn_kind: FnKind&lt;'_&gt;, span: Span, _: NodeId) {
+        // 增加判断逻辑
+        fn is_foo_fn(fn_kind: FnKind&lt;'_&gt;) -&gt; bool {
+            match fn_kind {
+                FnKind::Fn(_, ident, ..) =&gt; {
+                    // check if `fn` name is `foo`
+                    ident.name.as_str() == &quot;foo&quot;
+                }
+                // ignore closures
+                FnKind::Closure(..) =&gt; false
+            }
+        }
+        // 增加判断逻辑
+        if is_foo_fn(fn_kind) {
+            span_lint_and_help(
+                cx,
+                FOO_FUNCTIONS,
+                span,
+                &quot;function named `foo`&quot;,
+                None,
+                &quot;consider using a more meaningful name (考虑使用一个更有意义的函数名字)&quot;
+            );
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>再次执行测试输出：</p>
+<p><img src="./image/clippy/uitest3.png" alt="uitest3" /></p>
+<p>接下来执行：</p>
+<ol>
+<li><code>cargo dev bless</code> 更新 <code>.stderr</code>文件。这个 <code>.stderr</code>文件是需要提交的。如果测试出现错误，记得执行这一步。</li>
+<li><code>cargo test</code>。</li>
+</ol>
+<p>执行 <code>cargo test</code> 失败，因为 clippy 不允许出现 中文描述。所以，修改：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if is_foo_fn(fn_kind) {
+    span_lint_and_help(
+      cx,
+      FOO_FUNCTIONS,
+      span,
+      &quot;function named `foo`&quot;,
+      None,
+      &quot;consider using a more meaningful name (考虑使用一个更有意义的函数名字)&quot; // 此处不允许中文，当然你也可以修改 clippy 自身的 lint 配置
+    );
+}
+
+// 修改为
+
+if is_foo_fn(fn_kind) {
+    span_lint_and_help(
+      cx,
+      FOO_FUNCTIONS,
+      span,
+      &quot;function named `foo`&quot;,
+      None,
+      &quot;consider using a more meaningful name&quot;
+    );
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<p>测试成功。</p>
+<p>最后执行 <code>cargo dev fmt</code>，格式化代码。</p>
+<p>到目前为止，自定义 clippy lint 已经完成。</p>
+<h6><a class="header" href="#测试-clippy-lint-效果" id="测试-clippy-lint-效果">测试 Clippy lint 效果</a></h6>
+<p>因为我们自定义的 Clippy 二进制名字已经被修改了，所以可以直接安装，不怕和已安装的clippy有冲突了。</p>
+<p>执行以下命令安装自定义的Clippy:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo install --bin=cargo-myclippy --bin=clippy-mydriver --path=.
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后重新使用 <code>cargo new clippytest</code>创建一个新项目。</p>
+<p>将 <code>src/main.rs</code>修改为：</p>
+<pre><pre class="playground"><code class="language-rust">#![warn(clippy::foo_functions)]
+
+// Impl methods
+struct A;
+impl A {
+    pub fn fo(&amp;self) {}
+    pub fn foo(&amp;self) {}
+    pub fn food(&amp;self) {}
+}
+
+// Default trait methods
+trait B {
+    fn fo(&amp;self) {}
+    fn foo(&amp;self) {}
+    fn food(&amp;self) {}
+}
+
+// Plain functions
+fn fo() {}
+fn foo() {}
+fn food() {}
+
+fn main() {
+    // We also don't want to lint method calls
+    foo();
+    let a = A;
+    a.foo();
+}
+</code></pre></pre>
+<p>【如有必要】然后在 <code>clippytest</code>项目目录下创建 <code>rust-toolchain</code> 文件：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>[toolchain]
+channel = &quot;nightly-2021-06-17&quot;
+components = [&quot;llvm-tools-preview&quot;, &quot;rustc-dev&quot;, &quot;rust-src&quot;]
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个文件里的配置，要和 官方 rust-clippy 下一致，也就是你fork的那个原项目。</p>
+<p>然后命令行执行：<code>cargo myclippy</code>，输出：</p>
+<p><img src="./image/clippy/myclippy.png" alt="myclippy" /></p>
+<p>成功！</p>
+<p>然后回去 <code>src/main.rs</code>中，将 <code>#![warn(clippy::foo_functions)]</code> 改为 <code>#![error(clippy::foo_functions)]</code>，再次执行 <code>cargo myclippy</code>，输出：</p>
+<p><img src="./image/clippy/myclippy-error.jpeg" alt="myclippy-error" /></p>
+<p>成功！</p>
+<p>到此为止，自定义 Clippy Lint 成功！</p>
+<h6><a class="header" href="#小结" id="小结">小结</a></h6>
+<p>通过 fork clippy，完全可以定制自己的 Lint 。但是也有很明显的缺陷：</p>
+<ol>
+<li>Clippy 内置 lint 很多，需要手工注册自定义lint，想想那个 2000 行的函数就头疼。</li>
+<li>Clippy 依赖 rustc_interface 是未稳定的 API 。<strong>clippy_utils</strong> 里提供的helper方法也是依赖于编译器这个未稳定接口，这样不同编译器版本就会难以兼容。导致不能通用。</li>
+<li>需要命名为自己的 Clippy 二进制文件，避免和原本的 Clippy 冲突。</li>
+</ol>
+<p>如果自定义 Lint 可以 PR 更好，但并不是所有自定义 Lint 都可以提交到官方 PR ，必然需要维护自己的/团队的特殊场景的 Lint。就会面对上面的缺陷。</p>
+<p>有没有更好的办法呢？</p>
+<h4><a class="header" href="#方法二使用-dylint" id="方法二使用-dylint">方法二：使用 Dylint</a></h4>
+<p>参考：<a href="https://www.trailofbits.com/post/write-rust-lints-without-forking-clippy">Write Rust lints without forking Clippy</a></p>
+<p>社区有人开发了一个工具：  <a href="https://github.com/trailofbits/dylint">Dylint</a> 。它的特点：</p>
+<ol>
+<li>以动态库的方式来提供 lint 。而 Clippy 是静态库。Clippy 的所有 lint 都使用相同的编译器版本，因此只需要 <code>rustc_driver</code> 。</li>
+<li>Dylint 用户可以选择从不同编译器版本的库中加载 lint。</li>
+</ol>
+<p><img src="./image/clippy/dylint.png" alt="dylint" /></p>
+<p>Dylint 可以动态构建 <code>rustc_driver</code>。换句话说，如果用户想要 A 版本的编译器库中加载 lint，并且找不到 A 版本的 <code>rustc_driver</code>，Dylint 将构建一个新的 A 版本的<code>rustc_driver</code>。<code>rustc_driver</code>缓存在用户的主目录中，因此仅在必要时重建它们。</p>
+<p>Dylint 根据它们使用的编译器版本对库进行分组，使用相同编译器版本的库一起加载，并和它们的 lint 一起运行。这允许在 lint 之间共享中间编译结果(如：符号解析，类型检查，trait求解等)。</p>
+<p>在上图中，如果库 U 和 V 都使用了 A 版本的编译器，这两个库将被放到同一个分组中。A 版本编译器的<code>rustc_driver</code>将只被调用一次。<code>rustc_driver</code>在将控制权移交给 Rust 编译器之前会在库 U 和库 V 中注册 lint。</p>
+<h6><a class="header" href="#安装和配置" id="安装和配置">安装和配置</a></h6>
+<p>通过下面命令安全 dylint：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo install cargo-dylint
+cargo install dylint-link
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后获取模版项目：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>git clone https://github.com/trailofbits/dylint-template
+<span class="boring">}
+</span></code></pre></pre>
+<p>或者使用 <code>cargo-generate</code>来创建模版</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo generate --git https://github.com/trailofbits/dylint-template
+<span class="boring">}
+</span></code></pre></pre>
+<p>将项目命名为 ：<code>mylints</code></p>
+<p>然后进入到项目根目录，执行：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo build
+cargo dylint fill_me_in --list
+<span class="boring">}
+</span></code></pre></pre>
+<h6><a class="header" href="#编写-lint" id="编写-lint">编写 lint</a></h6>
+<p>因为生成的模版其实和 上面 fork clippy 自定义生成的代码模版类似，所以直接将上面的 lint 代码复制过来。</p>
+<p>创建新文件 <code>src/foo_functions.rs</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use clippy_utils::diagnostics::span_lint_and_help;
+use rustc_ast::{ast::NodeId, visit::FnKind};
+use rustc_lint::{EarlyContext, EarlyLintPass};
+use rustc_span::Span;
+use rustc_lint::LateLintPass;
+use rustc_session::{declare_lint, declare_lint_pass};
+
+declare_lint! {
+    /// **What it does:**
+    ///  检查 以 foo 命名的函数，并给予警告
+    /// **Why is this bad?**
+    ///    因为该命名没有意义
+    /// **Known problems:** None.
+    ///
+    /// **Example:**
+    ///
+    /// ```rust
+    /// // example code where clippy issues a warning
+    /// ```
+    /// Use instead:
+    ///   考虑使用一个更有意义的函数名字
+    /// ```rust
+    /// // example code which does not raise clippy warning
+    /// ```
+    pub FOO_FUNCTIONS,
+    Warn, //  注意：这里和  fork Clippy 略有不同
+    &quot;function named `foo`, which is not a descriptive name&quot;
+}
+
+declare_lint_pass!(FooFunctions =&gt; [FOO_FUNCTIONS]);
+
+
+impl EarlyLintPass for FooFunctions {
+    fn check_fn(&amp;mut self, cx: &amp;EarlyContext&lt;'_&gt;, fn_kind: FnKind&lt;'_&gt;, span: Span, _: NodeId) {
+        fn is_foo_fn(fn_kind: FnKind&lt;'_&gt;) -&gt; bool {
+            match fn_kind {
+                FnKind::Fn(_, ident, ..) =&gt; {
+                    // check if `fn` name is `foo`
+                    ident.name.as_str() == &quot;foo&quot;
+                },
+                // ignore closures
+                FnKind::Closure(..) =&gt; false,
+            }
+        }
+
+        if is_foo_fn(fn_kind) {
+            span_lint_and_help(
+                cx,
+                FOO_FUNCTIONS,
+                span,
+                &quot;function named `foo`&quot;,
+                None,
+                &quot;consider using a more meaningful name&quot;,
+            );
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>代码复制完毕之后，在 <code>src/lib.rs</code> 中添加：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo_functions;
+
+#[no_mangle]
+pub fn register_lints(_sess: &amp;rustc_session::Session, lint_store: &amp;mut rustc_lint::LintStore) {
+    lint_store.register_lints(&amp;[foo_functions::FOO_FUNCTIONS]);
+    lint_store.register_early_pass(|| Box::new(foo_functions::FooFunctions));
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意：需要配置当前项目下 <code>.cargo/config.toml</code> 中针对当前架构平台的 target 指定的链接器，否则会报 找不到库 之类的错误。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>[target.aarch64-apple-darwin]
+linker = &quot;dylint-link&quot;
+
+[target.x86_64-apple-darwin]
+linker = &quot;dylint-link&quot;
+
+[target.x86_64-unknown-linux-gnu]
+linker = &quot;dylint-link&quot;
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后执行 <code>cargo build</code> 编译成功。</p>
+<p>接下来需要设置几个环境变量：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>export MY_LINTS_PATH=/Work/Projects/myworkspace/mylints
+export DYLINT_LIBRARY_PATH=$MY_LINTS_PATH/target/debug
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后执行 <code>cargo test</code>。可以看到 uitest 的输出。</p>
+<p>但是 dylint 有个缺点，就是 uitest 无法像 clippy那样（<code>cargo dev bless</code>） 更新引用。所以 cargo test 会测试失败。</p>
+<p>但是可以在 <code>src/lib.rs</code> 中，添加：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[allow(dead_code)]
+fn foo() {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后在 mylints项目下执行： <code>cargo dylint --all</code> 。就能看到 lint 生效了。</p>
+<p>以上是我们编写了独立的 lints。</p>
+<h6><a class="header" href="#测试独立项目" id="测试独立项目">测试独立项目</a></h6>
+<p>随便创建一个 新的项目 <code>myproject</code>，将 <code>src/main.rs</code> 换成和前面测试 clippy 时候用的代码。</p>
+<p>基于前面设置好的 mylints ，我们只需要直接使用 <code>cargo dylint --all </code> 命令即可。</p>
+<p>然后在该项目根目录下执行：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cargo dylint --all -- --manifest-path=/Work/Projects/myproject/Cargo.toml
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后就可以正常执行 lint 检测了。</p>
+<h6><a class="header" href="#小结-1" id="小结-1"><strong>小结</strong></a></h6>
+<p>使用 dylint 比较麻烦的是，文档不是很全，测试不支持更新引用，不如 fork clippy 方便测试。</p>
+<p>但是 dylint 确实比较小巧，只需要维护我们自定义的lint 即可，不再需要维护 2000 多行的注册lint代码。</p>
+<p>使用 dylint 的时候，因为也依赖了 clippy 的 clippy_utils，所以需要和 clippy 的 rustc 版本保持一致。</p>
+<h4><a class="header" href="#总结" id="总结">总结</a></h4>
+<p>上面总结了两种定制 Clippy Lints 的方法，各有优劣。</p>
+<p>一个观点：</p>
+<ul>
+<li>
+<p>第一种方法比较适合 大公司/大团队，因为第一种方法比较完善，功能齐备，只是需要一个专门的团队来维护这个 lints。并且还有可能给上游去发 PR （如果需要），形成正向反馈，让工具更加完善。另外，也许可以给 Clippy 提供一个 Plugin 机制，方便维护定制的 Lint。</p>
+</li>
+<li>
+<p>第二种方法适合小团队，没有多余的人力去维护，只需要定制自己的一些 lints 使用即可。</p>
+</li>
+</ul>
+<p>欢迎在评论区留言交流。</p>
+<h3><a class="header" href="#有用的参考资源" id="有用的参考资源">有用的参考资源：</a></h3>
+<p>以下资源对你编写 lint 将很有帮助：</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-clippy/blob/master/doc/adding_lints.md">添加一个新的 lint</a> (针对 Clippy 但依然很有用)</li>
+<li><a href="https://github.com/rust-lang/rust-clippy/blob/master/doc/common_tools_writing_lints.md">编写 lint 的常用工具</a></li>
+<li><a href="https://doc.rust-lang.org/stable/nightly-rustc/rustc_hir/index.html">rustc_hir 文档</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_6/docker-wasm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_6/static_analysis_custom_clippy_lint.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_6/docker-wasm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_6/static_analysis_custom_clippy_lint.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

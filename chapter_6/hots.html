@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>社区热点 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item expanded "><a href="../chapter_6/hots.html" class="active"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.7.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.8.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.9.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.10.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.11.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.12.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.13.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.14.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.15.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.16.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.17.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.18.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.22.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.23.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.24.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.25.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.26.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> 七月刊（July）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#社区热点" id="社区热点">社区热点</a></h1>
+<p>编辑： 张汉东</p>
+<hr />
+<h2><a class="header" href="#rust-for-linux-项目相关进展" id="rust-for-linux-项目相关进展">Rust for Linux 项目相关进展</a></h2>
+<p>Google 赞助 且 由 ISRG 组织雇佣 Miguel Ojeda，让他全职从事Rust for Linux和其他安全工作，为期一年。希望能通过让他全职从事这项工作，为支持数字基础设施尽一份力。 </p>
+<p><a href="https://www.memorysafety.org/blog/supporting-miguel-ojeda-rust-in-linux/">https://www.memorysafety.org/blog/supporting-miguel-ojeda-rust-in-linux/</a></p>
+<h2><a class="header" href="#rustconf-2021-cfp-开放申请" id="rustconf-2021-cfp-开放申请">RustConf 2021 CFP 开放申请</a></h2>
+<p>RustConf 2021 大会计划于 9月14号举行， 提案开放时间为太平洋时间6月13日至7月11日晚上11:59分。</p>
+<p><a href="https://cfp.rustconf.com/events/rustconf-2021">https://cfp.rustconf.com/events/rustconf-2021</a></p>
+<h2><a class="header" href="#国内新的--cratesio-和-rustup-的国内镜像" id="国内新的--cratesio-和-rustup-的国内镜像">国内新的  crates.io 和 rustup 的国内镜像</a></h2>
+<p>字节跳动 的小伙伴搞的，希望能帮助建设国内的 rust 生态，感兴趣的话可以试用。</p>
+<p>不限速（实际上是 1000Gbps），优质 CDN 分发，欢迎大家使用~ </p>
+<p>有问题可以直接在评论区反馈。</p>
+<p><a href="https://rsproxy.cn/">https://rsproxy.cn/</a></p>
+<h2><a class="header" href="#2021-rust-china-conf-的调研" id="2021-rust-china-conf-的调研">2021 Rust China Conf 的调研</a></h2>
+<p>朋友们，请抽出一分钟完成一下 2021 Rust China Conf 的调研，只有3个问题 。</p>
+<p><a href="https://wj.qq.com/s2/8683119/cbf3/">https://wj.qq.com/s2/8683119/cbf3/</a></p>
+<h2><a class="header" href="#现场实录20210619-北京-rust区块链开发者活动" id="现场实录20210619-北京-rust区块链开发者活动">【现场实录】20210619-北京-Rust区块链开发者活动</a></h2>
+<p><a href="https://www.bilibili.com/video/BV1Jh411h7pp">https://www.bilibili.com/video/BV1Jh411h7pp</a></p>
+<h2><a class="header" href="#rustsbi组织宣布成立" id="rustsbi组织宣布成立">RustSBI组织宣布成立</a></h2>
+<p>RustSBI是RISC-V平台下的引导程序实现，它完全由Rust编写，并已经被录入RISC-V SBI国际标准。6月3日，RustSBI已经在GitHub上成立了组织，并提交了它对多个RISC-V平台的支持示例软件包。</p>
+<p>RISC-V处理器架构中，存在着定义于操作系统之下的环境，它被称作SBI标准。这个环境除了引导系统启动，还将常驻后台，在内核运行时提供处理器功能。RustSBI就是这样的一种环境，它是一个扩展性较好的库，允许开发者自由地添加需要的功能模块，以支持芯片研发企业、应用厂商和板卡厂商提供自己芯片的SBI支持环境。</p>
+<p>根据它的GitHub主页介绍，RustSBI项目组已经根据Mulan-PSL v2协议开源了它对K210和QEMU平台的支持，更多平台如FU540、C906等的支持也在筹划中。RustSBI组织以模块化开发、较好的支持嵌入式Rust生态，期望以这一形式，使厂商无需担忧是否合并到主分支，并鼓励开发者尝试多种多样的设计，来丰富引导程序方面的RISC-V生态环境。</p>
+<p>“未来的RISC-V引导程序可能包含很多种可能性，这包括已经用在无盘工作站、安全网络等引导程序中的下载和验证机制，也可用于DIY爱好者的主板诊断。甚至用它做调试器也是可以的，它事实上提供了完全可定制的硬件兼容层，”RustSBI的维护者洛佳这样告诉《Rust日报》，“实践证明，它可以完成硬件到硬件的兼容性，从而延长硬件的生命周期，降低管理和迭代更新成本。”</p>
+<p>“RustSBI已经能引导启动rCore等类Unix系统，”维护者继续说，“它是开源开放的，我们期待它被更进一步的被科研、教学和生产界广泛使用。”</p>
+<p>RustSBI组织首页：<a href="https://github.com/rustsbi">https://github.com/rustsbi</a></p>
+<h2><a class="header" href="#惊叹-rust-在艺术领域的商业应用" id="惊叹-rust-在艺术领域的商业应用">惊叹！ Rust 在艺术领域的商业应用！</a></h2>
+<p><a href="https://t.me/rust_daily_news/4863">观看视频</a></p>
+<p>该艺术项目使用486步进电机，86,000个LED和5通道颗粒式合成引擎，控制软件系统使用 Rust 实现，利用的是 nannou 和 koto。</p>
+<p>该项目背后是一家德国公司：<a href="mindbuffer.net">mindbuffer.net</a></p>
+<ul>
+<li><a href="https://nannou.cc/">https://nannou.cc/</a></li>
+<li><a href="https://github.com/koto-lang/koto">https://github.com/koto-lang/koto</a></li>
+</ul>
+<h2><a class="header" href="#2021年开源操作系统夏令营-欢迎报名" id="2021年开源操作系统夏令营-欢迎报名">2021年开源操作系统夏令营 欢迎报名</a></h2>
+<p><strong>任何</strong> 对Rust 和 RISC-V写操作系统<strong>感兴趣的均可报名</strong></p>
+<p>鹏城实验室和清华大学组织的2020年开源操作系统夏令营收到同学们的积极响应，参与夏令营的同学在今年的“2021全国大学生计算机系统能力大赛 - 操作系统赛”的初赛中都有不错的表现( <a href="https://mp.weixin.qq.com/s/Cb2SaonAAHDVNDli_80Bpw">https://mp.weixin.qq.com/s/Cb2SaonAAHDVNDli_80Bpw</a> )，今年启元实验室、清华大学和CSDN等将继续组织“2021年开源操作系统夏令营”，希望能把对开源操作系统开发有兴趣的朋友团结在一起，形成一个活跃的开源社区。欢迎对开源操作系统有兴趣的任何人报名（需填写下面的报名问卷）参加。</p>
+<p><strong>2021年开源操作系统夏令营</strong></p>
+<ul>
+<li>第一阶段： <a href="https://github.com/rcore-os/rCore/wiki/os-tutorial-summer-of-code-2021">https://github.com/rcore-os/rCore/wiki/os-tutorial-summer-of-code-2021</a></li>
+<li>第二阶段： <a href="https://github.com/rcore-os/rCore/wiki/zcore-summer-of-code-2021">https://github.com/rcore-os/rCore/wiki/zcore-summer-of-code-2021</a></li>
+<li>报名问卷： <a href="http://oscourse2019.mikecrm.com/vzZqxgM">http://oscourse2019.mikecrm.com/vzZqxgM</a></li>
+</ul>
+<h2><a class="header" href="#gdc-2021-峰会--treyarch-公司致力于-游戏工具库的-rust-应用" id="gdc-2021-峰会--treyarch-公司致力于-游戏工具库的-rust-应用">GDC 2021 峰会 ： Treyarch 公司致力于 游戏工具库的 Rust 应用</a></h2>
+<p>GDC (Game Developers Conference 2021) 峰会将于 7月19～23日举行。 Treyarch 公司（《使命召唤系列》游戏公司）将在该峰会发表 Rust 相关议题。</p>
+<blockquote>
+<p>Treyarch是美国的一家电子游戏开发商，总部位于加利福尼亚州的圣莫尼卡。 Treyarch成立于1996年，2001年被美国动视收购。其代表作为《使命召唤系列》。</p>
+</blockquote>
+<p>Rust编程语言已经悄悄地在科技界掀起风暴，但在游戏工作室中的采用却比较缓慢。自2018年以来，Treyarch一直在逐步将Rust整合到我们的工具和管道中。本次会议将利用这一经验，探讨Rust可以给游戏工具程序员带来的机遇和挑战，并研究Rust可以成为游戏工具库的有力补充的方式。</p>
+<p>Treyarch 在 GDC  大会的议题：</p>
+<ul>
+<li>The Rust Programming Language for Game Tooling</li>
+<li>Boots on the Ground: The Terrain of 'Call of Duty'</li>
+<li>Shadows of Cold War: A Scalable Approach to Shadowing</li>
+</ul>
+<p><a href="https://schedule.gdconf.com/session/tools-summit-the-rust-programming-language-for-game-tooling/880599">https://schedule.gdconf.com/session/tools-summit-the-rust-programming-language-for-game-tooling/880599</a></p>
+<h2><a class="header" href="#在curl中使用hyper如何帮助使互联网更安全" id="在curl中使用hyper如何帮助使互联网更安全">在curl中使用hyper如何帮助使互联网更安全</a></h2>
+<blockquote>
+<p>作者：Sean McArthur（hyper作者）</p>
+</blockquote>
+<p><strong>大概翻译了一下重点摘要：</strong></p>
+<p>今年2月，互联网安全研究小组的Josh Aas、curl的Daniel Stenberg和我（来自hyper和Amazon Web Services）联合举办了一场网络研讨会，讨论内存安全和互联网，以及在curl中使用hyper如何帮助使互联网更安全。由于curl是开源和许可的，从物联网设备到卫星，以及大多数Linux发行版中都可以找到它。Curl是那些我们认为理所当然的基础库之一，但它影响着我们的网络生活。（视频回顾：https://www.youtube.com/watch?v=okGUxW_i9yk）</p>
+<p><strong>不太安全的互联网</strong></p>
+<p>内存安全是编程语言或系统的一个属性，它可以保护程序不会错误地访问它不应该访问的内存，例如认为缓冲区比它大，或者从一个指针解释数据，而这个指针后来被清理并用于不同的值。缺乏内存安全是对互联网基础设施的一个严重的持续威胁，并对个人和组织都造成了重大的、有意义的损害。比如说。</p>
+<ul>
+<li>微软估计，在过去十年中，他们的产品中70%的漏洞都是由缺乏内存安全造成的。</li>
+<li>谷歌发现，Chrome浏览器70%的严重安全漏洞是内存安全问题。</li>
+<li>Android团队报告说，他们90%的漏洞是内存安全问题。</li>
+<li>Mozilla指出，Firefox在其风格组件中的74%的安全漏洞是内存安全漏洞。</li>
+<li>最近的一项研究表明，60-70%的iOS和macOS漏洞都与内存安全有关。</li>
+<li>Project Zero的一项分析发现，被利用的0-day中，有超过80%是由于缺乏内存安全。</li>
+</ul>
+<p>这些漏洞可能导致现实生活中的隐私被侵犯、财务损失、公共服务被剥夺，以及人权受到影响。</p>
+<p>造成这种漏洞泛滥的一个重要原因是，许多工具是用编程语言编写的，而这些语言对内存安全漏洞的保护作用不大，甚至没有。尽管 &quot;内存安全 &quot;语言已经存在了很长时间，但由于性能或互操作性要求，它们经常被忽视。</p>
+<p>通常说到内存安全就要提到 Rust 。Rust是一种较新的语言，它执行内存安全，但具有与C类似的性能和互操作性。然而，这篇博文并不是呼吁 &quot;用Rust重写（所有）&quot;。</p>
+<p>重写所有的东西是不现实的，每一段代码对人类的影响也是不一样的。相反，让我们简单地走过一个实际的努力，把内存安全带到互联网的关键部分。这种努力鼓励项目用内存安全库来取代库或模块化功能，而不是着手进行基础重写。它将工作分解成可管理的部分，并逐步提供价值。</p>
+<p><strong>curl无处不在</strong></p>
+<p>curl是开始这项工作的理想人选。潜在的影响是巨大的，因为curl无处不在。根据curl网站的说法。</p>
+<p>curl在命令行或脚本中被用来传输数据。curl也被用于汽车、电视机、路由器、打印机、音频设备、手机、平板电脑、机顶盒、媒体播放器中，并且是超过100亿套软件应用程序的互联网传输引擎。</p>
+<p>curl也是用C语言编写的。</p>
+<p>在最近的一篇博文中，Daniel Stenberg指出，curl有一半的漏洞是C语言的错误--换句话说，与内存安全有关。这些错误包括缓冲区超读、缓冲区溢出、使用后释放和双重释放。尽管curl处理了一大堆协议，但HTTP是内存安全漏洞的第二大领域。</p>
+<p>我们能让curl更安全吗？</p>
+<p>这样做会使互联网更安全，所以值得努力。而这正是我们要做的。Curl的API和ABI是稳定的 &quot;装甲门&quot;，不会损坏。但是curl已经熟悉了为其内部实现细节选择不同的 &quot;后端&quot;。在此之前，curl可以被配置为内部支持TLS、DNS、压缩和其他组件的后端。我们只需要提供一个更安全的HTTP后端选项。</p>
+<p><strong>&quot;此时 Hyper 加入了群聊&quot;</strong></p>
+<p>Hyper是一个安全、正确、快速的Rust语言的HTTP库。Hyper是开源的，并被AWS、Buoyant、Discord、谷歌、微软、Mozilla等公司使用。它有客户端和服务器端的API，并提供对HTTP/1和HTTP/2的支持。</p>
+<p>Rust库不会带来对新运行时的依赖，在C语言中调用Rust函数也没有开销，反之亦然。它只是需要工程师的工作来暴露一个与C语言兼容的API。</p>
+<p>Hyper开发人员立即知道这是需要做的事情。考虑到curl的使用量，这是一个让互联网更安全的机会。而hyper的Rust用户也会受益，因为这项工作所处理的任何bug修复或边缘案例也会为他们修复。</p>
+<p>我们为hyper设计了一个C语言API。大部分的工作是围绕着识别Rust和C语言之间的假设差异。在这些部分被解决后，API就开始工作了。Hyper添加了几个选项，让curl对他们的用户来说几乎没有区别。</p>
+<p><strong>目前状态：</strong></p>
+<p>curl和hyper的代码都已经合并到了各自的主开发分支。Curl 可以被配置为以 hyper 作为其 HTTP 后台进行编译，尽管它将处于实验状态，直到 curl 的所有 HTTP 支持与它的内部 C 后台一样工作，并且被更广泛地试用。大部分的代码已经工作了，剩下的问题是更复杂的HTTP功能，仍然需要更新以支持不同的后端。跟踪工作的最好方法是通过curl的广泛测试套件。</p>
+<p>从数量上看，在800个左右的HTTP单元测试中，有95%的测试被移植并通过了配置为后端的hyper。这意味着 curl 的很多标准功能已经在工作了。使用hyper后端，curl支持HTTP/1和HTTP/2。它可以使用任何 TLS 后台的 HTTPS，甚至可以使用 HTTP(S) 代理。无论使用哪种后端，电线上的HTTP请求都是相同的。</p>
+<p><strong>下一步是什么？</strong></p>
+<p>还需要在curl中加入一些功能，以使整个测试套件通过。此外，我们还希望改善对恐慌和内存不足的处理，以及其他关于从Rust中暴露C语言库的细节。此外，开发人员还需要调整或修复curl在完成单元测试时注意到的任何问题。</p>
+<p><a href="https://aws.amazon.com/blogs/opensource/how-using-hyper-in-curl-can-help-make-the-internet-safer/">https://aws.amazon.com/blogs/opensource/how-using-hyper-in-curl-can-help-make-the-internet-safer/</a></p>
+<h2><a class="header" href="#tensorbase--risc-v-芯片上执行-sql" id="tensorbase--risc-v-芯片上执行-sql">TensorBase | RISC-V 芯片上执行 SQL</a></h2>
+<p>TensorBase 是第一个在真正的 RISC-V 芯片上运行的 SQL 数据库</p>
+<p><a href="https://tensorbase.io/2021/06/08/sql_on_riscv_in_rust.html">SQL on RISC-V Chip in Rust (tensorbase.io)</a></p>
+<h2><a class="header" href="#aws-添加了-9-项关于rust-sdk的新服务" id="aws-添加了-9-项关于rust-sdk的新服务">AWS 添加了 9 项关于rust sdk的新服务</a></h2>
+<p><a href="https://github.com/awslabs/aws-sdk-rust/releases/tag/v0.0.7-alpha">https://github.com/awslabs/aws-sdk-rust/releases/tag/v0.0.7-alpha</a></p>
+<h2><a class="header" href="#reddit-讨论rust语言在项目管理上的优势" id="reddit-讨论rust语言在项目管理上的优势">Reddit 讨论：Rust语言在项目管理上的优势</a></h2>
+<p>Rust在技术/项目管理上有什么优势吗？足以支撑你说服自己和其他人在公司内部开始尝试使用Rust？ </p>
+<p>作者提到了两点：</p>
+<ol>
+<li>安全
+<ul>
+<li>理由：&quot;70%的安全问题都和内存安全有关&quot;</li>
+<li>证据：
+<ul>
+<li><a href="https://www.zdnet.com/article/microsoft-70-percent-of-all-security-bugs-are-memory-safety-issues/#:%7E:text=Microsoft%3A%2070%20percent%20of%20all%20security%20bugs%20are%20memory%20safety%20issues,-Percentage%20of%20memory&amp;text=Around%2070%20percent%20of%20all,week%20at%20a%20security%20conference">Microsoft: 70 percent of all security bugs are memory safety issues</a></li>
+<li><a href="https://www.chromium.org/Home/chromium-security/memory-safety">Google: chromium memory-safety problem</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>维护
+<ul>
+<li>理由：软件设计、研发到生产过程中的维护复杂度会逐步上升</li>
+<li>证据：<a href="https://www.whitesourcesoftware.com/wp-content/media/2021/04/graph2.jpg">Relative cost to fix, based on time of detection</a></li>
+</ul>
+</li>
+</ol>
+<p>或者你有其他任何观点和证据来说服别人使用rust吗？</p>
+<p><a href="https://www.reddit.com/r/rust/comments/o0a61h/rusts_advantages_in_13_slides_on_management_level/%5D">https://www.reddit.com/r/rust/comments/o0a61h/rusts_advantages_in_13_slides_on_management_level/%5D</a></p>
+<h2><a class="header" href="#在-facebook-rust-是如何被用来构建-linux-系统工具库和服务的" id="在-facebook-rust-是如何被用来构建-linux-系统工具库和服务的">在 Facebook Rust 是如何被用来构建 Linux 系统工具、库和服务的</a></h2>
+<p>这篇是一篇采访纪录，@NavyataBawa邀请到了 Facebook 工程师 Daniel Xu，分享他在 Facebook 是如何使用 Rust 来构建 Linux 系统工具、库和服务的。</p>
+<p><a href="https://developers.facebook.com/blog/post/2021/06/24/meet-rustaceans-daniel-xu/">https://developers.facebook.com/blog/post/2021/06/24/meet-rustaceans-daniel-xu/</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_6/lang.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_6/events.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_6/lang.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_6/events.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
