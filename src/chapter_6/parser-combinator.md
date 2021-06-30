@@ -1,23 +1,23 @@
-# 用 Rust 学习解析器组合器  
+# 用 Rust 学习解析器组合子 (combinator)
 
-#### [原文](https://bodil.lol/parser-combinators/) / 译者: [iamazy](https://github.com/iamazy), [Matrixtang](https://github.com/MATRIXKOO)
+[原文](https://bodil.lol/parser-combinators/)
 
-</br>
+> 译者: [iamazy](https://github.com/iamazy), [Matrixtang](https://github.com/MATRIXKOO)
 
-本文向已是 Rust 程序员的人们传授解析器组合器的基础知识。它假定不涉及其他知识，并将解释与 Rust 没有直接关系的所有内容，以及为达到此目的使用 Rust 的一些令人意外的特性。如果你不了解 Rust，他不会教你 Rust 的内容，但是这样的话，同样也无法更好的教你解析器和组合器的知识。如果你想要学习 Rust 语言，我推荐 [Rust 编程语言](https://doc.rust-lang.org/book/) 这本书。  
+本文向已是 Rust 程序员的人们传授解析器组合子的基础知识。它假定不涉及其他知识，并将解释与 Rust 没有直接关系的所有内容，以及为达到此目的使用 Rust 的一些令人意外的特性。如果你不了解 Rust，他不会教你 Rust 的内容，但是这样的话，同样也无法更好的教你解析器和组合子的知识。如果你想要学习 Rust 语言，我推荐 [Rust 编程语言](https://doc.rust-lang.org/book/) 这本书。
 
 ## Beginner's Mind
 
-当每个程序员发现自己需要解析器时，它们的生活将变得有意义。  
+当每个程序员发现自己需要解析器时，它们的生活将变得有意义。
 
 初级程序员将会问：“什么是解析器？”。  
 中级程序员将会说：“这很简单，我将写一串正则表达式”。  
-高级程序员将会说：“退一步考虑问题，我知道`Lex`(词法分析器)和`Yacc`(语法解析器)”  
+高级程序员将会说：“退一步考虑问题，我知道`Lex`(词法分析器)和`Yacc`(语法解析器)”
 
 初级程序员的想法是正确的。
 
-不是说正则表达式不好(但是请不要用正则表达式写复杂的解析器)。使用经过数千年 (millennia) 磨练至完美的解析器和词法分析生成器之类的强大工具并不是没有乐趣可言。但是从头开始一点一点学习解析器将更有趣。这两者只是对当前实际问题的抽象，如果你直接选择正则表达式或者解析器生成工具，你将失去这一份乐趣。在初学者眼中，正如人们说的：本来(解决这个问题)有很多种方法，但是在专家眼里，已经形成思维定视，只会选择一种他们最习惯的方式。
-在本文中我们将从头开始学习如何构建解析器，基于被称为解析器组合器的函数式编程语言的通用技术。一旦你掌握了它们的基本概念，它们的优势将非常巨大，同时又非常接近第一原理。因为这里唯一的抽象是你将在基础的组合器之上构建你自己的抽象。所有这些，你必须先构建它们，才能使用它们。
+不是说正则表达式不好(但是请不要用正则表达式写复杂的解析器)。使用经过 `数千年 (millennia)` 磨练至完美的解析器和词法分析生成器之类的强大工具并不是没有乐趣可言。但是从头开始一点一点学习解析器将更有趣。这两者只是对当前实际问题的抽象，如果你直接选择正则表达式或者解析器生成工具，你将失去这一份乐趣。在初学者眼中，正如人们说的：本来(解决这个问题)有很多种方法，但是在专家眼里，已经形成思维定视，只会选择一种他们最习惯的方式。
+在本文中我们将从头开始学习如何构建解析器，基于被称为解析器组合子的函数式编程语言的通用技术。一旦你掌握了它们的基本概念，它们的优势将非常巨大，同时又非常接近第一原理。因为这里唯一的抽象是你将在基础的组合子之上构建你自己的抽象。所有这些，你必须先构建它们，才能使用它们。
 
 ## How To Work Through This Article
 
@@ -29,7 +29,7 @@
 
 ## The Xcruciating Markup Language
 
-我们将用简化的XML格式写一个解析器，如下所示：
+我们将用简化的 XML 格式写一个解析器，如下所示：
 
 ```xml
 <parent-element>
@@ -165,7 +165,7 @@ fn literal_parser() {
 
 在第三种情况下，我们提供了一个不正确的输入`"Hello Mike!"`，并注意到该函数拒绝了这个输入并返回了一个错误。不是说 Mike 作为一般规则是不正确的，而是它不是此解析器所需要的。
 
-#### Exercises
+## Exercises
 
 - 你能在标准库中找到一个关于`str`类型的方法，让你编写`match_literal()`时不必做麻烦的`get`索引吗？
 
@@ -250,7 +250,7 @@ fn identifier_parser() {
 
 ## Combinators
 
-现在，我们已经可以解析`<`，以及之后的标志符了，但是我们需要同时将它们进行解析，以便在这里可以取得进展。因此接下来将编写另一个解析器的构造函数，它将两个解析器作为输入并返回一个新的解析器，并按顺序解析它们。换言之，它是一个解析器组合器，因为它将两个解析器组合成一个新的解析器。让我们看看我们是否能够做到这一点。
+现在，我们已经可以解析`<`，以及之后的标志符了，但是我们需要同时将它们进行解析，以便在这里可以取得进展。因此接下来将编写另一个解析器的构造函数，它将两个解析器作为输入并返回一个新的解析器，并按顺序解析它们。换言之，它是一个解析器组合子，因为它将两个解析器组合成一个新的解析器。让我们看看我们是否能够做到这一点。
 
 ```rust
 fn pair<P1, P2, R1, R2>(parser1: P1, parser2: P2) -> impl Fn(&str) -> Result<(&str, (R1, R2)), &str>
@@ -295,9 +295,9 @@ fn pair_combinator() {
 
 ## Enter The Functor
 
-在我们深入讨论之前，先介绍另一个组合器：`map`，它将使编写这两个解析器更加简单。
+在我们深入讨论之前，先介绍另一个组合子：`map`，它将使编写这两个解析器更加简单。
 
-这个组合器有一个目的：改变结果的类型。例如，假设你有一个解析器返回`((), String)`，但是你希望能够将其返回值类型修改为`String`。
+这个组合子有一个目的：改变结果的类型。例如，假设你有一个解析器返回`((), String)`，但是你希望能够将其返回值类型修改为`String`。
 
 为了做到这点，我们传入一个函数，该函数知道如何将原始类型转换成新的类型。在我们的示例中，该函数十分简单：`|(_left, right)| right`。它的一般格式就像`Fn(A) -> B`，其中`A`是解析器的原始类型，`B`是期望的新类型。
 
@@ -426,11 +426,11 @@ where
 }
 ```
 
-`Result`的`and_then`方法和`map`类似，不同之处在于`map`函数不会返回新值到`Result`内部，而是返回一个新的`Result`。上面的代码与先前使用`match`块的版本效果相同。稍后我们将回到`and_then`，但是现在，既然我们有一个干净简洁的`map`，我们可以真正实现`left`，`right`组合器。
+`Result`的`and_then`方法和`map`类似，不同之处在于`map`函数不会返回新值到`Result`内部，而是返回一个新的`Result`。上面的代码与先前使用`match`块的版本效果相同。稍后我们将回到`and_then`，但是现在，既然我们有一个干净简洁的`map`，我们可以真正实现`left`，`right`组合子。
 
 ## Left And Right
 
-有了`pair`和`map`，我们可以非常简洁的编写`left`和`right`组合器：
+有了`pair`和`map`，我们可以非常简洁的编写`left`和`right`组合子：
 
 ```rust
 fn left<'a, P1, P2, R1, R2>(parser1: P1, parser2: P2) -> impl Parser<'a, R1>
@@ -450,9 +450,9 @@ where
 }
 ```
 
-我们使用`pair`组合器将两个解析器组合成一个解析器，然后使用`map`组合器选择其结果元组中我们想要保留的部分。
+我们使用`pair`组合子将两个解析器组合成一个解析器，然后使用`map`组合子选择其结果元组中我们想要保留的部分。
 
-现在我们需要为元素标签的前两部分重写测试，使它更简洁一些，在此过程中，我们将获得了一些重要的新解析器组合器功能。
+现在我们需要为元素标签的前两部分重写测试，使它更简洁一些，在此过程中，我们将获得了一些重要的新解析器组合子功能。
 
 不过，我们必须先更新我们的两个解析器以使用`Parser`和`ParseResult`。`match_literal`是更复杂的一个：
 
@@ -498,7 +498,7 @@ fn right_combinator() {
 
 在元素名称的末尾以及第一个属性名称(如果存在的话)的开头之间，存在一个空格。我们需要处理这个空格。
 
-甚至更糟的是，我们需要处理一个或多个空格，因为`<element      attribute="value"/>`也是一个合法的语法，即使它的空格很多。所以这似乎是我们考虑是否可以编写一个组合器来表示一个或多个解析器想法的好时机。
+甚至更糟的是，我们需要处理一个或多个空格，因为`<element attribute="value"/>`也是一个合法的语法，即使它的空格很多。所以这似乎是我们考虑是否可以编写一个组合子来表示一个或多个解析器想法的好时机。
 
 我们在`identifier`解析器中已经处理过这个问题，但是一切都是在那里手动完成的。毫不奇怪，总体思路的代码并没有什么不同。
 
@@ -589,10 +589,597 @@ where
 
 在这里，我们遇到了 Rust 的一个问题，我甚至不是指`Vec`没有`cons`方法的问题，但我知道每个阅读那段代码的 Lisp 程序员都在思考这个问题：那就是所有权。
 
-我们拥有这个解析器，所以我们不能将其作为参数传递两次，编译器会试图对你大喊，因为你试图移动一个已经移动的值。那么我们可以让组合器代替引用吗？不，事实证明，我们还遇到另一整套借用检查器的问题 - 我们目前不会试图解决这些问题。并且因为这些解析器是函数，所以它们不会实现`Clone`，该 trait 本来可以帮我们节省一整天的时间，所以我们被困在一个约束中，我们不能在组合器中轻易地复用我们的解析器。
+我们拥有这个解析器，所以我们不能将其作为参数传递两次，编译器会试图对你大喊，因为你试图移动一个已经移动的值。那么我们可以让组合子代替引用吗？不，事实证明，我们还遇到另一整套借用检查器的问题 - 我们目前不会试图解决这些问题。并且因为这些解析器是函数，所以它们不会实现`Clone`，该 trait 本来可以帮我们节省一整天的时间，所以我们被困在一个约束中，我们不能在组合子中轻易地复用我们的解析器。
 
-不过，这不是一个大问题。它只是说明我们不能使用组合器来表达`one_or_more`，但事实证明，这两个通常是你需要的唯一组合器，它们往往会重用解析器，而且，如果你想变得非常花哨，除了解析器，你还可以编写一个带有`RangeBound`的组合器，并在一个范围内对其进行重复：`zero_or_more`使用`range(0..)`，`one_or_more`使用`range(1..)`，`five_or_six`使用`range(5..=6)`，依此类推。
+不过，这不是一个大问题。它只是说明我们不能使用组合子来表达`one_or_more`，但事实证明，这两个通常是你需要的唯一组合子，它们往往会重用解析器，而且，如果你想变得非常花哨，除了解析器，你还可以编写一个带有`RangeBound`的组合子，并在一个范围内对其进行重复：`zero_or_more`使用`range(0..)`，`one_or_more`使用`range(1..)`，`five_or_six`使用`range(5..=6)`，依此类推。
 
 不过，让我们把它留给读者作为练习。现在我们只需使用`zero_or_more`和`one_or_more`即可。
 
 另一个练习可能是找到解决这些所有权问题的方法 - 也许可以通过将解析器包装在`Rc`中使其支持克隆？
+
+## A Predicate Combinator [#](https://bodil.lol/parser-combinators/#a-predicate-combinator)
+
+我们现在有了需要用 `one_or_more` 解析空白的 `xml` 块，并用 `zero_or_more` 解析属性对。 其实，稍等一下。我们其实不想先解析空格 _然后_ 解析属性 (`attributes`)。如果你考虑一下，如果没有属性，空格是可选的，我们可能会遇到直接的 `>` 或 `/>`。但是如果有一个属性，那么*必须*是空格。幸运的是，每个属性之间也必须有空格，如果有多个，所以我们在这里真正看到的是一系列*零或更多*出现的*一个或多个*空格项，然后是属性。
+
+我们首先需要一个解析单个空白项的解析器。我们可以选择下列三种方式之一。
+
+一，我们可以愚蠢地使用我们的 `match_literal` 解析器和一个只包含一个空格的字符串。为什么这么傻？因为空格也是换行符、制表符和大量呈现为空格的奇怪 Unicode 字符。我们将不得不再次依赖 Rust 的标准库，当然 `char` 有一个 `is_whitespace` 方法，就像它有 `is_alphabetic` 和 `is_alphanumeric` 一样。
+
+二，我们可以使用 `is_whitespace` Predicate 写出另外一个解析器，它消耗任意数量的空白字符，就像我们之前编写的 `identifier` 一样。
+
+三，我们可以写的更加巧妙。编写一个解析器 `any_char`，它返回一个单一的 `char`，只要输入中还剩下一个，以及一个组合子 `pred`，它接受一个解析器和一个谓词 (Predicate）函数，并像这样将两者结合起来：`pred (any_char, |c| c.is_whitespace())`。这有一个额外的好处，通过它，编写我们将需要的最终的解析器变得非常容易：属性值的引用字符串。 `any_char` 解析器写起来很简单，但我们得记得注意那些 UTF-8 问题。
+
+```rust
+fn any_char(input: &str) -> ParseResult<char> {
+    match input.chars().next() {
+        Some(next) => Ok((&input[next.len_utf8()..], next)),
+        _ => Err(input),
+    }
+}
+```
+
+对 `经验丰富` 的我们来说， `pred` 组合子也并没有给我们太多惊喜 。 我们调用解析器，然后我们在解析器成功的情况下调用我们的谓词函数，并且只有当它返回 true 时，我们才真正返回 `success`，否则我们将返回与解析器失败一致的错误。
+
+```rust
+fn pred<'a, P, A, F>(parser: P, predicate: F) -> impl Parser<'a, A>
+where
+    P: Parser<'a, A>,
+    F: Fn(&A) -> bool,
+{
+    move |input| {
+        if let Ok((next_input, value)) = parser.parse(input) {
+            if predicate(&value) {
+                return Ok((next_input, value));
+            }
+        }
+        Err(input)
+    }
+}
+```
+
+写一个快速测试以确保一切正常：
+
+```rust
+#[test]
+fn predicate_combinator() {
+    let parser = pred(any_char, |c| *c == 'o');
+    assert_eq!(Ok(("mg", 'o')), parser.parse("omg"));
+    assert_eq!(Err("lol"), parser.parse("lol"));
+}
+```
+
+有了这两个组件，我们可以用一个快速的单行代码编写我们的 `whitespace_char` 解析器：
+
+```rust
+fn whitespace_char<'a>() -> impl Parser<'a, char> {
+    pred(any_char, |c| c.is_whitespace())
+}
+```
+
+并且，现在我们有了`whitespace_char`，我们也可以用它实现我们之前的想法，_一个或多个空白_，以及它的姊妹想法，_零个或多个空白_。 让我们专注于几个简单的地方，并分别称它们为`space1`和`space0`。
+
+```rust
+fn space1<'a>() -> impl Parser<'a, Vec<char>> {
+    one_or_more(whitespace_char())
+}
+
+fn space0<'a>() -> impl Parser<'a, Vec<char>> {
+    zero_or_more(whitespace_char())
+}
+```
+
+## Quoted Strings
+
+完成所有这些组件后，我们现在终于可以解析这些属性了吗？ 当然啦，我们只需要确保我们拥有所有这些属性组件的单独的解析器。 我们已经为属性名称提供了 `identifier`（尽管使用 `any_char` 和 `pred` 加上我们的 `*_or_more` 组合子来重写它是很诱人的）。 `=` 只是 `match_literal("=")`。 不过，我们只有一个带引号的字符串解析器，所以让我们把它组合起来。 幸运地是，我们已经拥有了完成它所需的所有组合子。
+
+```rust
+fn quoted_string<'a>() -> impl Parser<'a, String> {
+    map(
+        right(
+            match_literal("\""),
+            left(
+                zero_or_more(pred(any_char, |c| *c != '"')),
+                match_literal("\""),
+            ),
+        ),
+        |chars| chars.into_iter().collect(),
+    )
+}
+```
+
+组合子的嵌套在这一点上变得有点烦人，但我们暂时不会重构所有代码来修复它，而是专注于这里发生的事情。
+
+最外面的组合子是一个 `map`，因为前面提到的烦人的嵌套，从这开始理解代码是很让人困惑的，所以让我们试着找出它真正开始的地方：第一个引号字符。在`map`里面，有一个`right`，而`right`的第一部分就是我们要找的：`match_literal("\"")`。那是我们的引号的开始 。
+
+`right` 的第二部分是字符串的其余部分。在 `left` 里面，我们很快注意到那个 `left` 的 _right_ 参数，我们一直忽视的那个: 是另一个 `match_literal("\"")` - 引号的结束。所以左手部分是我们用引号包裹的字符串。
+
+我们在这里利用新的 `pred` 和 `any_char` 来获得一个接受*除另一个引号之外的任何内容*的解析器，并将其放入 `zero_or_more` 中，因此我们所说的实现如下：
+
+- 一个引号
+
+- 后跟零个或多个*不是*另一个引号的内容
+
+- 接着是另一个引号
+
+
+  并且，在 `right` 和 `left` 之间，我们丢弃结果值中的引号并取回引用的字符串。
+
+  但是等等，这不是一个字符串。还记得 `zero_or_more` 返回什么吗？内部解析器的返回类型 A 的 `Vec<A>`。对于`any_char`来说，就是`char`。那么，我们得到的不是字符串而是`Vec<char>`。这就是 `map` 的用武之地：我们使用它把 `Vec<char>` 转换为 `String`，因为你可以从 `Iterator<Item = char>` 构建一个 `String`，所以我们可以调用 `vec_of_chars.into_iter().collect()`，并且由于类型推断的强大功能，我们有了 `String`。
+
+  在我们继续之前，让我们编写一个快速测试以确保一切正常，因为如果我们需要这么多词来解释它，这可能不是我们作为程序员对自己有信心的样子。
+
+```rust
+#[test]
+fn quoted_string_parser() {
+    assert_eq!(
+        Ok(("", "Hello Joe!".to_string())),
+        quoted_string().parse("\"Hello Joe!\"")
+    );
+}
+```
+
+所以, 终于, 我们可以解析点属性了.
+
+## At Last, Parsing Attributes
+
+我们现在可以解析空格、标识符、`=` 符号和带引号的字符串。 最后，这就是我们解析属性所需的全部内容。
+
+首先，让我们为一个属性对编写一个解析器。 我们将把它们存储为 `Vec<(String, String)>`，你可能还记得，所以我们需要一个解析器来处理 `(String, String)` 元组,来提供给我们值得信赖的 `zero_or_more` 组合子。 让我们看看我们是否可以写出一个。
+
+```rust
+fn attribute_pair<'a>() -> impl Parser<'a, (String, String)> {
+    pair(identifier, right(match_literal("="), quoted_string()))
+}
+```
+
+易如反掌！ 总结一下：我们已经有一个方便的组合子来解析一个值的元组，`pair`，所以我们将它与 `identifier` 解析器一起使用，产生一个 `String` 和一个带有 `=` 符号的 `right`， 它包括了我们不想保留的值，以及我们新的 `quoted_string` 解析器，它给了我们另一个 `String`。
+
+现在，让我们将其与 `zero_or_more` 结合起来构建该 `vector` - 但不要忘记它们之间的空白。
+
+```rust
+fn attributes<'a>() -> impl Parser<'a, Vec<(String, String)>> {
+    zero_or_more(right(space1(), attribute_pair()))
+}
+```
+
+零次或多次出现以下内容：一个或多个空白字符，然后是一个属性对。 我们使用`right`来丢弃空格并保留属性对。
+
+让我们测试一下。
+
+```rust
+#[test]
+fn attribute_parser() {
+    assert_eq!(
+        Ok((
+            "",
+            vec![
+                ("one".to_string(), "1".to_string()),
+                ("two".to_string(), "2".to_string())
+            ]
+        )),
+        attributes().parse(" one=\"1\" two=\"2\"")
+    );
+}
+```
+
+测试通过! 起飞!
+
+实际上，并没有，在叙述者点上, 我的 `rustc` 抱怨我的类型变得非常复杂，我需要增加最大允许的类型大小才能继续。你也可能遇到这种情况，如果发生了, 你需要知道如何处理它。 幸好，在这些情况下，`rustc` 通常会给出很好的建议，所以当它告诉你将 `#![type_length_limit = "...some big number..."]` 添加到文件顶部时，就按照它说的去做。 实际上，只需将其设为 `#![type_length_limit = "16777216"]`，这将使我们进一步深入复杂类型的平流层。 全力以赴，我们现在是宇航员！
+
+## So Close Now
+
+这个时候，事情似乎即将开始合为一体，这让人松了一口气，因为我们的类型正在快速接近 NP 完整性。 我们只需要处理两个版本的元素标签：单个元素和带有子元素的父元素，但是我们非常有信心，一旦我们有了这些，解析子元素将只是 `zero_or_more` 的问题， 对吧？
+
+所以让我们先从单一元素开始，把孩子的问题推迟一点。 或者，更好的是，让我们首先为两者的所有共同点编写一个解析器：开头的 `<`、元素名称和属性。 让我们看看我们是否可以从几个组合子中得到 `(String, Vec<(String, String)>)`类型。
+
+```rust
+fn element_start<'a>() -> impl Parser<'a, (String, Vec<(String, String)>)> {
+    right(match_literal("<"), pair(identifier, attributes()))
+}
+```
+
+有了它，我们可以快速地给它打上标签，为单个元素创建一个解析器。
+
+```rust
+fn single_element<'a>() -> impl Parser<'a, Element> {
+    map(
+        left(element_start(), match_literal("/>")),
+        |(name, attributes)| Element {
+            name,
+            attributes,
+            children: vec![],
+        },
+    )
+}
+```
+
+万岁，感觉我们的目标已经触手可及了——我们现在实际上正在构建一个 `Element`！
+
+让我们来测试一下这个现代科技的奇迹吧。
+
+```rust
+#[test]
+fn single_element_parser() {
+    assert_eq!(
+        Ok((
+            "",
+            Element {
+                name: "div".to_string(),
+                attributes: vec![("class".to_string(), "float".to_string())],
+                children: vec![]
+            }
+        )),
+        single_element().parse("<div class=\"float\"/>")
+    );
+}
+```
+
+...我想我们才刚刚突破大气层。
+
+`single_element` 的返回类型非常复杂，编译器会花费很长时间，直到遇到我们之前给它的非常大的类型大小限制 (`#![type_length_limit = ""]`)，要求更大的类型。 很明显我们不能再忽视这个问题，因为它是一个相当简单的解析器和(应该只需要)几分钟的编译时间——对于成品来说甚至可能是几个小时——似乎有点不合理。
+
+在继续之前，你最好在我们修复问题时注释掉这两个函数和测试......
+
+## To Infinity And Beyond
+
+如果你曾经尝试过在 Rust 中编写递归类型，你可能已经知道我们的小问题的解决方案。
+
+递归类型的一个非常简单的例子是单向链表。 原则上，可以将其表示为这样的枚举：
+
+```rust
+enum List<A> {
+    Cons(A, List<A>),
+    Nil,
+}
+```
+
+`rustc` 会非常明智地反对你的递归类型 `List<A>` ,因为它具有无限大小，因为在每个 `List::<A>::Cons` 内部是另一个 `List<A>`，这意味着它也是一个 `List<A>`......直到无穷大。就 `rustc` 而言，我们要求一个无限列表，我们要求它能够*分配*一个无限列表。
+
+在许多语言中，无限列表原则上对于类型系统来说不是问题，实际上对于 Rust 也不是问题。问题是在 Rust 中，如前所述，我们需要能够*分配*它，或者更确切地说，我们需要能够在我们构造它时预先确定类型的 _大小_，以及当类型是无限的，这意味着大小也必须是无限的。
+
+解决方案是使用一点间接性。我们的`List::Cons` 不是`A` 的一个元素和`A` 的另一个*list*，而是我们使它成为`A` 的一个元素和一个指向`A` 列表的*指针*。我们知道指针的大小，不管它指向什么都是一样的，所以我们的 List::Cons 现在有一个固定的和可预测的大小，无论列表的大小如何。在 Rust 中，将一个拥有的东西变成指向堆上拥有的东西的指针的方法是用 `box` 包裹它。
+
+```rust
+enum List<A> {
+    Cons(A, Box<List<A>>),
+    Nil,
+}
+```
+
+`Box` 的另一个有趣的特性是它里面的类型可以是抽象的。 这意味着我们可以让类型检查器处理一个非常简洁的 `Box<dyn Parser<'a, A>>`，而不是我们现在非常复杂的解析器函数类型。
+
+听起来不错。 有什么缺点？ 好吧，我们可能会因为必须遵循该指针而失去一两个指令周期，也可能是编译器失去了一些优化解析器的机会。 但回想一下 Knuth 关于过早优化(1)的告诫：它会没事的。 你完全可以负担得起这些周期。 来这里是为了解 解析器组合子，而不是了解手写的超专业化 [SIMD 解析器](https://github.com/lemire/simdjson)（尽管它们本身就很令人兴奋）。 因此，除了迄今为止我们一直在使用的裸函数之外，让我们继续为 _boxed_ 解析器函数实现 `Parser`。
+
+> 译者注: 1: 过早优化是万恶之源
+
+```rust
+struct BoxedParser<'a, Output> {
+    parser: Box<dyn Parser<'a, Output> + 'a>,
+}
+
+impl<'a, Output> BoxedParser<'a, Output> {
+    fn new<P>(parser: P) -> Self
+    where
+        P: Parser<'a, Output> + 'a,
+    {
+        BoxedParser {
+            parser: Box::new(parser),
+        }
+    }
+}
+
+impl<'a, Output> Parser<'a, Output> for BoxedParser<'a, Output> {
+    fn parse(&self, input: &'a str) -> ParseResult<'a, Output> {
+        self.parser.parse(input)
+    }
+}
+```
+
+出于礼节，我们创建了一个新类型 `BoxedParser`来保存我们的 `box`。 要从任何其他类型的解析器（包括另一个`BoxedParser`，即使那毫无意义）创建一个新的`BoxedParser`，我们提供了一个函数`BoxedParser::new(parser)`，它只会将该解析器放入 我们的新类型中的一个 `Box`。 最后，我们为它实现了 `Parser`，这样它就可以作为解析器互换使用。
+
+这使我们能够将解析器函数放入 `Box`，并且 `BoxedParser` 将与函数一样用作 `Parser`。 现在，正如前面提到的，这意味着将解析器移动到堆中，并且必须取消引用一个指针才能找到它，这可能会花费我们*几个宝贵的纳秒*，所以我们实际上可能想要推迟使用 `box`。 将一些更常用的组合子放到 `box` 就足够了。
+
+## **An Opportunity Presents Itself**
+
+但是，稍等片刻，这为我们提供了解决另一个变得麻烦的问题的机会。
+
+还记得我们写的最后几个解析器吗？ 因为我们的组合子是独立的函数，当我们嵌套大量的组合子时，我们的代码开始变得有点不可读。 回想一下我们的 `quoted_string` 解析器：
+
+```rust
+fn quoted_string<'a>() -> impl Parser<'a, String> {
+    map(
+        right(
+            match_literal("\""),
+            left(
+                zero_or_more(pred(any_char, |c| *c != '"')),
+                match_literal("\""),
+            ),
+        ),
+        |chars| chars.into_iter().collect(),
+    )
+}
+```
+
+如果我们可以在解析器上使用这些组合子方法而不是独立函数，它会有更好的可读性。 如果我们可以将组合子声明为 `Parser` trait 上的方法会怎样？
+
+问题是，如果我们这样做，我们就失去了依赖 `impl Trait` 作为返回类型的能力，因为 `impl Trait` 不允许出现在 trait 声明中。
+
+……但现在我们有了`BoxedParser`。 我们不能声明一个返回 `impl Parser<'a, A>` 的 trait ，但我们肯定*可以*声明一个返回 `BoxedParser<'a, A>` 的 trait 。
+
+最好的部分是我们甚至可以使用默认实现声明这些，这样我们就不必为实现 `Parser` 的每个类型重新实现每个组合子。
+
+让我们用 `map` 来试试，通过扩展我们的 `Parser` trait 如下：
+
+```rust
+trait Parser<'a, Output> {
+    fn parse(&self, input: &'a str) -> ParseResult<'a, Output>;
+
+    fn map<F, NewOutput>(self, map_fn: F) -> BoxedParser<'a, NewOutput>
+    where
+        Self: Sized + 'a,
+        Output: 'a,
+        NewOutput: 'a,
+        F: Fn(Output) -> NewOutput + 'a,
+    {
+        BoxedParser::new(map(self, map_fn))
+    }
+}
+```
+
+啊这，好多`'a'`，唉，它们都是必要的。 幸运的是，我们仍然可以不变地重用旧的组合子函数——而且，我们还得到一个额外的好处，不仅可以获得更好的语法来应用它们，我们还通过自动 `box` 来摆脱爆炸性的 `impl Trait` 类型。 现在我们可以稍微改进我们的 `quoted_string` 解析器：
+
+```rust
+fn quoted_string<'a>() -> impl Parser<'a, String> {
+    right(
+        match_literal("\""),
+        left(
+            zero_or_more(pred(any_char, |c| *c != '"')),
+            match_literal("\""),
+        ),
+    )
+    .map(|chars| chars.into_iter().collect())
+}
+```
+
+乍一看现在更明显，正在对 `right()` 的结果调用 `.map()`。
+
+我们也可以给 `pair`、`left` 和 `right` 相同的处理，但是对于这三个，我认为当它们是函数时读起来更容易，因为它们反映了 `pair` 的输出结构 类型。 如果你不同意，完全可以像我们对 `map` 所做的那样将它们添加到 trait 中，并且非常欢迎你继续尝试将其作为练习。
+
+不过，另一个主要候选人是 `pred`。 让我们将它的定义添加到 `Parser` trait 中：
+
+```rust
+fn pred<F>(self, pred_fn: F) -> BoxedParser<'a, Output>
+where
+    Self: Sized + 'a,
+    Output: 'a,
+    F: Fn(&Output) -> bool + 'a,
+{
+    BoxedParser::new(pred(self, pred_fn))
+}
+```
+
+这下我们就可以用 `pred` 重写 `quoted_string`：
+
+```rust
+zero_or_more(any_char.pred(|c| *c != '"')),
+```
+
+我认为这读起来更好一些，我认为我们也会保留 `zero_or_more` 原样 - 它读起来就像应用了以下谓词的零个或多个 `any_char`，这对我来说听起来很半。 当然，如果你愿意这么写，你也可以继续将 `zero_or_more` 和 `one_or_more` 移到 trait 中。
+
+除了重写`quoted_string`，我们还要修正`single_element`中的`map`：
+
+```rust
+fn single_element<'a>() -> impl Parser<'a, Element> {
+    left(element_start(), match_literal("/>")).map(|(name, attributes)| Element {
+        name,
+        attributes,
+        children: vec![],
+    })
+}
+```
+
+让我们试着取消对 `element_start` 和我们之前注释掉的测试的注释，看看情况是否变得更好。 开始编译并尝试运行测试......
+
+……而且，是的，现在编译时间恢复正常了。 甚至可以继续删除文件顶部的字体大小设置。
+
+这只是通过 `box` 两个 `map` 和一个 `pred` - *而且*我们从中得到了更好的语法！
+
+## Having Children
+
+现在让我们为父元素的开始标记编写解析器。 它几乎与`single_element` 相同，只是它以`>` 结尾而不是`/>`。 后面还有零个或多个子元素和一个结束标记，但首先我们需要解析实际的开始标记，所以让我们完成这个函数。
+
+```rust
+fn open_element<'a>() -> impl Parser<'a, Element> {
+    left(element_start(), match_literal(">")).map(|(name, attributes)| Element {
+        name,
+        attributes,
+        children: vec![],
+    })
+}
+```
+
+现在，我们如何得到这些子元素？ 它们将是单个元素或父元素本身，并且它们有零个或多个，所以我们有我们可信赖的 `zero_or_more` 组合子，但是我们提供什么？ 我们还没有编写过的一件事是多重解析器：解析*或者*单个元素*或*父元素的东西。
+
+为了完成这个特性，我们需要一个组合子，它按顺序尝试两个解析器：如果第一个解析器成功，我们就完成了，我们返回它的结果，就是这样。 如果失败，我们不会返回错误，而是在*相同的输入*上尝试第二个解析器。 如果成功，很好，如果没有，我们也会返回错误，因为这意味着我们的两个解析器都失败了，这是一个整体性失败。
+
+```rust
+fn either<'a, P1, P2, A>(parser1: P1, parser2: P2) -> impl Parser<'a, A>
+where
+    P1: Parser<'a, A>,
+    P2: Parser<'a, A>,
+{
+    move |input| match parser1.parse(input) {
+        ok @ Ok(_) => ok,
+        Err(_) => parser2.parse(input),
+    }
+}
+```
+
+这使得我们可以声明一个解析器`element`，它匹配单个元素或父元素（现在，我们只使用`open_element` 来表示它，一旦我们有了`element`，我们将处理 `element`）。
+
+```rust
+fn element<'a>() -> impl Parser<'a, Element> {
+    either(single_element(), open_element())
+}
+```
+
+现在让我们为结束标记添加一个解析器。 它具有必须匹配开始标签的特性，这意味着解析器必须知道开始标签的名称是什么。 但这就是函数参数的用途，对吧？
+
+```rust
+fn close_element<'a>(expected_name: String) -> impl Parser<'a, String> {
+    right(match_literal("</"), left(identifier, match_literal(">")))
+        .pred(move |name| name == &expected_name)
+}
+```
+
+事实证明，那个 `pred` 组合子真的很有用，不是吗？
+
+现在，让我们为完整的父元素解析器、子元素和所有元素组合起来：
+
+```rust
+fn parent_element<'a>() -> impl Parser<'a, Element> {
+    pair(
+        open_element(),
+        left(zero_or_more(element()), close_element(…oops)),
+    )
+}
+```
+
+通过使用 `and_then`，我们现在可以通过使用该函数构建正确版本的 `close_element` 来获得正确的结果。
+
+```rust
+fn parent_element<'a>() -> impl Parser<'a, Element> {
+    open_element().and_then(|el| {
+        left(zero_or_more(element()), close_element(el.name.clone())).map(move |children| {
+            let mut el = el.clone();
+            el.children = children;
+            el
+        })
+    })
+}
+```
+
+现在看起来有点复杂，因为 `and_then` 必须在 `open_element()` 中进行，在那里我们找到进入 `close_element` 的地方。这意味着 `open_element` 之后的解析器的其余部分都必须在 `and_then` 闭包内构造。此外，因为该闭包现在是来自 `open_element` 的 `Element` 结果的唯一接收者，我们返回的解析器也必须向前传递该信息。
+
+我们在生成的解析器上 `map`的内部闭包具有对外部闭包中的 `Element`（`el`）的引用。我们必须使用 `clone()` ，因为一个 `Fn` 中，只有对它的引用。我们获取内部解析器的结果（我们的 `Vec<Element>` 子元素）并将其添加到我们克隆的 `Element` 中，然后将其作为最终结果返回。
+
+我们现在需要做的就是返回到我们的 `element` 解析器并确保我们将 `open_element` 更改为 `parent_element`，这样它就会解析整个元素结构，而不是只是它的开头，我相信我们已经完成了！
+
+## Word Or Do I Have To?
+
+还记得我们讨论过 `map` 模式如何在 Planet Haskell 上被称为“函子”吗？
+
+`and_then` 模式是你在 Rust 中经常看到的另一种模式，通常与 `map` 位于相同的位置。它在 `Iterator` 上被称为 [`flat_map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map)，但它的模式与其他模式相同。
+
+它的花名是`monad`。如果你有一个东西 `Thing<A>`，并且你有一个可用的 `and_then` 函数，它可以将一个函数从 `A` 传递给 `Thing<B>`，这样现在你就有了一个新的 `Thing<B>` 来替代原来的，这就是一个 monad。
+
+该函数可能会立即被调用，比如当你有一个 `Option<A>` 时，我们已经知道它是一个 `Some(A)` 还是一个 `None`，我们直接应用该函数，如果它是一个 `Some(A)`，那么就会给我们一个`Some(B)`。
+
+它也可能被称为 `惰性 (lazy)`。例如，如果有一个仍在等待解析的 `Future<A>`，它不会立即调用该函数来创建一个 `Future<B>`，而是创建一个新的 `Future<B>`它包含 `Future<A>` 和函数，然后等待 `Future<A>` 完成。当它这样做时，它会使用 `Future<A>` 的结果调用函数，这样就搞定了 [1](https://bodil.lol/parser-combinators/#footnote_1)(He isn't really your uncle.)，得到你的 `Future< B>` 。换句话说，在`Future` 的情况下，可以将传递给`and_then` 的函数视为*回调函数*，因为它会在完成时使用原始 future 的结果进行调用。它还比这更有趣，因为它返回一个 _new_ `Future`，它可能已经或可能没有被解决，所以它是一种将 future 连在一起的方法。
+
+然而，与函子一样，Rust 的类型系统目前不能表达 `monad`，所以让我们只需注意这种模式被称为 `monad`，而且令人失望的是，这和网上的搜到的意思并不一样，它与墨西哥卷饼毫无关系。
+
+## Whitespace, Redux
+
+只有最后一件事。
+
+我们现在应该有一个能够解析一些 XML 的解析器，但是他并不能很好的接受空格。 标签之间应该允许任意空格，这样我们就可以自由地在标签之间插入换行符等（原则上，标识符和文字之间应该允许空格，比如`< div />`，但这里跳过它）。 在这一点上，我们应该能够毫不费力地为此组合一个快速组合子。
+
+```rust
+fn whitespace_wrap<'a, P, A>(parser: P) -> impl Parser<'a, A>
+where
+    P: Parser<'a, A>,
+{
+    right(space0(), left(parser, space0()))
+}
+```
+
+如果我们将 `element` 包裹在里面，它将忽略 `element` 周围的所有前面和后面空格，这意味着我们可以随意使用尽可能多的换行符和尽可能多的缩进。
+
+```rust
+fn element<'a>() -> impl Parser<'a, Element> {
+    whitespace_wrap(either(single_element(), parent_element()))
+}
+```
+
+## We're Finally There! 
+
+我想我们终于做到了！ 让我们写个测试庆祝一下！
+
+```RUST
+#[test]
+fn xml_parser() {
+    let doc = r#"
+        <top label="Top">
+            <semi-bottom label="Bottom"/>
+            <middle>
+                <bottom label="Another bottom"/>
+            </middle>
+        </top>"#;
+    let parsed_doc = Element {
+        name: "top".to_string(),
+        attributes: vec![("label".to_string(), "Top".to_string())],
+        children: vec![
+            Element {
+                name: "semi-bottom".to_string(),
+                attributes: vec![("label".to_string(), "Bottom".to_string())],
+                children: vec![],
+            },
+            Element {
+                name: "middle".to_string(),
+                attributes: vec![],
+                children: vec![Element {
+                    name: "bottom".to_string(),
+                    attributes: vec![("label".to_string(), "Another bottom".to_string())],
+                    children: vec![],
+                }],
+            },
+        ],
+    };
+    assert_eq!(Ok(("", parsed_doc)), element().parse(doc));
+}
+
+```
+
+下面这个测试会因为有未闭合 tag 而解析失败：
+
+```rust
+#[test]
+fn mismatched_closing_tag() {
+    let doc = r#"
+        <top>
+            <bottom/>
+        </middle>"#;
+    assert_eq!(Err("</middle>"), element().parse(doc));
+}
+```
+
+好消息是它返回不匹配的结束标记作为错误。 坏消息是它实际上并没有*说*问题是不匹配的结束标签，只是*错误在哪里*。 总比没有好，但是，老实说，随着错误消息的出现，它仍然很糟糕。 但是想让它能成功的找到错至少得再写一篇同样长的文章。
+
+让我们关注好消息：我们使用解析器组合子从头开始编写了一个解析器！ 我们知道解析器既构成函子又构成单子，因此你现在可以在令人生畏的范畴论知识聚会上给人们留下深刻印象了[2](https://bodil.lol/parser-combinators/#footnote_2)。（Please don't be that person at parties. 别真的这么干）
+
+最重要的是，我们现在知道解析器组合子是如何从头开始工作的。 现在没有人能阻止我们！
+
+## Victory Puppies
+
+![img](https://bodil.lol/parser-combinators/many-puppies.gif)
+
+## Further Resources
+
+首先，我对用严格的 `rust`术语 向你解释 monad 感到内疚，而且我知道如果我不向你指出 [他的开创性论文](https://homepages.com)，Phil Wadler 会对我非常不满。 其中详细介绍了更多令人兴奋的细节——包括它们与解析器组合子的关系。
+
+本文中的想法与 [`pom`](https://crates.io/crates/pom) 解析器组合子库背后的想法极为相似，如果这让你想在同一个解析器组合子中使用风格，我强烈推荐它。
+
+Rust 解析器组合子的最新技术仍然是 [`nom`](https://crates.io/crates/nom)，以至于前面提到的 `pom` 显然是派生的名称（而且没有比这更好的称赞了），但它采用了与我们今天在这里构建的方法截然不同的方法。
+
+另一个流行的 Rust 解析器组合库是 [`combine`](https://crates.io/crates/combine)，它可能也值得一看。
+
+Haskell 的开创性解析器组合库是 [Parsec](http://hackage.haskell.org/package/parsec)。
+
+最后，我对解析器组合子的第一次认识归功于 Graham Hutton 所著的 [_Programming in Haskell_](http://www.cs.nott.ac.uk/~pszgmh/pih.html)，这是一本很棒的书，不仅容易读而且还会教给你 Haskell 的积极副作用。
+
+## Licence
+
+This work by [Bodil Stokke](https://bodil.lol/) is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+本文由 Bodil Stokke 撰写，基于署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)协议。
