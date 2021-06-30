@@ -1,4 +1,12 @@
-## Rust 不是一家公司
+## Rust 与开源 | Rust 并不是一家公司
+
+译者：郭晓双 / 后期编辑：张汉东
+
+> 原文： https://blog.m-ou.se/rust-is-not-a-company/
+> 
+> 本文是 Mara(Rust Library Team Leader) 写的一篇关于 Rust 项目开源治理的文章。
+
+---
 
 ### 不是公司
 

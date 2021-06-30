@@ -160,7 +160,37 @@
 
 
 
-- [六月刊（June）| 待发布]()
+- [六月刊（June）](./chapter_6/toc.md)
+    - [发刊通告](./chapter_6/announce.md)
+    - [官方动态](./chapter_6/lang.md)
+    - [社区热点](./chapter_6/hots.md)
+    - [活动回顾](./chapter_6/events.md)
+    - [本月招聘](./chapter_6/jobs.md)
+    - [Rust与开源 ｜ Rust 不是一家公司](./chapter_6/rust-not-a-company.md)
+    - [三万言｜2021 年 Rust 行业调研报告](./chapter_6/rust-report.md)
+    - [华为 | WebAssembly 安全性调研](./chapter_6/webassmebly-security.md)
+    - [华为 | StratoVirt - 基于Rust的 balloon 功能实践](./chapter_6/hw_StratoVirt_balloon.md)
+    - [蚂蚁集团 ｜ Rust 数据内存布局](./chapter_6/ant-rust-data-layout.md)
+    - [Datenlord | Rust 语言无锁数据结构的内存管理](./chapter_6/rust-lockfree.md)
+    - [SecondState | 用 Docker 工具管理 Rust 函数](./chapter_6/docker-wasm.md)
+    - [华为 | 如何定制 Cargo Clippy ](./chapter_6/custom-clippy.md)
+    - [定制静态分析 lint 检查规则](./chapter_6/static_analysis_custom_clippy_lint.md)
+    - [无需 fork Clippy 就可以编写 Rust lints](./chapter_6/write-rust-lints-without-forking-clippy.md)
+    - [学习资源](./chapter_6/learn.md)
+    - [Rust过程宏系列教程 | Proc Macro Workshop 之 Debug ](./chapter_6/proc_macro_workshop_guide_for_builder_project.md)
+    - [Rust 学习笔记系列｜ Part 4](./chapter_6/rust_study_part_4.md)
+    - [Rust 学习笔记系列｜ Part 5](./chapter_6/rust_study_part_5.md)
+    - [Rust 学习笔记系列｜ Part 6](./chapter_6/rust_study_part_6.md)
+    - [Rust 学习笔记系列｜ Part 7](./chapter_6/rust_study_part_7.md)
+    - [用 Rust 学习解析器组合子 (combinator)](./chapter_6/parser-combinator.md)
+    - [对Web3.0概念的梳理](./chapter_6/web3-part1.md)
+    - [GitHub 趋势榜](./chapter_6/github_trending.md)
+    - [推荐项目 ｜ 基础工具库](./chapter_6/tool_libs.md)
+    - [推荐项目 |  框架引擎](./chapter_6/frameworks.md)
+
+
+
+
 - [七月刊（July）| 待发布]()
 - [八月刊（August）| 待发布]()
 - [九月刊（September）| 待发布]()

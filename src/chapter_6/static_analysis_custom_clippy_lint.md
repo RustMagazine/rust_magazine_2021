@@ -27,7 +27,7 @@
 
 这时候如果把自定义的 lint 加到公司的 CI/CD 流程中，就能自动检测不符合公司 coding_style 的代码
 
-![](./image/static_analysis_custom_clippy_lint.png)
+![](./image/clippy/static_analysis_custom_clippy_lint.png)
 
 ## cargo-lint 可执行文件
 
