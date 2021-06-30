@@ -1,7 +1,5 @@
 # 无需 fork Clippy 就可以编写 Rust lints
 
-![dylint](../image/dylint.jpeg)
-
 [原文](https://www.trailofbits.com/post/write-rust-lints-without-forking-clippy)
 
 本文主要介绍 [Dylint](https://github.com/trailofbits/dylint)，它是一个可以从动态库中加载 Rust lints 规则的工具。Dylint 可以让开发人员轻松维护自己的个人 lint 集合。

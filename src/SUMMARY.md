@@ -167,6 +167,7 @@
     - [活动回顾](./chapter_6/events.md)
     - [本月招聘](./chapter_6/jobs.md)
     - [Rust与开源 ｜ Rust 不是一家公司](./chapter_6/rust-not-a-company.md)
+    - [开源与心理健康](./chapter_6/open-source-mental-health.md)
     - [三万言｜2021 年 Rust 行业调研报告](./chapter_6/rust-report.md)
     - [华为 | WebAssembly 安全性调研](./chapter_6/webassmebly-security.md)
     - [华为 | StratoVirt - 基于Rust的 balloon 功能实践](./chapter_6/hw_StratoVirt_balloon.md)
