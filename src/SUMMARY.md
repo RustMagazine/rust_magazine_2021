@@ -185,6 +185,7 @@
     - [Rust 学习笔记系列｜ Part 7](./chapter_6/rust_study_part_7.md)
     - [用 Rust 学习解析器组合子 (combinator)](./chapter_6/parser-combinator.md)
     - [对Web3.0概念的梳理](./chapter_6/web3-part1.md)
+    - [ Rbatis ORM 2.0 | 零开销编译时动态SQL的探索](./chapter_6/rabits.md)
     - [GitHub 趋势榜](./chapter_6/github_trending.md)
     - [推荐项目 ｜ 基础工具库](./chapter_6/tool_libs.md)
     - [推荐项目 |  框架引擎](./chapter_6/frameworks.md)

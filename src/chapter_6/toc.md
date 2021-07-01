@@ -56,6 +56,7 @@
 
 ## 开源项目巡礼
 
+- [ Rbatis ORM 2.0 | 零开销编译时动态SQL的探索](./rabits.md)
 - [GitHub 趋势榜](./github_trending.md)
 - [推荐项目 ｜ 基础工具库](./tool_libs.md)
 - [推荐项目 |  框架引擎](./frameworks.md)
