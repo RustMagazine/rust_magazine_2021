@@ -194,6 +194,25 @@
 
 
 - [七月刊（July）| 待发布]()
+    - [发刊通告](./chapter_7/announce.md)
+    - [官方动态](./chapter_7/lang.md)
+    - [社区热点](./chapter_7/hots.md)
+    - [活动回顾](./chapter_7/events.md)
+    - [本月招聘](./chapter_7/jobs.md)
+    - [Datenlord | Rust实现RDMA异步编程（二）](./chapter_7/rust-epoll-rdma-part2.md)
+    - [学习资源](./chapter_7/learn.md)
+    - [常见问题汇总](./chapter_7/faq.md)
+    - [语言技巧](./chapter_7/tips.md)
+    - [GitHub 趋势榜](./chapter_7/github_trending.md)
+    - [推荐项目 ｜ 基础工具库](./chapter_7/tool_libs.md)
+    - [推荐项目 |  框架引擎](./chapter_7/frameworks.md)
+    - [Rust生态安全漏洞总结系列 | Part 3](./chapter_7/rust-security-part-3.md)
+
+
+
+
+
+
 - [八月刊（August）| 待发布]()
 - [九月刊（September）| 待发布]()
 - [十月刊（October）| 待发布]()
