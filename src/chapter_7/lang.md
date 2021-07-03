@@ -209,3 +209,16 @@ cargo install cargo-supply-chain
 - [cargo-supply-chain](https://github.com/rust-secure-code/cargo-supply-chain)
 - [cargo-geiger](https://github.com/rust-secure-code/cargo-geiger)
 
+## RFC 3107 即将被合并 ｜ 允许枚举类型使用  `#[derive(Default)] `
+
+```rust
+
+#[derive(Default)]
+enum Option<T> {
+    #[default]
+    None,
+    Some(T),
+}
+```
+
+[https://github.com/rust-lang/rfcs/pull/3107](https://github.com/rust-lang/rfcs/pull/3107)
