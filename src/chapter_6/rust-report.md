@@ -2051,7 +2051,7 @@ Nervos Network 是一个开源的公链生态，包含以区块链技术为核�
   - **[rustscan](https://github.com/rustscan/rustscan)**，是一个现代化高性能的端口扫描器，并且提供脚本引擎来支持运行 Python，Lua，Shell。支持 自适应学习（Adaptive learning）。用的越多，RustScan 越智能，不是基于臃肿的机器学习，主要是基于基本数学。
   - **[feroxbuster](https://github.com/epi052/feroxbuster)**，一款高性能的内容发现工具，用于渗透测试。feroxbuster 使用蛮力结合单词列表在目标目录中搜索未链接的内容，这是一种攻击行为。这些资源可能存储有关 Web 应用程序和操作系统的敏感信息，例如源代码，凭据，内部网络寻址等。此攻击也称为可预测资源位置，文件枚举，目录枚举和资源枚举。
   - **[rusty-tor](https://github.com/zero-gear/rusty-tor)**，一个概念验证的 Tor 客户端。不过有两年没有维护了。
-  - [amber](https://github.com/EgeBalci/amber)， 号称首款 反射式 PE 打包器，目前开发很活跃。amber 提供的打包方法，可以改变将恶意软件传送到系统的方式。 通过尝试通过无文件代码注入将有效负载传递到系统，可以直接绕过大多数安全机制，而不是尝试寻找提供机器学习数据集的新的反检测技术。 使用这种新的打包方法，可以将已编译的PE文件转换为可与常见软件漏洞（例如缓冲区溢出）一起使用的多阶段感染有效负载。
+  - [Enarx](https://github.com/enarx)，这是一个组织，由红帽公司牵头其他知名企业来做可信执行环境的应用部署系统。
   - [sn0int](https://github.com/kpcyrd/sn0int)， 半自动高级公开资源情报（OSINT）框架和程序包管理器，用于扫描目标IP地址、电子邮件、网站和组织信息，并从不同消息源收集各种情报信息。
   - [sniffglue](https://github.com/kpcyrd/sniffglue)，多线程网络嗅探器。Kpcyrd 经常使用tcpdump，但他认为输出更友好的话会更好，并且 wireshark 也经常存在漏洞，tcpdump 有时也有漏洞，所以他用 Rust 实现了这个工具。
   - [badtouch](https://github.com/kpcyrd/badtouch)， 可编写脚本的网络身份验证破解程序。

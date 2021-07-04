@@ -67,3 +67,15 @@ Fang 相关链接：
 
 - [https://github.com/ayrat555/fang](https://github.com/ayrat555/fang)
 - [介绍文章](https://www.badykov.com/rust/2021/06/27/fang/)
+
+
+## enarx : 在可信执行环境的应用部署系统
+
+据说是红帽和一些知名企业一起搞的。
+
+Enarx是独立于CPU架构的，使相同的应用程序代码可以在多个目标上部署，抽象出诸如交叉编译和硬件供应商之间不同的认证机制等问题。目前，支持 AMD SEV和英特尔SGX的工作正在进行中。
+
+Enarx 使用 WebAssembly 作为其隔离和可移植性的基础。
+
+
+[https://github.com/enarx/enarx](https://github.com/enarx/enarx)
