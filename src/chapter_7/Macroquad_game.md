@@ -1,8 +1,7 @@
 # 使用Macroquad在Android设备上发布游戏
+ <img src="../image/Macroquad_game_1.png" width = "550" alt="Macroquad_game_1" align=center />
 
-[![zemeroth](1.zemeroth.png)](https://play.google.com/store/apps/details?id=rust.zemeroth)
-
-**译者注：**macroquad是一个简单易用的Rust游戏库。macroquad尝试避免任何Rust特定概念比如生命周期/借用，这使得它对初学者非常友好。
+**译者注：** macroquad是一个简单易用的Rust游戏库。macroquad尝试避免任何Rust特定概念比如生命周期/借用，这使得它对初学者非常友好。
 
 详见https://docs.rs/macroquad/0.3.7/macroquad/index.html
 
@@ -170,7 +169,7 @@ macroquad::file::set_pc_assets_folder("assets");
 
 ## 高DPI适配
 
-![densities-phone_2x](2.densities-phone_2x.png)
+ <img src="../image/Macroquad_game_2.png" width = "340" alt="Macroquad_game_2" align=center />
 
 *[图片来源](https://developer.android.com/training/multiscreen/screendensities)*
 
@@ -207,7 +206,7 @@ async fn main() {
 
 
 
-![icon](3.icon.jpg)
+![icon](../image/Macroquad_game_3.jpg)
 
 应用图标在APK内被视为一种特殊资源，我们将res目录加入APK：
 
