@@ -1045,6 +1045,81 @@ fn parent_element<'a>() -> impl Parser<'a, Element> {
 }
 ```
 
+Oops。现在我们要怎么把参数传给`close_element`？我想我们还缺少最后一个组合子。
+
+我们已经很接近了。一旦我们解决了最后这个问题以让`parent_element`工作，我们就能把`element`解析器的`open_element`替换成新的`parent_element`，这就意味着，我们就有一个完整可用的XML解析器。
+
+还记得我前面说过我们后面会回到`and_then`吗？好的，后面就是这里了。我们所需要的组合子，实际上，就是`and_then`：我们需要一个东西能接收一个解析子，还要一个函数，这个函数能接收解析子的返回结果并返回一个*新*解析子，这个解析子我们后面再用。这有点像`pair`，但不是仅仅收集tuple里的两个结果，我们把结果传入一个函数。这也是`and_then`怎么作用在`Result`和`Options`的方式，除了这个更好理解，因为`Result`和`Options`基本上什么也不做，它们只是包含了一些数据而已(或者不包含，在某一些情况下)。
+
+所以让我们试着实现一下它。
+
+```rust
+fn and_then<'a, P, F, A, B, NextP>(parser: P, f: F) -> impl Parser<'a, B>
+where
+    P: Parser<'a, A>,
+    NextP: Parser<'a, B>,
+    F: Fn(A) -> NextP,
+{
+    move |input| match parser.parse(input) {
+        Ok((next_input, result)) => f(result).parse(next_input),
+        Err(err) => Err(err),
+    }
+}
+```
+
+看看这些类型，这里有很多类型变量，但是我们认识`P`，我们的输入解析器，`P`有一个结果类型`A`。我们的函数`F`，本来是一个从`A`到`B`的`map`，然而，关键的不同在于`and_then`接收一个函数，这个函数把`A`转化为一个新的解析器`NextP`，`NextP`有一个返回类型`B`。最终的结果类型是`B`，因此我们可以假设不管从`NextP`返回的是什么，将是最后的结果。
+
+这段代码没类型那么复杂：我们一开始运行输入解析器，如果失败，这段code也失败，但是如果输入解析器成功，接下来我们调用函数`f`作用于result(为类型`A`)，从`f(result)`返回的是个新的解析器， 类型是`B`。我们把返回的解析器作用在下一段输入，然后直接返回结果。如果失败，就挂在这里，如果成功，我们就得到类型为`B`的值。
+
+再来一次：首先我们运行类型为`P`的解析器，如果成功，我们调用函数`F`作用在解析器`P`的结果上，得到下一个类型为`NextP`的解析器，然后我们运行，得到最终的结果。
+
+让我们也把它直接加到`Parser`特质上，因为这个就像`map`，肯定这样读起来更好。
+
+```rust
+fn and_then<F, NextParser, NewOutput>(self, f: F) -> BoxedParser<'a, NewOutput>
+where
+    Self: Sized + 'a,
+    Output: 'a,
+    NewOutput: 'a,
+    NextParser: Parser<'a, NewOutput> + 'a,
+    F: Fn(Output) -> NextParser + 'a,
+{
+    BoxedParser::new(and_then(self, f))
+}
+
+```
+
+OK，现在，这样做有什么好处？
+
+首先，我们几乎可以用这个实现`pair`:
+
+```rust
+fn pair<'a, P1, P2, R1, R2>(parser1: P1, parser2: P2) -> impl Parser<'a, (R1, R2)>
+where
+    P1: Parser<'a, R1> + 'a,
+    P2: Parser<'a, R2> + 'a,
+    R1: 'a + Clone,
+    R2: 'a,
+{
+    parser1.and_then(move |result1| parser2.map(move |result2| (result1.clone(), result2)))
+}
+```
+
+看上去很整洁，但是这里有个问题：`parser2.map()`消耗了`parser2`来创建包装解析器，而且函数是`Fn`，不是`FnOnce`，因此不允许消费`parser2`，只能取它的引用。Rust的问题，换句话说。在一个这些不是问题的更高级的语言中，这可以是一个很整洁的定义`pair`的方法。
+
+尽管如此，我们还是能在Rust用这个函数懒生成`close_element`解析器的正确版本，或者，换句话，我们可以把参数传入它。
+
+回想一下我们失败的尝试：
+
+```rust
+fn parent_element<'a>() -> impl Parser<'a, Element> {
+    pair(
+        open_element(),
+        left(zero_or_more(element()), close_element(…oops)),
+    )
+}
+```
+
 通过使用 `and_then`，我们现在可以通过使用该函数构建正确版本的 `close_element` 来获得正确的结果。
 
 ```rust
