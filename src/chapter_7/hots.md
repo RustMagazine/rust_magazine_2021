@@ -37,3 +37,61 @@ Buck 是 Facebook 在 2013 年的Facebook Mobile DevCon上亮相的一个快速�
 近日 Discord 工程师尝试用 copilot 来辅助开发 Rust 项目。效果不是很好。
 
 视频观看：[https://t.me/rust_daily_news/4914](https://t.me/rust_daily_news/4914)
+
+## rustc_codegen_gcc 的 MCP 已经被接受
+
+在不久的将来，Rust 就会多一个 GCC 的后端。
+
+同类项目还有 [GCC-rs ](https://github.com/Rust-GCC/gccrs),GCC-rs  是 用 Cpp 重新实现 Rustc 的一个 GCC 前端。
+
+为什么有 GCC-rs 这个项目？
+
+1. 想要支持更多的 CPU 架构
+2. 跨语言 LTO。GCC-RS FAQ将Linux列为激励示例。 具有讽刺意味的是，Linux支持ltvm但不是gcc！
+3. Rust 自举（Bootstrap）链很长，因为需要从C到OCAML，然后编译预发布 Rust 以编译 Rust 1.0编译 Rust 1.1 、1.2等，直到捕获最多1.53（或者最新版本）。 因此，如果您可以用C++中编写的 Rust 编译器直接编译1.53，则可以节省一些时间。
+4. 复用 GCC 插件
+
+但 [rustc_codegen_gcc](https://github.com/antoyo/rustc_codegen_gcc)  作者认为 GCC-rs 其实没有很好的解决这些问题。
+
+rustc_codegen_gcc 项目只需将GCC插入现有的Rust编译器作为代码生成后端，就可以简单的达成这些目标。
+
+该项目的主要目标是能够在LLVM不支持的平台上编译 Rust 代码。 次要目标是检查使用GCC后端是否提供任何编译速度改进。
+
+现在 rustc_codegen_gcc 已经被接受，gcc-rs 该何去何从？
+
+相关阅读：[Rust 与 开源 | GPL 许可证引发的问题](https://zhuanlan.zhihu.com/p/387946955)
+
+## Rust GameDev #23 
+
+这一期游戏开发报告中包含了一些很有创意的游戏。写 Rust 累了，可以玩一玩，都是开源的。
+
+1.  吃尾蛇。支持wasm，可以网页玩耍。关卡设计的很有心。基于 bevy 0.5 实现。
+
+- [https://github.com/szunami/taileater/](https://github.com/szunami/taileater/)
+- [https://szunami.itch.io/taileater](https://szunami.itch.io/taileater)
+
+2. Egregoria，模拟城市建设者，试图复制现代社会以及尽可能复制。基于  Legion ecs 实现。
+
+[https://github.com/Uriopass/Egregoria](https://github.com/Uriopass/Egregoria)
+
+
+3. Blightmud ，是一款 命令行终端的 mud 客户端，可以支持很多 mud server，比如 bat.org 等。
+
+[https://github.com/Blightmud/Blightmud](https://github.com/Blightmud/Blightmud)
+
+4.  Dango， 多人物理沙盒游戏。基于 bevy , Nphysics 物理引擎， CrystalObs 网络库等。Dango 目前在浏览器中基于wasm 运行 server，其他玩家通过 webrtc 加入。
+
+[https://github.com/ErnWong/dango-tribute](https://github.com/ErnWong/dango-tribute)
+
+5. hyper-farmer ： 基于bevy实现，游戏虽然简单但是挺有创意，锻炼双手协调
+
+- [https://wilsk.itch.io/hyper-farmer](https://wilsk.itch.io/hyper-farmer) 在线玩
+-  [https://github.com/will-hart/cloud-surfer ](https://github.com/will-hart/cloud-surfer )
+
+6. fish-game，基于 macroquad 游戏引擎实现，支持wasm
+
+- [https://fedorgames.itch.io/fish-game](https://fedorgames.itch.io/fish-game) 在线玩
+- [https://github.com/heroiclabs/fishgame-macroquad](https://github.com/heroiclabs/fishgame-macroquad) 源码
+-  [https://github.com/not-fl3/macroquad](https://github.com/not-fl3/macroquad) 游戏引擎
+
+[https://gamedev.rs/news/023/](https://gamedev.rs/news/023/)

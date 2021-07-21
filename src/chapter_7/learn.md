@@ -27,3 +27,8 @@ Tezos 是一个开源去中心化区块链网络，为智能合约和数字资�
 
 - [https://medium.com/tezedge/speeding-up-incoming-message-parsing-by-3-to-10-times-by-switching-from-serde-to-the-nom-library-a74b04391bb4](https://medium.com/tezedge/speeding-up-incoming-message-parsing-by-3-to-10-times-by-switching-from-serde-to-the-nom-library-a74b04391bb4)
 - [https://github.com/tezedge/tezedge](https://github.com/tezedge/tezedge)
+
+## Rust 概念解惑 | Deref vs AsRef vs Borrow vs Cow 
+
+- 英文：[https://dev.to/zhanghandong/rust-concept-clarification-deref-vs-asref-vs-borrow-vs-cow-13g6](https://dev.to/zhanghandong/rust-concept-clarification-deref-vs-asref-vs-borrow-vs-cow-13g6)
+- 中文：[Rust 概念解惑 | Deref vs AsRef vs Borrow vs Cow ](https://mp.weixin.qq.com/s/OdcLb5U8QCeYH08feThN7w)

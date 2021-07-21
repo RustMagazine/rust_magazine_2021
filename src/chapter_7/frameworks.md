@@ -17,3 +17,6 @@
 - [twitter thread](https://twitter.com/Kerollmops/status/1410613829147324424?s=20)
 - [MeiliSearch](https://github.com/meilisearch/MeiliSearch)
 
+## Fluvio：现代化可编程流处理平台
+
+[https://www.infinyon.com/blog/2021/06/introducing-fluvio/#fluvio-programmable-platform-for-data-in-motion](https://www.infinyon.com/blog/2021/06/introducing-fluvio/#fluvio-programmable-platform-for-data-in-motion)
