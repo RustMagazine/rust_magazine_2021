@@ -101,7 +101,7 @@ Rust 中文社群 飞书群 邀请你加入：
 
 ---
 
-<center> 🔥🔥🔥🔥 <strong>北京-Rust区块链开发者活动现在实录-20210619</strong> 🔥🔥🔥🔥 </center>
+<center> 🔥🔥🔥🔥 <strong>北京-Rust区块链开发者活动现场实录-20210619</strong> 🔥🔥🔥🔥 </center>
 
 视频集地址：[https://www.bilibili.com/video/BV1Jh411h7pp](https://www.bilibili.com/video/BV1Jh411h7pp)
 
