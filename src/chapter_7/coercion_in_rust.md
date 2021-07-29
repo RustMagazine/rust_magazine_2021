@@ -113,9 +113,6 @@ fn main() {
 
 在该例中，即使引用在函数签名中降级，借用检查器仍然观察到在同一作用域内(针对同一内存)创建了两个可变引用，这是不被允许的。
 
-> **ALERT 1** 引用降级往往不是你想要的  
-> 正如 pretzelhammer 的 [Common Rust Lifetime Misconceptions](https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md) 所述，引用降级通常是不可取的，并且可能会造成[意料之外的后果](https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md#9-downgrading-mut-refs-to-shared-refs-is-safe)。
-
 ### 解引用强转
 
 下一种强转是 Rust 人体工程学 (ergonomics) 的基石 (cornerstone)。“解引用强转”是由两个特征的实现产生的强转：`Deref`和`DerefMut`。这些(特征)明确存在的目的是选择加入这种强转，让容器可以透明使用它们包含的类型(这些容器通常称为“智能指针”)。
@@ -139,11 +136,6 @@ pub trait DerefMut: Deref {
 `DerefMut`特征需要`Deref`作为超类型，这既可以让其访问 Target 关联类型，也可以确保`Deref`和`DerefMut`的目标类型始终一致。否则，你可能会在可变上下文中启用对一种类型的强转，而在不可变上下文中启用对另一种类型的强转。这种级别的灵活性为解引用强转增加了更多的复杂性，但没有明显的好处，因此它不可用。
 
 这两个特征所需的方法`deref`和`deref_mut`，在实现这些特征的类型上调用方法时会被隐式调用。比如，在`Box<T>`上实现了`Deref<Target = T>`，因此可以透明地调用其包含类型的方法，这使得`Box<T>`比用户必须为每个操作显式访问其内容更符合人体工程学。
-
-> **ASIDE 2**，分配器类型  
-> 这里显式的`leak`函数签名包括`Box`的`A`类型参数，它是分配器 (allocator) 的类型。这是为了让 Rust 的容器对需要替代分配器的用例更友好，相对于更改整个程序的分配器，它可以做到更精细的控制。`leak`函数返回一个引用，其生命周期为`A: 'a`，它直观的表示分配器的生命周期至少与从中借用的数据一样长。否则，分配器可能会在它的引用仍然存在时被释放，从而导致悬垂引用，这会导致内存不安全。
-
-但是，如果包含类型也想定义方法，那么在该类型上存在解引用强转也会导致潜在的歧义。鉴于此，“智能指针”通常将它们的方法作为关联函数而不是方法。如`Box::leak`方法，它在值不释放的情况下其进行拆箱(因此最终的释放操作留给用户)，该关联方法的函数签名为`fn leak<'a>(b: Box<T, A>) -> &'a mut T where A: 'a`，因此它通过`Box::leak(my_boxed_type)`进行调用，而不是`my_boxed_type.leak()`。
 
 ### 裸指针强转
 
