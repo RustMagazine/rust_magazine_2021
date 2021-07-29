@@ -207,7 +207,7 @@
     - [推荐项目 ｜ 基础工具库](./chapter_7/tool_libs.md)
     - [推荐项目 |  框架引擎](./chapter_7/frameworks.md)
     - [Rust生态安全漏洞总结系列 | Part 3](./chapter_7/rust-security-part-3.md)
-
+    - [Zellij 的性能优化](./chapter_7/how-we-improved-the-performance-of-our-rust-app.md)
 
 
 
