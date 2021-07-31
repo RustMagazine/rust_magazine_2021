@@ -4,6 +4,65 @@
 
 ---
 
+## Rust 1.54 稳定版发布
+
+Rust 1.54 更新的特性并不是很多，值得注意的是:
+
+1. 增量编译功能又重新默认开启了。
+2. 在 ErrorKind 中 多了一个 OutOfMemory 类型。 
+
+[https://blog.rust-lang.org/2021/07/29/Rust-1.54.0.html](https://blog.rust-lang.org/2021/07/29/Rust-1.54.0.html)
+
+## task::ready! 宏将在 1.56 稳定
+
+futures-core 的 ready!() 宏存在好几年了，这个宏可以在处理 Future 的时候减少很多模板代码。
+
+ready!() 宏稳定之后将会在 std::task 模块。
+
+[https://github.com/rust-lang/rust/pull/81050](https://github.com/rust-lang/rust/pull/81050)
+
+## Rust 2021 进入公开测试期
+
+Rust 2021 版进入 公开测试期 。该版本的所有计划功能现在都可以在 nightly 版本中率先体验。同时还提供了方便的迁移办法，以便将代码从 Rust 2018 快速迁移到 Rust 2021 。
+
+- 安装最近的 nightly 工具链：`rustup update nightly` 。
+- 运行 `cargo +nightly fix --edition` 。
+- 编辑 `Cargo.toml` ，将 `cargo-features = ["edition2021"]` 置于顶部（位于 `[package]` 上方），并将 `edition` 改为 `edition = "2021" `。
+- 运行 `cargo +nightly check` 以确认能否在新版本上正常工作。
+
+Datafuse 团队目前正在进行 Rust 2021 迁移的尝鲜体验，相关工作可以关注：[https://github.com/datafuselabs/datafuse/pull/1159](https://github.com/datafuselabs/datafuse/pull/1159)
+
+Rust 2021 public testing period: [https://blog.rust-lang.org/2021/07/21/Rust-2021-public-testing.html](https://blog.rust-lang.org/2021/07/21/Rust-2021-public-testing.html)
+
+the nightly version of Rust edition guide: [https://doc.rust-lang.org/nightly/edition-guide/rust-2021/index.html](https://doc.rust-lang.org/nightly/edition-guide/rust-2021/index.html)
+
+
+
+## rustc_codegen_gcc 的 MCP 已经被接受
+
+在不久的将来，Rust 就会多一个 GCC 的后端。
+
+同类项目还有 [GCC-rs ](https://github.com/Rust-GCC/gccrs),GCC-rs  是 用 Cpp 重新实现 Rustc 的一个 GCC 前端。
+
+为什么有 GCC-rs 这个项目？
+
+1. 想要支持更多的 CPU 架构
+2. 跨语言 LTO。GCC-RS FAQ将Linux列为激励示例。 具有讽刺意味的是，Linux支持ltvm但不是gcc！
+3. Rust 自举（Bootstrap）链很长，因为需要从C到OCAML，然后编译预发布 Rust 以编译 Rust 1.0编译 Rust 1.1 、1.2等，直到捕获最多1.53（或者最新版本）。 因此，如果您可以用C++中编写的 Rust 编译器直接编译1.53，则可以节省一些时间。
+4. 复用 GCC 插件
+
+但 [rustc_codegen_gcc](https://github.com/antoyo/rustc_codegen_gcc)  作者认为 GCC-rs 其实没有很好的解决这些问题。
+
+rustc_codegen_gcc 项目只需将GCC插入现有的Rust编译器作为代码生成后端，就可以简单的达成这些目标。
+
+该项目的主要目标是能够在LLVM不支持的平台上编译 Rust 代码。 次要目标是检查使用GCC后端是否提供任何编译速度改进。
+
+现在 rustc_codegen_gcc 已经被接受，gcc-rs 该何去何从？
+
+相关阅读：[Rust 与 开源 | GPL 许可证引发的问题](https://zhuanlan.zhihu.com/p/387946955)
+
+
+
 ## GAT （generic associated types ）今年能否稳定？ 我看行。
 
 四天前，在 GAT tracking issues 下有人回复：
@@ -222,3 +281,4 @@ enum Option<T> {
 ```
 
 [https://github.com/rust-lang/rfcs/pull/3107](https://github.com/rust-lang/rfcs/pull/3107)
+

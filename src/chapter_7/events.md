@@ -10,6 +10,31 @@
 
 ---
 
+# 活动预告：
+
+## 2021.08.08 杭州线下 Meetup
+
+![](./image/event/hz_rustmeetup.jpg)
+
+## 公开课：认识面向基础架构语言Rust
+
+Rust究竟是一门怎样的语言? 为什么连续五年夺得”最受程序员喜爱的编程语言”称号。我们有幸邀请到Rust中文社区的苏林老师分享一下:
+
+课程主题：《认识面向基础架构语言Rust》
+
+课程时间： 2021年8月1日 20:30-21:30
+
+课程内容：
+
+- Rust语言设计思想
+- Rust语言现状和未来
+- 通过一个hello word理解Rust语言如何执行
+
+[https://mp.weixin.qq.com/s/z-L33EyR7qac8KUlSxUFlA](https://mp.weixin.qq.com/s/z-L33EyR7qac8KUlSxUFlA)
+
+
+---
+
 # 【线上】Rust 唠嗑室本月汇总
 
 - 来源：[Rust 唠嗑室](https://space.bilibili.com/25566598/video)
@@ -78,7 +103,7 @@ Rust 中文社群 飞书群 邀请你加入：
 
 视频来源：[https://space.bilibili.com/24917186](https://space.bilibili.com/24917186)
 
-## 第十三期讨论主题：如何在面试中考察一个人 Rust 水平？
+## 第十三期 讨论主题：如何在面试中考察一个人 Rust 水平？
 
 1. 如何面试/或准备应聘一场 Rust 面试。
 2. 实际面试经验分享 （@ huangjj ）
@@ -86,18 +111,64 @@ Rust 中文社群 飞书群 邀请你加入：
 
 [查看回放](https://www.bilibili.com/video/BV1ZV411p7Y3)
 
+## 第十四期： 
 
-## 第十一期 讨论主题：了解 rust-analyzer 原理 Part 1
+分享者：吴翱翔
+
+【讨论主题】
+
+1. Rust 消息队列实现多房间号的聊天室应用(视频长度 26 分钟)
+2. Rust 运行时动态加载配置文件和软中断(视频长度 17 分钟)
+
+【回放】
+
+- [视频一](https://www.bilibili.com/video/BV1w64y1t7PQ/)
+- [视频二](https://www.bilibili.com/video/BV1Jw41197Rd/)
+
+
+## 第十五期 讨论主题：了解 rust-analyzer 原理 Part 1
 
 1. 这系列视频是 ra 作者为贡献者或潜在贡献者录制的
 2. 第一集展示了 ra 源码仓库的代码组织结构，从项目文档开始，逐步介绍了 cargo xtask 的使用，虽然采用扁平的 crate 结构，但也分主要的几个入口库 （ide/ hir 等），还看到了处理过程宏和声明宏相关的crate，还有 vfs（虚拟文件系统）等。
-3. 还展示了一些可能的贡献点：视频结尾有总结
+3. 还展示了一些可能的贡献点：
+  - bench 测试目录下有一个很大的 8500 行 代码的文件，需要分隔成多个小文件
+  -  指定了 code style，然后接下来会根据code style 进行代码重构
+  -  对标准库扩展的库中，可能需要添加一些文档
+  -  帮忙增加 fuzz 测试等等。
+
 
 参考资料：
 
 1. https://github.com/rust-analyzer/rust-analyzer
 
 [查看回放](https://www.bilibili.com/video/BV1wg411772D)
+
+
+## 第十六期 讨论主题：了解 rust-analyzer 原理 Part 2
+
+【主题】 
+
+1.  Rust 1.54 特性 
+2.  学习 LSP-language-server-protocol规范 ，然后跟随 rust-analyzer 作者学习 rust-analyzer 原理 （part 2）
+
+
+【总结】
+
+1. Rust 1.54 更新的特性并不是很多，值得注意的是，增量编译功能又重新默认开启了。并且在 ErrorKind 中 多了一个 OutOfMemory 类型。 
+2. RustAnalyzer 学习心得：
+  - ra 为什么需要虚拟文件系统？ 主要有三点原因：
+    - 为了重复使用文件，以及优化内存。所以不可能使用  std::fs::read_to_string 这样的方式去读取文件。有虚拟文件系统就方便多了。
+    - 需要兼容多平台文件系统和路径。比如 windows 路径和linux路径有很大差异，需要统一抽象。
+    - 需要平台无关的 绝对路径和相对路径的 控制转换。 
+  - ra 的虚拟文件系统（vfs）只是一种快照系统，它只需要获取文件什么时候修改，哪里修改即可，不需要知道具体修改什么内容。类似于 git。
+  - 代码架构比较常规，比如通过对象安全的 Hander trait  来提供统一接口，用于监控文件。也针对 每个 crate 提供一个对应的 FileSet 来管理文件，就好像是 文件系统分区的概念。
+  - vfs 是 ra 数据流动的基础。 如果你对 实现一个简易且健壮的文件系统比较感兴趣，可以看看 vfs 的实现。
+  - ra 作者强烈推荐了这个库 ： https://crates.io/crates/fst 。
+
+【回放】
+
+[https://www.bilibili.com/video/BV1jL411n7e3/](https://www.bilibili.com/video/BV1jL411n7e3/)
+
 
 ---
 

@@ -4,6 +4,28 @@
 
 ---
 
+## RustChinaConf 2021 议题征集开放申请
+
+[申请通道详情](./rust_china_conf_2021.md)
+
+## 为Linux内核添加Rust支持的最新补丁已经出现
+
+Miguel Ojeda一直在领导 "Rust for Linux"的工作--现在这个项目得到了Google的资助以使这种编程语言能够在内核中使用。虽然5.14内核合并窗口目前正在进行，但这并没有被标记为拉动请求阶段，估计要到下一个或者更晚的周期才会登陆。这是继4月份发出的 "征求意见"补丁之后的又一进展。
+
+Rust for Linux的启用现在已经达到了33000多行代码，部分原因是他们目前在树中包括了Rust的 "alloc"标准库的一个子集，为内核目的进行了修改。最终，开发者们将尝试把变化放到上游的alloc crate中，但现在是在内核树中进行，其他需要的库也是在内核树中进行的。
+
+这些新补丁的另一个变化是，之前的版本需要使用Rust编译器的每夜版本，而现在内核可以用beta和稳定版的Rustc编译。然而，内核支持确实需要一些Rust编译器的功能，目前被上游视为不稳定的来源。
+
+除了AArch64、PowerPC和x86_64之外，ARM 32位和RISC-V体系现在也被Rust for Linux所支持。
+
+除了Linux内核中的Rust管道外，Rust支持的最初用户是Rust中的Android Binder IPC实现，这仍被认为是一项正在进行的工作。
+
+这些最新的Rust for Linux内核补丁可以在内核邮件列表中找到：
+
+[https://lore.kernel.org/lkml/20210704202756.29107-1-ojeda@kernel.org/](https://lore.kernel.org/lkml/20210704202756.29107-1-ojeda@kernel.org/)
+
+此消息来自: [https://www.cnbeta.com/articles/tech/1148741.htm](https://www.cnbeta.com/articles/tech/1148741.htm)
+
 ## Facebook 从 Java 到 Rust | Buck 的未来
 
 Buck 是 Facebook 在 2013 年的Facebook Mobile DevCon上亮相的一个快速的 Android 构建系统。从那时起，它已经扩展到支持用15种以上的语言编写的应用程序，目标平台包括手机、服务器、智能设备和VR头盔等等。
@@ -38,28 +60,6 @@ Buck 是 Facebook 在 2013 年的Facebook Mobile DevCon上亮相的一个快速�
 
 视频观看：[https://t.me/rust_daily_news/4914](https://t.me/rust_daily_news/4914)
 
-## rustc_codegen_gcc 的 MCP 已经被接受
-
-在不久的将来，Rust 就会多一个 GCC 的后端。
-
-同类项目还有 [GCC-rs ](https://github.com/Rust-GCC/gccrs),GCC-rs  是 用 Cpp 重新实现 Rustc 的一个 GCC 前端。
-
-为什么有 GCC-rs 这个项目？
-
-1. 想要支持更多的 CPU 架构
-2. 跨语言 LTO。GCC-RS FAQ将Linux列为激励示例。 具有讽刺意味的是，Linux支持ltvm但不是gcc！
-3. Rust 自举（Bootstrap）链很长，因为需要从C到OCAML，然后编译预发布 Rust 以编译 Rust 1.0编译 Rust 1.1 、1.2等，直到捕获最多1.53（或者最新版本）。 因此，如果您可以用C++中编写的 Rust 编译器直接编译1.53，则可以节省一些时间。
-4. 复用 GCC 插件
-
-但 [rustc_codegen_gcc](https://github.com/antoyo/rustc_codegen_gcc)  作者认为 GCC-rs 其实没有很好的解决这些问题。
-
-rustc_codegen_gcc 项目只需将GCC插入现有的Rust编译器作为代码生成后端，就可以简单的达成这些目标。
-
-该项目的主要目标是能够在LLVM不支持的平台上编译 Rust 代码。 次要目标是检查使用GCC后端是否提供任何编译速度改进。
-
-现在 rustc_codegen_gcc 已经被接受，gcc-rs 该何去何从？
-
-相关阅读：[Rust 与 开源 | GPL 许可证引发的问题](https://zhuanlan.zhihu.com/p/387946955)
 
 ## Rust GameDev #23 
 
@@ -95,3 +95,105 @@ rustc_codegen_gcc 项目只需将GCC插入现有的Rust编译器作为代码生�
 -  [https://github.com/not-fl3/macroquad](https://github.com/not-fl3/macroquad) 游戏引擎
 
 [https://gamedev.rs/news/023/](https://gamedev.rs/news/023/)
+
+## CNCF 又多了俩 Rust 项目
+
+Good to see both wasmCloud and Krustlet submitted to the CNCF Sandbox at the same time:
+
+- wasmCloud: [https://github.com/cncf/toc/issues/693](https://github.com/cncf/toc/issues/693)
+- Krustlet: [https://github.com/cncf/toc/issues/690](https://github.com/cncf/toc/issues/690)
+
+## Zenoh 性能提升的故事｜ 漫游在 Rust 异步仙境
+
+在 Rust Maginze 月刊第四期中介绍过 Zenoh :  [开源产品 | eclipse zenoh 助力雾计算和边缘计算]( [https://rustmagazine.github.io/rust_magazine_2021/chapter_4/zenoh.html](https://rustmagazine.github.io/rust_magazine_2021/chapter_4/zenoh.html) ) 
+
+eclipse zenoh （读： /zeno/ ） ，提供了零开销的Pub/Sub、Store/Query 和 计算。
+
+zenoh 统一了 动态/静止/使用中的数据并提供计算结果。它颇有分寸地将传统的Pub/Sub与地理分布的存储、查询和计算融合在一起，同时保留了远远超出任何主流协议栈的时间和空间效率水平。
+
+官网是 zenoh.io 。
+
+GitHub代码仓库 `eclipse-zenoh/zenoh` 。
+
+2020 年 12 月 Eclipse Edge Native 工作组启动，并将 Zenoh 引入 Eclipse 。并用 Rust 对 zenoh 进行重写。
+
+在本文中，Zenoh 团队剖析了他们如何改进让异步性能提升一倍。
+
+- 8字节payload 时超过3.5M msg/s
+- 1Mb payload 时超过 45Gb/s
+- 在 backlogged 场景下，延迟低至 35 微秒
+
+该团队如何做到的呢？
+
+一：准备工作
+
+1. 准备测试环境，以便获得可复现的结果。因为很多外部因素可能会影响代码性能，这是为了排除这些干扰。这有个非常棒的指南：https://easyperf.net/blog/2019/08/02/Perf-measurement-environment-on-Linux
+2. 彻底阅读 [《Rust 性能手册》](https://nnethercote.github.io/perf-book/title-page.html)。我们发现它对Rust的性能技巧和诀窍以及剖析技术都很有见地。另外，还有一篇关于[如何在Rust中编写高性能代码](http://likebike.com/posts/How_To_Write_Fast_Rust_Code.html)的博客也是不错的参考。
+
+二：寻找性能热点（hotspots）
+
+1.  我们先使用 [flamegraph](https://github.com/flamegraph-rs/flamegraph) 来生成火焰图，打算寻找 zenoh 中的异步性能热点。然而，异步使得火焰图相当难以阅读，因为异步调度器和future执行器基本上出现在火焰图中每一个地方。所以改变了性能剖析工具，开始使用 [perf](https://perf.wiki.kernel.org/index.php/Main_Page) ，可以提供更清晰的热点图，尤其是序列化和反序列化方面。
+2. 改进了序列化/反序列化相关实现，性能直接提升 100% 。但是这种改进在吞吐量测试中没有反映出来。
+
+三： 堆分配还是栈分配？
+
+zenoh 团队 一直避免在关键环节进行堆分配。用 valgrind 仔细检查后发现，并没有不必要的堆分配，缓存未命中率也不高。因此该团队开始检查 栈分配的问题，利用 Rust 编译器的一个 flag （仅在 Rust Nightly 可用）来验证一个数据结构多大以及它的内存对齐方式。
+
+rust
+$ RUSTFLAGS=-Zprint-type-sizes cargo build --release
+用这种方式来编译 zenoh 即可。输出：
+
+```rust
+print-type-size type: `net::protocol::proto::msg::Data`: 304 bytes, alignment: 8 bytes
+print-type-size     field `.key`: 40 bytes
+print-type-size     field `.data_info`: 168 bytes
+print-type-size     field `.payload`: 96 bytes
+```
+
+异步数据结构也会这样打印出来。然后该团队发现了一个痛苦的事实：
+
+1. 异步 future，一旦被编译，就会在栈中占用几十 KB 的空间。每次有消息需要通过网络发送，就会调用这些 futures。
+2. 因为zenoh广泛使用异步，所以现在导致 栈太深太大，给内存带来很大压力。
+3. 经过思考，该团队将 异步代码隔离在特定的部分，尤其是网络交互部分，而其他部分则转为使用同步。由此来平衡 同步和异步，汲取了两个世界的优点。大幅减少了栈内存的压力，带了巨大的性能提升。
+
+四： 性能测试结果
+
+该团队性能测试环境为：AMD Ryzen 5800x，32GB内存，通过100Gb以太网连接，根据前面所说的性能测试环境配置指南配置好。
+
+具体的性能测试图表，可以进一步查看文章。也可以关注 zenoh 团队的博客，因为他们性能优化还会继续。
+
+[https://zenoh.io/blog/2021-07-13-zenoh-performance-async/](https://zenoh.io/blog/2021-07-13-zenoh-performance-async/)
+
+## 清华90后校友、MIT助理教授范楚楚获ACM博士论文奖，Rust社区Ralf Jung荣誉提名
+
+
+Ralf Jung 的博士论文为《Understanding and Evolving the Rust Programming Language (https://people.mpi-sws.org/~jung/phd/thesis-screen.pdf)》
+
+RalfJung 研究的这个，是对  Safe Rust 安全模型做了形式化验证，也为 Unsafe Rust UB 检查建立了模型。实至名归。
+
+[https://mp.weixin.qq.com/s/wkjexOyXXpEC-nYEWxpkWQ](https://mp.weixin.qq.com/s/wkjexOyXXpEC-nYEWxpkWQ)
+
+## Tokio 支持 io-uring
+
+Tokio 为 Linux 上的 io-uring 系统 API 提供支持。此版本提供异步文件操作，将在后续版本中添加对更多操作的支持。
+
+tokio-uring API可能构成Tokio 2.0版本的基础，2024 年 可能会发布 tokio 2.0 ，然后集成这个库。
+
+[https://tokio.rs/blog/2021-07-tokio-uring](https://tokio.rs/blog/2021-07-tokio-uring)
+
+## 同一功能实现下 Rust vs Elixir 代码量比较 案例 : Ockam
+
+Ockam 是一套 用于相互身份验证和分布式应用程序之间的端到端加密消息的工具。 目前提供 Rust 和 Elixir 两种实现。
+
+从 Rust  和 Elixir 的比例来看:
+
+- Rust 69.3%
+- Elixir 30.7%
+
+因为是同一种功能特性实现（Rust 比 Elixir 多两个特性实现），但是否可以从 代码量得出开发效率 elixir 是 Rust  的两倍呢？ 
+
+我认为不尽然。也需要看场景。 这个项目设计到分布式消息通信，这方面因为elixir 的默认支持 的生产力可能更高。 而 Rust 可能还需要多做一些基础工作。 
+
+这就好比，很多人说 rust 编译helloworld比 c 的大，但其实 c 的一些基础库操作系统都是默认支持的，不需要另外携带，rust 则需要。
+
+[https://github.com/ockam-network/ockam](https://github.com/ockam-network/ockam)

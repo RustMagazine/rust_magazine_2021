@@ -1,4 +1,5 @@
 # 使用Macroquad在Android设备上发布游戏
+
  <img src="../image/Macroquad_game_1.png" width = "550" alt="Macroquad_game_1" align=center />
 
 **译者注：** macroquad是一个简单易用的Rust游戏库。macroquad尝试避免任何Rust特定概念比如生命周期/借用，这使得它对初学者非常友好。

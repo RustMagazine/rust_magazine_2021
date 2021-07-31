@@ -191,23 +191,33 @@
     - [推荐项目 |  框架引擎](./chapter_6/frameworks.md)
 
 
-
-
-- [七月刊（July）| 待发布]()
+- [七月刊（July）](./chapter_7/toc.md)
     - [发刊通告](./chapter_7/announce.md)
     - [官方动态](./chapter_7/lang.md)
     - [社区热点](./chapter_7/hots.md)
     - [活动回顾](./chapter_7/events.md)
     - [本月招聘](./chapter_7/jobs.md)
+    - [论文导读 | 性能与生产力 : Rust vs C ](./chapter_7/paper-rust-vs-c.md)
+    - [华为 | Rust 调用约定和名称修饰规则介绍](./chapter_7/hw-rust-name-mangling.md)
+    - [蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用](./chapter_7/ant-futures-compat.md)
+    - [字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM ](./chapter_7/lark-rust-wasm-sqlite.md)
     - [Datenlord | Rust实现RDMA异步编程（二）](./chapter_7/rust-epoll-rdma-part2.md)
     - [学习资源](./chapter_7/learn.md)
-    - [常见问题汇总](./chapter_7/faq.md)
-    - [语言技巧](./chapter_7/tips.md)
+    - [【完整】Rust 标准库 Trait 指南](./chapter_7/rusts-standard-library-traits.md)
+    - [Rust 中的隐式类型转换](./chapter_7/coercion_in_rust.md)
+    - [Tokio Internals 之 任务调度](./chapter_7/tokio-task-scheduler.md)
+    - [为什么你不应该沉迷于 Rust 的“特性”](./chapter_7/about-rust-features.md)
+    - [Rust `no-std` 工程实践](./chapter_7/rust-no-std.md)
+    - [Rust 内存错误调试和动态分析工具分享](./chapter_7/dynamic_analyzing_tools.md)
+    - [使用Macroquad在Android设备上发布游戏](./chapter_7/macroquad_game.md)
+    - [跨空间跳板内核](./chapter_7/trampoline-kernel.md)
+    - [Trait Upcasting 系列 ｜ Part I](./chapter_7/trait-upcasting-part1.md)
     - [GitHub 趋势榜](./chapter_7/github_trending.md)
     - [推荐项目 ｜ 基础工具库](./chapter_7/tool_libs.md)
     - [推荐项目 |  框架引擎](./chapter_7/frameworks.md)
-    - [Rust生态安全漏洞总结系列 | Part 3](./chapter_7/rust-security-part-3.md)
-    - [Zellij 的性能优化](./chapter_7/how-we-improved-the-performance-of-our-rust-app.md)
+
+
+
 
 
 

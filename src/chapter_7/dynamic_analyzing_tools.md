@@ -8,7 +8,7 @@
 
 ## 为什么需要动态分析
 
-![](./dynamic_analyzing_tools/flamegraph.png)
+![](./image/dynamic_analyzing_tools/flamegraph.png)
 
 以上是某个 Rust 程序**动态分析**生成的火焰图，通过火焰图可以很清晰的看到程序的性能瓶颈在频繁 alloc 分配内存
 
@@ -330,7 +330,7 @@ perf-report 会默认打开当前目录的 perf.data 文件，也可以通过 -i
 
 > perf report --call-graph
 
-![](./dynamic_analyzing_tools/perf.png)
+![](./image/dynamic_analyzing_tools/perf.png)
 
 可以选中 tree::main 的函数符号按下回车，选择 `zoom into tree thread` 来展示 main 函数的子函数调用树
 
@@ -348,9 +348,9 @@ cargo-flamegraph 需要系统已装 perf ，能将 perf 数据渲染成火焰图
 
 通过 valgrind 生成 callgrind.out.887505 数据( 887505 是 PID )，再通过 KCachegrind 打开进行可视化
 
-![](https://aws1.discourse-cdn.com/business5/uploads/rust_lang/original/3X/3/1/311bcd6f2cf22c1ac9fe9e23bb6801f2cde80deb.png)
+![](./image/dynamic_analyzing_tools/3.png)
 
-参考: https://users.rust-lang.org/t/is-it-possible-to-print-the-callgraph-of-a-cargo-workspace/50369/6
+参考: [https://users.rust-lang.org/t/is-it-possible-to-print-the-callgraph-of-a-cargo-workspace/50369/6](https://users.rust-lang.org/t/is-it-possible-to-print-the-callgraph-of-a-cargo-workspace/50369/6)
 
 ### gprof
 
@@ -523,4 +523,4 @@ fn main() {
 
 examples 目录下几乎都是各种内存错误的常见例子，也是作者踩过坑的各种内存 Bug
 
-项目链接: <https://github.com/pymongo/linux_commands_rewritten_in_rust/>
+项目链接: <[https://github.com/pymongo/linux_commands_rewritten_in_rust/](https://github.com/pymongo/linux_commands_rewritten_in_rust/)>

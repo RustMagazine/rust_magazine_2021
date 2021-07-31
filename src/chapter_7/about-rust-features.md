@@ -4,6 +4,8 @@
 
 > 原文链接：[https://nullderef.com/blog/rust-features/#cargo-release](https://nullderef.com/blog/rust-features/#cargo-release)
 
+---
+
 Rust 使得表达条件编译变得非常容易，特别是由于它的“特性”。它们很好地集成到语言中并且非常易于使用。但是我通过维护Rspotify（Spotify API 的库）学到的一件事 是，人们不应该对它们着迷。当条件编译是解决问题的唯一方法时，应该使用条件编译，原因有很多，我将在本文中解释。
 
 这对某些人来说可能很明显，但对我来说，当我开始使用 Rust 时并没有那么清楚。即使您已经知道，这也可能是一个有趣的提醒；也许您在最新的项目中忘记了它并添加了一个不必要的功能。

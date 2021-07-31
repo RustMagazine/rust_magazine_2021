@@ -1,5 +1,7 @@
 # Rust no-std 工程实践
 
+作者：苏胤榕
+
 > 改写std的库为支持no_std的库及写出一个支持std和no_std库的经验谈
 > github repo: https://github.com/DaviRain-Su/rust-no-std-source
 

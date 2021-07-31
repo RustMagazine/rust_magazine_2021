@@ -1,6 +1,10 @@
 # Rust 中的隐式类型转换
 
-[原文](https://www.possiblerust.com/guide/what-can-coerce-and-where-in-rust) / 译者：[iamazy](https://github.com/iamazy)
+译者：[iamazy](https://github.com/iamazy)
+
+> [原文](https://www.possiblerust.com/guide/what-can-coerce-and-where-in-rust) 
+
+---
 
 Rust 支持多种[类型转换](https://doc.rust-lang.org/reference/type-coercions.html)，它可以**隐式**的将一种类型转换成另一种类型。与其他支持类型转换的语言一样，Rust 在易读性与易写性之间做了权衡。虽然对于 Rust 支持类型转换的清单是否最好存在分歧，但是学习类型转换是有意义的，因为有些是惯用的 (idiomatic) Rust 代码的核心。在本文中，我将描述 Rust 支持什么样的类型转换，以及在何处应用。
 

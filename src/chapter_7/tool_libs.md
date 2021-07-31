@@ -79,3 +79,143 @@ Enarx 使用 WebAssembly 作为其隔离和可移植性的基础。
 
 
 [https://github.com/enarx/enarx](https://github.com/enarx/enarx)
+
+## cargo-c ：构建并安装C-ABI兼容的动态和静态库。
+
+它生成并安装正确的PKG-Config文件，静态库和动态库，以及任何C（和C兼容）软件使用的C头。
+
+[https://github.com/lu-zero/cargo-c](https://github.com/lu-zero/cargo-c)
+
+## macroquad游戏引擎分离出音频系统
+
+macroquad 游戏引擎在最近将其音频系统给单独提取出来，作为一个更通用的Rust包，该crate是对多个平台的多个音频后端的统一抽象，目前完成度如下：
+
+- Web: WebAudio
+- Android: OpenSLES
+- Linux: Alsa
+- Mac: CoreAudio
+- Windows: Wasapi
+- IOS: CoreAudio(?)
+
+[https://github.com/not-fl3/quad-snd](https://github.com/not-fl3/quad-snd)
+
+## Gloo v0.3.0 发布
+
+Gloo 团队很高兴地宣布一个新的、姗姗来迟的 Gloo 版本：v0.3.0。Gloo 是一个模块化工具包，用于使用 Rust 和 WASM 构建快速、可靠的 Web 应用程序和库。
+
+[https://gloo-rs.web.app/blog/release-0.3.0](https://gloo-rs.web.app/blog/release-0.3.0)
+
+## Throne ： 用于游戏原型设计和故事逻辑的脚本语言
+
+@tobmansf 一直在研究用于游戏原型设计和故事逻辑的脚本语言。它可以编译成 WebAssembly，可以在 [https://t-mw.github.io/throne-playground/](https://t-mw.github.io/throne-playground/) 上试一试。
+
+[https://github.com/t-mw/throne](https://github.com/t-mw/throne)
+
+## 零成本反序列化框架 rkyv 发布 0.7.1 版本
+
+[https://github.com/djkoloski/rkyv](https://github.com/djkoloski/rkyv)
+
+## 一个 Rust 和 TypeScript 实现的 体素（Voxel）引擎
+
+基于 actix-web 实现
+
+- [https://github.com/ian13456/mine.js](https://github.com/ian13456/mine.js)
+- 在线玩：[https://mine.iantheearl.io/?world=terrains](https://mine.iantheearl.io/?world=terrains)
+
+## 慢啃 Rust 系列   | Gazebo 库 之 Dupe
+
+原文标题：Rust Nibbles - Gazebo : Dupe 
+
+「Rust Nibbles」 翻译成 「慢啃 Rust 」 没毛病吧 ？ 
+
+这是 Facebook for Develpers 网站出的Rust Nibbles系列文章，介绍 facebook 开源的各种 Rust 库。
+
+Gazebo 是 facebook 工程师 编写的基础库，Gazebo以独立模块的形式包含了一系列经过测试的Rust实用程序。这篇文章是介绍了 Gazebo 中的 Dupe trait 。
+
+在Rust中，有两个用于 "复制 "一个值的相关特性--Copy和Clone。
+
+在Gazebo中引入了第三个类似的trait，称之为Dupe，它可以在Gazebo Prelude中使用。（dupe 有复制物品/复制底片的意思）。
+
+Copy 是 编译器的自动行为，复制成本也不高。而 Clone 则不然。为了降低 Clone  的成本，一般可以使用 Arc，但是 Arc 使得代码阅读成本提升。比如 `let xs = ys.clone();`，你可能需要查看大量上下文来弄清是 调用了 Clone 还是 Arc 。当然你可以使用 `let xs = Arc::clone(ys)`来提升可读性，但缺点是，它破坏了抽象。
+
+所以，Gazebo 中引入了 Dupe trait, `let xs = ys.dupe()`。
+
+```rust
+use gazebo::prelude::*;
+#[derive(Clone, Dupe)]
+struct MyArc(Arc<String>);
+```
+
+看了一下实现源码：[https://github.com/facebookincubator/gazebo/blob/master/gazebo/src/dupe.rs](https://github.com/facebookincubator/gazebo/blob/master/gazebo/src/dupe.rs)
+
+```rust
+pub trait Dupe: Clone {
+    fn dupe(&self) -> Self {
+        self.clone()
+    }
+}
+```
+
+看上去和 Clone 很像，但它仅在 常量时或零分配下可用，比如 Arc。因为 Dupe 只给这些类型实现了。
+
+[https://developers.facebook.com/blog/post/2021/07/06/rust-nibbles-gazebo-dupe/](https://developers.facebook.com/blog/post/2021/07/06/rust-nibbles-gazebo-dupe/)
+
+## 想用 Rust  写脚本吗？ 
+
+rust-script ，可以在没有任何设置或编译步骤的情况下运行rust 文件和表达式。
+
+```rust
+
+$ echo 'println!("Hello, World!");' > hello.rs
+$ rust-script hello.rs
+Hello, World!
+```
+
+也支持 依赖 crate
+
+```rust
+
+#!/usr/bin/env rust-script
+//! This is a regular crate doc comment, but it also contains a partial
+//! Cargo manifest.  Note the use of a *fenced* code block, and the
+//! `cargo` "language".
+//!
+//! ```cargo
+//! [dependencies]
+//! time = "0.1.25"
+//! 
+fn main() {
+    println!("{}", time::now().rfc822z());
+}
+
+```
+
+```rust
+$ rust-script now
+Wed, 28 Oct 2020 00:38:45 +0100
+```
+
+- [https://rust-script.org/](https://rust-script.org/)
+- [https://github.com/fornwall/rust-script](https://github.com/fornwall/rust-script)
+
+## Quilkin : 一个用于游戏服务器的开源UDP代理
+
+由embark 和 Google Cloud 共同推出，目标是为任何游戏工作室提供和巨头同等的网络功能。
+
+[https://medium.com/embarkstudios/say-hi-to-quilkin-an-open-source-udp-proxy-88577c795204](https://medium.com/embarkstudios/say-hi-to-quilkin-an-open-source-udp-proxy-88577c795204)
+
+## franzplot ： Rust 实现的教学软件
+
+米兰理工大学的一名研究助理，担任了 “设计的曲线和表面”课程的助教，这门课主要是为设计专业的学生解释三维数学概念。 因为没有趁手的教学工具，所以这位助教自己用 Rust 实现了一个。
+
+第一个版本是 cpp 实现的。然后新版本用 Rust 重写了，为什么呢？
+
+1. 他在cpp版本内亏欠的技术债务太多，不利于开源协同
+2. OpenGL 已经被苹果废弃
+3. 想让工具变得更加强大
+
+所以，现在用 WebGPU + Rust 重写了这个工具。基于 [https://github.com/gfx-rs/wgpu](https://github.com/gfx-rs/wgpu)
+
+FranzPlot目前是闭源的，未来可能会开源。因为尽管重新写了软件，也还需要处理一些技术债务。另外想完全使用 WGSL 而抛弃 GLSL ，还想将 界面替换为 纯 Rust 实现，比如 使用egui框架。现在是用了 imgui-rs。
+
+[https://gfx-rs.github.io/stories/franzplot](https://gfx-rs.github.io/stories/franzplot)
