@@ -1,6 +1,6 @@
 # Trait Upcasting 系列 ｜ Part I
 
-作者： 张汉东
+作者： 张汉东 / 审校：crlf0710
 
 ---
 

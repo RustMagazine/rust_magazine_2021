@@ -197,3 +197,58 @@ Ockam 是一套 用于相互身份验证和分布式应用程序之间的端到�
 这就好比，很多人说 rust 编译helloworld比 c 的大，但其实 c 的一些基础库操作系统都是默认支持的，不需要另外携带，rust 则需要。
 
 [https://github.com/ockam-network/ockam](https://github.com/ockam-network/ockam)
+
+## CNCF宣布Linkerd毕业
+
+Linkerd 是第一个加入 CNCF 沙箱的项目，沙箱当时被称为 inception，现在是第一个获得毕业地位的服务网格项目。
+
+Linkerd 创始人、Buoyant 首席技术官 Oliver Gould 说。“我们的使命是为服务网格领域带来简单性和用户同理心，我们不得不孜孜不倦地努力消除普遍认为服务网格复杂而笨重的说法。虽然我们做出了有争议的技术决策——采用 Rust 而不是 C++，构建特定于服务网格的'微代理'而不是使用通用代理，专注于 Kubernetes 而不是构建抽象层——这些决策已经得到验证，而我们的全球运营者社区再次对这一愿景下注。”
+
+- [https://linkerd.io/2021/07/28/announcing-cncf-graduation/](https://linkerd.io/2021/07/28/announcing-cncf-graduation/)
+- 中文 [https://mp.weixin.qq.com/s/P5dQjVe0jidguNhZ0KzGTg](https://mp.weixin.qq.com/s/P5dQjVe0jidguNhZ0KzGTg)
+- [https://linkerd.io/](https://linkerd.io/)
+
+## Rust Search Extension 1.3.0-rc 版发布！
+
+想提前体验的朋友欢迎在这个页面下载并帮忙测测，如果没啥 bug 了周末就正式发布！
+
+- [https://github.com/huhu/rust-search-extension/wiki/V1.3.0-Release-Candidate-(zh_CN) ](https://github.com/huhu/rust-search-extension/wiki/V1.3.0-Release-Candidate-(zh_CN) )
+- [https://rust.extension.sh/changelog/](https://rust.extension.sh/changelog/)
+
+## Arti: 一个纯Rust实现的Tor
+
+今天，我很高兴地宣布 Tor 的新时代实现。
+
+在过去一年左右的时间里，我们一直致力于“Arti”，这是一个用 Rust 重写 Tor 的项目。感谢 Zcash Open Major Grants (ZOMG) 的资助，我们终于可以将 Arti 项目列入我们的优先事项列表，并投入更多时间。
+
+下面我将谈谈我们为什么要做这个项目，它对 Tor 用户和运营商意味着什么，它的未来发展方向，以及人们可以如何提供帮助。
+
+- [https://blog.torproject.org/announcing-arti](https://blog.torproject.org/announcing-arti) 
+- [https://gitlab.torproject.org/tpo/core/arti/](https://gitlab.torproject.org/tpo/core/arti/)
+
+## Scott Mabin 全职加入 乐鑫科技
+
+Scott Mabin 全职加入 Espressif，将为其所有芯片提供 Rust 支持，改善其芯片的 Rust 生态系统。
+
+乐鑫科技（股票代码：688018）是一家全球化的无晶圆厂半导体公司，成立于2008 年，在中国、捷克、印度、新加坡和巴西均设有办公地，团队来自20 多个国家和地区。
+
+组织
+
+支持esp的分叉编译器已经被移到 esp-rs组织中，同时还有一些idf支持板块--很快就会有更多的内容。在esp-rs/rust资源库中的讨论已经开始，在过去的一个月中，Espressif每周都会举办社区会议，重点是推动Rust支持的发展。
+
+Espressif芯片上的Rust标准库
+
+@ivmarkov 一直在努力将Rust STD库移植到esp-idf上，esp-idf是Espressif芯片的基于C的开发环境，esp-idf有一个newlib环境，可以用来构建Rust库。@ivmarkov把rust-esp32-std-hello演示版本放在一起，以展示其功能，其中包括WiFi、线程和使用esp-idf的驱动来驱动显示器。非常酷的东西! 有一些初期的问题，你可以在这里追踪，但希望我们很快就能开始向上游提供这些补丁。
+
+为了补充Espressif芯片的标准库，esp-idf-hal已经被更新并移到esp-rs组织中。这个 crate 有API来使用标准库中没有抽象的外围设备和硬件，例如SPI外围设备。与HAL一起，esp-idf-svc也被加入，它是Espressif芯片的嵌入式svc特性的实现。embedded-svc背后的目标是提供围绕更高级别的嵌入式服务的抽象，WiFi、Ping、HTTPD、NVS等。
+
+[https://mabez.dev/blog/posts/esp-rust-espressif/](https://mabez.dev/blog/posts/esp-rust-espressif/)
+
+## Lemmy 发布 v0.11.3
+
+Lemmy 类似于Reddit、Hacker News等网站。你订阅你感兴趣的论坛，发布链接和讨论，然后投票，并对其进行评论。在背后它却是非常不同的；任何人都可以很容易地运行一个服务器，所有这些服务器是联合的（类似电子邮件），并连接到同一个宇宙，称为Fediverse。对于一个链接聚合器来说，这意味着在一个服务器上注册的用户可以订阅任何其他服务器上的论坛，并可以与其他地方注册的用户进行讨论。
+
+总体目标是创建一个容易自主托管的、分散的替代Reddit和其他链接聚合器的网站，不受公司控制和干涉。
+
+- [https://github.com/LemmyNet/lemmy](https://github.com/LemmyNet/lemmy)
+- [https://lemmy.ml/post/75818](https://lemmy.ml/post/75818)

@@ -219,3 +219,63 @@ Wed, 28 Oct 2020 00:38:45 +0100
 FranzPlot目前是闭源的，未来可能会开源。因为尽管重新写了软件，也还需要处理一些技术债务。另外想完全使用 WGSL 而抛弃 GLSL ，还想将 界面替换为 纯 Rust 实现，比如 使用egui框架。现在是用了 imgui-rs。
 
 [https://gfx-rs.github.io/stories/franzplot](https://gfx-rs.github.io/stories/franzplot)
+
+## delicate 一个轻量的分布式的任务调度平台
+
+特色大概有几点：
+
+1. 丰富Rust生态。是一个中小型项目（代码量3W+）， 涉及的交互端包括（Front-end , Server ,  agent）  js & rust 的交织， 可以让新同学作为参考实现一个Rust的工程。
+2. 里面的面对C端的交互都尽量设计的符合用户习惯，除了性能之外 项目很关心人使用的舒适度。
+3. 里面有一些新定义的概念比如绑定，任务不直接关联机器而是关联机器的一个抽象（绑定），当有成百上千的任务需要从  A 机器迁移到 B 机器 ，只需要修改一次关联关系，任务就自动完成了迁移。
+
+[https://github.com/BinChengZhao/delicate](https://github.com/BinChengZhao/delicate)
+
+## 一个安全的可用于 `#[no_std]` ASN.1 的 解码器框架
+
+[https://github.com/XAMPPRocky/rasn](https://github.com/XAMPPRocky/rasn)
+
+## Rust 实现的 Windows 上的下一代包管理器，非常快
+
+现在只发布了 Alpha 版本，但是已经比目前 Windows 自带的包管理器快 5 倍了。
+
+[https://github.com/novus-package-manager/novus](https://github.com/novus-package-manager/novus)
+
+## Loadstone 发布，一个安全的裸金属的 bootloader
+Rust 开始写 bootloader 了。看起来这是一个相当严肃的项目，目前已经发布了 1.0.0。提供了如下功能：
+
+- 多镜像操作：存储，拷贝，升级，验证和启动。可灵活配置
+- 支持外部 flash 芯片
+- Golden image rollbacks （怎么翻译？）
+- 自动或应用触发的升级
+
+搞底层的同学，请严重关注一下此项目。
+
+[https://github.com/absw/loadstone](https://github.com/absw/loadstone)
+
+## 一个研究型的 OS：NrOS
+
+Node Replicated Kernel (NRK) 最早是在 VMware Research 里面的一个原型研究型 Os 项目，现在已经做出了一些学术成果。主要特点是要探索未来操作系统的结构。
+
+[https://nrkernel.systems/](https://nrkernel.systems/)
+
+## Sycamore v0.5.0发布
+
+Sycamore 是一个用于在 Rust 和 WebAssembly 中构建同构 Web 应用程序的库。v0.5.0 版本是Sycamore迄今为止最大的版本，包含大量新功能和错误修复。其中这个版本还引入了功能齐全的路由系统
+
+文章链接：[https://sycamore-rs.netlify.app/news/announcing-v0.5.0](https://sycamore-rs.netlify.app/news/announcing-v0.5.0)
+
+## nanorand v0.6 发布
+
+nanorand 是一个快速、轻量、高效的随机数生成器，其提供的 nanorand::WyRand 在 M1 Macbook Air 上速度可达 16.4 GB/s。
+
+目前 nanorand 发布了 v0.6 ，RandomGen 支持带符号整数和浮点数，RandomRange 支持带符号整数。
+
+[https://github.com/Absolucy/nanorand-rs](https://github.com/Absolucy/nanorand-rs)
+
+## Hora 0.1.0
+
+Hora，Rust 实现的近似最邻近搜索（Approximate Nearest Neighbor Search, ANNS）算法库。先发布了 v0.1.0，专注于近似最邻近搜索领域，已经实现了 HNSW（Hierarchical Navigable Small World Graph Index）索引，SSG（Satellite System Graph）索引，PQIVF（Product Quantization Inverted File）索引，BruteForceIndex，其他索引也即将推出。
+
+Hora 可以部署在任何操作系统平台上，已经支持的 PC 操作系统 Linux，Mac OS，Windows，将支持移动设备操作系统 IOS 和Android，以及将来支持嵌入式系统（no_std），并将支持多语言绑定，包括 Python，Javascript，Java，Ruby，Swift 和 R。
+
+相关链接信息：[https://github.com/hora-search/hora](https://github.com/hora-search/hora)

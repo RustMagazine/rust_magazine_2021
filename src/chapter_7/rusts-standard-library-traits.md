@@ -3,11 +3,9 @@
 
 译者： Praying
 
-> 原文标题：Tour of Rust's Standard Library Traits
-> <br/>
-> 原文链接：https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md <br/>
-> <br/>
-> 说明： 可能网络中也存在其他翻译，但本篇是由 Praying 独立翻译完成的。
+> - 原文标题：Tour of Rust's Standard Library Traits
+> - 原文链接：[https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md ](https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md )
+> - 说明： 可能网络中也存在其他翻译，但本篇是由 Praying 独立翻译完成的。
 
 ## 内容目录
 

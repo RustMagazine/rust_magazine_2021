@@ -3,7 +3,7 @@
 - 作者： [Aram Drevekenin](https://www.poor.dev/blog/performance)
 - 译者： [yct21](https://github.com/yct21)
 
-![Zellij impovement post cover](/image/zellij-performance-improve-1.png)
+![Zellij impovement post cover](./image/zellij/zellij-performance-improve-1.png)
 
 过去的几个月里，我们一直工作在 [Zellij] 的故障修复和性能调优上。在这个过程中，我们发现了不少问题和瓶颈，并采取了一些创造性的手段解决或者绕过它们。
 
@@ -17,7 +17,7 @@ _关于本文的代码示例_
 
 ## 应用的功能与遇到的问题
 
-![Zellij Application](/image/zellij-performance-improve-2.png)
+![Zellij Application](./image/zellij/zellij-performance-improve-2.png)
 
 Zellij 是一个终端复用软件，简单来说，这是一个运行于虚拟终端（如 Alacritty, iterm2, Konsole 等）和 shell 之间的应用。
 
@@ -35,7 +35,7 @@ pty 线程 会查询 [pty]，这是我们与 shell（或者其他在终端中运
 
 另外，每隔一小段时间，pty 线程会给 screen 线程发送 _render_ 消息，让其根据窗格的状态渲染用户的 UI。 
 
-![Zellij work flow](/image/zellij-performance-improve-3.gif)
+![Zellij work flow](./image/zellij/zellij-performance-improve-3.gif)
 
 pty 线程会启动一个异步任务，采用一个非阻塞的循环去轮询 pty，检查是否有新的数据。如果没有数据，pty 线程会休眠一段固定的时间。pty 线程在拿到数据后会向 screen 线程发送 _data_ 指令，让其解析数据。此外，在以下情况下，pty 线程会去发 render 指令：
 
@@ -97,7 +97,7 @@ task::spawn({
 
 我们遇到的第一个性能瓶颈是 MPSC 消息通道的溢出。为了形象描述这个问题，我们给前面的流程图加个速： 
 
-![Zellij Application](/image/zellij-performance-improve-4.gif)
+![Zellij Application](./image/zellij/zellij-performance-improve-4.gif)
 
 pty 线程和 screen 线程的数据处理速率并不同步，前者向消息通道中发送数据的速度远快于后者消耗的速度。这在以下方面影响了性能：
 
@@ -150,7 +150,7 @@ task::spawn({
 
 现在的运行流程可以参照下图：
 
-![Zellij Application](/image/zellij-performance-improve-5.gif)
+![Zellij Application](./image/zellij/zellij-performance-improve-5.gif)
 
 ### 性能提升的度量
 

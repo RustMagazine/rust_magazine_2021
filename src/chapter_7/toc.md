@@ -26,7 +26,7 @@
 - [蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用](./ant-futures-compat.md)
 - [字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM ](./lark-rust-wasm-sqlite.md)
 - [Datenlord | Rust实现RDMA异步编程（二）](./rust-epoll-rdma-part2.md)
-
+- [Zellij 的性能优化](./how-we-improved-the-performance-of-our-rust-app.md)
 
 ## 学习园地
 

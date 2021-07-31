@@ -268,17 +268,31 @@ cargo install cargo-supply-chain
 - [cargo-supply-chain](https://github.com/rust-secure-code/cargo-supply-chain)
 - [cargo-geiger](https://github.com/rust-secure-code/cargo-geiger)
 
-## RFC 3107 即将被合并 ｜ 允许枚举类型使用  `#[derive(Default)] `
+## 让 Rust 更快的解析 float类型 已被合并到 Rust core 库
 
-```rust
+作者两年前就提出了如何让 Rust 解析 float 更快更安全, 不过最近, 这些改变才合并到libcore.
 
-#[derive(Default)]
-enum Option<T> {
-    #[default]
-    None,
-    Some(T),
-}
-```
+这意味着, 当你解析大量的 float 类型时, 性能会得到非常夸张的提升.
 
-[https://github.com/rust-lang/rfcs/pull/3107](https://github.com/rust-lang/rfcs/pull/3107)
+例如:
 
+- 0.06,0.13,0.25,0.38,0.44,0.44,0.38,0.44,0.5,0.56 这样的数据大概会提升 2 倍.
+- -65.613616999999977,43.420273000000009,-65.619720000000029,43.418052999999986,-65.625,43.421379000000059 这样的数据大约会提升 10倍 性能.
+- 8.988465674311580536566680e307 这种数据大概会提升1600~10,000倍的提升.
+
+- [https://github.com/rust-lang/rust/pull/86761](https://github.com/rust-lang/rust/pull/86761)
+- [相关算法论文](https://arxiv.org/abs/2101.11408)
+
+## RFC 3128: I/O Safety
+
+Rust 现在已经有一个被采纳的 I/O 安全的 RFC. 该 RFC 用于处理 文件操作符和 sockets 等的生命周期. 这让编写底层安全的系统对象有了可能.
+
+[https://github.com/rust-lang/rfcs/blob/master/text/3128-io-safety.md](https://github.com/rust-lang/rfcs/blob/master/text/3128-io-safety.md)
+
+## rustc_codegen_gcc 进展报告#2
+
+rustc_codegen_gcc 是 rustc 的 GCC 代码，这意味着它可以被现有的 rustc 前端加载，通过支持更多的架构和 GCC 的优化而受益于 GCC。
+
+当前状态：Antoyo 手动实现了 popcount（因为 gcc 会产生一个对某些函数的调用，这在 no-std 中是行不通的）。除此之外，修复了一些东西，使之更容易在 godbolt 中添加这个 gcc 代码，并使 Antoyo 的这个PR合并到 rustc 中。
+
+报告#2的详情参见 Antoyo 的博客链接，[https://blog.antoyo.xyz/rustc_codegen_gcc-progress-report-2](https://blog.antoyo.xyz/rustc_codegen_gcc-progress-report-2)

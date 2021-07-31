@@ -2,7 +2,7 @@
 
 译者：[iamazy](https://github.com/iamazy)
 
-> [原文](https://www.possiblerust.com/guide/what-can-coerce-and-where-in-rust) 
+> 原文： [https://www.possiblerust.com/guide/what-can-coerce-and-where-in-rust](https://www.possiblerust.com/guide/what-can-coerce-and-where-in-rust) 
 
 ---
 

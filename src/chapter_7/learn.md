@@ -165,3 +165,54 @@ Local Native是一个跨平台的Rust写的桌面应用程序，使用的UI框�
 
 
 [https://blog.discourse.org/2021/07/faster-user-uploads-on-discourse-with-rust-webassembly-and-mozjpeg](https://blog.discourse.org/2021/07/faster-user-uploads-on-discourse-with-rust-webassembly-and-mozjpeg)
+
+## Rust 实现的轻量级浏览器，用于教学目标
+
+[https://github.com/lmt-swallow/puppy-browser/](https://github.com/lmt-swallow/puppy-browser/)
+
+## 如何在 Windows 上进行 Rust 开发
+
+微软官方指南，在 Windows 上使用 Rust 进行开发，包括开发环境的设置、Windows 的 Rust 和代码示例。
+
+[https://docs.microsoft.com/en-us/windows/dev-environment/rust/](https://docs.microsoft.com/en-us/windows/dev-environment/rust/)
+
+## hyperfunctions: PostgreSQL 中的函数，用于简化时序数据的工作
+Rust 实现的 postgresql 扩展。能简化开发工作。
+
+其中提到一个理念：创建新的 SQL 函数，而不是重新发明语法。值得品味。
+
+[https://blog.timescale.com/blog/introducing-hyperfunctions-new-sql-functions-to-simplify-working-with-time-series-data-in-postgresql/](https://blog.timescale.com/blog/introducing-hyperfunctions-new-sql-functions-to-simplify-working-with-time-series-data-in-postgresql/)
+
+## 并不总是iCache的原因
+
+摘要： 
+
+众所周知，内联是一项很有用的代码优化技术。但有时候我们也常听到类似下面这样的观点：
+
+内联也会使代码变慢，因为内联会增加代码的大小，使指令缓存变大并导致缓存未命中。
+
+对于内联导致代码运行速度变慢的原因，不少人归结为内联使得iCache命中率降低，造成指令流水线在取指的过程中耗费更多的时间。
+
+本文作者通过使用若干有效的工具(perf/valgrind)对比了是否启用内联特性的代码性能和汇编指令，提出了内联可能造成代码变慢的另一种解释：
+
+试考虑内联技术将函数S内联展开于函数C中：
+
+1. 内联使得C占用了更多的寄存器。由于函数S的代码直接在函数C的函数体中展开，造成函数C在程序上下文切换过程中加入了更多的push/pop指令，并且函数C的运行时栈的空间进一步膨胀。与内联版本中每次调用函数C都意味着这些新增的push/pop指令都会运行不同，未内联版本的push/pop指令只存在于函数S的上下文中，并且只有当函数C确实调用函数S时，这些指令才会被运行；
+2. 基于第一点的基本认识，现在设想函数S在流程控制语句中被调用（循环或条件分支等），编译器可能会提升函数S中的某些指令到条件分支之外，造成这些指令从冷路径变为热路径（冷热路径：因为条件分支可能不会执行，但是位于条件分支之外的代码总会执行，是为热路径）；
+3. 在上述场景中，随着外层函数C的栈中局部变量和流程控制语句增多，编译器的优化反而使得热路径执行效率降低。
+
+- [https://matklad.github.io/2021/07/10/its-not-always-icache.html]
+- [https://matklad.github.io/2021/07/09/inline-in-rust.html](https://matklad.github.io/2021/07/09/inline-in-rust.html)
+- [https://www.scylladb.com/2017/07/06/scyllas-approach-improve-performance-cpu-bound-workloads/](https://www.scylladb.com/2017/07/06/scyllas-approach-improve-performance-cpu-bound-workloads/)
+
+## 一个 Rust 编写的 k8s controller
+
+作者为了学习 k8s 的 controller 以及 Rust, 用 Rust 编写了一个 controller.
+
+[https://blog.frankel.ch/start-rust/6/](https://blog.frankel.ch/start-rust/6/)
+
+## Rust 在前端中的使用
+
+这其实是一个手把手教你如何使用 WebAssembly 的教程.
+
+[https://blog.frankel.ch/start-rust/5/](https://blog.frankel.ch/start-rust/5/)
