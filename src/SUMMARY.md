@@ -197,6 +197,7 @@
     - [社区热点](./chapter_7/hots.md)
     - [活动回顾](./chapter_7/events.md)
     - [本月招聘](./chapter_7/jobs.md)
+    - [RustChinaConf 2021 议题征集开放申请](./chapter_7/rust_china_conf_2021.md)
     - [论文导读 | 性能与生产力 : Rust vs C ](./chapter_7/paper-rust-vs-c.md)
     - [华为 | Rust 调用约定和名称修饰规则介绍](./chapter_7/hw-rust-name-mangling.md)
     - [蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用](./chapter_7/ant-futures-compat.md)
