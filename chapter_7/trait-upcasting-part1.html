@@ -1,0 +1,1101 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Trait Upcasting 系列 ｜ Part I - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/open-source-mental-health.html"><strong aria-hidden="true">8.7.</strong> 开源与心理健康</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.8.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.9.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.10.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.11.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.12.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.13.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.14.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.15.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.16.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.18.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.22.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.23.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.24.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/rabits.html"><strong aria-hidden="true">8.25.</strong> Rbatis ORM 2.0 | 零开销编译时动态SQL的探索</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.26.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.27.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.28.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_7/toc.html"><strong aria-hidden="true">9.</strong> 七月刊（July）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_7/announce.html"><strong aria-hidden="true">9.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_7/lang.html"><strong aria-hidden="true">9.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_7/hots.html"><strong aria-hidden="true">9.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_7/events.html"><strong aria-hidden="true">9.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_7/jobs.html"><strong aria-hidden="true">9.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_7/paper-rust-vs-c.html"><strong aria-hidden="true">9.6.</strong> 论文导读 | 性能与生产力 : Rust vs C </a></li><li class="chapter-item "><a href="../chapter_7/hw-rust-name-mangling.html"><strong aria-hidden="true">9.7.</strong> 华为 | Rust 调用约定和名称修饰规则介绍</a></li><li class="chapter-item "><a href="../chapter_7/ant-futures-compat.html"><strong aria-hidden="true">9.8.</strong> 蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用</a></li><li class="chapter-item "><a href="../chapter_7/lark-rust-wasm-sqlite.html"><strong aria-hidden="true">9.9.</strong> 字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM </a></li><li class="chapter-item "><a href="../chapter_7/rust-epoll-rdma-part2.html"><strong aria-hidden="true">9.10.</strong> Datenlord | Rust实现RDMA异步编程（二）</a></li><li class="chapter-item "><a href="../chapter_7/how-we-improved-the-performance-of-our-rust-app.html"><strong aria-hidden="true">9.11.</strong> Zellij 的性能优化</a></li><li class="chapter-item "><a href="../chapter_7/learn.html"><strong aria-hidden="true">9.12.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_7/rusts-standard-library-traits.html"><strong aria-hidden="true">9.13.</strong> 【完整】Rust 标准库 Trait 指南</a></li><li class="chapter-item "><a href="../chapter_7/coercion_in_rust.html"><strong aria-hidden="true">9.14.</strong> Rust 中的隐式类型转换</a></li><li class="chapter-item "><a href="../chapter_7/tokio-task-scheduler.html"><strong aria-hidden="true">9.15.</strong> Tokio Internals 之 任务调度</a></li><li class="chapter-item "><a href="../chapter_7/about-rust-features.html"><strong aria-hidden="true">9.16.</strong> 为什么你不应该沉迷于 Rust 的“特性”</a></li><li class="chapter-item "><a href="../chapter_7/rust-no-std.html"><strong aria-hidden="true">9.17.</strong> Rust no-std 工程实践</a></li><li class="chapter-item "><a href="../chapter_7/dynamic_analyzing_tools.html"><strong aria-hidden="true">9.18.</strong> Rust 内存错误调试和动态分析工具分享</a></li><li class="chapter-item "><a href="../chapter_7/macroquad_game.html"><strong aria-hidden="true">9.19.</strong> 使用Macroquad在Android设备上发布游戏</a></li><li class="chapter-item "><a href="../chapter_7/trampoline-kernel.html"><strong aria-hidden="true">9.20.</strong> 跨空间跳板内核</a></li><li class="chapter-item expanded "><a href="../chapter_7/trait-upcasting-part1.html" class="active"><strong aria-hidden="true">9.21.</strong> Trait Upcasting 系列 ｜ Part I</a></li><li class="chapter-item "><a href="../chapter_7/github_trending.html"><strong aria-hidden="true">9.22.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_7/tool_libs.html"><strong aria-hidden="true">9.23.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_7/frameworks.html"><strong aria-hidden="true">9.24.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">10.</strong> 八月刊（August）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> 九月刊（September）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#trait-upcasting-系列--part-i" id="trait-upcasting-系列--part-i">Trait Upcasting 系列 ｜ Part I</a></h1>
+<p>作者： 张汉东 / 审校：crlf0710</p>
+<hr />
+<h2><a class="header" href="#引子" id="引子">引子</a></h2>
+<p>记录 @crlf0710 的 Trait Upcasting系列 系列 PR 过程。因为后续我也参与其中一个 PR，所以先要理清楚 @crlf0710 的 PR 思路，以便后续我的参与。也借此机会分享出来，希望更多的人能参与到 Rust 语言贡献中。</p>
+<p>PR 系列：</p>
+<ol>
+<li><a href="https://github.com/rust-lang/rust/pull/86291">Refactor vtable codegen #86291</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/86475">Change vtable memory representation to use tcx allocated allocations.#86475 </a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/86461">Refactor vtable format for upcoming trait_upcasting feature. #86461</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/86264">Trait upcasting (part1) #86264</a></li>
+<li><a href="">Trait upcasting (part2) </a></li>
+</ol>
+<p>本文为 第一个 PR 的描述。</p>
+<hr />
+<h2><a class="header" href="#前情提要" id="前情提要">前情提要</a></h2>
+<p>故事要从 <a href="https://github.com/rust-lang/rust/pull/60900">Trait upcasting #60900</a> 这个 PR 讲起 。</p>
+<p>Trait upcasting ，是 trait 向上转型的意思。这个 PR 提出，当 <code>Foo: Bar</code> ，即 Foo trait 继承自 Bar trait 时，允许从 <code>dyn Foo</code>转到 <code>dyn Bar</code>。</p>
+<p>目前 Rust 版本中，不支持此功能。因为目前trait 继承情况下， trait 对象的方法都是存储在同一个虚表中，无法区分哪个函数是属于哪个trait 对象。</p>
+<p>社区内有一个通用的解决办法：</p>
+<pre><pre class="playground"><code class="language-rust">trait Base {
+    fn base(&amp;self) {
+        println!(&quot;base...&quot;);
+    }
+}
+
+trait AsBase {
+    fn as_base(&amp;self) -&gt; &amp;dyn Base; //返回 Base trait对象
+}
+
+// blanket implementation
+// 为所有实现 Base 的 T 来实现 AsBase
+impl&lt;T: Base&gt; AsBase for T {
+  	// 返回 Base trait对象
+    fn as_base(&amp;self) -&gt; &amp;dyn Base {
+        self
+    }
+}
+
+trait Foo: AsBase {
+    fn foo(&amp;self) {
+        println!(&quot;foo..&quot;);
+    }
+}
+
+#[derive(Debug)]
+struct MyStruct;
+
+impl Foo for MyStruct {}
+impl Base for MyStruct {}
+
+fn main() {
+    let s = MyStruct;
+    let foo: &amp;dyn Foo = &amp;s;
+    foo.foo();
+    let base: &amp;dyn Base = foo.as_base(); // 通过 as_base 来返回 Base trait对象达到 upcasting 的效果
+    base.base();
+}
+
+</code></pre></pre>
+<p>在 PR  #60900  中，作者给出了一些实现，但是因为太大了，需要对这份工作进行重构，然后这个 PR 就被关闭了。关于这个 PR 的相关讨论被记录于 <a href="https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits/topic/object.20upcasting">rust-lang.zulipchat.</a></p>
+<p>这份重构的工作，就由 <strong><a href="https://github.com/crlf0710">crlf0710</a></strong> 承接起来了，这就是这个系列 PR 的由来。相关提案：<a href="https://github.com/rust-lang/lang-team/issues/98">Trait Upcasting #98</a> ， 跟踪 issues :<a href="https://github.com/rust-lang/rust/issues/65991">Tracking issue for trait upcasting #65991 </a></p>
+<h2><a class="header" href="#第一步工作-重构-vtable-代码生成" id="第一步工作-重构-vtable-代码生成">第一步工作： 重构 vtable 代码生成</a></h2>
+<p>状态：这部分工作已经被合并。</p>
+<p>相关PR: <a href="https://github.com/rust-lang/rust/pull/86291">Refactor vtable codegen #86291</a> 。</p>
+<h3><a class="header" href="#修改文件概述" id="修改文件概述">修改文件概述</a></h3>
+<p>本次修改涉及 十个文件。</p>
+<ol>
+<li><code>compiler/rustc_codegen_cranelift/src/vtable.rs </code></li>
+<li><code>compiler/rustc_codegen_ssa/src/glue.rs</code></li>
+<li><code>compiler/rustc_codegen_ssa/src/meth.rs </code></li>
+<li><code>compiler/rustc_codegen_ssa/src/mir/block.rs</code></li>
+<li><code>compiler/rustc_middle/src/query/mod.rs </code></li>
+<li><code>compiler/rustc_middle/src/ty/mod.rs</code></li>
+<li><code>compiler/rustc_mir/src/interpret/traits.rs </code></li>
+<li><code>compiler/rustc_mir/src/monomorphize/collector.rs </code></li>
+<li><code>compiler/rustc_trait_selection/src/traits/mod.rs </code></li>
+<li><code>compiler/rustc_trait_selection/src/traits/select/confirmation.rs</code></li>
+</ol>
+<p>这十个文件涉及五个 crate：</p>
+<ol>
+<li><code>rustc_codegen_cranelift</code>，是 基于 cranelift 的编译器后端，专门用于 debug 模式。</li>
+<li><code>rustc_codegen_ssa</code>，截至2021年1月，RustC_Codegen_SSA 为所有后端提供了一个抽象的接口，以允许其他Codegen后端（例如Cranelift）。</li>
+<li><code>rustc_middle</code>，属于 rust 编译器的 main crate ，包含rustc“家族”中的其他crate使用的通用类型定义，包括 HIR/MIR/Types。</li>
+<li><code>rustc_mir</code>，用于操作 MIR 的库。</li>
+<li><code>rustc_trait_selection</code>，该库定义了 trait resolution 相关方法。详细内容：<a href="https://rustc-dev-guide.rust-lang.org/traits/resolution.html">Trait resolution (old-style)</a> 。</li>
+</ol>
+<h3><a class="header" href="#rustc_middle-库中的修改" id="rustc_middle-库中的修改">rustc_middle 库中的修改</a></h3>
+<p>在 <code>compiler/rustc_middle/src/ty/mod.rs</code> 中新增了枚举类型：VtblEntry。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone, Copy, Debug, PartialEq, HashStable)]
+pub enum VtblEntry&lt;'tcx&gt; {
+    MetadataDropInPlace,
+    MetadataSize,
+    MetadataAlign,
+    Vacant,
+    Method(DefId, SubstsRef&lt;'tcx&gt;),
+}
+
+pub const COMMON_VTABLE_ENTRIES: &amp;[VtblEntry&lt;'_&gt;] =
+    &amp;[VtblEntry::MetadataDropInPlace, VtblEntry::MetadataSize, VtblEntry::MetadataAlign];
+
+pub const COMMON_VTABLE_ENTRIES_DROPINPLACE: usize = 0;
+pub const COMMON_VTABLE_ENTRIES_SIZE: usize = 1;
+pub const COMMON_VTABLE_ENTRIES_ALIGN: usize = 2;
+<span class="boring">}
+</span></code></pre></pre>
+<p>这是为了识别 vtable 中的不同 entry，这样才有可能识别 存储在vtable中的不同 trait 对象。</p>
+<p>接下来，在 <code>compiler/rustc_middle/src/query/mod.rs </code> 中把  <code>query vtable_methods</code> 修改为 <code>query vtable_entries</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用的是一个宏
+rustc_queries! {
+   // ...
+   query vtable_entries(key: ty::PolyTraitRef&lt;'tcx&gt;)
+                        -&gt; &amp;'tcx [ty::VtblEntry&lt;'tcx&gt;] {
+        desc { |tcx| &quot;finding all vtable entries for trait {}&quot;, tcx.def_path_str(key.def_id()) }
+    }
+  
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在 rust_middle 中定义了 rustc 的 <a href="https://rustc-dev-guide.rust-lang.org/overview.html?highlight=query#queries">query 系统</a> 。Rust 使用查询系统，是为了支持增量编译。参考 <a href="https://rustcrustc.github.io/rustc-dev-guide-zh/overview.html#%E7%BC%96%E8%AF%91%E5%99%A8%E6%A6%82%E8%A7%88">编译器概览</a> 。</p>
+<p>举个例子。假如有一条查询负责询问某个东西的类型， 而另一条查询负责询问某个函数的优化后的 MIR。这些查询可以相互调用并且由查询系统所跟踪。 查询的结果被缓存于硬盘上，这样我们就可以分辨相较于上次编译，哪些查询的结果改变了，并且仅重做这些查询。 这就是增量编译是如何工作的。</p>
+<blockquote>
+<p>类型上下文（TyCtxt），它是一个相当巨大的结构体， 是所有东西的中心。所有查询都被定义为在<a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/ty/struct.TyCtxt.html"><code>TyCtxt</code></a>类型上 的方法，并且内存中的查询缓存也同样被存储在此。在代码中，通常会有一个名为<code>tcx</code>变量，它是 类型上下文上的一个句柄。有同样会见到名为<code>'tcx</code>的生命周期，这意味着有东西被和<code>TyCtxt</code>的 生命周期绑定在了一起（通常它会被存储或者被驻留化）。</p>
+</blockquote>
+<p><strong><a href="https://rustcrustc.github.io/rustc-dev-guide-zh/overview.html#tyty"><code>ty::Ty</code></a> 介绍</strong></p>
+<p>类型在 Rust 中相当重要，并且形成了许多编译器分析的核心。用于表示类型（在用户程序中）的 主要类型（在编译器中）是 <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/ty/type.Ty.html"><code>rustc_middle::ty::Ty</code></a>。它是如此的重要以至于我们为其 设置了一整章<a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/ty/type.Ty.html"><code>ty::Ty</code></a>，但是对于现在而言，我们只想提到它存在并且是<code>rustc</code>用来表示类型的方法！</p>
+<p>同样注意到<code>rustc_middle::ty</code>模块定义了我们之前提到的<code>TyCtxt</code>结构体。</p>
+<h3><a class="header" href="#rustc_codegen_ssa-中的修改" id="rustc_codegen_ssa-中的修改">rustc_codegen_ssa 中的修改</a></h3>
+<p>因为 rustc_codegen_ssa 是 后端 codegen 的接口，所以先看这里。</p>
+<p>rustc_codegen_ssa 主要入口点： <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_codegen_ssa/base/fn.codegen_crate.html"><code>rustc_codegen_ssa::base::codegen_crate</code></a></p>
+<ul>
+<li>它单态化并且产出 LLVM IR给一个代码生成单元。 它之后启动一个后台线程来运行一个之后必须被结合的LLVM。</li>
+<li>单态化通过<a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_codegen_ssa/mir/struct.FunctionCx.html#method.monomorphize"><code>FunctionCx::monomorphize</code></a> 懒启动以及<a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_codegen_ssa/base/fn.codegen_instance.html"><code>rustc_codegen_ssa::base::codegen_instance</code></a></li>
+</ul>
+<p>在 rust_codgen_ssa 出现之前，生成代码都是由 rust_codgen_llvm 处理。</p>
+<p>LLVM codegen的两个最重要的结构是<code>CodegenCx</code>和<code>Builder</code>。它们由多个生命期参数和Value的类型组成。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>struct CodegenCx&lt;'ll, 'tcx&gt; {
+  /* ... */
+}
+
+struct Builder&lt;'a, 'll, 'tcx&gt; {
+  cx: &amp;'a CodegenCx&lt;'ll, 'tcx&gt;,
+  /* ... */
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>CodegenCx</code>是用来编译一个可以包含多个函数的 codegen-unit 的，而<code>Builder</code> 是为了编译一个基本块而创建的。<code>CodegenCx</code>和<code>Builder</code>将是实现所有定义后端接口的traits的结构。</p>
+<p>这些 trait 被定义在<code>rustc_codegen_ssa/traits</code>文件夹中，所有与后端无关的代码都以它们为参数。</p>
+<p>在  rustc_codegen_ssa 有个关键的 trait ：<code>BuilderMethods</code>，它表示后端实现的构建方法。那么实际上， rustc_codegen_cranelift 目前并没有依赖  rustc_codegen_ssa 的这个 BuilderMethods trait， 而 rustc_codegen_llvm 依赖了。看来目前 rustc_codegen_ssa 并未重构完成。</p>
+<p>重构 vtable 的相关工作，主要涉及三个文件： </p>
+<ol>
+<li><code>rustc_codegen_ssa/src/meth.rs </code></li>
+<li><code>rustc_codegen_ssa/src/glue.rs</code></li>
+<li><code>rustc_codegen_ssa/src/mir/block.rs</code></li>
+</ol>
+<p><strong>在 <code>meth.rs</code> 中：</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rustc_middle::ty::{self, Instance, Ty, VtblEntry, COMMON_VTABLE_ENTRIES}; // 引入 rustc_middle 新加的枚举 VtblEntry 相关
+
+impl&lt;'a, 'tcx&gt; VirtualIndex {
+    pub fn from_index(index: usize) -&gt; Self {
+        VirtualIndex(index as u64) // 修改虚表index ，之前是偏移 3 ，因为之前是没有 vtable Entry 的，所以 DESTRUCTOR（index 0）,SIZE（index 1）,ALIGN（index 2） 都展开放了，现在则不需要。
+    }
+  
+    // ...
+  
+    // 修改
+    pub fn get_vtable&lt;'tcx, Cx: CodegenMethods&lt;'tcx&gt;&gt;(
+    cx: &amp;Cx,
+    ty: Ty&lt;'tcx&gt;,
+    trait_ref: Option&lt;ty::PolyExistentialTraitRef&lt;'tcx&gt;&gt;,
+) -&gt; Cx::Value {
+  			// ...
+        // 新增
+        // 当有  T: Trait 或 SubTrait: ParentTrait 这种形式出现时，就会有 trait_ref 
+        // 所以，相当于是 如果是有 trait 继承的情况下，就利用 query vtable_entries 来查询该trait
+        // 并返回 vtable_entries ，否则返回 COMMON_VTABLE_ENTRIES，代表是单一的trait 对象
+  	    let vtable_entries = if let Some(trait_ref) = trait_ref {
+            tcx.vtable_entries(trait_ref.with_self_ty(tcx, ty))
+        } else {
+            COMMON_VTABLE_ENTRIES
+        };
+  
+  			let layout = cx.layout_of(ty); // 新增
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // If you touch this code, be sure to also make the corresponding changes to
+    // `get_vtable` in `rust_mir/interpret/traits.rs`.
+      // /////////////////////////////////////////////////////////////////////////////////////////////
+    // 新增
+    // 迭代处理每个 vtable entry 的元信息：drop/大小/对齐/方法等
+    let components: Vec&lt;_&gt; = vtable_entries
+        .iter()
+        .map(|entry| match entry {
+            VtblEntry::MetadataDropInPlace =&gt; {
+                cx.get_fn_addr(Instance::resolve_drop_in_place(cx.tcx(), ty))
+            }
+            VtblEntry::MetadataSize =&gt; cx.const_usize(layout.size.bytes()),
+            VtblEntry::MetadataAlign =&gt; cx.const_usize(layout.align.abi.bytes()),
+            VtblEntry::Vacant =&gt; nullptr,
+            VtblEntry::Method(def_id, substs) =&gt; cx.get_fn_addr(
+                ty::Instance::resolve_for_vtable(
+                    cx.tcx(),
+                    ty::ParamEnv::reveal_all(),
+                    *def_id,
+                    substs,
+                )
+                .unwrap()
+                .polymorphize(cx.tcx()),
+            ),
+        })
+        .collect();
+  
+        // ...
+  
+     }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>文档：<a href="https://doc.rust-lang.org/stable/nightly-rustc/rustc_middle/ty/type.PolyExistentialTraitRef.html">rustc_middle::ty::PolyExistentialTraitRef</a> ，该类型表示 对一个已经擦除了 Self 的 trait 的存在性引用，所以使用 <code>with_self_ty</code> 来提供一个self占位。</p>
+<p><strong>在 <code>src/glue.rs</code> 中：</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// BuilderMethods 是通用后端接口，但目前只有llvm用这个
+pub fn size_and_align_of_dst&lt;'a, 'tcx, Bx: BuilderMethods&lt;'a, 'tcx&gt;&gt;(
+    bx: &amp;mut Bx,
+    t: Ty&lt;'tcx&gt;,
+    info: Option&lt;Bx::Value&gt;,
+) -&gt; (Bx::Value, Bx::Value) {
+  
+ 		// ...
+  
+  	match t.kind() {
+        ty::Dynamic(..) =&gt; {
+            // load size/align from vtable
+            // 新增
+            let vtable = info.unwrap();
+            (
+                meth::VirtualIndex::from_index(ty::COMMON_VTABLE_ENTRIES_SIZE)
+                    .get_usize(bx, vtable),
+                meth::VirtualIndex::from_index(ty::COMMON_VTABLE_ENTRIES_ALIGN)
+                    .get_usize(bx, vtable),
+            )
+        }
+    		// ...  
+    }
+  
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>问题： 既然目前 BuilderMethods 只有 llvm使用而 cranelift没有使用， 为什么 <a href="https://github.com/rust-lang/rust/blob/master/compiler/rustc_codegen_cranelift/src/unsize.rs#L131">rustc_codegen_cranelift/src/unsize.rs#L131</a> 中对应的 <code>size_and_align_of_dst</code> 函数不做对应修改？</p>
+<p>答：因为 rustc_codegen_cranelift 中 vtable 要做相应修改，具体在后面描述。</p>
+<p><code>src/glue.rs</code> 就是一个胶水模块，在生成底层指令的相关模块中，会调用该方法。</p>
+<p><strong>在 <code>src/mir/block.rs</code> 中：</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct TerminatorCodegenHelper&lt;'tcx&gt; {
+    bb: mir::BasicBlock,
+    terminator: &amp;'tcx mir::Terminator&lt;'tcx&gt;,
+    funclet_bb: Option&lt;mir::BasicBlock&gt;,
+}
+
+impl&lt;'a, 'tcx&gt; TerminatorCodegenHelper&lt;'tcx&gt; {
+    // ...
+  
+  	fn codegen_drop_terminator(
+        &amp;mut self,
+        helper: TerminatorCodegenHelper&lt;'tcx&gt;,
+        mut bx: Bx,
+        location: mir::Place&lt;'tcx&gt;,
+        target: mir::BasicBlock,
+        unwind: Option&lt;mir::BasicBlock&gt;,
+    ) {
+        // ...
+         let (drop_fn, fn_abi) = match ty.kind() {
+            // FIXME(eddyb) perhaps move some of this logic into
+            // `Instance::resolve_drop_in_place`?
+            ty::Dynamic(..) =&gt; {
+                 // ...
+                 // 新增
+                 (
+                   meth::VirtualIndex::from_index(ty::COMMON_VTABLE_ENTRIES_DROPINPLACE)
+                        .get_fn(&amp;mut bx, vtable, &amp;fn_abi),
+                    fn_abi,
+                )
+            }
+            // ... 
+          }
+        // ...
+    }
+  
+    // ...
+  
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>src/mir/block.rs</code> 顾名思义，这个是和 MIR 生成 basicblock 有关。代码中，要生成 drop 相关的终止符，所以需要得到虚表中 <code>COMMON_VTABLE_ENTRIES_DROPINPLACE</code>相关 index信息。</p>
+<h3><a class="header" href="#rustc_codegen_cranelift-库中的修改" id="rustc_codegen_cranelift-库中的修改">rustc_codegen_cranelift 库中的修改</a></h3>
+<p>在 <code>compiler/rustc_codegen_cranelift/src/vtable.rs</code> 中，定义了一些自由函数，用于定义 trait 对象中 vtable相关。</p>
+<p>因为在 rustc_codegen_ssa 做了一些相关修改，而目前 rustc_codegen_cranelift 并没有使用 rustc_codegen_ssa 的统一接口，所以需要修改 rustc_codegen_cranelift vtable相关代码。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>use ty::VtblEntry; // 新增
+
+pub(crate) fn drop_fn_of_obj(fx: &amp;mut FunctionCx&lt;'_, '_, '_&gt;, vtable: Value) -&gt; Value {
+    let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes() as usize;
+    fx.bcx.ins().load(
+        pointer_ty(fx.tcx),
+        vtable_memflags(),
+        vtable,
+        (ty::COMMON_VTABLE_ENTRIES_DROPINPLACE * usize_size) as i32, // 新增
+    )
+}
+
+pub(crate) fn size_of_obj(fx: &amp;mut FunctionCx&lt;'_, '_, '_&gt;, vtable: Value) -&gt; Value {
+    let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes() as usize;
+    fx.bcx.ins().load(
+        pointer_ty(fx.tcx),
+        vtable_memflags(),
+        vtable,
+        (ty::COMMON_VTABLE_ENTRIES_SIZE * usize_size) as i32, // 新增
+    )
+}
+
+pub(crate) fn min_align_of_obj(fx: &amp;mut FunctionCx&lt;'_, '_, '_&gt;, vtable: Value) -&gt; Value {
+    let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes() as usize;
+    fx.bcx.ins().load(
+        pointer_ty(fx.tcx),
+        vtable_memflags(),
+        vtable,
+        (ty::COMMON_VTABLE_ENTRIES_SIZE * usize_size) as i32, // 新增
+    )
+}
+
+pub(crate) fn get_ptr_and_method_ref&lt;'tcx&gt;(
+    fx: &amp;mut FunctionCx&lt;'_, '_, 'tcx&gt;,
+    arg: CValue&lt;'tcx&gt;,
+    idx: usize,
+) -&gt; (Value, Value) {
+    let (ptr, vtable) = if let Abi::ScalarPair(_, _) = arg.layout().abi {
+        arg.load_scalar_pair(fx)
+    } else {
+        let (ptr, vtable) = arg.try_to_ptr().unwrap();
+        (ptr.get_addr(fx), vtable.unwrap())
+    };
+
+    let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes();
+    let func_ref = fx.bcx.ins().load(
+        pointer_ty(fx.tcx),
+        vtable_memflags(),
+        vtable,
+        (idx * usize_size as usize) as i32, // 修改，因为 idx 变了，之前是 idx+3
+    );
+    (ptr, func_ref)
+}
+
+fn build_vtable&lt;'tcx&gt;(
+    fx: &amp;mut FunctionCx&lt;'_, '_, 'tcx&gt;,
+    layout: TyAndLayout&lt;'tcx&gt;,
+    trait_ref: Option&lt;ty::PolyExistentialTraitRef&lt;'tcx&gt;&gt;,
+) -&gt; DataId {
+    let tcx = fx.tcx;
+    let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes() as usize;
+
+    let drop_in_place_fn = import_function(
+        tcx,
+        fx.module,
+        Instance::resolve_drop_in_place(tcx, layout.ty).polymorphize(fx.tcx),
+    );
+
+    // 新增
+    let vtable_entries = if let Some(trait_ref) = trait_ref {
+        tcx.vtable_entries(trait_ref.with_self_ty(tcx, layout.ty))
+    } else {
+        ty::COMMON_VTABLE_ENTRIES
+    };
+  
+     let mut data_ctx = DataContext::new();
+     let mut data = ::std::iter::repeat(0u8)
+         .take(vtable_entries.len() * usize_size)
+         .collect::&lt;Vec&lt;u8&gt;&gt;()
+         .into_boxed_slice();
+      // 新增
+      // 迭代处理 vtable entry
+      for (idx, entry) in vtable_entries.iter().enumerate() {
+          match entry {
+              VtblEntry::MetadataSize =&gt; {
+                  write_usize(fx.tcx, &amp;mut data, idx, layout.size.bytes());
+              }
+              VtblEntry::MetadataAlign =&gt; {
+                  write_usize(fx.tcx, &amp;mut data, idx, layout.align.abi.bytes());
+              }
+              VtblEntry::MetadataDropInPlace | VtblEntry::Vacant | VtblEntry::Method(_, _) =&gt; {}
+          }
+      }
+      data_ctx.define(data);
+
+  
+      // 迭代处理 vtable entry
+      for (idx, entry) in vtable_entries.iter().enumerate() {
+          match entry {
+              VtblEntry::MetadataDropInPlace =&gt; {
+                  let func_ref = fx.module.declare_func_in_data(drop_in_place_fn, &amp;mut data_ctx);
+                  data_ctx.write_function_addr((idx * usize_size) as u32, func_ref);
+              }
+              VtblEntry::Method(def_id, substs) =&gt; {
+                  let func_id = import_function(
+                      tcx,
+                      fx.module,
+                      Instance::resolve_for_vtable(tcx, ParamEnv::reveal_all(), *def_id, substs)
+                          .unwrap()
+                          .polymorphize(fx.tcx),
+                  );
+                  let func_ref = fx.module.declare_func_in_data(func_id, &amp;mut data_ctx);
+                  data_ctx.write_function_addr((idx * usize_size) as u32, func_ref);
+              }
+              VtblEntry::MetadataSize | VtblEntry::MetadataAlign | VtblEntry::Vacant =&gt; {}
+          }
+      }
+
+    // ... 
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>对 vtable 的修改，类似于 rustc_codegen_ssa  相关代码修改，只不过 rustc_codegen_cranelift 没有完全使用 rustc_codegen_ssa 的接口，所以需要另行单独处理。</p>
+<h3><a class="header" href="#rustc_trait_selection-中的修改" id="rustc_trait_selection-中的修改">rustc_trait_selection 中的修改</a></h3>
+<p>该库定义了 trait resolution 相关方法。Rust 编译器类型检查，mir层都依赖于该库。</p>
+<p>Trait Resolution 主要用于判断该如何选择合理的 trait。 比如：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Convert&lt;Target&gt; {
+    fn convert(&amp;self) -&gt; Target;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个trait只有一个方法。它是最简单的。它从（隐含的）Self类型转换到Target类型。如果我们想允许isize和usize之间的转换，我们可以这样实现Convert。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>impl Convert&lt;usize&gt; for isize { ... } // isize -&gt; usize
+impl Convert&lt;isize&gt; for usize { ... } // usize -&gt; isize
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在想象一下，有一些像下面这样的代码。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: isize = .....;
+let y = x.convert();
+<span class="boring">}
+</span></code></pre></pre>
+<p>对convert的调用将为isize生成一个<code>trait reference Convert&lt;$Y&gt;</code>，其中<code>$Y</code>是代表y类型的类型变量。在我们可以看到的两个impls中，唯一匹配的是<code>Convert&lt;usize&gt; for isize</code>。因此，我们可以选择这个函数，这将导致<code>$Y</code>的类型被统一为<code>usize</code>。(注意，在组装候选程序时，我们在一个事务中进行初始统一，这样它们就不会相互影响。)</p>
+<p>还有其他情况，可以参考 <a href="https://rustc-dev-guide.rust-lang.org/traits/resolution.html">Trait resolution (old-style)</a> 。</p>
+<p>既然 vtable 已经修改，那也必须得修改该库中相关代码。</p>
+<p>一共修改两个文件：<code>rustc_trait_selection/src/traits/mod.rs</code> 和 <code>rustc_trait_selection/src/traits/select/confirmation.rs</code>。</p>
+<p><strong>在 <code>src/traits/mod.rs</code>中：</strong></p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rustc_middle::ty::{
+    self, GenericParamDefKind, ParamEnv, ToPredicate, Ty, TyCtxt, VtblEntry, WithConstness,
+    COMMON_VTABLE_ENTRIES,
+}; // 引入 新增的 VtblEntry类型
+
+pub use self::util::{
+    supertrait_def_ids, supertraits, transitive_bounds, transitive_bounds_that_define_assoc_type,
+    SupertraitDefIds, Supertraits,
+};
+
+/// Given a trait `trait_ref`, iterates the vtable entries
+/// that come from `trait_ref`, including its supertraits.
+// 修改 原方法
+fn vtable_entries&lt;'tcx&gt;(
+    tcx: TyCtxt&lt;'tcx&gt;,
+    trait_ref: ty::PolyTraitRef&lt;'tcx&gt;,
+) -&gt; &amp;'tcx [VtblEntry&lt;'tcx&gt;] {
+    debug!(&quot;vtable_entries({:?})&quot;, trait_ref);
+
+    let entries = COMMON_VTABLE_ENTRIES.iter().cloned().chain(
+        supertraits(tcx, trait_ref).flat_map(move |trait_ref| {
+            let trait_methods = tcx
+                .associated_items(trait_ref.def_id())
+                .in_definition_order()
+                .filter(|item| item.kind == ty::AssocKind::Fn);
+
+            // Now list each method's DefId and InternalSubsts (for within its trait).
+            // If the method can never be called from this object, produce `Vacant`.
+            trait_methods.map(move |trait_method| {
+                debug!(&quot;vtable_entries: trait_method={:?}&quot;, trait_method);
+                let def_id = trait_method.def_id;
+
+                // Some methods cannot be called on an object; skip those.
+                if !is_vtable_safe_method(tcx, trait_ref.def_id(), &amp;trait_method) {
+                    debug!(&quot;vtable_entries: not vtable safe&quot;);
+                    return VtblEntry::Vacant;
+                }
+
+                // The method may have some early-bound lifetimes; add regions for those.
+                let substs = trait_ref.map_bound(|trait_ref| {
+                    InternalSubsts::for_item(tcx, def_id, |param, _| match param.kind {
+                        GenericParamDefKind::Lifetime =&gt; tcx.lifetimes.re_erased.into(),
+                        GenericParamDefKind::Type { .. } | GenericParamDefKind::Const { .. } =&gt; {
+                            trait_ref.substs[param.index as usize]
+                        }
+                    })
+                });
+
+                // The trait type may have higher-ranked lifetimes in it;
+                // erase them if they appear, so that we get the type
+                // at some particular call site.
+                let substs =
+                    tcx.normalize_erasing_late_bound_regions(ty::ParamEnv::reveal_all(), substs);
+
+                // It's possible that the method relies on where-clauses that
+                // do not hold for this particular set of type parameters.
+                // Note that this method could then never be called, so we
+                // do not want to try and codegen it, in that case (see #23435).
+                let predicates = tcx.predicates_of(def_id).instantiate_own(tcx, substs);
+                if impossible_predicates(tcx, predicates.predicates) {
+                    debug!(&quot;vtable_entries: predicates do not hold&quot;);
+                    return VtblEntry::Vacant;
+                }
+
+                VtblEntry::Method(def_id, substs)
+            })
+        }),
+    );
+
+    tcx.arena.alloc_from_iter(entries)
+}
+
+/// Find slot base for trait methods within vtable entries of another trait
+// 新增 ： 查找其他 trait 的VTable条目中的 trait 方法的位置
+fn vtable_trait_first_method_offset&lt;'tcx&gt;(
+    tcx: TyCtxt&lt;'tcx&gt;,
+    key: (
+        ty::PolyTraitRef&lt;'tcx&gt;, // trait_to_be_found
+        ty::PolyTraitRef&lt;'tcx&gt;, // trait_owning_vtable
+    ),
+) -&gt; usize {
+    let (trait_to_be_found, trait_owning_vtable) = key;
+
+    let mut supertraits = util::supertraits(tcx, trait_owning_vtable);
+
+    // For each of the non-matching predicates that
+    // we pass over, we sum up the set of number of vtable
+    // entries, so that we can compute the offset for the selected
+    // trait.
+    let vtable_base = ty::COMMON_VTABLE_ENTRIES.len()
+        + supertraits
+            .by_ref()
+            .take_while(|t| *t != trait_to_be_found)
+            .map(|t| util::count_own_vtable_entries(tcx, t))
+            .sum::&lt;usize&gt;();
+
+    vtable_base
+}
+
+// 修改
+pub fn provide(providers: &amp;mut ty::query::Providers) {
+    object_safety::provide(providers);
+    structural_match::provide(providers);
+    *providers = ty::query::Providers {
+        // ...
+      
+        vtable_entries,
+  
+        // ...
+    };
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>在 <code>src/traits/select/confirmation.rs </code> 中：</strong></p>
+<p>该模块用于确认选中的 trait 。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span> fn confirm_object_candidate(
+        &amp;mut self,
+        obligation: &amp;TraitObligation&lt;'tcx&gt;,
+        index: usize,
+    ) -&gt; Result&lt;ImplSourceObjectData&lt;'tcx, PredicateObligation&lt;'tcx&gt;&gt;, SelectionError&lt;'tcx&gt;&gt; {
+    // ...
+    let unnormalized_upcast_trait_ref =
+            supertraits.nth(index).expect(&quot;supertraits iterator no longer has as many elements&quot;); // 修改
+      
+    // ...
+    let vtable_base = super::super::vtable_trait_first_method_offset(
+            tcx,
+            (unnormalized_upcast_trait_ref, ty::Binder::dummy(object_trait_ref)),
+        );
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#rustc_mir-中的修改" id="rustc_mir-中的修改">rustc_mir 中的修改</a></h3>
+<p>在 rust_mir 中涉及两个文件修改: <code>rustc_mir/src/interpret/traits.rs </code> 和 <code>rustc_mir/src/monomorphize/collector.rs </code> 。</p>
+<p><strong>在 <code>src/interpret/traits.rs</code> 中：</strong></p>
+<p>interpret 是和 mir 转译为 llvm ir 相关。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rustc_middle::ty::{
+    self, Instance, Ty, VtblEntry, COMMON_VTABLE_ENTRIES, COMMON_VTABLE_ENTRIES_ALIGN,
+    COMMON_VTABLE_ENTRIES_DROPINPLACE, COMMON_VTABLE_ENTRIES_SIZE,
+}; // 修改，引入 VtblEntry 相关新类型
+
+
+// 修改原方法
+// InterpCx 是 interpret 上下文
+impl&lt;'mir, 'tcx: 'mir, M: Machine&lt;'mir, 'tcx&gt;&gt; InterpCx&lt;'mir, 'tcx, M&gt; {
+    /// Creates a dynamic vtable for the given type and vtable origin. This is used only for
+    /// objects.
+    ///
+    /// The `trait_ref` encodes the erased self type. Hence, if we are
+    /// making an object `Foo&lt;Trait&gt;` from a value of type `Foo&lt;T&gt;`, then
+    /// `trait_ref` would map `T: Trait`.
+    pub fn get_vtable(
+        &amp;mut self,
+        ty: Ty&lt;'tcx&gt;,
+        poly_trait_ref: Option&lt;ty::PolyExistentialTraitRef&lt;'tcx&gt;&gt;,
+    ) -&gt; InterpResult&lt;'tcx, Pointer&lt;M::PointerTag&gt;&gt; {
+        // ...
+      
+        // 获取 vtable entries
+      	let vtable_entries = if let Some(poly_trait_ref) = poly_trait_ref {
+            let trait_ref = poly_trait_ref.with_self_ty(*self.tcx, ty);
+            let trait_ref = self.tcx.erase_regions(trait_ref);
+
+            self.tcx.vtable_entries(trait_ref)
+        } else {
+            COMMON_VTABLE_ENTRIES
+        };
+
+        // ...
+        // 新增
+        ////////////////////////////////////////////////////////////////////////
+        // If you touch this code, be sure to also make the corresponding changes to
+        // `get_vtable` in `rust_codegen_llvm/meth.rs`.
+        // /////////////////////////////////////////////////////////////////////
+        let vtable_size = ptr_size * u64::try_from(vtable_entries.len()).unwrap();
+      
+        // ...
+        // 新增
+        // No need to do any alignment checks on the memory accesses below, because we know the
+        // allocation is correctly aligned as we created it above. Also we're only offsetting by
+        // multiples of `ptr_align`, which means that it will stay aligned to `ptr_align`.
+        // 迭代处理 vtable entries 中每个虚表的布局
+        let scalars = vtable_entries
+            .iter()
+            .map(|entry| -&gt; InterpResult&lt;'tcx, _&gt; {
+                match entry {
+                    VtblEntry::MetadataDropInPlace =&gt; Ok(Some(drop.into())),
+                    VtblEntry::MetadataSize =&gt; Ok(Some(Scalar::from_uint(size, ptr_size).into())),
+                    VtblEntry::MetadataAlign =&gt; Ok(Some(Scalar::from_uint(align, ptr_size).into())),
+                    VtblEntry::Vacant =&gt; Ok(None),
+                    VtblEntry::Method(def_id, substs) =&gt; {
+                        // Prepare the fn ptr we write into the vtable.
+                        let instance =
+                            ty::Instance::resolve_for_vtable(tcx, self.param_env, *def_id, substs)
+                                .ok_or_else(|| err_inval!(TooGeneric))?;
+                        let fn_ptr = self.memory.create_fn_alloc(FnVal::Instance(instance));
+                        Ok(Some(fn_ptr.into()))
+                    }
+                }
+            })
+            .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+        let mut vtable_alloc =
+            self.memory.get_mut(vtable.into(), vtable_size, ptr_align)?.expect(&quot;not a ZST&quot;);
+        for (idx, scalar) in scalars.into_iter().enumerate() {
+            if let Some(scalar) = scalar {
+                let idx: u64 = u64::try_from(idx).unwrap();
+                vtable_alloc.write_ptr_sized(ptr_size * idx, scalar)?;
+            }
+        }
+        // ...  
+      
+        // 修改原方法
+        /// Resolves the function at the specified slot in the provided
+    /// vtable. Currently an index of '3' (`COMMON_VTABLE_ENTRIES.len()`)
+    /// corresponds to the first method declared in the trait of the provided vtable.
+    pub fn get_vtable_slot(
+        &amp;self,
+        vtable: Scalar&lt;M::PointerTag&gt;,
+        idx: u64,
+    ) -&gt; InterpResult&lt;'tcx, FnVal&lt;'tcx, M::ExtraFnVal&gt;&gt; {
+        let ptr_size = self.pointer_size();
+        let vtable_slot = vtable.ptr_offset(ptr_size * idx, self)?; // 新增
+        let vtable_slot = self
+            .memory
+            .get(vtable_slot, ptr_size, self.tcx.data_layout.pointer_align.abi)?
+            .expect(&quot;cannot be a ZST&quot;);
+        let fn_ptr = vtable_slot.read_ptr_sized(Size::ZERO)?.check_init()?;
+        self.memory.get_fn(fn_ptr)
+    }
+
+    /// Returns the drop fn instance as well as the actual dynamic type.
+    pub fn read_drop_type_from_vtable(
+        &amp;self,
+        vtable: Scalar&lt;M::PointerTag&gt;,
+    ) -&gt; InterpResult&lt;'tcx, (ty::Instance&lt;'tcx&gt;, Ty&lt;'tcx&gt;)&gt; {
+        let pointer_size = self.pointer_size();
+        // We don't care about the pointee type; we just want a pointer.
+        let vtable = self
+            .memory
+            .get(
+                vtable,
+                pointer_size * u64::try_from(COMMON_VTABLE_ENTRIES.len()).unwrap(),
+                self.tcx.data_layout.pointer_align.abi,
+            )?
+            .expect(&quot;cannot be a ZST&quot;);
+        let drop_fn = vtable
+            .read_ptr_sized(
+                pointer_size * u64::try_from(COMMON_VTABLE_ENTRIES_DROPINPLACE).unwrap(),
+            )?
+            .check_init()?;
+          // ....
+        }
+      
+        // ...
+        // 修改原方法
+        pub fn read_size_and_align_from_vtable(
+        &amp;self,
+        vtable: Scalar&lt;M::PointerTag&gt;,
+        ) -&gt; InterpResult&lt;'tcx, (Size, Align)&gt; {
+            let pointer_size = self.pointer_size();
+            // We check for `size = 3 * ptr_size`, which covers the drop fn (unused here),
+            // the size, and the align (which we read below).
+            let vtable = self
+                .memory
+                .get(
+                    vtable,
+                    pointer_size * u64::try_from(COMMON_VTABLE_ENTRIES.len()).unwrap(),
+                    self.tcx.data_layout.pointer_align.abi,
+                )?
+                .expect(&quot;cannot be a ZST&quot;);
+            let size = vtable
+                .read_ptr_sized(pointer_size * u64::try_from(COMMON_VTABLE_ENTRIES_SIZE).unwrap())?
+                .check_init()?;
+            let size = u64::try_from(self.force_bits(size, pointer_size)?).unwrap();
+            let align = vtable
+                .read_ptr_sized(pointer_size * u64::try_from(COMMON_VTABLE_ENTRIES_ALIGN).unwrap())?
+                .check_init()?;
+            let align = u64::try_from(self.force_bits(align, pointer_size)?).unwrap();
+            let align = Align::from_bytes(align).map_err(|e| err_ub!(InvalidVtableAlignment(e)))?;
+
+            if size &gt;= self.tcx.data_layout.obj_size_bound() {
+                throw_ub!(InvalidVtableSize);
+            }
+            Ok((Size::from_bytes(size), align))
+        }
+        // ...
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>在 <code>src/monomorphize/collector.rs </code>中：</strong></p>
+<p>monomorphize 意思是 单态化，意味着 这个模块用于 泛型单态化。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rustc_middle::ty::{self, GenericParamDefKind, Instance, Ty, TyCtxt, TypeFoldable, VtblEntry}; // 引入新的 VtablEntry 类型
+
+/// Creates a `MonoItem` for each method that is referenced by the vtable for
+/// the given trait/impl pair.
+fn create_mono_items_for_vtable_methods&lt;'tcx&gt;(
+    tcx: TyCtxt&lt;'tcx&gt;,
+    trait_ty: Ty&lt;'tcx&gt;,
+    impl_ty: Ty&lt;'tcx&gt;,
+    source: Span,
+    output: &amp;mut Vec&lt;Spanned&lt;MonoItem&lt;'tcx&gt;&gt;&gt;,
+) {
+   // ...
+   if let ty::Dynamic(ref trait_ty, ..) = trait_ty.kind() {
+       if let Some(principal) = trait_ty.principal() {
+           // ...
+           // Walk all methods of the trait, including those of its supertraits
+           // 走查所有的 trait 方法，包括 supertrait 的
+           let entries = tcx.vtable_entries(poly_trait_ref);
+           let methods = entries
+                .iter()
+                .filter_map(|entry| match entry {
+                    VtblEntry::MetadataDropInPlace
+                    | VtblEntry::MetadataSize
+                    | VtblEntry::MetadataAlign
+                    | VtblEntry::Vacant =&gt; None,
+                    VtblEntry::Method(def_id, substs) =&gt; ty::Instance::resolve_for_vtable(
+                        tcx,
+                        ty::ParamEnv::reveal_all(),
+                        *def_id,
+                        substs,
+                    )
+                    .filter(|instance| should_codegen_locally(tcx, instance)),
+                })
+                .map(|item| create_fn_mono_item(tcx, item, source));
+            output.extend(methods);
+       }
+   }
+   // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#小结" id="小结">小结</a></h2>
+<p>第一步工作，主要是为了改进生成的 vtable结构，能够识别 多个trait 对象。</p>
+<p>从 <code>rustc_middle -&gt; rustc_codgen_ssa -&gt; rustc_codegen_cranelift -&gt; rustc_trait_selection -&gt; rustc_mir</code> 这个过程，是从上到下，从抽象类型 到 能转译为 llvm IR 的 MIR。</p>
+<p>如果 <code>rustc_codgen_cranelift</code> 能够完全使用 <code>rustc_codgen_ssa</code> ，那么代码修改起来应该更方便了。</p>
+<p>后续：看到 <a href="https://github.com/antoyo/rustc_codegen_gcc">rustc_codegen_gcc</a> 就是基于 <code>rustc_codgen_ssa</code>来实现的。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_7/trampoline-kernel.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_7/github_trending.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_7/trampoline-kernel.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_7/github_trending.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
