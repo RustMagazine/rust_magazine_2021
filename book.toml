@@ -14,7 +14,7 @@ theme = "mytheme"
 default-theme = "rust"
 google-analytics = "UA-188947685-1"
 git-repository-url = "https://github.com/RustMagazine/rust_magazine_2021"
-additional-js = ["mermaid.min.js", "mermaid-init.js"]
+additional-js = ["mermaid.min.js", "mermaid-init.js", "smart-anchor.js"]
 mathjax-support = true
 
 [output.html.playground]
