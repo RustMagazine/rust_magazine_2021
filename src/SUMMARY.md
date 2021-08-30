@@ -219,13 +219,29 @@
     - [推荐项目 |  框架引擎](./chapter_7/frameworks.md)
 
 
+- [八月刊（August）| 待发布](./chapter_8/toc.md)
+    - [发刊通告](./chapter_8/announce.md)
+    - [官方动态](./chapter_8/lang.md)
+    - [社区热点](./chapter_8/hots.md)
+    - [活动回顾](./chapter_8/events.md)
+    - [本月招聘](./chapter_8/jobs.md)
+    - [RustChinaConf 2021 正式启动](./chapter_8/rust_china_conf_2021.md)
+    - [论文导读 | Rudra : 查找 Rust 生态系统中的内存安全 Bug ](./chapter_8/paper-rudra.md)
+    - [华为 | Rust语言中SIMD计算加速指令的使用](./chapter_8/hw-rust-simd.md)
+    - [蚂蚁集团 | Trait Object 还是 Virtual Method Table](./chapter_8/ant-futures-compat.md)
+    - [Datenlord | Rust实现RDMA异步编程（三）](./chapter_8/rust-epoll-rdma-part3.md)
+    - [Datenlord | 英文投稿](./chapter_8/rust-english.md)
+    - [SecondState | AWS Lambda 中的 Rust 与 WebAssembly Serverless 函数](./chapter_8/aws-lambda-rust-wasm-serverless.md)
+    - [便利蜂 | 门店网络与 Rust 落地实践](./chapter_8/bianlifeng_embedded_rust.md)
+    - [学习资源](./chapter_8/learn.md)
+    - [Rust 技巧篇](./chapter_8/rust-tips.rs)
+    - [真实世界的设计模式 | 单例模式 与 Sealed](./chapter_8/singleton_and_sealed.md)
+    - [Rust 编写 GUI 框架？](./chapter_8/rust-gui-framwork.md)
+    - [Trait Upcasting 系列 ｜ Part II](./chapter_8/trait-upcasting-part2.md)
+    - [GitHub 趋势榜](./chapter_8/github_trending.md)
+    - [推荐项目 ｜ 基础工具库](./chapter_8/tool_libs.md)
+    - [推荐项目 |  框架引擎](./chapter_8/frameworks.md)
 
-
-
-
-
-
-- [八月刊（August）| 待发布]()
 - [九月刊（September）| 待发布]()
 - [十月刊（October）| 待发布]()
 - [十一月刊（November）| 待发布]()
