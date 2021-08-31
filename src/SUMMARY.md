@@ -236,6 +236,7 @@
     - [学习资源](./chapter_8/learn.md)
     - [Rust 技巧篇](./chapter_8/rust-tips.rs)
     - [真实世界的设计模式 | 单例模式 与 Sealed](./chapter_8/singleton_and_sealed.md)
+    - [为 reqwest 增加中间件支持](./chapter_8/reqwest-middleware.md)
     - [Rust 编写 GUI 框架？](./chapter_8/rust-gui-framwork.md)
     - [Trait Upcasting 系列 ｜ Part II](./chapter_8/trait-upcasting-part2.md)
     - [GitHub 趋势榜](./chapter_8/github_trending.md)
