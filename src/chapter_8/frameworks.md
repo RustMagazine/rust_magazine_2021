@@ -66,12 +66,47 @@ rg3d 最近发布了 0.22 版，作者在 Reddit 发布了一段 rg3d 的演示�
 [https://github.com/rg3dengine/rg3d](https://github.com/rg3dengine/rg3d)
 
 
-## Rust Search Extension 1.3 发布
 
-小编的 Rust 插件发布新版本半个多月了，一直忘了发帖了，今天补上。欢迎大家体验！
+## Tangram：训练、部署和监控机器学习模型
 
-更新说明：https://github.com/huhu/rust-search-extension/wiki/V1.3.0-Release-Candidate-(zh_CN)
+一个机器学习套件，使用方法如下：
 
-Changelog: https://rust.extension.sh/changelog
+```
+# 训练
+$ tangram train --file heart_disease.csv --target diagnosis --output heart_disease.tangram
+```
 
+推理支持多种语言：Elixir, Go, JavaScript, Python, Ruby 和 Rust，以 Rust 为例：
+
+```rust
+let model: tangram::Model = tangram::Model::from_path("heart_disease.tangram", None).unwrap();
+
+let input = tangram::predict_input! {
+  "age": 63.0,
+  "gender": "male",
+  // ...
+};
+
+let output = model.predict_one(input, None);
+# { className: 'Negative', probability: 0.9381780624389648 }
+```
+很好奇训练的时候居然没有要指定模型，发现其将模型共分为三类：回归、二分类和多分类，训练时会根据数据自动选择合适（使用评估方法）的模型，每种模型又有两种不同的训练方法：线性方法和树方法。
+
+自带的监控功能看起来还不错。
+
+项目理论上可以用在简单机器学习场景下，尤其是那些还没有支持机器学习的语言，不过推理并没有 Benchmark，生产中使用需要做好性能测试。
+
+[https://github.com/tangramdotdev/tangram](https://github.com/tangramdotdev/tangram)
+
+## RefineDB: Rust编写的强类型文档数据库
+
+运行在任何事务性 键值存储上的 强类型 文档数据库。
+
+目前支持的 backends 有:
+
+- FoundationDB
+- 单机部署的 SQLite。
+- 一个简单的内存键值存储。
+
+[https://github.com/losfair/RefineDB](https://github.com/losfair/RefineDB)
 

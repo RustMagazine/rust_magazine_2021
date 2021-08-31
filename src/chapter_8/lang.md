@@ -141,3 +141,9 @@ fn main() {
 
 - [https://github.com/Rust-GCC/gccrs](https://github.com/Rust-GCC/gccrs)
 - [https://thephilbert.io/2021/08/02/gcc-rust-monthly-report-8-july-2021/](https://thephilbert.io/2021/08/02/gcc-rust-monthly-report-8-july-2021/)
+
+## Rust 1.56 中即将发布增强版的错误消息格式
+
+cargo 构建时如果发生错误将用类似于 diff 的方式显示输出建议帮助开发者修改程序。
+
+[https://github.com/rust-lang/rust/pull/86532](https://github.com/rust-lang/rust/pull/86532)

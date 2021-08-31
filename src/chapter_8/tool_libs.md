@@ -242,3 +242,179 @@ $ cargo auto docs
 ```
 
 [https://github.com/LucianoBestia/cargo-auto](https://github.com/LucianoBestia/cargo-auto)
+
+## rust-grad 用 Rust 写成的自动微分库，支持 wgpu 计算
+
+实验性的自动微分库，由作者自己维护的 ndarray 分叉提供 wgpu 支持。这也为向 ndarray 添加 wgpu 支持提供了概念性的验证。
+
+- [https://github.com/RustyBamboo/rust-grad](https://github.com/RustyBamboo/rust-grad)
+- [https://github.com/RustyBamboo/ndarray/tree/wgpu](https://github.com/RustyBamboo/ndarray/tree/wgpu)
+
+## SnakeOS v0.1.0发布
+
+这是继在 Rust 博客系列中编写操作系统之后适用于 x86 CPU 的可启动贪吃蛇游戏。它支持 async/await 和动态内存管理，当然，现在你可以在裸机上玩贪吃蛇了！
+
+[https://github.com/trusch/snakeos](https://github.com/trusch/snakeos)
+
+## miette: 人类友好的错误诊断库
+
+miette是Rust的诊断库。它包括一系列的traits/protocols，允许您hook到它的错误报告工具，甚至编写您自己的错误报告!它允许你定义错误类型，可以像这样打印出来(或以任何你喜欢的格式!):
+
+[https://github.com/zkat/miette](https://github.com/zkat/miette)
+
+## RustSBI 0.2.0-alpha.5 版本发布
+
+RustSBI 0.2.0-alpha.5版本发布。良好支持您的业务和学术研究系统，兼容性强，先进的模块化设计，值得信赖。 RustSBI是RISC-V下的引导程序环境，它支持多款模拟器和芯片平台。在今年的首届全国大学生系统能力竞赛操作系统赛中，RustSBI被来自全国高校的赛队广泛使用，用于实现自己的比赛用系统，并取得全国一、二和三等奖。
+
+本次更新特性：
+
+- 完整支持RISC-V SBI 0.3正式版标准
+- 支持SBI PMU性能监视扩展
+
+兼容性修改指南：
+
+- rustsbi::ecall指令要求[usize; 6]，加入ctx.a5;
+- 降级embedded-hal到0.2.6
+
+[https://docs.rs/rustsbi/0.2.0-alpha.5/](https://docs.rs/rustsbi/0.2.0-alpha.5/)
+
+## default-args: 零开销实现带缺省值的函数
+
+通过使用default_args::default_args!宏来实现带缺省值的函数，下面是用例：
+
+```rust
+use default_args::default_args;
+
+// this would make a macro named `foo`
+// and original function named `foo_`
+default_args! {
+    fn foo(important_arg: u32, optional: u32 = 100) -> String {
+        format!("{}, {}", important_arg, optional)
+    }
+}
+
+// in other codes ...
+assert_eq!(foo!(1), "1, 100"); // foo(1, 100)
+assert_eq!(foo!(1, 3), "1, 3"); // foo(1, 3)
+assert_eq!(foo!(1, optional = 10), "1, 10"); // foo(1, 10)
+
+// let's make another one
+default_args! {
+    #[inline]
+    pub async unsafe extern "C" fn bar<S1, S2, S3>(a: S1, b: S2 = "b", c: S3 = "c") -> String
+    where
+        S1: AsRef<str>,
+        S2: AsRef<str>,
+        S3: AsRef<str>,
+    {
+        format!("{}, {}, {}", a.as_ref(), b.as_ref(), c.as_ref())
+    }
+    // that was long signature!
+}
+
+// in other codes ...
+assert_eq!(unsafe { bar!("a") }.await, "a, b, c");
+assert_eq!(unsafe { bar!("a", "d") }.await, "a, d, c");
+// you can even mix named & unnamed argument in optional arguments
+assert_eq!(unsafe { bar!("a", "d", c = "e") }.await, "a, d, e");
+assert_eq!(unsafe { bar!("a", c = "e") }.await, "a, b, e");
+```
+
+[https://github.com/buttercrab/default-args.rs](https://github.com/buttercrab/default-args.rs)
+
+## nom 7.0 版本发布
+
+nom 是一个用 Rust 编写的解析器组合库。它的目标是提供工具来构建安全的解析器，而不会影响速度或内存消耗。为此，它广泛使用 Rust 的强类型和内存安全来生成快速且正确的解析器，并提供函数、宏和特征来抽象大部分容易出错的管道。目前7.0已经发布
+
+[https://crates.io/crates/nom](https://crates.io/crates/nom)
+
+## egui 0.14 版本发布
+
+egui 是一个易于使用的纯 Rust 图形用户界面。egui 可以在 Web 上、本机上以及您最喜欢的游戏引擎中运行。egui 旨在成为最容易使用的 Rust GUI 库，以及在 Rust 中制作 Web 应用程序的最简单方法，它可以在任何可以绘制纹理三角形的地方使用，这意味着您可以轻松地将其集成到您选择的游戏引擎中。
+
+[https://github.com/emilk/egui](https://github.com/emilk/egui)
+
+## crates.live：可视化 Rust crates 依赖项
+
+crates.live 是来自 crates.io 的 Rust crates 的依赖可视化工具。 它显示了 Rust crates（包）的依赖树。功能包括：
+
+- 依赖解析， crates.live 引擎通过匹配依赖版本来完成完整的依赖解析。
+- 交互式图表，带有标记的板条箱的可缩放交互式图表。
+- 图像导出， 将图形导出为 PNG。
+- 开放 API：（即将推出）GraphQL API。
+
+crates.live 使用了一堆技术框架，技术栈包括：
+
+- Rust， crates.live 后端和爬虫是用 Rust 和开源 Rust 库开发的。
+- GraphQl， WASM 驱动的 GraphQL 服务器。
+- React/Bulma， 前端库。
+- Terraform， 帮助启动和维护我们的基础设施。
+- Cloudflare， Cloudflare 工作人员运行 WASM 后端。
+
+如果在使用此应用程序时有任何疑问、建议或问题； 可以通过 contact@crates.live 联系。 crates.live 由 Abid Omar 开发，可通过 contact@omarabid.com 联系。
+
+[https://crates.live/](https://crates.live/)
+
+## Obake，版本化数据结构
+
+Obake 是一个用于声明和维护版本化数据结构的过程宏。 “obake”这个名字取自日语“お化け（おばけ）”，这是日本民间传说中一类会变形的超自然生物。
+
+在开发应用程序时，配置格式和内部数据结构通常会在版本之间演变。 然而，保持这些版本之间的向后兼容性需要声明和维护遗留格式的数据结构和用于在它们之间迁移的代码。 Obake 的目标是让这个过程变得轻松。
+
+```rust
+#[obake::versioned]                 // create a versioned data-structure
+#[obake(version("0.1.0"))]          // declare some versions
+#[obake(version("0.2.0"))]
+#[derive(PartialEq, Eq, Hash)]      // additional attributes are applied to all versions
+struct Foo {
+    #[obake(cfg("0.1.0"))]          // enable fields for specific versions with
+    foo: String,                    // semantic version constraints
+   
+    #[obake(cfg(">=0.2, <=0.3.0"))] // any semantic version constraint can appear in
+    bar: u32,                       // a `cfg` attribute 
+   
+    #[obake(cfg("0.1.0"))]          // multiple `cfg` attributes are treated as a
+    #[obake(cfg(">=0.3"))]          // disjunction over version constraints
+    baz: char,
+}
+
+// describe migrations between versions using the `From` trait
+// and an automatically generated type-level macro for referring to
+// specific versions of `Foo`
+impl From<Foo!["0.1.0"]> for Foo!["0.2.0"] {
+    fn from(foo: Foo!["0.1.0"]) -> Self {
+        Self { bar: 0 }
+    }
+}
+
+// an enumeration of all versions of `Foo` is accessed using the
+// `obake::Versioned` trait:
+let versioned_example: <Foo as obake::Versioned>::Versioned = unimplemented!();
+
+// this enumeration implements `Into<Foo>`, where `Foo` is the latest declared
+// version of `Foo` (in this case, `Foo!["0.2.0"]`)
+let example: Foo = versioned_example.into();
+```
+
+[https://github.com/doctorn/obake](https://github.com/doctorn/obake)
+
+## lateral：一个在 x86_64 上启动的模块化内核
+
+在本地执行：
+
+```
+$ make run-release ARCH=x86_64
+```
+
+可以根据自己的情况调整 Makefile 第一行 Bash 的配置。执行后如果有安装 QEMU 的话会自动加载：
+
+每个组件都建立在窗口管理器之上，而不是像大多数操作系统那样建立在终端之上。
+
+[https://github.com/carterisonline/lateral](https://github.com/carterisonline/lateral)
+
+## Persy 1.0 发布
+
+Persy 是一个简单的事务存储引擎。
+
+- [https://persy.rs/posts/persy-1.0.html](https://persy.rs/posts/persy-1.0.html)
+- [https://gitlab.com/tglman/persy](https://gitlab.com/tglman/persy)
