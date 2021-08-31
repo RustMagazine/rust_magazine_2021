@@ -299,8 +299,7 @@ Rust 非常适合此类门店嵌入式场景，其完整易用的工具链、高
 
 最后，便利蜂正在寻找优秀的伙伴，每一份简历我们都会认真对待，期待遇见。
 
-- 邮箱地址：[tech-hiring@bianlifeng.com](tech-hiring@bianlifeng.com)
-- 邮件标题：运维
+- 邮箱地址：[zhen.pei@bianlifeng.com](zhen.pei@bianlifeng.com)
 
 ## 招聘官网
 

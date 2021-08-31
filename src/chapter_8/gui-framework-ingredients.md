@@ -1,6 +1,6 @@
-# 您想要编写一个 GUI 框架吗？
+# 想用 Rust 编写 GUI 框架吗？
 
-> 原文链接：https://www.cmyr.net/blog/gui-framework-ingredients.html
+> 原文链接：[https://www.cmyr.net/blog/gui-framework-ingredients.html](https://www.cmyr.net/blog/gui-framework-ingredients.html)
 
 通过最近关于 Rust 中 GUI 编程的几次讨论，我留下了这样的印象：“GUI”这个词对不同的人来说意味着截然不同的东西。
 

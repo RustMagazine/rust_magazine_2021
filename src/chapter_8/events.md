@@ -54,6 +54,7 @@
 
 - [https://www.bilibili.com/video/BV1Gv411N7Z7](https://www.bilibili.com/video/BV1Gv411N7Z7)
 
+
 ---
 
 <center> 🔥🔥🔥🔥 <strong>RustFriday 飞书群线上沙龙</strong> 🔥🔥🔥🔥 </center>
@@ -101,6 +102,29 @@ Rust 中文社群 飞书群 邀请你加入：
 【回放】
 
 - [https://www.bilibili.com/video/BV1Kb4y16742](https://www.bilibili.com/video/BV1Kb4y16742)
+
+
+## 第十八期 ｜ 如何用 Rust 实现 RPC 框架
+
+分享者：张汉东
+
+【讨论主题】
+
+1.  教程作者 茌海 分享了 Lust 框架的思路。为什么要用rust呢？因为go 服务的性能已经到了存量优化的一个瓶颈，不得不考虑使用rust重新实现从根本上消除go系统所带来的问题。
+2.  大家一起跟随教程学习 如果构建一个 rpc 框架。 该教程虽然比较简短，但其实内容很丰富，并且融合了很多生产实践的思考。
+    - 从第二章到第三章是介绍如果抽象消息和协议，
+    -  第四章和第五章，介绍如何结合tokio codec 和 transport 来进一步整合消息和协议，以及使用tower 增加中间件支持，复用tokio生态里的工具。
+    -  第六章 则介绍了如何使用nom来解析 thrift idl，以及通过过程宏来自动生成代码。
+    -  第七和第八章则进一步基于tower来增加服务发现/负债均衡/自定义中间件等功能。麻雀虽小，五脏俱全，非常值得学习。
+
+【参考资料】
+
+ [https://github.com/mini-lust/tutorials](https://github.com/mini-lust/tutorials)
+
+【回放】
+
+- [https://www.bilibili.com/video/BV1Pg411V7FM/](https://www.bilibili.com/video/BV1Pg411V7FM/)
+
 
 ---
 
