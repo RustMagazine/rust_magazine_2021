@@ -165,9 +165,7 @@ app.use(function (req, res, next) {
 
 这与surf的方法非常相似，除了我们使用response对象并可以直接改变它：中间件函数不返回任何内容。
 
-
-
-####　Tower
+#### Tower
 
 <span style="background-color:#D2D2D2">tower</span>是用于网络应用程序的通用Rust组件库。 
 

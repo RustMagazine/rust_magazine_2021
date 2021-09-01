@@ -1,4 +1,4 @@
-Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？
+# Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？
 
 作者： CrLF0710
 
