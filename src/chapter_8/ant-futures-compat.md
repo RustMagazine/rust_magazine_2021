@@ -1,5 +1,6 @@
 # 蚂蚁集团 | Trait Object 还是 Virtual Method Table
 
+作者： 史泽宇
 
 > Trait object 是 Rust 动态分发的实现方式。在 2021 年 4 月发刊的 Rust Magazine 中，Jiacai Liu 同学在《Trait 使用及实现分析》文章中介绍了 Rust 中 Ad-hoc 多态的使用方式，包括静态分发与动态分发，并且对 trait object 中的对象安全问题以及原因做出了详细解释。
 > 那么，使用 trait object 就是 Rust 中动态分发的终点吗？事实上我们发现，在很多 Rust 代码中使用了原始的虚表而不是 trait object，这其中的原因又是什么呢？
@@ -9,7 +10,7 @@
 
 在 Rust 中使用 trait 实现多态有两种方式，静态分发或者动态分发。静态分发使用 trait bound 或者 impl trait 方式实现编译期单态化，根据类型参数生成对应的结构或者函数。动态分发使用 trait object 的方式实现，而由于 trait object 是动态大小类型，无法在编译期确定类型大小，所以一般会使用指向 trait object 的引用或者指针来操作 trait object。而指向 trait object 的引用或者指针本质上是一个胖指针，其中包含了指向擦除了具体类型的对象指针与虚函数表。所以每次调用 trait object 的方法时，需要解引用该胖指针，所以部分观点认为动态分发比静态分发开销更大，而相反的观点认为使用静态分发会导致编译时间变长，编译后二进制文件膨胀以及增加缓存失效概率等问题，所以具体使用哪种方式就见仁见智了。
 
-![trait object](./image/ant/1.jpg)
+![trait object](./image/ant/1.jpeg)
 
 然而，标准的 `Trait` 结构也有着一些缺陷，比如由于对象安全的要求，一些 trait 无法通过 trait object 的方式使用。所以我们在使用或者阅读一些 Rust crate 的时候会发现，这些库实现了自己的 trait object 结构，比如标准库的 `RawWaker` 结构，`tokio` 的 `RawTask` 结构，`bytes` 的 `Bytes` 结构，`anyhow` 的 `ErrorImpl` 结构，以及关于类型擦除的内存分配器 [^1] 的讨论。在接下来的内容里，我对其中几个实现进行了一些粗浅的分析，并结合一些已有的讨论 [^2]，尝试总结它们的共同点。笔者水平有限，如有错漏，烦请指出。
 
