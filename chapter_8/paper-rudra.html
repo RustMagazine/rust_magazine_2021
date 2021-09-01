@@ -201,7 +201,7 @@
 </ol>
 <h2><a class="header" href="#rudra" id="rudra">Rudra</a></h2>
 <p><a href="https://github.com/sslab-gatech/Rudra"><code>Rudra</code></a> 用于分析和报告Unsafe Rust 代码中潜在的内存安全漏洞。 由于Unsafe 代码中的错误威胁到 Rust 安全保证的基础，<code>Rudra</code> 的主要重点是将我们的分析扩展到 Rust  包注册仓库（比如 <code>crates.io</code>）中托管的所有程序和库。<code>Rudra</code>  可以在 6.5 小时内扫描整个注册仓库（<code>43k</code> 包）并识别出 263 个以前未知的内存安全漏洞，提交 98 个 <code>RustSec</code> 公告和 74 个<code> CVE</code>，占自 2016 年以来报告给 <code>RustSec</code> 的所有漏洞的 41.4%。</p>
-<p>![rudra](D:\Rust 工作报告\文档报告\Rust\image\rudra.PNG)</p>
+<p><img src="./image/rudra/rudra.PNG" alt="rudra" /></p>
 <p><code>Rudra</code> 发现的新漏洞很微妙，它们存在于Rust 专家的库中：两个在 <code>std</code> 库中，一个在官方 <code>futures</code> 库中，一个在 Rust 编译器 <code>rustc</code> 中。  <code>Rudra</code> 已经开源， 并计划将其算法集成到官方 Rust linter 中。</p>
 <blockquote>
 <p>Rudra， 这个名称来自于 梵文，译为鲁特罗（或楼陀罗），印度神话中司风暴、狩猎、死亡和自然界之神。他在暴怒时会滥伤人畜；他又擅长以草药来给人治病。其名意为“狂吼”或“咆哮”（可能是飓风或暴风雨）。 </p>
@@ -358,7 +358,7 @@ fn main(){
 <p>这里， <code> Borrow&lt;B&gt;</code> 是高阶类型，它内部 <code>borrow</code> 的一致性其实并没有保证，可能会返回不同的slice，如果不做处理，很可能会暴露出未初始化的字节给调用者。</p>
 <h3><a class="header" href="#propagating-sendsync-in-generic-types" id="propagating-sendsync-in-generic-types">Propagating Send/Sync in Generic Types</a></h3>
 <p>当涉及泛型时候， <code>Send/Sync</code> 的规则会变得很复杂，如图：</p>
-<p>![rudra2](D:\Rust 工作报告\文档报告\Rust\image\rudra2.PNG)</p>
+<p><img src="./image/rudra/rudra2.PNG" alt="rudra2" /></p>
 <p>通常 <code>Send/Sync</code> 会由编译器自动实现，但是当开发者涉及 Unsafe 时，可能需要手动实现这俩 trait。手动实现 <code>Send/Sync</code> 想要正确很困难。一个不懂 <code>Send/Sync</code> 如何手动实现的开发者，很容易在代码中引入 Bug。</p>
 <p><strong>论文对此给出定义：</strong></p>
 <p>如果泛型在实现<code>Send/Sync</code>类型时，如果它对内部类型上指定了不正确的<code>Send/Sync</code>约束，那么泛型的<code>Send/Sync</code>约束就会变得不正确。这就是 泛型中 <code>Send/Sync</code> 传播引发的不安全 Bug。</p>
@@ -401,7 +401,7 @@ fn main(){
 <p>这个问题通过修正<code>Send/Sync</code>的实现，以及在<code>MappedMutexGuard</code>类型中添加一个<code>PhantomData&lt;&amp;'a mut U&gt;</code>标记来告诉编译器，这个防护也是在U之上。</p>
 <h2><a class="header" href="#rudra-的设计" id="rudra-的设计">Rudra 的设计</a></h2>
 <p>整体设计图如下：</p>
-<p>![rudra3](D:\Rust 工作报告\文档报告\Rust\image\rudra3.PNG)</p>
+<p><img src="./image/rudra/rudra3.PNG" alt="rudra3" /></p>
 <p>Rudra 通过 <code>HIR</code> 来获取 crate 的代码结构（包括 trait定义、函数签名、Unsafe 块等），通过 <code>MIR</code> 来获取代码语义（数据流、控制流图、调用依赖等）。为什么不使用 LLVM IR 呢？因为在这个层面上 Rust 的抽象已经消失了。</p>
 <p>然后通过内部的 <code>Unsafe Dataflow Checker (UD)</code> 来检查 <code>Panic Safety Bug</code> 和 <code>Higher-order Invariant Bug</code>，通过 <code>Send/Sync Variance Checker(SV)</code>来检查 <code>Send/Sync Variance Bug</code>。最终将结果按优先级汇总输出报告。</p>
 <p><code>Unsafe Dataflow Checker (UD)</code>  和 <code>Send/Sync Variance Checker(SV) </code> 对应两套算法，具体可参加论文和代码。</p>
@@ -414,7 +414,7 @@ fn main(){
 <p>通常，会因为功能性的漏洞，而造成信息安全问题。</p>
 <h2><a class="header" href="#小结" id="小结">小结</a></h2>
 <p>该论文的最后一章，还包含了很多数据来证明 Rudra 的效果，以及 Rudra 和 Fuzz 测试、Miri 和其他 Rust 静态分析工具的比较等结果。</p>
-<p>![rudra4](D:\Rust 工作报告\文档报告\Rust\image\rudra4.PNG)</p>
+<p><img src="./image/rudra/rudra4.PNG" alt="rudra4" /></p>
 <p>上图是论文作者们使用 Rudra 对 Rust 实现的几个操作系统进行检查的结果，详细内容参加论文。</p>
 <p>这篇论文非常值得一看，对于我们真正理解 Rust 的安全理念有所帮助。该论文也为 Rust 语言的安全状况提供了新的视角，也提供了一个静态检查工具，值得我们关注。</p>
 
