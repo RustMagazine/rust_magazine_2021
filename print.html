@@ -53741,7 +53741,7 @@ impl Middleware for ConditionalCall {
 })
 </code></pre>
 <p>这与surf的方法非常相似，除了我们使用response对象并可以直接改变它：中间件函数不返回任何内容。</p>
-<p>####　Tower</p>
+<h4><a class="header" href="#tower" id="tower">Tower</a></h4>
 <p><span style="background-color:#D2D2D2">tower</span>是用于网络应用程序的通用Rust组件库。 </p>
 <p>它被用于许多著名crate中，例如<span style="background-color:#D2D2D2">hyper</span>和<span style="background-color:#D2D2D2">tonic</span>。<span style="background-color:#D2D2D2">tower</span>的中间件有点复杂，很可能是因为，他们不想强制用户使用动态调度（例如<span style="background-color:#D2D2D2">async_trait</span>）。 </p>
 <p>至于其他库，这是tower<a href="https://docs.rs/tower/0.4.8/tower/trait.Layer.html">文档</a>中给出的示例：</p>
@@ -53963,7 +53963,7 @@ Jul 20 19:59:35.705  INFO post_reqwest_middleware: Got response 200 OK
 <h2><a class="header" href="#总结-22" id="总结-22">总结</a></h2>
 <p>我希望这个目录至少有助于模糊地定义问题的范围。我在这里所描述的事情都不是不可能的，但这样做所有这些，和他们做的很好，是相当多的工作。</p>
 <p>最后一点值得结束：为了使这项工作有用，它的存在是不够的。如果您希望人们使用您的框架，您将必须使其对他们有吸引力：提供易于使用的良好 API，在宿主语言中是惯用的，有据可查的，并且可以让他们解决他们的实际问题。</p>
-<p>Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？</p>
+<h1><a class="header" href="#trait-upcasting-系列--如何把子-trait-转成父-trait-" id="trait-upcasting-系列--如何把子-trait-转成父-trait-">Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？</a></h1>
 <p>作者： CrLF0710</p>
 <blockquote>
 <p>本文由 Trait Upcasting 贡献者 CrLF0710（猫老师）来介绍一下特质向上类型转换(Trait upcasting coercion) 这个功能。</p>
