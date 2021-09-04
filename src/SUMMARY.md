@@ -249,6 +249,7 @@
     - [社区热点](./chapter_9/hots.md)
     - [活动回顾](./chapter_9/events.md)
     - [本月招聘](./chapter_9/jobs.md)
+    - [Phala Network | 在Intel SGX环境下实现Rust原生std支持](./chapter_9/intel_sgx_std.md)
     - [学习资源](./chapter_9/learn.md)
     - [外刊评论](./chapter_9/foreign_journal_review.md)
     - [Rust 技巧篇](./chapter_9/rust-tips.rs)
