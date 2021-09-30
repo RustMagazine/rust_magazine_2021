@@ -1,8 +1,10 @@
 # 可视化项目成员包的调用关系
 
-通常一个大型 Rust 项目都会用 cargo workspace 来管理
+作者： 吴翱翔 
 
-workspace 下面有多个 member 也叫 package 或者叫 crate
+---
+
+通常一个大型 Rust 项目都会用 cargo workspace 来管理 workspace 下面有多个 member 也叫 package 或者叫 crate
 
 ## 伞结构?
 
