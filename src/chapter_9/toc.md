@@ -14,7 +14,7 @@
 
 - [本月招聘](./jobs.md)
 
-- [官方 RustConf 盘点](./rustconf.md)
+- [官方 RustConf 2021 盘点](./rustconf.md)
 
 - [RustChinaConf 2021 动态](./rust_china_conf_2021.md)
 
@@ -35,7 +35,8 @@
 ### 新手入门
 
 - [学习资源](./learn.md)
-- [Rust 技巧篇](./rust-tips.rs)
+- [Rust 技巧篇](./rust-tips.rs) 
+- [为 嵌入式 C  程序员编写的 Rust 指南](./rust-for-embedded-c.md)
 
 ### 原理与工程实践
 
@@ -48,3 +49,6 @@
 - [推荐项目 ｜ 基础工具库](./tool_libs.md)
 - [推荐项目 |  框架引擎](./frameworks.md)
 
+##  Rust 与 安全
+
+- [Rust生态安全漏洞总结系列 | Part 3](./rust-security-part3.md)
