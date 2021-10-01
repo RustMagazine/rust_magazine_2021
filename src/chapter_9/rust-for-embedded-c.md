@@ -1,8 +1,8 @@
-# 为 嵌入式 C  程序员编写的 Rust 指南
+# 【译·四万言】为 嵌入式 C 程序员编写的 Rust 指南
 
 译者：张汉东 
 
-原文：https://docs.opentitan.org/doc/ug/rust_for_c/ 
+原文：[https://docs.opentitan.org/doc/ug/rust_for_c/ ](https://docs.opentitan.org/doc/ug/rust_for_c/ )
 
 作者： Google OpenTitan 团队
 
