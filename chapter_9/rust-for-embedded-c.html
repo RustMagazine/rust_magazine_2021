@@ -1,0 +1,1994 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>为 嵌入式 C  程序员编写的 Rust 指南 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/open-source-mental-health.html"><strong aria-hidden="true">8.7.</strong> 开源与心理健康</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.8.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.9.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.10.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.11.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.12.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.13.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.14.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.15.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.16.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.18.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.22.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.23.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.24.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/rabits.html"><strong aria-hidden="true">8.25.</strong> Rbatis ORM 2.0 | 零开销编译时动态SQL的探索</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.26.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.27.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.28.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_7/toc.html"><strong aria-hidden="true">9.</strong> 七月刊（July）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_7/announce.html"><strong aria-hidden="true">9.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_7/lang.html"><strong aria-hidden="true">9.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_7/hots.html"><strong aria-hidden="true">9.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_7/events.html"><strong aria-hidden="true">9.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_7/jobs.html"><strong aria-hidden="true">9.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_7/rust_china_conf_2021.html"><strong aria-hidden="true">9.6.</strong> RustChinaConf 2021 议题征集开放申请</a></li><li class="chapter-item "><a href="../chapter_7/paper-rust-vs-c.html"><strong aria-hidden="true">9.7.</strong> 论文导读 | 性能与生产力 : Rust vs C </a></li><li class="chapter-item "><a href="../chapter_7/hw-rust-name-mangling.html"><strong aria-hidden="true">9.8.</strong> 华为 | Rust 调用约定和名称修饰规则介绍</a></li><li class="chapter-item "><a href="../chapter_7/ant-futures-compat.html"><strong aria-hidden="true">9.9.</strong> 蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用</a></li><li class="chapter-item "><a href="../chapter_7/lark-rust-wasm-sqlite.html"><strong aria-hidden="true">9.10.</strong> 字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM </a></li><li class="chapter-item "><a href="../chapter_7/rust-epoll-rdma-part2.html"><strong aria-hidden="true">9.11.</strong> Datenlord | Rust实现RDMA异步编程（二）</a></li><li class="chapter-item "><a href="../chapter_7/how-we-improved-the-performance-of-our-rust-app.html"><strong aria-hidden="true">9.12.</strong> Zellij 的性能优化</a></li><li class="chapter-item "><a href="../chapter_7/learn.html"><strong aria-hidden="true">9.13.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_7/rusts-standard-library-traits.html"><strong aria-hidden="true">9.14.</strong> 【完整】Rust 标准库 Trait 指南</a></li><li class="chapter-item "><a href="../chapter_7/coercion_in_rust.html"><strong aria-hidden="true">9.15.</strong> Rust 中的隐式类型转换</a></li><li class="chapter-item "><a href="../chapter_7/tokio-task-scheduler.html"><strong aria-hidden="true">9.16.</strong> Tokio Internals 之 任务调度</a></li><li class="chapter-item "><a href="../chapter_7/about-rust-features.html"><strong aria-hidden="true">9.17.</strong> 为什么你不应该沉迷于 Rust 的“特性”</a></li><li class="chapter-item "><a href="../chapter_7/rust-no-std.html"><strong aria-hidden="true">9.18.</strong> Rust no-std 工程实践</a></li><li class="chapter-item "><a href="../chapter_7/dynamic_analyzing_tools.html"><strong aria-hidden="true">9.19.</strong> Rust 内存错误调试和动态分析工具分享</a></li><li class="chapter-item "><a href="../chapter_7/macroquad_game.html"><strong aria-hidden="true">9.20.</strong> 使用Macroquad在Android设备上发布游戏</a></li><li class="chapter-item "><a href="../chapter_7/trampoline-kernel.html"><strong aria-hidden="true">9.21.</strong> 跨空间跳板内核</a></li><li class="chapter-item "><a href="../chapter_7/trait-upcasting-part1.html"><strong aria-hidden="true">9.22.</strong> Trait Upcasting 系列 ｜ Part I</a></li><li class="chapter-item "><a href="../chapter_7/github_trending.html"><strong aria-hidden="true">9.23.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_7/tool_libs.html"><strong aria-hidden="true">9.24.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_7/frameworks.html"><strong aria-hidden="true">9.25.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_8/toc.html"><strong aria-hidden="true">10.</strong> 八月刊（August）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_8/announce.html"><strong aria-hidden="true">10.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_8/lang.html"><strong aria-hidden="true">10.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_8/hots.html"><strong aria-hidden="true">10.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_8/events.html"><strong aria-hidden="true">10.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_8/jobs.html"><strong aria-hidden="true">10.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_8/rust_china_conf_2021.html"><strong aria-hidden="true">10.6.</strong> RustChinaConf 2021 正式启动</a></li><li class="chapter-item "><a href="../chapter_8/paper-rudra.html"><strong aria-hidden="true">10.7.</strong> 论文导读 | Rudra : 查找 Rust 生态系统中的内存安全 Bug </a></li><li class="chapter-item "><a href="../chapter_8/hw-rust-simd.html"><strong aria-hidden="true">10.8.</strong> 华为 | Rust语言中SIMD计算加速指令的使用</a></li><li class="chapter-item "><a href="../chapter_8/ant-futures-compat.html"><strong aria-hidden="true">10.9.</strong> 蚂蚁集团 | Trait Object 还是 Virtual Method Table</a></li><li class="chapter-item "><a href="../chapter_8/rust-lockfree-part2.html"><strong aria-hidden="true">10.10.</strong> Datenlord | Rust 无锁编程之Crossbeam Epoch算法解析</a></li><li class="chapter-item "><a href="../chapter_8/rust-k8s.html"><strong aria-hidden="true">10.11.</strong> DatenLord | Rust 实现K8S调度扩展</a></li><li class="chapter-item "><a href="../chapter_8/aws-lambda-rust-wasm-serverless.html"><strong aria-hidden="true">10.12.</strong> SecondState | AWS Lambda 中的 Rust 与 WebAssembly Serverless 函数</a></li><li class="chapter-item "><a href="../chapter_8/bianlifeng_embedded_rust.html"><strong aria-hidden="true">10.13.</strong> 便利蜂 | 门店网络与 Rust 落地实践</a></li><li class="chapter-item "><a href="../chapter_8/learn.html"><strong aria-hidden="true">10.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_8/rust-tips.html"><strong aria-hidden="true">10.15.</strong> Rust 技巧篇</a></li><li class="chapter-item "><a href="../chapter_8/reqwest-middleware.html"><strong aria-hidden="true">10.16.</strong> 为 reqwest 增加中间件支持</a></li><li class="chapter-item "><a href="../chapter_8/gui-framework-ingredients.html"><strong aria-hidden="true">10.17.</strong> 想用 Rust 编写 GUI 框架吗？</a></li><li class="chapter-item "><a href="../chapter_8/what-is-trait-upcasting.html"><strong aria-hidden="true">10.18.</strong> Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？</a></li><li class="chapter-item "><a href="../chapter_8/trait-upcasting-part2.html"><strong aria-hidden="true">10.19.</strong> Trait Upcasting 系列 ｜ Part II</a></li><li class="chapter-item "><a href="../chapter_8/github_trending.html"><strong aria-hidden="true">10.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_8/tool_libs.html"><strong aria-hidden="true">10.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_8/frameworks.html"><strong aria-hidden="true">10.22.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_9/toc.html"><strong aria-hidden="true">11.</strong> 九月刊（September）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_9/announce.html"><strong aria-hidden="true">11.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_9/lang.html"><strong aria-hidden="true">11.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_9/hots.html"><strong aria-hidden="true">11.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_9/events.html"><strong aria-hidden="true">11.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_9/jobs.html"><strong aria-hidden="true">11.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_9/rustconf.html"><strong aria-hidden="true">11.6.</strong> 官方 RustConf 2021 盘点</a></li><li class="chapter-item "><a href="../chapter_9/rust_china_conf_2021.html"><strong aria-hidden="true">11.7.</strong> RustChinaConf 2021 动态</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.8.</strong> 将 TensorFlow 模型移植到 Pure Rust 的开发成本有多高？</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.9.</strong> Rust 2021 有哪些新功能</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.10.</strong> 周期性服务发现</a></li><li class="chapter-item "><a href="../chapter_9/rethink-async.html"><strong aria-hidden="true">11.11.</strong> Datenlord | 重新思考 Rust Async - 如何实现高性能 I/O</a></li><li class="chapter-item "><a href="../chapter_9/intel_sgx_std.html"><strong aria-hidden="true">11.12.</strong> Phala Network | 在Intel SGX环境下实现Rust原生std支持</a></li><li class="chapter-item "><a href="../chapter_9/rust-android-ui.html"><strong aria-hidden="true">11.13.</strong> 如何用Rust做Android UI渲染</a></li><li class="chapter-item "><a href="../chapter_9/learn.html"><strong aria-hidden="true">11.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_9/lifetime-smart-ptr.html"><strong aria-hidden="true">11.15.</strong> Rust 生命周期与智能指针</a></li><li class="chapter-item expanded "><a href="../chapter_9/rust-for-embedded-c.html" class="active"><strong aria-hidden="true">11.16.</strong> 为 嵌入式 C  程序员编写的 Rust 指南</a></li><li class="chapter-item "><a href="../chapter_9/visualize_crate_graph.html"><strong aria-hidden="true">11.17.</strong> 可视化项目成员包的调用关系</a></li><li class="chapter-item "><a href="../chapter_9/poem-openapi.html"><strong aria-hidden="true">11.18.</strong> 基于 Poem 的 OpenAPI 服务端框架</a></li><li class="chapter-item "><a href="../chapter_9/rust-cryptography-ecosystem.html"><strong aria-hidden="true">11.19.</strong> 密码协议算法与Rust生态</a></li><li class="chapter-item "><a href="../chapter_9/github_trending.html"><strong aria-hidden="true">11.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_9/tool_libs.html"><strong aria-hidden="true">11.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_9/frameworks.html"><strong aria-hidden="true">11.22.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_9/rust-security-part3.html"><strong aria-hidden="true">11.23.</strong> Rust生态安全漏洞总结系列 | Part 3</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> 十月刊（October）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#译四万言为-嵌入式-c-程序员编写的-rust-指南" id="译四万言为-嵌入式-c-程序员编写的-rust-指南">【译·四万言】为 嵌入式 C 程序员编写的 Rust 指南</a></h1>
+<p>译者：张汉东 </p>
+<p>原文：<a href="https://docs.opentitan.org/doc/ug/rust_for_c/">https://docs.opentitan.org/doc/ug/rust_for_c/ </a></p>
+<p>作者： Google OpenTitan 团队</p>
+<hr />
+<h2><a class="header" href="#引子" id="引子">引子</a></h2>
+<p>在今年（2021）RustConf 大会上，Miguel Young 分享了《移动构造函数，Rust 中可能吗？》的演讲。</p>
+<p>在观看这个演讲视频的时候，本人深挖了一下作者的信息，发现了这篇文章。</p>
+<blockquote>
+<p>Miguel Young 是来自 Google OpenTitan 项目的开发者。OpenTitan 项目，想通过开源框架减少芯片被破解的可能。</p>
+<p>OpenTitan  <strong>将由非营利组织lowRISC监督，</strong> 该公司正在开发基于RISC-V架构的免费微处理器。</p>
+<p><strong>OpenTitan项目涵盖了各种逻辑组件的开发</strong> RoT芯片的需求，包括基于RISC-V架构的lowRISC Ibex开放式微处理器，加密协处理器，硬件随机数生成器，恒定和随机存取存储器数据和密钥存储层次结构，机制保护，I / O输入块，安全启动媒体等</p>
+<p>可以在必要时使用OpenTitan，以确保系统的硬件和软件组件的完整性，并确保未更换关键的系统组件，并基于制造商验证和授权的代码。</p>
+<p><strong>基于OpenTitan的芯片可用于</strong> 服务器主板，网卡，消费类设备，路由器，物联网设备，以验证固件（检测恶意软件对固件的修改），提供加密的唯一系统标识符（硬件防伪保护）以及保护加密密钥（如果出现以下情况，则隔离密钥）：攻击者可以获得对计算机的物理访问权限），提供与安全相关的服务，并维护无法编辑或删除的隔离审核跟踪。</p>
+</blockquote>
+<p>本人又深挖了一下 <a href="https://github.com/lowRISC/opentitan">OpenTitan</a> 项目，在 GitHub 的语言成分分析中看不到 Rust 的痕迹。但是在源码中搜索 Rust，则发现很多 Rust 痕迹。</p>
+<p>一、其中，OpenTitan 的 Software 部分支持 Rust 实现。</p>
+<ul>
+<li>设备软件的固件镜像，支持 Rust 实现。</li>
+<li>Host 软件必须用 Rust 实现 （也支持 Cpp）。</li>
+</ul>
+<p>二、 ROM_EXT 由 Rust 实现</p>
+<p>OpenTitan  安全启动过程中，为了增加一定程度的灵活性，特别是为了允许制造商的特定配置和提供安全更新的设施--OpenTitan设计了扩展ROM（ROM_EXT），常驻闪存中。</p>
+<p>ROM_EXT由一个 manifest  和 image 本身组成。当 image  生成时，manifest   是 &quot;空白 &quot;的。ROM_EXT签名者的责任是更新manifest  ，签名image，并将签名加入其中。</p>
+<p>源码：https://github.com/lowRISC/opentitan/tree/master/sw/host/rom_ext_image_tools/signer ，它是一个 Host 软件。</p>
+<p>在 Readme 里介绍了他们为什么选择 Rust : https://github.com/lowRISC/opentitan/blob/master/sw/host/rom_ext_image_tools/signer/README.md </p>
+<p>该项目中其他比较有用的资源：</p>
+<ol>
+<li>RISC-V Assembly Style Guide ： https://docs.opentitan.org/doc/rm/asm_coding_style/ </li>
+<li>FPGA Reference Manual：https://docs.opentitan.org/doc/rm/ref_manual_fpga/ </li>
+<li>Rust for Embedded C Programmers https://docs.opentitan.org/doc/ug/rust_for_c/ </li>
+</ol>
+<p>接下来是 Rust for Embedded C Programmers 的翻译正文。</p>
+<h2><a class="header" href="#正文" id="正文">正文</a></h2>
+<h3><a class="header" href="#前言" id="前言">前言</a></h3>
+<p>本文档旨在作为Rust的介绍，针对的是对嵌入式系统C语言有深入接触的工程师，以及几乎没有C++经验和不了解Rust的工程师。本文档将包含以下内容：</p>
+<ul>
+<li>提供嵌入式 C 语言工具库中和 Rust 相似的内容</li>
+<li>讨论这些相似内容和 C 语言的区别</li>
+<li>指出 Rust 内存和执行模型 与 C 语言的实质性差异</li>
+<li>介绍 Rust 特有的功能，这些功能要么是使用 Rust 的关键，要么是非常有用（引用、生命周期、泛型和特质）。</li>
+</ul>
+<p>虽然本文并不是很严谨，但在脚注中也包含了语言律法相关的说明，只不过这些说明不影响理解本文。</p>
+<p>学习 Rust 的一个很好的方法是使用编译器，看看能编译什么。 Matt Godbolt 的  <a href="https://rust.godbolt.org/">Compiler Explorer</a> 对于了解 Rust 产生的汇编很有用。 <a href="https://play.rust-lang.org/">Rust Playground</a> 也可以用来观察 Rust 代码执行时的情况，不过它的局限性更大。</p>
+<p>本文档是针对嵌入式开发而写。这里不会讨论任何非嵌入式的 Rust 特性：见 <a href="https://rust-embedded.github.io/book/intro/no-std.html">https://rust-embedded.github.io/book/intro/no-std.html</a> 。</p>
+<p>Cpp 用户请注意。 Rust 和 Cpp 共享很多术语与概念（所有权、生命周期、析构器、多态性），但 Rust 对它们的实现往往具有明显不同的语义。在 Cpp 中的经验不应该被期望能准确地迁移。</p>
+<h3><a class="header" href="#什么是-rust-" id="什么是-rust-">什么是 Rust ？</a></h3>
+<p>Rust 是一门通用的编程语言，其重点是最大限度地提高程序员的控制能力和零运行时开销。同时消除了传统系统语言中容易“让人中招”的部分。Rust 有时也被称为“系统语言”。</p>
+<p>在语法和设计哲学角度， Rust 很像 Cpp 和 ML（一种函数式语言）的结合体，尽管在语义上它与这两种语言有很大的不同。Rust 是第一种流行的，得到良好支持的语言，它提供了绝对的内存安全，而无需使用自动引用计数或垃圾回收器（GC）。Rust 也提供一种在源码中提供注解（生命周期参数）的技术，来避免访问失效的内存，它被称为借用检查器，不是在运行时检查。</p>
+<blockquote>
+<p>译注：</p>
+<p>这里说 绝对的内存安全，有点过了。</p>
+<p>作者在脚注里虽然有说明：在Rust中，如果不使用关键字unsafe，使用后释放（use-after-frees）、双重释放（double frees）、取消引用（null dereferences）和数据竞争（data race）都是不可能的；这也适用于其他大多数传统上被认为是C语言中未定义行为的东西。︎</p>
+<p>但是，没有绝对的安全，更没有绝对的内存安全。Rust 只是消除了比较常见的内存安全问题。</p>
+</blockquote>
+<p>Rust 可以编译为本地代码，在内存和计算性方面可以和 C/Cpp 相媲美，并且可以与任何使用 C 调用惯例的东西无缝集成。它还静态地消除了一大类与安全漏洞相关的内存错误。Rust 的工具链是建立在 LLVM 之上的，所以，所有针对 LLVM 性能的工作都会有利于 Rust。</p>
+<p>Rust 还包含了一种特殊的方言，叫做 “Unsafe Rust”。 在极少数需要进行底层操作的时候，它无法提供静态检查。本文档将围绕 Unsafe Rust 展开。</p>
+<h3><a class="header" href="#rust-工具链" id="rust-工具链">Rust 工具链</a></h3>
+<p>一个完整的 Rust 工具链由几个主要部分组成：</p>
+<ul>
+<li>rustc， Rust 编译器。</li>
+<li>rustup，Rust 工具链的安装程序。</li>
+<li>Cargo， Rust 的构建系统（基于 rustc）。</li>
+<li>std 和 core 。</li>
+</ul>
+<p>Rust工具链的发布周期为六周，类似于Chrome的发布周期：每六周，一个发布（release）分支被切割为下一个测试版（beta），六周后成为下一个稳定版（Stable）。Rust的夜间版（Nightly）每天都从主干版（master）上切割下来；正是在夜间版上，非稳定（unstable）的功能才可以被启用。一些非稳定的特性（features）对嵌入式非常有用，所以嵌入式Rust项目使用夜间编译器的情况并不少见。</p>
+<p>rustup用于管理Rust的安装。这主要是由于Rust的发布过于频繁，操作系统的包管理器无法跟上，而且项目可以锁定特定版本的Rust。当Rust工具链通过rustup安装时，rustc和cargo等组件会感知到它；<code>rustc +nightly-2020-03-22</code>能通过rustup来下载和执行3月22日构建的rustc nightly。项目目录中一个名为rust-toolchain的文件也可以达到同样的效果。</p>
+<p>Cargo是一个Rust的构建系统/包管理器。它可以自动构建项目（即有Cargo.toml文件的目录）和它们的依赖项。Rust中的单个编译单元被称为 &quot;crates&quot;，它们要么是静态库（即与<code>.a</code>文件相当），要么是完全链接的本地二进制文件。这与C语言不同，在C语言中，每个<code>.c</code>文件都会生成一个单独的对象文件。 Rust也没有头文件，尽管它提供了一个模块系统来组织内部的代码，这将在后面讨论。Tock板是一个很好的例子，说明一个更复杂的货物文件是什么样子的：<a href="https://github.com/tock/tock/blob/master/boards/opentitan/Cargo.toml">https://github.com/tock/tock/blob/master/boards/opentitan/Cargo.toml</a></p>
+<p>一些有用的Cargo子命令包括:</p>
+<ul>
+<li><code>cargo check</code> 运行<code>rustc</code>的检查，但在它开始输出代码和优化之前就停止了。这对于开发过程中的错误检查很有用。</li>
+<li><code>cargo build</code> 构建一个库或二进制文件，取决于crate类型。</li>
+<li><code>cargo clippy</code> 运行 Rust linter, Clippy。</li>
+<li><code>cargo doc --open</code> 构建 crate 文档，然后在浏览器中打开它。</li>
+<li><code>cargo fmt</code> 运行 Rust formatter 。</li>
+</ul>
+<p>此外，<code>RUSTFLAGS</code>环境变量的内容也会传递给<code>rustc</code>，作为注入标志的机制。</p>
+<p>Rust标准库，像<code>libc</code>一样，在嵌入式环境中比较罕见。标准库由三个板块组成：<code>core</code>、<code>alloc</code>和<code>std</code>。<code>core</code>，有时被称为<code>libcore</code>，是所有的基本定义，不依赖于操作系统的支持。core中的任何东西都不能进行堆分配。<code>alloc</code>不需要操作系统的支持，但需要<code>mallo</code>c和<code>free</code>符号。std是<code>core+alloc</code>，以及操作系统API，如文件和线程支持。<code>#[no_std] </code> 禁用了<code>std</code>和<code>alloc</code>，留下了<code>core</code>。在本文档中，我们将只使用<code>core</code>类型，尽管我们可以通过std命名空间来引用它们（它们是别名）。也就是说，我们可以引用<code>std::mem::drop</code>，尽管在<code>#[no_std]</code>代码中它必须被命名为<code>core::mem::drop</code>。</p>
+<p>rustc有许多 flag。其中最突出的是:</p>
+<ul>
+<li><code>--emit asm</code> 和 <code>--emit llvm-ir</code>，对检查编译器输出很有用。
+<code>--target</code>，设置交叉编译的目标。它的作用类似于Clang的<code>-target</code>、<code>-march</code>和<code>-mabi</code>标志。它接受一个定义了平台的目标定义（在很多情况下类似于LLVM的目标三要素）。例如，OpenTitan 软件使用<code>riscv32imc-unknown-none-elf</code>目标。使用一个不是宿主目标的目标（例如，x86_64-unknown-linux-musl）需要用<code>rustup component install rust-std-&lt;target&gt;</code>来安装相应的标准库构建。参见<code> rustc --print targets</code>。<code>--target</code>也被Cargo直接接受，这与大多数rustc的标志不同。</li>
+<li><code>-C link-arg</code>，等同于Clang的<code>-T</code>。</li>
+<li><code>-C opt-level</code>，相当于Clang的<code>-O</code>（我们主要使用<code>-C opt-level=z</code>来嵌入）。</li>
+<li><code>-C lto</code>，相当于Clang的<code>-flto</code>。</li>
+<li><code>-C force-frame-pointers</code>，相当于Clang的<code>-fno-omit-frame-pointer</code>。</li>
+<li><code>-D warnings</code>大致等同于<code>-Werror</code>。</li>
+</ul>
+<p>其他有趣的标志可以在<code>rustc -C</code>帮助下找到，在夜间，可以在<code>rustc -Z</code>帮助下找到。</p>
+<h3><a class="header" href="#part-i--用-rust-重写-c-程序" id="part-i--用-rust-重写-c-程序">Part I:  用 Rust 重写 C 程序</a></h3>
+<p>在 深入研究 Rust 的具体特性前，我们将首先探讨 C 语言的概念如何映射到 Rust 中，以及 Unsafe Rust。 Unsafe Rust 是Rust 的方言，虽然没有 Safe Rust 的太多限制，但也是有一定安全保证。</p>
+<h4><a class="header" href="#类型type" id="类型type">类型（Type）</a></h4>
+<p>Rust 和 C 对类型的处理方法大致相同，尽管 Rust 很少有隐式转换。在这一节中，我们将讨论如何将 C 语言类型转换为 Rust 类型。</p>
+<h5><a class="header" href="#整数" id="整数">整数</a></h5>
+<p>Rust缺少C语言中的<code>int</code>、<code>long</code>、<code>unsigned</code>和其他具有实现定义大小的类型。相反，Rust的原生整数类型是精确大小的类型：<code>i8</code>、<code>i16</code>、<code>i32</code>、<code>i64</code>和<code>i128</code>分别是<code>8</code>、<code>16</code>、<code>32</code>、<code>64</code>和<code>128</code>位的有符号整数，而<code>u8</code>、<code>u16</code>、<code>u32</code>、<code>u64</code>和<code>u128</code>是其无符号变体。Rust还提供了<code>isize</code>和<code>usize</code>，它们对应于<code>intptr_t</code>和<code>uintptr_t11</code>。对齐要求与C语言完全相同。</p>
+<p>Rust支持所有整数类型的常规二进制运算，不过在做算术时不能混合不同的类型，而且与C不同的是，没有整型提升(integral promotion)。Rust中的溢出与C14不同：它是由实现定义的，并且必须使程序崩溃或回绕（ wrap around）。Casting是通过<code>as</code>关键字完成的，其行为方式与C语言完全相同。<code>(uint8_t) x</code>被写成<code>u8</code>。整数类型之间从不进行隐式转换，甚至在有符号和无符号变体之间也是如此。</p>
+<p>Rust有常见的整数字元：十进制为<code>123</code>，十六进制为<code>0xdead</code>，二进制为<code>0b1010</code>，八进制为<code>0o777</code>。下划线可以任意穿插在一个整数字头中，以分隔数字组。<code>0xdead_beef</code>，1_000_000。它们也可以用原生整数类型的名称作为后缀，以强制其类型。<code>0u8</code>, <code>0o777i16</code>, <code>12_34_usize</code>；否则它们将默认为任何类型推导（后面会详细介绍）所选择的类型，如果不受限制，则为<code>i32</code>。</p>
+<p>Rust也有一个专门的<code>bool</code>类型。它不能与整数隐式转换，否则就是一个<code>u8</code>，保证具有<code>0x00</code>或<code>0x01</code>的值，以及各自的字面意义<code>false</code>和<code>true</code>。<code>bool</code>支持所有的位操作，是唯一与短路的<code>&amp;&amp;</code>和<code>||</code>兼容的类型。它也是唯一可以在<code>if</code>和<code>while</code>条件下使用的类型。</p>
+<p>整数有一套广泛的内置位操作，以方法的形式暴露出来，如<code>x.count_zeros()</code>和<code>x.next_power_of_two()</code>。例子见<a href="https://doc.rust-lang.org/std/primitive.u32.html">https://doc.rust-lang.org/std/primitive.u32.html</a>。</p>
+<h5><a class="header" href="#结构体和元组" id="结构体和元组">结构体和元组</a></h5>
+<p>结构体声明和C 相似：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyStruct {
+    pub foo: i32,
+    pub bar: u8,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust有每个字段的可见性修改器<code>pub</code>；我们将在后面对可见性进行更彻底的处理。</p>
+<p>结构值可以使用类似于C语言的指定初始化语法来创建。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>MyStruct { foo: -42, bar: 0xf, }
+<span class="boring">}
+</span></code></pre></pre>
+<p>不过，Rust的结构体并不像C结构体那样布局，事实上，Rust并没有指定其结构体的布局。在Rust中可以使用<code>#[repr(C)]</code>属性来指定一个C结构。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[repr(C)]
+struct MyCStruct {
+    a: u8,
+    b: u32,
+    c: u8,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这保证了按声明顺序排列字段，为对齐添加填充。<code>#[repr(Rust)] </code>是隐含的默认值。<code>#[repr(packed)] </code>类似于<code>__attribute__((packed))</code>，并且不会产生任何<code>padding</code>。整个结构的对齐方式可以使用<code>#[repr(align(N))]</code>强制为一个较大的值，类似于<code>_Alignas</code>。</p>
+<p>可以使用与C语言相同的点语法来访问字段：<code>my_struct.foo, my_struct.bar = 5;</code>。</p>
+<p>Rust还提供了 &quot;类元组结构&quot;，这是有编号而非命名字段的结构体。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyTuple(pub u32, pub u8);
+<span class="boring">}
+</span></code></pre></pre>
+<p>字段的访问采用类似的点状语法：<code>tuple.0, tuple.1</code>，并采用类似函数调用的语法构造:<code>MyTuple(1, 2)</code>。除了语法之外，它们与普通结构体没有区别。类元组结构上的字段可以省略，以声明一个零字节的结构。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyEmpty
+<span class="boring">}
+</span></code></pre></pre>
+<p>元组的匿名版本也是可用的: <code>(u32, u8)</code>。这些本质上是具有未命名字段的匿名结构。空元组类型，<code>（）</code>，被称为 &quot;单元&quot;，作为Rust的空类型（与空不同，<code>（）</code>只有一个值，也叫<code>（）</code>，是零大小）。Rust 还有一个类似于<code>void</code>的类型，即<code>！</code>，我们将在讨论函数的时候讨论这个类型。</p>
+<p>如果一个结构的每个字段都可以用<code>==</code>来比较，编译器就可以为你的结构生成一个等价函数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(PartialEq, Eq)]
+struct MyStruct {
+    a: u32,
+    b: u8,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这使得在 MyStruct 的值上使用<code>==</code>成为可能，它会比较字段是否相等。同样也可以对<code>&lt;</code>和<code>&gt;=</code>这样的排序操作进行操作。<code>#[derive(PartialOrd, Ord)]</code>将定义比较函数，按字母顺序比较结构。</p>
+<h5><a class="header" href="#枚举体与联合体" id="枚举体与联合体">枚举体与联合体</a></h5>
+<p>和 C 语言一样，Rust 也有枚举，用于描述具有固定数值的类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum MyEnum {
+    Banana, Apple, Pineapple,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>但与C不同的是，MyEnum 是一个实数类型，而不仅仅是一个整数类型的别名。同样与C不同的是，枚举的变体不会被转储到全局命名空间，而是必须通过枚举类型来访问。<code>MyEnum::Banana</code>。请注意，与结构不同，枚举的变体是默认 pub 的。</p>
+<p>虽然Rust用整数来表示枚举值（这些整数被称为判别值），但是它们的排列方式没有被指定。为了得到一个像C语言那样分配判别符的枚举，我们可以使用一个<code>repr</code>属性。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[repr(C)]
+enum MyCEnum {
+    Banana = 0,
+    Apple = 5,
+    Pineapple = 7,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>但与C不同的是，Rust 只保证明确写下的判别值。这样的枚举可以安全地转换为整数类型（比如<code>MyCEnum::Apple as u32</code>），反之则不然：编译器总是假设MyCEnum 的底层值是<code>0</code>、<code>5</code>或<code>7</code>，违反这个约束是未定义行为（UB）。如果我们想要求一个枚举是一个精确的整数宽度，我们可以使用<code>#[repr(T)]</code>，其中<code>T</code>是一个整数类型，如<code>u16</code>或<code>i8</code>。</p>
+<p>Rust中的<code>Union</code>是一个相当新的特性，一般来说，在正常的代码中不会用到很多。它们的声明方式与结构很相似。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>union MyUnion {
+    pub foo: i32,
+    pub bar: u8,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>并像结构体一样创建。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>MyUnion { bar: 0xa, }  // `bar` is the active variant.
+<span class="boring">}
+</span></code></pre></pre>
+<p>对union变体的赋值与结构中的赋值相同，但读取变体需要使用 Unsafe 的Rust，因为编译器无法证明你没有读取未初始化的或无效的数据，所以你需要写上</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>unsafe { my_union.bar }  // I assert that bar is the active variant.
+<span class="boring">}
+</span></code></pre></pre>
+<p>由于对析构器的关注，Union 对哪些类型可以作为变体也有限制。</p>
+<p>由于 Union 在C语言中非常有用，但完全不安全，所以Rust提供了内置的标记(tagged) Union，可以通过枚举语法访问。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum MyEnum {
+    FooVariant { foo: i32 },
+    BarVariant(u8),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>tagged-union 的枚举变体使用与Rust 结构体相同的语法；枚举由一个足以区分所有变体的标签值（判别值）和一个编译器跟踪的变体联合组成。然而，有效使用这种枚举需要模式匹配，我们将在讨论模式时再次看到这些枚举。</p>
+<p>就像对待结构体一样，<code>#[derive]</code>可以用在枚举上以定义比较运算符，其定义与结构体的情况类似。</p>
+<h5><a class="header" href="#数组" id="数组">数组</a></h5>
+<p>Rust数组等同C语言的数组：内联存储编译时已知数量的值。C中的<code>T[N]</code>在Rust中被拼成<code>[T；N]</code>。数组是用<code>[a, b, c]</code>语法创建的，一个有很多相同值的副本的数组可以用<code>[0x55u8; 1024]</code>创建。一个多维数组可以被声明为一个数组的数组。<code>[[T；N]；M]</code>。</p>
+<p>数组元素可以用<code>x[index]</code>来访问，就像在C语言中一样。但是请注意，Rust会自动在每个数组访问周围插入边界检查；边界检查失败会引发程序的恐慌（panic）。Unsafe  Rust可以用来欺骗边界检查，当它知道（对程序员来说，而不是Rustc！）没有必要执行边界检查，但当它是性能关键的时候，就可以省略它。</p>
+<p>Rust数组是 &quot;真正的 &quot;类型，与C不同，它们可以通过值传递到函数中，并通过值从函数中返回。当传入函数时，它们也不会衰变为指针。</p>
+<h5><a class="header" href="#指针" id="指针">指针</a></h5>
+<p>像其他所有的嵌入式语言一样，Rust 也有指针。这些指针通常被称为原始指针，以区别于无数的智能指针类型。Rust将<code>T</code> 和<code>const T</code> 拼成<code>mut T</code>和<code>const T</code>。与C不同的是，指针在被解除引用之前不需要与它们的指针类型对齐（与C一样，Rust假设所有指针的读/写都是对齐的）。</p>
+<p>请注意，C的基于类型的严格别名在Rust中并不存在。正如我们稍后所了解的，Rust对引用有不同的别名规则，这些规则更加强大，编译器可以自动检查。</p>
+<p>空指针可以使用<code>std::ptr::null()</code>和<code>std::ptr::null_mut()</code>函数创建。Rust指针不支持算术运算符；相反，一个方法填补了这个角色：用 <code>ptr.offset(4)</code> 代替 <code>ptr + 4</code>。指针之间是否相等是简单的判断地址是否相等。</p>
+<p>指针可以用<code>*ptr</code>语法进行解引用，尽管这是 Unsafe 的Rust，需要说出<code>unsafe</code>。当指针被解引用时，它们必须像C语言一样，良好地对齐并指向有效的内存；不这样做就是不安全。与C语言不同，操作符<code>&amp;x</code>产生一个引用，而不是一个指针。</p>
+<p>指针的解除引用仍然受移动语义的约束，就像在普通的Rust中一样。指针上的<code>read()</code>和<code>write()</code>方法可以用来忽略这些规则。<code>read_unaligned()</code>和<code>write_unaligned()</code> 可以用来执行安全的无对齐访问，而<code>copy_to()</code>和<code>copy_nonoverlapping_to()</code>分别类似于<code>memmove()</code>和<code>memcpy()</code>。关于其他有用的指针方法，见<a href="https://doc.rust-lang.org/std/primitive.pointer.html">https://doc.rust-lang.org/std/primitive.pointer.html</a>。挥发性操作也是使用指针方法进行的，这将在后面单独讨论。</p>
+<p>由于所有这些操作都会解除对指针的定义，它们自然被限制在不安全的Rust中。</p>
+<p>我们将在后面发现，除了原始指针之外，Rust还有许多其他的指针类型。一般来说，原始指针在 Rust 中只用于指向潜在的未初始化的内存，一般表示地址，而不是实际内存的引用。为此，我们使用引用，这将在后面讨论。</p>
+<p>当我们遇到函数时，我们将触及到函数指针。</p>
+<h4><a class="header" href="#项item" id="项item">项（item）</a></h4>
+<p>和C语言一样，Rust也有全局变量和函数。这些，连同上面的类型定义，在语法中被称为（语法层面）项（Item），以避免与C的声明/定义的区别相混淆。与C不同的是，Rust没有前向声明或声明顺序语义；所有的东西对整个文件都是可见的。语法项是通过专门的导入语句导入的，而不是通过文本包含；关于这一点，后面会有更多的介绍。</p>
+<h4><a class="header" href="#常量和全局" id="常量和全局">常量和全局</a></h4>
+<p>Rust有专门的编译时常量语法，其作用与C语言中的#defined常量相同，其语法为：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const MY_CONSTANT: u32 = 0x42;
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里需要类型，右侧必须是一个常量表达式，大致是字面符号、数字运算符和常量函数的任何组合（稍后会详细介绍）。</p>
+<p>常量在运行时不存在。它们可以被认为是固定的表达式，被复制+粘贴到它们被使用的地方，类似于C语言中的<code>#defines</code>和<code>enum</code>声明器。</p>
+<p>Globals看起来像常量，但有一个关键字<code>static</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>static MY_GLOBAL: u8 = 0x00;
+static mut MY_MUTABLE_GLOBAL: Foo = Foo::new();
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Globals</code>保证住在<code>.rodata</code>、<code>.data</code>或<code>.bss</code>中，这取决于它们的可变性和初始化。与常量不同，它们有唯一的地址，但是与常量一样，它们必须用常量表达式进行初始化。</p>
+<p>可变的全局变量特别危险，因为它们可能是多核系统中数据竞争的来源。由于IRQ控制流的存在，可变全局变量也可能成为其他恶意行为的来源。因此，对可变全局的读写，或者创建对其的引用，都需要使用Unsafe的Rust。</p>
+<h4><a class="header" href="#函数" id="函数">函数</a></h4>
+<p>在C和Rust中，函数是最重要的句法结构。Rust对函数的声明是这样的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn my_function(x: u32, y: *mut u32) -&gt; bool {
+    // Function body.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在<code>-&gt;</code>标记后面的返回类型，当它是<code>()</code>（&quot;单元&quot;，空元组）时可以省略，它作为Rust的无效类型的等价物。函数的调用采用通常的<code>foo(a, b, c)</code>语法。</p>
+<p>一个函数的主体由一个语句列表组成，可能以一个表达式结束；该表达式是函数的返回值（不需要返回关键字）。如果缺少表达式，那么<code>（）</code>将被假定为返回类型。项目可以与语句混合在一起，这些语句在其当前范围内是局部的，但在所有范围内都是可见的。</p>
+<p>Rust 函数可以被标记为<code>unsafe fn</code>，这意味着该函数不能被正常调用，而必须使用Unsafe 的Rust调用。<code>unsafe fn</code>的主体就像一个<code>unsafe block</code>；当我们详细讨论Unsafe 的Rust时，我们会更多地了解这个问题。</p>
+<p>Rus t函数有一个未指定的调用约定。为了声明一个具有不同调用约定的函数，该函数被声明为<code>extern &quot;ABI&quot; fn foo()</code>，其中ABI是一个支持的ABI。<code>&quot;C &quot;</code>是我们真正关心的唯一一个，它将调用约定转换为系统的<code>C ABI</code>。默认的、隐式的调用约定是<code>extern &quot;Rust &quot;</code>。</p>
+<p>将函数标记为extern并不能禁用名字改编（mangling）；这必须通过给函数添加<code>#[no_mangle]</code>属性来实现。然后，未改编的函数可以被C语言调用，允许Rust库有一个C语言接口。一个经过处理的<code>extern &quot;C &quot;</code>函数的主要用途是变成一个函数指针，传递给C。</p>
+<p>函数指针类型看起来就像去掉所有变量名的函数：<code>fn(u32, *mut u32) -&gt; bool</code>。函数指针不能为空，而且必须始终指向一个具有正确ABI的有效函数。函数指针可以通过隐含地将一个函数转换为一个函数来创建（没有<code>&amp;</code>操作符）。函数指针也可以指定 <code>unsafe</code> 和 <code>extern</code> ：<code>unsafe extern &quot;C&quot; fn() -&gt; u32</code>。</p>
+<p>永不返回的函数有一个特殊的返回类型<code>!</code>，称为 &quot;永无类型(Never type)&quot;。这类似于C语言中的<code>noreturn</code>注解。然而，使用类型为<code>!</code>的表达式必然是死代码，因此，<code>!</code>将隐含地强制到所有类型（这简化了类型检查，并且完全没有问题，因为这都发生在可证明的死代码中）。</p>
+<p>函数也可以被标记为常数。这使得该函数可用于常数计算，但大大限制了可用的操作。不过，在每个版本中，<code>const</code>函数的可用语法都在增加。大多数可以成为常数的标准库函数已经是常数了。</p>
+<h4><a class="header" href="#宏" id="宏">宏</a></h4>
+<p>Rust和C语言一样，也有宏。Rust的宏比C的宏要强大得多，它在Rust的语法树上操作，而不是通过字符串替换。宏调用与函数调用的区别是在宏名称后面加上一个<code>!</code>。例如，<code>file!()</code>会扩展为一个带有文件名的字符串字面。要了解更多关于宏的信息，请参见<a href="https://danielkeep.github.io/tlborm/book/index.html">https://danielkeep.github.io/tlborm/book/index.html</a>。</p>
+<blockquote>
+<p>译注： Rust 的宏就目前的实现而言，并不是在 Rust 语法树上操作。但它也可以被认为是在语法树上操作。</p>
+<p>因为 Rust 的语法树 API 本身并未稳定，目前 Rust 的宏都是建立在稳定的 词法分析 API 基础上，然后通过特定的语法解析（声明宏使用宏解析器，过程宏使用第三方syn/quote库）来完成操作。 </p>
+</blockquote>
+<h4><a class="header" href="#别名" id="别名">别名</a></h4>
+<p>Rust有type，它的工作原理和C语言中的<code>typedef</code>完全一样，其语法为：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type MyAlias = u32;
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#表达式和语句" id="表达式和语句">表达式和语句</a></h4>
+<p>与C语言非常不同的是，Rust的语法中几乎没有语句：几乎所有的东西都是某种表达式，并且可以在表达式上下文中使用。粗略地说，语言中唯一的语句是创建一个绑定。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: u32 = foo();
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>:</code>后面的类型是可选的，如果缺少，编译器将使用当前范围内的所有信息，包括<code>let</code>之前和之后的信息，来推断出一个类型。</p>
+<p>表达式后面的分号只是简单地计算表达式的副作用，就像在其它语言中一样。有些表达式，比如<code>if</code>、<code>while</code>和<code>for</code>，不需要在后面加上分号。如果它们没有在表达式中使用，它们将被执行以产生副作用。</p>
+<p><code>let</code>绑定在默认情况下是不可变的，但是<code>let mut x = /* ... */; </code>将使其成为可变的。</p>
+<p>和C语言一样，重新赋值是一个表达式，但和C语言不同的是，它求值为<code>()</code>而不是赋值。</p>
+<p>和几乎所有其他语言一样，字面意义、运算符、函数调用、变量引用等等都是标准表达式，我们已经看到了Rust的拼写方式。让我们深入了解一下Rust的一些其他表达式。</p>
+<p><strong>块表达式（block）</strong></p>
+<p>Rust中的块就像是C语言中块的更好版本；在Rust中，每个块都是一个表达式。一个块以<code>{ }</code>为界，由一组语句和项组成，可能还有一个结束表达式，很像一个函数。然后，该块将求值最后的表达式。比如说：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let foo = {
+    let bar = 5;
+    bar ^ 2
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>块就像立即执行的局部函数，对于限制变量的范围很有用。</p>
+<p>如果一个块没有以表达式结束（也就是说，里面的每个语句都以分号结束），它将隐式返回<code>()</code>，就像函数一样。在处理像<code>if</code>和匹配表达式这样的结构时，这种自动的<code>()</code>很重要，因为它需要将多个执行分支的类型统一为一个。</p>
+<p><strong>条件表达式：if 和 match</strong></p>
+<p>Rust的<code>if</code>表达式在语法上与C语言类似。完整的语法是:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if cond1 {
+    // ...
+} else if cond2 {
+    // ...
+} else {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>条件必须是求值为 <code>bool</code>的表达式。一个条件可以有零个或多个<code>else if</code>子句，<code>else</code>子句是可选的。正因为如此，Rust不需要（因此也没有）三元操作符。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = if c { a } else { b };
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust中的<code>if</code>表达式需要使用大括号。</p>
+<p>在Rust中，<code>if</code>表达式的值为最终被执行的块的值。因此，所有块都必须有相同的类型。例如，下面这个表达式不会被编译，因为一个错误的分号导致类型检查失败。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if cond() {
+    my_int(4)   // Type is i32.
+} else {
+    my_int(7);  // Type is (), due to the ;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>i32</code>和 <code>()</code> 是不同的类型，所以编译器不能将它们统一为整个<code>if</code>的整体类型。</p>
+<p>一般来说，在<code>if</code>子句中用分号结束所有最终表达式是个好主意，除非需要它的值。</p>
+<p>和C语言一样，Rust也有一个类似<code>switch</code> 的结构，叫做匹配。你可以匹配整数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let y = match x {
+    0 =&gt; 0x00,       // Match 0.
+    1..=10 =&gt; 0x0f,  // Match all integers from 1 to 10, inclusive.
+    _ =&gt; 0xf0,       // Match anything, like a `default:` case.
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>像<code>if</code>表达式一样，匹配表达式产生一个值。语法<code>case val: stuff; break; </code>在Rust中大致转化为<code>val =&gt; stuff</code>。Rust称这些<code>case</code>子句为 &quot;匹配分支 &quot;。</p>
+<p>与C语言不同的是，<code>match</code>语句没有贯穿（fallthrough），特别是只有一个分支被执行。然而，Rust允许一个匹配分支来匹配多个值。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match x {
+    0 | 2 | 4 =&gt; /* ... */,
+    _ =&gt; /* ... */,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust会静态地检查每一种可能的情况是否被覆盖。这在对一个枚举进行匹配时特别有用。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Color { Red, Green, Blue, }
+let c: Color = /* ... */;
+match c {
+    Color::Red =&gt;   /* ... */,
+    Color::Green =&gt; /* ... */,
+    Color::Blue =&gt;  /* ... */,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>不需要<code>_ =&gt; case</code>，就像C语言中的<code>default:</code>一样，因为Rust静态地知道所有的情况都被覆盖了（因为枚举不能接受没有被列为变体的值）。如果在枚举中不需要这种行为（因为将来会有更多的变体加入），<code>#[non_exhaustive]</code>属性可以应用于枚举定义，以要求一个默认的分支。</p>
+<p>我们将在后面看到，模式匹配使得<code>match</code>比C的<code>switch</code>要强大得多。</p>
+<p><strong>循环：<code>loop</code> 和<code>while</code></strong></p>
+<p>Rust有三种循环：<code>loop</code>、<code>while</code>和<code>for</code>。<code>for</code>不是C语言风格的<code>for</code>，所以我们将在后面讨论它。<code>while</code>是标准的C语言<code>while</code>循环，语法略有不同。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>while loop_condition { /* Stuff. */ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>它可以作为一个表达式使用，但它的类型总是<code>()</code>；当它是一个块中的最后一个表达式时，这一点最值得注意。</p>
+<p><code>loop</code>是Rust特有的；它只是一个无限循环。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>loop { /* Stuff. */ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>因为无限循环永远不会结束，所以循环表达式的类型（如果其中没有中断！）是<code>！</code>因为循环之后的任何代码都是死的。有了无条件的无限循环，Rust可以对循环进行更好的类型和寿命分析。在语言底层实现中，Rust的所有控制流都是以循环、匹配和中断的方式实现的。</p>
+<h4><a class="header" href="#控制流" id="控制流"><strong>控制流</strong></a></h4>
+<p>Rust有<code>return</code>、<code>break</code>和<code>continue</code>，它们具有C语言中的通常含义。它们也是表达式，并且和<code>loop {}</code>一样，具有类型<code>！</code>因为所有跟在它们后面的代码都不会被执行（因为它们阻碍了控制流）。</p>
+<p><code>return x</code> 带着值x提前退出一个函数。<code> return</code>只是<code>return ()</code>的语法。<code>break</code>和<code>continue</code> 就是常规循环中的用法。</p>
+<p>所有类型的循环都可以用标签进行注释（这是Rust唯一允许标签的地方）。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>'a: loop {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>break</code>和<code>continue</code>可以和这些标签一起使用（例如<code>break 'a</code>），这将会破坏或继续带有该标签的循环（而不是最邻近的循环）。虽然C语言缺少这个功能，但大多数没有goto的语言都有这个功能。</p>
+<p>也可以从一个无限循环中以值 <code>break</code>，这将导致循环表达式计算为该值，而不是<code>!</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let value = loop {
+  let attempt = get();
+  if successful(attempt) {
+    break attempt;
+  }
+};
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#与-c-语言对话" id="与-c-语言对话">与 C 语言对话</a></h4>
+<p>Rust的一大优势是与现有的C语言库实现了大部分的无缝对接。因为Rust基本上没有运行时间，与C类型相对应的Rust类型可以被简单地共享，Rust可以在几乎没有开销的情况下调用C函数。外部符号的名称可以使用<code>extern</code>块进行 &quot;前向声明&quot;，这使得Rust可以命名这些符号，并在之后与之链接。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>extern &quot;C&quot; {
+    fn malloc(bytes: usize) -&gt; *mut u8;
+    static mut errno: i32;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>当指定的ABI是<code> &quot;C &quot;</code>时，它可以不写: <code>extern {}</code>是隐含的<code>extern &quot;C&quot; {}</code>。</p>
+<p>确保这些符号的存在是链接器的责任。此外，还必须注意在边界上发送哪些类型。更多细节见<a href="https://doc.rust-lang.org/reference/items/external-blocks.html">https://doc.rust-lang.org/reference/items/external-blocks.html</a>。</p>
+<h4><a class="header" href="#其他类似的功能" id="其他类似的功能">其他类似的功能</a></h4>
+<h5><a class="header" href="#volatile" id="volatile">Volatile</a></h5>
+<p>Rust没有<code>volatile</code>限定词。相反，可以使用指针上的<code>read_volatile()</code> 和<code>write_volatile()</code> 方法进行易失性读取，其行为与C语言中的易失性指针转指完全相同。</p>
+<p>注意，这些方法在比架构的易失性加载和存储更宽的类型上工作，这将扩展成一系列的易失性访问，所以要小心。同样的注意事项也适用于C语言：<code>volatile uint64_t</code>在32位机器上会发出多个访问。</p>
+<h5><a class="header" href="#内联汇编" id="内联汇编">内联汇编</a></h5>
+<p>Rust还不完全支持内联汇编。Clang的内联汇编语法在不稳定的宏<code>llvm_asm!()</code>后面可用，它最终会被Rust特有的语法取代，从而更好地与语言结合。 <code>global_asm!()</code>也是如此，但可在全局范围内使用，用于定义整个函数。裸函数可以用<code>#[naked]</code>来创建。参见<a href="https://doc.rust-lang.org/1.8.0/book/inline-assembly.html">https://doc.rust-lang.org/1.8.0/book/inline-assembly.html</a>。</p>
+<p>请注意，这种语法目前正处于重新设计和稳定的过程中。</p>
+<h5><a class="header" href="#按位转换" id="按位转换">按位转换</a></h5>
+<p>Rust提供了一个类型系统的陷阱门，可以将任何类型按位转换位任何其他相同大小的类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = /* ... */;
+let y = std::mem::transmute&lt;A, B&gt;(x);
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个陷阱门是非常危险的，只应该在强制转换不够用的情况下使用。</p>
+<p>https://doc.rust-lang.org/std/mem/fn.transmute.html 有一个用途列表，其中许多实际上不需要转换。</p>
+<h5><a class="header" href="#链接器技巧和其他属性" id="链接器技巧和其他属性">链接器技巧和其他属性</a></h5>
+<p>下面是与嵌入式编程有关的各种属性。其中许多属性会巧妙地影响链接器/优化器的行为，并且在很大程度上属于 &quot;你可能不需要担心它 &quot;的范畴。</p>
+<ul>
+<li><code>#[link_section = &quot;.my_section&quot;] </code>是<code>__attribute__((section(&quot;.my_section&quot;))</code>的简单拼写，它将在给定的<code>ELF</code>(或等价)部分粘贴一个符号。</li>
+<li><code>#[used]</code>可以用来强制链接器保留一个符号  (这在C语言中通常是通过将符号标记为<code>volatile</code>来实现的)。通常对<code>__attribute__((used))</code>的注意事项，以及其他链接器的提示，在这里也适用。</li>
+<li><code>#[inline]</code>类似于C的<code>inline</code>，只是一个提示；<code>#[inline(always)]</code>和<code>#[inline(never)]</code>将分别总是 或从不被inline。</li>
+<li><code>#[cold]</code>也可以用来对那些不太可能被调用的函数进行最小化的内联。</li>
+</ul>
+<h3><a class="header" href="#part-ii--rust-专属特性" id="part-ii--rust-专属特性">Part II : Rust 专属特性</a></h3>
+<p>前一部分介绍了可以直接将 C 代码翻译为 Rust 代码所需要的知识。但是，这样直接从 C 翻译的 Rust 代码，其安全性将和 C 代码一样，没有太多保证。这一节，我们将重点介绍 使 Rust （译注：是指 Safe Rust） 更加安全、更容易编写的特性。</p>
+<h4><a class="header" href="#所有权ownership" id="所有权ownership">所有权（Ownership）</a></h4>
+<p>双重释放（double-free），或者一般来说，双重使用，是 C 语言中一大类潜在的 Bug，这些 Bug 一眼看上去并没有明显的错误。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// `handle` is a managed resource to a peripheral, that should be
+// destroyed to signal to the hardware that the resource is not in use.
+my_handle_t handle = new_handle(0x40000);
+use_for_scheduling(handle);  // Does something with `handle` and destroys it.
+// ... 200 lines of scheduler code later ...
+use_for_scheduling(handle);  // Oops double free.
+<span class="boring">}
+</span></code></pre></pre>
+<p>在 C 语言中，DF（double-free） 和 UAF（use-after-free）是崩溃和安全漏洞常见来源。让我们看看在 Rust 代码中尝试这样做会发生什么?</p>
+<p>考虑一下用 Rust 编写等效代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let handle = new_handle(0x40000);
+use_for_scheduling(handle);
+// ...
+use_for_scheduling(handle);
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果你试图编译这段代码，你会得到一个错误：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0382]: use of moved value: `handle`
+  --&gt; src/main.rs:10:24
+   |
+7  |     let handle = new_handle(0x40000);
+   |         ------ move occurs because `handle` has type `Handle`,
+   |                which does not implement the `Copy` trait
+8  |     use_for_scheduling(handle);
+   |                        ------ value moved here
+9  |     // ...
+10 |     use_for_scheduling(handle);
+   |                        ^^^^^^ value used here after move
+<span class="boring">}
+</span></code></pre></pre>
+<p>UF 和 DF 的错误在 Safe Rust 中是不可能存在的。这类特殊错误（不直接涉及指针）是由移动语义来防止的。正如上面错误示例所示，变量标志着它已经被 &quot;移出&quot;：该变量现在是一个未初始化内存的空槽。编译器会静态地跟踪这一点，如果你试图再次移出，编译会失败。当前存储一个值的变量被称为它的 &quot;所有者 &quot;；所有者有权将所有权移交给另一个变量，但只能这样做一次。</p>
+<p>该错误还指出，&quot;Handle没有实现Copy 特质&quot;。特质本身是以后的话题；现在这意味着Handle有移动语义（新类型的默认）。实现了复制的类型具有复制语义；这就是 C 语言中所有按值传递的类型的行为方式：在 C 语言中，按值传递的结构总是复制整个结构，而按引用传递的结构只是复制指向该结构的指针。这就是为什么在处理整数和原始指针时，移动并不相关：它们都是Copy类型。</p>
+<p>请注意，您定义的任何结构和枚举都不是默认的复制类型，即使它们的所有字段都是。如果你希望一个字段都是Copy的结构体也是Copy的，你可以使用以下特殊语法。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone, Copy)]
+struct MyPodType {
+  // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>当然，复制/移动的区别是一种错误的说法：由于复制和移动语义而导致的重新赋值可以编译成相同的memcpy或寄存器移动代码。这种区分纯粹是为了静态分析。</p>
+<h4><a class="header" href="#引用references和生命周期lifetimes" id="引用references和生命周期lifetimes">引用（References）和生命周期（Lifetimes）</a></h4>
+<p>另一类 UAF 使用涉及到栈销毁以后的栈变量。考虑下面的 C 代码：</p>
+<pre><code class="language-c">const int* alloc_int(void) {
+  int x = 0;
+  return &amp;x;
+}
+</code></pre>
+<p>这个函数显然是错误的，但是这样的错误，即一个指针超过它所指向的数据，在C语言中是很隐蔽的，因为它们很常见。</p>
+<p>Rust的主要指针类型: 引用，使得这种情况不可能发生。引用就像原始的指针，只是它们总是对齐良好、非空，并且指向有效的内存；它们也比C语言的指针有更强的别名限制。让我们来探讨一下Rust是如何实现这最后一项保证的。</p>
+<p>考虑一下下面这个Rust程序。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn alloc_int() -&gt; &amp;i32 {
+    let x = 0i32;
+    &amp;x
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个程序将无法编译，并出现一个隐秘的错误：<code>missing lifetime specifier.</code>。显然，我们漏掉了什么，但至少编译器没有让这个明显错误的程序通过。</p>
+<p>生命周期（lifetime），用<code>'a</code>这样的符号表示（撇号通常读作 &quot;tick&quot;），标记源代码的一个区域。Rust中的每个引用都有一个生命周期，代表了一个引用指向有效内存的区域：这是由语法<code>&amp;'a i32</code>在<code>'a</code>期间对<code>i32</code>的引用所指定。生命周期和类型一样，在运行时不存在；它们的存在只是为了让编译器进行借用检查，在这种情况下，编译器会确保引用只存在于各自的生命周期内。一个特殊的生命期，<code>static</code>代表整个程序。它是常量和全局变量的生命周期。</p>
+<p>考虑一下下面的Rust代码:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: i32 = 42;
+let y: &amp;'a i32 = &amp;x;  // Start of 'a.
+use_reference(y);
+use_value(x);  // End of 'a, because x has been moved.
+use_reference(y);  // Error: use of y outside of 'a.
+<span class="boring">}
+</span></code></pre></pre>
+<p>引用生命周期从引用被接受时开始，当生命周期超出范围或引用的值被移动时结束。试图在生命周期外使用引用是一个错误，因为它现在是一个悬空的指针。</p>
+<p>Rust经常把引用称为借用：引用可以在有限的时间内（生命周期）从它的所有者那里借用一个值，但是必须在所有者把这个值让给其他人之前归还它。引用也有可能是借用的借用，或者是再借用：总是有可能创建一个具有较短生命周期但与另一个引用具有相同价值的引用。重新借用通常是由编译器隐式执行的，通常是在调用点周围，但也可以通过写<code>&amp;*x</code>显式执行。</p>
+<p>在大多数使用生命周期的地方都可以省略。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_field(m: &amp;MyStruct) -&gt; &amp;u32 {
+  &amp;m.field  // For references, unlike for raw pointers, . acts the same way -&gt; does in C.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在这里，编译器假定返回类型的生命周期应该与<code>m</code>的生命周期相同。然而，我们可以明确地写出这一点。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_field&lt;'a&gt;(m: &amp;'a MyStruct) -&gt; &amp;'a u32 { /* ... */ }
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>&lt;'a&gt;</code>语法在函数签名中引入了一个新的命名生命周期，这样我们就可以明确地告诉编译器 &quot;这两个引用具有相同的生命周期&quot;。当编译器无法做出任何假设时，这对于指定许多生命周期来说特别有用。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_fields&lt;'a, 'b&gt;(m1: &amp;'a MyStruct, m2: &amp;'b MyStruct) -&gt; (&amp;'a u32, &amp;'b u32) {
+    (&amp;m1.field, &amp;m2.field)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在我们可以尝试修复我们错误的栈返回函数。我们需要为这个函数引入一个新的生命周期，因为没有函数参数可以得到一个生命周期。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn alloc_int&lt;'a&gt;() -&gt; &amp;'a i32 {
+    let x = 0i32;
+    &amp;x
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>现在这给了我们一个直接的错误，表明借用检查可以防止错误的栈返回。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0515]: cannot return reference to local variable `x`
+ --&gt; src/lib.rs:9:3
+  |
+9 |   &amp;x
+  |   ^^ returns a reference to data owned by the current function
+<span class="boring">}
+</span></code></pre></pre>
+<p>这种<code>&lt;'a&gt;</code>语法也可以应用于结构体等项目。如果你要创建一个包含引用的类型，<code>&lt;'a&gt;</code>是必须的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyRef&lt;'a&gt; {
+    meta: MyMetadata,
+    ptr: &amp;'a u32,  // Lifetime elision not allowed here.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust的引用有两种类型：共享和唯一。一个共享引用，<code>&amp;T</code>，提供了对<code>T</code>类型值的不可改变的访问，并且可以自由复制：<code>&amp;T</code>是Copy。唯一的引用，<code>&amp;mut T</code>，提供了对<code>T</code>类型值的可变访问，但要遵守Rust的别名规则，这比C的严格别名规则要严格得多，而且不能被关闭。</p>
+<p>对于一个给定的值，在同一时间只能有一个<code>&amp;mut T</code>激活。这意味着在这个唯一引用的有效期内不能创建其他引用。然而，一个<code>&amp;mut T</code>可以被重新借用，通常用于传递给一个函数。在再借用的有效期内，不能使用原来的引用。这意味着下面的代码可以正常工作。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn do_mut(p: &amp;mut Handle) { /* ... */ }
+
+let handle: &amp;mut Handle = /* ... */;
+do_mut(handle);  // Reborrow of handle for the duration of do_mut.
+// handle is valid again.
+do_mut(handle);  // Reborrow again.
+<span class="boring">}
+</span></code></pre></pre>
+<p>换句话说，Rust 没有一个安全的<code>int*</code>等价物；它只有<code>const int*</code> 和<code>int* restrict</code>的等价物......再加上强制去掉 const是即时未定义行为。Rust会假设没有可变的引用别名，以便进行别名分析。这意味着更多的优化机会，而不需要安全代码做任何事情。</p>
+<p>最后，不用说，引用只对主（main）内存有用；Rust有权为（可能未使用的）引用产生虚假的load和store，所以MMIO应该完全通过原始指针进行。</p>
+<p><a href="https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html">https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html </a>进一步阐述了各种生命周期规则。</p>
+<h4><a class="header" href="#引用操作" id="引用操作">引用操作</a></h4>
+<p>Rust引用的行为更像标量值，而不像指针（除了借用检查）。因为静态地知道每个引用在任何时候都指向一个有效的、初始化了的<code>T</code>类型的值，所以在大多数时候显式地取消引用（尽管在必要时，它们可以被取消引用。<code>*x</code>是一个可以被赋值的<code>lvalue</code>）。)</p>
+<p>Rust没有<code>-&gt;</code>操作符，但是对于<code>x: &amp;T</code>来说，点操作符的行为就像<code>x</code>是一个<code>T</code>一样。例如，如果<code>field</code>是<code>T</code>的一个字段，<code>x.field</code>就是<code>field</code>的<code>lvalue</code>（在C语言中拼写为<code>x-&gt;field</code>）。这甚至适用于严重嵌套的引用：<code>&amp;&amp;&amp;&amp;</code>的点运算符将触发三次内存查找。这被称为 <code>auto-deref </code>行为。</p>
+<p>引用是否相等取决于其指向值的是否相等：<code>x == y</code>，对于<code>x: &amp;T</code>和<code>y: &amp;T</code>，变成<code>*x == *y</code>。指针相等判断仍然可以用<code>std::ptr::eq(x, y)</code>。引用可以被强转为原始指针：<code>x as *const T</code>，并直接进行比较。</p>
+<h4><a class="header" href="#方法" id="方法">方法</a></h4>
+<p>虽然Rust不是一种面向对象的语言，但它确实提供了一种在类型下对函数进行命名的机制：<code>impl</code>（代表实现）块。这也允许你使用Rust的可见性注解，使外部用户无法看到实现细节。</p>
+<p>下面是一个带有方法的类型的例子。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Counter(u64);  // Non-public field!
+impl Counter {
+    /// Creates a new `Counter`.
+    pub fn new() -&gt; Self {
+      Counter(0)
+    }
+
+    /// Private helper.
+    fn add(&amp;mut self, x: u64) {
+        self.0 += x;
+    }
+
+    /// Get the current counter value.
+    pub fn get(&amp;self) -&gt; u64 {
+        self.0
+    }
+
+    /// Increment the counter and return the previous value.
+    pub fn inc(&amp;mut self) -&gt; u64 {
+        let prev = self.get();
+        self.add(1);
+        prev
+    }
+
+    /// Consumes the counter, returning its final value.
+    pub fn consume(self) -&gt; u64 {
+        self.get()
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>外部模块不能访问任何未标记为pub的东西，这使得我们可以对 Counter 执行一个不变性：它是不变的。让我们来解读一下这个语法。</p>
+<p>impl 块中的函数被称为 &quot;固有函数 (inherent functions) &quot;或 &quot;方法 (method)&quot;，这取决于它们是否带一个<code>self</code>参数。固有函数不需要<code>self</code>参数，它的调用方式与<code>Counter::new() </code>类似。</p>
+<p><code>self</code>参数是一个名为 self 的参数（这是一个关键字），其类型涉及<code>Self</code> （另一个关键字，是内含块的类型别名），如<code>&amp;Self </code>。<code>self</code>、<code>&amp;self</code>、<code>mut self</code>和<code>&amp;mut self</code>的语法 是语法糖，分别对应 <code>self: Self</code>、 <code>self: &amp;Self</code>、<code>mut self: Self</code> 和<code>self: &amp;mut Self</code>，分别代表了<code>self-by-value</code>、<code>self-by-reference</code>、<code>self-by-mut-value</code>和<code>self-by-mut-reference</code>。</p>
+<p>因此，方法可以像这样被调用：<code>my_counter.inc()</code>。方法实际上只是普通的函数：你也可以像<code>Counter::inc(&amp;mut my_counter)</code>这样调用。请注意，调用一个接收<code>&amp;self</code>或<code>&amp;mut self</code>的函数会触发接收类型的借用；如果在一个非引用值上调用<code>&amp;self</code>函数，该值将被获取其地址，并被传递到方法中。</p>
+<p>impl块，像其他项目一样，可以通过生命周期参数化。为了给一个有引用的结构添加方法，可以使用以下语法。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;'a&gt; MyStruct&lt;'a&gt; { /* ... */ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果'a'在 impl 块内从未实际使用过，可以使用 lifetime 占位符 来写。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl MyStruct&lt;'_&gt; { /* ... */ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>正如我们已经看到的，许多原始类型也有方法；这些方法被定义在标准库的特殊 impl 块中。</p>
+<h4><a class="header" href="#切片slice-和-for--循环" id="切片slice-和-for--循环">切片（slice） 和 <code>for</code>  循环</a></h4>
+<p>引用也不允许进行指针运算，所以<code>&amp;u32</code>不能被用来指向字的缓冲区。静态缓冲区可以作为数组来传递，比如<code>&amp;[u32; 1024]</code>，但我们经常想传递一个运行时已知值的连续内存的指针。切片 是Rust对指针加长度的解决方案。</p>
+<p><code>T</code>的切片是<code>[T]</code>类型；这种类型最像C语言中的 &quot;灵活数组成员&quot;。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct slice {
+    size_t len;
+    T values[];
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>那么，一个<code>slice*</code>将指向一个长度，后面是那么多的<code>T</code>；除了在指针后面，它不可能合理地存在。同样地，<code>[T]</code>就是Rust所说的动态大小的类型，它需要存在于一个引用后面：更常见的是看到<code>&amp;[T]</code>和<code>&amp;mut[T]</code>。</p>
+<p>然而，Rust 仍然与C版本不同：<code>&amp;[T]</code>是一个胖指针，有两个字宽。它本质上看起来像这样。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Slice {
+    len: usize,
+    values: *const T,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>对一个切片的引用与数组引用类似：<code>&amp;x[n]</code>提取对切片中第n个元素的引用（有边界检查），<code>x[n] = y</code>分配给它。切片的长度也可以用<code>len</code>方法提取：<code>x.len()</code>。</p>
+<p><code>str</code> 是一个类似切片的类型，保证包含<code>UTF-8</code>字符串数据。</p>
+<p>可以使用 &quot;范围索引操作 &quot;从数组和其他切片创建切片：<code>&amp;x[a..b]</code>。这需要数组或切片<code>x</code>，并创建一个从索引<code>a</code>到索引<code>b</code>（包括<code>a</code>，不包括<code>b</code>）的元素的切片，长度为<code>b-a</code>。<code>&amp;x[a..]</code>是后缀，从<code>a</code>开始，<code>&amp;x[...b]</code>是前缀，从<code>b</code>结束，<code>&amp;x[...]</code>是整个切片，对于将数组转换为切片很有用。包容范围也是可用的，其语法是<code>a...=b</code>。</p>
+<p>切片可以通过<code>for</code>循环进行迭代。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let slice: &amp;[u32] = /* ... */;
+for x in slice {
+    // x is a reference to the nth element in slice.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果需要一个索引，可以直接在一个范围内迭代。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for i in 0..slice.len() {
+    let x = &amp;slice[i];
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这可以与<code>_</code>模式相结合，简单地重复一个操作n次。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for _ in 0...n {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>与借用有关的切片的一个重要注意事项是唯一引用。如果我们有一个对切片的唯一引用，就不可能同时对多个元素采取唯一引用。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let slice: &amp;mut [u32] = /* ... */;
+let x = &amp;mut slice[0];
+let y = &amp;mut slice[1];  // Error: slice is already borrowed.
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>split_at_mut() </code> 方法可以用来将一个唯一的<code>slice</code>引用分割成两个不重叠的唯一<code>slice</code>引用。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let slice: &amp;mut [u32] = /* ... */;
+let (slice1, slice2) = slice.split_at_mut(1);
+let x = &amp;mut slice1[0];  // slice[0]
+let y = &amp;mut slice2[0];  // slice[1]
+<span class="boring">}
+</span></code></pre></pre>
+<p>通常情况下，可以通过结构化的方式来避免这种情况的发生，但这种逃逸的方式是为了在必要的时候存在。切片也可以用<code>as_ptr()</code>和<code>len()</code>函数分解成其指针和长度部分，然后用<code>std::slice::from_raw_parts()</code>重新组装起来。这种操作是不安全的，但对于跨越系统调用或IPC边界的C和Rust，或者Rust和Rust之间的桥接非常有用。</p>
+<p>更多的切片操作可以在<a href="https://doc.rust-lang.org/std/slice/index.html">https://doc.rust-lang.org/std/slice/index.html</a> 和 <a href="https://doc.rust-lang.org/std/primitive.slice.html">https://doc.rust-lang.org/std/primitive.slice.html</a>找到。</p>
+<h4><a class="header" href="#字符串字面量" id="字符串字面量">字符串字面量</a></h4>
+<p>Rust的字符串字头很像C的字符串字面量 : <code>&quot;abcd...&quot;</code>。任意的ASCII范围的字节可以用<code>\xNN</code>插入，并支持大多数常见的转义序列。然而，所有的Rust字符串都是<code>UTF-8</code>编码的字节切片：<code>&amp;str</code>是围绕<code>&amp;[u8]</code>的一个封装类型，保证里面的字节是有效的<code>UTF-8</code>。所有字符串字面的类型是<code>&amp;'static str</code>。</p>
+<p>Rust字符串字面意义中可以包含任意的换行，这可以被转义。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Equivalent to &quot;foo\n  bar&quot;.
+let s = &quot;foo
+  bar&quot;;
+// Equivalent to &quot;foo  bar&quot;.
+let s = &quot;foo\
+  bar&quot;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>原始字符串不能使用转义序列，并由任意的、匹配数量的<code>#</code>符号分隔。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s = r&quot;...&quot;;
+let s = r#&quot; ...&quot;#;
+let s = r#####&quot;...&quot;#####;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust也有<code>'z'</code> 形式的字符字面，不过它们的类型是<code>char</code>，一个32位的Unicode代码点。要获得一个<code>u8</code>类型的ASCII字节，可以使用<code>b'z'</code>。</p>
+<h4><a class="header" href="#析构-与-raii" id="析构-与-raii">析构 与 RAII</a></h4>
+<p>析构器是一些特殊的函数，当一个值变得不可触及时（即，最初声明它的<code>let</code>不能再被命名，并且对它的最后一次引用已经过期），它将执行清理逻辑。在析构器运行后，如果它是一个结构体或枚举，那么该值的每个字段也被销毁（或 &quot;丢弃&quot;）。</p>
+<p>析构器是用一种特殊的 impl 块来声明的（我们将在后面看到更多这样的内容）。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Drop for MyType {
+    fn drop(&amp;mut self) {
+        // Dtor code.
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>如果几个值同时超出了范围，它们会按照声明的相反顺序被丢弃。</p>
+<p>Drop方法不能被手动调用；然而，标准库函数<code>std::mem::drop()</code>可以用来放弃一个值的所有权并立即销毁它。Union 和具有复制语义的类型不能有析构器。</p>
+<p>析构器可以实现资源获取即初始化（RAII）的惯用法。一个持有某种临时资源的类型，像一个外设的句柄，可以有一个析构器来自动释放该资源。一旦句柄超出范围，该资源就会被清理掉。</p>
+<p>RAII的典型例子是动态内存管理：你用<code>malloc</code>分配内存，把返回的指针藏在一个结构中，然后该结构的析构器对该指针调用<code>free</code>。由于在调用<code>free</code>时，该结构已经超出了范围，所以UAF是不可能的。由于Rust的移动语义，这个结构不能被复制，所以析构器不能被调用两次。因此，双重释放也是不可能的 。</p>
+<p>在某些情况下，调用一个析构器可能是不可取的（例如，在某些不安全的Rust操作中）。标准库提供了特殊的函数<code>std::mem::forget()</code>，它消耗一个值而不调用其析构器。<code>std::mem::ManuallyDrop&lt;T&gt;</code>类型是一个智能指针 ，它持有一个<code>T</code>，同时抑制其析构器。由于这个原因，不存在期望一个析构器实际运行的问题。</p>
+<p><code>std::mem::needs_drop()</code>这个函数可以用来发现一个类型是否需要被drop；即使它没有drop方法，它也可能递归地有一个字段可以drop。 <code>std::ptr::drop_in_place()</code> 可以用来在一个原始指针后面的值中运行析构器，而在技术上不放弃对它的访问。</p>
+<h4><a class="header" href="#模式匹配" id="模式匹配">模式匹配</a></h4>
+<p>引用不能为空，但事实证明，空值有时是有用的。<code>Option&lt;T&gt;</code>是一个标准的库类型，代表一个 &quot;可能没有的<code>T</code> &quot; 。它被实现为一个枚举。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Option&lt;T&gt; {
+    Some(T),
+    None,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>&lt;T&gt;</code>类似于我们之前看到的lifetime语法；它意味着<code>Option&lt;T&gt;</code>是一个通用类型；我们很快就会深入研究这些。</p>
+<p>如果我们有一个<code>Option&lt;T&gt;</code>类型的值（或者，任何其他的枚举，真的），我们可以使用模式匹配来编写以该值的判别式为条件的代码，这可以通过匹配表达式访问。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: Option&lt;u32&gt; = /* ... */;
+let y = match x {
+    Some(val) =&gt; val,  // If `x` is a `Some`, bind the value inside to `val`.
+    None =&gt; 42,  // If `x` is a `None`, do this instead.
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>模式匹配给我们的关键是能够安全地检查枚举内的联合体：标签(tag)检查是由编译器强制执行的。</p>
+<p>模式就像表达式，形成一种小型语言。如果说表达式是通过组合现有的值来建立一个值，那么模式则是相反的：它们通过解构值来建立值。特别是，应用于表达式的模式会执行以下操作。</p>
+<ul>
+<li>检查表达式的值是否真的与该模式匹配。(注意，类型检查并不包括在内；模式不能表达式的类型）。</li>
+<li>可以选择将表达式的值绑定到一个名字上。</li>
+<li>可以选择递归到子模式中。</li>
+</ul>
+<p>下面是几个模式的例子。请记住每个模式的匹配、绑定和递归属性。一般来说，模式看起来像它们匹配的表达式的值。</p>
+<ul>
+<li><code>_</code>，一个下划线模式。匹配总是成功的，但是会扔掉匹配的值。这就是相当于默认情况下的_：case。_</li>
+<li><code>foo</code>，一个标识符模式。这个模式与<code>_</code>完全一样，但它将匹配的值与它的名字绑定。这就是上面<code>Some(val)</code>中的<code>val</code>。这也可以作为一个默认的案例，希望对匹配到的值做一些事情。绑定可以通过写<code>Some(mut val)</code>而变得可变。</li>
+<li>任何数字字面量，用于一个字面量模式。这种匹配将匹配的值与字面值进行比较，并且不匹配任何东西。这些也可以是包容性的范围： <code>5..=1686</code>.</li>
+<li><code>(pat1, pat2, /* etc */）</code>，一个元组模式。这种匹配对元组类型进行操作，并且总是成功的：它提取元组的各个元素，并将它们应用于模式的子模式。特别是，<code>()</code>模式匹配单位值<code>()</code>。</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x: (u32, u32) = /* ... */;
+match x {
+    (5, u) =&gt; /* ... */,  // Check that first element is five,
+    // bind the second element to `u`.
+    (u, _) =&gt; /* ... */,  // Bind the first element to `u`,
+    // discard the second element.
+}
+
+let y: (u32, (u32, u32)) = /* ... */;
+match y {
+    // All patterns can nest arbitrarily, like expressions.
+    (42, (u, _)) =&gt;  /* ... */,
+    // `..` can be used to match either a head or a tail of tuple.
+    (.., u) =&gt; /* ... */,
+    (u, ..) =&gt; /* ... */,
+    (..) =&gt;    /* ... */,  // Synonymous with _.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>结构模式类似于元组模式。对于类似元组的结构，它们的语法完全相同，但以结构的名称开始。<code>MyTuple(a, b, _)</code>。普通结构的语法要有趣得多。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyStruct { a: i32, b: u32 }
+match my_struct {
+    MyStruct { a, b } =&gt; /* ... */,  // Bind the fields `a` and `b` to
+    // names `a` and `b`, respectively.
+    MyStruct { a: foo, b: _ } =&gt; /* ... */,  // Bind the field `a` to the name
+    // `foo`, and discard the field `b`.
+    MyStruct { a: -5, .. } =&gt; /* ... */  // Check that `a` is -5, and ignore
+    // other fields.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>枚举模式可能是最重要的一种模式，也是我们在上面的<code>Option</code>的匹配语句中看到的。它们与结构模式非常相似，只是它们不总是成功的，而是检查枚举判别符是否是模式中指定的那个。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum MyEnum { A, B{u32), C { a: i32, b: i32 }, }
+match my_enum {
+    MyEnum::A =&gt;    /* ... */,  // Match for variant `A`.
+    MyEnum::B(7) =&gt; /* ... */,  // Match for variant `B`, with 7 as the value inside.
+    MyEnum::B(x) =&gt; /* ... */,  // Match for variant `B`, binding the value inside to
+    // `x`.
+
+    MyEnum::C { a: 7, .. } =&gt; /* ... */,  // Match for variant `C`, with 7 as the
+    // value in `a` and all other fields ignored.
+
+    MyEnum::C { b, .. } =&gt; /* ... */,  // Match for variant `C`, binding b to b.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>对模式语法的完整处理可以在<a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html">https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html</a>。</p>
+<p>匹配表达式将针对一个值对每个模式进行计算，直到有一个匹配，依次进行；编译器将对无法到达的模式发出警告。编译器还将确保每个值都能与其中一个匹配分支相匹配，这是因为每个情况都被覆盖了（例如，每个枚举变体都存在），或者存在一个不可辩驳（irrefutable ）的模式（即，一个匹配所有值的模式）。<code>_</code>, <code>foo</code>, <code>(a, _)</code>, 和<code>MyStruct { a, .. }</code>都是不可反驳的模式的例子。</p>
+<p>如果被匹配的值是某种类型的引用，绑定的名字也将是引用。</p>
+<p>比如说:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match &amp;my_struct {
+    MyStruct { a, .. } =&gt; {
+        // Here, `a` is a `&amp;i32`, which is a reference to the `a` field in my_struct.
+    },
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个特性有时被称为匹配的人机工程学，因为在它被添加之前，必须在引用的匹配中添加明确的解除引用和特殊的<code>ref</code>模式限定符。</p>
+<p>此外，匹配语句在上面讨论的模式语法的基础上支持两个额外的特性。</p>
+<ul>
+<li>多重匹配分支可以允许一个匹配分支匹配多个模式中的一个：<code>a | b | c =&gt; /* ... */</code>,. 如果有任何模式匹配，就执行该分支。</li>
+<li>匹配守卫为你提供了一种快捷方法，用于在某些表达式上限制一个分支：<code>Some(foo) if foo.has_condition() =&gt; /* ... */</code>,.</li>
+</ul>
+<p>另外，标准库提供了 <code>matches!()</code> 宏，作为以下常见匹配表达式的简写。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match expr {
+  &lt;some_complex_match_arm&gt; =&gt; true,
+  _ =&gt; false,
+}
+// ... can be replaced with ...
+matches!(expr, some_complex_match_arm)
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>matches! </code>也支持多重匹配和匹配守卫。</p>
+<p>不可反驳的模式可以与普通变量声明一起使用。语法<code>let x = /* ... */; </code>实际上使用了一个模式：<code>x</code>是一个模式。当我们写<code>let mut x = /* ... */;</code>时，我们使用的是一个<code>mut x</code>模式。其他不可辩驳的模式也可以用在这里。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Destructure a tuple, rather than using clunky `.0` and `.1` field names.
+let (a, b) = /* ... */;
+
+// Destructure a struct, to access its fields directly.
+let Foo { foo, bar, baz } = /* ... */;
+
+// Syntactically valid but not allowed: `42` is not an irrefutable pattern.
+let 42 = /* ... */;
+Special variants of if and while exist to take advantage of patterns, too:
+
+if let Some(x) = my_option {
+    // If the pattern succeeds, the body will be executed, and `x` will be bound
+    // to the value inside the Option.
+    do_thing(x);
+} else {
+    // Else block is optional; `x` is undefined here.
+    // do_thing(x);  // Error.
+}
+
+while let Some(x) = some_func() {
+    // Loop terminates once the pattern match fails. Again, `x` is bound
+    // to the value inside the Option.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>与普通的<code>let</code>语句不同，<code>if let</code>和<code>while let</code>表达式是为了与可反驳模式一起使用。</p>
+<p>一般来说，几乎所有绑定值的地方都可以是一个不可反驳的模式，例如函数参数和<code>for</code>循环变量。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_first((x, _): (u32, u32)) -&gt; u32 { x }
+
+for (k, v) in my_key_values {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#特质trait" id="特质trait">特质（trait）</a></h4>
+<p>特质是Rust的核心代码重复使用抽象。Rust的特质就像其他语言中的接口：一个类型必须实现的方法列表。然而，特质本身并不是类型。</p>
+<p>标准库中一个非常简单的<code>trait</code>是<code>Clone</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Clone {
+    fn clone(&amp;self) -&gt; Self;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>一个满足<code>Clone</code>接口的类型（用Rust的说法是 &quot;实现Clone&quot;）有一个具有给定签名的<code>Clone</code>方法，它返回一个<code>Self</code>的副本。为了实现一个特质，你可以使用一个略微有趣的<code>impl</code> 语法。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Clone for MyType {
+    fn clone(&amp;self) -&gt; Self { /* implementation */ }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这给了我们一个一致的方式来拼写 &quot;我想要这个值的一个副本&quot;。标准库为一些类似的操作提供了特质，比如<code>Default</code>，用于提供默认值；<code>PartialEq</code>和<code>Eq</code>，用于平等；<code>PartialOrd</code>和<code>Ord</code>，用于排序；以及<code>Hash</code>，用于非加密散列。</p>
+<p>上述 特质 的特殊之处在于，它们对一个结构或枚举有微不足道的实现，假设该结构或枚举的所有字段都实现了它。在 &quot;所有权 &quot;一节中描述的<code>#[derive()]</code>语法可以与任何这些特质一起使用，为一个类型自动实现它们。普通旧数据（POD）类型看起来像这样的情况并不少见。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+struct MyPod {
+    pub a: u8,
+    pub b: u8,
+    // The following line wouldn't compile, because `derive(Eq)` requires
+    // all fields to be `Eq`.
+    // c: NonEq,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>特质也可以提供用其他方法实现的内置方法，以提供一个默认的实现（如果对某一特定类型有更有效的实现，则可以重写）。完整的<code>Clone</code> trait实际上是这样的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Clone {
+    fn clone(&amp;self) -&gt; Self;
+    fn clone_from(&amp;mut self, source: &amp;Self) {
+        *self = source.clone();
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>实现者不需要提供<code>clone_from</code>，但如果默认的实现不够好的话，允许他们这样做。</p>
+<p>特质和实现它们的类型可以被定义在不同的模块中，只要实现模块定义了特质或类型。这意味着特质方法并不是类型的一部分，而是特质和类型的一部分。因此，为了在一个特定类型上调用特质方法，该特质也必须在范围内。当无歧义时，trait函数可以作为<code>foo.trait_fn()</code>、<code>Foo::trait_fn(foo)</code>或<code>Trait::trait_fn(foo)</code>来调用。然而，由于名字有时可能有歧义，所以有一个完全不模糊的语法 :<code>&lt;Foo as Trait&gt;::trait_fn(foo)</code>。最后一种语法在通用语境中也是很有用的，或者可以精确到被引用的确切函数。</p>
+<p>特质 也是操作符重载的载体：这些<code>trait</code>可以在标准库的<code>std::ops</code>模块中找到。</p>
+<h4><a class="header" href="#trait-对象" id="trait-对象">Trait 对象</a></h4>
+<p>特质可以通过一种叫做特质对象的机制用于动态调度（也被称为虚拟多态性）。给定一个<code>trait Trait</code>和一个实现它的类型T，我们可以将一个引用<code>&amp;T</code> as 强转成一个动态trait对象：<code>&amp;dyn Trait</code>。比如说:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Id {
+    fn get_id(&amp;self) -&gt; usize;
+}
+impl Id for Device {
+  // ...
+}
+
+let device: Device = /* ... */;
+let dyn_id = &amp;device as &amp;dyn Id;  // Create a vtable.
+let id = dyn_id.get_id();  // Indirect procedure call.
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>dyn Trait </code>是一个动态大小的类型，很像切片，只能存在于一个指针后面。引用<code>&amp;dyn Trait</code>看起来像这样。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct TraitObject {
+    value: *mut (),
+    vtable: *mut Vtable,
+}
+
+struct Vtable {
+    size: usize,
+    align: usize,
+    dtor: fn(&amp;mut T),
+    // Other trait methods.
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>因此，对<code>get_id</code>的动态函数调用将编译成如下内容。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let device: Device = /* ... */;
+let dyn_id = &amp;device as IdTraitObject;
+let id = (dyn_id.vtable.get_id)(dyn_id.value);
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#unsafe-trait" id="unsafe-trait">Unsafe Trait</a></h4>
+<p>我们可以通过编写<code>unsafe trait MyTrait { /* ... */ }；</code>与普通trait的唯一区别是，它需要实现不安全的 impl。Unsafe 的 trait 通常在其方法之外执行某种额外的约束；事实上，Unsafe 的 trait 经常根本就没有方法。例如，标准库的特质<code>Sync</code>是由所有同步访问的类型实现的。因为这个特质所断言的不变性超出了编译器可以检查的范围，所以它是一个不安全的特质。</p>
+<p>特质方法可以单独标记为<code> unsafe</code> 。这样做通常是为了表明，不仅在实现该特质时需要小心，而且调用该函数也需要小心（并发出不安全的声音）。这与将特质标记为<code> unsafe</code>是分开的，没有必要将一个特质标记为<code> unsafe</code>，因为它有<code> unsafe</code>的方法。</p>
+<h4><a class="header" href="#auto-trait" id="auto-trait">Auto Trait</a></h4>
+<p>Auto Trait 是一种编译器机制，用于自动实现某些特征；在标准库的源代码中，它显示为 auto trait Foo {}。(尽管这种语法在普通库中是不可用的)。如果一个结构或枚举类型的所有字段也实现了该特性，那么自动特性就会自动实现，并用于向特性系统暴露跨行属性。例如，Send和Sync是自动特质；其他一些标记性特质98也是自动特质。</p>
+<p>自动特征总是你并不希望选择的标记。它们就像derive()特性的反面，你需要选择加入，因为它们对你的类型的API产生了有意义的影响，能够控制这种影响是很重要的。</p>
+<h4><a class="header" href="#泛型编程" id="泛型编程">泛型编程</a></h4>
+<p>泛型编程是指编写可以被编译为许多类型的源代码。泛型是Rust的核心功能之一，它可以实现多态静态调度。</p>
+<p>函数可以通过引入类型参数来实现泛型，使用的语法类似于显式生命期。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn identity&lt;T&gt;(x: T) -&gt; T {
+    x
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个函数接受一个任何类型的值并立即返回。然后它可以像这样被调用：<code>identity::&lt;i32&gt;(42)</code>。使用一个填写了所有类型参数的通用函数会导致它被实例化（或单态化），从而导致为它生成代码。这个过程本质上包括用具体的值替换<code>T</code>的每一次出现。</p>
+<p>每个不同的实例化在运行时是一个单独的函数，有一个单独的地址，尽管对于产生相同代码的函数，如<code>identity::&lt;i32&gt;</code>和<code>identity::&lt;u32&gt;</code>，链接器可能会重复它们。过分热衷于使用泛型代码会导致二进制的膨胀。</p>
+<p>大多数时候，<code>::&lt;&gt;</code>位（被一些参考资料称为 &quot;涡轮鱼&quot;）是不必要的，因为Rust类型演绎可以推断出它：<code>let x: u64 = identity(42); </code>会推断出<code>T = u64</code>。然而，在没有必要的情况下，包括它也是有用的，可以帮助提高可读性。</p>
+<p>类型也可以是泛型的，比如之前的<code>Option&lt;T&gt;</code>类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyWrapper&lt;T&gt; {
+    foo: usize,
+    bar: T,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>具体的类型<code>MyWrapper&lt;i32&gt;</code>包括将定义中所有出现的<code>T</code>替换成<code>i32</code>，否则我们可以将其作为普通类型使用。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_foo(mw: MyWrapper&lt;i32&gt;) -&gt; usize {
+    mw.foo
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意，<code>MyWrapper</code>本身并不是一个类型。</p>
+<p>注意不同的泛型实例是不同的类型，有不同的布局和大小，一般来说，它们之间不能相互转换。</p>
+<p>不出所料，我们可以将泛型函数与泛型类型结合起来。在这种情况下，我们并不真的需要知道<code>T = i32</code>，所以我们把它剔除。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_foo&lt;T&gt;(mw: MyWrapper&lt;T&gt;) -&gt; usize {
+    mw.foo
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们也可以建立一个泛型函数来提取泛型字段。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_bar&lt;T&gt;(mw: MyWrapper&lt;T&gt;) -&gt; T {
+    mw.bar
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>就像对待生命周期一样，impl 块在使用前需要引入类型参数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T&gt; MyWrapper&lt;T&gt; {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#泛型限定" id="泛型限定">泛型限定</a></h4>
+<p>然而，仅仅是泛型就有一个限制：函数在其泛型形式下只进行一次类型和借用检查，而不是每次实例化；这意味着泛型代码不能仅仅调用<code>T</code>的固有方法，并期望查找成功。例如，这段代码不会被编译。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn generic_add&lt;T&gt;(x: T, y: T) -&gt; T {
+    x + y
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>错误看起来像这样。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0369]: cannot add `T` to `T`
+ --&gt; src/lib.rs:2:6
+  |
+2 |     x+y
+  |     -^- T
+  |     |
+  |     T
+  |
+  = note: T might need a bound for std::ops::Add
+<span class="boring">}
+</span></code></pre></pre>
+<p>编译器很有帮助地建议我们需要某种 &quot;限定&quot;。泛型限定是特质真正发挥作用的地方。</p>
+<p><code>Add</code> 是一个标准库特质，看起来像下面这样。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Add&lt;Rhs&gt; {
+    type Output;
+    fn add(self, other: Rhs) -&gt; Self::Output;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个特质不仅是泛型的，而且它还定义了一个相关的类型，允许实现者选择加法运算的返回类型。因此，对于任何类型的<code>T</code>和<code>U</code>，如果<code>T</code>实现了<code>Add&lt;U&gt;</code>，我们可以把它们加在一起；操作的返回类型是<code>&lt;T as Add&lt;U&gt;&gt;::Output</code>。</p>
+<p>因此，我们的<code>generic_add</code>函数应该被改写成:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn generic_add&lt;T: Add&lt;T&gt;&gt;(x: T, y: T) -&gt; T::Output {
+    x + y
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>T: Add&lt;T&gt;</code>部分是一个泛型约束，断言这个函数只有在所选的<code>T</code>实现了<code>Add&lt;T&gt;</code>时才能被编译。</p>
+<p>如果我们想确保返回一个<code> T</code>，我们可以改变约束，要求 <code>Output </code>是<code> T</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn generic_add&lt;T&gt;(x: T, y: T) -&gt; T
+  where T: Add&lt;T, Output=T&gt;
+{
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意，这个限定被包含在<code>where</code>子句中，在返回类型之后。这与把它放在尖括号中是一样的，但对于复杂的限定，建议不要让它们挡住路。括号内的限定和<code>where</code>子句适用于所有其他可以有泛型限定的项，比如<code>traits</code>、<code>impls</code>、<code>structs</code>和<code>enums</code>。</p>
+<p>限定泛型可以被用来模拟各种其他行为。例如，<code>From</code> 和<code> Into</code> 特质代表无损转换，所以一个想要任何可以转换为<code> MyType</code> 的值的函数可能看起来像:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo&lt;T: Into&lt;MyType&gt;&gt;(x: T) {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后你可以在 <code>MyType</code> 上为所有可以转换为<code>MyType</code> 的 <code>T </code>实现<code> From&lt;T&gt;</code>。当 <code>U </code>实现 <code>From&lt;T&gt;</code> 时，标准库中的泛型 impl 会使 <code>T</code> 实现 <code>Into&lt;U&gt;</code>。在调用点，这看起来像一个重载函数。</p>
+<p>限定的泛型也可以被用来传递常量。想象一下，我们定义了一个特质，比如</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait DriverId {
+    const VALUE: u8;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后，这个特质可以由各种零大小的类型来实现，这些类型的存在只是为了作为类型参数传入。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct GpioDriverId;
+impl DriverId for GpioDriverId {
+    const VALUE: u8 = 0x4a;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后，需要接受一个驱动的常数id的函数可以这样编写和调用。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn get_device_addr&lt;Id: DriverId&gt;() -&gt; usize {
+  // use Id::VALUE somehow ...
+}
+// ...
+get_device_addr::&lt;GpioDriverId&gt;()
+<span class="boring">}
+</span></code></pre></pre>
+<p>类型也可以通过生命周期来绑定。绑定<code>T:'a</code>表示<code>T</code>中的每个引用都比<code>'a</code>长；每当一个通用的<code>&amp;'a T</code>被传递时，这种绑定将被隐式插入。限定可以被组合: <code>T: Clone + Default</code> 和 <code>T: Clone + 'a </code>都是有效的限定。最后，生命周期可以被其他生命期所约束：<code>'a: 'b</code>意味着生命期<code>'a</code>比<code>'b</code>长。</p>
+<h4><a class="header" href="#幻影类型" id="幻影类型">幻影类型</a></h4>
+<p>以下是 Rust 中的一个错误：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0392]: parameter `T` is never used
+ --&gt; src/lib.rs:2:12
+  |
+2 | struct Foo&lt;T&gt;;
+  |            ^ unused parameter
+  |
+  = help: consider removing `T`, referring to it in a field,
+    or using a marker such as `std::marker::PhantomData`
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust 要求使用所有的生命周期和类型参数，因为生成调用析构器的代码需要知道某个特定类型是否拥有一个<code>T</code>。这并不总是理想的，因为有时在你的类型中暴露一个<code>T</code>是很有用的，即使你不拥有它；我们可以使用编译器的建议来解决这个问题:<code>PhantomData</code>。关于如何使用它的更多信息，请参阅<a href="https://doc.rust-lang.org/std/marker/struct.PhantomData.html">类型文档</a>或相关的<a href="https://doc.rust-lang.org/nomicon/phantom-data.html">Rustonomicon条目</a>。</p>
+<h4><a class="header" href="#智能指针" id="智能指针">智能指针</a></h4>
+<p>在Rust中，&quot;智能指针&quot;是任何实现了<code>std::ops::Deref</code>的类型，即解引用操作符 。Deref的定义是这样的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Deref {
+    type Target;
+    fn deref(&amp;self) -&gt; &amp;Self::Target;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>实现Deref的类型也可以实现可变体。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait DerefMut: Deref {
+    fn deref_mut(&amp;mut self) -&gt; &amp;mut Self::Target;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>实现<code>Deref</code>特质给了一个类型T两个特征。</p>
+<p>它可以被解除引用。<code>*x成为*(x.deref())</code>或<code>*(x.deref_mut())</code>的语法糖，这取决于产生的左值是否被赋值。
+它获得了自动的deref：如果<code>x.foo</code>不是<code>T</code>的一个字段或方法，那么它将扩展为<code>x.deref().foo</code>或<code>x.deref_mut().foo</code>，同样取决于用途。
+此外，<code>deref</code>和<code>deref_mut</code>的调用是通过做一个明确的重借：<code>&amp;*x</code>和<code>&amp;mut *x</code>。</p>
+<p>智能指针的一个例子是<code>ManuallyDrop&lt;T&gt;</code>。尽管这个类型直接包含了一个<code>T</code>（而不是通过引用），它仍然被称为 &quot;智能指针&quot;，因为它可以被解引用以获得里面的<code>T</code>，而且<code>T</code>的方法可以被调用。我们将在后面看到，<code>RefCell&lt;T&gt;</code>类型也会产生智能指针。限制对一个值的访问的泛型包装类型是智能指针，这种情况并不少见。</p>
+<p>注意，因为<code>Target</code>是一个关联类型，所以一个类型只能转指到一个其他类型。</p>
+<p>虽然与智能指针不太相关，但<code>Index</code>和<code>IndexMut</code>特质类似于 <code>Deref </code>和<code>DerefMut</code>特质，它可以实现<code>x[foo]</code>下标语法。<code>Index</code>看起来像这样。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Index&lt;Idx&gt; {
+    type Output;
+    fn index(&amp;self, index: Idx) -&gt; &amp;Self::Output;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>一个索引操作，很像一个解引用的操作，从<code>x[idx]</code>扩展到<code>*(x.index(idx))</code>。注意，索引操作可以被重载，这也是通过特质重载的一个有用的例子。例如，<code>&lt;[u8] as Index&lt;usize&gt;&gt;::Output</code>是<code>u8</code>，而<code>&lt;[u8] as Index&lt;Range&gt;&gt;::Output</code>是<code>[u8]</code>。用单个索引进行索引产生一个字节，而用一个范围进行索引产生另一个切片。</p>
+<h4><a class="header" href="#闭包" id="闭包">闭包</a></h4>
+<p>闭包（有时在其他语言中被称为 &quot;lambda表达式&quot;）是捕获其环境的某些部分的函数字面，它可以被传递给其他函数以定制行为。</p>
+<p>Closures不是单纯的函数指针，因为这种捕获的状态。在C语言中，与此最相近的是一个函数，它需要一个函数指针和一些 &quot;上下文&quot;。例如，Linux的<code>pthread_create()</code>函数需要一个<code>void* (*start_routine)(void*)</code>参数和一个<code>void* arg</code>参数，<code>arg</code>代表<code>start_routine</code>需要执行的状态。以类似的方式，Rust闭包需要额外的状态来执行，只是<code>arg</code>成为<code>start_routine</code>值的一部分。不仅如此，Rust还会为<code>arg</code>合成一个定制的上下文结构，而通常情况下，程序员需要手动完成这一工作。Rust让这个习语更容易使用，因此也更常见。</p>
+<p>正如我们将看到的，Rust有许多不同的闭包ABI，其中一些与<code>pthread_create</code>的做法非常相似；在某些情况下，函数指针及其上下文甚至可以被内联。</p>
+<p>在Rust中，创建闭包的语法是<code>|arg1, arg2| expr</code>。它们可以很简单，比如<code>|(k, _)| k</code>（使用模式匹配来提取一个元组的第一个元素），也可以很复杂，使用一个块表达式来创建一个较长的函数。<code>|foo| { /* ... */ } </code>参数的类型可以选择性地指定为<code>|foo: Foo| { /* ... */ }</code>，而返回类型则是<code>|foo| -&gt; Bar { /* ... */ }</code>，尽管在几乎所有的情况下，类型推导都可以正确地计算出它们。一个不需要参数的闭包可以写成<code>|| /* ... */</code>.</p>
+<p>闭包通过引用来捕获它们的环境；该引用的可变性是通过使用来推导的。比如说。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = /* ... */;
+let y = /* ... */;
+let f = |arg| {
+    x.do_thing(arg);  // Takes &amp;self, so this implicitly produces a shared reference.
+    y.do_mut_thing(arg);  // Takes &amp;mut self, so it takes a unique reference instead.
+};
+// Note: f holds a unique borrow of y.
+let z = &amp;mut y;  // Error!
+<span class="boring">}
+</span></code></pre></pre>
+<p>上面，<code>f</code>通过共享引用捕获<code>x</code>，通过唯一引用捕获<code>y</code>。实际的闭包值<code>f</code>是一个包含捕获的合成结构体。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyClosure&lt;'a&gt; {
+    x: &amp;'a X,
+    y: &amp;'a mut Y,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>调用一个闭包，比如<code>f()</code>，会调用一个合成函数，该函数将<code>MyClosure</code>作为其第一个参数。我们可以通过移动到闭包中来代替捕获；这可以通过移动<code>|arg| { /* ... */ }</code> 语法来实现。如果将其应用于<code>f</code>，<code>MyClosure</code>将变成:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyClosure&lt;'a&gt; {
+    x: X,
+    y: Y,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rust 并不完全支持通过移动捕获和通过引用捕获的混合方式，但通过移动捕获引用的方式可以将它们混合起来。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = /* ... */;
+let y = /* ... */;
+let x_ref = &amp;x;
+let f = move |arg| {
+    x_ref.do_thing(arg);  // Capture x_ref by move, aka capture x by shared ref.
+    y.do_mut_thing(arg);  // Capture y by move.
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>对于Copy类型来说，通过移动捕获和通过引用捕获之间的区别是不重要的。</p>
+<p>为了在不同的闭包类型上实现多态性，我们使用了特殊的<code>Fn</code>、<code>FnMut</code>和<code>FnOnce</code>特性。这些代表了可以通过共享引用、唯一引用或移动来调用的函数。只捕获共享引用的闭包实现了所有三种；通过唯一引用捕获的闭包只实现了后两种，而通过移动捕获的闭包只实现了最后一种 。函数指针、函数项 和不捕获的闭包也实现了这三者，并且都可以被转换为函数指针。</p>
+<p>这些特质使用类似于函数指针的特殊语法 。例如，<code>Fn(i32) -&gt; i32</code>表示接受一个<code>i32</code>参数并返回另一个<code>i32</code>。如果所有的捕捉器都实现了 <code>Copy</code> 和 <code>Clone</code>，那么闭包也实现了 <code>Copy</code> 和 <code>Clone</code>。</p>
+<h4><a class="header" href="#作为函数参数的闭包" id="作为函数参数的闭包">作为函数参数的闭包</a></h4>
+<p>编写接受闭包参数的函数大致有两种方式：通过动态分发，或通过静态分发，这两种方式分别对性能和大小有影响。</p>
+<p><code>Fn</code>和<code>FnMut</code>闭包可以使用<code>trait</code>对象来接受。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn my_do_thing(func: &amp;dyn Fn(i32) -&gt; i32) -&gt; i32 {
+    func(MY_CONST)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这与 C 语言的方法完全相同：合成函数住在 trait 对象的 vtable 中，而捕获则在实际 trait 对象指针本身的后面。换句话说。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct DynClosure {
+    vtable: *mut Vtable,
+    captures: *mut Captures,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>当然，vtable 的调用会带来性能上的损失，但避免了泛型实例化的代码大小开销。</p>
+<p>使用泛型允许传递实现<code>Fn</code>、<code>FnMut</code>或<code>FnOnce</code>的闭包，方法是为每个函数类型专门设计调用函数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn my_do_thing&lt;F: Fn(i32) -&gt; i32&gt;(func: F) -&gt; i32 {
+    func(MY_CONST)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这将转化为对合成闭包函数的直接调用，没有任何开销，但会为传入的每个闭包重复该函数，如果在大型函数上使用，会导致很大的尺寸冲击。</p>
+<p>我们可以使用简洁的方法来声明这种类型的函数，这样可以避免声明一个类型参数。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn my_do_thing(func: impl Fn(i32) -&gt; i32) -&gt; i32 { /* ... */ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>impl Trait 可以用在函数参数位置，表示 &quot;这个参数可以是任何实现了 Trait的类型&quot;，这实际上是声明了一个匿名的 泛型参数。请注意，从技术上讲，Trait 可以是任何涉及至少一个trait的泛型限定：<code>impl Clone + Default</code>和<code>impl Clone + 'a</code>都是有效的。</p>
+<h4><a class="header" href="#作为函数返回的闭包" id="作为函数返回的闭包">作为函数返回的闭包</a></h4>
+<p>闭包类型通常是不可命名的。返回闭包的典型方式是将 impl Trait 放在返回位置。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn new_fn() -&gt; impl Fn(i32) -&gt; i32 {
+    |x| x * x
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>返回位置 impl Trait 意味着 &quot;此函数返回某个实现 Trait 的未指定类型&quot;。函数的调用者不能使用实际的类型，只能使用通过Trait提供的函数。 impl Trait也可以用来隐藏实现细节，当一个返回值只存在于实现某些trait时。</p>
+<p>返回位置 impl Trait 有一个主要的注意事项：它不能返回实现该特征的多个类型。例如，下面的代码是一个类型错误。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn new_fn(flag: bool) -&gt; impl Fn(i32) -&gt; i32 {
+    if flag {
+        |_| 0
+    } else {
+        |x| x * x
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>由此产生的编译器错误看起来像这样。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>  = note: expected type `[closure@src/lib.rs:3:5: 3:10]`
+          found closure `[closure@src/lib.rs:5:5: 5:14]`
+  = note: no two closures, even if identical, have the same type
+  = help: consider boxing your closure and/or using it as a trait object
+<span class="boring">}
+</span></code></pre></pre>
+<p>在非嵌入式环境中，解决方案（正如编译器所建议的）是在堆上分配闭包，并使用特质对象。然而，在嵌入式上下文中，分配是有限的，所以这个解决方案是不可用的。</p>
+<p>如果没有闭包捕获，返回一个函数指针可能是一个可接受的解决方案。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn new_fn(flag: bool) -&gt; fn(i32) -&gt; i32 {
+    if flag {
+        |_| 0
+    } else {
+        |x| x * x
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#作为结构体字段的闭包" id="作为结构体字段的闭包">作为结构体字段的闭包</a></h4>
+<p>如果不能轻松分配，使用闭包作为结构字段是相当有限的。两个选择是：要么让闭包类型的特质泛化（这需要通过使用该结构的所有东西来传播），要么要求闭包不捕获，而是使用函数指针。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyStruct&lt;F&gt;
+where F: Fn(i32) -&gt; i32 {
+    val: usize,
+    func: F,
+}
+// Vs.
+struct MyStruct {
+    val: usize,
+    func: fn(i32) -&gt; i32,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>一般来说，函数指针是最简单的，而且没有捕获的要求也不是特别苛刻。泛型变体往往对临时类型更有用，比如组合器。</p>
+<p>临时的结构体也可以尝试使用特质对象，但生命周期要求会有相当大的限制。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyStruct&lt;'a&gt; {
+    val: usize,
+    func: &amp;'a dyn Fn(i32) -&gt; i32,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#rust-中的错误处理-option-和-result" id="rust-中的错误处理-option-和-result">Rust 中的错误处理： Option 和 Result</a></h4>
+<p>正如我们在上面看到的，<code>Option</code> 是一个让我们指定一个 &quot;潜在的未初始化的 &quot;值的类型。虽然使用匹配表达式来处理<code>Option</code>是很常见的，但它也有一些方便的函数来缩短常见的代码序列。<code> is_none()</code>可以用来检查一个<code>Option</code>是否为空；<code>map</code>可以用来转换一个<code>Option</code>里面的值。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>opt.map(|t| t + 1)  // Increments the value inside, if there is one.
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>unwrap_or()</code>可以用来提取里面的值，有一个默认值。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>opt.unwrap_or(42)  // Get the value inside, or the value 42 if the former is unavailable.
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Option</code>的文档描述了许多其他潜在的用途和对<code>Option</code>的操作：<a href="https://doc.rust-lang.org/std/option">https://doc.rust-lang.org/std/option</a>。这个类型的文档本身有一个为 <code>Option</code> 定义的所有便利函数的完整列表：<a href="https://doc.rust-lang.org/std/option/enum.Option.html">https://doc.rust-lang.org/std/option/enum.Option.html</a>。</p>
+<p><code>Option</code>的一个关键应用是安全的可归零引用。<code>Option&lt;T&gt;</code>。Rust语言保证<code>Option&lt;&amp;T&gt;</code>在ABI层与一个可归零的指针相同 ，所以它可以安全地被传递到C代码中。这种优化也适用于至少包含一个引用的结构：<code>is_none()</code>位将被压缩到该结构的一个引用字段中。其他一些类型也有资格进行内存布局优化，比如<code>NonZeroI32</code> 。</p>
+<p><code>Result&lt;T, E&gt;</code>与<code>Option&lt;T&gt;</code>类似，但它没有 &quot;空 &quot;的状态，而是有 &quot;错误 &quot;的状态。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Result&lt;T, E&gt; {
+    Ok(T),
+    Err(E),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Result&lt;T, E&gt;</code> 表示对<code>T</code>类型的值完成了计算，但可能出了问题。<code>E</code>通常是某种枚举类型，因为<code>Rust</code>并没有为所有情况提供单一的错误类型。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum MyError {
+    DeadlineExceeded,
+    BufferExhausted(usize),
+    OtherError(ErrorCode),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>使用常见的错误枚举为你的代码定义自定义的 <code>Result </code>类型是相当普遍的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type Result&lt;T&gt; = std::result::Result&lt;T, MyError&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>在某种程度上，<code>Option&lt;T&gt;</code>只是一个<code>Result&lt;T, ()&gt;</code>，其中错误类型只是微不足道的单元元组。Rust 提供了一些函数用于它们之间的转换。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>opt.ok_or(error)  // Converts Option&lt;T&gt; into Result&lt;T, E&gt;, using the provided error if
+// the Option is empty.
+res.ok()  // Discards the error portion and returns an Option&lt;T&gt;.
+res.err()  // Discards the ok portion and returns an Option&lt;E&gt;.
+<span class="boring">}
+</span></code></pre></pre>
+<p>为其可能失败的副作用而执行的计算，如写操作，倾向于返回<code> Result&lt;(), E&gt;</code>。这与C语言不同，当函数返回<code>void</code>时，对可能失败的函数的处理是不一致的，因为<code>void</code>不是一个真实的类型。</p>
+<p>有时，由于某些特性的接口，有必要为一个不能失败的操作产生一个结果。目前的做法是使用<code>Result&lt;T, std::convert::Infallible&gt;</code>类型，它可以被匹配到如下内容。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let res: Result&lt;T, Infallible&gt; = /* ... */;
+match res {
+    Ok(t) =&gt; { /* ... */ },
+    Err(x) =&gt; match x {},
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Result 支持一种特殊的提前返回语法。当在一个返回<code>Result&lt;T, E&gt;</code>的函数中，你有一个<code>Result&lt;U, E&gt;</code>类型的值，表达式<code>res? </code>将解开 Result，如果它存在，将得到里面的 &quot;ok &quot;值，如果不存在，则立即返回错误。也就是说，<code>res?</code> 被翻译成:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match res {
+    Ok(x) =&gt; x,
+    Err(e) =&gt; return Err(e),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个问号操作符可以与方法链在一起，这样就可以写出在第一个错误时提前返回的直接代码，而无需显式控制流。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = my_thing.foo()?.bar()?.baz()?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>更多的结果操作见 <a href="https://doc.rust-lang.org/std/result/index.html">https://doc.rust-lang.org/std/result/index.html</a>。</p>
+<h4><a class="header" href="#回顾for---迭代器" id="回顾for---迭代器">回顾<code>for</code>  ： 迭代器</a></h4>
+<p>迭代器是任何实现了迭代器特质的类型，它看起来像这样。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait Iterator {
+    type Item;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>一个迭代器产生一个<code>Option&lt;Item&gt;</code>值的序列；<code>next()</code>方法允许一个迭代器推进一些内部状态，并产生序列中的下一个值。</p>
+<p>例如，一个非常简单的迭代器只是依次产生每个非负的整数值。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Counter { state: u64 }
+impl Iterator for Counter {
+    type Item = u64;
+    fn next(&amp;mut self) -&gt; Option&lt;u64&gt; {
+        let current = self.state;
+        self.state += 1;
+        Some(current)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个迭代器将永远产生数值：它总是返回<code>Some</code>。一个最终产生<code>None</code>，然后永远返回<code>None</code>的迭代器，被称为 &quot;fused &quot; 。有些迭代器在返回<code>None</code>后可能又开始返回<code>Some</code>，但大多数Rust结构将所有迭代器都视为fused的。</p>
+<p>一个相关的特质是<code>IntoIter</code>特质。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait IntoIter {
+    type Iter: Iterator;
+    fn into_iter(self) -&gt; Self::Iter;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>一个<code>IntoIter</code>类型可以被转换成一个迭代器。这个类型被用来驱动我们看到的用于迭代切片的<code>for</code>循环。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for pattern in expr {
+    // ...
+}
+// is syntactic sugar for
+let iter = expr.into_iter();
+while let Some(pattern) = iter.next() {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在切片的例子中，<code>&amp;'a [T]</code>实现了<code>IntoIter</code>，它产生了一个迭代器，依次产生切片的每个元素；<code>Range&lt;i32&gt;</code>类型（也就是语法<code>0...32</code>产生的）也实现了<code>IntoIter</code>。</p>
+<p>所有这些机制允许用户建立自己的迭代器，用于自己类型的<code>for</code>循环，或者使用现有的迭代器和迭代器组合器。迭代器特性定义了几十个提供的方法，这些方法可以用来建立更复杂的迭代器。下面是几个特别有用的组合器的例子。</p>
+<ul>
+<li><code>iter.chain(iter2)</code>。将两个具有相同 Item 类型的迭代器链在一起。当 iter 产生 None 时，第二个迭代器开始。</li>
+<li><code>iter.peekable()</code>。将迭代器转换为具有<code>.peek()</code>函数的迭代器，该函数返回对序列中下一个值的引用（但不前进）。</li>
+<li><code>iter.enumerate()</code>。将 Item 类型从<code>T</code>变为<code>（usize, T）</code>，跟踪序列中的当前索引和值。</li>
+<li><code>iter.step_by(n)</code>。改变迭代器以返回每<code>n</code>个元素。</li>
+<li><code>iter.take(n)</code>. 缩短迭代器的长度，在 fuse 前返回<code>n</code>个元素。</li>
+<li><code>iter.map(|x| /* ... */) </code>。Lazy 地对每个元素应用闭包。</li>
+<li><code>iter.filter(|x| /* ... */)</code>。对每个元素应用一个谓词；如果谓词返回错误，则被<code>next()</code>跳过。</li>
+</ul>
+<p>一些其他的特质(trait)可以增强迭代器的属性，从而实现进一步的方法。<code>ExactSizeIterator</code>迭代器产生一个已知的、固定数量的值；<code>DoubleEndedIterators</code>可以从序列的前部和后部提取元素。虽然上面的许多操作在下一个方面有朴素的实现，但当有更有效的算法时，标准库的迭代器会覆盖它们。一般来说，迭代器可以产生非常高效的代码，类似于<code>while</code>循环所发出的代码，但在使用特别复杂的组合器链时，应该注意。</p>
+<p>参见<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">https://doc.rust-lang.org/std/iter/trait.Iterator.html</a> 和 <a href="https://doc.rust-lang.org/std/iter">https://doc.rust-lang.org/std/iter</a> 以了解可用操作的全部细节。</p>
+<h4><a class="header" href="#模块-和-crate-布局" id="模块-和-crate-布局">模块 和 Crate 布局</a></h4>
+<p>每个Rust crate（从编译器的角度来看）都有一个唯一的、单一标识符的名字。这个名字被用来命名一个 crate 的符号 。core 和 std是 crate。</p>
+<p>每个crate 都以<code>lib.rs</code>或<code>main.rs</code>文件为根，这取决于它是一个库还是一个二进制文件。这个文件可以声明模块，这些模块是crate的子命名空间。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Declares a public module named `devices`. Its definition is found in
+// either `devices.rs` or `devices/mod.rs`, relative to the current file.
+pub mod devices;
+
+// Declares a private module named `tests`. Its definition is found
+// within the curly braces.
+mod tests {
+  // ...
+}
+
+// Declares a private module named `generated`. Its definition is found
+// in the given path.
+#[path = &quot;relative/path/to/file.rs&quot;]
+mod generated;
+<span class="boring">}
+</span></code></pre></pre>
+<p>模块可以任意嵌套：一个模块可以声明更多的模块。</p>
+<p>模块中的符号可以通过路径引用：<code>std::mem::drop</code>指的是<code>crate std::mem</code>模块中的符号<code>drop</code>。<code>crate::devices::gpio:Gpio</code>指的是当前crate的<code>devices::gpio</code>模块中的符号<code>Gpio</code>。</p>
+<p><code>use</code>项可以用来在当前范围内创建符号别名。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Pull in std::mem::drop, aliased to `drop`.
+use std::mem::drop;
+
+// Pull in the module std::mem, so we can now write `mem::drop` for `std::mem::drop`.
+use std::mem;
+
+// Pull in both size_of and drop:
+use std::mem::{size_of, drop};
+
+// Pull in all symbols in `std::mem`, including `drop`. Should typically be best
+// avoided, for readability.
+use std::mem::*;
+
+// Pull in all symbols from the parent module:
+use super::*;
+
+// Pull in a symbol from a submodule (synonymous with using the full
+// path starting with `crate`).
+use self::devices::Gpio;
+
+// Pull in a name, but rename it.
+use std::io::Result as IoResult;
+
+// Pull in a trait to enable its methods, but without pulling its name
+// into scope.
+use std::io::Write as _;
+<span class="boring">}
+</span></code></pre></pre>
+<p>请注意，这是受可见性限制的。默认情况下，所有符号都是 &quot;私有 &quot;的，只在当前模块和它的子模块中可见。这可以明确地拼成<code>pub(self)</code>。一个符号可以用<code>pub(super)</code>限制在父模块和子模块中，也可以用<code>pub(crate)</code>限制在当前的<code>crate</code>中。最后，一个符号可以用<code>pub(in that::path)</code>限制在一个特定的路径上。<code>pub</code>简单地说就是 &quot;完全是公开的&quot;。</p>
+<p>几乎所有的项都可以用可见性标记，除了<code> impl</code>。用可见性标记一个模块会限制其中所有项目的可见性。一个<code>pub(crate)</code>模块中的<code>pub</code>符号就是<code>pub(crate)</code>。 <code>use</code>语句也可以用可见性标记：这将导致导入的符号成为模块的一部分。例如，<code>std</code>中充满了<code>pub use core::Symbol;</code>的实例，以使<code>core</code>符号能够通过<code>std</code>被导入。</p>
+<p>甚至<code>use</code>项也可以被标记为可见性。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// mod my_mod
+pub use std::mem::size_of;
+<span class="boring">}
+</span></code></pre></pre>
+<p>这意味着其他模块现在可以通过<code>my_mod::size_of</code>访问符号<code>size_of</code>，有效地重新导出了该符号。许多基本的核心类型也是这样通过<code>std crate</code>访问的。</p>
+<p>Rust 没有头文件，也没有声明顺序的限制；一个crate 内的模块可以自由地形成循环的依赖关系，因为它们不是编译的单位，只是命名空间。Rust crate的命名空间是封闭的：在一个crate被完全编译后，没有其他符号可以被添加到其中。</p>
+<h4><a class="header" href="#内部可变性" id="内部可变性">内部可变性</a></h4>
+<p>内部可变性是绕过Rust的别名规则的一个借用检查逃生舱。</p>
+<p>通常情况下，Rust要求你在改变一个值之前静态地证明你对它有唯一的访问权。<code>UnsafeCell&lt;T&gt;</code>是一种特殊的、被编译器所认可的 类型，它包含一个单一的<code>T</code>，并且有一个方法<code>fn get(&amp;self) -&gt; *mut T</code>。当你在运行时可以保证对<code>UnsafeCell</code>的共享引用实际上是唯一的，由<code>get()</code>返回的原始指针可以被转换为唯一引用。这使得安全地突变代码成为可能，在运行时，已知代码是唯一的。当然，直接使用<code>UnsafeCell</code>是非常不安全的，它的存在是为了形成其他抽象的基础。</p>
+<p>有两种安全暴露内部可变性的常见策略：<code>Cell</code> 方式 和<code>RefCell</code>方式。</p>
+<p>Cell 方式根本就没有创建一个唯一的引用：相反，它在任何时候都持有一个有效的<code>T</code>，并提供一个交换原语来取出<code>T</code>并留下另一个。这样一来，就不需要执行别名规则了，因为没有引用实际指向那个<code>T</code>。</p>
+<p>RefCell 方式则在运行时进行基本的借用检查。除了持有一个<code>T</code>之外，RefCell 还持有一个未完成的共享引用的数量的计数器（或者一个未完成的唯一引用的哨位值）。<code>try_borrow()</code>和<code>try_borrow_mut()</code>方法动态地检查这种借用是否有效（分别是没有未完成的唯一引用，或者根本没有未完成的引用），并返回一个<code>Result</code>来表示成功或失败。在成功的情况下，返回值是一个包裹着引用的智能指针，其析构器将减少原始 RefCell 中的共享/唯一引用计数。换句话说，RefCell 就像一个单线程的读写<code>mutex</code>，没有原子性的代价。</p>
+<p>其他的抽象可以建立在<code>UnsafeCell</code>之上，用其他的策略来维持别名不变性，但它们最终会类似于Cell或RefCell中的一个。</p>
+<p>内部可变性也是常量和静态的主要区别之一。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>static S: MyCell&lt;u32&gt; = MyCell::new(0);
+const C: MyCell&lt;u32&gt; = MyCell::new(0);
+
+S.set(1);
+S.get();  // value = 1, because `set` modified the memory location.
+C.set(1);
+C.get()  // value = 0, because `set` modified an inlined copy.
+<span class="boring">}
+</span></code></pre></pre>
+<p>注意，<code>S</code>后面的内存改变了，所以必须在<code>.data</code>或<code>.bss</code>部分分配。这说明了UnsafeCell的另一个特性：它导致本来被声明为不可变的数据被分配为可变的。</p>
+<p>更多细节请参见<a href="https://doc.rust-lang.org/std/cell/index.html">https://doc.rust-lang.org/std/cell/index.html</a>；就像所有与别名相关的主题一样，它需要仔细关注细节，本节还远远没有穷尽。</p>
+<h4><a class="header" href="#unsafe-rust" id="unsafe-rust">Unsafe Rust</a></h4>
+<p>Unsafe Rust是Rust的一种方言，由关键词<code>unsafe</code>来表示：unsafe block，unsafel 函数，unsafe trait。重要的是，所有这些行为都需要说出关键词<code>unsafe</code>，这样就可以在代码审查中很容易地发现它们。在unsafe 块中的代码向读者表明，程序员已经检查了微妙的安全保证，而编译器自己是无法做到的。</p>
+<p>Unsafe 的Rust从根本上说是通过 &quot;关闭 &quot;编译器通常执行的某些检查来实现的，只要在 <code>usnafe { /* ... */ }</code>中，Unsafe Rust可以做的事情是Safe Rust不能做的。</p>
+<ul>
+<li>调用 Unsafe 的函数。</li>
+<li>对原始指针的解引用。</li>
+<li>通过一个可变静态来改变全局状态。</li>
+<li>读取Union 字段。</li>
+<li>调用asm!宏。</li>
+</ul>
+<p>此外，Unsafe的 impl 可以实现 unsafe trait，但不需要在 unsafe 块内。</p>
+<p>典型的参考文献是<a href="https://doc.rust-lang.org/stable/nomicon/">Rustonomicon</a> ，这是一份非规范性文件，描述了Unafe Rust的常见用途。它是嵌入式编程的必读文件（主要是前半部分）。它包含了正确和不正确使用Unsafe Rust的详细例子，以及关于何时调用Unsafe Rust 的指导。</p>
+<p>在本文中，提到了Unsafe Rust，主要是围绕调用unsafe 函数和引用原始指针，这大概是Unsafe Rust能做的所有普通Rust不能做的。有了这些能力就有了责任。Unsafe 的Rust对未定义行为并不安全，它可以让机器处于正常安全的Rust所允许的行为会触发未定义行为的状态。一般来说，有几条经验法则是有用的。</p>
+<ul>
+<li>每个<code>unsafe fn</code>都应该在文档中声明，它假定调用者会坚持哪些不变性，以及它将使机器处于什么状态。例如，<code>&lt;[T]&gt;::get_unchecked(n)</code>忽略了索引操作的边界检查，而由调用者来维护它。</li>
+<li>每当 unsafe 的代码调用到一个unsafe 的函数时，它必须确保在安全的代码中观察不到违反的不变性，这些不变性可能会触发未定义行为。例如，如果我们有一个类型保持着<code>len&gt;0</code>的不变性，而我们在 unsafe 块中暂时将其设置为<code>0</code>，那么在对该类型调用任何安全方法之前，必须将其恢复为<code>&gt;0</code>。</li>
+<li>Unsafe 的代码应该保持在绝对最小的范围内，并且用安全的接口来包装，通过静态类型系统保证或运行时检查来断言不变量。每一行 unsafe 的代码都是浪费了Rust保证的工程成本的地方。</li>
+</ul>
+<p>换句话说，Safe Rust能够自由地假设Rust对别名、所有权和值的表示的保证在任何时候都是成立的。这种假设是普遍存在的：不仅编译器使用它来积极优化代码的速度和大小，而且其他库代码，如包装类型的析构器，也这样假设。Unsafe Rust 负责维护这一核心保证。在某种程度上，Unsafe Rust 负责保护 Safe Rust。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_9/lifetime-smart-ptr.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_9/visualize_crate_graph.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_9/lifetime-smart-ptr.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_9/visualize_crate_graph.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+        <script type="text/javascript" src="../smart-anchor.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
