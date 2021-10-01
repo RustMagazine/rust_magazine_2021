@@ -1,7 +1,7 @@
 # 密码协议算法与Rust生态
 
 - 作者： Sylvain Kerkour 
-- 译者： 王江同（华为）
+- 译者： 王江桐（华为）
 
 > 原文： [https://kerkour.com/blog/rust-cryptography-ecosystem/](https://kerkour.com/blog/rust-cryptography-ecosystem/)
 

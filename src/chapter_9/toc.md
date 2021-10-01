@@ -23,7 +23,7 @@
 
 - [Datenlord | 重新思考 Rust Async - 如何实现高性能 I/O](./rethink-async.md)
 - [Phala Network | 在Intel SGX环境下实现Rust原生std支持](./intel_sgx_std.md) 
-- [如何用Rust做Android UI渲染](./rust-android-ui.md)
+- [字节 | 如何用Rust做Android UI渲染](./rust-android-ui.md)
 
 ## 学习园地
 

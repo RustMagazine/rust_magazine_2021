@@ -1,6 +1,6 @@
 # Rust 生命周期和智能指针
 
-作者： 王江同（华为）
+作者： 王江桐（华为）
 
 本文是对 [第407篇推文](https://this-week-in-rust.org/blog/2021/09/08/this-week-in-rust-407/)，以及[第408篇推文](https://this-week-in-rust.org/blog/2021/09/15/this-week-in-rust-408/)推荐博文中有关于 Rus生命周期与智能指针内容的扩展和梳理。
 
