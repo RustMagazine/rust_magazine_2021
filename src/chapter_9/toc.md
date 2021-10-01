@@ -1,4 +1,4 @@
-# 九月刊（September）| 待发布
+# 九月刊（September）
 
 ## 发刊通告
 
