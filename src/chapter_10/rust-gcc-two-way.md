@@ -1,4 +1,4 @@
-# Rust 和 GCC 整合的两条路
+# 【Linux Plumbers 大会总结】Rust 和 GCC 整合的两种方式
 
 > 原文 [https://lwn.net/SubscriberLink/871283/c437c1364397e70e/](https://lwn.net/SubscriberLink/871283/c437c1364397e70e/)
 >
