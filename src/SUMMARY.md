@@ -270,7 +270,19 @@
 
 
 
-- [十月刊（October）| 待发布]()
+- [十月刊（October）| 待发布](./chapter_10/toc.md)
+    - [发刊通告](./chapter_10/announce.md)
+    - [官方动态](./chapter_10/lang.md)
+    - [社区热点](./chapter_10/hots.md)
+    - [活动回顾](./chapter_10/events.md)
+    - [本月招聘](./chapter_10/jobs.md)
+    - [RustChinaConf 2021 动态](./chapter_10/rust_china_conf_2021.md)
+    - [学习资源](./chapter_10/learn.md)
+    - [GitHub 趋势榜](./chapter_10/github_trending.md)
+    - [推荐项目 ｜ 基础工具库](./chapter_10/tool_libs.md)
+    - [推荐项目 |  框架引擎](./chapter_10/frameworks.md)
+
+
 - [十一月刊（November）| 待发布]()
 - [十二月刊（December）| 待发布]()
 
