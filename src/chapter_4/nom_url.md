@@ -1,6 +1,16 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: use nom to parse url
+
+---
+
 # 使用 nom 解析 url
 
-#### [原文](https://blog.logrocket.com/parsing-in-rust-with-nom/) 
+编辑：张汉东
+
+---
+
+> [原文](https://blog.logrocket.com/parsing-in-rust-with-nom/) 
 
 </br>
 

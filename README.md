@@ -11,6 +11,10 @@
 - [GitHub Page 阅读](https://rustmagazine.github.io/rust_magazine_2021/)
 - [语雀阅读](https://www.yuque.com/chaosbot/rust_magazine_2021)
 
+### PDF 下载
+
+2021 上半年集合 PDF： [下载](https://github.com/RustMagazine/rust_magazine_2021/releases/tag/0.5)
+
 ### 如何订阅本刊 RSS ?
 
 1. 订阅地址：[https://rustmagazine.github.io/rust_magazine_2021/rss.xml](https://rustmagazine.github.io/rust_magazine_2021/rss.xml)

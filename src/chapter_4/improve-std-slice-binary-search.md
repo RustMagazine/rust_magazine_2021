@@ -1,3 +1,8 @@
+---
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Optimize binary_search of Rust standard library
+
+---
 
 # 优化 Rust 标准库的 binary_search
 

@@ -1,14 +1,16 @@
 ---
-pub_date: Wed Apr 21 2021 17:24:55 GMT
-description: Implement typo checker by rustc source code
+pub_date: Thu, 30 Apr 2021 18:00:00 GMT
+description: Use rustc source code to implement misspelling candidate word suggestions
 
 ---
 
 # 用 rustc 源码实现拼写错误候选词建议
 
-作者: 吴翱翔@pymongo
+作者: 吴翱翔@pymongo / 后期编辑：张汉东
 
 > 原文: [用 rustc 源码实现拼写错误候选词建议](https://pymongo.github.io/#/2021/04/rustc_edit_distance_and_typo_checker.md)
+
+---
 
 最近想给一个聊天应用的聊天消息输入框加上拼写错误检查，毕竟 word, keynote 等涉及文本输入的软件都有拼写错误检查和纠错功能
 
@@ -91,7 +93,7 @@ edit_distance 是个动态规划算法或字符串算法的经典问题，果然
 
 我拿 rustc 源码的 lev_distance 函数在 leetcode上通过 edit_distance 一题
 
-![](rustc_edit_distance_leetcode_submit.png)
+![](image/rustc_edit/rustc_edit_distance_and_typo_checker_1.png)
 
 用 strsim 的相关函数也能通过编辑距离这题，但是运行耗时 4ms 会比 rustc 源码运行耗时 0ms 慢点
 
@@ -186,7 +188,7 @@ nm: sanitizer_netbsd.cpp.o: no symbols
 
 我相信我编译过很多像 rust-analyzer, racer 等静态分析的库，说不定电脑本地的 cargo 缓存就有 rustc 源码的 lev_distance.rs
 
-![](kfind_lev_distance.png)
+![](image/rustc_edit/rustc_edit_distance_and_typo_checker_2.png)
 
 果然发现 rustc-ap-rustc_span 这个 crate 就有 lev_distance 函数
 
