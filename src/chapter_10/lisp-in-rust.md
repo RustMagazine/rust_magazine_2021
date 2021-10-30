@@ -480,7 +480,7 @@ data.insert(
 
 要实现一个更接近 lisp 的语言，我们还需要引入 `def` 和 `if` 这两关键字了。这两关键字的作用见下表：
 
-![](./images/2021/risp-if-def-desc.png)
+![](./image/lispInRust/risp-if-def-desc.png)
 
 _图片来自[知乎专栏](https://zhuanlan.zhihu.com/p/28989326)_
 
