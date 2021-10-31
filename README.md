@@ -21,32 +21,6 @@
 
 2. 复制订阅地址到你最喜欢的订阅工具开始订阅。
 
----
-
-### 编辑小组
-
-- 张汉东（Chaos）
-- [李冬杰](https://www.yuque.com/lidongjies)
-- 柴杰
-- [苏胤榕（DaviRain）](https://github.com/DaviRain-Su)
-- 聂雷海（大海）
-- 严炳（ryan）
-- [橘梦](https://github.com/wangshengfei/)
-- 高宪凤
-- 杨楚天（yct21）
-- [Matrixtang](https://github.com/MATRIXKOO)
-- m1zzx2 
-- [NiZerin](https://github.com/NiZerin) 
-
-- <其他成员招募位> 招募条件见下方
-
-### 编辑招募条件
-
-- 热爱 Rust 语言
-- 有时间参与编辑文章
-- 有学习的心态
-
-有意者请联系。
 
 ### 发刊渠道
 
