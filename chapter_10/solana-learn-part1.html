@@ -1,0 +1,727 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>【区块链】Solana 开发笔记 Part 1 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/open-source-mental-health.html"><strong aria-hidden="true">8.7.</strong> 开源与心理健康</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.8.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.9.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.10.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.11.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.12.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.13.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.14.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.15.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.16.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.18.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.22.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.23.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.24.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/rabits.html"><strong aria-hidden="true">8.25.</strong> Rbatis ORM 2.0 | 零开销编译时动态SQL的探索</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.26.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.27.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.28.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_7/toc.html"><strong aria-hidden="true">9.</strong> 七月刊（July）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_7/announce.html"><strong aria-hidden="true">9.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_7/lang.html"><strong aria-hidden="true">9.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_7/hots.html"><strong aria-hidden="true">9.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_7/events.html"><strong aria-hidden="true">9.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_7/jobs.html"><strong aria-hidden="true">9.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_7/rust_china_conf_2021.html"><strong aria-hidden="true">9.6.</strong> RustChinaConf 2021 议题征集开放申请</a></li><li class="chapter-item "><a href="../chapter_7/paper-rust-vs-c.html"><strong aria-hidden="true">9.7.</strong> 论文导读 | 性能与生产力 : Rust vs C </a></li><li class="chapter-item "><a href="../chapter_7/hw-rust-name-mangling.html"><strong aria-hidden="true">9.8.</strong> 华为 | Rust 调用约定和名称修饰规则介绍</a></li><li class="chapter-item "><a href="../chapter_7/ant-futures-compat.html"><strong aria-hidden="true">9.9.</strong> 蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用</a></li><li class="chapter-item "><a href="../chapter_7/lark-rust-wasm-sqlite.html"><strong aria-hidden="true">9.10.</strong> 字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM </a></li><li class="chapter-item "><a href="../chapter_7/rust-epoll-rdma-part2.html"><strong aria-hidden="true">9.11.</strong> Datenlord | Rust实现RDMA异步编程（二）</a></li><li class="chapter-item "><a href="../chapter_7/how-we-improved-the-performance-of-our-rust-app.html"><strong aria-hidden="true">9.12.</strong> Zellij 的性能优化</a></li><li class="chapter-item "><a href="../chapter_7/learn.html"><strong aria-hidden="true">9.13.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_7/rusts-standard-library-traits.html"><strong aria-hidden="true">9.14.</strong> 【完整】Rust 标准库 Trait 指南</a></li><li class="chapter-item "><a href="../chapter_7/coercion_in_rust.html"><strong aria-hidden="true">9.15.</strong> Rust 中的隐式类型转换</a></li><li class="chapter-item "><a href="../chapter_7/tokio-task-scheduler.html"><strong aria-hidden="true">9.16.</strong> Tokio Internals 之 任务调度</a></li><li class="chapter-item "><a href="../chapter_7/about-rust-features.html"><strong aria-hidden="true">9.17.</strong> 为什么你不应该沉迷于 Rust 的“特性”</a></li><li class="chapter-item "><a href="../chapter_7/rust-no-std.html"><strong aria-hidden="true">9.18.</strong> Rust no-std 工程实践</a></li><li class="chapter-item "><a href="../chapter_7/dynamic_analyzing_tools.html"><strong aria-hidden="true">9.19.</strong> Rust 内存错误调试和动态分析工具分享</a></li><li class="chapter-item "><a href="../chapter_7/macroquad_game.html"><strong aria-hidden="true">9.20.</strong> 使用Macroquad在Android设备上发布游戏</a></li><li class="chapter-item "><a href="../chapter_7/trampoline-kernel.html"><strong aria-hidden="true">9.21.</strong> 跨空间跳板内核</a></li><li class="chapter-item "><a href="../chapter_7/trait-upcasting-part1.html"><strong aria-hidden="true">9.22.</strong> Trait Upcasting 系列 ｜ Part I</a></li><li class="chapter-item "><a href="../chapter_7/github_trending.html"><strong aria-hidden="true">9.23.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_7/tool_libs.html"><strong aria-hidden="true">9.24.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_7/frameworks.html"><strong aria-hidden="true">9.25.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_8/toc.html"><strong aria-hidden="true">10.</strong> 八月刊（August）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_8/announce.html"><strong aria-hidden="true">10.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_8/lang.html"><strong aria-hidden="true">10.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_8/hots.html"><strong aria-hidden="true">10.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_8/events.html"><strong aria-hidden="true">10.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_8/jobs.html"><strong aria-hidden="true">10.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_8/rust_china_conf_2021.html"><strong aria-hidden="true">10.6.</strong> RustChinaConf 2021 正式启动</a></li><li class="chapter-item "><a href="../chapter_8/paper-rudra.html"><strong aria-hidden="true">10.7.</strong> 论文导读 | Rudra : 查找 Rust 生态系统中的内存安全 Bug </a></li><li class="chapter-item "><a href="../chapter_8/hw-rust-simd.html"><strong aria-hidden="true">10.8.</strong> 华为 | Rust语言中SIMD计算加速指令的使用</a></li><li class="chapter-item "><a href="../chapter_8/ant-futures-compat.html"><strong aria-hidden="true">10.9.</strong> 蚂蚁集团 | Trait Object 还是 Virtual Method Table</a></li><li class="chapter-item "><a href="../chapter_8/rust-lockfree-part2.html"><strong aria-hidden="true">10.10.</strong> Datenlord | Rust 无锁编程之Crossbeam Epoch算法解析</a></li><li class="chapter-item "><a href="../chapter_8/rust-k8s.html"><strong aria-hidden="true">10.11.</strong> DatenLord | Rust 实现K8S调度扩展</a></li><li class="chapter-item "><a href="../chapter_8/aws-lambda-rust-wasm-serverless.html"><strong aria-hidden="true">10.12.</strong> SecondState | AWS Lambda 中的 Rust 与 WebAssembly Serverless 函数</a></li><li class="chapter-item "><a href="../chapter_8/bianlifeng_embedded_rust.html"><strong aria-hidden="true">10.13.</strong> 便利蜂 | 门店网络与 Rust 落地实践</a></li><li class="chapter-item "><a href="../chapter_8/learn.html"><strong aria-hidden="true">10.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_8/rust-tips.html"><strong aria-hidden="true">10.15.</strong> Rust 技巧篇</a></li><li class="chapter-item "><a href="../chapter_8/reqwest-middleware.html"><strong aria-hidden="true">10.16.</strong> 为 reqwest 增加中间件支持</a></li><li class="chapter-item "><a href="../chapter_8/gui-framework-ingredients.html"><strong aria-hidden="true">10.17.</strong> 想用 Rust 编写 GUI 框架吗？</a></li><li class="chapter-item "><a href="../chapter_8/what-is-trait-upcasting.html"><strong aria-hidden="true">10.18.</strong> Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？</a></li><li class="chapter-item "><a href="../chapter_8/trait-upcasting-part2.html"><strong aria-hidden="true">10.19.</strong> Trait Upcasting 系列 ｜ Part II</a></li><li class="chapter-item "><a href="../chapter_8/github_trending.html"><strong aria-hidden="true">10.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_8/tool_libs.html"><strong aria-hidden="true">10.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_8/frameworks.html"><strong aria-hidden="true">10.22.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_9/toc.html"><strong aria-hidden="true">11.</strong> 九月刊（September）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_9/announce.html"><strong aria-hidden="true">11.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_9/lang.html"><strong aria-hidden="true">11.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_9/hots.html"><strong aria-hidden="true">11.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_9/events.html"><strong aria-hidden="true">11.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_9/jobs.html"><strong aria-hidden="true">11.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_9/rustconf.html"><strong aria-hidden="true">11.6.</strong> 官方 RustConf 2021 盘点</a></li><li class="chapter-item "><a href="../chapter_9/rust_china_conf_2021.html"><strong aria-hidden="true">11.7.</strong> RustChinaConf 2021 动态</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.8.</strong> 将 TensorFlow 模型移植到 Pure Rust 的开发成本有多高？</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.9.</strong> Rust 2021 有哪些新功能</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.10.</strong> 周期性服务发现</a></li><li class="chapter-item "><a href="../chapter_9/rethink-async.html"><strong aria-hidden="true">11.11.</strong> Datenlord | 重新思考 Rust Async - 如何实现高性能 I/O</a></li><li class="chapter-item "><a href="../chapter_9/intel_sgx_std.html"><strong aria-hidden="true">11.12.</strong> Phala Network | 在Intel SGX环境下实现Rust原生std支持</a></li><li class="chapter-item "><a href="../chapter_9/rust-android-ui.html"><strong aria-hidden="true">11.13.</strong> 如何用Rust做Android UI渲染</a></li><li class="chapter-item "><a href="../chapter_9/learn.html"><strong aria-hidden="true">11.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_9/lifetime-smart-ptr.html"><strong aria-hidden="true">11.15.</strong> Rust 生命周期与智能指针</a></li><li class="chapter-item "><a href="../chapter_9/rust-for-embedded-c.html"><strong aria-hidden="true">11.16.</strong> 为 嵌入式 C  程序员编写的 Rust 指南</a></li><li class="chapter-item "><a href="../chapter_9/visualize_crate_graph.html"><strong aria-hidden="true">11.17.</strong> 可视化项目成员包的调用关系</a></li><li class="chapter-item "><a href="../chapter_9/poem-openapi.html"><strong aria-hidden="true">11.18.</strong> 基于 Poem 的 OpenAPI 服务端框架</a></li><li class="chapter-item "><a href="../chapter_9/rust-cryptography-ecosystem.html"><strong aria-hidden="true">11.19.</strong> 密码协议算法与Rust生态</a></li><li class="chapter-item "><a href="../chapter_9/github_trending.html"><strong aria-hidden="true">11.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_9/tool_libs.html"><strong aria-hidden="true">11.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_9/frameworks.html"><strong aria-hidden="true">11.22.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_9/rust-security-part3.html"><strong aria-hidden="true">11.23.</strong> Rust生态安全漏洞总结系列 | Part 3</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_10/toc.html"><strong aria-hidden="true">12.</strong> 十月刊（October）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_10/announce.html"><strong aria-hidden="true">12.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_10/lang.html"><strong aria-hidden="true">12.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_10/hots.html"><strong aria-hidden="true">12.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_10/events.html"><strong aria-hidden="true">12.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_10/jobs.html"><strong aria-hidden="true">12.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_10/rust-foundation.html"><strong aria-hidden="true">12.6.</strong> 聚焦Rust基金会新成员 | 为什么要加入 Rust 基金会 </a></li><li class="chapter-item "><a href="../chapter_10/rust-gcc-two-way.html"><strong aria-hidden="true">12.7.</strong> 【Linux Plumbers 大会总结】Rust 和 GCC 整合的两种方式</a></li><li class="chapter-item "><a href="../chapter_10/p99conf.html"><strong aria-hidden="true">12.8.</strong> P99 Conf Talk 汇总 |  Rust 在高性能低延迟系统中的应用</a></li><li class="chapter-item "><a href="../chapter_10/foreign_journal_review.html"><strong aria-hidden="true">12.9.</strong> 知名项目进展报告</a></li><li class="chapter-item "><a href="../chapter_10/async-trait.html"><strong aria-hidden="true">12.10.</strong> Rust Async trait 更新与多线程</a></li><li class="chapter-item "><a href="../chapter_10/rust-mem-safety.html"><strong aria-hidden="true">12.11.</strong> Rust调研与内存安全</a></li><li class="chapter-item "><a href="../chapter_10/mocks-and-tokio.html"><strong aria-hidden="true">12.12.</strong> 对外输出 Mocks 接口 和 Tokio 的高延展性服务器设计</a></li><li class="chapter-item "><a href="../chapter_10/rdma-memory-management-in-rust.html"><strong aria-hidden="true">12.13.</strong> Datenlord |在 Rust 中管理 RDMA 内存 </a></li><li class="chapter-item "><a href="../chapter_10/dapr.html"><strong aria-hidden="true">12.14.</strong> SecondState | Dapr的一个轻量安全可移植且高性能的Runtime</a></li><li class="chapter-item "><a href="../chapter_10/dropbox.html"><strong aria-hidden="true">12.15.</strong> Dropbox | 为什么我们要为 Capture 构建自定义 Rust 库</a></li><li class="chapter-item "><a href="../chapter_10/learn.html"><strong aria-hidden="true">12.16.</strong> 学习资源</a></li><li class="chapter-item expanded "><a href="../chapter_10/solana-learn-part1.html" class="active"><strong aria-hidden="true">12.17.</strong> 【区块链】Solana 开发笔记 Part 1</a></li><li class="chapter-item "><a href="../chapter_10/bad-practice.html"><strong aria-hidden="true">12.18.</strong> Rust 中常见的新手错误和不良习惯</a></li><li class="chapter-item "><a href="../chapter_10/rustc_plugin_custom_lints.html"><strong aria-hidden="true">12.19.</strong> 基于编译器插件定制 clippy lint</a></li><li class="chapter-item "><a href="../chapter_10/seaorm.html"><strong aria-hidden="true">12.20.</strong> Rust 生态观察｜ SeaORM: 要做 Rust 版本的 ActiveRecord  </a></li><li class="chapter-item "><a href="../chapter_10/delicate.html"><strong aria-hidden="true">12.21.</strong> Delicate 为什么从 actix-web 迁移到 poem</a></li><li class="chapter-item "><a href="../chapter_10/github_trending.html"><strong aria-hidden="true">12.22.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_10/tool_libs.html"><strong aria-hidden="true">12.23.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_10/rust-security-part4.html"><strong aria-hidden="true">12.24.</strong> Rust生态安全漏洞总结系列 | Part 4</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#区块链solana-开发笔记-part-1" id="区块链solana-开发笔记-part-1">【区块链】Solana 开发笔记 Part 1</a></h1>
+<p>作者：朱春雷</p>
+<blockquote>
+<p>笔者注：因近期笔者工作需要，开始接触 Solana 链上程序开发。本系列文章是笔者的学习笔记，既是为了备忘，也是希望得到 Solana 开发者的指点与交流。本系列文章将默认读者已经掌握 Rust 的基础语法，故不涉及对 Rust 语法细节的解释。如果读者对 Rust 基础语法还不熟练的话，可参阅相关资料或购买本文下方推荐的 Rust 入门书籍 《Rust 编程入门、实战与进阶》学习。
+​</p>
+</blockquote>
+<hr />
+<h2><a class="header" href="#11-solana-简介" id="11-solana-简介">1.1 Solana 简介</a></h2>
+<p>Solana 是一个高性能、无许可的底层公链，专注于在不牺牲去中心化或安全性的前提下提供可扩展性。Solana 主网于 2020 年一季度上线，目前主网的全球节点超过 800 个，TPS 最高可达 6.5 万，出块时间约 400 毫秒。
+​
+Solana 的共识算法采用 PoH（历史证明），其核心是一个去中心化时钟，该时钟旨在解决缺乏单个可信赖时间源在分布式网络中的时间问题。PoH 免除了在节点网络中广播时间戳的需求，从而提高整个网络的效率。
+​</p>
+<h3><a class="header" href="#111-链上程序" id="111-链上程序">1.1.1 链上程序</a></h3>
+<p>Solana 的智能合约叫做链上程序（On-chain Program），Solana 官方提供了 Rust 和 C 的 SDK 来支持开发链上程序。链上程序的开发工作流如图 1-1 所示，开发者可以使用工具将程序编译成 Berkley Packet Filter (BPF) 字节码（文件以 .so 为扩展名)，再部署到 Solana 链上，通过 Sealevel 并行智能合约运行时去执行智能合约的逻辑。此外，基于 Solana JSON RPC API，官方提供了诸多 SDK 用于客户端与 Solana 链上数据交互。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/321202/1634866923480-525df4b2-b3b5-4235-a08e-0ae4544ae715.jpeg#clientId=uc7fd3735-e2ca-4&amp;from=ui&amp;id=Ow7nd&amp;margin=%5Bobject%20Object%5D&amp;name=640.jpg&amp;originHeight=698&amp;originWidth=1080&amp;originalType=binary&amp;ratio=1&amp;size=19886&amp;status=done&amp;style=none&amp;taskId=u3ef50700-6cc2-4f44-b4d1-4c54f41af6a" alt="640.jpg" />
+图 1-1 链上程序开发工作流
+​</p>
+<h3><a class="header" href="#112-账户模型" id="112-账户模型">1.1.2 账户模型</a></h3>
+<p>与以太坊类似，Solana 也是基于账户模型的区块链。通过将任意状态存储于链上账户并同步复制给集群中的所有节点，可以创建复杂而强大的去中心化应用程序。
+​</p>
+<p>Solana 提供了一套不同于以太坊的账户模型，账户定义的字段如表 1-1 所示。Solana 的账户可以分为可执行账户和不可执行账户。</p>
+<ul>
+<li>可执行账户：存储不可变的数据，主要用于存储程序的 BPF 字节码。</li>
+<li>不可执行账户：存储可变的数据，主要用于存储程序的状态。</li>
+</ul>
+<p>表 1-1 账户定义字段</p>
+<table><thead><tr><th>字段</th><th>描述</th></tr></thead><tbody>
+<tr><td>lamports</td><td>账户余额</td></tr>
+<tr><td>owner</td><td>账户所有者</td></tr>
+<tr><td>executable</td><td>是否为可执行账户</td></tr>
+<tr><td>data</td><td>账户存储的数据</td></tr>
+<tr><td>rent_epoch</td><td>Solana链上程序的部署是按其账户大小进行定期收费的，如果账户无法支付租金，系统将清除该账号</td></tr>
+</tbody></table>
+<p>我们知道以太坊上每个智能合约的代码和状态都存储在同一个账户中，而 Solana 链上程序是只读或无状态的，即程序的账户（可执行账户）只存储 BPF 字节码，不存储任何状态，程序会把状态存储在其他独立的账户（不可执行账户）中。为了区分某个账户是用作哪个程序的状态存储，每个账户都指定了一个程序作为其所有者。程序可以读取其不作为所有者的账户中的状态，但只有作为所有者的程序才能修改账户中的状态，任何其他程序所做的修改都会被还原并导致交易失败。
+​</p>
+<p>更多关于账户模型的资料可以参见官方文档：<a href="https://solana.wiki/zh-cn/docs/account-model/">https://solana.wiki/zh-cn/docs/account-model/</a></p>
+<h2><a class="header" href="#12-搭建编程环境" id="12-搭建编程环境">1.2 搭建编程环境</a></h2>
+<p>在开始 Solana 链上程序开发之前，需要先安装和配置相关的编程环境。首先请正确安装 Node、NPM 和 Rust 的最新稳定版本，下面来安装 Solana CLI 并配置相关环境。
+​</p>
+<h3><a class="header" href="#121-安装-solana-cli" id="121-安装-solana-cli">1.2.1 安装 Solana CLI</a></h3>
+<p>Solana CLI 是与 Solana 集群进行交互的命令行管理工具，包含节点程序 solana-validator、密钥对生成工具 solana-keygen，以及合约开发工具 cargo-build-bpf、cargo-test-bpf 等。</p>
+<p>在终端运行以下命令，可完成 Solana CLI 最新稳定版的下载与安装。</p>
+<pre><code class="language-bash">sh -c &quot;$(curl -sSfL https://release.solana.com/stable/install)&quot;
+</code></pre>
+<p>如果安装成功，会出现以下内容。</p>
+<pre><code>downloading stable installer
+  ✨ stable commit e9bef425 initialized
+Adding export PATH=&quot;~/.local/share/solana/install/active_release/bin:$PATH&quot; to ~/.profile
+Adding export PATH=&quot;~/.local/share/solana/install/active_release/bin:$PATH&quot; to ~/.bash_profile
+
+Close and reopen your terminal to apply the PATH changes or run the following in your existing shell:
+  export PATH=&quot;~/.local/share/solana/install/active_release/bin:$PATH&quot;
+</code></pre>
+<p>Solana CLI 的所有命令行工具都安装在 ~/.local/share/solana/install/active_release/bin 中，并会自动将该路径加入 ~/.profile 和 ~/.bash_profile 文件的 PATH 环境变量。</p>
+<p>运行以下命令，检查 PATH 环境变量是否已正确设置。</p>
+<pre><code class="language-bash">solana --version
+
+// solana-cli 1.7.18 (src:e9bef425; feat:140464022)
+</code></pre>
+<p>如果能显示 solana-cli 的版本号、版本哈希等信息，代表环境变量设置成功。如果未看到这些信息，请检查相关文件中 PATH 环境变量设置的路径是否正确。</p>
+<p>如果已安装过 Solana CLI，想升级到最新版本，可在终端运行以下命令。</p>
+<pre><code class="language-bash">solana-install update
+</code></pre>
+<p>​</p>
+<h3><a class="header" href="#122-配置-solana-cli" id="122-配置-solana-cli">1.2.2 配置 Solana CLI</a></h3>
+<h4><a class="header" href="#1-连接到集群" id="1-连接到集群">1. 连接到集群</a></h4>
+<p>Solana 的集群有本地集群（localhost）和公开集群。根据不同的用途，公开集群又分为开发者网络（devnet）、测试网（testnet）和主网（mainnet-beta）。</p>
+<ul>
+<li>devnet 是适用于开发者的集群，开发者可获得 SOL token 的空投，但这个 SOL token 不具有真实价值，仅限测试使用。devnet 的 RPC 链接是 <a href="https://api.devnet.solana.com">https://api.devnet.solana.com</a> 。</li>
+<li>testnet 是用于测试最新功能的集群，如网络性能、稳定性和验证程序行为等。同样可获得 SOL token 的空投，但也仅限测试使用。testnet 的 RPC 链接是 <a href="https://api.testnet.solana.com">https://api.testnet.solana.com</a> 。</li>
+<li>mainnet-beta 是主网集群，在 Mainnet Beta 上发行的 SOL token 具有真实价值。mainnet-beta 的 RPC 链接是 <a href="https://api.mainnet-beta.solana.com">https://api.mainnet-beta.solana.com</a> 。</li>
+</ul>
+<p>运行以下命令，根据实际需要来选择集群。</p>
+<pre><code class="language-bash">// 选择localhost集群
+solana config set --url localhost
+
+// 选择devnet集群
+solana config set --url devnet
+</code></pre>
+<h4><a class="header" href="#2-创建账户" id="2-创建账户">2. 创建账户</a></h4>
+<p>如果是第一次使用 Solana CLI，需要先创建一个账户。运行以下命令，根据操作提示可以设置一个 BIP39 规范的密码，此密码用来增强助记词的安全性，当然也可以为空。生成新的账户后，密钥对会被自动写入 ~/.config/solana/id.json 文件中。需要注意的是，这种存储密钥对的方式是不安全的，仅限开发测试使用。</p>
+<pre><code class="language-bash">solana-keygen new
+</code></pre>
+<p>要查看当前这个账户的公钥，运行以下命令。</p>
+<pre><code class="language-bash">solana-keygen pubkey
+</code></pre>
+<p>当前如果是在 devnet 集群，该账户的余额为 0 SOL，可以运行以下命令查询余额。</p>
+<pre><code class="language-bash">solana balance
+</code></pre>
+<p>在 devnet 上申请 SOL 空投，运行以下命令后再次查询当前账户的余额，会发现余额为 2 SOL。</p>
+<pre><code class="language-bash">solana airdrop 2
+</code></pre>
+<h2><a class="header" href="#13-第一个-solana-项目hello-world" id="13-第一个-solana-项目hello-world">1.3 第一个 Solana 项目——Hello World</a></h2>
+<p>Hello World 是一个官方演示项目，展示了如何使用 Rust 和 C 开发链上程序，并使用 Solana CLI 来构建与部署，以及使用 Solana JavaScript SDK 与链上程序进行交互。</p>
+<h3><a class="header" href="#131-hello-world-源码解读" id="131-hello-world-源码解读">1.3.1 Hello World 源码解读</a></h3>
+<p>example-helloworld 项目的目录结构如下所示，其中 program-rust 目录下是 Rust 开发的程序源代码，client 目录下是客户端的源代码。</p>
+<pre><code>example-helloworld
+|
++-- src
+|  |
+|  +-- client
+|  |  |
+|  |  +-- hello_world.ts
+|  |  |
+|  |  +-- main.ts
+|  |  |
+|  |  +-- utils.ts
+|  |
+|  +-- program-rust
+|  |  |
+|  |  +-- src
+|  |  |  |
+|  |  |  +-- lib.rs
+|  |  |
+|  |  +-- tests
+|  |  |  |
+|  |  |  +-- lib.rs
+|  |  |
+|  |  +-- Cargo.toml
+|  |  |
+|  |  +-- Xargo.toml
+|
++-- .gitignore
+|
++-- package.json
+|
++-- tsconfig.json
+</code></pre>
+<h4><a class="header" href="#1-链上程序源码解读" id="1-链上程序源码解读">1. 链上程序源码解读</a></h4>
+<p>program-rust/src/lib.rs 是链上程序的核心代码，如代码清单 1-1 所示，实现了将程序被调用次数存储在链上账户中。</p>
+<p>第 1 行代码将 borsh::BorshDeserialize 和 borsh::BorshSerialize 引入本地作用域，用于序列化和反序列化数据。第 2~9 行代码将 Solana Rust SDK 的模块引入本地作用域，使用 Rust 编写程序都需要这个 SDK。
+​</p>
+<p>第 13~16 行代码定义了 GreetingAccount 结构体作为存储在账户中的状态类型，里面有一个 u32 类型的字段 counter，用于记录程序被有效调用的次数。
+​</p>
+<p>第 19 行代码 entrypoint 声明了 process_instruction 函数是程序入口，每个程序都有一个唯一的入口。第 22~26 行代码是 process_instruction 函数签名，它要接收 3 个参数：</p>
+<ul>
+<li>program_id：链上程序的部署地址，在这里也就是 helloworld 程序账户的公钥。</li>
+<li>accounts：与程序交互的账户列表，当前程序会使用账户列表中的账户来存储状态或修改账户中的数据。如果当前程序不是某个账户的所有者，那就无法使用该账户存储状态或修改数据，当前交易会执行失败。</li>
+<li>instruction_data：指令数据，比如要转账的代币数量、转账地址等。</li>
+</ul>
+<p>process_instruction 函数的返回值类型是 ProgramResult，ProgramResult 类型的定义如下所示。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub type ProgramResult = Result&lt;(), ProgramError&gt;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>当程序的逻辑执行成功时返回 Ok(())，否则将 ProgramError 错误返回。ProgramError 是自定义错误的枚举类型，其中包含程序可能失败的各种原因。
+​</p>
+<p>第 27 行代码使用 msg! 宏将字符串输出到日志中，方便观察业务的执行逻辑和调试信息。第 30 行代码通过 iter 方法将账户列表转换为迭代器，以安全的方式获取账户地址。第 33 行代码使用了 ? 操作符，如果迭代器中有账户地址，会将账户地址与变量 account 绑定。如果迭代器中没有账户地址，? 操作符会让程序执行失败。
+​</p>
+<p>第 36~39 行代码判断存储状态的账户所有者是否是当前程序。只有账户所有者才能修改数据，否则输出日志并返回。
+​</p>
+<p>第 42~44 行代码先对账户中的数据进行反序列化操作，再将 counter 加一，最后将其序列化后存储到账户中。</p>
+<p>代码清单 1-1 helloworld 链上程序</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use borsh::{BorshDeserialize, BorshSerialize};
+use solana_program::{
+    account_info::{next_account_info, AccountInfo},
+    entrypoint,
+    entrypoint::ProgramResult,
+    msg,
+    program_error::ProgramError,
+    pubkey::Pubkey,
+};
+
+/// Define the type of state stored in accounts
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct GreetingAccount {
+    /// number of greetings
+    pub counter: u32,
+}
+
+// Declare and export the program's entrypoint
+entrypoint!(process_instruction);
+
+// Program entrypoint's implementation
+pub fn process_instruction(
+    program_id: &amp;Pubkey, // Public key of the account the hello world program was loaded into
+    accounts: &amp;[AccountInfo], // The account to say hello to
+    _instruction_data: &amp;[u8], // Ignored, all helloworld instructions are hellos
+) -&gt; ProgramResult {
+    msg!(&quot;Hello World Rust program entrypoint&quot;);
+
+    // Iterating accounts is safer then indexing
+    let accounts_iter = &amp;mut accounts.iter();
+
+    // Get the account to say hello to
+    let account = next_account_info(accounts_iter)?;
+
+    // The account must be owned by the program in order to modify its data
+    if account.owner != program_id {
+        msg!(&quot;Greeted account does not have the correct program id&quot;);
+        return Err(ProgramError::IncorrectProgramId);
+    }
+
+    // Increment and store the number of times the account has been greeted
+    let mut greeting_account = GreetingAccount::try_from_slice(&amp;account.data.borrow())?;
+    greeting_account.counter += 1;
+    greeting_account.serialize(&amp;mut &amp;mut account.data.borrow_mut()[..])?;
+
+    msg!(&quot;Greeted {} time(s)!&quot;, greeting_account.counter);
+
+    Ok(())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#2-客户端程序源码解读" id="2-客户端程序源码解读">2. 客户端程序源码解读</a></h4>
+<p>要想测试链上程序，我们必须通过 Solana JSON RPC API 去和链上程序进行交互。example-helloworld 项目提供的客户端用 Typescript 编写，使用了 web3.js 库这个 Solana JavaScript SDK。</p>
+<p>在 client 目录下，客户端执行的入口是 main.ts 文件，它按特定的顺序执行任务，每个任务的业务逻辑代码在 hello_world.ts 文件。
+​</p>
+<p>首先，客户端调用 establishConnection 函数与集群建立连接。</p>
+<pre><code class="language-typescript">export async function establishConnection(): Promise&lt;void&gt; {
+  const rpcUrl = await getRpcUrl();
+  connection = new Connection(rpcUrl, 'confirmed');
+  const version = await connection.getVersion();
+  console.log('Connection to cluster established:', rpcUrl, version);
+}
+</code></pre>
+<p>接着，客户端调用 establishPayer 函数来确保有一个有支付能力的账户。</p>
+<pre><code class="language-typescript">export async function establishPayer(): Promise&lt;void&gt; {
+  let fees = 0;
+  if (!payer) {
+    const {feeCalculator} = await connection.getRecentBlockhash();
+
+    // Calculate the cost to fund the greeter account
+    fees += await connection.getMinimumBalanceForRentExemption(GREETING_SIZE);
+
+    // Calculate the cost of sending transactions
+    fees += feeCalculator.lamportsPerSignature * 100; // wag
+
+    try {
+      // Get payer from cli config
+      payer = await getPayer();
+    } catch (err) {
+      // Fund a new payer via airdrop
+      payer = await newAccountWithLamports(connection, fees);
+    }
+  }
+
+  const lamports = await connection.getBalance(payer.publicKey);
+  if (lamports &lt; fees) {
+    // This should only happen when using cli config keypair
+    const sig = await connection.requestAirdrop(
+      payer.publicKey,
+      fees - lamports,
+    );
+    await connection.confirmTransaction(sig);
+  }
+
+  console.log(
+    'Using account',
+    payer.publicKey.toBase58(),
+    'containing',
+    lamports / LAMPORTS_PER_SOL,
+    'SOL to pay for fees',
+  );
+}
+</code></pre>
+<p>然后，客户端调用 checkProgram 函数从 src/program-rust/target/deploy/helloworld-keypair.json 中加载已部署程序的密钥对（此操作前需先构建链上程序，详见 1.3.2 节），并使用密钥对的公钥来获取程序账户。如果程序不存在，客户端会报错并停止执行。如果程序存在，将创建一个新账户来存储状态，并以该程序作为新账户所有者。这里新账户存储的状态，就是程序被调用的次数。</p>
+<pre><code class="language-typescript">export async function checkProgram(): Promise&lt;void&gt; {
+  // Read program id from keypair file
+  try {
+    const programKeypair = await createKeypairFromFile(PROGRAM_KEYPAIR_PATH);
+    programId = programKeypair.publicKey;
+  } catch (err) {
+    const errMsg = (err as Error).message;
+    throw new Error(
+      `Failed to read program keypair at '${PROGRAM_KEYPAIR_PATH}' due to error: ${errMsg}.`,
+    );
+  }
+
+  // Check if the program has been deployed
+  const programInfo = await connection.getAccountInfo(programId);
+  if (programInfo === null) {
+    if (fs.existsSync(PROGRAM_SO_PATH)) {
+      throw new Error(
+        'Program needs to be deployed with `solana program deploy dist/program/helloworld.so`',
+      );
+    } else {
+      throw new Error('Program needs to be built and deployed');
+    }
+  } else if (!programInfo.executable) {
+    throw new Error(`Program is not executable`);
+  }
+  console.log(`Using program ${programId.toBase58()}`);
+
+  // Derive the address (public key) of a greeting account from the program so that it's easy to find later.
+  const GREETING_SEED = 'hello';
+  greetedPubkey = await PublicKey.createWithSeed(
+    payer.publicKey,
+    GREETING_SEED,
+    programId,
+  );
+
+  // Check if the greeting account has already been created
+  const greetedAccount = await connection.getAccountInfo(greetedPubkey);
+  if (greetedAccount === null) {
+    console.log(
+      'Creating account',
+      greetedPubkey.toBase58(),
+      'to say hello to',
+    );
+    const lamports = await connection.getMinimumBalanceForRentExemption(
+      GREETING_SIZE,
+    );
+
+    const transaction = new Transaction().add(
+      SystemProgram.createAccountWithSeed({
+        fromPubkey: payer.publicKey,
+        basePubkey: payer.publicKey,
+        seed: GREETING_SEED,
+        newAccountPubkey: greetedPubkey,
+        lamports,
+        space: GREETING_SIZE,
+        programId,
+      }),
+    );
+    await sendAndConfirmTransaction(connection, transaction, [payer]);
+  }
+}
+</code></pre>
+<p>客户端再调用 sayHello 函数向链上程序发送交易。一个交易可以包含一个或多个不同的指令，当前该交易包含了一个指令，指令中带有要调用链上程序的 Program Id 以及客户端要交互的账户地址。需要注意的是，如果交易中包含多个不同的指令，其中有一个指令执行失败，那么所有指令所做的操作都会被还原。</p>
+<pre><code class="language-typescript">export async function sayHello(): Promise&lt;void&gt; {
+  console.log('Saying hello to', greetedPubkey.toBase58());
+  const instruction = new TransactionInstruction({
+    keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true}],
+    programId,
+    data: Buffer.alloc(0), // All instructions are hellos
+  });
+  await sendAndConfirmTransaction(
+    connection,
+    new Transaction().add(instruction),
+    [payer],
+  );
+}
+</code></pre>
+<p>最后，客户端调用 reportGreetings 函数访问账户数据，查询链上程序被有效调用的次数。</p>
+<pre><code class="language-typescript">export async function reportGreetings(): Promise&lt;void&gt; {
+  const accountInfo = await connection.getAccountInfo(greetedPubkey);
+  if (accountInfo === null) {
+    throw 'Error: cannot find the greeted account';
+  }
+  const greeting = borsh.deserialize(
+    GreetingSchema,
+    GreetingAccount,
+    accountInfo.data,
+  );
+  console.log(
+    greetedPubkey.toBase58(),
+    'has been greeted',
+    greeting.counter,
+    'time(s)',
+  );
+}
+</code></pre>
+<h3><a class="header" href="#132-hello-world-构建与部署" id="132-hello-world-构建与部署">1.3.2 Hello World 构建与部署</a></h3>
+<h4><a class="header" href="#1-创建项目" id="1-创建项目">1. 创建项目</a></h4>
+<p>使用 git clone 命令下载 example-helloworld 项目。</p>
+<pre><code class="language-bash">git clone https://github.com/solana-labs/example-helloworld.git
+cd example-helloworld
+</code></pre>
+<h4><a class="header" href="#2-构建链上程序" id="2-构建链上程序">2. 构建链上程序</a></h4>
+<p>运行以下命令，在 program-rust 目录下构建链上程序。</p>
+<pre><code class="language-bash">cd src/program-rust/
+cargo build-bpf
+</code></pre>
+<p>构建完成后，src/program-rust/target/deploy 目录下的 helloworld.so 就是可在 Solana 集群部署的链上程序的 BPF 字节码文件。
+​</p>
+<h4><a class="header" href="#3-启动本地集群" id="3-启动本地集群">3. 启动本地集群</a></h4>
+<p>当前项目在本地集群部署运行，因此首先选择 localhost 集群，运行以下命令。</p>
+<pre><code class="language-bash">solana config set --url localhost
+</code></pre>
+<p>本地集群设置成功，会出现以下内容。</p>
+<pre><code>Config File: ~/.config/solana/cli/config.yml
+RPC URL: http://localhost:8899
+WebSocket URL: ws://localhost:8900/ (computed)
+Keypair Path: ~/.config/solana/id.json
+Commitment: confirmed
+</code></pre>
+<p>再运行以下命令，启动 localhost 集群。</p>
+<pre><code class="language-bash">solana-test-validator
+</code></pre>
+<p>看到以下内容，代表本地集群已成功启动。</p>
+<pre><code>Ledger location: test-ledger
+Log: test-ledger/validator.log
+Identity: A4HuRgmABNCe94epY2mU7q6WqEHCo2B9iBFE5Yphiw5u
+Genesis Hash: 96TF9n1uuyFv4rAKECffA61jLrgYjMjNRZ3hJpP6HSr7
+Version: 1.7.18
+Shred Version: 13390
+Gossip Address: 127.0.0.1:1024
+TPU Address: 127.0.0.1:1027
+JSON RPC URL: http://127.0.0.1:8899
+⠉ 00:00:42 | Processed Slot: 45430 | Confirmed Slot: 45430 | Finalized Slot: 45398 | Snapshot Slot: 45300 | Transactions: 45452 | ◎499.772930000
+</code></pre>
+<p>​</p>
+<h4><a class="header" href="#4-部署链上程序" id="4-部署链上程序">4. 部署链上程序</a></h4>
+<p>运行以下命令，在 localhost 集群部署链上程序。</p>
+<pre><code class="language-bash">solana program deploy target/deploy/helloworld.so
+
+// Program Id: 6AArMEBpFhhtU2mBnEMEPeEH7xkhfUwPseUeG4fhLYto
+</code></pre>
+<p>链上程序部署成功会返回 Program Id，它类似于以太坊智能合约的地址。
+​</p>
+<h4><a class="header" href="#5-调用链上程序" id="5-调用链上程序">5. 调用链上程序</a></h4>
+<p>helloworld 已成功部署，可以与它进行交互了！example-helloworld 项目提供了一个简单的客户端，在运行客户端之前先安装依赖软件包。</p>
+<pre><code class="language-bash">npm install
+</code></pre>
+<p>由于我们调整了链上程序的构建方式，没有使用该项目默认的 npm run build:program-rust 命令，因此需要修改 client 目录下的 hello_world.ts 文件，将第 48 行代码定义的变量 PROGRAM_PATH 的路径由“../../dist/program”改为“../program-rust/target/deploy”。 再运行以下命令，启动客户端去调用链上程序。</p>
+<pre><code class="language-bash">npm run start
+</code></pre>
+<p>客户端成功调用链上程序，输出内容如下所示。如果再次运行客户端，第 10 行所显示的次数会加一。至此，我们已经成功在 Solana 集群部署链上程序并与之交互了。</p>
+<pre><code>&gt; helloworld@0.0.1 start
+&gt; ts-node src/client/main.ts
+
+Let's say hello to a Solana account...
+Connection to cluster established: http://localhost:8899 { 'feature-set': 3179062686, 'solana-core': '1.6.23' }
+Using account 4xRm2FYmRB8WdxJk6nXicVMgsPnsxChEnpQwFDGwdcSS containing 499999999.93435186 SOL to pay for fees
+Using program 6AArMEBpFhhtU2mBnEMEPeEH7xkhfUwPseUeG4fhLYto
+Creating account Eq7bcsg5p6AaYiPnfiia99ESsuq4B4jYpVbWZhQ94Zvy to say hello to
+Saying hello to Eq7bcsg5p6AaYiPnfiia99ESsuq4B4jYpVbWZhQ94Zvy
+Eq7bcsg5p6AaYiPnfiia99ESsuq4B4jYpVbWZhQ94Zvy has been greeted 1 time(s)
+Success
+</code></pre>
+<p>如果没有输出期望值，请首先确认是否已正确启动了本地集群，构建并部署好了链上程序。此外，可以运行以下命令查看程序日志，日志包括程序日志消息以及程序失败信息。</p>
+<pre><code class="language-bash">solana logs
+</code></pre>
+<p>包含程序失败信息的日志如下所示，检查日志找出程序失败的原因。</p>
+<pre><code>Transaction executed in slot 5621:
+Signature: 4pya5iyvNfAZj9sVWHzByrxdKB84uA5sCxLceBwr9UyuETX2QwnKg56MgBKWSM4breVRzHmpb1EZQXFPPmJnEtsJ
+Status: Error processing Instruction 0: Program failed to complete
+Log Messages:
+  Program G5bbS1ipWzqQhekkiCLn6u7Y1jJdnGK85ceSYLx2kKbA invoke [1]
+  Program log: Hello World Rust program entrypoint
+  Program G5bbS1ipWzqQhekkiCLn6u7Y1jJdnGK85ceSYLx2kKbA consumed 200000 of 200000 compute units
+  Program failed to complete: exceeded maximum number of instructions allowed (200000) at instruction #334
+  Program G5bbS1ipWzqQhekkiCLn6u7Y1jJdnGK85ceSYLx2kKbA failed: Program failed to complete
+</code></pre>
+<h2><a class="header" href="#14-本章小节" id="14-本章小节">1.4 本章小节</a></h2>
+<p>本章对 Solana 区块链的基本概念进行了简要介绍，Solana 的智能合约叫做链上程序。在开始 Solana 链上程序开发之前，需要先安装和配置相关的编程环境，我们着重介绍了 Solana CLI 的安装和配置。
+​</p>
+<p>Hello World 是一个官方演示项目，通过对这个项目源码的解读，我们了解了如何使用 Rust 开发链上程序，并使用 Solana CLI 来构建与部署，以及使用 Solana JavaScript SDK 与链上程序进行交互。</p>
+<hr />
+<p>推荐 Rust 入门学习书籍《Rust 编程入门、实战与进阶》，该书详细讲解 Rust 核心语法，注重编码能力训练，将数据结构、算法与 Rust 编程结合，精选 39 道 LeetCode 高频算法面试真题。需要购买书籍的朋友，可以访问当当网（<a href="http://product.dangdang.com/29233731.html">购书链接</a>）或扫描下方二维码。
+<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388665960-17c7443d-e53d-401e-b4a1-ad939814a83b.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=960&amp;id=u3608c71f&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=1920&amp;originWidth=1080&amp;originalType=binary&amp;ratio=1&amp;size=1527952&amp;status=done&amp;style=none&amp;taskId=u74674526-7e34-43b7-8884-2c2552c4625&amp;width=540" alt="image.png" /></p>
+<hr />
+<p><strong>扫码关注公众号</strong>
+<img src="https://cdn.nlark.com/yuque/0/2021/png/321202/1622388723600-27f235d4-66a7-41f3-81e6-5d8fd19a8ea8.png#clientId=u20ed317f-89af-4&amp;from=paste&amp;height=129&amp;id=ua3d2f650&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=258&amp;originWidth=258&amp;originalType=binary&amp;ratio=1&amp;size=41167&amp;status=done&amp;style=none&amp;taskId=u60fd4199-cb7e-4821-ab2d-c5b4e7290fd&amp;width=129" alt="image.png" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_10/learn.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_10/bad-practice.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_10/learn.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_10/bad-practice.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+        <script type="text/javascript" src="../smart-anchor.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
