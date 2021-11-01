@@ -4,7 +4,7 @@
 
 ---
 
-## # Linus Torvalds ：Rust 为 Linux 的发展带来更多乐趣，乐趣是Linux 长青的基石
+## Linus Torvalds ：Rust 为 Linux 的发展带来更多乐趣，乐趣是Linux 长青的基石
 
 > 原文： [Linus Torvalds on Community, Rust and Linux’s Longevity](https://thenewstack.io/linus-torvalds-on-community-rust-and-linuxs-longevity/)
 
