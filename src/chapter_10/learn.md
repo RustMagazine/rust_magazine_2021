@@ -4,6 +4,105 @@
 
 ---
 
+## toml-edit 优化之旅
+
+`toml_edit` 是一个保留格式（在修改用户的Cargo.toml时，能保留格式）的TOML crate，允许用户修改.toml文件。
+
+优化之前
+
+```
+toml_edit 8.7us 271us
+toml_edit::easy 20.7us 634us
+```
+
+优化之后
+
+```
+toml_edit 4.0us 149us
+toml_edit::easy 5.0us 179us
+```
+
+上下文：
+
+该作者是 cargo-edit 的核心贡献者，现在正致力于将 cargo-add 合并到 cargo 的工作中，其中对 toml 的修改要用到 toml_edit 这个库，他们已经把相关的工作都做完了，只剩下最后都性能优化。这篇文章就是 作者对 toml_edit 性能优化的记录。
+
+性能之旅：
+
+1. 要确定你的优化目标。 作者之前并不确定可以从 toml_edit 中可以挤出多少性能，但是Alex Crichton帮助他确定了这个目标，他特别指出Cargo的解析器，是一个影响用户的瓶颈，这个结果是在`toml-rs` 分析时展示出来的。因此，toml_edit 至少应该和 `toml_rs`有同样的速度，他们还想进一步优化`toml_rs`。
+2.  依靠性能之书（https://nnethercote.github.io/perf-book/profiling.html）来帮助开始profile，选择了callgrind和kcachegrind作为可视化工具。
+3. 使用 [kstring](https://github.com/cobalt-org/kstring)，来优化字符串key。 
+
+默认情况下，`kstring` ：
+
+- 内联字符串存储总共 16个字节
+-  max_inline 特性选择存储总共 23 个字节，对于小字符串来说会很慢
+-  以`Box<str>`的形式存储堆字符串
+-  使用`Arc<str>`，它用Ref-counting的成本代替了分配的成本
+
+4. 要注意第三方解析便利性背后的成本
+
+解析器组合器，如`nom`或`combined`，使语法转换为代码变得容易，但也很容易隐藏大量的成本：
+
+- 不必要的分配
+- 缺少批处理
+
+他优化解析器的 [https://github.com/ordian/toml_edit/pull/209 ](https://github.com/ordian/toml_edit/pull/209 )
+
+5.  将字符和字符串的操作换成按字节操作，并且根据情况在某些安全的情况下，使用 uncheck 的方法来避免 utf-8 校验。 pr 在这里 [https://github.com/ordian/toml_edit/pull/219/](https://github.com/ordian/toml_edit/pull/219/)
+
+6. 良好错误处理背后的代价。
+
+toml_edit 之前的解析器用的是 combine，它的特点是错误处理非常细致，将检查每个选择并合并错误。它优先考虑在字符串中最早出现的错误，并合并发生在相同点的错误。这样做的问题是，即使没有面向用户的错误发生，错误处理的逻辑也会让你付出代价。
+
+作者要优化他还有很多选择，比如放弃 combine，使用nom或者手写parse  (性能优化效果将最大)，但是他选择继续使用 combine，但是用 dispatch! （可以迅速实施改变）来代替map。这样的选择算是小步迈进。PR: [https://github.com/ordian/toml_edit/pull/222 ](https://github.com/ordian/toml_edit/pull/222 )
+
+7. serde的隐藏成本
+
+serde对toml文件中每个字符串进行解析，看它是否可能是一个日期。没有Datetime的文件必须为它的存在付出代价。所以作者将使用一个专门的结构体来优化这种情况。pr：[https://github.com/ordian/toml_edit/pull/226 ](https://github.com/ordian/toml_edit/pull/226 )
+
+默认情况下，serde检查每个未标记的枚举的变体，看它是否有效。作者使用 手动实现 serde::Deserialize  trait 来优化这种情况，而避免 derive 自动实现。pr ：[https://github.com/ordian/toml_edit/pull/227](https://github.com/ordian/toml_edit/pull/227)
+
+有哪些优化是失败的呢？
+
+不是所有的修复都是成功的。不幸的是，失败的尝试通常不会被很好地记录下来，因为它们可能不会被记录到PR中。
+
+这里作者凭记忆罗列了一些失败的尝试：
+
+1. 批处理优化，收益比较小
+2. 想进一步优化KString，反而变慢了
+3. 尝试将 combine 迁移到 nom，目前正在努力
+
+最后，发现了这句话： 感谢 Futurewei 对这项工作的赞助 
+
+[https://epage.github.io/blog/2021/09/optimizing-toml-edit/](https://epage.github.io/blog/2021/09/optimizing-toml-edit/)
+
+## 在 Rust 项目中编写 dockerfile 的建议
+
+当你写一个Rust项目时，也许你想建立一个小型的运行容器（基于alpine和distroless/cc-debian），然后你可以在 k8s 或其他你喜欢的地方运行它。
+
+文章中介绍了步骤以及最终的三个示例：
+
+1. [https://windsoilder.github.io/writing_dockerfile_in_rust_project.html#6-final-dockerfile](https://windsoilder.github.io/writing_dockerfile_in_rust_project.html#6-final-dockerfile)
+2. [https://windsoilder.github.io/writing_dockerfile_in_rust_project.html#7-additional-dockerfile](https://windsoilder.github.io/writing_dockerfile_in_rust_project.html#7-additional-dockerfile)
+3. [https://windsoilder.github.io/writing_dockerfile_in_rust_project.html#not-vendor-based-dockerfile-based-on-cargo-chef](https://windsoilder.github.io/writing_dockerfile_in_rust_project.html#not-vendor-based-dockerfile-based-on-cargo-chef)
+
+
+[https://windsoilder.github.io/writing_dockerfile_in_rust_project.html](https://windsoilder.github.io/writing_dockerfile_in_rust_project.html)
+
+## 面向有多门语言编程经验的开发者的 Rust 入门书
+
+[https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html](https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html)
+
+## 使用Rust编写嵌入式固件
+
+本文探讨了Rust在嵌入式上的能力，并为用它编写固件提供了一个起点。本文包含关于嵌入式编程和Rust的介绍性信息。本文描述为什么你应该考虑在新项目中使用Rust，提供常用库的概述，并提供涵盖最重要部分的代码示例。其中的一些主题与官方的Rust嵌入式和Rust嵌入式发现书籍有重叠。
+
+这些都是很好的入门资源，并为刚接触Rust的有经验的嵌入式工程师和刚接触嵌入式的人分别进行了详细介绍。本文的重点是实用固件的架构，并介绍了在这些书之后发布的工具和库。
+
+作者使用Rust编写了水监测器固件，并计划在未来的设备中也这样做，因为它的内存安全和人体工程学。
+
+[https://www.anyleaf.org/blog/writing-embedded-firmware-using-rust](https://www.anyleaf.org/blog/writing-embedded-firmware-using-rust)
+
 ## 使用 Rust Cloudflare Workers 构建 ServerLess
 
 文章带我们了解怎么用 Rust 编写 Cloudflare Workers ServerLess 代码。

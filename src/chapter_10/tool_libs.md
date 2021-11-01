@@ -4,6 +4,23 @@
 
 ---
 
+## SwapQueue： 一个高度优化和轻量级的`crossbeam::deque`替代品
+
+一个无锁线程拥有的队列，其中任务由线程安全窃取者通过缓冲区交换而不是任务弹出来完成。
+
+只为通过缓冲区交换来获取整个队列这一单一的使用情况而设计。通过放弃弹出单个任务的能力，可以做出一个更适合于完全批处理的数据结构。
+
+[https://github.com/Bajix/swap-queue-rs](https://github.com/Bajix/swap-queue-rs)
+
+## Goose：Rust 实现的负载测试框架
+
+Goose是受Locust启发的Rust负载测试工具。用户行为是用标准的 Rust 代码定义的。负载测试是依赖于Goose 库的应用程序。Web 请求是使用Reqwest HTTP 客户端发出的。
+
+Goose 每 CPU 核产生的流量至少是 Locust 的 11 倍，对于更复杂的负载测试（例如使用第三方库抓取表单内容的负载测试），收益甚至更大。
+
+- [https://github.com/tag1consulting/goose](https://github.com/tag1consulting/goose)
+- [Goose Book](https://book.goose.rs/)
+
 ## Flowistry：强大的 Rust IDE 工具
 
 `Flowistry` 是一个 `VSCode` 扩展，可帮助您理解 Rust 程序。`Flowistry` 使用数据流分析和指针分析在比类型所能提供的更深层次上分析 Rust 程序（参见 `rust-analyzer`）。

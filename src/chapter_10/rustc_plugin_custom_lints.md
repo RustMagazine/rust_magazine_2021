@@ -4,6 +4,8 @@
 
 > 原文: [基于编译器插件定制 clippy lint](https://pymongo.github.io/#/2021/10/rustc_plugin_custom_lints.md)
 
+---
+
 本文基于 Rust 月刊先前文章 [华为 | 如何定制 Rust Clippy](https://rustmagazine.github.io/rust_magazine_2021/chapter_6/custom-clippy.html)
 
 上述文章中提供了改 clippy 源码或 dylint 库的两个开发定制 lint 的方案，

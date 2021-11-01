@@ -1,4 +1,4 @@
-#  【趣文】Rust 公案 （Rust Koans）
+#  【趣文】Rust 公案 ｜ 新锈与大师的对话
 
 > Rust 公案（Koans）是来自 Rust 官方用户论坛中 [DanielKeep](https://users.rust-lang.org/u/DanielKeep)  在 2015 年编写的一[系列趣文](https://users.rust-lang.org/t/rust-koans/2408)。
 >

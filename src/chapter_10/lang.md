@@ -87,7 +87,9 @@ Rust 基金会官网成员聚焦栏目，会定期采访一些新加入基金会
 - [泛型关联类型](https://rust-lang.github.io/generic-associated-types-initiative/updates/2021-oct.html)，目前也有一些进展。
 - 其他
 
-[https://blog.rust-lang.org/inside-rust/2021/10/08/Lang-team-Oct-update.html](https://blog.rust-lang.org/inside-rust/2021/10/08/Lang-team-Oct-update.html)
+- [https://blog.rust-lang.org/inside-rust/2021/10/08/Lang-team-Oct-update.html](https://blog.rust-lang.org/inside-rust/2021/10/08/Lang-team-Oct-update.html)
+
+
 
 ## Rust 生态的可持续增长和可见性
 
