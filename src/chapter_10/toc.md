@@ -39,6 +39,7 @@
 
 ### 原理与工程实践
 
+- [用 Rust 实现 Lisp 解释器](./lisp-in-rust.md)
 - [基于编译器插件定制 clippy lint](./rustc_plugin_custom_lints.md)
 
 ## 开源项目巡礼
