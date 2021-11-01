@@ -1,0 +1,989 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>用 Rust 实现 Lisp 解释器 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/open-source-mental-health.html"><strong aria-hidden="true">8.7.</strong> 开源与心理健康</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.8.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.9.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.10.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.11.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.12.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.13.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.14.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.15.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.16.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.18.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.22.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.23.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.24.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/rabits.html"><strong aria-hidden="true">8.25.</strong> Rbatis ORM 2.0 | 零开销编译时动态SQL的探索</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.26.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.27.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.28.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_7/toc.html"><strong aria-hidden="true">9.</strong> 七月刊（July）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_7/announce.html"><strong aria-hidden="true">9.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_7/lang.html"><strong aria-hidden="true">9.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_7/hots.html"><strong aria-hidden="true">9.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_7/events.html"><strong aria-hidden="true">9.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_7/jobs.html"><strong aria-hidden="true">9.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_7/rust_china_conf_2021.html"><strong aria-hidden="true">9.6.</strong> RustChinaConf 2021 议题征集开放申请</a></li><li class="chapter-item "><a href="../chapter_7/paper-rust-vs-c.html"><strong aria-hidden="true">9.7.</strong> 论文导读 | 性能与生产力 : Rust vs C </a></li><li class="chapter-item "><a href="../chapter_7/hw-rust-name-mangling.html"><strong aria-hidden="true">9.8.</strong> 华为 | Rust 调用约定和名称修饰规则介绍</a></li><li class="chapter-item "><a href="../chapter_7/ant-futures-compat.html"><strong aria-hidden="true">9.9.</strong> 蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用</a></li><li class="chapter-item "><a href="../chapter_7/lark-rust-wasm-sqlite.html"><strong aria-hidden="true">9.10.</strong> 字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM </a></li><li class="chapter-item "><a href="../chapter_7/rust-epoll-rdma-part2.html"><strong aria-hidden="true">9.11.</strong> Datenlord | Rust实现RDMA异步编程（二）</a></li><li class="chapter-item "><a href="../chapter_7/how-we-improved-the-performance-of-our-rust-app.html"><strong aria-hidden="true">9.12.</strong> Zellij 的性能优化</a></li><li class="chapter-item "><a href="../chapter_7/learn.html"><strong aria-hidden="true">9.13.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_7/rusts-standard-library-traits.html"><strong aria-hidden="true">9.14.</strong> 【完整】Rust 标准库 Trait 指南</a></li><li class="chapter-item "><a href="../chapter_7/coercion_in_rust.html"><strong aria-hidden="true">9.15.</strong> Rust 中的隐式类型转换</a></li><li class="chapter-item "><a href="../chapter_7/tokio-task-scheduler.html"><strong aria-hidden="true">9.16.</strong> Tokio Internals 之 任务调度</a></li><li class="chapter-item "><a href="../chapter_7/about-rust-features.html"><strong aria-hidden="true">9.17.</strong> 为什么你不应该沉迷于 Rust 的“特性”</a></li><li class="chapter-item "><a href="../chapter_7/rust-no-std.html"><strong aria-hidden="true">9.18.</strong> Rust no-std 工程实践</a></li><li class="chapter-item "><a href="../chapter_7/dynamic_analyzing_tools.html"><strong aria-hidden="true">9.19.</strong> Rust 内存错误调试和动态分析工具分享</a></li><li class="chapter-item "><a href="../chapter_7/macroquad_game.html"><strong aria-hidden="true">9.20.</strong> 使用Macroquad在Android设备上发布游戏</a></li><li class="chapter-item "><a href="../chapter_7/trampoline-kernel.html"><strong aria-hidden="true">9.21.</strong> 跨空间跳板内核</a></li><li class="chapter-item "><a href="../chapter_7/trait-upcasting-part1.html"><strong aria-hidden="true">9.22.</strong> Trait Upcasting 系列 ｜ Part I</a></li><li class="chapter-item "><a href="../chapter_7/github_trending.html"><strong aria-hidden="true">9.23.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_7/tool_libs.html"><strong aria-hidden="true">9.24.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_7/frameworks.html"><strong aria-hidden="true">9.25.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_8/toc.html"><strong aria-hidden="true">10.</strong> 八月刊（August）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_8/announce.html"><strong aria-hidden="true">10.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_8/lang.html"><strong aria-hidden="true">10.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_8/hots.html"><strong aria-hidden="true">10.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_8/events.html"><strong aria-hidden="true">10.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_8/jobs.html"><strong aria-hidden="true">10.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_8/rust_china_conf_2021.html"><strong aria-hidden="true">10.6.</strong> RustChinaConf 2021 正式启动</a></li><li class="chapter-item "><a href="../chapter_8/paper-rudra.html"><strong aria-hidden="true">10.7.</strong> 论文导读 | Rudra : 查找 Rust 生态系统中的内存安全 Bug </a></li><li class="chapter-item "><a href="../chapter_8/hw-rust-simd.html"><strong aria-hidden="true">10.8.</strong> 华为 | Rust语言中SIMD计算加速指令的使用</a></li><li class="chapter-item "><a href="../chapter_8/ant-futures-compat.html"><strong aria-hidden="true">10.9.</strong> 蚂蚁集团 | Trait Object 还是 Virtual Method Table</a></li><li class="chapter-item "><a href="../chapter_8/rust-lockfree-part2.html"><strong aria-hidden="true">10.10.</strong> Datenlord | Rust 无锁编程之Crossbeam Epoch算法解析</a></li><li class="chapter-item "><a href="../chapter_8/rust-k8s.html"><strong aria-hidden="true">10.11.</strong> DatenLord | Rust 实现K8S调度扩展</a></li><li class="chapter-item "><a href="../chapter_8/aws-lambda-rust-wasm-serverless.html"><strong aria-hidden="true">10.12.</strong> SecondState | AWS Lambda 中的 Rust 与 WebAssembly Serverless 函数</a></li><li class="chapter-item "><a href="../chapter_8/bianlifeng_embedded_rust.html"><strong aria-hidden="true">10.13.</strong> 便利蜂 | 门店网络与 Rust 落地实践</a></li><li class="chapter-item "><a href="../chapter_8/learn.html"><strong aria-hidden="true">10.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_8/rust-tips.html"><strong aria-hidden="true">10.15.</strong> Rust 技巧篇</a></li><li class="chapter-item "><a href="../chapter_8/reqwest-middleware.html"><strong aria-hidden="true">10.16.</strong> 为 reqwest 增加中间件支持</a></li><li class="chapter-item "><a href="../chapter_8/gui-framework-ingredients.html"><strong aria-hidden="true">10.17.</strong> 想用 Rust 编写 GUI 框架吗？</a></li><li class="chapter-item "><a href="../chapter_8/what-is-trait-upcasting.html"><strong aria-hidden="true">10.18.</strong> Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？</a></li><li class="chapter-item "><a href="../chapter_8/trait-upcasting-part2.html"><strong aria-hidden="true">10.19.</strong> Trait Upcasting 系列 ｜ Part II</a></li><li class="chapter-item "><a href="../chapter_8/github_trending.html"><strong aria-hidden="true">10.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_8/tool_libs.html"><strong aria-hidden="true">10.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_8/frameworks.html"><strong aria-hidden="true">10.22.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_9/toc.html"><strong aria-hidden="true">11.</strong> 九月刊（September）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_9/announce.html"><strong aria-hidden="true">11.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_9/lang.html"><strong aria-hidden="true">11.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_9/hots.html"><strong aria-hidden="true">11.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_9/events.html"><strong aria-hidden="true">11.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_9/jobs.html"><strong aria-hidden="true">11.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_9/rustconf.html"><strong aria-hidden="true">11.6.</strong> 官方 RustConf 2021 盘点</a></li><li class="chapter-item "><a href="../chapter_9/rust_china_conf_2021.html"><strong aria-hidden="true">11.7.</strong> RustChinaConf 2021 动态</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.8.</strong> 将 TensorFlow 模型移植到 Pure Rust 的开发成本有多高？</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.9.</strong> Rust 2021 有哪些新功能</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.10.</strong> 周期性服务发现</a></li><li class="chapter-item "><a href="../chapter_9/rethink-async.html"><strong aria-hidden="true">11.11.</strong> Datenlord | 重新思考 Rust Async - 如何实现高性能 I/O</a></li><li class="chapter-item "><a href="../chapter_9/intel_sgx_std.html"><strong aria-hidden="true">11.12.</strong> Phala Network | 在Intel SGX环境下实现Rust原生std支持</a></li><li class="chapter-item "><a href="../chapter_9/rust-android-ui.html"><strong aria-hidden="true">11.13.</strong> 如何用Rust做Android UI渲染</a></li><li class="chapter-item "><a href="../chapter_9/learn.html"><strong aria-hidden="true">11.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_9/lifetime-smart-ptr.html"><strong aria-hidden="true">11.15.</strong> Rust 生命周期与智能指针</a></li><li class="chapter-item "><a href="../chapter_9/rust-for-embedded-c.html"><strong aria-hidden="true">11.16.</strong> 为 嵌入式 C  程序员编写的 Rust 指南</a></li><li class="chapter-item "><a href="../chapter_9/visualize_crate_graph.html"><strong aria-hidden="true">11.17.</strong> 可视化项目成员包的调用关系</a></li><li class="chapter-item "><a href="../chapter_9/poem-openapi.html"><strong aria-hidden="true">11.18.</strong> 基于 Poem 的 OpenAPI 服务端框架</a></li><li class="chapter-item "><a href="../chapter_9/rust-cryptography-ecosystem.html"><strong aria-hidden="true">11.19.</strong> 密码协议算法与Rust生态</a></li><li class="chapter-item "><a href="../chapter_9/github_trending.html"><strong aria-hidden="true">11.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_9/tool_libs.html"><strong aria-hidden="true">11.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_9/frameworks.html"><strong aria-hidden="true">11.22.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_9/rust-security-part3.html"><strong aria-hidden="true">11.23.</strong> Rust生态安全漏洞总结系列 | Part 3</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_10/toc.html"><strong aria-hidden="true">12.</strong> 十月刊（October）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_10/announce.html"><strong aria-hidden="true">12.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_10/lang.html"><strong aria-hidden="true">12.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_10/hots.html"><strong aria-hidden="true">12.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_10/events.html"><strong aria-hidden="true">12.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_10/jobs.html"><strong aria-hidden="true">12.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_10/rust-foundation.html"><strong aria-hidden="true">12.6.</strong> 聚焦Rust基金会新成员 | 为什么要加入 Rust 基金会 </a></li><li class="chapter-item "><a href="../chapter_10/rust-gcc-two-way.html"><strong aria-hidden="true">12.7.</strong> 【Linux Plumbers 大会总结】Rust 和 GCC 整合的两种方式</a></li><li class="chapter-item "><a href="../chapter_10/p99conf.html"><strong aria-hidden="true">12.8.</strong> P99 Conf Talk 汇总 |  Rust 在高性能低延迟系统中的应用</a></li><li class="chapter-item "><a href="../chapter_10/rust-coding-guidelines.html"><strong aria-hidden="true">12.9.</strong> 《Rust 安全编码规范》 初稿发布</a></li><li class="chapter-item "><a href="../chapter_10/foreign_journal_review.html"><strong aria-hidden="true">12.10.</strong> 知名项目进展报告</a></li><li class="chapter-item "><a href="../chapter_10/async-trait.html"><strong aria-hidden="true">12.11.</strong> Rust Async trait 更新与多线程</a></li><li class="chapter-item "><a href="../chapter_10/rust-mem-safety.html"><strong aria-hidden="true">12.12.</strong> Rust调研与内存安全</a></li><li class="chapter-item "><a href="../chapter_10/mocks-and-tokio.html"><strong aria-hidden="true">12.13.</strong> 对外输出 Mocks 接口 和 Tokio 的高延展性服务器设计</a></li><li class="chapter-item "><a href="../chapter_10/rdma-memory-management-in-rust.html"><strong aria-hidden="true">12.14.</strong> Datenlord |在 Rust 中管理 RDMA 内存 </a></li><li class="chapter-item "><a href="../chapter_10/dapr.html"><strong aria-hidden="true">12.15.</strong> SecondState | Dapr的一个轻量安全可移植且高性能的Runtime</a></li><li class="chapter-item "><a href="../chapter_10/dropbox.html"><strong aria-hidden="true">12.16.</strong> Dropbox | 为什么我们要为 Capture 构建自定义 Rust 库</a></li><li class="chapter-item "><a href="../chapter_10/learn.html"><strong aria-hidden="true">12.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_10/rust-koans.html"><strong aria-hidden="true">12.18.</strong> 【趣文】Rust 公案 ｜ 新锈与大师的对话</a></li><li class="chapter-item "><a href="../chapter_10/solana-learn-part1.html"><strong aria-hidden="true">12.19.</strong> 【区块链】Solana 开发笔记 Part 1</a></li><li class="chapter-item "><a href="../chapter_10/bad-practice.html"><strong aria-hidden="true">12.20.</strong> Rust 中常见的新手错误和不良习惯</a></li><li class="chapter-item expanded "><a href="../chapter_10/lisp-in-rust.html" class="active"><strong aria-hidden="true">12.21.</strong> 用 Rust 实现 Lisp 解释器</a></li><li class="chapter-item "><a href="../chapter_10/rustc_plugin_custom_lints.html"><strong aria-hidden="true">12.22.</strong> 基于编译器插件定制 clippy lint</a></li><li class="chapter-item "><a href="../chapter_10/seaorm.html"><strong aria-hidden="true">12.23.</strong> Rust 生态观察｜ SeaORM: 要做 Rust 版本的 ActiveRecord  </a></li><li class="chapter-item "><a href="../chapter_10/delicate.html"><strong aria-hidden="true">12.24.</strong> Delicate 为什么从 actix-web 迁移到 poem</a></li><li class="chapter-item "><a href="../chapter_10/github_trending.html"><strong aria-hidden="true">12.25.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_10/tool_libs.html"><strong aria-hidden="true">12.26.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_10/rust-security-part4.html"><strong aria-hidden="true">12.27.</strong> Rust生态安全漏洞总结系列 | Part 4</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">13.</strong> 十一月刊（November）| 待发布</div></li><li class="chapter-item "><div><strong aria-hidden="true">14.</strong> 十二月刊（December）| 待发布</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#用-rust-实现-lisp-解释器" id="用-rust-实现-lisp-解释器">用 Rust 实现 Lisp 解释器</a></h1>
+<blockquote>
+<ul>
+<li>深度参考：https://stopachka.essay.dev/post/5/risp-in-rust-lisp</li>
+<li>本文作者：<a href="https://github.com/suhanyujie/rust-cookbook-note">suhanyujie</a></li>
+<li>文章来自：https://github.com/suhanyujie/rust-cookbook-note</li>
+<li>ps：水平有限，翻译不当之处，还请指正，谢谢！</li>
+</ul>
+</blockquote>
+<h2><a class="header" href="#前言" id="前言">前言</a></h2>
+<p>一段时间没有写 Rust 了，感觉有些生疏了，打算找个 Rust 小项目复习一下。在<a href="https://blog.budshome.com/">芽之家</a>博客看到了这个博文，讲的是用 Rust <a href="https://stopachka.essay.dev/post/5/risp-in-rust-lisp">实现 lisp</a>。有感兴趣的同学，可以一起看看。</p>
+<p>作者介绍到，这是他的第一个练手项目，有些地方可能会实现的不是很好，但我觉得也是很有参考价值的，尤其是对于我这样的 Rust 新手。此外，作者还提到了另一篇 <a href="http://norvig.com/lispy.html">python 实现 lisp</a>，这应该也是参考资料之一。</p>
+<h2><a class="header" href="#lisp" id="lisp">Lisp</a></h2>
+<p>在开始前，我们需要了解一些关于 lisp 的背景知识。<a href="https://zh.wikipedia.org/wiki/LISP">Lisp</a> 是一种高阶编程语言，在其基础上演变出了很多中方言，如：Scheme、Common Lisp 等。查阅了下百度百科，其描述可读性不强，建议阅读维基百科的<a href="https://zh.wikipedia.org/wiki/LISP">描述</a>，或者这个 <a href="https://www.yiibai.com/lisp/lisp_overview.html">Lisp 教程</a>。</p>
+<p>在实现一个 Lisp（子集）的解析器之前，先要了解 Lisp 的<a href="https://www.yiibai.com/lisp/lisp_basic_syntax.html">语法规则</a>。如果你想大概了解一下它的语法和简单使用，可以自己在本地<a href="https://lisp-lang.org/learn/getting-started/">安装一个环境</a>，并尝试。这里以 Ubuntu 20.04 为例。可通过以下命令安装一个 common lisp 的实现 —— sbcl，用于熟悉 lisp：</p>
+<pre><code>sudo apt-get install sbcl
+</code></pre>
+<p>然后，在命令行中输入 sbcl，即可进入它的交互式命令行：</p>
+<pre><code>$ sbcl
+This is SBCL 2.0.1.debian, an implementation of ANSI Common Lisp.
+More information about SBCL is available at &lt;http://www.sbcl.org/&gt;.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+</code></pre>
+<p>输入一个加法运算试一试：</p>
+<pre><code>$ * (+ 1 2)
+3
+</code></pre>
+<p>可以看到，能得到计算后地结果 —— 3。</p>
+<p>关于更多关于 Lisp 的语法在这里就不详细说明了，可以参考这个<a href="https://www.yiibai.com/lisp/lisp_basic_syntax.html">教程</a>进行进一步学习。</p>
+<h2><a class="header" href="#lisp-的算术运算" id="lisp-的算术运算">Lisp 的算术运算</a></h2>
+<p>为了能尽快地实现目标，我们只是简单地实现一个类似于计算器的运算功能，别看只是一个小小的计算器，但也包含了很多的基础知识。</p>
+<p>在开始之前，我们先确定好最终的目标，我们最终实现的效果如下：</p>
+<pre><code>(+ 10 5) //=&gt; 15
+(- 10 5) //=&gt; 5
+</code></pre>
+<p>输入简单的 lisp 程序，就能输出对应的计算结果。在开始之前，先介绍一下我们的程序执行，所经历的大体过程：</p>
+<blockquote>
+<p>程序 -&gt; parse（解析） -&gt; 抽象语法树 -&gt; eval（执行） -&gt; 结果</p>
+</blockquote>
+<p>这个过程中的 parse 和 eval 就是我们要实现的功能。比如下面这个程序示例：</p>
+<pre><code>$ (+ 1 2)
+3
+$ (* 2 3)
+6
+</code></pre>
+<p>换句话说，就是我们需要将我们输入的源代码解析转换成语法树，然后执行语法树就能得到我们想要的结果。而源码中，我们只需有三类输入：</p>
+<ul>
+<li>符号</li>
+<li>数值</li>
+<li>列表</li>
+</ul>
+<p>将其用 Rust 枚举类型表示，如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone)]
+enum RispExp {
+  Symbol(String),
+  Number(f64),
+  List(Vec&lt;RispExp&gt;),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>你可能有些疑惑，没关系，我们继续向后看。</p>
+<p>在解析源码时，我们会遇到错误，因此需要定义错误类型：</p>
+<pre><code class="language-Rust">enum RispErr {
+    Reason(String),
+}
+</code></pre>
+<p>如果你想定义更健壮、好用的错误类型，可以<a href="https://news.ycombinator.com/item?id=19812159">参考这个</a>。但这里，为了简化实现，我们只是将错误类型定义成一个枚举变体 <code>Reason(String)</code>，一旦遇到异常，我们将异常信息装入其中，返回给调用方即可。</p>
+<p>我们还需要一个作用域类型，用它来存储定义的变量、内置函数等。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone)]
+struct RispEnv {
+  data: HashMap&lt;String, RispExp&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#解析" id="解析">解析</a></h2>
+<p>根据前面的过程描述，我们要将源码解析成语法树，也就是 RispExp 的表示形式。这样做之前，我们需要将源码解析成一个一个 token。</p>
+<p>比如我们的输入是 <code>(+ 10 5)</code>，将其 token 化的结果是 <code>[&quot;(&quot;, &quot;+&quot;, &quot;10&quot;, &quot;5&quot;, &quot;)&quot;]</code>。使用 Rust 实现如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn tokenize(expr: String) -&gt; Vec&lt;String&gt; {
+    expr.replace(&quot;(&quot;, &quot; ( &quot;)
+        .replace(&quot;)&quot;, &quot; ) &quot;)
+        .split_whitespace()
+        .map(|x| x.to_string())
+        .collect()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>根据 lisp 表达式的规则，表达式一般都是由小括号包裹起来的，为了更好的通过空格分割 token，我们将小括号替换为两边各带有一个空格的括号。然后通过 split_whitespace 函数将字符串进行分割，并把每段字符串转换成带所有权的字符串，最后通过 collect 收集，以字符串数组的形式存放到变量中。</p>
+<p>然后通过 parse 函数将其转化成 RispExp 类型结构：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parse&lt;'a&gt;(tokens: &amp;'a [String]) -&gt; Result&lt;(RispExp, &amp;'a [String]), RispErr&gt; {
+    let (token, rest) = tokens
+        .split_first()
+        .ok_or(RispErr::Reason(&quot;could not get token&quot;.to_string()))?;
+    match &amp;token[..] {
+        &quot;(&quot; =&gt; read_seq(rest),
+        &quot;)&quot; =&gt; Err(RispErr::Reason(&quot;unexpected `)`&quot;.to_string())),
+        _ =&gt; Ok((parse_atom(token), rest)),
+    }
+}
+
+fn read_seq&lt;'a&gt;(tokens: &amp;'a [String]) -&gt; Result&lt;(RispExp, &amp;'a [String]), RispErr&gt; {
+    let mut res: Vec&lt;RispExp&gt; = vec![];
+    let mut xs = tokens;
+    loop {
+        let (next_token, rest) = xs
+            .split_first()
+            .ok_or(RispErr::Reason(&quot;could not find closing `)`&quot;.to_string()))?;
+        if next_token == &quot;)&quot; {
+            return Ok((RispExp::List(res), rest));
+        }
+        let (exp, new_xs) = parse(&amp;xs)?;
+        res.push(exp);
+        xs = new_xs;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>得到 token 列表后，我们对 token 逐个解析，通过 split_first 取出 token 列表中的第一个 token，以及第一个以外的其余元素。
+对第一个 token 进行模式匹配：</p>
+<ul>
+<li>如果表达式以 <code>(</code> 开头，则调用 read_seq 读取表达式剩余部分的 token</li>
+<li>如果表达式以 <code>)</code> 开头，则意味着当前表达式是错误的表达式。</li>
+<li>以上之外，则是要按正常情况解析 lisp 表达式中的原子 —— <a href="https://www.yiibai.com/lisp/lisp_basic_syntax.html">atom</a>。parse_atom 的实现如下：</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parse_atom(token: &amp;str) -&gt; RispExp {
+    let potential_float: Result&lt;f64, ParseFloatError&gt; = token.parse();
+    match potential_float {
+        Ok(v) =&gt; RispExp::Number(v),
+        Err(_) =&gt; RispExp::Symbol(token.to_string().clone()),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>根据<a href="https://www.yiibai.com/lisp/lisp_basic_syntax.html">语法规则</a>，一个原子是一个数字连续字符或字符串，它包括数字和特殊字符。
+我们先尝试将其解析为数值类型，如果解析失败，则意味着它是字符串 —— RispExp::Symbol(token.to_string().clone())。</p>
+<p>我们会在全局符号表中存储变量的定义和函数定义，因此我们需要扩展一下 RispExp：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone)]
+enum RispExp {
+    Symbol(String),
+    Number(f64),
+    List(Vec&lt;RispExp&gt;),
+    Func(fn(&amp;[RispExp]) -&gt; Result&lt;RispExp, RispErr&gt;), // new
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们先创建一个存储特定符号的容器，每一个符号都有特殊的功能：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn default_env() -&gt; RispEnv {
+    let mut data: HashMap&lt;String, RispExp&gt; = HashMap::new();
+    data.insert(
+        &quot;+&quot;.to_string(),
+        RispExp::Func(|args: &amp;[RispExp]| -&gt; Result&lt;RispExp, RispErr&gt; {
+            let sum = parse_list_of_floats(args)?
+                .iter()
+                .fold(0.0, |sum, a| sum + a);
+            Ok(RispExp::Number(sum))
+        }),
+    );
+    data.insert(
+        &quot;-&quot;.to_string(),
+        RispExp::Func(|args: &amp;[RispExp]| -&gt; Result&lt;RispExp, RispErr&gt; {
+            let floats = parse_list_of_floats(args)?;
+            let first = *floats
+                .first()
+                .ok_or(RispErr::Reason(&quot;expected at least one number&quot;.to_string()))?;
+            let sum_of_rest = floats[1..].iter().fold(0.0, |sum, a| sum + a);
+
+            Ok(RispExp::Number(first - sum_of_rest))
+        }),
+    );
+
+    RispEnv { data }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里我们先实现 <code>+</code>、<code>-</code> 运算符的功能。并且为了简化实现，我们先简单粗暴地认为参数都是合法的数值类型，可以通过 parse_list_of_floats 解析这些参数：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parse_list_of_floats(args: &amp;[RispExp]) -&gt; Result&lt;Vec&lt;f64&gt;, RispErr&gt; {
+    args.iter().map(|x| parse_single_float(x)).collect()
+}
+
+fn parse_single_float(exp: &amp;RispExp) -&gt; Result&lt;f64, RispErr&gt; {
+    match exp {
+        RispExp::Number(num) =&gt; Ok(*num),
+        _ =&gt; Err(RispErr::Reason(&quot;expect a number&quot;.to_string())),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#执行" id="执行">执行</a></h2>
+<p>接下来是实现 eval（程序执行）部分了。</p>
+<ul>
+<li>1.程序体（表达式）的第一部分如果是标识符，则在全局环境中查询该标识符，如果存在，则返回（如果是 <code>+</code>、<code>-</code> 等操作符，则返回 <code>RispExp::Func</code> 类型的操作逻辑实现）。</li>
+<li>2.如果是数值，则返回该数值</li>
+<li>3.如果是列表，则尝试步骤一。即先返回 <code>RispExp::Func</code>（函数类型），然后列表中的其他原子作为参数执行该函数。</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn eval(exp: &amp;RispExp, env: &amp;mut RispEnv) -&gt; Result&lt;RispExp, RispErr&gt; {
+    match exp {
+        RispExp::Symbol(k) =&gt; env
+            .data
+            .get(k)
+            .ok_or(RispErr::Reason(format!(&quot;unexpected symbol k={}&quot;, k)))
+            .map(|x| x.clone()),
+        RispExp::Number(_a) =&gt; Ok(exp.clone()),
+        RispExp::List(list) =&gt; {
+            let first_form = list
+                .first()
+                .ok_or(RispErr::Reason(&quot;expected a non-empty list&quot;.to_string()))?;
+            let arg_forms = &amp;list[1..];
+            let first_eval = eval(first_form, env)?;
+            match first_eval {
+                RispExp::Func(f) =&gt; {
+                    let args_eval = arg_forms
+                        .iter()
+                        .map(|x| eval(x, env))
+                        .collect::&lt;Result&lt;Vec&lt;RispExp&gt;, RispErr&gt;&gt;();
+                    f(&amp;args_eval?)
+                }
+                _ =&gt; Err(RispErr::Reason(&quot;first form must be a function&quot;.to_string())),
+            }
+        }
+        RispExp::Func(_) =&gt; Err(RispErr::Reason(&quot;unexpected form&quot;.to_string())),
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>前面提到过，我们要实现一个简单的计算器，而 lisp 的计算表达式一般是以符号原子开始的，如：<code>(+ 1 2)</code>。
+当把这个表达式转换为 RispExp 结构后的形式类似于：</p>
+<pre><code>// 伪代码
+PlusFunc(
+  num1,
+  num2,
+  ...
+)
+</code></pre>
+<p>我们先通过 <code>+</code> 匹配到事先在 default_env 中注册好的函数 f，然后向该函数中传入第一个原子之后的所有参数：<code>f(num1, num2)</code>，就能得到执行结果。</p>
+<h2><a class="header" href="#repl" id="repl">REPL</a></h2>
+<p>REPL 的全称是 Read Evel Print Loop，表示一种交互形式：读取 -&gt; 执行 -&gt; 打印结果 -&gt; 循环。</p>
+<p>针对前面实现的 lisp 子集，我们可以为其实现一个 repl，用于更好的使用该“lisp 解释器”。</p>
+<p>我们要做的很简单，读取用户输入，然后解析执行，把执行结果打印出来，然后不断地循环整个过程。那接下来，把解释器的实现用循环包裹起来试试：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parse_eval(expr: String, env: &amp;mut RispEnv) -&gt; Result&lt;RispExp, RispErr&gt; {
+    let (parsed_exp, _) = parse(&amp;tokenize(expr))?;
+    let evaled_exp = eval(&amp;parsed_exp, env)?;
+    Ok(evaled_exp)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>获取用户输入的表达式，再调用 parse_eval：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn slurp_expr() -&gt; String {
+    let mut expr = String::new();
+    io::stdin()
+        .read_line(&amp;mut expr)
+        .expect(&quot;Failed to read line&quot;);
+    expr
+}
+
+pub fn run_repl() {
+    let env = &amp;mut default_env();
+    loop {
+        println!(&quot;risp &gt;&quot;);
+        let expr = slurp_expr();
+        match parse_eval(expr, env) {
+            Ok(res) =&gt; println!(&quot;// 🔥 =&gt; {}&quot;, res),
+            Err(e) =&gt; match e {
+                RispErr::Reason(msg) =&gt; println!(&quot;// 🙀 =&gt; {}&quot;, msg),
+            },
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>好了，接下来我们把 run_repl 放入 main 函数中：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    run_repl();
+}
+</code></pre></pre>
+<p>大功告成！我们只需在命令行中输入 <code>cargo run</code> 即可启动你的 repl 程序。完整的代码可以<a href="../src/notes/lisp1">点此查看</a>。</p>
+<p>启动后，输入简单的 lisp 表达式，看看效果：</p>
+<pre><code>risp &gt;
+(+ 1 2 )
+// 🔥 =&gt; 3
+risp &gt;
+(+ 1 10 (+ 20 1))
+// 🔥 =&gt; 32
+</code></pre>
+<p>可以看出，单一的表达式和嵌套的表达式的加、减法都可以正确地计算出结果。这样，我们算是实现了这个简单的加减法计算。</p>
+<h2><a class="header" href="#版本-011" id="版本-011">版本 0.1.1</a></h2>
+<p>目前，我们的“lisp”仅支持简单的加、减等算数运算，我们需要扩展它。先给它增加 bool 类型的支持。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone)]
+enum RispExp {
+    Symbol(String),
+    Number(f64),
+    List(Vec&lt;RispExp&gt;),
+    Func(fn(&amp;[RispExp]) -&gt; Result&lt;RispExp, RispErr&gt;),
+    Bool(bool),  // -&gt;new
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>对应的我们需要调整 parse_atom 中的代码：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parse_atom(token: &amp;str) -&gt; RispExp {
+    match token {
+        &quot;true&quot; =&gt; {
+            RispExp::Bool(true)
+        },
+        &quot;false&quot; =&gt; {
+            RispExp::Bool(false)
+        },
+        _ =&gt; {
+            let potential_float: Result&lt;f64, ParseFloatError&gt; = token.parse();
+            match potential_float {
+                Ok(v) =&gt; RispExp::Number(v),
+                Err(_) =&gt; RispExp::Symbol(token.to_string().clone()),
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>有了布尔类型之后，我们可以实现 <code>&gt;</code>，<code>&lt;</code>，<code>=</code> 等比较运算符，因为通过这些运算符计算后的结果值是布尔值。</p>
+<p>要能支持这些比较运算符，我们需要将 <code>=</code> 对应的处理逻辑加到 default_env 中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// = 逻辑实现
+data.insert(
+    &quot;=&quot;.to_string(),
+    RispExp::Func(|args: &amp;[RispExp]| -&gt; Result&lt;RispExp, RispErr&gt; {
+        let floats = parse_list_of_floats(args)?;
+        // 要想比较，需要有两个值
+        if floats.len() != 2 {
+            return Err(RispErr::Reason(&quot;expected two number&quot;.to_string()));
+        }
+        // 将第 0 个元素和第 1 个元素进行比较
+        if floats.get(0).is_none() || floats.get(1).is_none() {
+            return Err(RispErr::Reason(&quot;expected number&quot;.to_string()));
+        }
+        let is_ok = floats.get(0).unwrap().eq(floats.get(1).unwrap());
+        Ok(RispExp::Bool(is_ok))
+    }),
+);
+<span class="boring">}
+</span></code></pre></pre>
+<p>此时，我们的 lisp 解释器已经支持了 <code>=</code> 的操作，使用 <code>cargo run</code> 运行 repl：</p>
+<pre><code>risp &gt;
+(= 12 12)
+// 🔥 =&gt; true
+risp &gt;
+(= 1 2 3)
+// 🙀 =&gt; expected two number
+risp &gt;
+</code></pre>
+<p>真不错，我们实现了 <code>=</code> 操作的扩展支持。我们还需要继续支持 <code>&gt;</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&lt;=</code>。以 <code>&gt;=</code> 为例，将其实现加入到 default_env 函数中：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>data.insert(
+    &quot;&gt;=&quot;.to_string(),
+    RispExp::Func(|args: &amp;[RispExp]| -&gt; Result&lt;RispExp, RispErr&gt; {
+        let floats = parse_list_of_floats(args)?;
+            // 要想比较，需要有两个值
+        if floats.len() != 2 {
+            return Err(RispErr::Reason(&quot;expected two number&quot;.to_string()));
+        }
+            // 校验这两个值必须存在
+        if floats.get(0).is_none() || floats.get(1).is_none() {
+            return Err(RispErr::Reason(&quot;expected number&quot;.to_string()));
+        }
+        Ok(RispExp::Bool(
+            floats.get(0).unwrap().gt(floats.get(1).unwrap()),
+        ))
+    }),
+);
+<span class="boring">}
+</span></code></pre></pre>
+<p>根据<a href="https://stopachka.essay.dev/post/5/risp-in-rust-lisp#comparison-operators#language-12-almost-risp">原博客</a>，为了简化代码，这部分的实现可以用宏实现：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>macro_rules! ensure_tonicity {
+    ($check_fn:expr) =&gt; {{
+        |args: &amp;[RispExp]| -&gt; Result&lt;RispExp, RispErr&gt; {
+            let floats = parse_list_of_floats(args)?;
+            let first = floats
+                .first()
+                .ok_or(RispErr::Reason(&quot;expected at least one number&quot;.to_string()))?;
+            let rest = &amp;floats[1..];
+            fn f(prev: &amp;f64, xs: &amp;[f64]) -&gt; bool {
+                match xs.first() {
+                    Some(x) =&gt; $check_fn(prev, x) &amp;&amp; f(x, &amp;xs[1..]),
+                    None =&gt; true,
+                }
+            };
+            Ok(RispExp::Bool(f(first, rest)))
+        }
+    }};
+}
+
+data.insert(
+    &quot;&gt;&quot;.to_string(),
+    RispExp::Func(ensure_tonicity!(|a, b| a &gt; b)),
+);
+
+data.insert(
+    &quot;&lt;&quot;.to_string(),
+    RispExp::Func(ensure_tonicity!(|a, b| a &lt; b)),
+);
+
+data.insert(
+    &quot;&lt;=&quot;.to_string(),
+    RispExp::Func(ensure_tonicity!(|a, b| a &lt;= b)),
+);
+<span class="boring">}
+</span></code></pre></pre>
+<p>这样就实现了所有比较运算符的处理逻辑了。</p>
+<p>要实现一个更接近 lisp 的语言，我们还需要引入 <code>def</code> 和 <code>if</code> 这两关键字了。这两关键字的作用见下表：</p>
+<p><img src="./image/lispInRust/risp-if-def-desc.png" alt="" /></p>
+<p><em>图片来自<a href="https://zhuanlan.zhihu.com/p/28989326">知乎专栏</a></em></p>
+<p>因此，我们先更新 eval 函数，使其<strong>优先</strong>匹配<strong>内置标识符</strong>（关键字），如果不是关键字，则直接按照原先逻辑执行：</p>
+<pre><code>fn eval(exp: &amp;RispExp, env: &amp;mut RispEnv) -&gt; Result&lt;RispExp, RispErr&gt; {
+    match exp {
+        ...
+        ...
+
+        RispExp::List(list) =&gt; {
+            let first_form = list
+                .first()
+                .ok_or(RispErr::Reason(&quot;expected a non-empty list&quot;.to_string()))?;
+            let arg_forms = &amp;list[1..];
+            // 优先匹配并处理“关键字”
+            match eval_built_in_form(first_form, arg_forms, env) {
+                Some(built_in_res) =&gt; built_in_res,
+                None =&gt; {
+                    let first_eval = eval(first_form, env)?;
+                    match first_eval {
+                        RispExp::Func(f) =&gt; {
+                            let args_eval = arg_forms
+                                .iter()
+                                .map(|x| eval(x, env))
+                                .collect::&lt;Result&lt;Vec&lt;RispExp&gt;, RispErr&gt;&gt;();
+                            f(&amp;args_eval?)
+                        }
+                        _ =&gt; Err(RispErr::Reason(&quot;first form must be a function&quot;.to_string())),
+                    }
+                }
+            }
+        }
+        RispExp::Func(_) =&gt; Err(RispErr::Reason(&quot;unexpected form&quot;.to_string())),
+    }
+}
+
+// 处理内置标识符
+fn eval_built_in_form(
+    exp: &amp;RispExp,
+    other_args: &amp;[RispExp],
+    env: &amp;mut RispEnv,
+) -&gt; Option&lt;Result&lt;RispExp, RispErr&gt;&gt; {
+    match exp {
+        RispExp::Symbol(symbol) =&gt; match symbol.as_ref() {
+            &quot;if&quot; =&gt; Some(eval_if_args(other_args, env)),
+            &quot;def&quot; =&gt; Some(eval_def_args(other_args, env)),
+            _ =&gt; None,
+        },
+        _ =&gt; None,
+    }
+}
+
+fn eval_if_args(args: &amp;[RispExp], env: &amp;mut RispEnv) -&gt; Result&lt;RispExp, RispErr&gt; {
+    let test_form = args
+        .first()
+        .ok_or(RispErr::Reason(&quot;expected test form&quot;.to_string()))?;
+    let test_eval = eval(test_form, env)?;
+    match test_eval {
+        RispExp::Bool(b) =&gt; {
+            let form_idx = if b { 1 } else { 2 };
+            let res_form = args
+                .get(form_idx)
+                .ok_or(RispErr::Reason(format!(&quot;expected form idx={}&quot;, form_idx)))?;
+            let res_eval = eval(res_form, env);
+            res_eval
+        }
+        _ =&gt; Err(RispErr::Reason(format!(
+            &quot;unexpected test form='{}'&quot;,
+            test_form.to_string()
+        ))),
+    }
+}
+</code></pre>
+<p>根据上图表格中的描述，<code>if</code> 语法如下：<code>(if test conseq alt)</code>，对 <code>test</code> 表达式求值，如果为真，则对 <code>conseq</code> 表达式求值并返回；否则，对 <code>alt</code> 表达式求值并返回。例如：<code>(if (&gt; 10 20) (+ 2 3) (- 1 2))</code>。</p>
+<p>同理，<code>def</code> 语法：<code>(def var exp)</code>。用于定义一个新的变量 <code>var</code>，它的值是 <code>exp</code> 表达式的值，例如：<code>(def k1 10)</code>。逻辑实现如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn eval_def_args(args: &amp;[RispExp], env: &amp;mut RispEnv) -&gt; Result&lt;RispExp, RispErr&gt; {
+    let var_exp = args.first().ok_or(RispErr::Reason(format!(&quot;unexepceted string for var&quot;)))?;
+
+    let val_res = args.get(1).ok_or(RispErr::Reason(format!(&quot;expected second param.&quot;)))?;
+    let evaled_val = eval(val_res, env)?;
+
+    match var_exp {
+        RispExp::Symbol(ref var_name) =&gt; {
+            env.data.insert(var_name.clone(), evaled_val);
+            Ok(var_exp.clone())
+        },
+        _ =&gt; Err(RispErr::Reason(format!(&quot;unexpected var name&quot;)))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们运行 repl（<code>cargo run</code>），通过一些输入，看看实现的效果：</p>
+<pre><code>risp &gt;
+(def a 1)
+// 🔥 =&gt; a
+risp &gt;
+(+ 1 a)
+// 🔥 =&gt; 2
+risp &gt;
+(if (&gt; 2 1) true false)
+// 🔥 =&gt; true
+risp &gt;
+(if (&lt; 2 1) true false)
+// 🔥 =&gt; false
+</code></pre>
+<p>太棒了，一切都运行的很完美！</p>
+<p>接下来，我们尝试支持另一种语法 —— lambda。下面是一个翻译文章对 lambda 的描述：</p>
+<blockquote>
+<p>lambda 特殊形式会创建一个过程(procedure)。（lambda这个名字来源于Alonzo Church的lambda calculus）     —— 来自<a href="https://zhuanlan.zhihu.com/p/29186794">译文</a></p>
+</blockquote>
+<p>lambda 其实就是一种匿名函数，既然是函数也就意味着有参数列表和函数体，所以，lambda 的语法形式如下：<code>(lambda (var...) exp)</code>，其中的 <code>(var...)</code> 是参数列表，<code>exp</code> 是函数体，因此我们定义 lambda 结构体：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone)]
+struct RispLambda {
+    params: Rc&lt;RispExp&gt;,
+    body: Rc&lt;RispExp&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>解析 lambda 表达式：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn eval_lambda_args(args: &amp;[RispExp]) -&gt; Result&lt;RispExp, RispErr&gt; {
+    let params = args
+        .first()
+        .ok_or(RispErr::Reason(format!(&quot;unexpected args form&quot;)))?;
+    let body = args
+        .get(1)
+        .ok_or(RispErr::Reason(format!(&quot;unexpected second form&quot;)))?;
+    if args.len() != 2 {
+        return Err(RispErr::Reason(format!(&quot;lambda can only have two forms&quot;)));
+    }
+    Ok(RispExp::Lambda(RispLambda {
+        params: Rc::new(params.clone()),
+        body: Rc::new(body.clone()),
+    }))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>对用户的输入进行解析，基于已经解析了的 RispExp 结构，当遇到的 List 是 lambda 类型时，将跟随在 lambda 后的第一个表达式视为“参数列表”，第二个表达式视为“lambda 函数体”。然后返回一个 RispExp::Lambda 实例。</p>
+<p>当 lambda 被调用时，会生成一个不同于 default_env 的新 env，可将其视为当前函数的作用域，当执行函数体的时候，会使用新的 env 中的符号、参数等信息，如果查找不到，则在全局环境（default_env）中查找，所以需要调整一下 RispEnv：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct RispEnv&lt;'a&gt; {
+    data: HashMap&lt;String, RispExp&gt;,
+    outer: Option&lt;&amp;'a RispEnv&lt;'a&gt;&gt;,
+}
+
+/// 构建 lambda 执行环境
+fn env_for_lambda&lt;'a&gt;(
+    params: Rc&lt;RispExp&gt;,
+    args: &amp;[RispExp],
+    outer_env: &amp;'a mut RispEnv,
+) -&gt; Result&lt;RispEnv&lt;'a&gt;, RispErr&gt; {
+    let ks = parse_list_of_symbol_strings(params)?;
+    if ks.len() != args.len() {
+        return Err(RispErr::Reason(format!(
+            &quot;expected {} params, got {}&quot;,
+            ks.len(),
+            args.len()
+        )));
+    }
+    let vs = eval_forms(args, outer_env)?;
+    let mut data: HashMap&lt;String, RispExp&gt; = HashMap::new();
+    for (k, v) in ks.iter().zip(vs.iter()) {
+        data.insert(k.clone(), v.clone());
+    }
+
+    Ok(RispEnv {
+        data,
+        outer: Some(outer_env),
+    })
+}
+
+/// 执行一组表达式，将结果放入数组中
+fn eval_forms(args: &amp;[RispExp], env: &amp;mut RispEnv) -&gt; Result&lt;Vec&lt;RispExp&gt;, RispErr&gt; {
+    args.iter().map(|x| eval(x, env)).collect()
+}
+
+/// 解析参数列表
+fn parse_list_of_symbol_strings(params: Rc&lt;RispExp&gt;) -&gt; Result&lt;Vec&lt;String&gt;, RispErr&gt; {
+    let list = match params.as_ref() {
+        RispExp::List(s) =&gt; Ok(s.clone()),
+        _ =&gt; Err(RispErr::Reason(format!(&quot;expected params to be a list&quot;))),
+    }?;
+    list.iter()
+        .map(|x| match x {
+            RispExp::Symbol(s) =&gt; Ok(s.clone()),
+            _ =&gt; Err(RispErr::Reason(format!(
+                &quot;expected symbol in the argument list&quot;
+            ))),
+        })
+        .collect()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>env_for_lambda</code> 函数中的 <code>data</code> 是 lambda 内部环境，<code>outer</code> 则是外层（全局环境）env。
+通过构建好的 lambda body，将其基于新构建的 lambda 环境执行，得到的结果即 lambda 调用结果。</p>
+<pre><code>fn eval(exp: &amp;RispExp, env: &amp;mut RispEnv) -&gt; Result&lt;RispExp, RispErr&gt; {
+    ...
+
+    RispExp::List(list) =&gt; {
+        ...
+
+        match eval_built_in_form(first_form, arg_forms, env) {
+            Some(built_in_res) =&gt; built_in_res,
+            None =&gt; {
+                let first_eval = eval(first_form, env)?;
+                match first_eval {
+                    RispExp::Func(f) =&gt; {
+                        let args_eval = arg_forms
+                            .iter()
+                            .map(|x| eval(x, env))
+                            .collect::&lt;Result&lt;Vec&lt;RispExp&gt;, RispErr&gt;&gt;();
+                        f(&amp;args_eval?)
+                    }
+                    RispExp::Lambda(lambda) =&gt; {    // -&gt;  New
+                        let new_env = &amp;mut env_for_lambda(lambda.params, arg_forms, env)?;
+                        eval(&amp;lambda.body, new_env)
+                    },
+                    _ =&gt; Err(RispErr::Reason(&quot;first form must be a function&quot;.to_string())),
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>基本完成了 lambda 的支持，我们编译代码试试吧！（<code>cargo run</code>）</p>
+<pre><code>risp &gt;
+(def add-one (lambda (a) (+ a 1)))
+// 🔥 =&gt; add-one
+risp &gt;
+(add-one 1)
+// 🔥 =&gt; 2
+risp &gt;
+(add-one 5)
+// 🔥 =&gt; 6
+</code></pre>
+<p>REPL 中，我们通过 def 定义了一个名为 <code>add-one</code> 的 lambda 表达式。
+然后调用 <code>add-one</code>，传入的参数为 1，结果为 2，入参为 <code>5</code> 时，计算结果为 6。符合预期！</p>
+<p>至此，lambda 表达式支持完成！完整的代码可以<a href="https://github.com/suhanyujie/rust-cookbook-note/tree/master/src/notes/lisp1">点此查看</a>。</p>
+<p>Lisp 是非常早期的高阶编程语言之一，它的出现开创了很多先驱概念，如：树、动态类型、高阶函数等。它结构简单，却是计算机语言发展中非常重要的基础。本文通过使用 Rust 实现 Lisp 子集，即是学习 Lisp 本身，也是学习 Rust 的语法和使用。基于此，你可以探索更加完整的 Lisp 实现。希望对读者你有帮助，感谢阅读！</p>
+<h2><a class="header" href="#参考资料" id="参考资料">参考资料</a></h2>
+<ul>
+<li>https://stopachka.essay.dev/post/5/risp-in-rust-lisp</li>
+<li>如何（用Python）写一个（Lisp）解释器（译文） https://zhuanlan.zhihu.com/p/28989326</li>
+<li>https://lisp-lang.org/learn/getting-started/</li>
+<li>mod 作用域，关于 Rust 模块详解，可以查看<a href="https://blog.frankel.ch/start-rust/1/">这篇文章</a></li>
+<li>Lisp 教程 https://www.yiibai.com/lisp/lisp_overview.html</li>
+<li>Lisp 维基百科 https://zh.wikipedia.org/wiki/LISP</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_10/bad-practice.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_10/rustc_plugin_custom_lints.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_10/bad-practice.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_10/rustc_plugin_custom_lints.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+        <script type="text/javascript" src="../smart-anchor.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
