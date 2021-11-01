@@ -279,6 +279,7 @@
     - [聚焦Rust基金会新成员 | 为什么要加入 Rust 基金会 ](./chapter_10/rust-foundation.md)
     - [【Linux Plumbers 大会总结】Rust 和 GCC 整合的两种方式](./chapter_10/rust-gcc-two-way.md)
     - [P99 Conf Talk 汇总 |  Rust 在高性能低延迟系统中的应用](./chapter_10/p99conf.md)
+    - [《Rust 安全编码规范》 初稿发布](./chapter_10/rust-coding-guidelines.md)
     - [知名项目进展报告](./chapter_10/foreign_journal_review.md)
     - [Rust Async trait 更新与多线程](./chapter_10/async-trait.md)
     - [Rust调研与内存安全](./chapter_10/rust-mem-safety.md)

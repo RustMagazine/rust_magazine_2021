@@ -12,7 +12,7 @@
 - [聚焦Rust基金会新成员 | 为什么要加入 Rust 基金会 ](./rust-foundation.md)
 - [【Linux Plumbers 大会总结】Rust 和 GCC 整合的两种方式](./rust-gcc-two-way.md)
 - [P99 Conf Talk 汇总 |  Rust 在高性能低延迟系统中的应用](./p99conf.md)
-
+- [《Rust 安全编码规范》 初稿发布](./rust-coding-guidelines.md)
 
 ## 外刊评论
 
