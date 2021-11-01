@@ -288,6 +288,7 @@
     - [SecondState | Dapr的一个轻量安全可移植且高性能的Runtime](./chapter_10/dapr.md)
     - [Dropbox | 为什么我们要为 Capture 构建自定义 Rust 库](./chapter_10/dropbox.md) 
     - [学习资源](./chapter_10/learn.md)
+    - [【趣文】Rust 公案 ｜ 新锈与大师的对话](./chapter_10/rust-koans.md)
     - [【区块链】Solana 开发笔记 Part 1](./chapter_10/solana-learn-part1.md)
     - [Rust 中常见的新手错误和不良习惯](./chapter_10/bad-practice.md)
     - [基于编译器插件定制 clippy lint](./chapter_10/rustc_plugin_custom_lints.md)

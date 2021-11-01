@@ -33,6 +33,7 @@
 ### 新手入门
 
 - [学习资源](./learn.md)
+- [【趣文】Rust 公案 ｜ 新锈与大师的对话](./rust-koans.md)
 - [【区块链】Solana 开发笔记 Part 1](./solana-learn-part1.md)
 - [Rust 中常见的新手错误和不良实践：不良习惯](./bad-practice.md)
 
