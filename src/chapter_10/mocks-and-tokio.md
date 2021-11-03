@@ -247,13 +247,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Tokio创建的线程数量一般和CPU核数保持一致。每个线程都会处理多个clients，但却只有一个监视线程通过epoll监听所有的socket，除此之外，也只有一个listen socket来接收新的连接。这样的设计非常容易成为性能的瓶颈。
 
-下图中的设计大大增加了服务器的延展性，这也是[Envoy][https://github.com/tetratelabs/envoy-wasm-rust-sdk], [Nginx][https://github.com/nginxinc/ngx-rust]使用的设计方法。每个线程都会通过epoll监视它所持有的client的socket，且每个线程都有一个自己的listen socket用来接收新的连接，并通过设置`SO_REUSEPORT`在同一个端口进行监听。
+下图中的设计大大增加了服务器的延展性，这也是[Envoy](https://github.com/tetratelabs/envoy-wasm-rust-sdk), [Nginx](https://github.com/nginxinc/ngx-rust)使用的设计方法。每个线程都会通过epoll监视它所持有的client的socket，且每个线程都有一个自己的listen socket用来接收新的连接，并通过设置`SO_REUSEPORT`在同一个端口进行监听。
 
 
 
 ![tokio1](./image/mocks/tokio3.png)
 
-通过更改一小段代码，可以极大的提升在多CPU环境下的性能。对该设计感兴趣的话可以在这里找到一个例子：[tokio-reuseport][https://github.com/fujita/tokio-reuseport]
+通过更改一小段代码，可以极大的提升在多CPU环境下的性能。对该设计感兴趣的话可以在这里找到一个例子：[tokio-reuseport](https://github.com/fujita/tokio-reuseport)
 
 
 
