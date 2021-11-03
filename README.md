@@ -17,9 +17,7 @@
 
 ### 如何订阅本刊 RSS ?
 
-1. 订阅地址：[https://rustmagazine.github.io/rust_magazine_2021/rss.xml](https://rustmagazine.github.io/rust_magazine_2021/rss.xml)
-
-2. 复制订阅地址到你最喜欢的订阅工具开始订阅。
+1. 暂时不提供了
 
 
 ### 发刊渠道
