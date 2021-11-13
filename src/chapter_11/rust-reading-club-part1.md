@@ -21,6 +21,7 @@
 - 时间： 2021-11-04 12:00 - 13:30 US Eastern time ([see in your time zone](https://everytimezone.com/s/a287d2e5))
 - 方式 zoom
 - 内容： [compiler/rustc_resolve/src](https://github.com/rust-lang/rust/tree/master/compiler/rustc_resolve/src) 
+- [Slides](https://hackmd.io/@rustc-reading-club/S1xsDveDK#/)
 
 参与前准备：
 
@@ -41,7 +42,6 @@
 
 
 ## 学前准备
-
 
 
 ### The Programmer's Brain
@@ -143,9 +143,25 @@ crate 的模块在这里构建，宏的路径、模块导入、表达式、类�
 
 Rust 编译过程大体分为：`词法分析 ->  语法分析 ->  HIR ->  MIR ->  LLVM IR` 这几个过程。
 
-名称解析过程应该发生在 语法分析的过程中，并且宏也展开完毕。 
 
-严格来说，词法分析、语法分析基本都是同时进行的，只是为了方便介绍和理解而分了先后顺序。
+#### 语义分析
+
+在词法分析和解析之后，以下操作通常按此顺序发生:
+
+- 名称和类型解析。确定词法作用域、在这些作用域中声明的标识符、这些标识符的类型信息，以及对于标识符的每个非声明使用，它所引用的声明
+- 控制流分析。在代码显式和/或隐式(例如，构造函数)的计算上构建控制流图。
+- 数据流分析。确定变量接收新值的位置，以及程序其他部分读取这些值的位置。 (这通常在程序内进行局部分析，然后可能是跨程序进行的分析)。
+
+作为数据流分析的一部分:
+- 点分析。确定代码中每个位置的每个指针，该指针可能引用哪些实体
+- 调用图。跨过程构建调用图，通常考虑间接函数指针，其估计值在指向分析期间出现。
+
+
+#### 名称解析
+
+[名称解析](https://rustcrustc.github.io/rustc-dev-guide-zh/name-resolution.html?highlight=name%20resolution#%E5%9F%BA%E7%A1%80)
+
+
 
 
 
@@ -154,13 +170,9 @@ Rust 编译过程大体分为：`词法分析 ->  语法分析 ->  HIR ->  MIR -
 ### 2021.11.04 官方第一期
 
 
+人数众多，突破了Zoom的上限，结果 Niko 进不来了。
 
-
-
-
-
-
-
+今天的活动就取消了，下次官方调研好工具再开始。
 
 
 
