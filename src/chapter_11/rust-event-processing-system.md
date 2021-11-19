@@ -8,7 +8,7 @@
 
 我是从  [Rust 插件系统系列](https://nullderef.com/series/) 文章中了解到 Tremor 项目的。
 
-简而言之，Tremor 是一个事件处理系统。 它最初是为了替代 Logstash 或 Telegraf 等软件而设计的。 然而，通过支持更复杂的工作流（例如聚合、汇总、ETL 语言和查询语言），tremor 已经超出了这个单一用例的范围。
+简而言之，[Tremor ](https://github.com/tremor-rs/tremor-runtime) 是一个事件处理系统。 它最初是为了替代 Logstash 或 Telegraf 等软件而设计的。 然而，通过支持更复杂的工作流（例如聚合、汇总、ETL 语言和查询语言），tremor 已经超出了这个单一用例的范围。
 
 Tremor 每年 365 天 24x7 运行，并使用 Rust 编程语言实现。
 
@@ -140,6 +140,8 @@ Rust 生态中的一些 事件流处理相关项目：
 - [timely-dataflow](https://github.com/TimelyDataflow/timely-dataflow) : 数据流引擎 （https://materialize.com/ 公司开源产品），相关论文 [Online Analysis of Distributed Dataflows with Timely Dataflow](https://arxiv.org/pdf/1912.09747.pdf)
 - [materialize](https://github.com/MaterializeInc/materialize) :  专注于实时应用的流数据库，基于 timely-dataflow 实现
 - [fluvio](https://github.com/infinyon/fluvio) :  可编程高性能分布式流平台
+- [erdos](https://github.com/erdos-project/erdos): 流式数据流系统技术构建的自动驾驶和机器人应用平台（实验性）
+- [Tremor ](https://github.com/tremor-rs/tremor-runtime) : 本文主角，事件处理系统。
 
 
 
