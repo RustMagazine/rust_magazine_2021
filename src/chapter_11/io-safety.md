@@ -213,7 +213,7 @@ pub trait FromFd {
 }
 ```
 
-上述为针对 Unix 平台的 trait，该库也包含 Windows 平台的相关 triat ： `AsHandle / AsSocket `、`IntoHandle /IntoSocket`  、`FromHandle /FromSocket  ` 。
+上述为针对 Unix 平台的 trait，该库也包含 Windows 平台的相关 trait ： `AsHandle / AsSocket `、`IntoHandle /IntoSocket`  、`FromHandle /FromSocket  ` 。
 
 ### 相关类型
 

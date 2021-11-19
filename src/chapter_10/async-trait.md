@@ -236,7 +236,7 @@ trait Trait {
 - 在trait中使用async fn应该不强制要求堆分配
 - 当使用`dyn trait`，对于所有impl块，future的类型应该相同，使得`dyn trait`泛用，而非局限于某个特定类型。也就是说，future应与实际的impl块独立，并且它应当有固定的大小，保证编译器可以编译
 
-目前的进展是，语言组已实现初步的static async fn in triats，但是只能与impl trait或泛型一起使用，具体可见这篇[MVP](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/mvp.html)（Minimum viable product最小可行产品）。目前解决方案的缺陷在于：
+目前的进展是，语言组已实现初步的static async fn in traits，但是只能与impl trait或泛型一起使用，具体可见这篇[MVP](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/mvp.html)（Minimum viable product最小可行产品）。目前解决方案的缺陷在于：
 
 - 不支持dyn
 - 无法命名Future types并且获取它们的引用
