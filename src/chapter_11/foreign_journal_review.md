@@ -62,3 +62,20 @@
 
 更多想法和细节欢迎围观该[讨论帖](https://www.reddit.com/r/rust/comments/qkt2j7/what_sort_of_mature_opensource_libraries_do_you/)。
 
+## Rust适合做科学计算吗？
+
+来自于 Reddit 的一篇帖子 ： [Is rust good for mathematical computing?](https://www.reddit.com/r/rust/comments/qv5i0n/is_rust_good_for_mathematical_computing/)
+
+科学计算相关的任务：
+
+- 矩阵计算
+- 数值分析
+
+对编程语言的要求：
+
+- 对lambda的良好支持；
+- 简单易用的函数组合；
+
+Rust语言本身对lambda(在Rust中称为闭包)、通用组合和函数式编程有很好的支持，但像柯里化(curry)这样的东西看起来并不漂亮。
+
+目前Rust语言实现的跟科学计算相关的crate列表，可以在此查看：[Scientific Computing](https://www.arewelearningyet.com/scientific-computing/)
