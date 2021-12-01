@@ -549,7 +549,7 @@ pub async fn insert_and_update(db: &DbConn) -> Result<(), DbErr> {
 }
 ```
 
-通过上面一系列从模型定义到数据操作，我们看得出来，SeaORM 的设计确实和 ActiveRecord 类型。如果开发者对 ActiveRecord 熟悉，那么会感觉很容易上手。比如，设置表关系的 DSL 方法： `has_many`  和 `belongs_to`  。
+通过上面一系列从模型定义到数据操作，我们看得出来，SeaORM 的设计确实和 ActiveRecord 类似。如果开发者对 ActiveRecord 熟悉，那么会感觉很容易上手。比如，设置表关系的 DSL 方法： `has_many`  和 `belongs_to`  。
 
 当然，SeaORM 也提供一些方便的编写数据迁移功能的方法和函数：
 
