@@ -18,6 +18,9 @@
 
 - [PL 观点 |  未定义行为也有好的一面](./pl_ub.md)
 
+## 元宇宙与区块链
+
+- [区块链快讯](./meta-blockchain.md)
 
 ## 外刊评论
 
@@ -29,9 +32,10 @@
 
 ## Rust 生产实践
 
-- [Datenlord |在 Rust 中管理 RDMA 内存 ](./rdma-memory-management-in-rust.md)
-- [蚂蚁集团 | ]()
-
+- [华为 | no std的可执行文件编写和运行](./no-std.md)
+- [华为 | 硬件加速指令实践心得](./core-arch.md)
+- [DatenLord | Rust程序性能分析](./rust-profiling.md)
+- [蚂蚁集团 ｜ Play With Your Async Code](./play-async.md)
 
 ## 学习园地
 
@@ -42,9 +46,11 @@
 
 ### 原理与工程实践
 
+- [Rust 源码阅读俱乐部 |  第一期 : 名称解析](./rust-reading-club-part1.md)
 - [【我读】Rust 语言应该使用什么内存模型？](./rust-memory-model.md)
 - [Rust AEAD benchmark 与 Const generics](./bench-and-const.md)
 - [Rust与Linux信号](./signal.md)
+
 
 ## 开源项目巡礼
 
@@ -57,6 +63,4 @@
 - [特洛伊之源｜ 在 Rust 代码中隐藏无形的漏洞](./trojan-source.md)
 - [Rust Crates可能的后门与Cargo](./crates-backdoor.md)
 
-## 元宇宙与区块链
 
-- [区块链快讯](./meta-blockchain.md)

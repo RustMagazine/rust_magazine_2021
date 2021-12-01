@@ -1,0 +1,856 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1200" height="454" onload="init(evt)" viewBox="0 0 1200 454" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
+<!-- NOTES:  -->
+<defs>
+	<linearGradient id="background" y1="0" y2="1" x1="0" x2="0" >
+		<stop stop-color="#eeeeee" offset="5%" />
+		<stop stop-color="#eeeeb0" offset="95%" />
+	</linearGradient>
+</defs>
+<style type="text/css">
+	text { font-family:Verdana; font-size:12px; fill:rgb(0,0,0); }
+	#search, #ignorecase { opacity:0.1; cursor:pointer; }
+	#search:hover, #search.show, #ignorecase:hover, #ignorecase.show { opacity:1; }
+	#subtitle { text-anchor:middle; font-color:rgb(160,160,160); }
+	#title { text-anchor:middle; font-size:17px}
+	#unzoom { cursor:pointer; }
+	#frames > *:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+	.hide { display:none; }
+	.parent { opacity:0.5; }
+</style>
+<script type="text/ecmascript">
+<![CDATA[
+	"use strict";
+	var details, searchbtn, unzoombtn, matchedtxt, svg, searching, currentSearchTerm, ignorecase, ignorecaseBtn;
+	function init(evt) {
+		details = document.getElementById("details").firstChild;
+		searchbtn = document.getElementById("search");
+		ignorecaseBtn = document.getElementById("ignorecase");
+		unzoombtn = document.getElementById("unzoom");
+		matchedtxt = document.getElementById("matched");
+		svg = document.getElementsByTagName("svg")[0];
+		searching = 0;
+		currentSearchTerm = null;
+
+		// use GET parameters to restore a flamegraphs state.
+		var params = get_params();
+		if (params.x && params.y)
+			zoom(find_group(document.querySelector('[x="' + params.x + '"][y="' + params.y + '"]')));
+                if (params.s) search(params.s);
+	}
+
+	// event listeners
+	window.addEventListener("click", function(e) {
+		var target = find_group(e.target);
+		if (target) {
+			if (target.nodeName == "a") {
+				if (e.ctrlKey === false) return;
+				e.preventDefault();
+			}
+			if (target.classList.contains("parent")) unzoom();
+			zoom(target);
+			if (!document.querySelector('.parent')) {
+				clearzoom();
+				return;
+			}
+
+			// set parameters for zoom state
+			var el = target.querySelector("rect");
+			if (el && el.attributes && el.attributes.y && el.attributes._orig_x) {
+				var params = get_params()
+				params.x = el.attributes._orig_x.value;
+				params.y = el.attributes.y.value;
+				history.replaceState(null, null, parse_params(params));
+			}
+		}
+		else if (e.target.id == "unzoom") clearzoom();
+		else if (e.target.id == "search") search_prompt();
+		else if (e.target.id == "ignorecase") toggle_ignorecase();
+	}, false)
+
+	// mouse-over for info
+	// show
+	window.addEventListener("mouseover", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = "Function: " + g_to_text(target);
+	}, false)
+
+	// clear
+	window.addEventListener("mouseout", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = ' ';
+	}, false)
+
+	// ctrl-F for search
+	// ctrl-I to toggle case-sensitive search
+	window.addEventListener("keydown",function (e) {
+		if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+			e.preventDefault();
+			search_prompt();
+		}
+		else if (e.ctrlKey && e.keyCode === 73) {
+			e.preventDefault();
+			toggle_ignorecase();
+		}
+	}, false)
+
+	// functions
+	function get_params() {
+		var params = {};
+		var paramsarr = window.location.search.substr(1).split('&');
+		for (var i = 0; i < paramsarr.length; ++i) {
+			var tmp = paramsarr[i].split("=");
+			if (!tmp[0] || !tmp[1]) continue;
+			params[tmp[0]]  = decodeURIComponent(tmp[1]);
+		}
+		return params;
+	}
+	function parse_params(params) {
+		var uri = "?";
+		for (var key in params) {
+			uri += key + '=' + encodeURIComponent(params[key]) + '&';
+		}
+		if (uri.slice(-1) == "&")
+			uri = uri.substring(0, uri.length - 1);
+		if (uri == '?')
+			uri = window.location.href.split('?')[0];
+		return uri;
+	}
+	function find_child(node, selector) {
+		var children = node.querySelectorAll(selector);
+		if (children.length) return children[0];
+	}
+	function find_group(node) {
+		var parent = node.parentElement;
+		if (!parent) return;
+		if (parent.id == "frames") return node;
+		return find_group(parent);
+	}
+	function orig_save(e, attr, val) {
+		if (e.attributes["_orig_" + attr] != undefined) return;
+		if (e.attributes[attr] == undefined) return;
+		if (val == undefined) val = e.attributes[attr].value;
+		e.setAttribute("_orig_" + attr, val);
+	}
+	function orig_load(e, attr) {
+		if (e.attributes["_orig_"+attr] == undefined) return;
+		e.attributes[attr].value = e.attributes["_orig_" + attr].value;
+		e.removeAttribute("_orig_"+attr);
+	}
+	function g_to_text(e) {
+		var text = find_child(e, "title").firstChild.nodeValue;
+		return (text)
+	}
+	function g_to_func(e) {
+		var func = g_to_text(e);
+		// if there's any manipulation we want to do to the function
+		// name before it's searched, do it here before returning.
+		return (func);
+	}
+	function update_text(e) {
+		var r = find_child(e, "rect");
+		var t = find_child(e, "text");
+		var w = parseFloat(r.attributes.width.value) -3;
+		var txt = find_child(e, "title").textContent.replace(/\([^(]*\)$/,"");
+		t.attributes.x.value = parseFloat(r.attributes.x.value) + 3;
+
+		// Smaller than this size won't fit anything
+		if (w < 2 * 12 * 0.59) {
+			t.textContent = "";
+			return;
+		}
+
+		t.textContent = txt;
+		// Fit in full text width
+		if (/^ *$/.test(txt) || t.getSubStringLength(0, txt.length) < w)
+			return;
+
+		for (var x = txt.length - 2; x > 0; x--) {
+			if (t.getSubStringLength(0, x + 2) <= w) {
+				t.textContent = txt.substring(0, x) + "..";
+				return;
+			}
+		}
+		t.textContent = "";
+	}
+
+	// zoom
+	function zoom_reset(e) {
+		if (e.attributes != undefined) {
+			orig_load(e, "x");
+			orig_load(e, "width");
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_reset(c[i]);
+		}
+	}
+	function zoom_child(e, x, ratio) {
+		if (e.attributes != undefined) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = (parseFloat(e.attributes.x.value) - x - 10) * ratio + 10;
+				if (e.tagName == "text")
+					e.attributes.x.value = find_child(e.parentNode, "rect[x]").attributes.x.value + 3;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseFloat(e.attributes.width.value) * ratio;
+			}
+		}
+
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_child(c[i], x - 10, ratio);
+		}
+	}
+	function zoom_parent(e) {
+		if (e.attributes) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = 10;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseInt(svg.width.baseVal.value) - (10 * 2);
+			}
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_parent(c[i]);
+		}
+	}
+	function zoom(node) {
+		var attr = find_child(node, "rect").attributes;
+		var width = parseFloat(attr.width.value);
+		var xmin = parseFloat(attr.x.value);
+		var xmax = parseFloat(xmin + width);
+		var ymin = parseFloat(attr.y.value);
+		var ratio = (svg.width.baseVal.value - 2 * 10) / width;
+
+		// XXX: Workaround for JavaScript float issues (fix me)
+		var fudge = 0.0001;
+
+		unzoombtn.classList.remove("hide");
+
+		var el = document.getElementById("frames").children;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var a = find_child(e, "rect").attributes;
+			var ex = parseFloat(a.x.value);
+			var ew = parseFloat(a.width.value);
+			var upstack;
+			// Is it an ancestor
+			if (0 == 0) {
+				upstack = parseFloat(a.y.value) > ymin;
+			} else {
+				upstack = parseFloat(a.y.value) < ymin;
+			}
+			if (upstack) {
+				// Direct ancestor
+				if (ex <= xmin && (ex+ew+fudge) >= xmax) {
+					e.classList.add("parent");
+					zoom_parent(e);
+					update_text(e);
+				}
+				// not in current path
+				else
+					e.classList.add("hide");
+			}
+			// Children maybe
+			else {
+				// no common path
+				if (ex < xmin || ex + fudge >= xmax) {
+					e.classList.add("hide");
+				}
+				else {
+					zoom_child(e, xmin, ratio);
+					update_text(e);
+				}
+			}
+		}
+		search();
+	}
+	function unzoom() {
+		unzoombtn.classList.add("hide");
+		var el = document.getElementById("frames").children;
+		for(var i = 0; i < el.length; i++) {
+			el[i].classList.remove("parent");
+			el[i].classList.remove("hide");
+			zoom_reset(el[i]);
+			update_text(el[i]);
+		}
+		search();
+	}
+	function clearzoom() {
+		unzoom();
+
+		// remove zoom state
+		var params = get_params();
+		if (params.x) delete params.x;
+		if (params.y) delete params.y;
+		history.replaceState(null, null, parse_params(params));
+	}
+
+	// search
+	function toggle_ignorecase() {
+		ignorecase = !ignorecase;
+		if (ignorecase) {
+			ignorecaseBtn.classList.add("show");
+		} else {
+			ignorecaseBtn.classList.remove("show");
+		}
+		reset_search();
+		search();
+	}
+	function reset_search() {
+		var el = document.querySelectorAll("#frames rect");
+		for (var i = 0; i < el.length; i++) {
+			orig_load(el[i], "fill")
+		}
+		var params = get_params();
+		delete params.s;
+		history.replaceState(null, null, parse_params(params));
+	}
+	function search_prompt() {
+		if (!searching) {
+			var term = prompt("Enter a search term (regexp " +
+			    "allowed, eg: ^ext4_)"
+			    + (ignorecase ? ", ignoring case" : "")
+			    + "\nPress Ctrl-i to toggle case sensitivity", "");
+			if (term != null) search(term);
+		} else {
+			reset_search();
+			searching = 0;
+			currentSearchTerm = null;
+			searchbtn.classList.remove("show");
+			searchbtn.firstChild.nodeValue = "Search"
+			matchedtxt.classList.add("hide");
+			matchedtxt.firstChild.nodeValue = ""
+		}
+	}
+	function search(term) {
+		if (term) currentSearchTerm = term;
+
+		var re = new RegExp(currentSearchTerm, ignorecase ? 'i' : '');
+		var el = document.getElementById("frames").children;
+		var matches = new Object();
+		var maxwidth = 0;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var func = g_to_func(e);
+			var rect = find_child(e, "rect");
+			if (func == null || rect == null)
+				continue;
+
+			// Save max width. Only works as we have a root frame
+			var w = parseFloat(rect.attributes.width.value);
+			if (w > maxwidth)
+				maxwidth = w;
+
+			if (func.match(re)) {
+				// highlight
+				var x = parseFloat(rect.attributes.x.value);
+				orig_save(rect, "fill");
+				rect.attributes.fill.value = "rgb(230,0,230)";
+
+				// remember matches
+				if (matches[x] == undefined) {
+					matches[x] = w;
+				} else {
+					if (w > matches[x]) {
+						// overwrite with parent
+						matches[x] = w;
+					}
+				}
+				searching = 1;
+			}
+		}
+		if (!searching)
+			return;
+		var params = get_params();
+		params.s = currentSearchTerm;
+		history.replaceState(null, null, parse_params(params));
+
+		searchbtn.classList.add("show");
+		searchbtn.firstChild.nodeValue = "Reset Search";
+
+		// calculate percent matched, excluding vertical overlap
+		var count = 0;
+		var lastx = -1;
+		var lastw = 0;
+		var keys = Array();
+		for (k in matches) {
+			if (matches.hasOwnProperty(k))
+				keys.push(k);
+		}
+		// sort the matched frames by their x location
+		// ascending, then width descending
+		keys.sort(function(a, b){
+			return a - b;
+		});
+		// Step through frames saving only the biggest bottom-up frames
+		// thanks to the sort order. This relies on the tree property
+		// where children are always smaller than their parents.
+		var fudge = 0.0001;	// JavaScript floating point
+		for (var k in keys) {
+			var x = parseFloat(keys[k]);
+			var w = matches[keys[k]];
+			if (x >= lastx + lastw - fudge) {
+				count += w;
+				lastx = x;
+				lastw = w;
+			}
+		}
+		// display matched percent
+		matchedtxt.classList.remove("hide");
+		var pct = 100 * count / maxwidth;
+		if (pct != 100) pct = pct.toFixed(1)
+		matchedtxt.firstChild.nodeValue = "Matched: " + pct + "%";
+	}
+]]>
+</script>
+<rect x="0.0" y="0" width="1200.0" height="454.0" fill="url(#background)"  />
+<text id="title" x="600.00" y="24" >Flame Graph</text>
+<text id="details" x="10.00" y="437" > </text>
+<text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
+<text id="search" x="1090.00" y="24" >Search</text>
+<text id="ignorecase" x="1174.00" y="24" >ic</text>
+<text id="matched" x="1090.00" y="437" > </text>
+<g id="frames">
+<g >
+<title>core::intrinsics::copy_nonoverlapping (2 samples, 0.80%)</title><rect x="419.0" y="85" width="9.4" height="15.0" fill="rgb(236,73,54)" rx="2" ry="2" />
+<text  x="422.00" y="95.5" ></text>
+</g>
+<g >
+<title>core::clone::impls::&lt;impl core::clone::Clone for i32&gt;::clone (2 samples, 0.80%)</title><rect x="828.0" y="117" width="9.4" height="15.0" fill="rgb(212,181,28)" rx="2" ry="2" />
+<text  x="831.01" y="127.5" ></text>
+</g>
+<g >
+<title>load_elf_binary (1 samples, 0.40%)</title><rect x="1157.1" y="277" width="4.7" height="15.0" fill="rgb(225,178,6)" rx="2" ry="2" />
+<text  x="1160.09" y="287.5" ></text>
+</g>
+<g >
+<title>do_faccessat (1 samples, 0.40%)</title><rect x="89.9" y="245" width="4.7" height="15.0" fill="rgb(252,129,36)" rx="2" ry="2" />
+<text  x="92.92" y="255.5" ></text>
+</g>
+<g >
+<title>core::ptr::swap_nonoverlapping_one (59 samples, 23.51%)</title><rect x="865.6" y="85" width="277.4" height="15.0" fill="rgb(236,220,53)" rx="2" ry="2" />
+<text  x="868.62" y="95.5" >core::ptr::swap_nonoverlapping_one</text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.40%)</title><rect x="89.9" y="293" width="4.7" height="15.0" fill="rgb(228,39,24)" rx="2" ry="2" />
+<text  x="92.92" y="303.5" ></text>
+</g>
+<g >
+<title>core::mem::replace (3 samples, 1.20%)</title><rect x="33.5" y="357" width="14.1" height="15.0" fill="rgb(245,29,13)" rx="2" ry="2" />
+<text  x="36.51" y="367.5" ></text>
+</g>
+<g >
+<title>core::cmp::impls::&lt;impl core::cmp::PartialOrd for i32&gt;::lt (4 samples, 1.59%)</title><rect x="837.4" y="117" width="18.8" height="15.0" fill="rgb(213,63,45)" rx="2" ry="2" />
+<text  x="840.41" y="127.5" ></text>
+</g>
+<g >
+<title>[ld-2.31.so] (1 samples, 0.40%)</title><rect x="89.9" y="357" width="4.7" height="15.0" fill="rgb(215,53,53)" rx="2" ry="2" />
+<text  x="92.92" y="367.5" ></text>
+</g>
+<g >
+<title>strncpy_from_user (1 samples, 0.40%)</title><rect x="89.9" y="197" width="4.7" height="15.0" fill="rgb(222,86,36)" rx="2" ry="2" />
+<text  x="92.92" y="207.5" ></text>
+</g>
+<g >
+<title>core::iter::range::&lt;impl core::iter::traits::iterator::Iterator for core::ops::range::Range&lt;A&gt;&gt;::next (112 samples, 44.62%)</title><rect x="616.5" y="133" width="526.5" height="15.0" fill="rgb(246,117,32)" rx="2" ry="2" />
+<text  x="619.45" y="143.5" >core::iter::range::&lt;impl core::iter::traits::iterator::Iterator for core..</text>
+</g>
+<g >
+<title>[ld-2.31.so] (1 samples, 0.40%)</title><rect x="89.9" y="325" width="4.7" height="15.0" fill="rgb(242,1,46)" rx="2" ry="2" />
+<text  x="92.92" y="335.5" ></text>
+</g>
+<g >
+<title>core::ops::function::FnOnce::call_once (194 samples, 77.29%)</title><rect x="231.0" y="197" width="912.0" height="15.0" fill="rgb(242,224,1)" rx="2" ry="2" />
+<text  x="233.96" y="207.5" >core::ops::function::FnOnce::call_once</text>
+</g>
+<g >
+<title>getname_flags (1 samples, 0.40%)</title><rect x="89.9" y="213" width="4.7" height="15.0" fill="rgb(219,196,23)" rx="2" ry="2" />
+<text  x="92.92" y="223.5" ></text>
+</g>
+<g >
+<title>__x64_sys_execve (1 samples, 0.40%)</title><rect x="1157.1" y="341" width="4.7" height="15.0" fill="rgb(237,18,28)" rx="2" ry="2" />
+<text  x="1160.09" y="351.5" ></text>
+</g>
+<g >
+<title>[libc-2.31.so] (7 samples, 2.79%)</title><rect x="926.7" y="53" width="32.9" height="15.0" fill="rgb(242,123,31)" rx="2" ry="2" />
+<text  x="929.73" y="63.5" >[l..</text>
+</g>
+<g >
+<title>do_execveat_common.isra.0 (6 samples, 2.39%)</title><rect x="1161.8" y="325" width="28.2" height="15.0" fill="rgb(251,1,32)" rx="2" ry="2" />
+<text  x="1164.79" y="335.5" >d..</text>
+</g>
+<g >
+<title>mprotect_fixup (1 samples, 0.40%)</title><rect x="1157.1" y="245" width="4.7" height="15.0" fill="rgb(254,127,19)" rx="2" ry="2" />
+<text  x="1160.09" y="255.5" ></text>
+</g>
+<g >
+<title>mytest::main (194 samples, 77.29%)</title><rect x="231.0" y="181" width="912.0" height="15.0" fill="rgb(213,1,14)" rx="2" ry="2" />
+<text  x="233.96" y="191.5" >mytest::main</text>
+</g>
+<g >
+<title>std::panicking::try::do_call (194 samples, 77.29%)</title><rect x="231.0" y="261" width="912.0" height="15.0" fill="rgb(218,142,20)" rx="2" ry="2" />
+<text  x="233.96" y="271.5" >std::panicking::try::do_call</text>
+</g>
+<g >
+<title>bprm_execve (1 samples, 0.40%)</title><rect x="1157.1" y="309" width="4.7" height="15.0" fill="rgb(217,13,53)" rx="2" ry="2" />
+<text  x="1160.09" y="319.5" ></text>
+</g>
+<g >
+<title>[ld-2.31.so] (1 samples, 0.40%)</title><rect x="89.9" y="373" width="4.7" height="15.0" fill="rgb(229,219,41)" rx="2" ry="2" />
+<text  x="92.92" y="383.5" ></text>
+</g>
+<g >
+<title>&lt;i32 as core::iter::range::Step&gt;::forward_unchecked (2 samples, 0.80%)</title><rect x="94.6" y="357" width="9.4" height="15.0" fill="rgb(206,38,54)" rx="2" ry="2" />
+<text  x="97.62" y="367.5" ></text>
+</g>
+<g >
+<title>perf_event_addr_filters_exec (1 samples, 0.40%)</title><rect x="1185.3" y="213" width="4.7" height="15.0" fill="rgb(245,128,35)" rx="2" ry="2" />
+<text  x="1188.30" y="223.5" ></text>
+</g>
+<g >
+<title>core::mem::maybe_uninit::MaybeUninit&lt;T&gt;::uninit (2 samples, 0.80%)</title><rect x="1133.6" y="53" width="9.4" height="15.0" fill="rgb(254,50,28)" rx="2" ry="2" />
+<text  x="1136.59" y="63.5" ></text>
+</g>
+<g >
+<title>core::mem::maybe_uninit::MaybeUninit&lt;T&gt;::uninit (2 samples, 0.80%)</title><rect x="517.7" y="69" width="9.4" height="15.0" fill="rgb(231,145,38)" rx="2" ry="2" />
+<text  x="520.73" y="79.5" ></text>
+</g>
+<g >
+<title>setup_arg_pages (1 samples, 0.40%)</title><rect x="1157.1" y="261" width="4.7" height="15.0" fill="rgb(249,138,12)" rx="2" ry="2" />
+<text  x="1160.09" y="271.5" ></text>
+</g>
+<g >
+<title>user_path_at_empty (1 samples, 0.40%)</title><rect x="89.9" y="229" width="4.7" height="15.0" fill="rgb(239,28,39)" rx="2" ry="2" />
+<text  x="92.92" y="239.5" ></text>
+</g>
+<g >
+<title>ctx_resched (5 samples, 1.99%)</title><rect x="1161.8" y="229" width="23.5" height="15.0" fill="rgb(248,104,36)" rx="2" ry="2" />
+<text  x="1164.79" y="239.5" >c..</text>
+</g>
+<g >
+<title>[mytest] (1 samples, 0.40%)</title><rect x="513.0" y="53" width="4.7" height="15.0" fill="rgb(239,229,40)" rx="2" ry="2" />
+<text  x="516.03" y="63.5" ></text>
+</g>
+<g >
+<title>core::ptr::swap_nonoverlapping_one (8 samples, 3.19%)</title><rect x="193.3" y="357" width="37.7" height="15.0" fill="rgb(240,20,3)" rx="2" ry="2" />
+<text  x="196.35" y="367.5" >cor..</text>
+</g>
+<g >
+<title>__x64_sys_access (1 samples, 0.40%)</title><rect x="89.9" y="261" width="4.7" height="15.0" fill="rgb(243,169,16)" rx="2" ry="2" />
+<text  x="92.92" y="271.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.40%)</title><rect x="1157.1" y="373" width="4.7" height="15.0" fill="rgb(236,223,42)" rx="2" ry="2" />
+<text  x="1160.09" y="383.5" ></text>
+</g>
+<g >
+<title>perf (6 samples, 2.39%)</title><rect x="1161.8" y="389" width="28.2" height="15.0" fill="rgb(237,205,41)" rx="2" ry="2" />
+<text  x="1164.79" y="399.5" >p..</text>
+</g>
+<g >
+<title>core::ptr::swap_nonoverlapping_one (2 samples, 0.80%)</title><rect x="61.7" y="357" width="9.4" height="15.0" fill="rgb(245,9,38)" rx="2" ry="2" />
+<text  x="64.71" y="367.5" ></text>
+</g>
+<g >
+<title>core::mem::swap (31 samples, 12.35%)</title><rect x="381.4" y="117" width="145.7" height="15.0" fill="rgb(228,8,51)" rx="2" ry="2" />
+<text  x="384.39" y="127.5" >core::mem::swap</text>
+</g>
+<g >
+<title>do_syscall_64 (6 samples, 2.39%)</title><rect x="1161.8" y="357" width="28.2" height="15.0" fill="rgb(224,10,2)" rx="2" ry="2" />
+<text  x="1164.79" y="367.5" >d..</text>
+</g>
+<g >
+<title>core::intrinsics::copy_nonoverlapping (9 samples, 3.59%)</title><rect x="475.4" y="69" width="42.3" height="15.0" fill="rgb(224,217,53)" rx="2" ry="2" />
+<text  x="478.42" y="79.5" >cor..</text>
+</g>
+<g >
+<title>core::ptr::read (35 samples, 13.94%)</title><rect x="978.4" y="69" width="164.6" height="15.0" fill="rgb(239,204,13)" rx="2" ry="2" />
+<text  x="981.45" y="79.5" >core::ptr::read</text>
+</g>
+<g >
+<title>core::intrinsics::copy_nonoverlapping (9 samples, 3.59%)</title><rect x="917.3" y="69" width="42.3" height="15.0" fill="rgb(233,15,48)" rx="2" ry="2" />
+<text  x="920.33" y="79.5" >cor..</text>
+</g>
+<g >
+<title>native_write_msr (5 samples, 1.99%)</title><rect x="1161.8" y="165" width="23.5" height="15.0" fill="rgb(247,191,26)" rx="2" ry="2" />
+<text  x="1164.79" y="175.5" >n..</text>
+</g>
+<g >
+<title>core::num::&lt;impl i32&gt;::unchecked_add (6 samples, 2.39%)</title><rect x="799.8" y="101" width="28.2" height="15.0" fill="rgb(249,130,35)" rx="2" ry="2" />
+<text  x="802.80" y="111.5" >c..</text>
+</g>
+<g >
+<title>exec_binprm (6 samples, 2.39%)</title><rect x="1161.8" y="293" width="28.2" height="15.0" fill="rgb(242,92,38)" rx="2" ry="2" />
+<text  x="1164.79" y="303.5" >e..</text>
+</g>
+<g >
+<title>core::mem::size_of (4 samples, 1.59%)</title><rect x="959.6" y="69" width="18.8" height="15.0" fill="rgb(230,196,20)" rx="2" ry="2" />
+<text  x="962.64" y="79.5" ></text>
+</g>
+<g >
+<title>std::rt::lang_start_internal (194 samples, 77.29%)</title><rect x="231.0" y="309" width="912.0" height="15.0" fill="rgb(254,87,17)" rx="2" ry="2" />
+<text  x="233.96" y="319.5" >std::rt::lang_start_internal</text>
+</g>
+<g >
+<title>std::rt::lang_start::{{closure}} (194 samples, 77.29%)</title><rect x="231.0" y="229" width="912.0" height="15.0" fill="rgb(211,190,29)" rx="2" ry="2" />
+<text  x="233.96" y="239.5" >std::rt::lang_start::{{closure}}</text>
+</g>
+<g >
+<title>perf_pmu_enable.part.0 (5 samples, 1.99%)</title><rect x="1161.8" y="213" width="23.5" height="15.0" fill="rgb(251,13,49)" rx="2" ry="2" />
+<text  x="1164.79" y="223.5" >p..</text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.40%)</title><rect x="1157.1" y="357" width="4.7" height="15.0" fill="rgb(251,149,30)" rx="2" ry="2" />
+<text  x="1160.09" y="367.5" ></text>
+</g>
+<g >
+<title>core::ptr::read (19 samples, 7.57%)</title><rect x="437.8" y="85" width="89.3" height="15.0" fill="rgb(247,112,18)" rx="2" ry="2" />
+<text  x="440.81" y="95.5" >core::ptr:..</text>
+</g>
+<g >
+<title>__x64_sys_execve (6 samples, 2.39%)</title><rect x="1161.8" y="341" width="28.2" height="15.0" fill="rgb(223,76,28)" rx="2" ry="2" />
+<text  x="1164.79" y="351.5" >_..</text>
+</g>
+<g >
+<title>std::panicking::try (194 samples, 77.29%)</title><rect x="231.0" y="277" width="912.0" height="15.0" fill="rgb(208,190,53)" rx="2" ry="2" />
+<text  x="233.96" y="287.5" >std::panicking::try</text>
+</g>
+<g >
+<title>mytest::test1 (194 samples, 77.29%)</title><rect x="231.0" y="165" width="912.0" height="15.0" fill="rgb(253,66,21)" rx="2" ry="2" />
+<text  x="233.96" y="175.5" >mytest::test1</text>
+</g>
+<g >
+<title>core::intrinsics::copy_nonoverlapping (6 samples, 2.39%)</title><rect x="118.1" y="357" width="28.2" height="15.0" fill="rgb(239,4,1)" rx="2" ry="2" />
+<text  x="121.13" y="367.5" >c..</text>
+</g>
+<g >
+<title>[[stack]] (16 samples, 6.37%)</title><rect x="14.7" y="373" width="75.2" height="15.0" fill="rgb(239,213,30)" rx="2" ry="2" />
+<text  x="17.70" y="383.5" >[[stack]]</text>
+</g>
+<g >
+<title>[ld-2.31.so] (1 samples, 0.40%)</title><rect x="89.9" y="309" width="4.7" height="15.0" fill="rgb(228,58,30)" rx="2" ry="2" />
+<text  x="92.92" y="319.5" ></text>
+</g>
+<g >
+<title>load_elf_binary (6 samples, 2.39%)</title><rect x="1161.8" y="277" width="28.2" height="15.0" fill="rgb(240,8,36)" rx="2" ry="2" />
+<text  x="1164.79" y="287.5" >l..</text>
+</g>
+<g >
+<title>core::mem::replace (61 samples, 24.30%)</title><rect x="856.2" y="117" width="286.8" height="15.0" fill="rgb(226,153,43)" rx="2" ry="2" />
+<text  x="859.22" y="127.5" >core::mem::replace</text>
+</g>
+<g >
+<title>core::intrinsics::copy_nonoverlapping (18 samples, 7.17%)</title><rect x="1049.0" y="53" width="84.6" height="15.0" fill="rgb(211,13,36)" rx="2" ry="2" />
+<text  x="1051.96" y="63.5" >core::int..</text>
+</g>
+<g >
+<title>core::iter::range::&lt;impl core::iter::traits::iterator::Iterator for core::ops::range::Range&lt;A&gt;&gt;::next (58 samples, 23.11%)</title><rect x="254.5" y="149" width="272.6" height="15.0" fill="rgb(229,46,10)" rx="2" ry="2" />
+<text  x="257.46" y="159.5" >core::iter::range::&lt;impl core::iter:..</text>
+</g>
+<g >
+<title>[libc-2.31.so] (13 samples, 5.18%)</title><rect x="1063.1" y="37" width="61.1" height="15.0" fill="rgb(213,18,33)" rx="2" ry="2" />
+<text  x="1066.07" y="47.5" >[libc-..</text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (6 samples, 2.39%)</title><rect x="1161.8" y="373" width="28.2" height="15.0" fill="rgb(227,154,26)" rx="2" ry="2" />
+<text  x="1164.79" y="383.5" >e..</text>
+</g>
+<g >
+<title>[[heap]] (1 samples, 0.40%)</title><rect x="10.0" y="373" width="4.7" height="15.0" fill="rgb(231,46,38)" rx="2" ry="2" />
+<text  x="13.00" y="383.5" ></text>
+</g>
+<g >
+<title>intel_pmu_enable_all (5 samples, 1.99%)</title><rect x="1161.8" y="181" width="23.5" height="15.0" fill="rgb(252,86,51)" rx="2" ry="2" />
+<text  x="1164.79" y="191.5" >i..</text>
+</g>
+<g >
+<title>core::mem::replace (35 samples, 13.94%)</title><rect x="362.6" y="133" width="164.5" height="15.0" fill="rgb(253,106,29)" rx="2" ry="2" />
+<text  x="365.59" y="143.5" >core::mem::replace</text>
+</g>
+<g >
+<title>_start (194 samples, 77.29%)</title><rect x="231.0" y="373" width="912.0" height="15.0" fill="rgb(218,191,7)" rx="2" ry="2" />
+<text  x="233.96" y="383.5" >_start</text>
+</g>
+<g >
+<title>&lt;i32 as core::iter::range::Step&gt;::forward_unchecked (3 samples, 1.20%)</title><rect x="14.7" y="357" width="14.1" height="15.0" fill="rgb(206,151,5)" rx="2" ry="2" />
+<text  x="17.70" y="367.5" ></text>
+</g>
+<g >
+<title>begin_new_exec (6 samples, 2.39%)</title><rect x="1161.8" y="261" width="28.2" height="15.0" fill="rgb(215,98,43)" rx="2" ry="2" />
+<text  x="1164.79" y="271.5" >b..</text>
+</g>
+<g >
+<title>[mytest] (2 samples, 0.80%)</title><rect x="1124.2" y="37" width="9.4" height="15.0" fill="rgb(217,216,42)" rx="2" ry="2" />
+<text  x="1127.18" y="47.5" ></text>
+</g>
+<g >
+<title>[libc-2.31.so] (6 samples, 2.39%)</title><rect x="484.8" y="53" width="28.2" height="15.0" fill="rgb(229,26,30)" rx="2" ry="2" />
+<text  x="487.82" y="63.5" >[..</text>
+</g>
+<g >
+<title>perf_event_mmap (1 samples, 0.40%)</title><rect x="1157.1" y="229" width="4.7" height="15.0" fill="rgb(230,63,22)" rx="2" ry="2" />
+<text  x="1160.09" y="239.5" ></text>
+</g>
+<g >
+<title>&lt;i32 as core::iter::range::Step&gt;::forward_unchecked (18 samples, 7.17%)</title><rect x="743.4" y="117" width="84.6" height="15.0" fill="rgb(244,137,12)" rx="2" ry="2" />
+<text  x="746.39" y="127.5" >&lt;i32 as c..</text>
+</g>
+<g >
+<title>core::ptr::read (3 samples, 1.20%)</title><rect x="47.6" y="357" width="14.1" height="15.0" fill="rgb(225,89,44)" rx="2" ry="2" />
+<text  x="50.61" y="367.5" ></text>
+</g>
+<g >
+<title>mytest::test2 (131 samples, 52.19%)</title><rect x="527.1" y="149" width="615.9" height="15.0" fill="rgb(246,24,10)" rx="2" ry="2" />
+<text  x="530.13" y="159.5" >mytest::test2</text>
+</g>
+<g >
+<title>bprm_execve (6 samples, 2.39%)</title><rect x="1161.8" y="309" width="28.2" height="15.0" fill="rgb(252,116,11)" rx="2" ry="2" />
+<text  x="1164.79" y="319.5" >b..</text>
+</g>
+<g >
+<title>core::mem::swap (60 samples, 23.90%)</title><rect x="860.9" y="101" width="282.1" height="15.0" fill="rgb(250,173,42)" rx="2" ry="2" />
+<text  x="863.92" y="111.5" >core::mem::swap</text>
+</g>
+<g >
+<title>all (251 samples, 100%)</title><rect x="10.0" y="405" width="1180.0" height="15.0" fill="rgb(230,89,8)" rx="2" ry="2" />
+<text  x="13.00" y="415.5" ></text>
+</g>
+<g >
+<title>core::cmp::impls::&lt;impl core::cmp::PartialOrd for i32&gt;::lt (2 samples, 0.80%)</title><rect x="108.7" y="357" width="9.4" height="15.0" fill="rgb(212,141,49)" rx="2" ry="2" />
+<text  x="111.73" y="367.5" ></text>
+</g>
+<g >
+<title>core::ptr::swap_nonoverlapping_one (29 samples, 11.55%)</title><rect x="390.8" y="101" width="136.3" height="15.0" fill="rgb(208,92,41)" rx="2" ry="2" />
+<text  x="393.80" y="111.5" >core::ptr::swap_n..</text>
+</g>
+<g >
+<title>[unknown] (29 samples, 11.55%)</title><rect x="94.6" y="373" width="136.4" height="15.0" fill="rgb(222,21,47)" rx="2" ry="2" />
+<text  x="97.62" y="383.5" >[unknown]</text>
+</g>
+<g >
+<title>__libc_start_main (194 samples, 77.29%)</title><rect x="231.0" y="357" width="912.0" height="15.0" fill="rgb(207,177,10)" rx="2" ry="2" />
+<text  x="233.96" y="367.5" >__libc_start_main</text>
+</g>
+<g >
+<title>std::panic::catch_unwind (194 samples, 77.29%)</title><rect x="231.0" y="293" width="912.0" height="15.0" fill="rgb(248,19,32)" rx="2" ry="2" />
+<text  x="233.96" y="303.5" >std::panic::catch_unwind</text>
+</g>
+<g >
+<title>core::cmp::impls::&lt;impl core::cmp::PartialOrd for i32&gt;::lt (2 samples, 0.80%)</title><rect x="353.2" y="133" width="9.4" height="15.0" fill="rgb(221,90,48)" rx="2" ry="2" />
+<text  x="356.19" y="143.5" ></text>
+</g>
+<g >
+<title>std::rt::lang_start (194 samples, 77.29%)</title><rect x="231.0" y="325" width="912.0" height="15.0" fill="rgb(232,2,41)" rx="2" ry="2" />
+<text  x="233.96" y="335.5" >std::rt::lang_start</text>
+</g>
+<g >
+<title>perf_iterate_ctx (1 samples, 0.40%)</title><rect x="1185.3" y="229" width="4.7" height="15.0" fill="rgb(209,212,33)" rx="2" ry="2" />
+<text  x="1188.30" y="239.5" ></text>
+</g>
+<g >
+<title>x86_pmu_enable (5 samples, 1.99%)</title><rect x="1161.8" y="197" width="23.5" height="15.0" fill="rgb(250,128,5)" rx="2" ry="2" />
+<text  x="1164.79" y="207.5" >x..</text>
+</g>
+<g >
+<title>core::ops::function::impls::&lt;impl core::ops::function::FnOnce&lt;A&gt; for &amp;F&gt;::call_once (194 samples, 77.29%)</title><rect x="231.0" y="245" width="912.0" height="15.0" fill="rgb(216,137,43)" rx="2" ry="2" />
+<text  x="233.96" y="255.5" >core::ops::function::impls::&lt;impl core::ops::function::FnOnce&lt;A&gt; for &amp;F&gt;::call_once</text>
+</g>
+<g >
+<title>perf_iterate_sb (1 samples, 0.40%)</title><rect x="1157.1" y="213" width="4.7" height="15.0" fill="rgb(228,213,12)" rx="2" ry="2" />
+<text  x="1160.09" y="223.5" ></text>
+</g>
+<g >
+<title>core::intrinsics::copy_nonoverlapping (2 samples, 0.80%)</title><rect x="1143.0" y="373" width="9.4" height="15.0" fill="rgb(232,89,3)" rx="2" ry="2" />
+<text  x="1145.99" y="383.5" ></text>
+</g>
+<g >
+<title>core::mem::replace (1 samples, 0.40%)</title><rect x="1152.4" y="373" width="4.7" height="15.0" fill="rgb(243,167,1)" rx="2" ry="2" />
+<text  x="1155.39" y="383.5" ></text>
+</g>
+<g >
+<title>&lt;i32 as core::iter::range::Step&gt;::forward_unchecked (10 samples, 3.98%)</title><rect x="306.2" y="133" width="47.0" height="15.0" fill="rgb(252,139,3)" rx="2" ry="2" />
+<text  x="309.18" y="143.5" >&lt;i32..</text>
+</g>
+<g >
+<title>exec_binprm (1 samples, 0.40%)</title><rect x="1157.1" y="293" width="4.7" height="15.0" fill="rgb(246,60,32)" rx="2" ry="2" />
+<text  x="1160.09" y="303.5" ></text>
+</g>
+<g >
+<title>core::mem::size_of (2 samples, 0.80%)</title><rect x="428.4" y="85" width="9.4" height="15.0" fill="rgb(237,183,22)" rx="2" ry="2" />
+<text  x="431.41" y="95.5" ></text>
+</g>
+<g >
+<title>[ld-2.31.so] (1 samples, 0.40%)</title><rect x="89.9" y="341" width="4.7" height="15.0" fill="rgb(249,61,4)" rx="2" ry="2" />
+<text  x="92.92" y="351.5" ></text>
+</g>
+<g >
+<title>[libc-2.31.so] (1 samples, 0.40%)</title><rect x="28.8" y="357" width="4.7" height="15.0" fill="rgb(228,87,27)" rx="2" ry="2" />
+<text  x="31.80" y="367.5" ></text>
+</g>
+<g >
+<title>core::mem::swap (7 samples, 2.79%)</title><rect x="160.4" y="357" width="32.9" height="15.0" fill="rgb(246,154,6)" rx="2" ry="2" />
+<text  x="163.44" y="367.5" >co..</text>
+</g>
+<g >
+<title>mytest (245 samples, 97.61%)</title><rect x="10.0" y="389" width="1151.8" height="15.0" fill="rgb(252,61,53)" rx="2" ry="2" />
+<text  x="13.00" y="399.5" >mytest</text>
+</g>
+<g >
+<title>[libc-2.31.so] (2 samples, 0.80%)</title><rect x="419.0" y="69" width="9.4" height="15.0" fill="rgb(237,34,38)" rx="2" ry="2" />
+<text  x="422.00" y="79.5" ></text>
+</g>
+<g >
+<title>main (194 samples, 77.29%)</title><rect x="231.0" y="341" width="912.0" height="15.0" fill="rgb(223,116,38)" rx="2" ry="2" />
+<text  x="233.96" y="351.5" >main</text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.40%)</title><rect x="89.9" y="277" width="4.7" height="15.0" fill="rgb(223,186,5)" rx="2" ry="2" />
+<text  x="92.92" y="287.5" ></text>
+</g>
+<g >
+<title>std::sys_common::backtrace::__rust_begin_short_backtrace (194 samples, 77.29%)</title><rect x="231.0" y="213" width="912.0" height="15.0" fill="rgb(239,36,29)" rx="2" ry="2" />
+<text  x="233.96" y="223.5" >std::sys_common::backtrace::__rust_begin_short_backtrace</text>
+</g>
+<g >
+<title>perf_event_mmap_output (1 samples, 0.40%)</title><rect x="1157.1" y="197" width="4.7" height="15.0" fill="rgb(221,40,42)" rx="2" ry="2" />
+<text  x="1160.09" y="207.5" ></text>
+</g>
+<g >
+<title>core::num::&lt;impl i32&gt;::unchecked_add (6 samples, 2.39%)</title><rect x="325.0" y="117" width="28.2" height="15.0" fill="rgb(210,124,0)" rx="2" ry="2" />
+<text  x="327.98" y="127.5" >c..</text>
+</g>
+<g >
+<title>do_execveat_common.isra.0 (1 samples, 0.40%)</title><rect x="1157.1" y="325" width="4.7" height="15.0" fill="rgb(211,14,47)" rx="2" ry="2" />
+<text  x="1160.09" y="335.5" ></text>
+</g>
+<g >
+<title>core::ptr::write (4 samples, 1.59%)</title><rect x="71.1" y="357" width="18.8" height="15.0" fill="rgb(250,217,51)" rx="2" ry="2" />
+<text  x="74.12" y="367.5" ></text>
+</g>
+<g >
+<title>perf_event_exec (6 samples, 2.39%)</title><rect x="1161.8" y="245" width="28.2" height="15.0" fill="rgb(228,13,42)" rx="2" ry="2" />
+<text  x="1164.79" y="255.5" >p..</text>
+</g>
+<g >
+<title>core::clone::impls::&lt;impl core::clone::Clone for i32&gt;::clone (1 samples, 0.40%)</title><rect x="104.0" y="357" width="4.7" height="15.0" fill="rgb(209,201,33)" rx="2" ry="2" />
+<text  x="107.02" y="367.5" ></text>
+</g>
+<g >
+<title>core::clone::impls::&lt;impl core::clone::Clone for i32&gt;::clone (1 samples, 0.40%)</title><rect x="10.0" y="357" width="4.7" height="15.0" fill="rgb(209,18,21)" rx="2" ry="2" />
+<text  x="13.00" y="367.5" ></text>
+</g>
+<g >
+<title>core::mem::replace (3 samples, 1.20%)</title><rect x="146.3" y="357" width="14.1" height="15.0" fill="rgb(206,169,53)" rx="2" ry="2" />
+<text  x="149.33" y="367.5" ></text>
+</g>
+</g>
+</svg>

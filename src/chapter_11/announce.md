@@ -10,26 +10,30 @@
 
 ### 本刊动态
 
+在去年RustChinaConf大会上我萌生想法，Rust Magazine 中文社区月刊开始启动，迄今为止也坚持下来每月一期，虽然也得到了一些公司和社区成员的投稿支持，但感觉效果并不符合我的预期，打算做完今年两期就停刊了。
 
+月刊访问量近两万，GitHub star 数近 600，不缺读者，关键是缺少投稿的人。我搞这个是希望国内社区和公司把自己研究、使用、学习rust的心得经验、生产经验分享出来。但投稿并不多，不符合我的预期。虽然还是可以继续搞，但对我而言这不是我期望的就没必要搞了。
 
-
-
-
+如果后续投稿量还上不来的话，也许本刊会变为内部期刊。
 
 
 ### 上期（十月刊）访问数据统计小结
 
 **用户数**
 
-- 新用户新增 2,063
+- 新用户新增 2,993
 
 **浏览量：**
 
-- 网页浏览量 ： 14,391
+- 网页浏览量 ： 19,511
 
 **十月份比较受欢迎的原创文章 Top 5（按访问量依次排名）：**
 
-- 
+- [Delicate 为什么从 actix-web 迁移到 poem](https://rustmagazine.github.io/rust_magazine_2021/chapter_10/delicate.html)
+- [《Rust 安全编码规范》 初稿发布](https://rustmagazine.github.io/rust_magazine_2021/chapter_10/rust-coding-guidelines.html)
+- [Rust Async trait 更新与多线程](https://rustmagazine.github.io/rust_magazine_2021/chapter_10/async-trait.html)
+- [聚焦Rust基金会新成员 | 为什么要加入 Rust 基金会](https://rustmagazine.github.io/rust_magazine_2021/chapter_10/rust-foundation.html)
+- [【趣文】Rust 公案 ｜ 新锈与大师的对话](https://rustmagazine.github.io/rust_magazine_2021/chapter_10/rust-koans.html)
 
 **九月份比较受欢迎的原创文章 Top 5（按访问量依次排名）：**
 

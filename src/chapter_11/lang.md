@@ -65,7 +65,19 @@ Rumbul 拥有在执行和学术委员会工作的广泛背景，曾担任广告�
 
 [https://doc.rust-lang.org/nightly/std/simd/index.html](https://doc.rust-lang.org/nightly/std/simd/index.html)
 
-### 内联汇编语法快稳定了
+## 内联汇编语法快稳定了
 
 跟踪贴在这里：https://github.com/rust-lang/rust/issues/72016#issuecomment-964186287
 
+
+## Rust Mod 团队辞职以抗议“不负责任”的核心团队
+
+Rust Mod 团队，是 Rust 审核团队（moderation team）。辞职是通过GitHub上的[ PR 请求](https://github.com/rust-lang/team/pull/671)提出的，其中团队成员Andrew Gallant写道，该团队辞职 "是为了抗议核心团队将自己置于不对任何人负责的地位，除了他们自己。"
+
+根据描述Rust治理的页面，审核团队的目的就是帮助 "维护行为准则和社区标准"。而根据辞职信，他们无法做到这一点，核心团队似乎在这些范围之外。
+
+这与今年早些时候Steve Klabnik对Rust基金会寻找执行董事和亚马逊对Rust基金会的影响无关：核心团队是一个独立于Rust基金会的组织，Rust基金会后来选择了执行董事，而核心团队和审核团队中似乎没有人与亚马逊有任何关系。"
+
+这对 Rust 语言发展是否有影响？目前为止还没有产生什么实质影响。这件事的本质是大型开源组织治理中必会遇到的问题之一。作为 Rust 开发者，没必要大惊小怪。
+
+[https://thenewstack.io/rust-mod-team-resigns-in-protest-of-unaccountable-core-team/](https://thenewstack.io/rust-mod-team-resigns-in-protest-of-unaccountable-core-team/)

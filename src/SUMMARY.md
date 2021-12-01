@@ -300,7 +300,36 @@
     - [Rust生态安全漏洞总结系列 | Part 4](./chapter_10/rust-security-part4.md)
 
 
-- [十一月刊（November）| 待发布]()
+- [十一月刊（November）](./chapter_11/toc.md)
+    - [发刊通告](./chapter_11/announce.md)
+    - [官方动态](./chapter_11/lang.md)
+    - [社区热点](./chapter_11/hots.md)
+    - [活动回顾](./chapter_11/events.md)
+    - [本月招聘](./chapter_11/jobs.md)
+    - [RFC 导读 | 构建安全的 I/O ](./chapter_11/io-safety.md)
+    - [PL 观点 |  未定义行为也有好的一面](./chapter_11/pl_ub.md)
+    - [区块链快讯](./chapter_11/meta-blockchain.md)
+    - [外刊评论](./chapter_11/foreign_journal_review.md)
+    - [【论文导读】Rust 程序 Bug 静态检测工具 MirChecker](./chapter_11/mirchecker.md)
+    - [华为 | no std的可执行文件编写和运行](./chapter_11/no-std.md)
+    - [华为 | 硬件加速指令实践心得](./chapter_11/core-arch.md)
+    - [DatenLord | Rust程序性能分析](./chapter_11/rust-profiling.md)
+    - [蚂蚁集团 ｜ Play With Your Async Code](./chapter_11/play-async.md)
+    - [学习资源](./chapter_11/learn.md)
+    - [Rust Tips : 软链接引发的卡死问题](./chapter_11/symlink_metadata.md)
+    - [Rust 源码阅读俱乐部 |  第一期 : 名称解析](./chapter_11/rust-reading-club-part1.md)
+    - [【我读】Rust 语言应该使用什么内存模型？](./chapter_11/rust-memory-model.md)
+    - [Rust AEAD benchmark 与 Const generics](./chapter_11/bench-and-const.md)
+    - [Rust与Linux信号](./chapter_11/signal.md)
+    - [GitHub 趋势榜](./chapter_11/github_trending.md)
+    - [推荐项目 ｜ 基础工具库](./chapter_11/tool_libs.md)
+    - [每月安全公告](./chapter_11/security-log.md)
+    - [特洛伊之源｜ 在 Rust 代码中隐藏无形的漏洞](./chapter_11/trojan-source.md)
+    - [Rust Crates可能的后门与Cargo](./chapter_11/crates-backdoor.md)
+
+
+    
+
 - [十二月刊（December）| 待发布]()
 
 
