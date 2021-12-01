@@ -204,3 +204,11 @@ Convex的创始团队分享了使用Rust的好处和一些取舍心得体会。�
 合并队列是一个与您的版本控制系统（本文将重点关注git和 GitHub）集成的应用程序，它要求以原子方式合并代码更改，从而确保主分支始终包含经过全面测试的代码版本。 许多工程团队和开源项目正在引入合并队列作为其工作流程的一部分。这篇文章探讨了使用合并队列的几个原因，并描述了如何设置 Bors，Rust 语言项目使用的合并队列实现。
 
 - [https://kflansburg.com/posts/merge-queues/](https://kflansburg.com/posts/merge-queues/)
+
+## 使用 Rust 和 WebRTC 为浏览器实现 Raft
+
+介绍了 [WRaft](https://github.com/shosti/wraft) 。这是一个基于 WebRTC 的 Raft 实现，用 Rust 编写，用于 WebAssembly。
+
+[https://wraft0.eevans.co](https://wraft0.eevans.co%2C/) 上有几个演示应用程序，代码[在 GitHub 上](https://github.com/shosti/wraft)是[开源的](https://github.com/shosti/wraft)。这是一个有趣且具有挑战性的项目，所以我想我会写一篇关于这种体验的博客文章，作为一种“事后分析”。
+
+[https://eevans.co/blog/wraft/](https://eevans.co/blog/wraft/)

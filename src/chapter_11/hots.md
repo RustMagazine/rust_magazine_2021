@@ -108,7 +108,7 @@ scan!("{} {}", name, age).expect("Invalid input!");
 
 如果想参与投票，请访问[原文](https://strawpoll.com/zxds5jye6)投票。
 
-### RustSBI-Nezha项目已经可以在oreboot引导链中使用
+##  RustSBI-Nezha项目已经可以在oreboot引导链中使用
 
 oreboot是类似于coreboot的引导程序项目，而RustSBI是适用于RISC-V的引导程序环境，这两者都是纯粹由rust编写的嵌入式应用程序。
 
@@ -133,3 +133,14 @@ hyperfine -h | false
  Artichoke （Rust 实现的 Ruby） 是如何避免这个错误的： [https://github.com/artichoke/artichoke/blob/d527412f9438aeba4cadb1f4303237f6f9e0cd4d/src/bin/artichoke.rs#L138-L173](https://github.com/artichoke/artichoke/blob/d527412f9438aeba4cadb1f4303237f6f9e0cd4d/src/bin/artichoke.rs#L138-L173)
 
 [https://www.reddit.com/r/rust/comments/r48hem/claps_defaults_cause_rust_clis_to_panic_on_help/](https://www.reddit.com/r/rust/comments/r48hem/claps_defaults_cause_rust_clis_to_panic_on_help/)
+
+## Hubris ： 新的嵌入式操作系统
+
+Hubris 是由[Oxide Computer Company](https://oxide.computer/)开发的用于微控制器的操作系统。我们还在Oxide 博客上[发布](https://oxide.computer/blog/hubris-and-humility)了[一篇宣布Hubris](https://oxide.computer/blog/hubris-and-humility)的博客文章。
+
+Hubris 提供抢占式多任务处理、单独编译的组件之间的内存隔离、隔离崩溃的驱动程序并在不影响系统其余部分的情况下重新启动它们的能力，以及灵活的组件间消息传递，消除了对大多数系统调用的需要——大约 2000 行 Rust . Hubris 调试器 [Humility](https://github.com/oxidecomputer/humility) 允许我们走近正在运行的系统并检查所有任务的交互，或捕获转储以进行离线调试。
+
+然而，Hubris 可能更有趣，因为它没有运行时创建或销毁任务的操作，没有动态资源分配，没有以特权模式运行的驱动程序代码，系统中也没有C代码。这通过构造消除了许多通常存在于类似系统中的攻击面。
+
+- [https://github.com/oxidecomputer/hubris](https://github.com/oxidecomputer/hubris)
+- [文档](https://hubris.oxide.computer/reference/)
