@@ -11,6 +11,14 @@
 - [GitHub Page 阅读](https://rustmagazine.github.io/rust_magazine_2021/)
 - [语雀阅读](https://www.yuque.com/chaosbot/rust_magazine_2021)
 
+## 如何贡献？
+
+为月刊做贡献有下面几种方式：
+
+1. 修正错误：查看每月文章，如果发现错误，可以直接提交 PR 修正。
+2. 补充内容：查看当月对应目录下的markdown文件，如果有标题，但内容空缺，欢迎补充，同样是发 PR。
+3. 新增内容：如果你在当月有想要投稿的文章，可以直接发PR，文章为 markdown 格式，放到当月对应目录下。
+
 ### PDF 下载
 
 2021 上半年集合 PDF： [下载](https://github.com/RustMagazine/rust_magazine_2021/releases/tag/0.5)

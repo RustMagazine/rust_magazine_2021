@@ -7,19 +7,13 @@
 ## Rust 资讯
 
 - [官方动态](./lang.md)
-
 - [社区热点](./hots.md)
-
 - [活动回顾](./events.md)
-
 - [本月招聘](./jobs.md)
-
 - [RFC 导读 | 构建安全的 I/O ](./io-safety.md)
-
 - [PL 观点 |  未定义行为也有好的一面](./pl_ub.md)
 
 ## 元宇宙与区块链
-
 - [区块链快讯](./meta-blockchain.md)
 
 ## 外刊评论
@@ -50,7 +44,6 @@
 - [【我读】Rust 语言应该使用什么内存模型？](./rust-memory-model.md)
 - [Rust AEAD benchmark 与 Const generics](./bench-and-const.md)
 - [Rust与Linux信号](./signal.md)
-
 
 ## 开源项目巡礼
 
