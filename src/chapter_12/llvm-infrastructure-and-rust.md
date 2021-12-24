@@ -1,8 +1,8 @@
 
 # LLVM基础设施和Rust
 
-> 原文地址: [LLVM Infrastructure and Rust](https://www.bexxmodd.com/log/llvm-infrastrucutre-and-rust/7)
-> 翻译来源: [LLVM基础设施和Rust](https://www.ttalk.im/2021/12/llvm-infrastructure-and-rust.html)
+>     原文地址: [LLVM Infrastructure and Rust](https://www.bexxmodd.com/log/llvm-infrastrucutre-and-rust/7)
+>     翻译来源: [LLVM基础设施和Rust](https://www.ttalk.im/2021/12/llvm-infrastructure-and-rust.html)
 
 LLVM是许多编程语言后端引擎。 它被C、C++、Rust、Go和Swift等使用。这篇博客主要是LLVM相关话题，我将探讨以下主题： 
 
@@ -31,7 +31,7 @@ LLVM的中间代码（IR）是一种类似于汇编的低级编程语言。 但�
 
 编译过程可以分为三个部分。 前端、优化、后端（图 1-a）。 编译过程从前端开始。 首先，预处理器开始组织源代码。 这是外部库扩展到目标源代码的阶段。 在Rust中，该指令由use语句定义。 C和C++中的一个类似指令是#include语句。 
 
-![图1-a 程序的生命周期](./image/llvm-infrastrucutre-and-rust/CofrtbC.png)
+![图1-a 程序的生命周期](./image/llvm-infrastructure-and-rust/CofrtbC.png)
 
 其次，是解析。 在此阶段，代码会被解析，从而发现语法错误，并构建[抽象语法树 (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree?utm_source=ttalk.im&utm_medium=website&utm_campaign=Tech%2520Talk)。 前端编译的第三步是IR Generation。 在这一步，编译器将AST转换为中间代码（IR）并输出结果。 
 
@@ -45,7 +45,7 @@ LLVM的中间代码（IR）是一种类似于汇编的低级编程语言。 但�
 
 当源代码转换为LLVMIR 时，它可以采用三种格式之一（图 1-b）。内存格式是一种二进制文件，适用于编译过程中的前端。 其他两种格式是Bitcode和Assembly。Bitcode是一种二进制磁盘存储格式，适用于快速加载，因为它具有更高的内存效率。Assembly是一种便于人类阅读的文本格式。
 
-![图1-b LLVM IR的格式](./image/llvm-infrastrucutre-and-rust/2021-12/GY2HcMK.png)
+![图1-b LLVM IR的格式](./image/llvm-infrastrucutre-and-rust/GY2HcMK.png)
 
 你可能想知道为什么要使用IR/BC而不是原生汇编和原生二进制？原因是本机程序集与平台的机器代码一对一绑定。 这取决于目标的体系结构，例如，x86的程序汇编和ARM的汇编会有所不同。 原生汇编通过汇编程序转换为原生二进制文件，当然LLVM也包含此功能。 这是[开箱即用的LLVM pass列表](https://github.com/llvm/llvm-project/blob/main/llvm/docs/Passes.rst)。 但这还不是全部，你可以实现你自己的pass来清理或优化源代码。
 
@@ -63,7 +63,7 @@ LLVM IR，就像任何其他系统一样，它有自己的程序结构（图2-a�
 
 LLVM IR 中的实际程序结构由分层容器组成。 在顶层，我们有模块。 它对应前端编译器的每个翻译单元。 模块可以与合并函数定义，以供LLVM链接器链接时使用。函数是下一级容器，包括函数签名及其基本块。基本块是一组按顺序执行的指令。 基本块有一个入口和一个出口。 第一个块称为入口块。 最后，IR有指令。 指令是可执行的单行（图 2-a）。 
 
-![图2-a IR程序结构](./image/llvm-infrastrucutre-and-rust/YphTMST.png)
+![图2-a IR程序结构](./image/llvm-infrastructure-and-rust/YphTMST.png)
 
 在IR文件中你会遇到两种变量，局部变量，用%符号表示，全局变量用@符号表示。LLVM IR可以使用无限数量的临时寄存器，而不是像本地汇编程序那样使用预定义数量的寄存器。 IR的寄存器由整数定义，例如 1,2,3,..N。 例如，`%2 = load i32, i32* %x` 表示将存储在局部变量x 的地址处的值加载到临时寄存器2中。 
 
@@ -212,7 +212,7 @@ panic1:                                           ; preds = %bb3
 
 `bb5`标签标记了while循环的退出块。 在这里，它将`%acc`地址中的值加载到临时量`%1`中，并从函数中返回它。 标签`bb2`是while循环体的入口。 while循环的主体分为两半。 第一个，负责乘法运算（`bb2`标签），第二个负责递减`n`，或者说是减法运算。 操作`n = n - 1`是通过调用另一个用于无符号减法的内部函数来完成的。 其余的操作与我们在`square`函数中看到的相同（图4-a）。 
 
-![图4-a 控制流和基本块](./image/llvm-infrastrucutre-and-rust/2021-12/Rb7zvTN.png)
+![图4-a 控制流和基本块](./image/llvm-infrastructure-and-rust/Rb7zvTN.png)
 
 你应该已经注意到SSA在此处起作用。对于每条赋值指令，IR都为每条指令引入了新的未命名临时量，而不是像源代码中定义的那样将值重新赋值给`n`和`acc`。未命名临时量的编号在每个实例生成时在函数内是从0开始递增。 
 
