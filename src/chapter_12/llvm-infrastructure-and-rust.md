@@ -220,7 +220,7 @@ LLVM IR支持二进制数的二进制补码。它具有整数数据类型，如i
 
 LLVM的类层次结构有点复杂。 基础对象是所谓的`Value`，用于表示SSA寄存器。 所有其他类都继承自它。 然后是`User`类，然后是`Instruction`、`Operator`、`Contstnt`类等（图4-b）。 这是LLVM中[完整类继承树](https://llvm.org/doxygen/classllvm_1_1Value.html)。 
 
-![图4-b LLVM类继承](./image/llvm-infrastrucutre-and-rust/qjLmuFW.png)
+![图4-b LLVM类继承](./image/llvm-infrastructure-and-rust/qjLmuFW.png)
 
 LLVM语言有许多高级结构、类型、常量、函数、代码生成指令等。如果你有兴趣了解更多信息，可以翻阅浏览[参考手册](https://llvm.org/docs/LangRef.html)。 
 
