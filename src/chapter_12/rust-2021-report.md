@@ -54,3 +54,5 @@
 [https://rust-sci.github.io/](https://rust-sci.github.io/)
 
 [https://rust-ml.github.io/linfa/](https://rust-ml.github.io/linfa/)
+
+[https://able.bio/haixuanTao/data-manipulation-polars-vs-rust--3def44c8](https://able.bio/haixuanTao/data-manipulation-polars-vs-rust--3def44c8)
