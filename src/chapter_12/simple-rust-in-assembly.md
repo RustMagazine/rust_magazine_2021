@@ -505,4 +505,4 @@ GitHub：https://github.com/KernelErr
 
 个人博客：https://lirui.tech/
 
-联系邮箱：[xl00enz3k@mozmail.com](mailto:xl00enz3k@mozmail.com)(最大支持150⁩ ⁨KB的电子邮件，含附件)
+联系邮箱：me@lirui.tech
