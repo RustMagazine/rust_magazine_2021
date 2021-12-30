@@ -283,6 +283,17 @@ Rust 中文社群 飞书群 邀请你加入：
 
 - [https://www.bilibili.com/video/BV1vF411B7W7](https://www.bilibili.com/video/BV1vF411B7W7)
 
+## 第十二期
+
+【主要内容】
+
+- rustlings | error handle
+- 自由讨论： 今天有什么思考？
+
+【回放】
+
+- [https://www.bilibili.com/video/BV1JZ4y1D7Sp](https://www.bilibili.com/video/BV1JZ4y1D7Sp)
+
 # 圣诞特辑 ：围绕 EmbarkStudios 的开源生态来理解Rust在图形计算方向的潜力
 
 【主要内容】
