@@ -56,3 +56,11 @@
 [https://rust-ml.github.io/linfa/](https://rust-ml.github.io/linfa/)
 
 [https://able.bio/haixuanTao/data-manipulation-polars-vs-rust--3def44c8](https://able.bio/haixuanTao/data-manipulation-polars-vs-rust--3def44c8)
+
+https://www.tockos.org/
+
+https://github.com/google/tock-on-titan
+
+https://github.com/google/OpenSK
+
+https://cloud.tencent.com/developer/article/1617840
