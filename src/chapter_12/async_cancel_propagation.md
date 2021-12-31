@@ -4,7 +4,7 @@
 
 > 原文: [tokio 异步传播的缺陷](https://pymongo.github.io/#/2021/12/async_cancel_propagation.md)
 
-最近项目中遇到一些 Bug: tokio channel 的接收方不知道为何被 drop 掉了导致 send Error
+最近项目中遇到一些 Bug:` tokio channel `的接收方不知道为何被 drop 掉了导致 `send Error`
 
 经过 Debug 后发现其实是 hyper 的 cancel propagation 导致的，
 以下这个对 hyper 源码中 examples/web_api.rs 的改动就能复现

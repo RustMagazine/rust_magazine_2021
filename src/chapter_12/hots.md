@@ -23,3 +23,26 @@
 - [https://www.phoronix.com/scan.php?page=news_item&px=Rust-For-Linux-v2](https://www.phoronix.com/scan.php?page=news_item&px=Rust-For-Linux-v2)
 - [kernel  crate 文档](https://rust-for-linux.github.io/docs/kernel/)
 
+## Hubris ： OXide公司出品的新的开源嵌入式 OS
+
+Hubris  没有运行时创建或销毁任务的操作，没有动态资源分配，没有以特权模式运行的驱动程序代码，系统中也没有C代码。通过这种构造，消除了许多通常存在于类似系统中的攻击面。
+
+OXide 公司在今年 OSFF Mini Summit 2021 会议上分享了  [即将到来的固件革命](https://www.youtube.com/watch?v=XbBzSSvT_P0) 中提到，Rust 将会是即将到来的固件革命的一部分。所以，他们重新审视嵌入式操作系统并用 Rust 开发了 Hubris。 Hubris 目前只支持 Arm Cortex M 平台。
+
+Hubris vs TockOS ：
+
+- Tock 使用动态加载，Hubris是静态的
+
+- Tock 是非常异步的，Hubris是严格同步的
+
+- Tock 的驱动程序与内核在同一保护区，Hubris 的驱动程序位于不同的投影域中
+
+  
+
+
+
+
+
+- [https://oxide.computer/blog/hubris-and-humility](https://oxide.computer/blog/hubris-and-humility) 
+- [https://github.com/oxidecomputer/hubris](https://github.com/oxidecomputer/hubris)
+- [https://github.com/oxidecomputer/humility](https://github.com/oxidecomputer/humility)
