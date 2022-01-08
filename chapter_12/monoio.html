@@ -1,0 +1,1095 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>字节跳动 | Rust 异步运行时的设计与实现 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/open-source-mental-health.html"><strong aria-hidden="true">8.7.</strong> 开源与心理健康</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.8.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.9.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.10.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.11.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.12.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.13.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.14.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.15.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.16.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.18.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.22.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.23.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.24.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/rabits.html"><strong aria-hidden="true">8.25.</strong> Rbatis ORM 2.0 | 零开销编译时动态SQL的探索</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.26.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.27.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.28.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_7/toc.html"><strong aria-hidden="true">9.</strong> 七月刊（July）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_7/announce.html"><strong aria-hidden="true">9.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_7/lang.html"><strong aria-hidden="true">9.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_7/hots.html"><strong aria-hidden="true">9.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_7/events.html"><strong aria-hidden="true">9.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_7/jobs.html"><strong aria-hidden="true">9.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_7/rust_china_conf_2021.html"><strong aria-hidden="true">9.6.</strong> RustChinaConf 2021 议题征集开放申请</a></li><li class="chapter-item "><a href="../chapter_7/paper-rust-vs-c.html"><strong aria-hidden="true">9.7.</strong> 论文导读 | 性能与生产力 : Rust vs C </a></li><li class="chapter-item "><a href="../chapter_7/hw-rust-name-mangling.html"><strong aria-hidden="true">9.8.</strong> 华为 | Rust 调用约定和名称修饰规则介绍</a></li><li class="chapter-item "><a href="../chapter_7/ant-futures-compat.html"><strong aria-hidden="true">9.9.</strong> 蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用</a></li><li class="chapter-item "><a href="../chapter_7/lark-rust-wasm-sqlite.html"><strong aria-hidden="true">9.10.</strong> 字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM </a></li><li class="chapter-item "><a href="../chapter_7/rust-epoll-rdma-part2.html"><strong aria-hidden="true">9.11.</strong> Datenlord | Rust实现RDMA异步编程（二）</a></li><li class="chapter-item "><a href="../chapter_7/how-we-improved-the-performance-of-our-rust-app.html"><strong aria-hidden="true">9.12.</strong> Zellij 的性能优化</a></li><li class="chapter-item "><a href="../chapter_7/learn.html"><strong aria-hidden="true">9.13.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_7/rusts-standard-library-traits.html"><strong aria-hidden="true">9.14.</strong> 【完整】Rust 标准库 Trait 指南</a></li><li class="chapter-item "><a href="../chapter_7/coercion_in_rust.html"><strong aria-hidden="true">9.15.</strong> Rust 中的隐式类型转换</a></li><li class="chapter-item "><a href="../chapter_7/tokio-task-scheduler.html"><strong aria-hidden="true">9.16.</strong> Tokio Internals 之 任务调度</a></li><li class="chapter-item "><a href="../chapter_7/about-rust-features.html"><strong aria-hidden="true">9.17.</strong> 为什么你不应该沉迷于 Rust 的“特性”</a></li><li class="chapter-item "><a href="../chapter_7/rust-no-std.html"><strong aria-hidden="true">9.18.</strong> Rust no-std 工程实践</a></li><li class="chapter-item "><a href="../chapter_7/dynamic_analyzing_tools.html"><strong aria-hidden="true">9.19.</strong> Rust 内存错误调试和动态分析工具分享</a></li><li class="chapter-item "><a href="../chapter_7/macroquad_game.html"><strong aria-hidden="true">9.20.</strong> 使用Macroquad在Android设备上发布游戏</a></li><li class="chapter-item "><a href="../chapter_7/trampoline-kernel.html"><strong aria-hidden="true">9.21.</strong> 跨空间跳板内核</a></li><li class="chapter-item "><a href="../chapter_7/trait-upcasting-part1.html"><strong aria-hidden="true">9.22.</strong> Trait Upcasting 系列 ｜ Part I</a></li><li class="chapter-item "><a href="../chapter_7/github_trending.html"><strong aria-hidden="true">9.23.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_7/tool_libs.html"><strong aria-hidden="true">9.24.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_7/frameworks.html"><strong aria-hidden="true">9.25.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_8/toc.html"><strong aria-hidden="true">10.</strong> 八月刊（August）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_8/announce.html"><strong aria-hidden="true">10.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_8/lang.html"><strong aria-hidden="true">10.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_8/hots.html"><strong aria-hidden="true">10.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_8/events.html"><strong aria-hidden="true">10.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_8/jobs.html"><strong aria-hidden="true">10.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_8/rust_china_conf_2021.html"><strong aria-hidden="true">10.6.</strong> RustChinaConf 2021 正式启动</a></li><li class="chapter-item "><a href="../chapter_8/paper-rudra.html"><strong aria-hidden="true">10.7.</strong> 论文导读 | Rudra : 查找 Rust 生态系统中的内存安全 Bug </a></li><li class="chapter-item "><a href="../chapter_8/hw-rust-simd.html"><strong aria-hidden="true">10.8.</strong> 华为 | Rust语言中SIMD计算加速指令的使用</a></li><li class="chapter-item "><a href="../chapter_8/ant-futures-compat.html"><strong aria-hidden="true">10.9.</strong> 蚂蚁集团 | Trait Object 还是 Virtual Method Table</a></li><li class="chapter-item "><a href="../chapter_8/rust-lockfree-part2.html"><strong aria-hidden="true">10.10.</strong> Datenlord | Rust 无锁编程之Crossbeam Epoch算法解析</a></li><li class="chapter-item "><a href="../chapter_8/rust-k8s.html"><strong aria-hidden="true">10.11.</strong> DatenLord | Rust 实现K8S调度扩展</a></li><li class="chapter-item "><a href="../chapter_8/aws-lambda-rust-wasm-serverless.html"><strong aria-hidden="true">10.12.</strong> SecondState | AWS Lambda 中的 Rust 与 WebAssembly Serverless 函数</a></li><li class="chapter-item "><a href="../chapter_8/bianlifeng_embedded_rust.html"><strong aria-hidden="true">10.13.</strong> 便利蜂 | 门店网络与 Rust 落地实践</a></li><li class="chapter-item "><a href="../chapter_8/learn.html"><strong aria-hidden="true">10.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_8/rust-tips.html"><strong aria-hidden="true">10.15.</strong> Rust 技巧篇</a></li><li class="chapter-item "><a href="../chapter_8/reqwest-middleware.html"><strong aria-hidden="true">10.16.</strong> 为 reqwest 增加中间件支持</a></li><li class="chapter-item "><a href="../chapter_8/gui-framework-ingredients.html"><strong aria-hidden="true">10.17.</strong> 想用 Rust 编写 GUI 框架吗？</a></li><li class="chapter-item "><a href="../chapter_8/what-is-trait-upcasting.html"><strong aria-hidden="true">10.18.</strong> Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？</a></li><li class="chapter-item "><a href="../chapter_8/trait-upcasting-part2.html"><strong aria-hidden="true">10.19.</strong> Trait Upcasting 系列 ｜ Part II</a></li><li class="chapter-item "><a href="../chapter_8/github_trending.html"><strong aria-hidden="true">10.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_8/tool_libs.html"><strong aria-hidden="true">10.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_8/frameworks.html"><strong aria-hidden="true">10.22.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_9/toc.html"><strong aria-hidden="true">11.</strong> 九月刊（September）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_9/announce.html"><strong aria-hidden="true">11.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_9/lang.html"><strong aria-hidden="true">11.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_9/hots.html"><strong aria-hidden="true">11.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_9/events.html"><strong aria-hidden="true">11.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_9/jobs.html"><strong aria-hidden="true">11.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_9/rustconf.html"><strong aria-hidden="true">11.6.</strong> 官方 RustConf 2021 盘点</a></li><li class="chapter-item "><a href="../chapter_9/rust_china_conf_2021.html"><strong aria-hidden="true">11.7.</strong> RustChinaConf 2021 动态</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.8.</strong> 将 TensorFlow 模型移植到 Pure Rust 的开发成本有多高？</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.9.</strong> Rust 2021 有哪些新功能</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.10.</strong> 周期性服务发现</a></li><li class="chapter-item "><a href="../chapter_9/rethink-async.html"><strong aria-hidden="true">11.11.</strong> Datenlord | 重新思考 Rust Async - 如何实现高性能 I/O</a></li><li class="chapter-item "><a href="../chapter_9/intel_sgx_std.html"><strong aria-hidden="true">11.12.</strong> Phala Network | 在Intel SGX环境下实现Rust原生std支持</a></li><li class="chapter-item "><a href="../chapter_9/rust-android-ui.html"><strong aria-hidden="true">11.13.</strong> 如何用Rust做Android UI渲染</a></li><li class="chapter-item "><a href="../chapter_9/learn.html"><strong aria-hidden="true">11.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_9/lifetime-smart-ptr.html"><strong aria-hidden="true">11.15.</strong> Rust 生命周期与智能指针</a></li><li class="chapter-item "><a href="../chapter_9/rust-for-embedded-c.html"><strong aria-hidden="true">11.16.</strong> 为 嵌入式 C  程序员编写的 Rust 指南</a></li><li class="chapter-item "><a href="../chapter_9/visualize_crate_graph.html"><strong aria-hidden="true">11.17.</strong> 可视化项目成员包的调用关系</a></li><li class="chapter-item "><a href="../chapter_9/poem-openapi.html"><strong aria-hidden="true">11.18.</strong> 基于 Poem 的 OpenAPI 服务端框架</a></li><li class="chapter-item "><a href="../chapter_9/rust-cryptography-ecosystem.html"><strong aria-hidden="true">11.19.</strong> 密码协议算法与Rust生态</a></li><li class="chapter-item "><a href="../chapter_9/github_trending.html"><strong aria-hidden="true">11.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_9/tool_libs.html"><strong aria-hidden="true">11.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_9/frameworks.html"><strong aria-hidden="true">11.22.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_9/rust-security-part3.html"><strong aria-hidden="true">11.23.</strong> Rust生态安全漏洞总结系列 | Part 3</a></li></ol></li><li class="chapter-item "><a href="../chapter_10/toc.html"><strong aria-hidden="true">12.</strong> 十月刊（October）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_10/announce.html"><strong aria-hidden="true">12.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_10/lang.html"><strong aria-hidden="true">12.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_10/hots.html"><strong aria-hidden="true">12.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_10/events.html"><strong aria-hidden="true">12.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_10/jobs.html"><strong aria-hidden="true">12.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_10/rust-foundation.html"><strong aria-hidden="true">12.6.</strong> 聚焦Rust基金会新成员 | 为什么要加入 Rust 基金会 </a></li><li class="chapter-item "><a href="../chapter_10/rust-gcc-two-way.html"><strong aria-hidden="true">12.7.</strong> 【Linux Plumbers 大会总结】Rust 和 GCC 整合的两种方式</a></li><li class="chapter-item "><a href="../chapter_10/p99conf.html"><strong aria-hidden="true">12.8.</strong> P99 Conf Talk 汇总 |  Rust 在高性能低延迟系统中的应用</a></li><li class="chapter-item "><a href="../chapter_10/rust-coding-guidelines.html"><strong aria-hidden="true">12.9.</strong> 《Rust 安全编码规范》 初稿发布</a></li><li class="chapter-item "><a href="../chapter_10/foreign_journal_review.html"><strong aria-hidden="true">12.10.</strong> 知名项目进展报告</a></li><li class="chapter-item "><a href="../chapter_10/async-trait.html"><strong aria-hidden="true">12.11.</strong> Rust Async trait 更新与多线程</a></li><li class="chapter-item "><a href="../chapter_10/rust-mem-safety.html"><strong aria-hidden="true">12.12.</strong> Rust调研与内存安全</a></li><li class="chapter-item "><a href="../chapter_10/mocks-and-tokio.html"><strong aria-hidden="true">12.13.</strong> 对外输出 Mocks 接口 和 Tokio 的高延展性服务器设计</a></li><li class="chapter-item "><a href="../chapter_10/rdma-memory-management-in-rust.html"><strong aria-hidden="true">12.14.</strong> Datenlord |在 Rust 中管理 RDMA 内存 </a></li><li class="chapter-item "><a href="../chapter_10/dapr.html"><strong aria-hidden="true">12.15.</strong> SecondState | Dapr的一个轻量安全可移植且高性能的Runtime</a></li><li class="chapter-item "><a href="../chapter_10/dropbox.html"><strong aria-hidden="true">12.16.</strong> Dropbox | 为什么我们要为 Capture 构建自定义 Rust 库</a></li><li class="chapter-item "><a href="../chapter_10/learn.html"><strong aria-hidden="true">12.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_10/rust-koans.html"><strong aria-hidden="true">12.18.</strong> 【趣文】Rust 公案 ｜ 新锈与大师的对话</a></li><li class="chapter-item "><a href="../chapter_10/solana-learn-part1.html"><strong aria-hidden="true">12.19.</strong> 【区块链】Solana 开发笔记 Part 1</a></li><li class="chapter-item "><a href="../chapter_10/bad-practice.html"><strong aria-hidden="true">12.20.</strong> Rust 中常见的新手错误和不良习惯</a></li><li class="chapter-item "><a href="../chapter_10/lisp-in-rust.html"><strong aria-hidden="true">12.21.</strong> 用 Rust 实现 Lisp 解释器</a></li><li class="chapter-item "><a href="../chapter_10/rustc_plugin_custom_lints.html"><strong aria-hidden="true">12.22.</strong> 基于编译器插件定制 clippy lint</a></li><li class="chapter-item "><a href="../chapter_10/seaorm.html"><strong aria-hidden="true">12.23.</strong> Rust 生态观察｜ SeaORM: 要做 Rust 版本的 ActiveRecord  </a></li><li class="chapter-item "><a href="../chapter_10/delicate.html"><strong aria-hidden="true">12.24.</strong> Delicate 为什么从 actix-web 迁移到 poem</a></li><li class="chapter-item "><a href="../chapter_10/github_trending.html"><strong aria-hidden="true">12.25.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_10/tool_libs.html"><strong aria-hidden="true">12.26.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_10/rust-security-part4.html"><strong aria-hidden="true">12.27.</strong> Rust生态安全漏洞总结系列 | Part 4</a></li></ol></li><li class="chapter-item "><a href="../chapter_11/toc.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_11/announce.html"><strong aria-hidden="true">13.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_11/lang.html"><strong aria-hidden="true">13.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_11/hots.html"><strong aria-hidden="true">13.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_11/events.html"><strong aria-hidden="true">13.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_11/jobs.html"><strong aria-hidden="true">13.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_11/io-safety.html"><strong aria-hidden="true">13.6.</strong> RFC 导读 | 构建安全的 I/O </a></li><li class="chapter-item "><a href="../chapter_11/pl_ub.html"><strong aria-hidden="true">13.7.</strong> PL 观点 |  未定义行为也有好的一面</a></li><li class="chapter-item "><a href="../chapter_11/meta-blockchain.html"><strong aria-hidden="true">13.8.</strong> 区块链快讯</a></li><li class="chapter-item "><a href="../chapter_11/foreign_journal_review.html"><strong aria-hidden="true">13.9.</strong> 外刊评论</a></li><li class="chapter-item "><a href="../chapter_11/mirchecker.html"><strong aria-hidden="true">13.10.</strong> 【论文导读】Rust 程序 Bug 静态检测工具 MirChecker</a></li><li class="chapter-item "><a href="../chapter_11/no-std.html"><strong aria-hidden="true">13.11.</strong> 华为 | no std的可执行文件编写和运行</a></li><li class="chapter-item "><a href="../chapter_11/core-arch.html"><strong aria-hidden="true">13.12.</strong> 华为 | 硬件加速指令实践心得</a></li><li class="chapter-item "><a href="../chapter_11/rust-profiling.html"><strong aria-hidden="true">13.13.</strong> DatenLord | Rust程序性能分析</a></li><li class="chapter-item "><a href="../chapter_11/play-async.html"><strong aria-hidden="true">13.14.</strong> 蚂蚁集团 ｜ Play With Your Async Code</a></li><li class="chapter-item "><a href="../chapter_11/learn.html"><strong aria-hidden="true">13.15.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_11/symlink_metadata.html"><strong aria-hidden="true">13.16.</strong> Rust Tips : 软链接引发的卡死问题</a></li><li class="chapter-item "><a href="../chapter_11/rust-reading-club-part1.html"><strong aria-hidden="true">13.17.</strong> Rust 源码阅读俱乐部 |  第一期 : 名称解析</a></li><li class="chapter-item "><a href="../chapter_11/rust-memory-model.html"><strong aria-hidden="true">13.18.</strong> 【我读】Rust 语言应该使用什么内存模型？</a></li><li class="chapter-item "><a href="../chapter_11/bench-and-const.html"><strong aria-hidden="true">13.19.</strong> Rust AEAD benchmark 与 Const generics</a></li><li class="chapter-item "><a href="../chapter_11/signal.html"><strong aria-hidden="true">13.20.</strong> Rust与Linux信号</a></li><li class="chapter-item "><a href="../chapter_11/github_trending.html"><strong aria-hidden="true">13.21.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_11/tool_libs.html"><strong aria-hidden="true">13.22.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_11/security-log.html"><strong aria-hidden="true">13.23.</strong> 每月安全公告</a></li><li class="chapter-item "><a href="../chapter_11/trojan-source.html"><strong aria-hidden="true">13.24.</strong> 特洛伊之源｜ 在 Rust 代码中隐藏无形的漏洞</a></li><li class="chapter-item "><a href="../chapter_11/crates-backdoor.html"><strong aria-hidden="true">13.25.</strong> Rust Crates可能的后门与Cargo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_12/toc.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_12/announce.html"><strong aria-hidden="true">14.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_12/lang.html"><strong aria-hidden="true">14.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_12/hots.html"><strong aria-hidden="true">14.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_12/events.html"><strong aria-hidden="true">14.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_12/jobs.html"><strong aria-hidden="true">14.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_12/rust-mod-team-follow-up.html"><strong aria-hidden="true">14.6.</strong> 【官方】对 Rust 审核团队问题的后续跟进</a></li><li class="chapter-item "><a href="../chapter_12/meta-blockchain.html"><strong aria-hidden="true">14.7.</strong> 区块链快讯</a></li><li class="chapter-item "><a href="../chapter_12/foreign_journal_review.html"><strong aria-hidden="true">14.8.</strong> 外刊评论</a></li><li class="chapter-item "><a href="../chapter_12/static-async-fn.html"><strong aria-hidden="true">14.9.</strong> Rust RFC static async fn in trait</a></li><li class="chapter-item "><a href="../chapter_12/serde.html"><strong aria-hidden="true">14.10.</strong> Rust 裸函数相关新RFC 和 序列化</a></li><li class="chapter-item "><a href="../chapter_12/ref.html"><strong aria-hidden="true">14.11.</strong> Rust for Linux 源码导读 | Ref 引用计数容器</a></li><li class="chapter-item "><a href="../chapter_12/ant-go-with-rust.html"><strong aria-hidden="true">14.12.</strong> 蚂蚁集团 | 一次 Go 中嵌入 Rust 库的踩坑实践</a></li><li class="chapter-item expanded "><a href="../chapter_12/monoio.html" class="active"><strong aria-hidden="true">14.13.</strong> 字节跳动 | Rust 异步运行时的设计与实现</a></li><li class="chapter-item "><a href="../chapter_12/tokio_part1.html"><strong aria-hidden="true">14.14.</strong> 达坦科技 | tokio 解析之任务调度</a></li><li class="chapter-item "><a href="../chapter_12/lock-free-implementation.html"><strong aria-hidden="true">14.15.</strong> 飞蓬网络 | 特定场景下的Rust无锁队列实现</a></li><li class="chapter-item "><a href="../chapter_12/signal.html"><strong aria-hidden="true">14.16.</strong> Signal | 如何用Rust构建大规模端到端加密通话</a></li><li class="chapter-item "><a href="../chapter_12/learn.html"><strong aria-hidden="true">14.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_12/simple-rust-in-assembly.html"><strong aria-hidden="true">14.18.</strong> Rust基础语句汇编分析</a></li><li class="chapter-item "><a href="../chapter_12/rust_for_rustaceans_reading_notes_ch13.html"><strong aria-hidden="true">14.19.</strong> 《Rust For Rustaceans》读书笔记之Rust生态系统</a></li><li class="chapter-item "><a href="../chapter_12/rust-pin-advanced.html"><strong aria-hidden="true">14.20.</strong> Rust Pin 进阶</a></li><li class="chapter-item "><a href="../chapter_12/rust-perf.html"><strong aria-hidden="true">14.21.</strong> Rust性能评估与调优实践</a></li><li class="chapter-item "><a href="../chapter_12/async_cancel_propagation.html"><strong aria-hidden="true">14.22.</strong> Tokio 异步传播的缺陷</a></li><li class="chapter-item "><a href="../chapter_12/lets-make-os.html"><strong aria-hidden="true">14.23.</strong> 来造一个OS吧</a></li><li class="chapter-item "><a href="../chapter_12/llvm-infrastructure-and-rust.html"><strong aria-hidden="true">14.24.</strong> LLVM基础设施和Rust</a></li><li class="chapter-item "><a href="../chapter_12/github_trending.html"><strong aria-hidden="true">14.25.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_12/tool_libs.html"><strong aria-hidden="true">14.26.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_12/security-log.html"><strong aria-hidden="true">14.27.</strong> 每月安全公告</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#字节跳动--rust-异步运行时的设计与实现" id="字节跳动--rust-异步运行时的设计与实现">字节跳动 ｜ Rust 异步运行时的设计与实现</a></h1>
+<p>作者：茬海/徐帅</p>
+<hr />
+<p>本文主要介绍如何设计和实现一个基于 io-uring 的 Thread-per-core 模型的 Runtime。</p>
+<p>我们的 Runtime <strong>Monoio</strong> 现已开源，你可以在 <a href="https://github.com/bytedance/monoio">github.com/bytedance/monoio</a> 找到它。</p>
+<p>下面我们会通过两个章节来介绍：</p>
+<ul>
+<li><code>科普篇</code> 简单介绍一下异步 IO 以及 rust runtime 中需要的主要抽象。</li>
+<li><code>实现篇</code> 本章节我们会介绍到 Monoio 的实现细节。</li>
+</ul>
+<h1><a class="header" href="#科普篇" id="科普篇">科普篇</a></h1>
+<h2><a class="header" href="#epoll--io-uring" id="epoll--io-uring">epoll &amp; io-uring</a></h2>
+<p>为了做到异步并发，我们需要内核提供相关的能力，来做到在某个 IO 处于阻塞状态时能够处理其他任务。</p>
+<h3><a class="header" href="#epoll" id="epoll">epoll</a></h3>
+<p>讲 epoll 的文章多如牛毛，在此简单地提一下：epoll 是 linux 下较好的 IO 事件通知机制，可以同时监听多个 fd 的 ready 状态。</p>
+<p>它主要包含 3 个 syscall：</p>
+<ol>
+<li><code>epoll_create</code>
+创建 epoll fd。</li>
+<li><code>epoll_ctl</code>
+向 epoll fd 添加、修改或删除其监听的 fd event。</li>
+<li><code>epoll_wait</code>
+等待监听 fd event，任何一个 event 发生时即返回；同时也支持传入一个 timeout，这样即便是没有 ready event，也可以在超时后返回。</li>
+</ol>
+<p>如果你不使用 epoll 这类，而是直接做 syscall，那么你需要让 fd 处于阻塞模式（默认），这样当你想从 fd 上 read 时，read 就会阻塞住直到有数据可读。</p>
+<p>使用 epoll 的时候，需要设置 fd 为非阻塞模式。当 read 时，在没有数据的情况下，read 也会立刻返回 <code>WOULD_BLOCK</code>。这时需要做的事情是将这个 fd 注册到 epoll fd 上，并设置 <code>EPOLLIN</code> 事件。</p>
+<p>之后在没事做的时候（所有任务都卡在 IO 了），陷入 syscall epoll_wait。当有 event 返回时，再对对应的 fd 做 read（取决于注册时设置的触发模式，可能还要做一些其他事情，确保下次读取正常）。</p>
+<p>总的来说，这个机制十分简单：设置 fd 为非阻塞模式，并在需要的时候注册到 epoll fd 上，然后 epoll fd 的事件触发时，再对 fd 进行操作。这样将多个 fd 的阻塞问题转变为单个 fd 的阻塞。</p>
+<h3><a class="header" href="#io-uring" id="io-uring">io-uring</a></h3>
+<p>与 epoll 不同，io-uring 不是一个事件通知机制，它是一个真正的异步 syscall 机制。你并不需要在它通知后再手动 syscall，因为它已经帮你做好了。</p>
+<p>io-uring 主要由两个 ring 组成（SQ 和 CQ），SQ 用于提交任务，CQ 用于接收任务的完成通知。任务（Op）往往可以对应到一个 syscall（如 read 对应 ReadOp），也会指定这次 syscall 的参数和 flag 等。</p>
+<p>在 submit 时，内核会消费掉所有 SQE，并注册 callback。之后等有数据时，如网卡中断发生，数据通过驱动读入，内核就会触发这些 callback，做 Op 想做的事情，如拷贝某个 fd 的数据到 buffer（这个 buffer 是用户指定的 buffer）。相比 epoll，io-uring 是纯同步的。</p>
+<blockquote>
+<p>注：本节涉及的 io-uring 相关是对带 FAST_POLL 的描述。</p>
+<p>https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d7718a9d25a61442da8ee8aeeff6a0097f0ccfd6</p>
+</blockquote>
+<p>总结一下，io-uring 和 epoll 在使用上其实差不多，一般使用方式是：直接将想做的事情丢到 SQ 中（如果 SQ 满了就要先 submit 一下），然后在没事干（所有任务都卡在 IO 了）的时候 <code>submit_and_wait(1)</code>（<code>submit_and_wait</code> 和 <code>submit</code> 并不是 syscall，它们是 liburing 对 <code>enter</code> 的封装）；返回后消费 CQ，即可拿到 syscall 结果。如果你比较在意延迟，你可以更激进地做 <code>submit</code>，尽早将任务推入可以在数据 ready 后尽早返回，但与此同时也要付出 syscall 增多的代价。</p>
+<h2><a class="header" href="#异步任务的执行流" id="异步任务的执行流">异步任务的执行流</a></h2>
+<p>常规的编程方式下，我们的代码控制流是对应线程的。就像你在写 C 时理解的那样，你的代码会直接编译到汇编指令，然后会由操作系统提供的“线程”去执行，在这其中没有多余的插入的逻辑。</p>
+<p>以 epoll 为例，基于 epoll 的异步本质上是对线程的多路复用。那么常规方式下的类似下面的代码就无法在这种场景下使用：</p>
+<pre><code>for connection = listener.accept():
+    do_something(connection)
+</code></pre>
+<p>因为这段代码中的 accept 是需要等待 IO 的，直接阻塞在这里会导致线程阻塞，这样就无法执行其他任务了。</p>
+<h3><a class="header" href="#面向-callback-编程" id="面向-callback-编程">面向 Callback 编程</a></h3>
+<p>在 C/C++ 中常被使用的 libevent 就是这种模型。用户代码不掌握主动权（因为线程的掌控权就一个，而用户任务千千万万），而是通过将 Callback 注册在 libevent 上，关联某个事件。当事件发生时，libevent 会调用用户的回调函数，并将事件的参数传递给用户。用户在初始化好一些 callback 后，将线程的主动权交给 libevent。其内部会帮忙处理和 epoll 的交互，并在 ready 时执行 callback。</p>
+<p>这种方式较为高效，但是写起来却令人头大。举例来说，如果你想做一次 HTTP 请求，那么你需要将这段代码拆成多个同步的函数，并通过 callback 将他们串起来：
+<img src="https://i.imgur.com/nTiCXaX.png" alt="callback" /></p>
+<p>本来一次可以内聚在一个一个函数里的行为，被拆成了一堆函数。相比面向过程，面向状态编程十分混乱，且容易因为编码者遗忘一些细节而出问题。</p>
+<h3><a class="header" href="#有栈协程" id="有栈协程">有栈协程</a></h3>
+<p>如果我们能在用户代码和最终产物之间插入一些逻辑呢？像 Golang 那样，用户代码实际上只对应到可被调度的 goroutine，实际拥有线程控制权的是 go runtime。goroutine 可以被 runtime 调度，在执行过程中也可以被抢占。</p>
+<p>当 goroutine 需要被中断然后切换到另一个 goroutine 时，runtime 只需要修改当前的 stack frame 即可。每个 goroutine 对应的栈其实是存在堆上的，所以可以随时打断随时复原。</p>
+<p>网络库也是配合这一套 runtime 的。syscall 都是非阻塞的，并可以自动地挂在 netpoll 上。</p>
+<p>有栈协程配合 runtime，解耦了 Task 级的用户代码和线程的对应关系。</p>
+<h3><a class="header" href="#基于-future-的无栈协程" id="基于-future-的无栈协程">基于 Future 的无栈协程</a></h3>
+<p>有栈协程的上下文切换开销不可忽视。因为可以被随时打断，所以我们有必要保存当时的寄存器上下文，否则恢复回去时就不能还原现场了。</p>
+<p>无栈协程没有这个问题，这种模式非常符合 Rust 的 Zero Cost Abstraction 的理念。Rust 中的 <code>async + await</code> 本质上是代码的自动展开，<code>async + await</code> 代码会基于 llvm generator 自动展开成状态机，状态机实现 Future 通过 poll 和 runtime 交互（具体细节可以参考<a href="https://hsqstephenzhang.github.io/2021/11/24/rust/future-explained0/">这篇文章</a>）。</p>
+<h2><a class="header" href="#rust-异步机制原理" id="rust-异步机制原理">Rust 异步机制原理</a></h2>
+<p>Rust 的异步机制设计较为复杂，标准库的接口和 Runtime 实现是解耦的。</p>
+<p>Rust 的异步依赖于 Future trait。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Future {
+    type Output;
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Future 是如何被执行的？根据上述 trait 定义很显然，是通过 <code>poll</code> 方法。返回的结果是 <code>Poll</code>，要么 <code>Pending</code> 要么 <code>Ready(T)</code>。</p>
+<p>那么 poll 方法是谁来调用的？</p>
+<ol>
+<li>用户。用户可以手动实现 Future，如用户对某个 Future 做包装，显然它需要实现 <code>poll</code> 并调用 <code>inner.poll</code>。</li>
+<li>Runtime。Runtime 是最终 <code>poll</code> 的调用者。</li>
+</ol>
+<p>作为 Future 的实现者，需要保证的是，一旦返回了 <code>Poll::Pending</code>，就要在未来该 Future 依赖的 IO 就绪后能够唤醒它。唤醒一个 Future 是通过 Context 内的 Waker 做到的。至于说唤醒之后要做什么，这个由 Runtime 所提供的 cx 自行实现（如将这个 Task 加入到待执行队列）。</p>
+<p>所以任何会产生事件的东西都要负责存储 Waker 并在 Ready 后唤醒它；而提供 cx 的东西会接收到这次唤醒操作，要负责重新调度它。这两个概念分别对应 Reactor 和 Executor，这两套东西靠 Waker 和 Future 解耦。</p>
+<p><img src="https://i.imgur.com/A7ApXSS.png" alt="simple-runtime" /></p>
+<h3><a class="header" href="#reactor" id="reactor">Reactor</a></h3>
+<p>举例来说，你甚至可以在 Tokio 之上再实现一套自己的 Reactor（约等于自己做了一套多路复用）。事实上 Tokio-uring 就是这么做的：它本身注册在 Tokio(mio) 上了一个 uring fd，而基于这个 fd 和一套自己的 Pending Op 管理系统又对外作为 Reactor 暴露了事件源的能力。在 tokio-tungstenite 中，也通过 <code>WakerProxy</code> 来解决了读写唤醒问题。</p>
+<p>另一个例子是计时器驱动。显然 IO 事件的信号来自于 epoll/io-uring 等，但计时器并不是，其内部维护了时间轮或 N 叉堆之类的结构，所以唤醒 Waker 一定是 Time Driver 的职责，所以它一定需要存储 Waker。Time Driver 在这个意义上是一个 Reactor 实现。</p>
+<h3><a class="header" href="#executor" id="executor">Executor</a></h3>
+<p>说完了 Reactor 我们来科普一下 Executor。Executor 负责任务调度和执行。以 Thread-per-core 场景为例（为啥用这个例子？没有跨线程调度写起来多简单啊），完全可以实现成一个 <code>VecDeque</code>，Executor 做的事就是从里面拿任务，调用它的 poll 方法。</p>
+<h3><a class="header" href="#io-组件" id="io-组件">IO 组件</a></h3>
+<p>看到这里你可能会好奇，既然 Reactor 负责唤醒对应 Task，Executor 负责执行唤醒的 Task，那我们看一下源头，是谁负责将 IO 注册到 Reactor 上的呢？</p>
+<p>IO 库（如 TcpStream 实现）会负责将未能立刻完成的 IO 注册到 Reactor 上。这也是为什么你在使用 Tokio 的时候会非要用 <code>Tokio::net::TcpStream</code> 而不能用标准库的原因之一；以及你想异步 sleep 时也需要用 Runtime 提供的 sleep 方法。</p>
+<h2><a class="header" href="#实现一个极简的-runtime" id="实现一个极简的-runtime">实现一个极简的 Runtime</a></h2>
+<p>出于简便目的，我们使用 epoll 来写这个 Runtime。这并不是我们的最终产品，只是为了演示如何实现最简单的 Runtime。</p>
+<p>本小节的完整代码在 <a href="https://github.com/ihciah/mini-rust-runtime">github.com/ihciah/mini-rust-runtime</a> 。</p>
+<p>对应前文的三部组成部分：Reactor、Executor 和 IO 组件，我们分别实现。我们从 Reactor 入手吧。</p>
+<h3><a class="header" href="#reactor-1" id="reactor-1">Reactor</a></h3>
+<p>由于裸操作 epoll 的体验有点差，并且本文的重点也并不是 Rust Binding，所以这里使用 polling 这个 crate 来完成 epoll 操作。</p>
+<p>polling crate 的基础用法是创建 <code>Poller</code>，以及向 <code>Poller</code> 添加或修改 fd 和 interest。这个包默认使用 oneshot 模式（<code>EPOLLONESHOT</code>），需要在 event 触发后重新注册。在多线程场景下这可能是有用的，不过在我们的单线程的最简版本中似乎没有必要这么做，因为会带来额外的 <code>epoll_ctl</code> syscall 开销。不过处于简便起见，我们仍旧使用它。</p>
+<p>作为 Reactor，我们在向 <code>Poller</code> 注册 interest 时，需要提供一个其对应的标识符，这个标识符在很多其他地方会被叫做 Token 或 UserData 或 Key。当 Event Ready 后，这个标志符会被原样返回。</p>
+<p>所以我们需要做的事情大概是这样的：</p>
+<ol>
+<li>创建 <code>Poller</code></li>
+<li>当需要关注某个 fd 的 Readable 或 Writable 时，向 <code>Poller</code> 添加 interest Event，并将 Waker 存下来</li>
+<li>添加 interest Event 前需要分配一个 Token，这样当 Event Ready 后我们才知道这个 Event 对应的 Waker 在哪。</li>
+</ol>
+<p>于是我们可以将 Reactor 设计为：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Reactor {
+    poller: Poller,
+    waker_mapping: rustc_hash::FxHashMap&lt;u64, Waker&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在其他 Runtime 实现中往往会使用 slab，slab 同时处理了 Token 分配和 Waker 的存储。</p>
+<p>简便起见，这里保存 Token 和 Waker 的关系时直接使用了 HashMap。Waker 的存储比较 trick 的方式解决：由于我们只关心读和写，所以我们将读对应的 MapKey 定义为 <code>fd * 2</code>，写对应的 MapKey 定义为 <code>fd * 2 + 1</code>（因为 TCP 连接是全双工的，同一个 fd 上的读写无关，可以在不同的 Task 上，有各自独立的 Waker）；而 Event 的 UserData（Token）仍旧使用 fd 本身。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Reactor {
+    pub fn modify_readable(&amp;mut self, fd: RawFd, cx: &amp;mut Context) {
+        println!(&quot;[reactor] modify_readable fd {} token {}&quot;, fd, fd * 2);
+
+        self.push_completion(fd as u64 * 2, cx);
+        let event = polling::Event::readable(fd as usize);
+        self.poller.modify(fd, event);
+    }
+
+    pub fn modify_writable(&amp;mut self, fd: RawFd, cx: &amp;mut Context) {
+        println!(&quot;[reactor] modify_writable fd {}, token {}&quot;, fd, fd * 2 + 1);
+
+        self.push_completion(fd as u64 * 2 + 1, cx);
+        let event = polling::Event::writable(fd as usize);
+        self.poller.modify(fd, event);
+    }
+
+    fn push_completion(&amp;mut self, token: u64, cx: &amp;mut Context) {
+        println!(&quot;[reactor token] token {} waker saved&quot;, token);
+
+        self.waker_mapping.insert(token, cx.waker().clone());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>要将 fd 挂在 Poller 上或摘掉也十分简单：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Reactor {
+    pub fn add(&amp;mut self, fd: RawFd) {
+        println!(&quot;[reactor] add fd {}&quot;, fd);
+
+        let flags =
+            nix::fcntl::OFlag::from_bits(nix::fcntl::fcntl(fd, nix::fcntl::F_GETFL).unwrap())
+                .unwrap();
+        let flags_nonblocking = flags | nix::fcntl::OFlag::O_NONBLOCK;
+        nix::fcntl::fcntl(fd, nix::fcntl::F_SETFL(flags_nonblocking)).unwrap();
+        self.poller
+            .add(fd, polling::Event::none(fd as usize))
+            .unwrap();
+    }
+
+    pub fn delete(&amp;mut self, fd: RawFd) {
+        println!(&quot;[reactor] delete fd {}&quot;, fd);
+
+        self.completion.remove(&amp;(fd as u64 * 2));
+        println!(&quot;[reactor token] token {} completion removed&quot;, fd as u64 * 2);
+        self.completion.remove(&amp;(fd as u64 * 2 + 1));
+        println!(
+            &quot;[reactor token] token {} completion removed&quot;,
+            fd as u64 * 2 + 1
+        );
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>一个注意事项是，在挂上去之前要设置为 Nonblocking 的，否则在做 syscall 时，如果出现误唤醒（epoll 并没有保证不会误唤醒）会导致线程阻塞。</p>
+<p>然后我们会面临一个问题：什么时候 <code>epoll_wait</code>？答案是没有任务的时候。如果所有任务都等待 IO 了，那么我们可以安全地陷入 syscall。所以我们的 Reactor 需要暴露一个 wait 接口来供 Executor 在没有任务时等待。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Reactor {
+    poller: Poller,
+    waker_mapping: rustc_hash::FxHashMap&lt;u64, Waker&gt;,
+
+    buffer: Vec&lt;Event&gt;,
+}
+
+impl Reactor {
+    pub fn wait(&amp;mut self) {
+        println!(&quot;[reactor] waiting&quot;);
+        self.poller.wait(&amp;mut self.buffer, None);
+        println!(&quot;[reactor] wait done&quot;);
+
+        for i in 0..self.buffer.len() {
+            let event = self.buffer.swap_remove(0);
+            if event.readable {
+                if let Some(waker) = self.waker_mapping.remove(&amp;(event.key as u64 * 2)) {
+                    println!(
+                        &quot;[reactor token] fd {} read waker token {} removed and woken&quot;,
+                        event.key,
+                        event.key * 2
+                    );
+                    waker.wake();
+                }
+            }
+            if event.writable {
+                if let Some(waker) = self.waker_mapping.remove(&amp;(event.key as u64 * 2 + 1)) {
+                    println!(
+                        &quot;[reactor token] fd {} write waker token {} removed and woken&quot;,
+                        event.key,
+                        event.key * 2 + 1
+                    );
+                    waker.wake();
+                }
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>接收 syscall 结果时需要提供预分配好的 buffer（<code>Vec&lt;Event&gt;</code>），为了避免每次都分配，我们直接在结构体中保存下来这个 buffer，通过 <code>Option</code> 包装可以让我们临时地拿到它的所有权。</p>
+<p><code>wait</code> 需要做的事情是：</p>
+<ol>
+<li>陷入 syscall</li>
+<li>syscall 返回后，处理所有就绪的 Event。如果事件是 readable 或者 writable 的，那么就分别从 HashMap 里找到并删除其对应的 Completion，然后唤醒它（这个 fd 和 Map Key 的对应规则我们前面也说到了，readable 对应 <code>fd * 2</code>，writable 对应 <code>fd * 2 + 1</code>）。</li>
+</ol>
+<p>最后将 Reactor 的创建函数补齐：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Reactor {
+    pub fn new() -&gt; Self {
+        Self {
+            poller: Poller::new().unwrap(),
+            waker_mapping: Default::default(),
+
+            buffer: Vec::with_capacity(2048),
+        }
+    }
+}
+
+impl Default for Reactor {
+    fn default() -&gt; Self {
+        Self::new()
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这时我们的 Reactor 就写完了。总的来说就是包装了 epoll，同时额外做了 Waker 的存储和唤醒。</p>
+<h3><a class="header" href="#executor-1" id="executor-1">Executor</a></h3>
+<p>Executor 需要存储 Task 并执行。</p>
+<h4><a class="header" href="#task" id="task">Task</a></h4>
+<p>Task 是什么？Task 其实是 Future，但因为 Task 需要共享所有权，所以这里我们使用 Rc 来存储；并且我们只知道用户丢进来一个 Future，并不知道它的具体类型，所以我们需要把它 Box 起来，这里使用 <code>LocalBoxFuture</code>。再加上内部可变性，所以 Task 的定义如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Task {
+    future: RefCell&lt;LocalBoxFuture&lt;'static, ()&gt;&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#taskqueue" id="taskqueue">TaskQueue</a></h4>
+<p>设计 Task 的存储结构，简便起见直接使用 VecDeque。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct TaskQueue {
+    queue: RefCell&lt;VecDeque&lt;Rc&lt;Task&gt;&gt;&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个 TaskQueue 需要能够 push 和 pop 任务：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl TaskQueue {
+    pub(crate) fn push(&amp;self, runnable: Rc&lt;Task&gt;) {
+        println!(&quot;add task&quot;);
+        self.queue.borrow_mut().push_back(runnable);
+    }
+
+    pub(crate) fn pop(&amp;self) -&gt; Option&lt;Rc&lt;Task&gt;&gt; {
+        println!(&quot;remove task&quot;);
+        self.queue.borrow_mut().pop_front()
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#waker" id="waker">Waker</a></h4>
+<p>Executor 需要提供 Context，其中包含 Waker。Waker 需要能够在被 wake 时将任务推入执行队列等待执行。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Waker {
+    waker: RawWaker,
+}
+
+pub struct RawWaker {
+    data: *const (),
+    vtable: &amp;'static RawWakerVTable,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Waker 通过自行指针和 vtable 自行实现动态分发。所以我们要做的事情有两个：</p>
+<ol>
+<li>拿到 Task 结构的指针并维护它的引用计数</li>
+<li>生成类型对应的 vtable</li>
+</ol>
+<p>我们可以这么定义 vtable：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Helper;
+
+impl Helper {
+    const VTABLE: RawWakerVTable = RawWakerVTable::new(
+        Self::clone_waker,
+        Self::wake,
+        Self::wake_by_ref,
+        Self::drop_waker,
+    );
+
+    unsafe fn clone_waker(data: *const ()) -&gt; RawWaker {
+        increase_refcount(data);
+        let vtable = &amp;Self::VTABLE;
+        RawWaker::new(data, vtable)
+    }
+
+    unsafe fn wake(ptr: *const ()) {
+        let rc = Rc::from_raw(ptr as *const Task);
+        rc.wake_();
+    }
+
+    unsafe fn wake_by_ref(ptr: *const ()) {
+        let rc = mem::ManuallyDrop::new(Rc::from_raw(ptr as *const Task));
+        rc.wake_by_ref_();
+    }
+
+    unsafe fn drop_waker(ptr: *const ()) {
+        drop(Rc::from_raw(ptr as *const Task));
+    }
+}
+
+unsafe fn increase_refcount(data: *const ()) {
+    let rc = mem::ManuallyDrop::new(Rc::&lt;Task&gt;::from_raw(data as *const Task));
+    let _rc_clone: mem::ManuallyDrop&lt;_&gt; = rc.clone();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>手动管理引用计数：我们会通过 <code>Rc::into_raw</code> 来取得 <code>Rc&lt;Task&gt;</code> 的裸指针并使用它和 vtable 构建 RawTask 然后构建 Task。在 vtable 实现中，我们需要小心地手动管理引用计数：如 <code>clone_waker</code> 时，虽然我们只 clone 一个指针，但它在含义上有了一次拷贝，所以我们需要手动让其引用计数加一。</p>
+<p>Task 实现 <code>wake_</code> 和 <code>wake_by_ref_</code> 来重新调度任务。重新调度任务做的事情只是简单地从 thread local storage 拿到 executor 然后向 TaskQueue push。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Task {
+    fn wake_(self: Rc&lt;Self&gt;) {
+        Self::wake_by_ref_(&amp;self)
+    }
+
+    fn wake_by_ref_(self: &amp;Rc&lt;Self&gt;) {
+        EX.with(|ex| ex.local_queue.push(self.clone()));
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#executor-2" id="executor-2">Executor</a></h4>
+<p>有了前面这些组件以后，构建 Executor 是非常简单的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>scoped_tls::scoped_thread_local!(pub(crate) static EX: Executor);
+
+pub struct Executor {
+    local_queue: TaskQueue,
+    pub(crate) reactor: Rc&lt;RefCell&lt;Reactor&gt;&gt;,
+
+    /// Make sure the type is `!Send` and `!Sync`.
+    _marker: PhantomData&lt;Rc&lt;()&gt;&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>当用户 spawn Task 的时候：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Executor {
+    pub fn spawn(fut: impl Future&lt;Output = ()&gt; + 'static) {
+        let t = Rc::new(Task {
+            future: RefCell::new(fut.boxed_local()),
+        });
+        EX.with(|ex| ex.local_queue.push(t));
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>其实做的事情就是将传入的 Future Box 起来然后构建 <code>Rc&lt;Task&gt;</code> 之后丢到执行队列里。</p>
+<p>那么 Executor 的主循环在哪呢？我们可以放在 <code>block_on</code> 里。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Executor {
+    pub fn block_on&lt;F, T, O&gt;(&amp;self, f: F) -&gt; O
+    where
+        F: Fn() -&gt; T,
+        T: Future&lt;Output = O&gt; + 'static,
+    {
+        let _waker = waker_fn::waker_fn(|| {});
+        let cx = &amp;mut Context::from_waker(&amp;_waker);
+
+        EX.set(self, || {
+            let fut = f();
+            pin_utils::pin_mut!(fut);
+            loop {
+                // return if the outer future is ready
+                if let std::task::Poll::Ready(t) = fut.as_mut().poll(cx) {
+                    break t;
+                }
+
+                // consume all tasks
+                while let Some(t) = self.local_queue.pop() {
+                    let future = t.future.borrow_mut();
+                    let w = waker(t.clone());
+                    let mut context = Context::from_waker(&amp;w);
+                    let _ = Pin::new(future).as_mut().poll(&amp;mut context);
+                }
+
+                // no task to execute now, it may ready
+                if let std::task::Poll::Ready(t) = fut.as_mut().poll(cx) {
+                    break t;
+                }
+
+                // block for io
+                self.reactor.borrow_mut().wait();
+            }
+        })
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这段有点复杂，可以分成以下几个步骤：</p>
+<ol>
+<li>创建一个 dummy_waker，这个 waker 其实啥事不做。</li>
+<li>(in loop)poll 传入的 future，检查是否 ready，如果 ready 就返回，结束 block_on。</li>
+<li>(in loop)循环处理 TaskQueue 中的所有 Task：构建它对应的 Waker 然后 poll 它。</li>
+<li>(in loop)这时已经没有待执行的任务了，可能主 future 已经 ready 了，也可能都在等待 IO。所以再次检查主 future，如果 ready 就返回。</li>
+<li>(in loop)既然所有人都在等待 IO，那就 <code>reactor.wait()</code>。这时 reactor 会陷入 syscall 等待至少一个 IO 可执行，然后唤醒对应 Task，会向 TaskQueue 里推任务。</li>
+</ol>
+<p>至此 Executor 基本写完了。</p>
+<h3><a class="header" href="#io-组件-1" id="io-组件-1">IO 组件</a></h3>
+<p>IO 组件要在 WouldBlock 时将其挂在 Reactor 上。以 TcpStream 为例，我们需要为其实现 <code>tokio::io::AsyncRead</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct TcpStream {
+    stream: StdTcpStream,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在创建 TcpStream 时需要将其添加到 Poller 上，销毁时需要摘下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl From&lt;StdTcpStream&gt; for TcpStream {
+    fn from(stream: StdTcpStream) -&gt; Self {
+        let reactor = get_reactor();
+        reactor.borrow_mut().add(stream.as_raw_fd());
+        Self { stream }
+    }
+}
+
+impl Drop for TcpStream {
+    fn drop(&amp;mut self) {
+        println!(&quot;drop&quot;);
+        let reactor = get_reactor();
+        reactor.borrow_mut().delete(self.stream.as_raw_fd());
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在实现 AsyncRead 时，对其做 read syscall。因为在添加到 Poller 时已经设置 fd 为非阻塞，所以这里 syscall 是安全的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl tokio::io::AsyncRead for TcpStream {
+    fn poll_read(
+        mut self: std::pin::Pin&lt;&amp;mut Self&gt;,
+        cx: &amp;mut std::task::Context&lt;'_&gt;,
+        buf: &amp;mut tokio::io::ReadBuf&lt;'_&gt;,
+    ) -&gt; Poll&lt;io::Result&lt;()&gt;&gt; {
+        let fd = self.stream.as_raw_fd();
+        unsafe {
+            let b = &amp;mut *(buf.unfilled_mut() as *mut [std::mem::MaybeUninit&lt;u8&gt;] as *mut [u8]);
+            println!(&quot;read for fd {}&quot;, fd);
+            match self.stream.read(b) {
+                Ok(n) =&gt; {
+                    println!(&quot;read for fd {} done, {}&quot;, fd, n);
+                    buf.assume_init(n);
+                    buf.advance(n);
+                    Poll::Ready(Ok(()))
+                }
+                Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock =&gt; {
+                    println!(&quot;read for fd {} done WouldBlock&quot;, fd);
+                    // modify reactor to register interest
+                    let reactor = get_reactor();
+                    reactor
+                        .borrow_mut()
+                        .modify_readable(self.stream.as_raw_fd(), cx);
+                    Poll::Pending
+                }
+                Err(e) =&gt; {
+                    println!(&quot;read for fd {} done err&quot;, fd);
+                    Poll::Ready(Err(e))
+                }
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>read syscall 可能会返回正确的结果，也可能会返回错误。其中错误中有一个错误需要特殊处理，就是 <code>WouldBlock</code>。当 <code>WouldBlock</code> 时，我们便需要将其挂在 Reactor 上，这里通过我们前面定义的函数 <code>modify_readable</code> 表示我们对 readabe 是关心的。在挂 Reactor 动作完成后，我们可以放心地返回 <code>Poll::Pending</code>，因为我们知道，它后续会被唤醒。</p>
+<h1><a class="header" href="#实现篇" id="实现篇">实现篇</a></h1>
+<h2><a class="header" href="#monoio" id="monoio">Monoio</a></h2>
+<h3><a class="header" href="#motivation" id="motivation">Motivation</a></h3>
+<p>我在字节参与 Mesh Proxy（基于 Envoy）的研发过程中，我感觉我们不得不因为 C++ 的问题而采取非常不优雅的代码组织和设计。</p>
+<p>因此我尝试调研了基于 Linkerd2-proxy（一个基于 Rust + Tokio 的 Mesh Proxy）来替代现有版本。压测数据显示，在 HTTP 场景性能提升只有 10% 左右；而 Envoy 压测数据显示非常多的 CPU 消耗是在 syscall 上。</p>
+<p>我们可以利用 Rust 泛型编程消除 C++ 中的基于动态分发的抽象带来的运行时开销；在 IO 上，我们考虑利用 io-uring 来替代 epoll。</p>
+<h3><a class="header" href="#前期调研" id="前期调研">前期调研</a></h3>
+<p>项目前期我们对比了几种方案下的性能：1. Tokio 2. Glommio 3. 裸 epoll 4. 裸 io-uring。之后发现裸 io-uring 性能上确实领先，但基于 io-uring 的 Glommio 的表现并不如人意。我们尝试 fork Glommio 的代码并做优化，发现它的项目本身存在较大问题，比如创建 uring 的 flag 似乎都没有正确理解；同时，它的 Task 实现相比 Tokio 的也性能较差。</p>
+<h3><a class="header" href="#自己造轮子" id="自己造轮子">自己造轮子</a></h3>
+<p>最终我们决定自己造一套 Runtime 来满足内部需求，提供极致的性能。</p>
+<p>该项目是我和 @dyxushuai 两人共同完成的。在我们实现过程中，我们大量参考了 Tokio、Tokio-uring 等项目，并且尝试了一些自己的设计。</p>
+<h2><a class="header" href="#模型讨论" id="模型讨论">模型讨论</a></h2>
+<p>不同的设计模型会有各自擅长的应用场景。</p>
+<p>Tokio 使用了公平调度模型，其内部的调度逻辑类似 Golang，任务可以在线程之间转移，这样能尽可能充分地利用多核心的性能。</p>
+<p>Glommio 也是一个 Rust Runtime，它基于 io-uring 实现，调度逻辑相比 Tokio 更加简单，是 thread-per-core 模型。</p>
+<p>两种模型各有优劣，前者更加灵活，通用型更强，但代价也并不小：</p>
+<ol>
+<li>
+<p>在多核机器上的性能表现不佳。</p>
+<p>在我的 1K Echo 的测试中(2021-11-26 latest version)，Tokio 4 Core 下性能只是 1 Core 下性能的 2.2 倍左右。而我们自己的 Monoio 可以基本保持线性。</p>
+<table><thead><tr><th align="center">1 Core</th><th align="center">4 Cores</th></tr></thead><tbody>
+<tr><td align="center"><img src="https://i.imgur.com/e7qtpqm.png" alt="1core" /></td><td align="center"><img src="https://i.imgur.com/fjLXAYf.png" alt="4cores" /></td></tr>
+</tbody></table>
+<p>详细的测试报告在<a href="https://github.com/bytedance/monoio/blob/master/docs/zh/benchmark.md">这里</a>。</p>
+</li>
+<li>
+<p>对 Task 本身的约束也不能忽视。如果 Task 可以在 Thread 之间调度，那么它必须实现 <code>Send + Sync</code>。这对用户代码是一个不小的限制。</p>
+<p>举例来说，如果要实现一个 cache 服务，基于公平调度模型的话，cache 对应的 map 就要通过 Atomic 或 Mutex 等来确保 <code>Send + Sync</code>；而如果实现成 thread-per-core 模型，直接使用 thread local 就可以了。以及，nginx 和 envoy 也是基于这种模型。</p>
+</li>
+</ol>
+<p>但是 thread-per-core 并不是银弹。例如，在业务系统中，不同的请求可能处理起来的逻辑是不同的，有的长连接需要做大量的运算，有的则几乎不怎么消耗 CPU。如果基于这种模型，那么很可能导致 CPU 核心之间出现不均衡，某个核心已经被满载，而另一个核心又非常空闲。</p>
+<h2><a class="header" href="#事件驱动" id="事件驱动">事件驱动</a></h2>
+<p>这里主要讨论 io-uring 和 epoll。</p>
+<p>epoll 只是通知机制，本质上事情还是通过用户代码直接 syscall 来做的，如 read。这样在高频 syscall 的场景下，频繁的用户态内核态切换会消耗较多资源。io-uring 可以做异步 syscall，即便是不开 <code>SQ_POLL</code> 也可以大大减少 syscall 次数。</p>
+<p>io-uring 的问题在于下面几点：</p>
+<ol>
+<li>兼容问题。平台兼容就不说了，linux only（epoll 在其他平台上有类似的存在，可以基于已经十分完善的 mio 做无缝兼容）。linux 上也会对 kernel 版本有一定要求，且不同版本的实现性能还有一定差距。大型公司一般还会有自己修改的内核版本，所以想持续跟进 backport 也是一件头疼事。同时对于 Mac/Windows 用户，在开发体验上也会带来一定困难。</li>
+<li>Buffer 生命周期问题。io-uring 是全异步的，Op push 到 SQ 后就不能移动 buffer，一定要保证其有效，直到 syscall 完成或 Cancel Op 执行完毕。无论是在 C/C++ 还是 Rust 中，都会面临 buffer 生命周期管理问题。epoll 没有这个问题，因为 syscall 就是用户做的，陷入 syscall 期间本来就无法操作 buffer，所以可以保证其持续有效直到 syscall 返回。</li>
+</ol>
+<h2><a class="header" href="#生命周期io-接口与-gat" id="生命周期io-接口与-gat">生命周期、IO 接口与 GAT</a></h2>
+<p>前一小节提到了 io-uring 的这个问题：需要某种机制保证 buffer 在 Op 执行期间是有效的。</p>
+<p>考虑下面这种情况：</p>
+<ol>
+<li>用户创建了 Buffer</li>
+<li>用户拿到了 buffer 的引用（不管是 <code>&amp;</code> 还是 <code>&amp;mut</code>）来做 read 和 write。</li>
+<li>Runtime 返回了 Future，但用户直接将其 Drop 了。</li>
+<li>现在没有人持有 buffer 的引用了，用户可以直接将其 Drop 掉。</li>
+<li>但是，buffer 的地址和长度已经被提交给内核，它可能即将被处理，也可能已经在处理中了。我们可以推入一个 <code>CancelOp</code> 进去，但是我们也不能保证 <code>CancelOp</code> 被立刻消费。</li>
+<li>Kernel 这时已经在操作错误的内存啦，如果这块内存被用户程序复用，会导致内存破坏。</li>
+</ol>
+<p>如果 Rust 实现了 Async Drop，这件事还能做——以正常的方式拿引用来使用 buffer；然鹅木有，我们不能保证及时取消掉内核对 buffer 的读写。</p>
+<p>所以，我们很难在不拿所有权的情况下保证 buffer 的有效性。这样就对 IO 接口有个新的挑战：常规的 IO 接口只需要给 <code>&amp;self</code> 或 <code>&amp;mut self</code>，而我们必须要给所有权。</p>
+<p>这部分设计我们参考了 tokio-uring，并把它定义为了 trait。这个 Trait 必须启动 GAT。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// AsyncReadRent: async read with a ownership of a buffer
+pub trait AsyncReadRent {
+    /// The future of read Result&lt;size, buffer&gt;
+    type ReadFuture&lt;'a, T&gt;: Future&lt;Output = BufResult&lt;usize, T&gt;&gt;
+    where
+        Self: 'a,
+        T: 'a;
+    /// The future of readv Result&lt;size, buffer&gt;
+    type ReadvFuture&lt;'a, T&gt;: Future&lt;Output = BufResult&lt;usize, T&gt;&gt;
+    where
+        Self: 'a,
+        T: 'a;
+
+    /// Same as read(2)
+    fn read&lt;T: IoBufMut&gt;(&amp;self, buf: T) -&gt; Self::ReadFuture&lt;'_, T&gt;;
+    /// Same as readv(2)
+    fn readv&lt;T: IoVecBufMut&gt;(&amp;self, buf: T) -&gt; Self::ReadvFuture&lt;'_, T&gt;;
+}
+
+/// AsyncWriteRent: async write with a ownership of a buffer
+pub trait AsyncWriteRent {
+    /// The future of write Result&lt;size, buffer&gt;
+    type WriteFuture&lt;'a, T&gt;: Future&lt;Output = BufResult&lt;usize, T&gt;&gt;
+    where
+        Self: 'a,
+        T: 'a;
+    /// The future of writev Result&lt;size, buffer&gt;
+    type WritevFuture&lt;'a, T&gt;: Future&lt;Output = BufResult&lt;usize, T&gt;&gt;
+    where
+        Self: 'a,
+        T: 'a;
+
+    /// Same as write(2)
+    fn write&lt;T: IoBuf&gt;(&amp;self, buf: T) -&gt; Self::WriteFuture&lt;'_, T&gt;;
+
+    /// Same as writev(2)
+    fn writev&lt;T: IoVecBuf&gt;(&amp;self, buf_vec: T) -&gt; Self::WritevFuture&lt;'_, T&gt;;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>类似 Tokio 的做法，我们还提供了一个带默认实现的 Ext：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait AsyncReadRentExt&lt;T: 'static&gt; {
+    /// The future of Result&lt;size, buffer&gt;
+    type Future&lt;'a&gt;: Future&lt;Output = BufResult&lt;usize, T&gt;&gt;
+    where
+        Self: 'a,
+        T: 'a;
+
+    /// Read until buf capacity is fulfilled
+    fn read_exact(&amp;self, buf: T) -&gt; &lt;Self as AsyncReadRentExt&lt;T&gt;&gt;::Future&lt;'_&gt;;
+}
+
+impl&lt;A, T&gt; AsyncReadRentExt&lt;T&gt; for A
+where
+    A: AsyncReadRent,
+    T: 'static + IoBufMut,
+{
+    type Future&lt;'a&gt;
+    where
+        A: 'a,
+    = impl Future&lt;Output = BufResult&lt;usize, T&gt;&gt;;
+
+    fn read_exact(&amp;self, mut buf: T) -&gt; Self::Future&lt;'_&gt; {
+        async move {
+            let len = buf.bytes_total();
+            let mut read = 0;
+            while read &lt; len {
+                let slice = buf.slice(read..len);
+                let (r, slice_) = self.read(slice).await;
+                buf = slice_.into_inner();
+                match r {
+                    Ok(r) =&gt; {
+                        read += r;
+                        if r == 0 {
+                            return (Err(std::io::ErrorKind::UnexpectedEof.into()), buf);
+                        }
+                    }
+                    Err(e) =&gt; return (Err(e), buf),
+                }
+            }
+            (Ok(read), buf)
+        }
+    }
+}
+
+pub trait AsyncWriteRentExt&lt;T: 'static&gt; {
+    /// The future of Result&lt;size, buffer&gt;
+    type Future&lt;'a&gt;: Future&lt;Output = BufResult&lt;usize, T&gt;&gt;
+    where
+        Self: 'a,
+        T: 'a;
+
+    /// Write all
+    fn write_all(&amp;self, buf: T) -&gt; &lt;Self as AsyncWriteRentExt&lt;T&gt;&gt;::Future&lt;'_&gt;;
+}
+
+impl&lt;A, T&gt; AsyncWriteRentExt&lt;T&gt; for A
+where
+    A: AsyncWriteRent,
+    T: 'static + IoBuf,
+{
+    type Future&lt;'a&gt;
+    where
+        A: 'a,
+    = impl Future&lt;Output = BufResult&lt;usize, T&gt;&gt;;
+
+    fn write_all(&amp;self, mut buf: T) -&gt; Self::Future&lt;'_&gt; {
+        async move {
+            let len = buf.bytes_init();
+            let mut written = 0;
+            while written &lt; len {
+                let slice = buf.slice(written..len);
+                let (r, slice_) = self.write(slice).await;
+                buf = slice_.into_inner();
+                match r {
+                    Ok(r) =&gt; {
+                        written += r;
+                        if r == 0 {
+                            return (Err(std::io::ErrorKind::WriteZero.into()), buf);
+                        }
+                    }
+                    Err(e) =&gt; return (Err(e), buf),
+                }
+            }
+            (Ok(written), buf)
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>开启 GAT 可以让我们很多事情变得方便。</p>
+<p>我们在 trait 中的关联类型 Future 上定义了生命周期，这样它就可以捕获 <code>&amp;self</code> 而不是非要 <code>Clone self</code> 中的部分成员，或者单独定义一个带生命周期标记的结构体。</p>
+<h3><a class="header" href="#定义-future" id="定义-future">定义 Future</a></h3>
+<p>如何定义一个 Future？常规我们需要定义一个结构体，并为它实现 Future trait。这里的关键在于要实现 <code>poll</code> 函数。这个函数接收 <code>Context</code> 并同步地返回 <code>Poll</code>。要实现 <code>poll</code> 我们一般需要手动管理状态，写起来十分困难且容易出错。</p>
+<p>这时你可能会说，直接 <code>async</code> 和 <code>await</code> 不能用吗？事实上 <code>async</code> 块确实生成了一个状态机，和你手写的差不多。但是问题是，这个生成结构并没有名字，所以如果你想把这个 Future 的类型用作关联类型就难了。这时候可以开启 <code>type_alias_impl_trait</code> 然后使用 opaque type 作为关联类型；也可以付出一些运行时开销，使用 <code>Box&lt;dyn Future&gt;</code>。</p>
+<h3><a class="header" href="#生成-future" id="生成-future">生成 Future</a></h3>
+<p>除了使用 <code>async</code> 块外，常规的方式就是手动构造一个实现了 <code>Future</code> 的结构体。这种 Future 有两种：</p>
+<ol>
+<li>带有所有权的额 Future，不需要额外写生命周期标记。这种 <code>Future</code> 和其他所有结构体都没有关联，如果你需要让它依赖一些不 <code>Copy</code> 的数据，那你可以考虑使用 <code>Rc</code> 或 <code>Arc</code> 之类的共享所有权的结构。</li>
+<li>带有引用的 Future，这种结构体本身上就带有生命周期标记。例如，Tokio 中的 <code>AsyncReadExt</code>，<code>read</code> 的签名是 <code>fn read&lt;'a&gt;(&amp;'a mut self, buf: &amp;'a mut [u8]) -&gt; Read&lt;'a, Self&gt;</code>。这里构造的 <code>Read&lt;'a, Self&gt;</code> 捕获了 self 和 buf 的引用，相比共享所有权，这是没有运行时开销的。但是这种 Future 不好作为 trait 的 type alias，只能开启 <code>generic_associated_types</code> 和 <code>type_alias_impl_trait</code>，然后使用 opaque type。</li>
+</ol>
+<h3><a class="header" href="#定义-io-trait" id="定义-io-trait">定义 IO trait</a></h3>
+<p>通常，我们的 IO 接口要以 <code>poll</code> 形式定义（如 <code>poll_read</code>），任何对 IO 的包装都应当基于这个 trait 来做（我们暂时称之为基础 trait）。</p>
+<p>但是为了用户友好的接口，一般会提供一个额外的 <code>Ext</code> trait，主要使用其默认实现。<code>Ext</code> trait 为所有实现了基础 trait 的类自动实现。例如，<code>read</code> 返回一个 Future，显然基于这个 future 使用 <code>await</code> 要比手动管理状态和 <code>poll</code> 更容易。</p>
+<p>那为什么基础 trait 使用 <code>poll</code> 形式定义呢？不能直接一步到位搞 Future 吗？因为 poll 形式是同步的，不需要捕获任何东西，容易定义且较为通用。如果直接一步到位定义了 Future，那么，要么类似 <code>Ext</code> 一样直接把返回 Future 类型写死（这样会导致无法包装和用户自行实现，就失去了定义 trait 的意义），要么把 Future 类型作为关联类型（前面说了，不开启 GAT 没办法带生命周期，即必须 static）。</p>
+<p>所以总结一下就是，在目前的 Rust 稳定版本中，只能使用 poll 形式的基础 trait + future 形式的 Ext trait 来定义 IO 接口。</p>
+<p>在开启 GAT 后这件事就能做了。我们可以直接在 trait 的关联类型中定义带生命周期的 Future，就可以捕获 self 了。</p>
+<p>这是银弹吗？不是。唯一的问题在于，如果使用了 GAT 这一套模式，就要总是使用它。如果你在 <code>poll</code> 形式和 GAT 形式之间反复横跳，那你会十分痛苦。基于 <code>poll</code> 形式接口自行维护状态，确实可以实现 Future（最简单的实现如 <code>poll_fn</code>）；但反过来就很难受了：你很难存储一个带生命周期的 Future。虽然使用一些 unsafe 的 hack 可以做(也有 cost)这件事，但是仍旧，限制很多且并不推荐这么做。<code>monoio-compat</code> 基于 GAT 的 future 实现了 Tokio 的 <code>AsyncRead</code> 和 <code>AsyncWrite</code>，如果你非要试一试，可以参考它。</p>
+<h2><a class="header" href="#buffer-管理" id="buffer-管理">Buffer 管理</a></h2>
+<p>Buffer 管理参考了 tokio-uring 设计。</p>
+<p>Buffer 由用户提供所有权，并在 Future 完成时将所有权返回回去。
+利用 Slab 维护一个全局状态，当 Op drop 时转移内部 Buffer 所有权至全局状态，并在 CQE 时做真正销毁。正常完成时丢回所有权。</p>
+<h2><a class="header" href="#time-driver-设计" id="time-driver-设计">Time Driver 设计</a></h2>
+<p>很多场景需要计时器，如超时，需要 select 两个 future，其中一个是 timeout。作为 Runtime 必须支持异步 sleep。</p>
+<h3><a class="header" href="#计时器管理与唤醒" id="计时器管理与唤醒">计时器管理与唤醒</a></h3>
+<p>Glommio 内部这部分实现较为简单，直接使用了 BTreeMap 维护 Instant -&gt; Waker 的映射，每次拿当前时间去 split_off 拿到所有过期的 timer 唤醒并计算下次 wake 间隔时间，然后在 driver park 的时候作为参数传入。Tokio 中类似，也有自己的时间轮实现，更复杂，但效率也更高（精确度上不如 Glommio 的实现方案）。</p>
+<p>考虑到我们性能优先的实现初衷，我们选择类似 Tokio 的时间轮方案。</p>
+<h3><a class="header" href="#和-driver-集成" id="和-driver-集成">和 Driver 集成</a></h3>
+<p>在 epoll 下，在我们做 wait 前，需要检查当前最近的计时器。如果有，那么必须将它的超时事件作为 wait 的参数传入，否则如果没有任何 IO 在这段时间里就绪，我们就会错过这次计时器的预期唤醒时间，如用户要 timeout 100ms，结果可能 200ms 了才唤醒，这已经失去意义了。</p>
+<p>Tokio 内部基于 EPOLL 和 时间轮 做了这件事。EPOLL 作为 IO Driver，并在这个之上封装了 Timer Driver。在 Timer Driver 陷入 syscall 之前，计算时间轮中最近的事件超时间隔，并作为 epoll wait 的参数。</p>
+<p>为啥不直接使用 TimerFd 直接利用 epoll 能力？因为这么搞有点重：timerfd 的创建、使用 epoll_ctl 添加和移除都是 syscall，而且不能做粗粒度的合并（时间轮的可以）。</p>
+<p>然而，io-uring 的 enter 并不支持传入一个超时时间。我们只能向 SQ 推 TimeoutOp 来做到这件事。</p>
+<h4><a class="header" href="#方案1" id="方案1">方案1</a></h4>
+<p>在插入 element 到时间轮空格子的时候，推 TimeoutOp；并在该格子取消至数量为 0 时推 TimeoutRemoveOp（取消这部分也可以不推，只是要额外付出一次误唤醒的 cost）。</p>
+<p>例如，我们会创建 5 个 10ms 的超时，它们会被插入到时间轮的同一个格子。在这个格子中数量从 0 变 1 的时机，我们向 SQ 推一个 10ms 的 TimeoutOp。</p>
+<h4><a class="header" href="#方案-2" id="方案-2">方案 2</a></h4>
+<p>每次 wait 前计算最近超时时间，推入 SQ 然后 wait；TimeoutOp 中设置 offset = 1。</p>
+<p>这里解释一下 offset 参数的含义，简单来说就是当有 $offset 个 CQ 完成时，或超时发生时会完成。</p>
+<blockquote>
+<p>This command will register a timeout operation. The addr field must contain a pointer to a struct timespec64 structure, len must contain 1 to signify one timespec64 structure, timeout_flags may contain IORING_TIMEOUT_ABS for an absolute timeout value, or 0 for a relative timeout. off may contain a completion event count. A timeout will trigger a wakeup event on the completion ring for anyone waiting for events. A timeout condition is met when either the specified timeout expires, or the specified number of events have completed. Either condition will trigger the event. If set to 0, completed events are not counted, which effectively acts like a timer. io_uring timeouts use the CLOCK_MONOTONIC clock source. The request will complete with -ETIME if the timeout got completed through expiration of the timer, or 0 if the timeout got completed through requests completing on their own. If the timeout was cancelled before it expired, the request will complete with -ECANCELED. Available since 5.4.</p>
+</blockquote>
+<p>这样需要在每次 wait 前推 SQ 进去，好处是不需要 remove（因为每次返回时就已经被消费掉了），没有误唤醒问题；并且实现简单，不需要维护 Op 的 user_data 字段用来推 TimeoutRemoveOp。
+<img src="https://i.imgur.com/oPlmYRN.png" alt="wait" /></p>
+<h4><a class="header" href="#方案-3" id="方案-3">方案 3</a></h4>
+<p>类似方案 2，只不过 TimeoutOp 中的 offset 设置为 0。</p>
+<p>这样实现起来较为麻烦：因为 offset = 0 表示它是一个纯粹的计时器，与 CQ 完成个数无关，它只会在实际超时时完成。这样就意味着，我们需要推 TimeoutRemoveOp 或者承担误唤醒开销（Glommio 实现类似这种方案，它的 cost 选择了后者）。
+<img src="https://i.imgur.com/56vsyAw.png" alt="wait" /></p>
+<h4><a class="header" href="#讨论" id="讨论">讨论</a></h4>
+<p>在插入 TimeoutOp 时，我们应当尽可能晚地插入，因为它可能会被 cancel。所以方案 1 会在 wait 前 0-&gt;1-&gt;0-&gt;1 变化时插入 2 次 TimeoutOp 和 2 次TiemoutRemoveOp，而这是不必要的，方案 1 基本不可取。</p>
+<p>方案 2 和 3 在执行时机上和 EPOLL 场景下的 Tokio 以及 Glommio 是一样的。细节上的差别是：</p>
+<ul>
+<li>方案 2 下，任何一个 CQ 完成时顺便把 TimeoutOp 给完成掉，这样就不需要 Remove，也就是说不需要维护 user_data，实现上会非常简单，也省了推 TimeoutRemoveOp 以及内核处理的开销。</li>
+<li>方案 3 相对 2 的好处是，当 wait 次数很多时，方案 2 每次都要推一个 TimeoutOp 进去，而方案 3 可以检查 TimeoutOp 是否被消耗掉，省一些推入次数；当然，对比方案 2 也有缺点，就是当超时取消时得推 TimeoutRemove 进去。</li>
+</ul>
+<p>在我们的实际业务场景中，时间事件绝大多数都是作为超时，少部分是定时轮询用。
+超时场景中往往是注册超时并移除超时，真正的超时并非热路径：所以我们这里初步决定是使用方案 2。同时，方案 2 实现简单，后续即便是要优化也成本不大。</p>
+<h2><a class="header" href="#跨线程通信" id="跨线程通信">跨线程通信</a></h2>
+<p>虽然是 thread per core 的 runtime，但是如果没有跨线程通信能力，很多事情是做不了的。比如常见的 case：单个线程拉取配置并分发到每个线程的 thread local 上。</p>
+<p>如果只是期望有跨线程通信能力，那么不需要任何 runtime 支持。无论是使用无锁的数据结构，或是跨线程锁，都可以做到。</p>
+<p>但我们希望可以在 runtime 层面集成。举例来说，A 线程有一个 channel rx，B 线程有一个 tx，我们通过 B 发送数据，A 可以 await 在 rx 上。这里的实现难点在于，A 线程上的 reactor 可能已经陷入内核进入等待 uring CQ 状态了，我们需要在任务被唤醒时额外唤醒其所在 thread。</p>
+<h3><a class="header" href="#unpark-能力" id="unpark-能力">Unpark 能力</a></h3>
+<p>所以我们需要在 Driver trait 上额外添加一个 Unpark 接口用于跨线程主动唤醒。</p>
+<p>在 epoll 下，tokio 内部实现是注册上去一个 eventfd。因为 tokio 本身的调度模型就依赖于跨线程唤醒，所以无论你是否使用 tokio 提供的一些 sync 数据结构，它都会在 epoll 上挂上这么一个 eventfd；而我们的实现主体是不依赖这个的，只有在用到我们实现的 channel 的时候才会依赖，所以我们这里通过条件编译，开启 “sync” feature 才插入相关代码，尽可能做到 zero cost。</p>
+<p>在 iouring 下怎么插入 eventfd 呢？同 time driver 中我们实现 park_timeout 做的事情差不多，可以直接推一个 ReadOp 进去读 8 byte，fd 就是 eventfd 的 fd。eventfd 读写都是 8 byte（u64）。</p>
+<blockquote>
+<p>注：文档里提到了两个 syscall flag（IORING_REGISTER_EVENTFD, IORING_REGISTER_EVENTFD_ASYNC），不是做这个事的。
+Ref: https://unixism.net/loti/ref-iouring/io_uring_register.html</p>
+</blockquote>
+<p>在什么时机我们需要推入 eventfd 呢？我们可以在内部维护一个状态标记当前 ring 里是否已存在 eventfd。在 sleep 前，如果已存在则直接 sleep，不存在则推一个进去并标记已存在。</p>
+<p>当消费 CQ 的时候，遇到 eventfd 对应的 userdata，则标记为不存在，这样下次 sleep 前会重新插入。</p>
+<p>当我们需要 unpark 线程时，只需要拿到它对应的 eventfd，并向其中写入 1u64，则这个 fd 就会可读，触发 ring 从 syscall 返回。</p>
+<p>我们将 UnparkHandle 维护在一个全局 Map 中便于每个线程都能够唤醒其他线程。在线程创建时，我们向全局注册自己的 UnparkHandle 的 Weak 引用。</p>
+<p>当需要跨线程唤醒时，我们只需要从全局 Map 里拿到这个 UnparkHandle 并尝试 upgrade，然后写入数据即可。为了减少对全部 Map 的访问，我们在每个线程中缓存这个映射。</p>
+<p>参考 Eventfd 的实现，kernel 内部一来有锁，二来会保证这 8 byte 的 u64 是一口气写完的，不存在乱序问题。所以目前实现改为了直接走 libc::write。（wow so unsafe!）</p>
+<h3><a class="header" href="#集成-waker" id="集成-waker">集成 Waker</a></h3>
+<p>在纯本线程下，我们的唤醒逻辑是这样的：</p>
+<ol>
+<li>我们想等待一个在本线程执行 future</li>
+<li>因为事件源是 uring，所以我们在 future 被 poll 时将 task 的 waker 存储在 op 关联的存储区</li>
+<li>Uring 产生了事件，唤醒 waker</li>
+<li>Waker 执行时将任务重新塞回本线程的执行队列</li>
+</ol>
+<p>在 uring driver 下，我们的事件源是 uring，所以 uring 负责存储并唤醒 waker；在 time driver 下，我们的事件源是 time wheel，所以也由其负责存储和唤醒 waker。</p>
+<p>现在我们的事件源是其他线程。以 oneshot channel 为例，当 rx poll 时，需要将 waker 存储在 channel 的共享存储区内；在 tx send 后，需要从 channel 共享存储区拿到 waker 并唤醒。waker 的唤醒逻辑不再是无脑把任务加到本地队列，而是需要调度到其所在线程的队列中。</p>
+<p>所以这样我们需要为每个 Executor 添加一个 shared_queue 用于共享地存储远程推入的 waker。当非本地 waker 被 wake 时，会将自己添加到目标线程的 queue 中。</p>
+<p>Glommio 中的另一种参考实现：</p>
+<p>前面说的方案是跨线程传递 waker，可以通用支持 channel、mutex 等数据结构。</p>
+<p>还可以不传递 waker，poll 的时候将 waker 加入本线程的数据结构，然后发送端有数据后并不是直接唤醒接收端的 waker，而是直接唤醒它所在的线程，由对端线程轮询所有存在 waker 的 channel。</p>
+<p>这种轮询的方式在某些场景下不够高效，且方案并不通用。</p>
+<h2><a class="header" href="#executor-设计" id="executor-设计">Executor 设计</a></h2>
+<p>Executor 在 thread per core 下按理说应该非常简单：</p>
+<ol>
+<li>直接做一个 Queue 然后从一端推任务，从另一端消费任务</li>
+<li>在没任务可做时，陷入 syscall 并等待至少一个任务完成</li>
+<li>拿到完成任务后逐个处理，将 syscall 结果应用到 buffer 上，并 wake 对应任务。</li>
+</ol>
+<p>在 epoll 下可能确实是这个逻辑；但是在 io-uring 下可能可以做一些额外的优化。</p>
+<h3><a class="header" href="#低延迟-or-减少-syscall" id="低延迟-or-减少-syscall">低延迟 or 减少 syscall</a></h3>
+<p>在我们推入 SQE 之后，我们可以当场 <code>submit()</code> 以尽快完成 syscall，降低延迟；也可以先等等，等到无事可做时再 <code>submit_and_wait(1)</code>。考虑到尽可能高性能，我们选择第二种方案（Glommio 和 Tokio-uring）——测试数据反映事实上延迟并不高，相比 Glommio 延迟有时反而因为 CPU 利用率降低而更低。在负载相对较低时，也可以采用一些动态的方式决定是否更激进地 <code>submit</code>。</p>
+<h3><a class="header" href="#饥饿问题" id="饥饿问题">饥饿问题</a></h3>
+<p>在这个 case 下，饥饿问题往往是用户代码写出了问题导致的。考虑下面几个场景：</p>
+<ol>
+<li>用户的 Future 每次 <code>poll</code> 都会 spawn 一个新任务，然后返回 Ready。</li>
+<li>用户的 Future 每次都会立刻 wake。</li>
+<li>用户的 Future 中的状态转换太多了，或者状态转换出现了死循环。</li>
+</ol>
+<p>如果我们选择在没有任务时再处理 IO（包括提交、等待和收割），那么这几个场景下，依赖 IO 的任务都无法得到处理，因为任务队列永远不会为空，或者任务永远执行不完。</p>
+<p>对于问题 1 和 2，我们<a href="https://github.com/bytedance/monoio/pull/3">提出了一个做法</a>，与其执行完所有任务，我们设置一个执行上限，当达到上限时强制做一次提交和收割。</p>
+<p>对于问题 3，可以类似 Tokio 做一个 coop 机制，限制递归 <code>poll</code> 执行的次数来做到限制状态转换的目的。</p>
+<h1><a class="header" href="#打个广告" id="打个广告">打个广告</a></h1>
+<p><a href="https://github.com/bytedance/monoio">Monoio</a> 目前仍处于非常不完善的阶段，期待你的贡献：）</p>
+<p>另外，我们还搭建了一个国内的 crates.io 和 rustup 的镜像，欢迎使用 <a href="https://rsproxy.cn/">RsProxy</a> ！</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_12/ant-go-with-rust.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_12/tokio_part1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_12/ant-go-with-rust.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_12/tokio_part1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+        <script type="text/javascript" src="../smart-anchor.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>

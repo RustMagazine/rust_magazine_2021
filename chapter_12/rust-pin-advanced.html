@@ -1,0 +1,784 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust Pin 进阶 - Rust精选</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The roots aren&#x27;t deep but the seeds are planted!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">RustMagazine 中文月刊</li><li class="chapter-item "><a href="../index.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item "><a href="../send_word.html"><strong aria-hidden="true">2.</strong> 创刊寄语</a></li><li class="chapter-item affix "><li class="part-title">2021 年期刊</li><li class="chapter-item "><a href="../chapter_1/toc.html"><strong aria-hidden="true">3.</strong> 一月刊（January）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_1/lang.html"><strong aria-hidden="true">3.1.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_1/hots.html"><strong aria-hidden="true">3.2.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_1/projects.html"><strong aria-hidden="true">3.3.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_1/learns.html"><strong aria-hidden="true">3.4.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_1/rust_laoke.html"><strong aria-hidden="true">3.5.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_1/jit.html"><strong aria-hidden="true">3.6.</strong> RustChinaConf2020 精选 | 用Rust设计高性能JIT执行引擎</a></li><li class="chapter-item "><a href="../chapter_1/rust_async.html"><strong aria-hidden="true">3.7.</strong> RustChinaConf2020 精选 | Rust 异步与并发</a></li><li class="chapter-item "><a href="../chapter_1/1password.html"><strong aria-hidden="true">3.8.</strong> 生产实践 |「译」1password 的 Rust 实践</a></li><li class="chapter-item "><a href="../chapter_1/cita_protobuf-ext.html"><strong aria-hidden="true">3.9.</strong> 生产实践 | 溪塔科技: 用Rust写Protobuf扩展</a></li><li class="chapter-item "><a href="../chapter_1/rust-design-patterns/builder.html"><strong aria-hidden="true">3.10.</strong> 学习园地 | 「系列」Rust设计模式之创建者模式</a></li><li class="chapter-item "><a href="../chapter_1/io_uring_and_rust.html"><strong aria-hidden="true">3.11.</strong> 学习园地 | 关于 io_uring 与 Rust 的思考</a></li><li class="chapter-item "><a href="../chapter_1/graphql_in_rust/graphql_in_rust.html"><strong aria-hidden="true">3.12.</strong> 学习园地 | 「译」 GraphQL in Rust</a></li><li class="chapter-item "><a href="../chapter_1/rust_ownership.html"><strong aria-hidden="true">3.13.</strong> 学习园地 | 图解 Rust 所有权与生命周期</a></li><li class="chapter-item "><a href="../chapter_1/embedded_rust.html"><strong aria-hidden="true">3.14.</strong> 嵌入式领域的Rust语言</a></li><li class="chapter-item "><a href="../chapter_1/rcore_intro.html"><strong aria-hidden="true">3.15.</strong> 用Rust写操作系统 | rCore OS 教程介绍 </a></li><li class="chapter-item "><a href="../chapter_1/rust_security_part1.html"><strong aria-hidden="true">3.16.</strong> Rust Security 专题 | Rust生态安全漏洞总结系列 | Part 1</a></li><li class="chapter-item "><a href="../chapter_1/rustc_dev_guide_zh.html"><strong aria-hidden="true">3.17.</strong> Rust编译器专题 | Rust Dev Guide 中文翻译启动招募</a></li><li class="chapter-item "><a href="../chapter_1/rustc_part1.html"><strong aria-hidden="true">3.18.</strong> Rust编译器专题 | 图解 Rust 编译器与语言设计 Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_2/toc.html"><strong aria-hidden="true">4.</strong> 二月刊（February）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_2/announce.html"><strong aria-hidden="true">4.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_2/lang.html"><strong aria-hidden="true">4.2.</strong> 本月简报 | Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_2/hots.html"><strong aria-hidden="true">4.3.</strong> 本月简报 |社区热点</a></li><li class="chapter-item "><a href="../chapter_2/projects.html"><strong aria-hidden="true">4.4.</strong> 本月简报 | 推荐项目</a></li><li class="chapter-item "><a href="../chapter_2/learns.html"><strong aria-hidden="true">4.5.</strong> 本月简报 | 学习资源</a></li><li class="chapter-item "><a href="../chapter_2/rust_laoke.html"><strong aria-hidden="true">4.6.</strong> 本月简报 | Rust唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_2/rust_zhihu.html"><strong aria-hidden="true">4.7.</strong> 知乎 Rust 圆桌年话专题问答精选</a></li><li class="chapter-item "><a href="../chapter_2/huawei_rust.html"><strong aria-hidden="true">4.8.</strong> 华为 | 可信编程 -- 华为引领Rust语言开发的实践和愿景</a></li><li class="chapter-item "><a href="../chapter_2/rust_trace.html"><strong aria-hidden="true">4.9.</strong> PingCAP | TiKV 高性能追踪的实现解析</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle.html"><strong aria-hidden="true">4.10.</strong> 蚂蚁集团 CeresDB 团队 | 关于 Rust 错误处理的思考</a></li><li class="chapter-item "><a href="../chapter_2/rust_error_handle_and_log.html"><strong aria-hidden="true">4.11.</strong> 华为 | Rust中的错误传递和日志记录</a></li><li class="chapter-item "><a href="../chapter_2/rust_study.html"><strong aria-hidden="true">4.12.</strong> 新年新人新气象 | Rust 学习笔记</a></li><li class="chapter-item "><a href="../chapter_2/cli_gameoflife.html"><strong aria-hidden="true">4.13.</strong> 「译」使用 Rust 实现命令行生命游戏</a></li><li class="chapter-item "><a href="../chapter_2/actor_with_tokio.html"><strong aria-hidden="true">4.14.</strong> 「译」使用 Tokio 实现 Actor 系统</a></li><li class="chapter-item "><a href="../chapter_2/rust_1.50.html"><strong aria-hidden="true">4.15.</strong> 解读 Rust 1.50 稳定版</a></li><li class="chapter-item "><a href="../chapter_2/rust_2021_edition.html"><strong aria-hidden="true">4.16.</strong> 解读 Rust 2021 Edition RFC </a></li><li class="chapter-item "><a href="../chapter_2/rust_wasm_frontend.html"><strong aria-hidden="true">4.17.</strong> 前端入门 ｜ Rust 和 WebAssembly </a></li><li class="chapter-item "><a href="../chapter_2/rust_game_bevy_bomber.html"><strong aria-hidden="true">4.18.</strong> 实践案例 | 使用 Bevy 游戏引擎制作炸弹人</a></li><li class="chapter-item "><a href="../chapter_2/io_uring_intro.html"><strong aria-hidden="true">4.19.</strong> io_uring | Linux 全新异步接口 io_uring 的 Rust 生态盘点 </a></li><li class="chapter-item "><a href="../chapter_2/io_uring_async_rw.html"><strong aria-hidden="true">4.20.</strong> io_uring | 用 Rust 实现基于 io_uring 的异步随机读文件</a></li><li class="chapter-item "><a href="../chapter_2/contribute_to_the_rust_part1.html"><strong aria-hidden="true">4.21.</strong> 如何为 Rust 语言做贡献 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_3/toc.html"><strong aria-hidden="true">5.</strong> 三月刊（March）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_3/announce.html"><strong aria-hidden="true">5.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_3/lang.html"><strong aria-hidden="true">5.2.</strong> Rust官方动态</a></li><li class="chapter-item "><a href="../chapter_3/hots.html"><strong aria-hidden="true">5.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_3/projects.html"><strong aria-hidden="true">5.4.</strong> 推荐项目</a></li><li class="chapter-item "><a href="../chapter_3/learns.html"><strong aria-hidden="true">5.5.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_3/rust_laoke.html"><strong aria-hidden="true">5.6.</strong> Rust 唠嗑室本月汇总</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_stratovirt.html"><strong aria-hidden="true">5.7.</strong> 华为 | 基于Rust的下一代虚拟化平台-StratoVirt</a></li><li class="chapter-item "><a href="../chapter_3/hw_ndarray.html"><strong aria-hidden="true">5.8.</strong> 华为 | Rust 科学计算多维数组运算库的分析与实践</a></li><li class="chapter-item "><a href="../chapter_3/hw_rust_rvm_wasm_ai.html"><strong aria-hidden="true">5.9.</strong> 华为 | 基于 TVM Rust Runtime 和 WASM 沙箱运行 AI 模型</a></li><li class="chapter-item "><a href="../chapter_3/rust_cpu_affinity.html"><strong aria-hidden="true">5.10.</strong> 蚂蚁集团 CeresDB 团队 | Rust CPU Affinity 初探</a></li><li class="chapter-item "><a href="../chapter_3/rust_rdma.html"><strong aria-hidden="true">5.11.</strong> DatenLord | Rust实现RDMA</a></li><li class="chapter-item "><a href="../chapter_3/async-vision-doc.html"><strong aria-hidden="true">5.12.</strong> 建立 Async Rust 的共同愿景</a></li><li class="chapter-item "><a href="../chapter_3/how-our-aws-rust-team-will-contribute-to-rusts-future-successes.html"><strong aria-hidden="true">5.13.</strong> Niko | 我们的 AWS Rust 团队将如何为 Rust 未来的成功做出贡献</a></li><li class="chapter-item "><a href="../chapter_3/no_std_binary.html"><strong aria-hidden="true">5.14.</strong> no_std 环境下的可执行文件</a></li><li class="chapter-item "><a href="../chapter_3/ink.html"><strong aria-hidden="true">5.15.</strong> 用 Rust 写智能合约 | Hello, Ink!  </a></li><li class="chapter-item "><a href="../chapter_3/reservoir.html"><strong aria-hidden="true">5.16.</strong> 「算法」蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item "><a href="../chapter_3/rust-mysql.html"><strong aria-hidden="true">5.17.</strong> Rust中使用MySQL</a></li><li class="chapter-item "><a href="../chapter_3/rust-design-pattern-factory.html"><strong aria-hidden="true">5.18.</strong> 「系列」Rust设计模式 ｜ 工厂模式</a></li><li class="chapter-item "><a href="../chapter_3/rust_vs_pandas.html"><strong aria-hidden="true">5.19.</strong> 「译」数据操作：Rust vs Pandas</a></li><li class="chapter-item "><a href="../chapter_3/Unsafe_Rust_How_and_when_not_to_use_it.html"><strong aria-hidden="true">5.20.</strong> 「译」Unsafe Rust 的取舍</a></li><li class="chapter-item "><a href="../chapter_3/Rhythm-game-in-Rust-using-bevy.html"><strong aria-hidden="true">5.21.</strong> 「译」基于 Rust 用 Bevy 实现节奏大师游戏</a></li><li class="chapter-item "><a href="../chapter_3/arenas-in-rust.html"><strong aria-hidden="true">5.22.</strong> 「译」Arenas in Rust</a></li><li class="chapter-item "><a href="../chapter_3/toy-front-end-for-llvm-write-in-rust.html"><strong aria-hidden="true">5.23.</strong> 「译」用 Rust 编写 LLVM 的玩具编译器</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-concurrent.html"><strong aria-hidden="true">5.24.</strong> 透过 Rust 探索系统的本原：并发篇</a></li><li class="chapter-item "><a href="../chapter_3/rust-to-system-essence-safety.html"><strong aria-hidden="true">5.25.</strong> 透过 Rust 探索系统的本原：安全篇</a></li><li class="chapter-item "><a href="../chapter_3/contribute_to_the_rust_part2.html"><strong aria-hidden="true">5.26.</strong> 如何为 Rust 语言做贡献 | Part 2</a></li></ol></li><li class="chapter-item "><a href="../chapter_4/toc.html"><strong aria-hidden="true">6.</strong> 四月刊（April）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_4/announce.html"><strong aria-hidden="true">6.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_4/info.html"><strong aria-hidden="true">6.2.</strong> Rust 资讯来源汇总</a></li><li class="chapter-item "><a href="../chapter_4/lang.html"><strong aria-hidden="true">6.3.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_4/hots.html"><strong aria-hidden="true">6.4.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_4/events.html"><strong aria-hidden="true">6.5.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_4/jobs.html"><strong aria-hidden="true">6.6.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_4/safe_system.html"><strong aria-hidden="true">6.7.</strong> 论文鉴赏 | 使用 Rust 进行安全系统编程</a></li><li class="chapter-item "><a href="../chapter_4/safe_drop.html"><strong aria-hidden="true">6.8.</strong> 论文鉴赏 | SafeDrop：通过静态数据流分析检测Rust程序的内存释放错误</a></li><li class="chapter-item "><a href="../chapter_4/event_os_design.html"><strong aria-hidden="true">6.9.</strong> 学界动态</a></li><li class="chapter-item "><a href="../chapter_4/hw_stratovirt.html"><strong aria-hidden="true">6.10.</strong> 华为 | StratoVirt 地址空间管理-基于Rust的实现与优化</a></li><li class="chapter-item "><a href="../chapter_4/hw_bin_opt.html"><strong aria-hidden="true">6.11.</strong> 华为 | Rust 编译后二进制大小和常用优化方式</a></li><li class="chapter-item "><a href="../chapter_4/ant_async_os_opt.html"><strong aria-hidden="true">6.12.</strong> 蚂蚁集团 | 异步化OS：利用Rustasyncawait提升10x性能-Rust</a></li><li class="chapter-item "><a href="../chapter_4/ant_trait.html"><strong aria-hidden="true">6.13.</strong> 蚂蚁集团 | Trait 使用及实现分析</a></li><li class="chapter-item "><a href="../chapter_4/zhihu_simd_rucene.html"><strong aria-hidden="true">6.14.</strong> 知乎 | 基于 SIMD 指令优化 Rucene</a></li><li class="chapter-item "><a href="../chapter_4/datenlord_io_uring.html"><strong aria-hidden="true">6.15.</strong> Datenlord | Rust 异步实现 io_uring </a></li><li class="chapter-item "><a href="../chapter_4/rust_ffi.html"><strong aria-hidden="true">6.16.</strong> PingCAP | 使用 Rust FFI </a></li><li class="chapter-item "><a href="../chapter_4/libp2p_ipfs.html"><strong aria-hidden="true">6.17.</strong> Netwarp | libp2p-rs与IPFS-Rust </a></li><li class="chapter-item "><a href="../chapter_4/google_android_rust.html"><strong aria-hidden="true">6.18.</strong> Google | 在 Android 平台使用 Rust</a></li><li class="chapter-item "><a href="../chapter_4/meili_search.html"><strong aria-hidden="true">6.19.</strong> MeiliSearch | 开源搜索引擎</a></li><li class="chapter-item "><a href="../chapter_4/learn.html"><strong aria-hidden="true">6.20.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_4/a-primer-on-rusts-result-type.html"><strong aria-hidden="true">6.21.</strong> 【译】Rust 的 Result 类型基础</a></li><li class="chapter-item "><a href="../chapter_4/faq.html"><strong aria-hidden="true">6.22.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_4/tips.html"><strong aria-hidden="true">6.23.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_4/try_trait_v2.html"><strong aria-hidden="true">6.24.</strong> RFC 介绍 | try-trait v2</a></li><li class="chapter-item "><a href="../chapter_4/2021_edition_preview.html"><strong aria-hidden="true">6.25.</strong> 【官宣】Rust 2021 Edition 计划</a></li><li class="chapter-item "><a href="../chapter_4/rustc_edit_distance_and_typo_checker.html"><strong aria-hidden="true">6.26.</strong> 用 rustc 源码实现拼写错误候选词建议</a></li><li class="chapter-item "><a href="../chapter_4/nom_url.html"><strong aria-hidden="true">6.27.</strong> 使用 nom 解析 url</a></li><li class="chapter-item "><a href="../chapter_4/facade.html"><strong aria-hidden="true">6.28.</strong> 真实世界的设计模式 | 外观模式（Facade Pattern）</a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-raii.html"><strong aria-hidden="true">6.29.</strong> Rust 探索系统本原 | RAII </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-lang.html"><strong aria-hidden="true">6.30.</strong> Rust 探索系统本原 | 编程语言 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-memory.html"><strong aria-hidden="true">6.31.</strong> Rust 探索系统本原 | 内存管理 </a></li><li class="chapter-item "><a href="../chapter_4/rust-to-system-essence-network.html"><strong aria-hidden="true">6.32.</strong> Rust 探索系统本原 | 网络 </a></li><li class="chapter-item "><a href="../chapter_4/contribute_to_the_rust_part3.html"><strong aria-hidden="true">6.33.</strong> 如何为 Rust 语言做贡献 | Part 3 </a></li><li class="chapter-item "><a href="../chapter_4/improve-std-slice-binary-search.html"><strong aria-hidden="true">6.34.</strong> 优化 Rust 标准库的 binary_search</a></li><li class="chapter-item "><a href="../chapter_4/github_trending.html"><strong aria-hidden="true">6.35.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_4/tool_libs.html"><strong aria-hidden="true">6.36.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_4/frameworks.html"><strong aria-hidden="true">6.37.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_4/tensorbase.html"><strong aria-hidden="true">6.38.</strong> 开源产品 | TensorBase，基于Rust的现代化开源数据仓库</a></li><li class="chapter-item "><a href="../chapter_4/zenoh.html"><strong aria-hidden="true">6.39.</strong> 开源产品 | eclipse zenoh 助力雾计算和边缘计算</a></li><li class="chapter-item "><a href="../chapter_4/unsafe_rust_tips.html"><strong aria-hidden="true">6.40.</strong> Unsafe Rust 编码技巧 | Part 1</a></li></ol></li><li class="chapter-item "><a href="../chapter_5/toc.html"><strong aria-hidden="true">7.</strong> 五月刊（May）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_5/announce.html"><strong aria-hidden="true">7.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_5/lang.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_5/hots.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_5/events.html"><strong aria-hidden="true">7.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_5/jobs.html"><strong aria-hidden="true">7.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_5/six-years-of-rust.html"><strong aria-hidden="true">7.6.</strong> 官方 | Rust 发布六周年</a></li><li class="chapter-item "><a href="../chapter_5/rusts-most-unrecognized-contributor.html"><strong aria-hidden="true">7.7.</strong> Rust 贡献名单上的无名英雄</a></li><li class="chapter-item "><a href="../chapter_5/pl.html"><strong aria-hidden="true">7.8.</strong> 漫谈编程语言的设计和实现</a></li><li class="chapter-item "><a href="../chapter_5/hw_StratoVirt_vcpu.html"><strong aria-hidden="true">7.9.</strong> 华为 | StratoVirt VCPU管理-Rust线程同步的实现</a></li><li class="chapter-item "><a href="../chapter_5/rust-memory-troubleshootting.html"><strong aria-hidden="true">7.10.</strong> 蚂蚁集团 ｜ 如何在生产环境排查 Rust 内存占用过高问题</a></li><li class="chapter-item "><a href="../chapter_5/rust-epoll-rdma.html"><strong aria-hidden="true">7.11.</strong> Datenlord | Rust实现RDMA异步编程（一）：基于epoll实现RDMA 异步操作</a></li><li class="chapter-item "><a href="../chapter_5/facebook_with_rust.html"><strong aria-hidden="true">7.12.</strong> Facebook | 应用 Rust 简史</a></li><li class="chapter-item "><a href="../chapter_5/rust_grpc_load_balancing.html"><strong aria-hidden="true">7.13.</strong> Truelayer | Rust 中的 gRPC 负载均衡</a></li><li class="chapter-item "><a href="../chapter_5/learn.html"><strong aria-hidden="true">7.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_5/Things_you_can_not_do_in_Rust.html"><strong aria-hidden="true">7.15.</strong> Rust 中无法办到的事情(以及如何替代)</a></li><li class="chapter-item "><a href="../chapter_5/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">7.16.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Builder 实现</a></li><li class="chapter-item "><a href="../chapter_5/running_rust_on_android.html"><strong aria-hidden="true">7.17.</strong> 在 Android 中运行 Rust </a></li><li class="chapter-item "><a href="../chapter_5/ink_01.html"><strong aria-hidden="true">7.18.</strong> Rust 与 区块链 | ink! 编程实战（一）: 初识 ink!</a></li><li class="chapter-item "><a href="../chapter_5/faq.html"><strong aria-hidden="true">7.19.</strong> 常见问题汇总</a></li><li class="chapter-item "><a href="../chapter_5/tips.html"><strong aria-hidden="true">7.20.</strong> 语言技巧</a></li><li class="chapter-item "><a href="../chapter_5/rust-gat.html"><strong aria-hidden="true">7.21.</strong> 了解一点关于泛型关联类型(GAT)的事</a></li><li class="chapter-item "><a href="../chapter_5/rust-runtime-and-ABI.html"><strong aria-hidden="true">7.22.</strong> Rust Runtime 与 ABI</a></li><li class="chapter-item "><a href="../chapter_5/cache_and_recursion_memoization.html"><strong aria-hidden="true">7.23.</strong> 借鉴数据库缓存解决动态规划难题</a></li><li class="chapter-item "><a href="../chapter_5/kernel_huge_page_subsystem.html"><strong aria-hidden="true">7.24.</strong> Rust 与 OS | 一种有效的页表系统抽象设计</a></li><li class="chapter-item "><a href="../chapter_5/rpi_os.html"><strong aria-hidden="true">7.25.</strong> 学习笔记 ｜ 树莓派 Rust 嵌入式操作系统 之 驱动：GPIO 和 UART</a></li><li class="chapter-item "><a href="../chapter_5/rust-to-system-essence-lang-generic.html"><strong aria-hidden="true">7.26.</strong> 透过 Rust 探索系统的本原：泛型</a></li><li class="chapter-item "><a href="../chapter_5/github_trending.html"><strong aria-hidden="true">7.27.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_5/tool_libs.html"><strong aria-hidden="true">7.28.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_5/frameworks.html"><strong aria-hidden="true">7.29.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_5/rust-security-part-2.html"><strong aria-hidden="true">7.30.</strong> Rust生态安全漏洞总结系列 | Part 2</a></li><li class="chapter-item "><a href="../chapter_5/rust-makes-malware-stronger.html"><strong aria-hidden="true">7.31.</strong> Rust 与 安全 | Rust 让恶意软件也变强了</a></li></ol></li><li class="chapter-item "><a href="../chapter_6/toc.html"><strong aria-hidden="true">8.</strong> 六月刊（June）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_6/announce.html"><strong aria-hidden="true">8.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_6/lang.html"><strong aria-hidden="true">8.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_6/hots.html"><strong aria-hidden="true">8.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_6/events.html"><strong aria-hidden="true">8.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_6/jobs.html"><strong aria-hidden="true">8.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_6/rust-not-a-company.html"><strong aria-hidden="true">8.6.</strong> Rust与开源 ｜ Rust 不是一家公司</a></li><li class="chapter-item "><a href="../chapter_6/open-source-mental-health.html"><strong aria-hidden="true">8.7.</strong> 开源与心理健康</a></li><li class="chapter-item "><a href="../chapter_6/rust-report.html"><strong aria-hidden="true">8.8.</strong> 三万言｜2021 年 Rust 行业调研报告</a></li><li class="chapter-item "><a href="../chapter_6/webassmebly-security.html"><strong aria-hidden="true">8.9.</strong> 华为 | WebAssembly 安全性调研</a></li><li class="chapter-item "><a href="../chapter_6/hw_StratoVirt_balloon.html"><strong aria-hidden="true">8.10.</strong> 华为 | StratoVirt - 基于Rust的 balloon 功能实践</a></li><li class="chapter-item "><a href="../chapter_6/ant-rust-data-layout.html"><strong aria-hidden="true">8.11.</strong> 蚂蚁集团 ｜ Rust 数据内存布局</a></li><li class="chapter-item "><a href="../chapter_6/rust-lockfree.html"><strong aria-hidden="true">8.12.</strong> Datenlord | Rust 语言无锁数据结构的内存管理</a></li><li class="chapter-item "><a href="../chapter_6/docker-wasm.html"><strong aria-hidden="true">8.13.</strong> SecondState | 用 Docker 工具管理 Rust 函数</a></li><li class="chapter-item "><a href="../chapter_6/custom-clippy.html"><strong aria-hidden="true">8.14.</strong> 华为 | 如何定制 Cargo Clippy </a></li><li class="chapter-item "><a href="../chapter_6/static_analysis_custom_clippy_lint.html"><strong aria-hidden="true">8.15.</strong> 定制静态分析 lint 检查规则</a></li><li class="chapter-item "><a href="../chapter_6/write-rust-lints-without-forking-clippy.html"><strong aria-hidden="true">8.16.</strong> 无需 fork Clippy 就可以编写 Rust lints</a></li><li class="chapter-item "><a href="../chapter_6/learn.html"><strong aria-hidden="true">8.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_6/proc_macro_workshop_guide_for_builder_project.html"><strong aria-hidden="true">8.18.</strong> Rust过程宏系列教程 | Proc Macro Workshop 之 Debug </a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_4.html"><strong aria-hidden="true">8.19.</strong> Rust 学习笔记系列｜ Part 4</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_5.html"><strong aria-hidden="true">8.20.</strong> Rust 学习笔记系列｜ Part 5</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_6.html"><strong aria-hidden="true">8.21.</strong> Rust 学习笔记系列｜ Part 6</a></li><li class="chapter-item "><a href="../chapter_6/rust_study_part_7.html"><strong aria-hidden="true">8.22.</strong> Rust 学习笔记系列｜ Part 7</a></li><li class="chapter-item "><a href="../chapter_6/parser-combinator.html"><strong aria-hidden="true">8.23.</strong> 用 Rust 学习解析器组合子 (combinator)</a></li><li class="chapter-item "><a href="../chapter_6/web3-part1.html"><strong aria-hidden="true">8.24.</strong> 对Web3.0概念的梳理</a></li><li class="chapter-item "><a href="../chapter_6/rabits.html"><strong aria-hidden="true">8.25.</strong> Rbatis ORM 2.0 | 零开销编译时动态SQL的探索</a></li><li class="chapter-item "><a href="../chapter_6/github_trending.html"><strong aria-hidden="true">8.26.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_6/tool_libs.html"><strong aria-hidden="true">8.27.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_6/frameworks.html"><strong aria-hidden="true">8.28.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_7/toc.html"><strong aria-hidden="true">9.</strong> 七月刊（July）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_7/announce.html"><strong aria-hidden="true">9.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_7/lang.html"><strong aria-hidden="true">9.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_7/hots.html"><strong aria-hidden="true">9.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_7/events.html"><strong aria-hidden="true">9.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_7/jobs.html"><strong aria-hidden="true">9.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_7/rust_china_conf_2021.html"><strong aria-hidden="true">9.6.</strong> RustChinaConf 2021 议题征集开放申请</a></li><li class="chapter-item "><a href="../chapter_7/paper-rust-vs-c.html"><strong aria-hidden="true">9.7.</strong> 论文导读 | 性能与生产力 : Rust vs C </a></li><li class="chapter-item "><a href="../chapter_7/hw-rust-name-mangling.html"><strong aria-hidden="true">9.8.</strong> 华为 | Rust 调用约定和名称修饰规则介绍</a></li><li class="chapter-item "><a href="../chapter_7/ant-futures-compat.html"><strong aria-hidden="true">9.9.</strong> 蚂蚁集团 | Futures 0.1 和 0.3 兼容层的分析与应用</a></li><li class="chapter-item "><a href="../chapter_7/lark-rust-wasm-sqlite.html"><strong aria-hidden="true">9.10.</strong> 字节跳动 ｜ 飞书 Rust 实践 之 SQLite 适配 WASM </a></li><li class="chapter-item "><a href="../chapter_7/rust-epoll-rdma-part2.html"><strong aria-hidden="true">9.11.</strong> Datenlord | Rust实现RDMA异步编程（二）</a></li><li class="chapter-item "><a href="../chapter_7/how-we-improved-the-performance-of-our-rust-app.html"><strong aria-hidden="true">9.12.</strong> Zellij 的性能优化</a></li><li class="chapter-item "><a href="../chapter_7/learn.html"><strong aria-hidden="true">9.13.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_7/rusts-standard-library-traits.html"><strong aria-hidden="true">9.14.</strong> 【完整】Rust 标准库 Trait 指南</a></li><li class="chapter-item "><a href="../chapter_7/coercion_in_rust.html"><strong aria-hidden="true">9.15.</strong> Rust 中的隐式类型转换</a></li><li class="chapter-item "><a href="../chapter_7/tokio-task-scheduler.html"><strong aria-hidden="true">9.16.</strong> Tokio Internals 之 任务调度</a></li><li class="chapter-item "><a href="../chapter_7/about-rust-features.html"><strong aria-hidden="true">9.17.</strong> 为什么你不应该沉迷于 Rust 的“特性”</a></li><li class="chapter-item "><a href="../chapter_7/rust-no-std.html"><strong aria-hidden="true">9.18.</strong> Rust no-std 工程实践</a></li><li class="chapter-item "><a href="../chapter_7/dynamic_analyzing_tools.html"><strong aria-hidden="true">9.19.</strong> Rust 内存错误调试和动态分析工具分享</a></li><li class="chapter-item "><a href="../chapter_7/macroquad_game.html"><strong aria-hidden="true">9.20.</strong> 使用Macroquad在Android设备上发布游戏</a></li><li class="chapter-item "><a href="../chapter_7/trampoline-kernel.html"><strong aria-hidden="true">9.21.</strong> 跨空间跳板内核</a></li><li class="chapter-item "><a href="../chapter_7/trait-upcasting-part1.html"><strong aria-hidden="true">9.22.</strong> Trait Upcasting 系列 ｜ Part I</a></li><li class="chapter-item "><a href="../chapter_7/github_trending.html"><strong aria-hidden="true">9.23.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_7/tool_libs.html"><strong aria-hidden="true">9.24.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_7/frameworks.html"><strong aria-hidden="true">9.25.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_8/toc.html"><strong aria-hidden="true">10.</strong> 八月刊（August）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_8/announce.html"><strong aria-hidden="true">10.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_8/lang.html"><strong aria-hidden="true">10.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_8/hots.html"><strong aria-hidden="true">10.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_8/events.html"><strong aria-hidden="true">10.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_8/jobs.html"><strong aria-hidden="true">10.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_8/rust_china_conf_2021.html"><strong aria-hidden="true">10.6.</strong> RustChinaConf 2021 正式启动</a></li><li class="chapter-item "><a href="../chapter_8/paper-rudra.html"><strong aria-hidden="true">10.7.</strong> 论文导读 | Rudra : 查找 Rust 生态系统中的内存安全 Bug </a></li><li class="chapter-item "><a href="../chapter_8/hw-rust-simd.html"><strong aria-hidden="true">10.8.</strong> 华为 | Rust语言中SIMD计算加速指令的使用</a></li><li class="chapter-item "><a href="../chapter_8/ant-futures-compat.html"><strong aria-hidden="true">10.9.</strong> 蚂蚁集团 | Trait Object 还是 Virtual Method Table</a></li><li class="chapter-item "><a href="../chapter_8/rust-lockfree-part2.html"><strong aria-hidden="true">10.10.</strong> Datenlord | Rust 无锁编程之Crossbeam Epoch算法解析</a></li><li class="chapter-item "><a href="../chapter_8/rust-k8s.html"><strong aria-hidden="true">10.11.</strong> DatenLord | Rust 实现K8S调度扩展</a></li><li class="chapter-item "><a href="../chapter_8/aws-lambda-rust-wasm-serverless.html"><strong aria-hidden="true">10.12.</strong> SecondState | AWS Lambda 中的 Rust 与 WebAssembly Serverless 函数</a></li><li class="chapter-item "><a href="../chapter_8/bianlifeng_embedded_rust.html"><strong aria-hidden="true">10.13.</strong> 便利蜂 | 门店网络与 Rust 落地实践</a></li><li class="chapter-item "><a href="../chapter_8/learn.html"><strong aria-hidden="true">10.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_8/rust-tips.html"><strong aria-hidden="true">10.15.</strong> Rust 技巧篇</a></li><li class="chapter-item "><a href="../chapter_8/reqwest-middleware.html"><strong aria-hidden="true">10.16.</strong> 为 reqwest 增加中间件支持</a></li><li class="chapter-item "><a href="../chapter_8/gui-framework-ingredients.html"><strong aria-hidden="true">10.17.</strong> 想用 Rust 编写 GUI 框架吗？</a></li><li class="chapter-item "><a href="../chapter_8/what-is-trait-upcasting.html"><strong aria-hidden="true">10.18.</strong> Trait Upcasting 系列 ｜ 如何把子 trait 转成父 trait ？</a></li><li class="chapter-item "><a href="../chapter_8/trait-upcasting-part2.html"><strong aria-hidden="true">10.19.</strong> Trait Upcasting 系列 ｜ Part II</a></li><li class="chapter-item "><a href="../chapter_8/github_trending.html"><strong aria-hidden="true">10.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_8/tool_libs.html"><strong aria-hidden="true">10.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_8/frameworks.html"><strong aria-hidden="true">10.22.</strong> 推荐项目 |  框架引擎</a></li></ol></li><li class="chapter-item "><a href="../chapter_9/toc.html"><strong aria-hidden="true">11.</strong> 九月刊（September）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_9/announce.html"><strong aria-hidden="true">11.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_9/lang.html"><strong aria-hidden="true">11.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_9/hots.html"><strong aria-hidden="true">11.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_9/events.html"><strong aria-hidden="true">11.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_9/jobs.html"><strong aria-hidden="true">11.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_9/rustconf.html"><strong aria-hidden="true">11.6.</strong> 官方 RustConf 2021 盘点</a></li><li class="chapter-item "><a href="../chapter_9/rust_china_conf_2021.html"><strong aria-hidden="true">11.7.</strong> RustChinaConf 2021 动态</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.8.</strong> 将 TensorFlow 模型移植到 Pure Rust 的开发成本有多高？</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.9.</strong> Rust 2021 有哪些新功能</a></li><li class="chapter-item "><a href="../chapter_9/foreign_journal_review.html"><strong aria-hidden="true">11.10.</strong> 周期性服务发现</a></li><li class="chapter-item "><a href="../chapter_9/rethink-async.html"><strong aria-hidden="true">11.11.</strong> Datenlord | 重新思考 Rust Async - 如何实现高性能 I/O</a></li><li class="chapter-item "><a href="../chapter_9/intel_sgx_std.html"><strong aria-hidden="true">11.12.</strong> Phala Network | 在Intel SGX环境下实现Rust原生std支持</a></li><li class="chapter-item "><a href="../chapter_9/rust-android-ui.html"><strong aria-hidden="true">11.13.</strong> 如何用Rust做Android UI渲染</a></li><li class="chapter-item "><a href="../chapter_9/learn.html"><strong aria-hidden="true">11.14.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_9/lifetime-smart-ptr.html"><strong aria-hidden="true">11.15.</strong> Rust 生命周期与智能指针</a></li><li class="chapter-item "><a href="../chapter_9/rust-for-embedded-c.html"><strong aria-hidden="true">11.16.</strong> 为 嵌入式 C  程序员编写的 Rust 指南</a></li><li class="chapter-item "><a href="../chapter_9/visualize_crate_graph.html"><strong aria-hidden="true">11.17.</strong> 可视化项目成员包的调用关系</a></li><li class="chapter-item "><a href="../chapter_9/poem-openapi.html"><strong aria-hidden="true">11.18.</strong> 基于 Poem 的 OpenAPI 服务端框架</a></li><li class="chapter-item "><a href="../chapter_9/rust-cryptography-ecosystem.html"><strong aria-hidden="true">11.19.</strong> 密码协议算法与Rust生态</a></li><li class="chapter-item "><a href="../chapter_9/github_trending.html"><strong aria-hidden="true">11.20.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_9/tool_libs.html"><strong aria-hidden="true">11.21.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_9/frameworks.html"><strong aria-hidden="true">11.22.</strong> 推荐项目 |  框架引擎</a></li><li class="chapter-item "><a href="../chapter_9/rust-security-part3.html"><strong aria-hidden="true">11.23.</strong> Rust生态安全漏洞总结系列 | Part 3</a></li></ol></li><li class="chapter-item "><a href="../chapter_10/toc.html"><strong aria-hidden="true">12.</strong> 十月刊（October）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_10/announce.html"><strong aria-hidden="true">12.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_10/lang.html"><strong aria-hidden="true">12.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_10/hots.html"><strong aria-hidden="true">12.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_10/events.html"><strong aria-hidden="true">12.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_10/jobs.html"><strong aria-hidden="true">12.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_10/rust-foundation.html"><strong aria-hidden="true">12.6.</strong> 聚焦Rust基金会新成员 | 为什么要加入 Rust 基金会 </a></li><li class="chapter-item "><a href="../chapter_10/rust-gcc-two-way.html"><strong aria-hidden="true">12.7.</strong> 【Linux Plumbers 大会总结】Rust 和 GCC 整合的两种方式</a></li><li class="chapter-item "><a href="../chapter_10/p99conf.html"><strong aria-hidden="true">12.8.</strong> P99 Conf Talk 汇总 |  Rust 在高性能低延迟系统中的应用</a></li><li class="chapter-item "><a href="../chapter_10/rust-coding-guidelines.html"><strong aria-hidden="true">12.9.</strong> 《Rust 安全编码规范》 初稿发布</a></li><li class="chapter-item "><a href="../chapter_10/foreign_journal_review.html"><strong aria-hidden="true">12.10.</strong> 知名项目进展报告</a></li><li class="chapter-item "><a href="../chapter_10/async-trait.html"><strong aria-hidden="true">12.11.</strong> Rust Async trait 更新与多线程</a></li><li class="chapter-item "><a href="../chapter_10/rust-mem-safety.html"><strong aria-hidden="true">12.12.</strong> Rust调研与内存安全</a></li><li class="chapter-item "><a href="../chapter_10/mocks-and-tokio.html"><strong aria-hidden="true">12.13.</strong> 对外输出 Mocks 接口 和 Tokio 的高延展性服务器设计</a></li><li class="chapter-item "><a href="../chapter_10/rdma-memory-management-in-rust.html"><strong aria-hidden="true">12.14.</strong> Datenlord |在 Rust 中管理 RDMA 内存 </a></li><li class="chapter-item "><a href="../chapter_10/dapr.html"><strong aria-hidden="true">12.15.</strong> SecondState | Dapr的一个轻量安全可移植且高性能的Runtime</a></li><li class="chapter-item "><a href="../chapter_10/dropbox.html"><strong aria-hidden="true">12.16.</strong> Dropbox | 为什么我们要为 Capture 构建自定义 Rust 库</a></li><li class="chapter-item "><a href="../chapter_10/learn.html"><strong aria-hidden="true">12.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_10/rust-koans.html"><strong aria-hidden="true">12.18.</strong> 【趣文】Rust 公案 ｜ 新锈与大师的对话</a></li><li class="chapter-item "><a href="../chapter_10/solana-learn-part1.html"><strong aria-hidden="true">12.19.</strong> 【区块链】Solana 开发笔记 Part 1</a></li><li class="chapter-item "><a href="../chapter_10/bad-practice.html"><strong aria-hidden="true">12.20.</strong> Rust 中常见的新手错误和不良习惯</a></li><li class="chapter-item "><a href="../chapter_10/lisp-in-rust.html"><strong aria-hidden="true">12.21.</strong> 用 Rust 实现 Lisp 解释器</a></li><li class="chapter-item "><a href="../chapter_10/rustc_plugin_custom_lints.html"><strong aria-hidden="true">12.22.</strong> 基于编译器插件定制 clippy lint</a></li><li class="chapter-item "><a href="../chapter_10/seaorm.html"><strong aria-hidden="true">12.23.</strong> Rust 生态观察｜ SeaORM: 要做 Rust 版本的 ActiveRecord  </a></li><li class="chapter-item "><a href="../chapter_10/delicate.html"><strong aria-hidden="true">12.24.</strong> Delicate 为什么从 actix-web 迁移到 poem</a></li><li class="chapter-item "><a href="../chapter_10/github_trending.html"><strong aria-hidden="true">12.25.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_10/tool_libs.html"><strong aria-hidden="true">12.26.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_10/rust-security-part4.html"><strong aria-hidden="true">12.27.</strong> Rust生态安全漏洞总结系列 | Part 4</a></li></ol></li><li class="chapter-item "><a href="../chapter_11/toc.html"><strong aria-hidden="true">13.</strong> 十一月刊（November）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_11/announce.html"><strong aria-hidden="true">13.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_11/lang.html"><strong aria-hidden="true">13.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_11/hots.html"><strong aria-hidden="true">13.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_11/events.html"><strong aria-hidden="true">13.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_11/jobs.html"><strong aria-hidden="true">13.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_11/io-safety.html"><strong aria-hidden="true">13.6.</strong> RFC 导读 | 构建安全的 I/O </a></li><li class="chapter-item "><a href="../chapter_11/pl_ub.html"><strong aria-hidden="true">13.7.</strong> PL 观点 |  未定义行为也有好的一面</a></li><li class="chapter-item "><a href="../chapter_11/meta-blockchain.html"><strong aria-hidden="true">13.8.</strong> 区块链快讯</a></li><li class="chapter-item "><a href="../chapter_11/foreign_journal_review.html"><strong aria-hidden="true">13.9.</strong> 外刊评论</a></li><li class="chapter-item "><a href="../chapter_11/mirchecker.html"><strong aria-hidden="true">13.10.</strong> 【论文导读】Rust 程序 Bug 静态检测工具 MirChecker</a></li><li class="chapter-item "><a href="../chapter_11/no-std.html"><strong aria-hidden="true">13.11.</strong> 华为 | no std的可执行文件编写和运行</a></li><li class="chapter-item "><a href="../chapter_11/core-arch.html"><strong aria-hidden="true">13.12.</strong> 华为 | 硬件加速指令实践心得</a></li><li class="chapter-item "><a href="../chapter_11/rust-profiling.html"><strong aria-hidden="true">13.13.</strong> DatenLord | Rust程序性能分析</a></li><li class="chapter-item "><a href="../chapter_11/play-async.html"><strong aria-hidden="true">13.14.</strong> 蚂蚁集团 ｜ Play With Your Async Code</a></li><li class="chapter-item "><a href="../chapter_11/learn.html"><strong aria-hidden="true">13.15.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_11/symlink_metadata.html"><strong aria-hidden="true">13.16.</strong> Rust Tips : 软链接引发的卡死问题</a></li><li class="chapter-item "><a href="../chapter_11/rust-reading-club-part1.html"><strong aria-hidden="true">13.17.</strong> Rust 源码阅读俱乐部 |  第一期 : 名称解析</a></li><li class="chapter-item "><a href="../chapter_11/rust-memory-model.html"><strong aria-hidden="true">13.18.</strong> 【我读】Rust 语言应该使用什么内存模型？</a></li><li class="chapter-item "><a href="../chapter_11/bench-and-const.html"><strong aria-hidden="true">13.19.</strong> Rust AEAD benchmark 与 Const generics</a></li><li class="chapter-item "><a href="../chapter_11/signal.html"><strong aria-hidden="true">13.20.</strong> Rust与Linux信号</a></li><li class="chapter-item "><a href="../chapter_11/github_trending.html"><strong aria-hidden="true">13.21.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_11/tool_libs.html"><strong aria-hidden="true">13.22.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_11/security-log.html"><strong aria-hidden="true">13.23.</strong> 每月安全公告</a></li><li class="chapter-item "><a href="../chapter_11/trojan-source.html"><strong aria-hidden="true">13.24.</strong> 特洛伊之源｜ 在 Rust 代码中隐藏无形的漏洞</a></li><li class="chapter-item "><a href="../chapter_11/crates-backdoor.html"><strong aria-hidden="true">13.25.</strong> Rust Crates可能的后门与Cargo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_12/toc.html"><strong aria-hidden="true">14.</strong> 十二月刊（December）</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../chapter_12/announce.html"><strong aria-hidden="true">14.1.</strong> 发刊通告</a></li><li class="chapter-item "><a href="../chapter_12/lang.html"><strong aria-hidden="true">14.2.</strong> 官方动态</a></li><li class="chapter-item "><a href="../chapter_12/hots.html"><strong aria-hidden="true">14.3.</strong> 社区热点</a></li><li class="chapter-item "><a href="../chapter_12/events.html"><strong aria-hidden="true">14.4.</strong> 活动回顾</a></li><li class="chapter-item "><a href="../chapter_12/jobs.html"><strong aria-hidden="true">14.5.</strong> 本月招聘</a></li><li class="chapter-item "><a href="../chapter_12/rust-mod-team-follow-up.html"><strong aria-hidden="true">14.6.</strong> 【官方】对 Rust 审核团队问题的后续跟进</a></li><li class="chapter-item "><a href="../chapter_12/meta-blockchain.html"><strong aria-hidden="true">14.7.</strong> 区块链快讯</a></li><li class="chapter-item "><a href="../chapter_12/foreign_journal_review.html"><strong aria-hidden="true">14.8.</strong> 外刊评论</a></li><li class="chapter-item "><a href="../chapter_12/static-async-fn.html"><strong aria-hidden="true">14.9.</strong> Rust RFC static async fn in trait</a></li><li class="chapter-item "><a href="../chapter_12/serde.html"><strong aria-hidden="true">14.10.</strong> Rust 裸函数相关新RFC 和 序列化</a></li><li class="chapter-item "><a href="../chapter_12/ref.html"><strong aria-hidden="true">14.11.</strong> Rust for Linux 源码导读 | Ref 引用计数容器</a></li><li class="chapter-item "><a href="../chapter_12/ant-go-with-rust.html"><strong aria-hidden="true">14.12.</strong> 蚂蚁集团 | 一次 Go 中嵌入 Rust 库的踩坑实践</a></li><li class="chapter-item "><a href="../chapter_12/monoio.html"><strong aria-hidden="true">14.13.</strong> 字节跳动 | Rust 异步运行时的设计与实现</a></li><li class="chapter-item "><a href="../chapter_12/tokio_part1.html"><strong aria-hidden="true">14.14.</strong> 达坦科技 | tokio 解析之任务调度</a></li><li class="chapter-item "><a href="../chapter_12/lock-free-implementation.html"><strong aria-hidden="true">14.15.</strong> 飞蓬网络 | 特定场景下的Rust无锁队列实现</a></li><li class="chapter-item "><a href="../chapter_12/signal.html"><strong aria-hidden="true">14.16.</strong> Signal | 如何用Rust构建大规模端到端加密通话</a></li><li class="chapter-item "><a href="../chapter_12/learn.html"><strong aria-hidden="true">14.17.</strong> 学习资源</a></li><li class="chapter-item "><a href="../chapter_12/simple-rust-in-assembly.html"><strong aria-hidden="true">14.18.</strong> Rust基础语句汇编分析</a></li><li class="chapter-item "><a href="../chapter_12/rust_for_rustaceans_reading_notes_ch13.html"><strong aria-hidden="true">14.19.</strong> 《Rust For Rustaceans》读书笔记之Rust生态系统</a></li><li class="chapter-item expanded "><a href="../chapter_12/rust-pin-advanced.html" class="active"><strong aria-hidden="true">14.20.</strong> Rust Pin 进阶</a></li><li class="chapter-item "><a href="../chapter_12/rust-perf.html"><strong aria-hidden="true">14.21.</strong> Rust性能评估与调优实践</a></li><li class="chapter-item "><a href="../chapter_12/async_cancel_propagation.html"><strong aria-hidden="true">14.22.</strong> Tokio 异步传播的缺陷</a></li><li class="chapter-item "><a href="../chapter_12/lets-make-os.html"><strong aria-hidden="true">14.23.</strong> 来造一个OS吧</a></li><li class="chapter-item "><a href="../chapter_12/llvm-infrastructure-and-rust.html"><strong aria-hidden="true">14.24.</strong> LLVM基础设施和Rust</a></li><li class="chapter-item "><a href="../chapter_12/github_trending.html"><strong aria-hidden="true">14.25.</strong> GitHub 趋势榜</a></li><li class="chapter-item "><a href="../chapter_12/tool_libs.html"><strong aria-hidden="true">14.26.</strong> 推荐项目 ｜ 基础工具库</a></li><li class="chapter-item "><a href="../chapter_12/security-log.html"><strong aria-hidden="true">14.27.</strong> 每月安全公告</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust精选</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/RustMagazine/rust_magazine_2021" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rust-pin-进阶" id="rust-pin-进阶">Rust Pin 进阶</a></h1>
+<blockquote>
+<p>原博客地址：https://folyd.com/blog/rust-pin-advanced/</p>
+</blockquote>
+<p>去年我写了一篇关于 Pin 的文章，算是由浅入深介绍了 Pin 到底是怎么一回事，为什么需要 Pin。但只掌握那部分知识依然不够，所以这篇文章希望能系统性的梳理跟 Pin 有关的知识点，所以标题我命名为《Rust Pin 进阶》。</p>
+<h2><a class="header" href="#pin-api-剖析" id="pin-api-剖析">Pin API 剖析</a></h2>
+<p>要想深入理解 Pin，熟悉 Pin 所有的方法是必不可少的。除去 nightly 的 API 后，Pin 总共有 13 个方法：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Pin&lt;P&gt; where P: Deref
+impl Pin&lt;P&gt; where P: Deref {
+  unsafe fn new_unchecked(pointer: P) -&gt; Pin&lt;P&gt;
+  
+  fn as_ref(&amp;self) -&gt; Pin&lt;&amp;P::Target&gt;
+  
+  unsafe fn into_inner_unchecked(pin: Pin&lt;P&gt;) -&gt; P
+}
+
+impl&lt;P: Deref&lt;Target: Unpin&gt;&gt; Pin&lt;P&gt; {
+  fn new(pointer: P) -&gt; Pin&lt;P&gt;
+  
+  fn into_inner(pin: Pin&lt;P&gt;) -&gt; P
+}
+
+impl&lt;'a, T: ?Sized&gt; Pin&lt;&amp;'a T&gt; {
+  unsafe fn map_unchecked&lt;U, F&gt;(self, func: F) -&gt; Pin&lt;&amp;'a U&gt;
+    where
+        U: ?Sized,
+        F: FnOnce(&amp;T) -&gt; &amp;U
+  
+  fn get_ref(self) -&gt; &amp;'a T
+}
+
+
+// Pin&lt;P&gt; where P: DerefMut
+impl&lt;P: DerefMut&gt; Pin&lt;P&gt; {
+  fn as_mut(&amp;mut self) -&gt; Pin&lt;&amp;mut P::Target&gt;
+  
+  fn set(&amp;mut self, value: P::Target) where P::Target: Sized
+}
+
+impl&lt;'a, T: ?Sized&gt; Pin&lt;&amp;'a mut T&gt; {
+  fn into_ref(self) -&gt; Pin&lt;&amp;'a T&gt;
+  
+  fn get_mut(self) -&gt; &amp;'a mut T where T: Unpin
+  
+  unsafe fn get_unchecked_mut(self) -&gt; &amp;'a mut T
+  
+  unsafe fn map_unchecked_mut&lt;U, F&gt;(self, func: F) -&gt; Pin&lt;&amp;'a mut U&gt;
+    where
+        U: ?Sized,
+        F: FnOnce(&amp;mut T) -&gt; &amp;mut U
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这些方法可以分为两个大类：</p>
+<ul>
+<li><code>Pin&lt;P&gt; where P: Deref</code></li>
+<li><code>Pin&lt;P&gt; where P: DerefMut</code></li>
+</ul>
+<p>之前的文章有说过，Pin 一般以 <code>Pin&lt;P&lt;T&gt;&gt;</code> 的形式来表示（P 是 Pointer 的缩写，T 是 Type 的缩写） ，所以 Pin 包裹的内容只能是智能指针（实现了 <code>Deref</code> trait 的类型都可以称为智能指针），对其他普通类型是没有意义的。因为 <code>&amp;T</code> 和 <code>&amp;mut T</code>分别实现了 <code>Deref</code> 和 <code>DerefMut</code>，所以 <code>Pin&lt;&amp;'a T&gt;</code> 和 <code>Pin&lt;&amp;'a mut T&gt;</code> 分别算这两大类下的特化实现。</p>
+<p>初看起来这 13 个方法有点杂乱，但其实他们的设计非常讲究，甚至可以说存在对称性。按功能来划分的话，这些方法可以分为 5 大类，各个类别按可变性或是符合 <code>T: Unpin</code> 限定来细分为 2~3 种。其中可变的版本都以 <code>mut</code> 结尾，因为不符合<code>T: Unpin</code> 限定的 <code>unsafe</code> 版本都包含 <code>unchecked</code>。</p>
+<table><thead><tr><th>功能</th><th align="left">方法</th><th>备注</th></tr></thead><tbody>
+<tr><td><strong>构造 <code>Pin</code></strong></td><td align="left"><code>new()</code> / <code>new_unchecked()</code></td><td>按是否满足 <code>T: Unpin</code> 限定来区分 safe 和 unsafe 两个版本。</td></tr>
+<tr><td><strong>转换 Pin 类型</strong></td><td align="left"><code>as_ref()</code> / <code>as_mut()</code></td><td>将 <code>&amp;/&amp;mut Pin&lt;P&lt;T&gt;&gt;</code> 转换成 <code>Pin&lt;&amp;/&amp;mut T&gt;</code>。</td></tr>
+<tr><td><strong>获取 <code>Pin&lt;P&lt;T&gt;&gt;</code> 里面 <code>T</code> 的借用</strong></td><td align="left"><code>get_ref()</code> / <code>get_mut()</code> / <code>get_unchecked_mut()</code></td><td>消耗所有权，拿到里面的 <code>T</code> 的借用。按可变性分为两个版本。因为 <code>&amp;mut T</code> 是&quot;万恶之源&quot;，所以 <code>get_mut</code> 又按是否满足 <code>T: Unpin</code> 限定来区分 safe 和 unsafe 两个版本。</td></tr>
+<tr><td><strong>消耗 Pin 所有权，拿到里面的指针 P</strong></td><td align="left"><code>into_inner()</code> / <code>into_inner_unchecked()</code></td><td>按是否满足 <code>T: Unpin</code> 限定来区分 safe 和 unsafe 两个版本。另外，为了避免和 <code>P</code> 自己的 into 类方法冲突，这几个 API 都设计成静态方法，必须通过 <code>Pin::into_inner()</code> 这种形式调用，不能用 <code>pin.into_inner()</code>。</td></tr>
+<tr><td><strong>Pin projection</strong></td><td align="left"><code>map_unchecked()</code> / <code>map_unchecked_mut()</code></td><td>通常用来做 Pin projection。</td></tr>
+</tbody></table>
+<blockquote>
+<p>只剩下两个方法没有归类到上面的表格中，它们也比较简单，分别是：</p>
+<ul>
+<li><code>Pin::set()</code> - 设置 <code>Pin&lt;P&lt;T&gt;&gt;</code> 中新的 <code>T</code> 的值。</li>
+<li><code>Pin&lt;&amp;mut Self&gt;::into_ref()</code> - 将 <code>Pin&lt;&amp;mut T&gt;</code> 转换成 <code>Pin&lt;&amp;T&gt;</code>。</li>
+</ul>
+</blockquote>
+<p>值得注意的是其实 <code>new()</code> 和 <code>new_unchecked()</code>， <code>get_mut()</code>与 <code>get_unchecked_mut()</code> ， <code>into_inner()</code> 和 <code>into_inner_unchecked()</code> 的实现是完全一样的，唯一的区别是 safe 版有 <code>Unpin</code> 限定。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub const fn new(pointer: P) -&gt; Pin&lt;P&gt; 
+  where P: Deref,
+	     &lt;P as Deref&gt;::Target: Unpin {
+    unsafe { Pin::new_unchecked(pointer) }
+}
+
+pub const unsafe fn new_unchecked(pointer: P) -&gt; Pin&lt;P&gt; {
+		Pin { pointer }
+}
+
+pub const fn get_mut(self) -&gt; &amp;'a mut T where T: Unpin {
+		self.pointer
+}
+
+pub const unsafe fn get_unchecked_mut(self) -&gt; &amp;'a mut T {
+		self.pointer
+}
+
+pub const fn into_inner(pin: Pin&lt;P&gt;) -&gt; P
+	where P: Deref,
+		    &lt;P as Deref&gt;::Target: Unpin {
+    pin.pointer
+}
+
+pub const unsafe fn into_inner_unchecked(pin: Pin&lt;P&gt;) -&gt; P {
+		pin.pointer
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>为什么相同的代码要区分 safe 和 unsafe 两个版本呢？要解答这个问题，还是要回到 <code>Pin</code> 的本质。**<code>Pin</code> 本质上解决的问题是在 safe Rust 下保证 <code>Pin&lt;P&lt;T&gt;</code> 中的 <code>T</code> 的内存地址不会被改变（也就是不被 move），除非 <code>T</code> 满足 <code>T: Unpin</code>。**保证 <code>T</code> 的内存地址不会被改变的本质是避免暴露<code>T</code> 或 <code>&amp;mut T</code>（&quot;万恶之源&quot;）。暴露 <code>T</code> 的话，随随便便就能 move 掉它；暴露 <code>&amp;mut T</code> 的话，开发者可以调用 <code>std::mem::swap()</code> 或 <code>std::mem::replace()</code> 这类方法来 move 掉 <code>T</code>。还有一条，Rust 里面 safe 和 unsafe 的边界一定要区分非常明确，不能有任何含糊。所以只要你不满足 <code>T: Unpin</code> ，然后需要构造 <code>Pin&lt;P&lt;T&gt;&gt;</code>、暴露 <code>T</code> 或者 <code>&amp;mut T</code> 的方法都应该是 unsafe 的。</p>
+<table><thead><tr><th></th><th>满足 <code>T: Unpin</code></th><th>不满足 <code>T: Unpin</code></th></tr></thead><tbody>
+<tr><td>构造 <code>Pin</code></td><td>safe</td><td><strong>unsafe</strong></td></tr>
+<tr><td>暴露 <code>T</code></td><td>safe</td><td><strong>unsafe</strong></td></tr>
+<tr><td>暴露 <code>&amp;T</code></td><td>safe</td><td>safe</td></tr>
+<tr><td>暴露 <code>&amp;mut T</code></td><td>safe</td><td><strong>unsafe</strong></td></tr>
+</tbody></table>
+<p>比如，<code>into_inner_unchecked()</code> 虽然返回的是 <code>P</code>，但是它是间接暴露了 <code>T</code> 和 <code>&amp;mut T</code>。因为你可以通过<code>*P</code> 或 <code>&amp;mut *P</code>  轻而易举的拿到 <code>T</code> 或 <code>&amp;mut T</code>。而你构造 <code>Pin&lt;P&lt;T&gt;&gt;</code> 的时候相当于是承若要遵守 <strong>Pin 的契约</strong> 的，但这步操作明显就违约了。</p>
+<p>为什么 <code>Pin::get_ref()</code> 是 safe 的呢？因为它返回的是 <code>&amp;T</code>，你没有办法 move 掉它：<code>std::mem::swap()</code> 类方法只支持 <code>&amp;mut T</code>，解引用 <code>&amp;T</code> 的话编译器会报错阻止你。（再一次感谢 rustc）另外需要强调的是内部可变性的类型。比如 <code>RefCell&lt;T&gt;</code>， <code>Pin&lt;&amp;mut RefCell&lt;T&gt;&gt;.into_ref().get_ref()</code> 返回的是 <code>&amp;RefCell&lt;T&gt;</code>，而 <code>RefCell&lt;T&gt;::into_inner()</code> 之类的方法可以拿到 <code>T</code> 然后 move 掉它。但是这个没关系，因为 <code>Pin&lt;P&lt;T&gt;&gt;</code> 的契约是保证 <code>P</code> 里面的 <code>T</code> 不被 move，而这里的 <code>P</code> 是 <code>&amp;</code>, <code>T</code> 是 <code>RefCell</code>，并不是 <code>RefCell&lt;T&gt;</code> 里面的 <code>T</code>。只要没有额外 <code>Pin&lt;&amp;T&gt;</code> 指向 <code>RefCell&lt;T&gt;</code> 里面的 <code>T</code> 就行，但是你构造 <code>RefCell&lt;T&gt;</code> 的时候其实已经自动杜绝这种可能了。因为 <code>RefCell::new()</code>  的参数是 <code>value: T</code>，早就把 <code>T</code> move 进来了。</p>
+<blockquote>
+<p>类似的，<code>Pin&lt;&amp;mut Box&lt;T&gt;&gt;</code> 保证的是 <code>Box&lt;T&gt;</code> 本身不被 move，而不是 <code>Box</code> 里面的 <code>T</code>。如果要保证 <code>Box&lt;T&gt;</code> 里面的 <code>T</code> 不被 move，直接使用 <code>Pin&lt;Box&lt;T&gt;&gt;</code> 即可。</p>
+</blockquote>
+<h2><a class="header" href="#pin-额外的属性" id="pin-额外的属性">Pin 额外的属性</a></h2>
+<h3><a class="header" href="#fundamental" id="fundamental">#[fundamental]</a></h3>
+<p>使用<code>#[fundamental]</code>属性标记的 trait 是不受孤儿规则约束。所以你可以给 <code>Pin&lt;P&lt;T&gt;&gt;</code> impl 你本地的 trait。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::pin::Pin;
+
+trait LocalTrait {}
+
+impl&lt;P&gt; LocalTrait for Pin&lt;P&gt; {
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#reprtransparent" id="reprtransparent">#[repr(transparent)]</a></h3>
+<p><code>#[repr(transparent)]</code> 这个属性可以让 <code>Pin</code> 拥有和里面 <code>pointer</code> 字段同样的 ABI 布局，在 FFI 的场景下会很有用。</p>
+<blockquote>
+<p><code>#[repr(transparent)]</code> 是 1.28 稳定的，详细可以看 <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">release note</a>：</p>
+<p><a href="https://github.com/rust-lang/rust/pull/51562/">The <code>#[repr(transparent)]</code> attribute is now stable.</a> This attribute allows a Rust newtype wrapper (<code>struct NewType&lt;T&gt;(T);</code>) to be represented as the inner type across Foreign Function Interface (FFI) boundaries.</p>
+</blockquote>
+<h2><a class="header" href="#pin-实现的-trait" id="pin-实现的-trait">Pin 实现的 trait</a></h2>
+<p>再来看看 <code>Pin</code> 实现了哪些值得关注的 trait。</p>
+<h3><a class="header" href="#unpin" id="unpin">Unpin</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;P&gt; Unpin for Pin&lt;P&gt; where P: Unpin {}
+<span class="boring">}
+</span></code></pre></pre>
+<p>因为 <code>Unpin</code> 是 auto trait，所以 <code>Pin&lt;P&lt;T&gt;</code> 如果满足 <code>P: Unpin</code> ，则 <code>Pin&lt;P&lt;T&gt;&gt;</code> 也会实现 <code>Unpin</code>。而几乎所有 <code>P</code> 都会是 <code>Unpin</code> ，所以 <code>Pin&lt;P&lt;T&gt;&gt;</code> 几乎总会是 <code>Unpin</code> 的。这个实现很重要，特别是如果这里的 <code>T</code> 是 <code>Future</code> 的时候。不管你的 <code>Future</code> 是不是满足 <code>Unpin</code>，把你用 <code>Pin&lt;&amp;mut ...&gt;</code> 包裹之后，它就是一个满足 <code>Unpin</code> 的 <code>Future</code> 了（因为 <code>Pin&lt;P&gt;</code> 实现了 <code>Future</code>，后面会讲到）。很多异步的方法可能需要你的 <code>Future</code> 满足 <code>Unpin</code> 才能调用，而 <code>async fn</code> 方法返回的 <code>Future</code> 显然不满足 <code>Unpin</code>，这个时候往往需要你把这个 <code>Future</code> pin 住才行。比如使用 <a href="https://docs.rs/tokio/latest/tokio/macro.pin.html">tokio::pin!()</a> 这个宏。</p>
+<pre><pre class="playground"><code class="language-rust">use tokio::pin;
+
+async fn my_async_fn() {
+    // async logic here
+}
+
+#[tokio::main]
+async fn main() {
+    let future = my_async_fn();
+    pin!(future);
+
+    (&amp;mut future).await;
+}
+</code></pre></pre>
+<p>另外，需要再次强调的是：</p>
+<ul>
+<li><strong><code>Pin</code> 本身是不是 <code>Unpin</code> 跟 <code>T</code> 是不是 <code>Unpin</code> 没有任何关系，只跟 <code>P</code> 有关系。</strong></li>
+<li><strong><code>Pin</code> 能不能把 <code>T</code>  pin 住跟 <code>P</code> 是不是 <code>Unpin</code> 没有任何关系，只跟 <code>T</code> 有关系。</strong></li>
+</ul>
+<p>上面两句话虽然有点绕，但是搞清楚了后，很多 Pin 的场景就不会懵逼了。</p>
+<h3><a class="header" href="#deref-和-derefmut" id="deref-和-derefmut">Deref 和 DerefMut</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;P: Deref&gt; Deref for Pin&lt;P&gt; {
+    type Target = P::Target;
+    fn deref(&amp;self) -&gt; &amp;P::Target {
+        Pin::get_ref(Pin::as_ref(self))
+    }
+}
+
+impl&lt;P: DerefMut&lt;Target: Unpin&gt;&gt; DerefMut for Pin&lt;P&gt; {
+    fn deref_mut(&amp;mut self) -&gt; &amp;mut P::Target {
+        Pin::get_mut(Pin::as_mut(self))
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这两个 trait 对 <code>Pin</code> 非常关键。只有实现了 <code>Deref</code> 后 <code>Pin&lt;P&gt;</code> 才是智能指针，开发者才可以无缝的调用 <code>P</code> 的方法。值得注意的是，只有满足 <code>T: Unpin</code> ，才会给 <code>Pin&lt;P&lt;T&gt;&gt;</code> 实现 <code>DerefMut</code>。因为 Safe Rust 下，<code>Pin&lt;P&lt;T&gt;&gt;</code> 的职责之一就是不能在不满足 <code>T: Unpin</code> 的前提条件下暴露 <code>&amp;mut T</code>。</p>
+<p>另外，实现了这两个 trait 之后，分别可以解引用拿到 <code>&amp;T</code> 和 <code>&amp;mut T</code>，但这种解引用的方式和 <code>get_ref()</code>、<code>get_mut()</code> 是有区别的。以 <code>&amp;T</code> 为例，假设有 <code>let p = Pin::new(&amp;T);</code>, 解引用 <code>p</code> 拿到 <code>&amp;T</code>： <code>let t = &amp;*p</code>;，这里拿到的 <code>&amp;T</code> 的生命周期其实等于 <code>&amp;Pin::new(&amp;T)</code> 的生命周期。而 <code>Pin::new(&amp;T).get_ref()</code> 拿到的 <code>&amp;T</code> 的生命周期和 <code>Pin</code> 自身的生命周期是相等的。</p>
+<p>为什么会这样呢？我们把解引用智能指针的语法糖展开之后看看。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let p = Pin::new(&amp;T);
+// let t = &amp;*p; 展开语法糖之后如下：
+let t = &amp;*Deref::deref(&amp;p);
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Pin</code> 的 <code>Deref</code> 实现代码是：<code>Pin::get_ref(Pin::as_ref(self))</code>，而 <code>Pin::as_ref()</code> 的代码如下。通过对比，就能发现解引用拿到的 <code>&amp;T</code> 的生命周期确实和 <code>get_ref()</code> 拿到的是不一样的。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Pin&lt;P&gt; where P: Deref {
+    pub fn as_ref(&amp;self) -&gt; Pin&lt;&amp;P::Target&gt; {
+        unsafe { Pin::new_unchecked(&amp;*self.pointer) }
+    }
+}
+
+// 对比上面 Deref 的实现
+impl&lt;'a, T: ?Sized&gt; Pin&lt;&amp;'a T&gt; {
+    pub const fn get_ref(self) -&gt; &amp;'a T {
+        self.pointer
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>另外一个值得注意的地方是 <code>Pin::as_ref()</code> 和 <code>Pin::as_mut()</code> 里面会解引用 <code>self.pointer</code>，其实就是会调用它的 <code>deref()</code> 或 <code>deref_mut()</code> 方法。这两个方法是由 <code>P</code> 自己实现的，所以这里会存在“恶意实现”把 <code>T</code> move 掉的可能性。但是这种“恶意实现”会被 <strong>Pin 的契约</strong> 排除掉：这是你自己“恶意实现”导致的，并不是由于使用 <code>Pin</code> 导致。</p>
+<blockquote>
+<p>Pin::new_unchecked() 的文档特意强调到了这一点：</p>
+<p>By using this method, you are making a promise about the <code>P::Deref</code> and <code>P::DerefMut</code> implementations, if they exist. Most importantly, they must not move out of their <code>self</code> arguments: <code>Pin::as_mut</code> and <code>Pin::as_ref</code> will call <code>DerefMut::deref_mut</code> and <code>Deref::deref</code> <em>on the pinned pointer</em> and expect these methods to uphold the pinning invariants.</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">use std::pin::Pin;
+use std::marker::PhantomPinned;
+use std::ptr::NonNull;
+use std::ops::{Deref, DerefMut};
+
+struct Unmovable {
+    data: String,
+    slice: NonNull&lt;String&gt;,
+    _pin: PhantomPinned,
+}
+
+impl Unmovable {
+    fn new(data: String) -&gt; Pin&lt;Boz&lt;Self&gt;&gt; {
+        let res = Unmovable {
+            data,
+            slice: NonNull::dangling(),
+            _pin: PhantomPinned,
+        };
+        let mut bozed = unsafe { Pin::new_unchecked(Boz(res)) };
+
+        let slice = NonNull::from(&amp;bozed.data);
+        // we know this is safe because modifying a field doesn't move the whole struct
+        unsafe {
+            let mut_ref: Pin&lt;&amp;mut Self&gt; = Pin::as_mut(&amp;mut bozed);
+            Pin::get_unchecked_mut(mut_ref).slice = slice;
+        }
+        bozed
+    }
+}
+
+impl Default for Unmovable {
+    fn default() -&gt; Self {
+        Unmovable {
+            data: String::new(),
+            slice: NonNull::dangling(),
+            _pin: PhantomPinned,
+        }
+    }
+}
+
+struct Boz&lt;T&gt;(T);
+
+impl&lt;T&gt; Deref for Boz&lt;T&gt;  {
+    type Target = T;
+    fn deref(&amp;self) -&gt; &amp;Self::Target {
+        &amp;self.0
+    }
+}
+
+// “Malicious” implementations of DerefMut
+impl&lt;T: Default&gt; DerefMut for Boz&lt;T&gt;  {
+    fn deref_mut(&amp;mut self) -&gt; &amp;mut Self::Target {
+        let _s = std::mem::take(&amp;mut self.0);
+        &amp;mut self.0
+    }
+}
+
+fn main() {
+   let mut unmovable = Unmovable::new(String::from(&quot;Malicious!!!&quot;));
+   unmovable.as_mut();
+}
+</code></pre></pre>
+<p>上面的例子，我们构造了一个 <code>Pin&lt;Boz&lt;Unmovable&gt;&gt;</code>，然后调用 <code>as_mut()</code> 方法的时候会解引用这个 <code>Boz</code>，<code>Boz</code> 有一个“恶意”的 <code>DerefMut</code> 实现，里面会 move 掉这个 <code>Unmovable</code>。但明明我是是把它 <code>Pin</code> 住了的。</p>
+<h3><a class="header" href="#future" id="future">Future</a></h3>
+<p><code>Pin</code> 还实现了 <code>Future</code>， 这个和 <code>Unpin</code> 关系密切，我们在接下来的部分统一讲解。</p>
+<h2><a class="header" href="#unpin-和-future" id="unpin-和-future">Unpin 和 Future</a></h2>
+<p>Rust 的 pinning API 让初学者困惑的一大难点就是 <code>Unpin</code> 的引入，往往很容易把人绕晕，所以我们必须要彻底搞清楚 <code>Unpin</code>，特别是它和 <code>Future</code> 的关系。 </p>
+<p>前面说过，<code>Unpin</code> 是一个 auto trait，几乎所有类型都实现了 <code>Unpin</code>，包括你没意识到的一些类型。比如：</p>
+<ul>
+<li><strong>&amp;T</strong>: <code>impl&lt;'a, T: ?Sized + 'a&gt; Unpin for &amp;'a T {}</code></li>
+<li><strong>&amp;mut T</strong>: <code>impl&lt;'a, T: ?Sized + 'a&gt; Unpin for &amp;'a mut T {}</code></li>
+<li><strong>*const T</strong>: <code>impl&lt;T: ?Sized&gt; Unpin for *const T {}</code></li>
+<li><strong>*mut T</strong>: <code>impl&lt;T: ?Sized&gt; Unpin for *mut T {}</code></li>
+<li>其他，包括 <code>Box</code>, <code>Arc</code>, <code>Rc</code> 等等</li>
+</ul>
+<p>注意这里是不管 <code>T</code> 满不满足 <code>T: Unpin</code> ，它们都是 <code>Unpin</code>。原因我们前面已经说了：<strong><code>Pin</code> 能不能把 <code>T</code>  pin 住跟 <code>P</code> 是不是 <code>Unpin</code> 没有任何关系，只跟 <code>T</code> 有关系。</strong></p>
+<blockquote>
+<p>第一篇文章有讲过，只有 <strong>std::marker::PhatomPinned</strong> ，包含 <strong>PhatomPinned</strong> 的类型，还有 <code>.await</code> 解语法糖之后的那个结构体是 <code>!Unpin</code>，这里不再赘述。</p>
+</blockquote>
+<h3><a class="header" href="#unpin-是-safe-trait" id="unpin-是-safe-trait">Unpin 是 safe trait</a></h3>
+<p>另外一个很重要的特点：**<code>Unpin</code> 是一个 safe trait。**也就是说你可以在 safe Rust 下给任意类型实现 <code>Unpin</code>，包括你的 <code>Future</code> 类型。</p>
+<blockquote>
+<p>我们提前准备好两个 assert 函数，后面会用到：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn assert_future&lt;F: Future&gt;(_f: F) {}
+fn assert_unpin&lt;T: Unpin&gt;(_t: T) {}
+<span class="boring">}
+</span></code></pre></pre>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">use std::{
+    future::Future,
+    pin::Pin,
+    task::{Context, Poll},
+};
+
+#[derive(Clone)]
+struct Dummy(String);
+
+impl Future for Dummy {
+    type Output = ();
+
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, _cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt; {
+        println!(&quot;{}&quot;, self.0);
+        Poll::Ready(())
+    }
+}
+
+// 不加这一行，编译器也会帮你自动实现 Unpin
+impl Unpin for Dummy {}
+
+fn main() {
+    let dummy = Dummy(String::from(&quot;hello world!&quot;));
+    assert_future(dummy.clone());
+    assert_unpin(dummy);
+}
+</code></pre></pre>
+<p>如果你要在另外一个 <code>Future</code> 中去 poll 这个 <code>Dummy</code> future 也是完全没有问题的。<code>futures</code> crate 甚至还提供了一系列 <a href="https://docs.rs/futures/latest/futures/index.html?search=unpin">unpin 版的方法</a>来帮助你做这件事，比如 <a href="https://docs.rs/futures/latest/futures/future/trait.FutureExt.html#method.poll_unpin">FutureExt::poll_unpin()</a> 。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait FutureExt: Future {
+    /// A convenience for calling `Future::poll` on `Unpin` future types.
+    fn poll_unpin(&amp;mut self, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt;
+    where
+        Self: Unpin,
+    {
+        Pin::new(self).poll(cx)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>可以看到这里是 <code>&amp;mut self</code>，而不是 <code>self: Pin&lt;&amp;mut Self&gt;</code>。</p>
+<p>但是，pin projection 场景下需要特别注意，如果你的类型中有字段是 <code>!Unpin</code> 的，你就不能给这个类型实现 <code>Unpin</code>。具体可以看官网 <a href="https://doc.rust-lang.org/std/pin/index.html#pinning-is-structural-for-field">Pinning <em>is</em> structural for field</a> 。</p>
+<h3><a class="header" href="#为什么-future-可以是-unpin-的" id="为什么-future-可以是-unpin-的">为什么 Future 可以是 Unpin 的</a></h3>
+<p>可能有人就要问了，<strong>Pin</strong> 设计之初不是为了解决实现 <code>Future</code> 的那个自引用结构体不被 move 的问题吗？为什么还可以给 <code>Future</code> 类型实现 <code>Unpin</code>？原因是这样的：如果你实现 <code>Future</code> 的类型是自引用结构体，那当然不能是 <code>Unpin</code> 的，除此之外实现 <code>Unpin</code> 完全没问题。上面那个例子，也包括很多第三方库的 <code>Future</code> 类型，都不会存在自引用结构体，可以放心大胆 move，所以完全可以是 <code>Unpin</code> 的。另外一个好处是，完全可以用 safe 版的 <code>Pin::new()</code> 方法构造 <code>Pin</code> 去poll future，不需要跟 unsafe 打交道。</p>
+<h3><a class="header" href="#pin-的-future-实现" id="pin-的-future-实现">Pin 的 Future 实现</a></h3>
+<p>之所以移到这里来讲 <code>Pin</code> 的 <code>Future</code> 实现，是因为 <strong>1.56</strong> 有一个 PR <a href="https://github.com/rust-lang/rust/pull/81363">#81363</a>  把 <code>P: Unpin</code> 的限定去掉了。我们先来看一下为什么要给 <code>Pin</code> 实现 <code>Future</code>，然后再来分析为什么这里的 <code>Unpin</code>  限定可以放开。</p>
+<pre><code class="language-diff">impl&lt;P&gt; Future for Pin&lt;P&gt;
+where
+-   P: Unpin + ops::DerefMut&lt;Target: Future&gt;,
++   P: ops::DerefMut&lt;Target: Future&gt;,
+{
+    type Output = &lt;&lt;P as ops::Deref&gt;::Target as Future&gt;::Output;
+
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt; {
+-       Pin::get_mut(self).as_mut().poll(cx)
++       &lt;P::Target as Future&gt;::poll(self.as_deref_mut(), cx)
+        // self.as_deref_mut() 其实就是 unsafe { self.get_unchecked_mut() }.as_mut()
+    }
+}
+</code></pre>
+<p>给 <code>Pin</code> 实现 <code>Future</code> 的理由很简单，就是为了方便调用 <code>poll()</code>，特别是在 pin projection 的场景。因为 <code>poll()</code> 的 <code>self</code> 是 <code>Pin&lt;&amp;mut Self&gt;</code> 类型，你没办法直接用 <code>future</code> 来调用 <code>poll()</code>。</p>
+<pre><code>error[E0599]: no method named `poll` found for struct `Dummy` in the current scope
+  --&gt; src/main.rs:35:20
+   |
+35 |         Dummy(String::from(&quot;hello world!&quot;)).poll(cx)
+   |                    						 ^^^^ method not found in `Dummy`
+</code></pre>
+<p>你必须要先构造一个 <code>Pin&lt;&amp;mut Dummy&gt;</code> 才能调用 <code>poll()</code>。给 <code>Pin</code> 实现 <code>Future</code> 之后，你可以直接这样写：<code>Pin::new(&amp;mut dummy).poll(ctx)</code>，要不然你还需要写 <code>Future::poll(Pin::new(&amp;mut dummy), ctx)</code>。</p>
+<p>再来看看为什么这里不需要 <code>P: Unpin</code>。首先，这个方法的目的是要去 poll <code>P::Target</code> 这个 <code>Future</code>，而 <code>poll()</code> 方法的 <code>Self</code> 是 <code>Pin&lt;P&lt;T&gt;&gt;</code>，<code>self</code> 是 <code>Pin&lt;&amp;mut Pin&lt;P&lt;T&gt;&gt;&gt;</code>（注意这里有两层 <code>Pin</code>）。我们要把 <code>Pin&lt;&amp;mut Pin&lt;P&lt;T&gt;&gt;&gt;</code> 安全地转换成 <code>Pin&lt;&amp;mut T&gt;</code> 才能调用 <code>P::Target</code> 的 <code>poll()</code>。那查一下 <code>Pin</code> 的 API 来倒推一下，拿到 <code>Pin&lt;&amp;mut T&gt;</code> 很简单，有 <code>Pin::as_mut()</code>，前后两个版本的最后都是调用 <code>as_mut()</code> 的，这里没问题。但 <code>as_mut()</code> 的签名是 <code>&amp;mut self</code>，也就是我们要先拿到 <code>&amp;mut Pin&lt;P&lt;T&gt;&gt;</code>。如果把 <code>Pin&lt;&amp;mut Pin&lt;P&lt;T&gt;&gt;&gt;</code>还原成基本形式 <code>Pin&lt;P&lt;T&gt;&gt;</code> 的话，那 <code>&amp;mut</code> 是那个 <code>P</code>，<code>Pin&lt;P&lt;T&gt;&gt;</code> 是那个 <code>T</code>。从 <code>Pin&lt;&amp;mut Pin&lt;P&lt;T&gt;&gt;&gt;</code> 拿到 <code>&amp;mut Pin&lt;P&lt;T&gt;&gt;</code>  其实就是需要从 <code>Pin&lt;P&lt;T&gt;&gt;</code> 拿到 <code>&amp;mut T</code>。<code>get_mut()</code>  和 <code>get_unchecked_mut()</code> 两个方法都能满足，唯一的区别是 <code>Unpin</code> 限定，这也是那个 PR 改动的地方。没有 <code>Unpin</code> 限定的话，我们只能使用 unsafe 版的 <code>get_unchecked_mut()</code> 。但是这里是完全安全的，因为我们拿到 <code>&amp;mut Pin&lt;P&lt;T&gt;&gt;</code> 后马上就调用 <code>as_mut()</code> 了，并不会 move 它。所以之前的 <code>P: Unpin</code> 是多余的。更多细节可以查看 <a href="https://doc.rust-lang.org/std/pin/struct.Pin.html#method.as_deref_mut">Pin::as_deref_mut()</a> 的文档和源码注释。</p>
+<h3><a class="header" href="#为什么需要-unpin-限定" id="为什么需要-unpin-限定">为什么需要 Unpin 限定</a></h3>
+<p>上面也提到过，有些异步相关的 API 需要你的类型满足 <code>Unpin</code> 才能调用。目前我所了解到的，这些 API 大致可以分为三类：</p>
+<ol>
+<li>**需要 <code>&amp;mut future</code> 的场景。**比如 <a href="https://docs.rs/tokio/latest/tokio/macro.select.html">tokio::select!()</a>， 这个宏需要你的 <code>Future</code> 满足 <code>Unpin</code>；</li>
+<li>**<code>AsyncRead</code> / <code>AsyncWrite</code> 的场景。**比如 <a href="https://docs.rs/tokio/latest/tokio/io/trait.AsyncWriteExt.html">tokio::io::AsyncWriteExt</a> 的方法需要你的 <code>Self</code> 满足  <code>Unpin</code>。</li>
+<li>**<code>Future</code> 本身就是符合 <code>Unpin</code>，并且不想直接和 <code>Pin</code> 打交道。**上面提到的 <code>FutureExt::poll_unpin()</code>方法就属于这一类。</li>
+</ol>
+<p>第 (2) 类主要跟 <code>AsyncRead</code> / <code>AsyncWrite</code> 的 <code>self</code> 需要 <code>Pin&lt;&amp;mut Self&gt;</code> 有关，社区也有不少这方面的讨论，不是这篇文章的重点，感兴趣可以查看下面的资料。</p>
+<blockquote>
+<ul>
+<li>futures-rs: <a href="https://github.com/rust-lang/futures-rs/issues/1454">Should AsyncRead and AsyncWrite take self by Pin?</a></li>
+<li>tokio: <a href="https://github.com/tokio-rs/tokio/issues/1272">Should AsyncRead/AsyncWrite required pinned self?</a></li>
+<li><a href="https://users.rust-lang.org/t/tokios-asyncreadext-and-asyncwriteext-require-self-unpin-why-and-what-to-do-about-it/64134/4">Tokio’s AsyncReadExt and AsyncWriteExt require Self: Unpin. Why and what to do about it?</a></li>
+</ul>
+<p>其次，tower 也在考虑要不要加 <code>Pin&lt;&amp;mut Self&gt;</code>：<a href="https://github.com/tower-rs/tower/issues/319">Pinning and Service</a>.</p>
+</blockquote>
+<p>关于第 (1) 类，主要原因是给 <code>&amp;mut Future</code> 实现 <code>Future</code> 的时候指定需要了 <code>F: Unpin</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: ?Sized + Future + Unpin&gt; Future for &amp;mut F {
+    type Output = F::Output;
+
+    fn poll(mut self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt; {
+        F::poll(Pin::new(&amp;mut **self), cx)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>所以归根结底需要搞清楚为什么这里需要 <code>Unpin</code>。先从场景谈起，假如我们有一个 <code>future</code> 需要在 <code>loop</code> 中不断地 poll 它，但是 <code>Future::poll()</code> 每调用一次就会消耗掉 <code>self</code> 的所有权。因此我们需要可变借用这个 <code>future</code>，避免消耗掉 <code>future</code> 的所有权。但是 <code>&amp;mut future</code> 之后会存在 move 掉这个 <code>future</code> 的风险（“万恶之源”），所以要么你这个 <code>future</code> 是 <code>Unpin</code> 的，要么你就要把它 pin 住再可变借用它（也就是 <code>&amp;mut Pin&lt;&amp;mut future&gt;</code>）。而刚好  <code>Pin&lt;P&gt; where P: DerefMut</code> 实现了 <code>Future</code>！（前面部分刚讲过的）而且 <code>Pin&lt;P&gt;</code> 也是满足 <code>Unpin</code> 的！真的太完美了，我们干脆给 <code>&amp;mut F</code> 实现 <code>Future</code> 吧，只要 <code>F</code> 满足 <code>Future + Unpin</code> 就行。这样的好处是如果你的 <code>future</code> 满足 <code>Unpin</code>，那你直接 <code>loop</code> 中多次 poll 就行，不用担心 move 的问题；如果你的 <code>future</code> 不满足 <code>Unpin</code>，那也没关系，把它 pin 住就好了。比如下面的例子，因为 <a href="https://docs.rs/tokio/latest/tokio/time/struct.Sleep.html">tokio::time::Sleep</a> 不满足 <code>Unpin</code>，你需要先使用 <code>tokio::pin!()</code> 把它 pin 住才可以编译通过。</p>
+<pre><pre class="playground"><code class="language-rust">use tokio::time::{self, Duration, Instant};
+
+#[tokio::main]
+async fn main() {
+    let sleep = time::sleep(Duration::from_millis(10));
+    tokio::pin!(sleep);
+
+    loop {
+        tokio::select! {
+            () = &amp;mut sleep =&gt; {
+                println!(&quot;timer elapsed&quot;);
+                sleep.as_mut().reset(Instant::now() + Duration::from_millis(50));
+            },
+        }
+    }
+}
+</code></pre></pre>
+<p>另外，同样的道理，给 <code>Box&lt;F&gt;</code> 实现 <code>Future</code> 的时候也需要 <code>Unpin</code>。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: ?Sized + Future + Unpin, A: Allocator&gt; Future for Box&lt;F, A&gt;
+where
+    A: 'static,
+{
+    type Output = F::Output;
+
+    fn poll(mut self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Output&gt; {
+        F::poll(Pin::new(&amp;mut *self), cx)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#其他需要-pin-的场景" id="其他需要-pin-的场景">其他需要 Pin 的场景</a></h2>
+<p>经常碰到有人问类似&quot;我这个场景是不是需要用 <code>Pin</code> 来解决？&quot;的问题，我看了一下，根本跟 <code>Pin</code> 没有任何关系，于是会用这句经典名言回复他：</p>
+<blockquote>
+<p>Rust 社区经典名言：<strong>Whenever you wonder if Pin could be the solution, it isn't.</strong></p>
+</blockquote>
+<p><strong>Pinning API</strong> 是朝着通用性设计的，并不是只为了解决异步里面自引用结构体 move 的一个问题，其他一些场景也需要用到 <code>Pin</code>。</p>
+<h3><a class="header" href="#intrusive-collections" id="intrusive-collections">Intrusive collections</a></h3>
+<p><strong>Intrusive collections</strong>（侵入式集合） 是 <code>Pin</code> 的另外一个应用场景。 <code>Pin</code> 的文档上有提到 <strong>intrusive doubly-linked list</strong> （侵入式双链表）这个例子，但是对于其他侵入式数据结构也类似（比如侵入式单链表）。不过文档只有言简意赅的几句话，并不是很好理解，我在这里简单的总结一下。</p>
+<p>首先需要了解 <strong>instrusive collections</strong> 是什么。我们平时用到的集合数据结构几乎都是 <strong>non-intrusive</strong> 的，比如标准库的 <code>Vec</code>，<code>LinkedList</code> 等。<strong>non-intrusive</strong> 类型集合的特点是集合中的元素和集合自身是完全解耦的，集合不需要关心每一个元素的类型是什么，集合也可以用来存放任意类型的元素。但 <strong>intrusive</strong> 类型的集合是一种完全侵入式的集合，它的 <code>prev</code> 或 <code>next</code> 指针是定义在元素上面的。</p>
+<p>以 C++ 为例子 ，<strong>non-intrusive</strong> 的双链表可以这样定义：</p>
+<pre><code class="language-c++">struct Point {
+    float x, y;
+};
+
+struct ListNode {
+    Point val;
+    ListNode *next, *prev;
+};
+</code></pre>
+<p>而 <strong>intrusive</strong> 的版本需要这样写：</p>
+<pre><code class="language-c++">struct Point {
+    float x, y;
+    Point *next, *prev;
+};
+</code></pre>
+<p>Rust 版 <strong>intrusive</strong> 的伪代码大概也是这样：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Point {
+    x: f64,
+    y: f64,
+    prev: Option&lt;Rc&lt;Point&gt;&gt;,
+    next: Option&lt;Rc&lt;Point&gt;&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>可以看到两者最大的区别在于指针是放在集合上面还是放在元素上面。两种类型的集合各自有优缺点，而 <strong>intrusive</strong> 类型最大的优点在于性能更好，缺点也很明显，不通用，不同的元素需要重复定义集合。相关的知识不是本文的重点，更多详细信息可以看看下面的资料：</p>
+<blockquote>
+<ul>
+<li><a href="https://fuchsia.dev/fuchsia-src/development/languages/c-cpp/fbl_containers_guide/introduction">Google Fuchsia 提供的侵入式容器</a></li>
+<li><a href="https://www.data-structures-in-practice.com/intrusive-linked-lists/">Intrusive linked lists</a></li>
+<li><a href="https://www.ralfj.de/blog/2018/04/10/safe-intrusive-collections-with-pinning.html">Safe Intrusive Collections with Pinning</a></li>
+</ul>
+</blockquote>
+<p>那为什么侵入式集合需要用到 <code>Pin</code> 呢？其原因在于元素之间互相有 <code>prev</code> 或 <code>next</code> 指针指向自己，如果中间某个元素发生 move 了，那其他元素指向它的指针地址就失效了，导致不安全行为。所以必须要用 <code>Pin</code> 来把元素给 pin 住！Rust 有一个叫 <a href="https://docs.rs/intrusive-collections">intrusive-collections</a> 的库提供了众多侵入式的集合类型，另外 Tokio  里面也定义了<a href="https://docs.rs/tokio/latest/src/tokio/util/linked_list.rs.html">侵入式集合</a>，毫无疑问他们都用到了 <code>Pin</code>。</p>
+<h3><a class="header" href="#其他" id="其他">其他</a></h3>
+<p>其实，只要是需要处理防止被 move 的场景，理论上都需要用到 <code>Pin</code> 来解决。其他的 case 我暂时想不出来了，以后有发现新的场景再补充，或者如果大家知道其他场景欢迎告诉我。</p>
+<h2><a class="header" href="#总结" id="总结">总结</a></h2>
+<p>这篇文章稍微有点长，我们来总结一下：</p>
+<ul>
+<li><code>Pin</code> 的 API 设计很讲究，甚至充满对称性，它的方法大致可以分为 5 类。其中涉及到 <code>Unpin</code> 和 <code>&amp;mut T</code> 又可以细分为 safe 和 unsafe 两种；</li>
+<li><code>Pin</code> 的 <code>#[fundamental]</code> 和 <code>#[repr(transparent)]</code> 很重要，但你一般不需要关心它；</li>
+<li><code>Pin</code> 实现的 trait 需要重点关注 <code>Unpin</code> ，<code>Deref</code> / <code>DerefMut</code>  和 <code>Future</code>，搞懂他们你才能完全掌握 <code>Pin</code>；</li>
+<li><code>Unpin</code> 和 <code>Future</code> 关系十分密切。<code>Unpin</code> 是 safe trait，理论上可以任意实现，<code>Future</code> 也可以是 <code>Unpin</code> 的。一些异步 API 中可能需要 <code>Unpin</code> 限定，需要理解它的原因，而不是一味的只顾使用。</li>
+<li><code>Pin</code> 是一种通用 API，除了 <code>async / await</code> 下需要 <code>Pin</code> 之外，也会有其他场景需要用 <code>Pin</code> 来解决，比如 <strong>intrusive collections</strong>。</li>
+</ul>
+<p>文章中多次提到的 <strong>Pin projection</strong> 没有展开讲，下一篇文章再来详细探讨它。再会！</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../chapter_12/rust_for_rustaceans_reading_notes_ch13.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../chapter_12/rust-perf.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../chapter_12/rust_for_rustaceans_reading_notes_ch13.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../chapter_12/rust-perf.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-188947685-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+        
+        <script type="text/javascript" src="../smart-anchor.js"></script>
+        
+
+        
+
+        <script src="https://utteranc.es/client.js"
+        repo="RustMagazine/rust_magazine_2021"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+
+    </body>
+</html>
