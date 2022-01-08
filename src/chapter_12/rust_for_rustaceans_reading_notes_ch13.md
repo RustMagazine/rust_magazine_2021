@@ -1,4 +1,4 @@
-# Rust For Rustaceans 读书笔记之 the rust ecosystem
+# 《Rust For Rustaceans》读书笔记之Rust生态系统
 
 作者: 吴翱翔
 

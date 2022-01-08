@@ -196,19 +196,19 @@ anchored 目前还缺少一些 ergonomic 的接口，attribute macro 和 ecosyst
 
 ## Ref
 
-[1]: [https://blog.rust-lang.org/2019/11/07/Async-await-stable.html](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html)
-[2]: [https://docs.rs/futures/0.1.21/futures/](https://docs.rs/futures/0.1.21/futures/)
-[3]: [https://github.com/rust-lang/rfcs/blob/master/text/2033-experimental-coroutines.md](https://github.com/rust-lang/rfcs/blob/master/text/2033-experimental-coroutines.md)
-[4]: [https://doc.rust-lang.org/std/pin/index.html](https://doc.rust-lang.org/std/pin/index.html)
-[5]: [https://blog.rust-lang.org/2016/04/19/MIR.html](https://blog.rust-lang.org/2016/04/19/MIR.html)
-[6]: [https://en.wikipedia.org/wiki/Control-flow_graph](https://en.wikipedia.org/wiki/Control-flow_graph)
-[7]: [https://doc.rust-lang.org/std/ops/trait.Generator.html](https://doc.rust-lang.org/std/ops/trait.Generator.html)
-[8]: [https://github.com/rust-lang/rust/blob/b834c4c1bad7521af47f38f44a4048be0a1fe2ee/compiler/rustc_middle/src/mir/mod.rs#L1915](https://github.com/rust-lang/rust/blob/b834c4c1bad7521af47f38f44a4048be0a1fe2ee/compiler/rustc_middle/src/mir/mod.rs#L1915)
-[9]: [https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html](https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html)
-[10]: [https://crates.io/crates/anchored](https://crates.io/crates/anchored)
-[11]: [https://rust-lang.github.io/rust-clippy/master/#await_holding](https://rust-lang.github.io/rust-clippy/master/#await_holding)
-[12]: [https://github.com/rust-lang/rust-clippy/issues/6353](https://github.com/rust-lang/rust-clippy/issues/6353)
-[13]: [https://doc.rust-lang.org/stable/nightly-rustc/src/rustc_typeck/check/generator_interior.rs.html#325-334](https://doc.rust-lang.org/stable/nightly-rustc/src/rustc_typeck/check/generator_interior.rs.html#325-334)
+- [1: https://blog.rust-lang.org/2019/11/07/Async-await-stable.html](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html)
+- [2: https://docs.rs/futures/0.1.21/futures/](https://docs.rs/futures/0.1.21/futures/)
+- [3: https://github.com/rust-lang/rfcs/blob/master/text/2033-experimental-coroutines.md](https://github.com/rust-lang/rfcs/blob/master/text/2033-experimental-coroutines.md)
+- [4: https://doc.rust-lang.org/std/pin/index.html](https://doc.rust-lang.org/std/pin/index.html)
+- [5: https://blog.rust-lang.org/2016/04/19/MIR.html](https://blog.rust-lang.org/2016/04/19/MIR.html)
+- [6: https://en.wikipedia.org/wiki/Control-flow_graph](https://en.wikipedia.org/wiki/Control-flow_graph)
+- [7: https://doc.rust-lang.org/std/ops/trait.Generator.html](https://doc.rust-lang.org/std/ops/trait.Generator.html)
+- [8: https://github.com/rust-lang/rust/blob/b834c4c1bad7521af47f38f44a4048be0a1fe2ee/compiler/rustc_middle/src/mir/mod.rs#L1915](https://github.com/rust-lang/rust/blob/b834c4c1bad7521af47f38f44a4048be0a1fe2ee/compiler/rustc_middle/src/mir/mod.rs#L1915)
+- [9: https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html](https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html)
+- [10: https://crates.io/crates/anchored](https://crates.io/crates/anchored)
+- [11: https://rust-lang.github.io/rust-clippy/master/#await_holding](https://rust-lang.github.io/rust-clippy/master/#await_holding)
+- [12: https://github.com/rust-lang/rust-clippy/issues/6353](https://github.com/rust-lang/rust-clippy/issues/6353)
+- [13: https://doc.rust-lang.org/stable/nightly-rustc/src/rustc_typeck/check/generator_interior.rs.html#325-334](https://doc.rust-lang.org/stable/nightly-rustc/src/rustc_typeck/check/generator_interior.rs.html#325-334)
 
 ## Appendix
 

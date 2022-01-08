@@ -330,7 +330,34 @@
 
     
 
-- [十二月刊（December）| 待发布]()
+- [十二月刊（December）](./chapter_12/toc.md)
+    - [发刊通告](./chapter_12/announce.md)
+    - [官方动态](./chapter_12/lang.md)
+    - [社区热点](./chapter_12/hots.md)
+    - [活动回顾](./chapter_12/events.md)
+    - [本月招聘](./chapter_12/jobs.md) 
+    - [【官方】对 Rust 审核团队问题的后续跟进](./chapter_12/rust-mod-team-follow-up.md)
+    - [区块链快讯](./chapter_12/meta-blockchain.md)
+    - [外刊评论](./chapter_12/foreign_journal_review.md)
+    - [Rust RFC static async fn in trait](./chapter_12/static-async-fn.md)
+    - [Rust 裸函数相关新RFC 和 序列化](./chapter_12/serde.md)
+    - [Rust for Linux 源码导读 | `Ref` 引用计数容器](./chapter_12/ref.md)
+    - [蚂蚁集团 | 一次 Go 中嵌入 Rust 库的踩坑实践](./chapter_12/ant-go-with-rust.md)
+    - [字节跳动 | Rust 异步运行时的设计与实现](./chapter_12/monoio.md)
+    - [达坦科技 | tokio 解析之任务调度](./chapter_12/tokio_part1.md)
+    - [飞蓬网络 | 特定场景下的Rust无锁队列实现](./chapter_12/lock-free-implementation.md)
+    - [Signal | 如何用Rust构建大规模端到端加密通话](./chapter_12/signal.md)
+    - [学习资源](./chapter_12/learn.md)
+    - [Rust基础语句汇编分析](./chapter_12/simple-rust-in-assembly.md)
+    - [ 《Rust For Rustaceans》读书笔记之Rust生态系统](./chapter_12/rust_for_rustaceans_reading_notes_ch13.md)
+    - [Rust Pin 进阶](./chapter_12/rust-pin-advanced.md)
+    - [Rust性能评估与调优实践](./chapter_12/rust-perf.md)
+    - [Tokio 异步传播的缺陷](./chapter_12/async_cancel_propagation.md)
+    - [来造一个OS吧](./chapter_12/lets-make-os.md)
+    - [LLVM基础设施和Rust](./chapter_12/llvm-infrastructure-and-rust.md)
+    - [GitHub 趋势榜](./chapter_12/github_trending.md)
+    - [推荐项目 ｜ 基础工具库](./chapter_12/tool_libs.md)
+    - [每月安全公告](./chapter_12/security-log.md)
 
 
 
