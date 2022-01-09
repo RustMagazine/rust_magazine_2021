@@ -14,6 +14,7 @@
     - Dimforge 的 2021 和 2022 目标
     - Mozilla Glean 的 2021 总结
     - hyper 生态相关的 2021 总结
+    - Wgpu 2021 总结
 - Reddit 讨论热帖
     - 你有哪些项目没有使用 Rust 语言？为什么？
     - 有哪些重要特性是 Rust 缺失 而 C/Cpp 中存在的？
