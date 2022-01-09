@@ -278,6 +278,6 @@ Reddit 中 一个网友指出，通过查看去除 `println!` 语句之后再编
 
 详细内容可以参考reddit贴。在评论中有人给出一些建议：
 
-1. 耶鲁大学的林忠教授开设 [《CPSC 429a, 计算机系统设计原理》 和 《CPSC 425b，移动和嵌入式系统 》](http://catalog.yale.edu/ycps/courses/cpsc/) 支持 Rust 语言。但是该课程不是公开课。
+1. 耶鲁大学的钟林教授开设 [《CPSC 429a, 计算机系统设计原理》 和 《CPSC 425b，移动和嵌入式系统 》](http://catalog.yale.edu/ycps/courses/cpsc/) 支持 Rust 语言。但是该课程不是公开课。
 2. 一位本科生使用 Rust 完成强化学习库：[https://github.com/ZuseZ4/Rust_RL](https://github.com/ZuseZ4/Rust_RL)。但是他反对将 Rust 用于机器学习的教学中，因为使用 Python 学习机器学习更加简单。（这样说也很有道理，学习的时候要讲究学习目标，学生的学习目标是学习机器学习领域知识，而非 Rust）。
 3. 一位朋友说，在大学里应该教授学生如何解决问题。比如通过学习多线程生命游戏的实现，来学习解决多线程并发的问题。
