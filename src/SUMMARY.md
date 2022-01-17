@@ -350,6 +350,7 @@
     - [学习资源](./chapter_12/learn.md)
     - [Rust基础语句汇编分析](./chapter_12/simple-rust-in-assembly.md)
     - [ 《Rust For Rustaceans》读书笔记之Rust生态系统](./chapter_12/rust_for_rustaceans_reading_notes_ch13.md)
+    - [代码杂谈：无锁编程](./chapter_12/lock-free.md)
     - [Rust Pin 进阶](./chapter_12/rust-pin-advanced.md)
     - [Rust性能评估与调优实践](./chapter_12/rust-perf.md)
     - [Tokio 异步传播的缺陷](./chapter_12/async_cancel_propagation.md)

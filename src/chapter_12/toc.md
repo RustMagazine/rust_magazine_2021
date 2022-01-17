@@ -44,6 +44,7 @@
 - [学习资源](./learn.md)
 - [Rust基础语句汇编分析](./simple-rust-in-assembly.md)
 - [ 《Rust For Rustaceans》读书笔记之Rust生态系统](./rust_for_rustaceans_reading_notes_ch13.md)
+- [代码杂谈：无锁编程](./lock-free.md)
 
 ## 原理与工程实践
 
