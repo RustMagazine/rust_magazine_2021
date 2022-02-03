@@ -101,6 +101,9 @@ h6:target::before {
 .content .header:visited:hover {
     text-decoration: none;
 }
+.content .utterances {
+    max-width: var(--content-max-width);
+}
 
 table {
     margin: 0 auto;
