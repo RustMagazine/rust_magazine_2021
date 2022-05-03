@@ -159,7 +159,7 @@ Shared library "libsqlite3.so" not found.
 Verifying alignment of target/debug/apk/statup.apk (4)...
       49 AndroidManifest.xml (OK - compressed)
      997 lib/arm64-v8a/libstartup.so (OK - compressed)
-Verification succesful
+Verification successful
 ```
 
 当我还没有编译`libsqlite3.so`时，我返回上一步仔细阅读了链接器产生的错误信息。链接器组合了很多的目标文件，这些目标文件都位于`target/aarch64-linux-android/debug/deps`目录下。如果我将`.so`文件放在这里会发生什么？
@@ -178,7 +178,7 @@ Verifying alignment of target/debug/apk/startup.apk (4)...
       49 AndroidManifest.xml (OK - compressed)
      997 lib/arm64-v8a/libstatup.so (OK - compressed)
 15881608 lib/arm64-v8a/libsqlite3.so (OK - compressed)
-Verification succesful
+Verification successful
 ```
 
 我现在有了一个可以安装在 Android 手机上的`.apk`文件。真是个巨大的成功！

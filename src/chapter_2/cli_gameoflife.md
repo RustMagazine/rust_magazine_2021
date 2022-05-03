@@ -244,7 +244,7 @@ if let Event::Key(KeyEvent { code, .. }) = read()? {
     }
 }
 
-// finaly disable raw mode at the end of the function before returning Ok(()):
+// finally disable raw mode at the end of the function before returning Ok(()):
 disable_raw_mode()?;
 ```
 添加循环退出功能是很重要的，因为raw mode模式下，会禁用ctrl+c退出的方式。

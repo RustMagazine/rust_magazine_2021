@@ -171,7 +171,7 @@ Teaclave的sgx_tstd中[重新实现](https://teaclave.apache.org/sgx-sdk-docs/is
 
 - CPUID 常用于检测CPU对SIMD的支持，以便使用不同SIMD指令集处理计算密集任务，需要关注。
 
-- GETSEC 是一个leaf funtion总入口，有很多子功能，都是特殊用途的。一般程序不会用到
+- GETSEC 是一个leaf function总入口，有很多子功能，都是特殊用途的。一般程序不会用到
 
   ![](./image/sgx/UvQw2dc.png)
 
