@@ -260,9 +260,9 @@ macro_rules! from_event_option_array_into_event_list(
                         let event_opt = unsafe { ptr::read(events.get_unchecked(idx)) };
                         if let Some(event) = event_opt { el.push::<Event>(event.into()); }
                     }
-                    // 此处 mem::forget 就是为了防止 `dobule free`。
+                    // 此处 mem::forget 就是为了防止 `double free`。
                     // 因为 `ptr::read` 也会制造一次 drop。
-                    // 所以上面如果发生了panic，那就相当于注释了 `mem::forget`，导致`dobule free`
+                    // 所以上面如果发生了panic，那就相当于注释了 `mem::forget`，导致`double free`
                     mem::forget(events);
                     el
                 }
@@ -280,7 +280,7 @@ impl<'e, E> From<[E; $len]> for EventList where E: Into<Event> {
             let event = unsafe { ptr::read(events.get_unchecked(idx)) };
             el.push(event.into());
         }
-        // Ownership has been unsafely transfered to the new event
+        // Ownership has been unsafely transferred to the new event
         // list without modifying the event reference count. Not
         // forgetting the source array would cause a double drop.
         mem::forget(events);
@@ -292,7 +292,7 @@ impl<'e, E> From<[E; $len]> for EventList where E: Into<Event> {
 以下是一段该漏洞都复现代码（我本人没有尝试过，但是提交issue都作者试过了），注意下面注释部分的说明：
 
 ```rust
-// POC:以下代码证明了上面两个case会发生dobule free 问题
+// POC:以下代码证明了上面两个case会发生double free 问题
 
 use fil_ocl::{Event, EventList};
 use std::convert::Into;

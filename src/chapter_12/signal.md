@@ -202,4 +202,4 @@ for layer_index in 0..=2 {
     - 通过使用 epoll 和多线程，使读写数据包的代码更快、更并发。
     - 将我们的锁定更改为更细粒度。
 3. 认为服务器的所有主要逻辑对性能的影响几乎没有一般的“通过服务器推送大量数据包”那么重要。
-4. RingRTC 通过 JNI 将 Rust 代码整合到 Andriod 平台。
+4. RingRTC 通过 JNI 将 Rust 代码整合到 Android 平台。

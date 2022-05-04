@@ -219,7 +219,7 @@ current heap size:80488B
 整体的方案如下：
 - 使用 Prometheus Client 记录分配的内存（应用层统计）。
 - 暴露出 metrics 接口。
-- 配置 Promethues server，进行 metrics 拉取。
+- 配置 Prometheus server，进行 metrics 拉取。
 - 配置 Grafana，连接 Prometheus server，进行可视化展示。
 
 ### 内存排查工具

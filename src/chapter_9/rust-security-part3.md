@@ -291,7 +291,7 @@ hyper的HTTP/1服务器代码存在一个缺陷，即错误地解析和接受带
 
 修复代码：https://github.com/hyperium/hyper/commit/06335158ca48724db9bf074398067d2db08613e7 
 
-需要判断 content-lenght 是不是可以正常转换为有效数位。
+需要判断 content-length 是不是可以正常转换为有效数位。
 
 ## [RUSTSEC-2021-0072: Vulnerability in tokio](https://rustsec.org/advisories/RUSTSEC-2021-0072.html)
 

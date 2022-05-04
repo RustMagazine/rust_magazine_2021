@@ -104,7 +104,7 @@ where
 - 这个 Future03 需要是 Unpin 的。Pin 解析起来比较复杂，这里就先不进行解析了，留到后面。
   所以如果当前的 Future03 既不是 TryFuture，也不是 Unpin 的。那要怎么转 Future01 呢？还是利用组合子就可以解决了。
 
-unit_error 组合子可以通过将 Future03<Ouput=T> 转换为Future03<Output=Result<T, ()>> 解决问题1；		
+unit_error 组合子可以通过将 Future03<Output=T> 转换为Future03<Output=Result<T, ()>> 解决问题1；		
 而 boxed 组合子则可以通过将其放到堆区的方法使之满足 Unpin，从而解决问题2。
 ```rust
 use futures03::future::{FutureExt, TryFutureExt};

@@ -107,7 +107,7 @@
 ## 引用及资源
 
 - [Rust 编程之道核心库和标准库的介绍](https://weread.qq.com/web/reader/0303203071848774030b9d6k9bf32f301f9bf31c7ff0a60)
-- [Rust embeded book](https://docs.rust-embedded.org/book/intro/no-std.html)
+- [Rust embedded book](https://docs.rust-embedded.org/book/intro/no-std.html)
 - [扩展no_std crate 的最佳实践](https://users.rust-lang.org/t/best-practice-of-extending-a-no-std-crate/12281/5)
 - [Rust API guidelines](https://github.com/rust-lang/api-guidelines)
 - [Rust API guidelines Nameing](https://rust-lang.github.io/api-guidelines/naming.html#c-feature)
