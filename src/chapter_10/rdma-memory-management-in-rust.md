@@ -4,7 +4,7 @@
 
 -------
 
-[RMDA](https://en.wikipedia.org/wiki/Remote_direct_memory_access) 是近年越来越热门的高速网络传输协议，被广泛应用于超算中心和高端存储领域。RDMA 的全称为 Remote Direct Memory Access，即允许本地内存被远端机器直接访问，该访问不经过被访问机器的操作系统，直接由网卡代为完成。正式因为网卡完成了大部分的数据传输工作，操作系统的负载被降低，使得其在大量数据传输的情况下具有更好的拓展性（scalability）。
+[RDMA](https://en.wikipedia.org/wiki/Remote_direct_memory_access) 是近年越来越热门的高速网络传输协议，被广泛应用于超算中心和高端存储领域。RDMA 的全称为 Remote Direct Memory Access，即允许本地内存被远端机器直接访问，该访问不经过被访问机器的操作系统，直接由网卡代为完成。正式因为网卡完成了大部分的数据传输工作，操作系统的负载被降低，使得其在大量数据传输的情况下具有更好的拓展性（scalability）。
 
 为了保证远端能够正确和安全地访问本地内存，RDMA 协议中有一系列规范来约束用户的访问，下面来简单介绍一下。
 
